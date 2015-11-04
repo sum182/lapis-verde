@@ -1,0 +1,6 @@
+root
+senha = admin
+
+user
+admin
+admin

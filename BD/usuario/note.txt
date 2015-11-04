@@ -1,0 +1,4 @@
+mysql root senha: admin
+
+usuario: admin
+senha: admin
