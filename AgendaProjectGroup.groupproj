@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B666703C-8E5F-4FA9-9E73-E6F953DD90AD}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Administrador\Administrador.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Componentes\sum182\D15\Sum182.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Componentes\sum182\D15\Sum182D15.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Administrador">
+        <MSBuild Projects="Administrador\Administrador.dproj"/>
+    </Target>
+    <Target Name="Administrador:Clean">
+        <MSBuild Projects="Administrador\Administrador.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Administrador:Make">
+        <MSBuild Projects="Administrador\Administrador.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Sum182">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj"/>
+    </Target>
+    <Target Name="Sum182:Clean">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Sum182:Make">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Sum182D15">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj"/>
+    </Target>
+    <Target Name="Sum182D15:Clean">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Sum182D15:Make">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Leitura">
+        <MSBuild Projects="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj"/>
+    </Target>
+    <Target Name="Leitura:Clean">
+        <MSBuild Projects="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Leitura:Make">
+        <MSBuild Projects="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Administrador;Sum182;Sum182D15;Leitura"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Administrador:Clean;Sum182:Clean;Sum182D15:Clean;Leitura:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Administrador:Make;Sum182:Make;Sum182D15:Make;Leitura:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
