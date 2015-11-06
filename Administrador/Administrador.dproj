@@ -107,6 +107,14 @@
             <Form>FrmSobre</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Cadastros\untCadastroTelefoneTipo.pas">
+            <Form>frmCadastroTelefoneTipo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\untCadastroEscola.pas">
+            <Form>frmCadastroEscola</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

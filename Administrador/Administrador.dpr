@@ -8,9 +8,10 @@ uses
   smGeral in 'C:\Componentes\Sum182\D15\Units\smGeral.pas',
   smMensagens in 'C:\Componentes\sum182\D15\Units\smMensagens.pas',
   smDB in 'C:\Componentes\Sum182\D15\Units\smDB.pas',
-
   untDM in 'untDM.pas' {DM: TDataModule},
-  untSobre in 'untSobre.pas' {FrmSobre};
+  untSobre in 'untSobre.pas' {FrmSobre},
+  untCadastroTelefoneTipo in 'Cadastros\untCadastroTelefoneTipo.pas' {frmCadastroTelefoneTipo},
+  untCadastroEscola in 'Cadastros\untCadastroEscola.pas' {frmCadastroEscola};
 
 {$R *.res}
 

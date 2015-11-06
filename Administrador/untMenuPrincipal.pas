@@ -26,7 +26,7 @@ uses
   dxStatusBar, dxRibbonStatusBar, IniFiles, dxSkinMetropolis, dxSkinMetropolisDark, dxSkinOffice2013DarkGray,
   dxSkinOffice2013LightGray, dxBarBuiltInMenu, dxRibbonCustomizationForm, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ExtCtrls, Vcl.DBCtrls;
 
 type
   TfrmMenuPrincipal = class(TForm)
@@ -89,7 +89,14 @@ type
     dxBarLargeButton22: TdxBarLargeButton;
     dxBarButton10: TdxBarButton;
     dxBarSubItem2: TdxBarSubItem;
+    mnCadTelefoneTipo: TdxBarButton;
+    DBNavigator1: TDBNavigator;
+    DBGrid1: TDBGrid;
+    FDQuery1: TFDQuery;
+    DataSource1: TDataSource;
     dxBarButton11: TdxBarButton;
+    dxBarLargeButton23: TdxBarLargeButton;
+    dxBarLargeButton24: TdxBarLargeButton;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);
@@ -98,6 +105,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure dxBarLargeButton16Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure dxBarLargeButton24Click(Sender: TObject);
+    procedure dxBarLargeButton23Click(Sender: TObject);
   private
     procedure ActivePg(Classe: TFormClass);
     procedure OpenForm(Classe: TFormClass; var Form;
@@ -116,7 +125,7 @@ implementation
 {$R *.dfm}
 
 uses
-  smGeral, smMensagens,untDM, untSobre;
+  smGeral, smMensagens,untDM, untSobre, untCadastroTelefoneTipo, untCadastroEscola;
 
 procedure TfrmMenuPrincipal.ActivePg(Classe: TFormClass);
 var
@@ -194,6 +203,16 @@ end;
 procedure TfrmMenuPrincipal.dxBarLargeButton18Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton23Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroEscola,frmCadastroEscola);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton24Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroTelefoneTipo,frmCadastroTelefoneTipo);
 end;
 
 procedure TfrmMenuPrincipal.FecharAba1Click(Sender: TObject);
