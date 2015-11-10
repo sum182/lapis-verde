@@ -31,7 +31,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.SkinName = 'Black'
     OnCanClose = pgPrincCanClose
-    ExplicitTop = 120
     ClientRectBottom = 374
     ClientRectLeft = 4
     ClientRectRight = 872
@@ -109,29 +108,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         end>
       Index = 3
     end
-  end
-  object DBNavigator1: TDBNavigator
-    Left = 491
-    Top = 189
-    Width = 240
-    Height = 25
-    DataSource = DataSource1
-    TabOrder = 7
-    Visible = False
-  end
-  object DBGrid1: TDBGrid
-    Left = 491
-    Top = 228
-    Width = 377
-    Height = 189
-    DataSource = DataSource1
-    TabOrder = 8
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    Visible = False
   end
   object pmAbas: TPopupMenu
     Left = 712
@@ -46578,29 +46554,11 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton2'
-        end
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton5'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'dxBarLargeButton6'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'dxBarLargeButton12'
+          ItemName = 'dxBarLargeButton23'
         end
         item
           Visible = True
           ItemName = 'dxBarLargeButton24'
-        end
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton23'
         end>
       OneOnRow = True
       Row = 0
@@ -50124,16 +50082,66 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object dxBarLargeButton23: TdxBarLargeButton
       Caption = 'Escola'
       Category = 0
-      Hint = 'Escola'
+      Hint = 'Cdastro de Escola'
       Visible = ivAlways
       OnClick = dxBarLargeButton23Click
     end
     object dxBarLargeButton24: TdxBarLargeButton
       Caption = 'Tipos de Telefone'
       Category = 0
-      Hint = 'Tipos de Telefone'
+      Hint = 'Cadastro de Tipos de Telefone'
       Visible = ivAlways
       OnClick = dxBarLargeButton24Click
+    end
+    object dxBarStatic1: TdxBarStatic
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+    end
+    object dxBarStatic2: TdxBarStatic
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+    end
+    object cxBarEditItem1: TcxBarEditItem
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+      PropertiesClassName = 'TcxCheckGroupProperties'
+      Properties.Items = <>
+    end
+    object dxBarLargeButton25: TdxBarLargeButton
+      Caption = 'New Button'
+      Category = 0
+      Hint = 'New Button'
+      Visible = ivAlways
+    end
+    object dxBarStatic3: TdxBarStatic
+      Caption = '|'
+      Category = 0
+      Hint = '|'
+      Visible = ivAlways
+    end
+    object dxBarLargeButton26: TdxBarLargeButton
+      Caption = 'New Button'
+      Category = 0
+      Hint = 'New Button'
+      Visible = ivAlways
+    end
+    object dxBarLargeButton27: TdxBarLargeButton
+      Caption = 'New Button'
+      Category = 0
+      Hint = 'New Button'
+      Visible = ivAlways
+    end
+    object dxBarLargeButton28: TdxBarLargeButton
+      Caption = 'New Button'
+      Category = 0
+      Hint = 'New Button'
+      Visible = ivAlways
     end
     object dxBarGroup1: TdxBarGroup
       Items = ()
@@ -50144,17 +50152,5 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object dxBarGroup3: TdxBarGroup
       Items = ()
     end
-  end
-  object FDQuery1: TFDQuery
-    Connection = DM.FDConnection
-    SQL.Strings = (
-      'select * from telefone_tipo'#10)
-    Left = 72
-    Top = 176
-  end
-  object DataSource1: TDataSource
-    DataSet = FDQuery1
-    Left = 80
-    Top = 232
   end
 end

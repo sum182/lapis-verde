@@ -1,39 +1,30 @@
 inherited frmCadastroEscola: TfrmCadastroEscola
   Caption = 'Cadastro de Escola'
   ClientHeight = 517
-  ClientWidth = 932
-  ExplicitWidth = 948
+  ClientWidth = 1038
+  ExplicitWidth = 1054
   ExplicitHeight = 555
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
-    Width = 932
+    Width = 1038
     ExplicitWidth = 116
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 14
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 70
-    end
   end
   inherited PaCoPadrao: TPageControl
-    Width = 932
+    Width = 1038
     Height = 476
     ExplicitWidth = 116
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 112
-      ExplicitHeight = 427
       inherited grbxPesquisa: TGroupBox
-        Width = 924
+        Width = 1030
         ExplicitWidth = 112
         inherited ToolBar1: TToolBar
-          Width = 914
+          Width = 1020
         end
       end
       inherited grPesquisa: TsmDBGrid
-        Width = 924
+        Width = 1030
         Height = 333
         DataSource = dsBusca
         Columns = <
@@ -90,142 +81,418 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       end
       inherited stbrConsulta: TStatusBar
         Top = 430
-        Width = 924
+        Width = 1030
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
-      ExplicitWidth = 108
-      ExplicitHeight = 427
-      object Label2: TLabel
-        Left = 32
-        Top = 24
-        Width = 44
-        Height = 13
-        Caption = 'escola_id'
-        FocusControl = cxDBSpinEdit1
-      end
-      object Label3: TLabel
-        Left = 32
-        Top = 64
-        Width = 71
-        Height = 13
-        Caption = 'nome_fantasia'
-        FocusControl = cxDBTextEdit1
-      end
-      object Label4: TLabel
-        Left = 32
-        Top = 104
-        Width = 59
-        Height = 13
-        Caption = 'razao_social'
-        FocusControl = cxDBTextEdit2
-      end
-      object Label5: TLabel
-        Left = 32
-        Top = 144
-        Width = 20
-        Height = 13
-        Caption = 'cnpj'
-        FocusControl = cxDBSpinEdit2
-      end
-      object Label6: TLabel
-        Left = 32
-        Top = 184
-        Width = 24
-        Height = 13
-        Caption = 'ativo'
-        FocusControl = cxDBTextEdit3
-      end
-      object Label7: TLabel
-        Left = 32
-        Top = 224
-        Width = 70
-        Height = 13
-        Caption = 'data_cadastro'
-        FocusControl = cxDBDateEdit1
-      end
-      object Label8: TLabel
-        Left = 32
-        Top = 264
-        Width = 24
-        Height = 13
-        Caption = 'email'
-        FocusControl = cxDBTextEdit4
-      end
-      object Label9: TLabel
-        Left = 32
-        Top = 304
-        Width = 110
-        Height = 13
-        Caption = 'informacoes_adicionais'
-        FocusControl = cxDBMemo1
-      end
-      object cxDBSpinEdit1: TcxDBSpinEdit
-        Left = 32
-        Top = 40
-        DataBinding.DataField = 'escola_id'
-        DataBinding.DataSource = dsCad
+      ExplicitLeft = 2
+      ExplicitWidth = 924
+      ExplicitHeight = 448
+      object cxPageControl1: TcxPageControl
+        Left = 0
+        Top = 0
+        Width = 1030
+        Height = 448
+        Align = alClient
         TabOrder = 0
-        Width = 121
-      end
-      object cxDBTextEdit1: TcxDBTextEdit
-        Left = 32
-        Top = 80
-        DataBinding.DataField = 'nome_fantasia'
-        DataBinding.DataSource = dsCad
-        TabOrder = 1
-        Width = 215
-      end
-      object cxDBTextEdit2: TcxDBTextEdit
-        Left = 32
-        Top = 120
-        DataBinding.DataField = 'razao_social'
-        DataBinding.DataSource = dsCad
-        TabOrder = 2
-        Width = 215
-      end
-      object cxDBSpinEdit2: TcxDBSpinEdit
-        Left = 32
-        Top = 160
-        DataBinding.DataField = 'cnpj'
-        DataBinding.DataSource = dsCad
-        TabOrder = 3
-        Width = 121
-      end
-      object cxDBTextEdit3: TcxDBTextEdit
-        Left = 32
-        Top = 200
-        DataBinding.DataField = 'ativo'
-        DataBinding.DataSource = dsCad
-        TabOrder = 4
-        Width = 121
-      end
-      object cxDBDateEdit1: TcxDBDateEdit
-        Left = 32
-        Top = 240
-        DataBinding.DataField = 'data_cadastro'
-        DataBinding.DataSource = dsCad
-        TabOrder = 5
-        Width = 121
-      end
-      object cxDBTextEdit4: TcxDBTextEdit
-        Left = 32
-        Top = 280
-        DataBinding.DataField = 'email'
-        DataBinding.DataSource = dsCad
-        TabOrder = 6
-        Width = 121
-      end
-      object cxDBMemo1: TcxDBMemo
-        Left = 32
-        Top = 320
-        DataBinding.DataField = 'informacoes_adicionais'
-        DataBinding.DataSource = dsCad
-        TabOrder = 7
-        Height = 89
-        Width = 185
+        Properties.ActivePage = cxTabSheet2
+        Properties.CustomButtons.Buttons = <>
+        ExplicitLeft = -3
+        ExplicitTop = 99
+        ExplicitWidth = 924
+        ClientRectBottom = 444
+        ClientRectLeft = 4
+        ClientRectRight = 1026
+        ClientRectTop = 24
+        object cxTabSheet1: TcxTabSheet
+          Caption = 'Dados Principais'
+          ImageIndex = 0
+          ExplicitLeft = 5
+          ExplicitTop = 25
+          object Label8: TLabel
+            Left = 30
+            Top = 168
+            Width = 24
+            Height = 13
+            Caption = 'Email'
+            FocusControl = cxDBTextEdit4
+          end
+          object Label7: TLabel
+            Left = 376
+            Top = 118
+            Width = 70
+            Height = 13
+            Caption = 'Data Cadastro'
+            FocusControl = cxDBDateEdit1
+          end
+          object Label5: TLabel
+            Left = 30
+            Top = 118
+            Width = 25
+            Height = 13
+            Caption = 'CNPJ'
+          end
+          object Label4: TLabel
+            Left = 30
+            Top = 69
+            Width = 60
+            Height = 13
+            Caption = 'Raz'#227'o Social'
+            FocusControl = cxDBTextEdit2
+          end
+          object Label3: TLabel
+            Left = 30
+            Top = 18
+            Width = 71
+            Height = 13
+            Caption = 'Nome Fantasia'
+            FocusControl = cxDBTextEdit1
+          end
+          object Label9: TLabel
+            Left = 30
+            Top = 221
+            Width = 93
+            Height = 13
+            Caption = 'Informa'#231#245'es Gerais'
+          end
+          object cxDBTextEdit4: TcxDBTextEdit
+            Left = 30
+            Top = 186
+            DataBinding.DataField = 'email'
+            DataBinding.DataSource = dsCad
+            TabOrder = 6
+            Width = 481
+          end
+          object cxDBDateEdit1: TcxDBDateEdit
+            Left = 376
+            Top = 135
+            DataBinding.DataField = 'data_cadastro'
+            DataBinding.DataSource = dsCad
+            TabOrder = 5
+            Width = 137
+          end
+          object cxDBTextEdit2: TcxDBTextEdit
+            Left = 30
+            Top = 86
+            DataBinding.DataField = 'razao_social'
+            DataBinding.DataSource = dsCad
+            TabOrder = 2
+            Width = 481
+          end
+          object cxDBTextEdit1: TcxDBTextEdit
+            Left = 30
+            Top = 35
+            DataBinding.DataField = 'nome_fantasia'
+            DataBinding.DataSource = dsCad
+            TabOrder = 0
+            Width = 481
+          end
+          object cxDBMemo1: TcxDBMemo
+            Left = 30
+            Top = 240
+            DataBinding.DataField = 'informacoes_gerais'
+            DataBinding.DataSource = dsCad
+            TabOrder = 7
+            Height = 131
+            Width = 481
+          end
+          object cxDBCheckBox1: TcxDBCheckBox
+            Left = 561
+            Top = 35
+            Caption = 'Ativo'
+            DataBinding.DataField = 'ativo'
+            DataBinding.DataSource = dsCad
+            Properties.NullStyle = nssUnchecked
+            Properties.ValueChecked = 'S'
+            Properties.ValueUnchecked = 'N'
+            TabOrder = 1
+            Width = 48
+          end
+          object cxGroupBox1: TcxGroupBox
+            Left = 561
+            Top = 89
+            Caption = 'Telefones'
+            TabOrder = 3
+            Height = 237
+            Width = 491
+            object Bevel1: TBevel
+              Left = 208
+              Top = 96
+              Width = 50
+              Height = 50
+            end
+            object Bevel2: TBevel
+              Left = 2
+              Top = 18
+              Width = 487
+              Height = 44
+              Align = alTop
+              ExplicitLeft = 3
+              ExplicitTop = 12
+            end
+            object DBNavigator1: TDBNavigator
+              Left = 16
+              Top = 28
+              Width = 105
+              Height = 25
+              DataSource = dsTelefone
+              VisibleButtons = [nbInsert, nbDelete, nbPost]
+              Align = alCustom
+              TabOrder = 0
+            end
+            object cxGrid1: TcxGrid
+              Left = 2
+              Top = 62
+              Width = 487
+              Height = 173
+              Align = alClient
+              TabOrder = 1
+              ExplicitLeft = 30
+              ExplicitTop = 119
+              ExplicitWidth = 250
+              ExplicitHeight = 200
+              object cxGrid1DBTableView1: TcxGridDBTableView
+                Navigator.Buttons.CustomButtons = <>
+                DataController.DataSource = dsTelefone
+                DataController.Summary.DefaultGroupSummaryItems = <>
+                DataController.Summary.FooterSummaryItems = <>
+                DataController.Summary.SummaryGroups = <>
+                OptionsView.GroupByBox = False
+                object cxGrid1DBTableView1escola_telefone_id: TcxGridDBColumn
+                  DataBinding.FieldName = 'escola_telefone_id'
+                end
+                object cxGrid1DBTableView1escola_id: TcxGridDBColumn
+                  DataBinding.FieldName = 'escola_id'
+                end
+                object cxGrid1DBTableView1telefone_tipo_id: TcxGridDBColumn
+                  DataBinding.FieldName = 'telefone_tipo_id'
+                  Width = 107
+                end
+                object cxGrid1DBTableView1numero: TcxGridDBColumn
+                  DataBinding.FieldName = 'numero'
+                  Width = 140
+                end
+                object cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn
+                  DataBinding.FieldName = 'telefone_tipo_id'
+                  PropertiesClassName = 'TcxLookupComboBoxProperties'
+                  Properties.KeyFieldNames = 'telefone_tipo_id'
+                  Properties.ListColumns = <
+                    item
+                      FieldName = 'descricao'
+                    end>
+                  Properties.ListSource = dsTelefoneTipo
+                  Width = 81
+                end
+              end
+              object cxGrid1Level1: TcxGridLevel
+                GridView = cxGrid1DBTableView1
+              end
+            end
+          end
+          object cxDBMaskEdit2: TcxDBMaskEdit
+            Left = 30
+            Top = 135
+            DataBinding.DataField = 'cnpj'
+            DataBinding.DataSource = dsCad
+            Properties.EditMask = '99.999.999/9999-99;0;_'
+            TabOrder = 4
+            Width = 283
+          end
+        end
+        object cxTabSheet2: TcxTabSheet
+          Caption = 'Endere'#231'o'
+          ImageIndex = 1
+          ExplicitLeft = 5
+          ExplicitTop = 25
+          object Label2: TLabel
+            Left = 184
+            Top = 192
+            Width = 95
+            Height = 13
+            Caption = 'escola_endereco_id'
+            FocusControl = cxDBSpinEdit1
+          end
+          object Label6: TLabel
+            Left = 32
+            Top = 24
+            Width = 19
+            Height = 13
+            Caption = 'Cep'
+          end
+          object Label10: TLabel
+            Left = 184
+            Top = 24
+            Width = 55
+            Height = 13
+            Caption = 'Logradouro'
+            FocusControl = cxDBTextEdit6
+          end
+          object Label11: TLabel
+            Left = 32
+            Top = 72
+            Width = 37
+            Height = 13
+            Caption = 'N'#250'mero'
+          end
+          object Label12: TLabel
+            Left = 184
+            Top = 72
+            Width = 65
+            Height = 13
+            Caption = 'Complemento'
+            FocusControl = cxDBTextEdit7
+          end
+          object Label13: TLabel
+            Left = 32
+            Top = 128
+            Width = 33
+            Height = 13
+            Caption = 'Cidade'
+            FocusControl = cxDBTextEdit8
+          end
+          object Label14: TLabel
+            Left = 404
+            Top = 72
+            Width = 28
+            Height = 13
+            Caption = 'Bairro'
+            FocusControl = cxDBTextEdit9
+          end
+          object Label15: TLabel
+            Left = 404
+            Top = 128
+            Width = 13
+            Height = 13
+            Caption = 'UF'
+            FocusControl = cxDBTextEdit10
+          end
+          object Label16: TLabel
+            Left = 32
+            Top = 192
+            Width = 44
+            Height = 13
+            Caption = 'escola_id'
+            FocusControl = cxDBSpinEdit3
+          end
+          object cxDBSpinEdit1: TcxDBSpinEdit
+            Left = 184
+            Top = 208
+            DataBinding.DataField = 'escola_endereco_id'
+            DataBinding.DataSource = dsEndereco
+            TabOrder = 8
+            Width = 121
+          end
+          object cxDBTextEdit6: TcxDBTextEdit
+            Left = 184
+            Top = 40
+            DataBinding.DataField = 'logradouro'
+            DataBinding.DataSource = dsEndereco
+            TabOrder = 1
+            Width = 659
+          end
+          object cxDBTextEdit7: TcxDBTextEdit
+            Left = 184
+            Top = 91
+            DataBinding.DataField = 'complemento'
+            DataBinding.DataSource = dsEndereco
+            TabOrder = 3
+            Width = 201
+          end
+          object cxDBTextEdit8: TcxDBTextEdit
+            Left = 32
+            Top = 145
+            DataBinding.DataField = 'cidade'
+            DataBinding.DataSource = dsEndereco
+            TabOrder = 5
+            Width = 353
+          end
+          object cxDBTextEdit9: TcxDBTextEdit
+            Left = 404
+            Top = 91
+            DataBinding.DataField = 'bairro'
+            DataBinding.DataSource = dsEndereco
+            TabOrder = 4
+            Width = 439
+          end
+          object cxDBTextEdit10: TcxDBTextEdit
+            Left = 404
+            Top = 208
+            DataBinding.DataField = 'uf'
+            DataBinding.DataSource = dsEndereco
+            TabOrder = 9
+            Width = 121
+          end
+          object cxDBSpinEdit3: TcxDBSpinEdit
+            Left = 32
+            Top = 208
+            DataBinding.DataField = 'escola_id'
+            DataBinding.DataSource = dsEndereco
+            TabOrder = 7
+            Width = 121
+          end
+          object DBNavigator2: TDBNavigator
+            Left = 32
+            Top = 256
+            Width = 240
+            Height = 25
+            DataSource = dsEndereco
+            TabOrder = 10
+          end
+          object cxDBMaskEdit1: TcxDBMaskEdit
+            Left = 32
+            Top = 40
+            DataBinding.DataField = 'cep'
+            DataBinding.DataSource = dsEndereco
+            Properties.EditMask = '99999-999;0'
+            TabOrder = 0
+            Width = 121
+          end
+          object cxDBSpinEdit2: TcxDBSpinEdit
+            Left = 32
+            Top = 91
+            DataBinding.DataField = 'numero'
+            DataBinding.DataSource = dsEndereco
+            Properties.SpinButtons.Visible = False
+            TabOrder = 2
+            Width = 121
+          end
+          object cxDBComboBox1: TcxDBComboBox
+            Left = 404
+            Top = 145
+            DataBinding.DataField = 'uf'
+            DataBinding.DataSource = dsEndereco
+            Properties.Items.Strings = (
+              'AC'
+              'AL'
+              'AM'
+              'AP'
+              'BA'
+              'CE'
+              'DF'
+              'ES'
+              'GO'
+              'MA'
+              'MG'
+              'MS'
+              'MT'
+              'PA'
+              'PB'
+              'PE'
+              'PI'
+              'PR'
+              'RJ'
+              'RN'
+              'RO'
+              'RR'
+              'RS'
+              'SC'
+              'SE'
+              'SP'
+              'TO')
+            TabOrder = 6
+            Width = 66
+          end
+        end
       end
     end
   end
@@ -289,8 +556,8 @@ inherited frmCadastroEscola: TfrmCadastroEscola
         FieldType = ftString
       end
       item
-        FieldName = 'informacoes_adicionais'
-        DisplayName = 'Informacoes_adicionais'
+        FieldName = 'informacoes_gerais'
+        DisplayName = 'informacoes_gerais'
         ShowCombo = False
         ShowGrid = False
         ShowSelect = False
@@ -1114,7 +1381,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       'select * from escola '
       'where escola_id = :escola_id'
       '')
-    Left = 600
+    Left = 616
     Top = 240
     ParamData = <
       item
@@ -1125,17 +1392,19 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       end>
   end
   inherited dsCad: TDataSource
-    Left = 600
+    Left = 616
+    Top = 296
   end
   inherited dsBusca: TDataSource
-    Left = 664
+    Left = 680
+    Top = 296
   end
   inherited fdqBusca: TFDQuery
     Connection = DM.FDConnection
     SQL.Strings = (
       'select * from escola '
       'where escola_id = :escola_id')
-    Left = 664
+    Left = 680
     Top = 240
     ParamData = <
       item
@@ -1144,5 +1413,116 @@ inherited frmCadastroEscola: TfrmCadastroEscola
         ParamType = ptInput
         Value = Null
       end>
+  end
+  object fdqEndereco: TFDQuery
+    MasterSource = dsCad
+    MasterFields = 'escola_id'
+    Connection = DM.FDConnection
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SQL.Strings = (
+      'SELECT * FROM escola_endereco e'
+      'where e.escola_id = :escola_id')
+    Left = 552
+    Top = 240
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object fdqEnderecoescola_endereco_id: TFDAutoIncField
+      FieldName = 'escola_endereco_id'
+      Origin = 'escola_endereco_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object fdqEnderecocep: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cep'
+      Origin = 'cep'
+    end
+    object fdqEnderecologradouro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'logradouro'
+      Origin = 'logradouro'
+      Size = 200
+    end
+    object fdqEndereconumero: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'numero'
+      Origin = 'numero'
+    end
+    object fdqEnderecocomplemento: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'complemento'
+      Origin = 'complemento'
+      Size = 50
+    end
+    object fdqEnderecocidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      Size = 50
+    end
+    object fdqEnderecobairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'bairro'
+      Origin = 'bairro'
+      Size = 50
+    end
+    object fdqEnderecouf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'uf'
+      Origin = 'uf'
+      Size = 10
+    end
+    object fdqEnderecoescola_id: TIntegerField
+      FieldName = 'escola_id'
+      Origin = 'escola_id'
+      Required = True
+    end
+  end
+  object dsEndereco: TDataSource
+    DataSet = fdqEndereco
+    Left = 552
+    Top = 296
+  end
+  object fdqTelefone: TFDQuery
+    MasterSource = dsCad
+    MasterFields = 'escola_id'
+    Connection = DM.FDConnection
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SQL.Strings = (
+      'SELECT * FROM escola_telefone t'
+      'where t.escola_id = :escola_id')
+    Left = 480
+    Top = 240
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsTelefone: TDataSource
+    DataSet = fdqTelefone
+    Left = 480
+    Top = 296
+  end
+  object fdqTelefoneTipo: TFDQuery
+    Connection = DM.FDConnection
+    SQL.Strings = (
+      'select * from telefone_tipo t'
+      'order by t.descricao')
+    Left = 400
+    Top = 240
+  end
+  object dsTelefoneTipo: TDataSource
+    DataSet = fdqTelefoneTipo
+    Left = 400
+    Top = 296
   end
 end

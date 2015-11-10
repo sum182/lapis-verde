@@ -20,12 +20,10 @@ uses
 
 type
   TfrmCadastroTelefoneTipo = class(TfrmCadFD)
-    Label2: TLabel;
-    cxDBSpinEdit1: TcxDBSpinEdit;
-    Label3: TLabel;
-    cxDBTextEdit1: TcxDBTextEdit;
-    cxDBBlobEdit1: TcxDBBlobEdit;
     cxDBMemo1: TcxDBMemo;
+    Label4: TLabel;
+    cxDBTextEdit1: TcxDBTextEdit;
+    Label3: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }

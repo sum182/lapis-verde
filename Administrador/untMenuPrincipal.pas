@@ -26,7 +26,8 @@ uses
   dxStatusBar, dxRibbonStatusBar, IniFiles, dxSkinMetropolis, dxSkinMetropolisDark, dxSkinOffice2013DarkGray,
   dxSkinOffice2013LightGray, dxBarBuiltInMenu, dxRibbonCustomizationForm, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ExtCtrls, Vcl.DBCtrls;
+  Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ExtCtrls, Vcl.DBCtrls, cxCheckGroup,
+  cxBarEditItem, dxBarExtItems;
 
 type
   TfrmMenuPrincipal = class(TForm)
@@ -90,13 +91,17 @@ type
     dxBarButton10: TdxBarButton;
     dxBarSubItem2: TdxBarSubItem;
     mnCadTelefoneTipo: TdxBarButton;
-    DBNavigator1: TDBNavigator;
-    DBGrid1: TDBGrid;
-    FDQuery1: TFDQuery;
-    DataSource1: TDataSource;
     dxBarButton11: TdxBarButton;
     dxBarLargeButton23: TdxBarLargeButton;
     dxBarLargeButton24: TdxBarLargeButton;
+    dxBarStatic1: TdxBarStatic;
+    dxBarStatic2: TdxBarStatic;
+    cxBarEditItem1: TcxBarEditItem;
+    dxBarLargeButton25: TdxBarLargeButton;
+    dxBarStatic3: TdxBarStatic;
+    dxBarLargeButton26: TdxBarLargeButton;
+    dxBarLargeButton27: TdxBarLargeButton;
+    dxBarLargeButton28: TdxBarLargeButton;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);

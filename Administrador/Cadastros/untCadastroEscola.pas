@@ -16,28 +16,82 @@ uses
   dxSkinOffice2013White, dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
   dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, cxMemo, cxDBEdit, cxDropDownEdit, cxCalendar, cxTextEdit, cxMaskEdit,
-  cxSpinEdit;
+  cxSpinEdit, dxSkinscxPCPainter, dxBarBuiltInMenu, cxCheckBox, cxPC, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxNavigator, cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView,
+  cxGrid, Vcl.ExtCtrls, Vcl.DBCtrls, cxGroupBox, cxDBLookupComboBox;
 
 type
   TfrmCadastroEscola = class(TfrmCadFD)
+    cxPageControl1: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
+    cxTabSheet2: TcxTabSheet;
+    cxDBTextEdit4: TcxDBTextEdit;
+    Label8: TLabel;
+    cxDBDateEdit1: TcxDBDateEdit;
+    Label7: TLabel;
+    Label5: TLabel;
+    cxDBTextEdit2: TcxDBTextEdit;
+    Label4: TLabel;
+    cxDBTextEdit1: TcxDBTextEdit;
+    Label3: TLabel;
+    cxDBMemo1: TcxDBMemo;
+    Label9: TLabel;
+    cxDBCheckBox1: TcxDBCheckBox;
+    fdqEndereco: TFDQuery;
+    dsEndereco: TDataSource;
+    fdqTelefone: TFDQuery;
+    dsTelefone: TDataSource;
+    cxGroupBox1: TcxGroupBox;
+    DBNavigator1: TDBNavigator;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1escola_telefone_id: TcxGridDBColumn;
+    cxGrid1DBTableView1escola_id: TcxGridDBColumn;
+    cxGrid1DBTableView1telefone_tipo_id: TcxGridDBColumn;
+    cxGrid1DBTableView1numero: TcxGridDBColumn;
+    fdqEnderecoescola_endereco_id: TFDAutoIncField;
+    fdqEnderecocep: TStringField;
+    fdqEnderecologradouro: TStringField;
+    fdqEndereconumero: TSmallintField;
+    fdqEnderecocomplemento: TStringField;
+    fdqEnderecocidade: TStringField;
+    fdqEnderecobairro: TStringField;
+    fdqEnderecouf: TStringField;
+    fdqEnderecoescola_id: TIntegerField;
     Label2: TLabel;
     cxDBSpinEdit1: TcxDBSpinEdit;
-    Label3: TLabel;
-    cxDBTextEdit1: TcxDBTextEdit;
-    Label4: TLabel;
-    cxDBTextEdit2: TcxDBTextEdit;
-    Label5: TLabel;
-    cxDBSpinEdit2: TcxDBSpinEdit;
     Label6: TLabel;
-    cxDBTextEdit3: TcxDBTextEdit;
-    Label7: TLabel;
-    cxDBDateEdit1: TcxDBDateEdit;
-    Label8: TLabel;
-    cxDBTextEdit4: TcxDBTextEdit;
-    Label9: TLabel;
-    cxDBMemo1: TcxDBMemo;
+    Label10: TLabel;
+    cxDBTextEdit6: TcxDBTextEdit;
+    Label11: TLabel;
+    Label12: TLabel;
+    cxDBTextEdit7: TcxDBTextEdit;
+    Label13: TLabel;
+    cxDBTextEdit8: TcxDBTextEdit;
+    Label14: TLabel;
+    cxDBTextEdit9: TcxDBTextEdit;
+    Label15: TLabel;
+    cxDBTextEdit10: TcxDBTextEdit;
+    Label16: TLabel;
+    cxDBSpinEdit3: TcxDBSpinEdit;
+    fdqTelefoneTipo: TFDQuery;
+    dsTelefoneTipo: TDataSource;
+    cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    DBNavigator2: TDBNavigator;
+    cxDBMaskEdit1: TcxDBMaskEdit;
+    cxDBSpinEdit2: TcxDBSpinEdit;
+    cxDBMaskEdit2: TcxDBMaskEdit;
+    cxDBComboBox1: TcxDBComboBox;
+    procedure FormShow(Sender: TObject);
+    procedure grPesquisaDblClick(Sender: TObject);
+    procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
   private
-    { Private declarations }
+   procedure OpenQuerys;
+   procedure SetPgtCtrlDefaut;
+   procedure OpenFdqEndereco;
   public
     { Public declarations }
   end;
@@ -50,5 +104,53 @@ implementation
 {$R *.dfm}
 
 uses untDM;
+
+{ TfrmCadastroEscola }
+
+procedure TfrmCadastroEscola.FormShow(Sender: TObject);
+begin
+  inherited;
+  OpenQuerys;
+  SetPgtCtrlDefaut;
+end;
+
+procedure TfrmCadastroEscola.grPesquisaDblClick(Sender: TObject);
+begin
+  inherited;
+  SetPgtCtrlDefaut;
+end;
+
+procedure TfrmCadastroEscola.grPesquisaKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  SetPgtCtrlDefaut;
+end;
+
+procedure TfrmCadastroEscola.OpenFdqEndereco;
+begin
+  fdqEndereco.Close;
+  fdqEndereco.Open;
+
+  if fdqEndereco.RecordCount >= 1 then
+    fdqEndereco.Edit
+  else
+    fdqEndereco.Append;
+end;
+
+procedure TfrmCadastroEscola.OpenQuerys;
+begin
+  OpenFdqEndereco;
+
+  fdqTelefone.Close;
+  fdqTelefone.Open;
+
+  fdqTelefoneTipo.Close;
+  fdqTelefoneTipo.Open;
+end;
+
+procedure TfrmCadastroEscola.SetPgtCtrlDefaut;
+begin
+  cxPageControl1.ActivePageIndex:=0;
+end;
 
 end.

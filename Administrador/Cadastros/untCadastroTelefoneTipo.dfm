@@ -1,19 +1,45 @@
 inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
   Caption = 'Cadastro de Tipos de Telefones'
+  ClientHeight = 538
+  ClientWidth = 971
   OnClose = FormClose
+  ExplicitWidth = 987
+  ExplicitHeight = 576
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 66
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 66
-    end
+    Width = 971
+    ExplicitWidth = 116
   end
   inherited PaCoPadrao: TPageControl
+    Width = 971
+    Height = 497
+    ExplicitWidth = 116
     inherited TaShConsulta: TTabSheet
+      ExplicitWidth = 113
+      inherited grbxPesquisa: TGroupBox
+        Width = 963
+        ExplicitWidth = 113
+        inherited ToolBar1: TToolBar
+          Width = 953
+          ExplicitWidth = 953
+          inherited ToolButton3: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton4: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton5: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton6: TToolButton
+            ExplicitWidth = 24
+          end
+        end
+      end
       inherited grPesquisa: TsmDBGrid
+        Width = 963
+        Height = 354
         DataSource = dsBusca
         Columns = <
           item
@@ -34,58 +60,56 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
             Visible = False
           end>
       end
+      inherited stbrConsulta: TStatusBar
+        Top = 451
+        Width = 963
+        ExplicitTop = 451
+        ExplicitWidth = 963
+      end
     end
     inherited TaShCadastro: TTabSheet
-      object Label2: TLabel
-        Left = 64
-        Top = 32
-        Width = 78
+      ExplicitLeft = 2
+      ExplicitWidth = 963
+      ExplicitHeight = 469
+      object Label4: TLabel
+        Left = 30
+        Top = 104
+        Width = 93
         Height = 13
-        Caption = 'telefone_tipo_id'
-        FocusControl = cxDBSpinEdit1
-      end
-      object Label3: TLabel
-        Left = 64
-        Top = 72
-        Width = 45
-        Height = 13
-        Caption = 'descricao'
+        Caption = 'Informa'#231#245'es Gerais'
         FocusControl = cxDBTextEdit1
       end
-      object cxDBSpinEdit1: TcxDBSpinEdit
-        Left = 64
-        Top = 48
-        DataBinding.DataField = 'telefone_tipo_id'
+      object Label3: TLabel
+        Left = 30
+        Top = 32
+        Width = 46
+        Height = 13
+        Caption = 'Descri'#231#227'o'
+        FocusControl = cxDBTextEdit1
+      end
+      object cxDBMemo1: TcxDBMemo
+        Left = 30
+        Top = 123
+        DataBinding.DataField = 'informacoes_gerais'
         DataBinding.DataSource = dsCad
         TabOrder = 0
-        Width = 121
+        Height = 158
+        Width = 512
       end
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = 64
-        Top = 88
+        Left = 30
+        Top = 51
         DataBinding.DataField = 'descricao'
         DataBinding.DataSource = dsCad
         TabOrder = 1
-        Width = 121
+        Width = 512
       end
-      object cxDBBlobEdit1: TcxDBBlobEdit
-        Left = 64
-        Top = 139
-        DataBinding.DataField = 'informacoes_gerais'
-        DataBinding.DataSource = dsCad
-        Properties.BlobEditKind = bekBlob
-        TabOrder = 2
-        Width = 121
-      end
-      object cxDBMemo1: TcxDBMemo
-        Left = 64
-        Top = 176
-        DataBinding.DataField = 'informacoes_gerais'
-        DataBinding.DataSource = dsCad
-        TabOrder = 3
-        Height = 89
-        Width = 185
-      end
+    end
+    inherited TaShRelatorio: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 963
+      ExplicitHeight = 469
     end
   end
   inherited smCadPadrao: TsmCadPadrao
@@ -119,7 +143,7 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -524,7 +548,7 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -932,7 +956,7 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
     SQL.Strings = (
       'select * from telefone_tipo'#10
       'where telefone_tipo_id = :telefone_tipo_id')
-    Top = 304
+    Top = 352
     ParamData = <
       item
         Name = 'TELEFONE_TIPO_ID'
@@ -942,11 +966,11 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
       end>
   end
   inherited dsCad: TDataSource
-    Top = 352
+    Top = 400
   end
   inherited dsBusca: TDataSource
     Left = 112
-    Top = 352
+    Top = 400
   end
   inherited fdqBusca: TFDQuery
     Connection = DM.FDConnection
@@ -954,7 +978,7 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
       'select * from telefone_tipo'#10
       'where telefone_tipo_id = :telefone_tipo_id')
     Left = 112
-    Top = 304
+    Top = 352
     ParamData = <
       item
         Name = 'TELEFONE_TIPO_ID'
