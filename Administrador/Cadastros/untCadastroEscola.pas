@@ -84,10 +84,10 @@ type
     procedure grPesquisaDblClick(Sender: TObject);
     procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
     procedure AcApplyUpdateExecute(Sender: TObject);
-    procedure AcCancelarExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure AcNovoExecute(Sender: TObject);
+    procedure fdqCadAfterOpen(DataSet: TDataSet);
   private
    procedure OpenQuerys;
    procedure SetPgtCtrlDefaut;
@@ -118,17 +118,16 @@ begin
  inherited;
 end;
 
-procedure TfrmCadastroEscola.AcCancelarExecute(Sender: TObject);
-begin
-  inherited;
-
-  OpenQuerys;
-end;
-
 procedure TfrmCadastroEscola.AcNovoExecute(Sender: TObject);
 begin
   inherited;
   fdqCadnome_fantasia.FocusControl;
+end;
+
+procedure TfrmCadastroEscola.fdqCadAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  OpenQuerys;
 end;
 
 procedure TfrmCadastroEscola.fdqCadNewRecord(DataSet: TDataSet);

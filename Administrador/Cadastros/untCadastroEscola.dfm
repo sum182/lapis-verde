@@ -1355,6 +1355,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       000000000000}
   end
   inherited fdqCad: TFDQuery
+    AfterOpen = fdqCadAfterOpen
     OnNewRecord = fdqCadNewRecord
     CachedUpdates = True
     Connection = DM.FDConnection

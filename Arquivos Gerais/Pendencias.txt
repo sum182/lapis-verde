@@ -1,3 +1,7 @@
+Tipo de Responsvael
+
+Tabela ResponsavelXAluno
+
 Nome da Aplicacao
   Alterar metodo do dm
   testar menu principal

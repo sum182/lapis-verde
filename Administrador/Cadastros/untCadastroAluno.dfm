@@ -1,193 +1,239 @@
 inherited frmCadastroAluno: TfrmCadastroAluno
   Caption = 'Cadastro de Aluno'
+  ClientHeight = 527
+  ClientWidth = 938
   OnCloseQuery = FormCloseQuery
+  ExplicitWidth = 954
+  ExplicitHeight = 565
   PixelsPerInch = 96
   TextHeight = 13
+  inherited ToBaCadastro: TToolBar
+    Width = 938
+    ExplicitWidth = 116
+  end
   inherited PaCoPadrao: TPageControl
+    Width = 938
+    Height = 486
+    ActivePage = TaShConsulta
+    ExplicitWidth = 116
+    inherited TaShConsulta: TTabSheet
+      ExplicitWidth = 108
+      inherited grbxPesquisa: TGroupBox
+        Width = 930
+        ExplicitWidth = 108
+        inherited ToolBar1: TToolBar
+          Width = 920
+          ExplicitWidth = 920
+        end
+      end
+      inherited grPesquisa: TsmDBGrid
+        Width = 930
+        Height = 343
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'aluno_id'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome'
+            Width = 188
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Sobrenome'
+            Width = 391
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'data_nascimento'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'sexo'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'rg'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'cpf'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'ativo'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'informacoes_gerais'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'escola_id'
+            Visible = False
+          end>
+      end
+      inherited stbrConsulta: TStatusBar
+        Top = 440
+        Width = 930
+        ExplicitTop = 432
+        ExplicitWidth = 930
+      end
+    end
     inherited TaShCadastro: TTabSheet
       ExplicitLeft = 8
-      object Label2: TLabel
-        Left = 32
-        Top = 16
-        Width = 40
-        Height = 13
-        Caption = 'aluno_id'
-        FocusControl = cxDBSpinEdit1
-      end
+      ExplicitWidth = 930
+      ExplicitHeight = 450
       object Label3: TLabel
         Left = 32
-        Top = 56
-        Width = 26
+        Top = 14
+        Width = 27
         Height = 13
-        Caption = 'nome'
+        Caption = 'Nome'
         FocusControl = cxDBTextEdit1
       end
       object Label4: TLabel
         Left = 32
-        Top = 96
-        Width = 53
+        Top = 67
+        Width = 54
         Height = 13
-        Caption = 'sobrenome'
+        Caption = 'Sobrenome'
         FocusControl = cxDBTextEdit2
       end
       object Label5: TLabel
         Left = 32
-        Top = 136
-        Width = 82
+        Top = 120
+        Width = 96
         Height = 13
-        Caption = 'data_nascimento'
+        Caption = 'Data de Nascimento'
         FocusControl = cxDBDateEdit1
       end
       object Label6: TLabel
-        Left = 32
-        Top = 176
-        Width = 23
+        Left = 232
+        Top = 120
+        Width = 24
         Height = 13
-        Caption = 'sexo'
-        FocusControl = cxDBTextEdit3
+        Caption = 'Sexo'
       end
       object Label7: TLabel
         Left = 32
-        Top = 216
-        Width = 10
+        Top = 168
+        Width = 14
         Height = 13
-        Caption = 'rg'
-        FocusControl = cxDBTextEdit4
+        Caption = 'RG'
       end
       object Label8: TLabel
-        Left = 32
-        Top = 256
-        Width = 15
+        Left = 232
+        Top = 168
+        Width = 19
         Height = 13
-        Caption = 'cpf'
-        FocusControl = cxDBSpinEdit2
+        Caption = 'CPF'
       end
       object Label9: TLabel
         Left = 32
-        Top = 296
-        Width = 24
-        Height = 13
-        Caption = 'ativo'
-        FocusControl = cxDBTextEdit5
-      end
-      object Label10: TLabel
-        Left = 32
-        Top = 336
+        Top = 232
         Width = 93
         Height = 13
-        Caption = 'informacoes_gerais'
-        FocusControl = cxDBMemo1
-      end
-      object Label11: TLabel
-        Left = 32
-        Top = 448
-        Width = 44
-        Height = 13
-        Caption = 'escola_id'
-        FocusControl = cxDBSpinEdit3
-      end
-      object cxDBSpinEdit1: TcxDBSpinEdit
-        Left = 32
-        Top = 32
-        DataBinding.DataField = 'aluno_id'
-        DataBinding.DataSource = dsCad
-        TabOrder = 0
-        Width = 121
+        Caption = 'Informa'#231#245'es Gerais'
       end
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 32
-        Top = 72
+        Top = 31
         DataBinding.DataField = 'nome'
         DataBinding.DataSource = dsCad
-        TabOrder = 1
-        Width = 121
+        TabOrder = 0
+        Width = 489
       end
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 32
-        Top = 112
+        Top = 84
         DataBinding.DataField = 'sobrenome'
         DataBinding.DataSource = dsCad
-        TabOrder = 2
-        Width = 121
+        TabOrder = 1
+        Width = 489
       end
       object cxDBDateEdit1: TcxDBDateEdit
         Left = 32
-        Top = 152
+        Top = 139
         DataBinding.DataField = 'data_nascimento'
         DataBinding.DataSource = dsCad
-        TabOrder = 3
-        Width = 121
+        TabOrder = 2
+        Width = 185
       end
-      object cxDBTextEdit3: TcxDBTextEdit
-        Left = 32
-        Top = 192
-        DataBinding.DataField = 'sexo'
-        DataBinding.DataSource = dsCad
-        TabOrder = 4
-        Width = 121
-      end
-      object cxDBTextEdit4: TcxDBTextEdit
-        Left = 32
-        Top = 232
-        DataBinding.DataField = 'rg'
-        DataBinding.DataSource = dsCad
-        TabOrder = 5
-        Width = 121
-      end
-      object cxDBSpinEdit2: TcxDBSpinEdit
-        Left = 32
-        Top = 272
-        DataBinding.DataField = 'cpf'
-        DataBinding.DataSource = dsCad
-        TabOrder = 6
-        Width = 121
-      end
-      object cxDBTextEdit5: TcxDBTextEdit
-        Left = 32
-        Top = 312
+      object cxDBCheckBox1: TcxDBCheckBox
+        Left = 600
+        Top = 31
+        Caption = 'Aluno Ativo'
         DataBinding.DataField = 'ativo'
         DataBinding.DataSource = dsCad
+        Properties.NullStyle = nssUnchecked
+        Properties.ValueChecked = 'S'
+        Properties.ValueUnchecked = 'N'
         TabOrder = 7
-        Width = 121
+        Width = 80
       end
       object cxDBMemo1: TcxDBMemo
         Left = 32
-        Top = 352
+        Top = 251
         DataBinding.DataField = 'informacoes_gerais'
         DataBinding.DataSource = dsCad
-        TabOrder = 8
-        Height = 89
+        TabOrder = 6
+        Height = 113
+        Width = 489
+      end
+      object cxDBMaskEdit2: TcxDBMaskEdit
+        Left = 232
+        Top = 187
+        DataBinding.DataField = 'cpf'
+        DataBinding.DataSource = dsCad
+        Properties.EditMask = '999.999.999-99;0;_'
+        TabOrder = 5
+        Width = 203
+      end
+      object cxDBMaskEdit1: TcxDBMaskEdit
+        Left = 32
+        Top = 187
+        DataBinding.DataField = 'rg'
+        DataBinding.DataSource = dsCad
+        Properties.EditMask = '00.000.000-a;0'
+        TabOrder = 4
         Width = 185
       end
-      object cxDBSpinEdit3: TcxDBSpinEdit
-        Left = 32
-        Top = 464
-        DataBinding.DataField = 'escola_id'
+      object cxDBImageComboBox1: TcxDBImageComboBox
+        Left = 232
+        Top = 139
+        DataBinding.DataField = 'sexo'
         DataBinding.DataSource = dsCad
-        TabOrder = 9
+        Properties.Items = <
+          item
+            Description = 'Masculino'
+            ImageIndex = 0
+            Value = 'M'
+          end
+          item
+            Description = 'Feminino'
+            Value = 'F'
+          end>
+        Style.Shadow = False
+        Style.ButtonStyle = btsSimple
+        Style.ButtonTransparency = ebtInactive
+        TabOrder = 3
         Width = 121
       end
-      object DBGrid1: TDBGrid
-        Left = 248
-        Top = 60
-        Width = 457
-        Height = 169
-        DataSource = dsFoto
-        TabOrder = 10
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-      end
-      object DBNavigator1: TDBNavigator
-        Left = 248
-        Top = 29
-        Width = 240
-        Height = 25
-        DataSource = dsFoto
-        TabOrder = 11
-      end
+    end
+    inherited TaShRelatorio: TTabSheet
+      ExplicitWidth = 930
+      ExplicitHeight = 450
     end
   end
   inherited smCadPadrao: TsmCadPadrao
@@ -202,7 +248,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
         FieldType = ftAutoInc
       end
       item
-        FieldName = 'nome'
+        FieldName = 'Nome'
         DisplayName = 'Nome'
         ShowCombo = True
         ShowGrid = True
@@ -210,7 +256,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
         FieldType = ftString
       end
       item
-        FieldName = 'sobrenome'
+        FieldName = 'Sobrenome'
         DisplayName = 'Sobrenome'
         ShowCombo = True
         ShowGrid = True
@@ -277,7 +323,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -682,7 +728,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1086,7 +1132,13 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       000000000000}
   end
   inherited fdqCad: TFDQuery
+    Active = True
+    AfterOpen = fdqCadAfterOpen
+    OnNewRecord = fdqCadNewRecord
+    CachedUpdates = True
     Connection = DM.FDConnection
+    SchemaAdapter = FDSchemaAdapter
+    UpdateOptions.AutoIncFields = 'aluno_id'
     SQL.Strings = (
       'SELECT * FROM aluno'
       'where aluno_id = :aluno_id')
@@ -1102,6 +1154,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       FieldName = 'aluno_id'
       Origin = 'aluno_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdqCadnome: TStringField
       AutoGenerateValue = arDefault
@@ -1158,121 +1211,16 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     end
   end
   inherited dsCad: TDataSource
-    DataSet = cdsCad
     Left = 680
-    Top = 424
+  end
+  inherited dsBusca: TDataSource
+    Left = 616
   end
   inherited fdqBusca: TFDQuery
     Connection = DM.FDConnection
+    Left = 616
   end
-  object dsFoto: TDataSource
-    DataSet = cdsFoto
-    Left = 608
-    Top = 424
-  end
-  object fdqFoto: TFDQuery
-    Connection = DM.FDConnection
-    SQL.Strings = (
-      'select * from aluno_foto'
-      'where aluno_id = :aluno_id')
-    Left = 608
-    Top = 248
-    ParamData = <
-      item
-        Position = 1
-        Name = 'ALUNO_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-      end>
-  end
-  object dspCad: TDataSetProvider
-    DataSet = fdqCad
-    Options = [poFetchDetailsOnDemand, poCascadeDeletes, poCascadeUpdates, poAllowMultiRecordUpdates, poAutoRefresh, poPropogateChanges, poAllowCommandText, poUseQuoteChar]
-    Left = 680
-    Top = 304
-  end
-  object cdsCad: TClientDataSet
-    Aggregates = <>
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ALUNO_ID'
-        ParamType = ptInput
-      end>
-    ProviderName = 'dspCad'
-    Left = 680
-    Top = 368
-    object cdsCadaluno_id: TAutoIncField
-      FieldName = 'aluno_id'
-      ReadOnly = True
-    end
-    object cdsCadnome: TStringField
-      FieldName = 'nome'
-      Size = 150
-    end
-    object cdsCadsobrenome: TStringField
-      FieldName = 'sobrenome'
-      Size = 150
-    end
-    object cdsCaddata_nascimento: TDateField
-      FieldName = 'data_nascimento'
-    end
-    object cdsCadsexo: TStringField
-      FieldName = 'sexo'
-      FixedChar = True
-      Size = 1
-    end
-    object cdsCadrg: TStringField
-      FieldName = 'rg'
-      Size = 50
-    end
-    object cdsCadcpf: TLargeintField
-      FieldName = 'cpf'
-    end
-    object cdsCadativo: TStringField
-      FieldName = 'ativo'
-      FixedChar = True
-      Size = 1
-    end
-    object cdsCadinformacoes_gerais: TMemoField
-      FieldName = 'informacoes_gerais'
-      BlobType = ftMemo
-    end
-    object cdsCadescola_id: TIntegerField
-      FieldName = 'escola_id'
-    end
-  end
-  object dspFoto: TDataSetProvider
-    DataSet = fdqFoto
-    Options = [poFetchDetailsOnDemand, poCascadeDeletes, poCascadeUpdates, poAllowMultiRecordUpdates, poAutoRefresh, poPropogateChanges, poAllowCommandText, poUseQuoteChar]
-    Left = 608
-    Top = 312
-  end
-  object cdsFoto: TClientDataSet
-    Aggregates = <>
-    IndexFieldNames = 'aluno_id'
-    MasterFields = 'aluno_id'
-    MasterSource = dsCad
-    PacketRecords = 0
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ALUNO_ID'
-        ParamType = ptInput
-        Value = 0
-      end>
-    ProviderName = 'dspFoto'
-    Left = 608
-    Top = 368
-    object cdsFotoaluno_foto_id: TAutoIncField
-      FieldName = 'aluno_foto_id'
-    end
-    object cdsFotoaluno_id: TIntegerField
-      FieldName = 'aluno_id'
-      Required = True
-    end
-    object cdsFotofoto: TBlobField
-      FieldName = 'foto'
-    end
+  inherited FDSchemaAdapter: TFDSchemaAdapter
+    Left = 544
   end
 end

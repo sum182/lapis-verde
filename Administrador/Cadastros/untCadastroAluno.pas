@@ -16,7 +16,8 @@ uses
   dxSkinOffice2013White, dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
   dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, cxMemo, cxDBEdit, cxDropDownEdit, cxCalendar, cxTextEdit, cxMaskEdit,
-  cxSpinEdit, Vcl.ExtCtrls, Vcl.DBCtrls, Datasnap.DBClient, Datasnap.Provider;
+  cxSpinEdit, Vcl.ExtCtrls, Vcl.DBCtrls, Datasnap.DBClient, Datasnap.Provider, cxCheckBox, cxImageComboBox, Vcl.Menus, cxButtons,
+  cxImage, cxBlobEdit, cxGroupBox;
 
 type
   TfrmCadastroAluno = class(TfrmCadFD)
@@ -30,8 +31,6 @@ type
     fdqCadativo: TStringField;
     fdqCadinformacoes_gerais: TMemoField;
     fdqCadescola_id: TIntegerField;
-    Label2: TLabel;
-    cxDBSpinEdit1: TcxDBSpinEdit;
     Label3: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
     Label4: TLabel;
@@ -39,41 +38,19 @@ type
     Label5: TLabel;
     cxDBDateEdit1: TcxDBDateEdit;
     Label6: TLabel;
-    cxDBTextEdit3: TcxDBTextEdit;
     Label7: TLabel;
-    cxDBTextEdit4: TcxDBTextEdit;
     Label8: TLabel;
-    cxDBSpinEdit2: TcxDBSpinEdit;
-    Label9: TLabel;
-    cxDBTextEdit5: TcxDBTextEdit;
-    Label10: TLabel;
+    cxDBCheckBox1: TcxDBCheckBox;
     cxDBMemo1: TcxDBMemo;
-    Label11: TLabel;
-    cxDBSpinEdit3: TcxDBSpinEdit;
-    DBGrid1: TDBGrid;
-    DBNavigator1: TDBNavigator;
-    dsFoto: TDataSource;
-    fdqFoto: TFDQuery;
-    dspCad: TDataSetProvider;
-    cdsCad: TClientDataSet;
-    cdsCadaluno_id: TAutoIncField;
-    cdsCadnome: TStringField;
-    cdsCadsobrenome: TStringField;
-    cdsCaddata_nascimento: TDateField;
-    cdsCadsexo: TStringField;
-    cdsCadrg: TStringField;
-    cdsCadcpf: TLargeintField;
-    cdsCadativo: TStringField;
-    cdsCadinformacoes_gerais: TMemoField;
-    cdsCadescola_id: TIntegerField;
-    dspFoto: TDataSetProvider;
-    cdsFoto: TClientDataSet;
-    cdsFotoaluno_foto_id: TAutoIncField;
-    cdsFotoaluno_id: TIntegerField;
-    cdsFotofoto: TBlobField;
+    Label9: TLabel;
+    cxDBMaskEdit2: TcxDBMaskEdit;
+    cxDBMaskEdit1: TcxDBMaskEdit;
+    cxDBImageComboBox1: TcxDBImageComboBox;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
-    procedure AcApplyUpdateExecute(Sender: TObject);
+    procedure fdqCadAfterOpen(DataSet: TDataSet);
+    procedure fdqCadNewRecord(DataSet: TDataSet);
+    procedure AcNovoExecute(Sender: TObject);
   private
     procedure OpenQuerys;
   public
@@ -89,10 +66,22 @@ implementation
 
 uses untDM, smGeral;
 
-procedure TfrmCadastroAluno.AcApplyUpdateExecute(Sender: TObject);
+procedure TfrmCadastroAluno.AcNovoExecute(Sender: TObject);
 begin
   inherited;
-  ApplyUpdates(cdsFoto);
+  fdqCadnome.FocusControl;
+end;
+
+procedure TfrmCadastroAluno.fdqCadAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  OpenQuerys;
+end;
+
+procedure TfrmCadastroAluno.fdqCadNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  fdqCadativo.AsString:='S';
 end;
 
 procedure TfrmCadastroAluno.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -107,10 +96,10 @@ begin
   OpenQuerys;
 end;
 
+
 procedure TfrmCadastroAluno.OpenQuerys;
 begin
-  cdsFoto.Close;
-  cdsFoto.CreateDataSet;
+  //
 end;
 
 end.
