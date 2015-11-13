@@ -96,7 +96,6 @@
             <Form>frmCadFD</Form>
         </DCCReference>
         <DCCReference Include="C:\Componentes\Sum182\D15\Units\smGeral.pas"/>
-        <DCCReference Include="C:\Componentes\sum182\D15\Units\smMensagens.pas"/>
         <DCCReference Include="C:\Componentes\Sum182\D15\Units\smDB.pas"/>
         <DCCReference Include="untDM.pas">
             <Form>DM</Form>
@@ -113,6 +112,19 @@
         </DCCReference>
         <DCCReference Include="Cadastros\untCadastroEscola.pas">
             <Form>frmCadastroEscola</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="C:\Componentes\sum182\D15\Units\smMensagens.pas"/>
+        <DCCReference Include="Cadastros\untCadastroAluno.pas">
+            <Form>frmCadastroAluno</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Testes\f_principal.pas">
+            <Form>frm_principal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Testes\untTeste.pas">
+            <Form>frmTeste</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

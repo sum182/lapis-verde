@@ -1,118 +1,257 @@
-inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
-  Caption = 'Cadastro de Tipos de Telefones'
-  ClientHeight = 538
-  ClientWidth = 971
-  OnClose = FormClose
-  ExplicitWidth = 987
-  ExplicitHeight = 576
+inherited frmCadastroAluno: TfrmCadastroAluno
+  Caption = 'Cadastro de Aluno'
+  OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
   TextHeight = 13
-  inherited ToBaCadastro: TToolBar
-    Width = 971
-    ExplicitWidth = 971
-  end
   inherited PaCoPadrao: TPageControl
-    Width = 971
-    Height = 497
-    ExplicitWidth = 971
-    ExplicitHeight = 497
-    inherited TaShConsulta: TTabSheet
-      ExplicitWidth = 963
-      ExplicitHeight = 469
-      inherited grbxPesquisa: TGroupBox
-        Width = 963
-        ExplicitWidth = 963
-        inherited ToolBar1: TToolBar
-          Width = 953
-          ExplicitWidth = 953
-        end
-      end
-      inherited grPesquisa: TsmDBGrid
-        Width = 963
-        Height = 354
-        DataSource = dsBusca
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'telefone_tipo_id'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'descricao'
-            Title.Caption = 'Descri'#231#227'o'
-            Width = 233
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'informacoes_gerais'
-            Visible = False
-          end>
-      end
-      inherited stbrConsulta: TStatusBar
-        Top = 451
-        Width = 963
-        ExplicitTop = 451
-        ExplicitWidth = 963
-      end
-    end
     inherited TaShCadastro: TTabSheet
-      ExplicitWidth = 963
-      ExplicitHeight = 469
-      object Label4: TLabel
-        Left = 30
-        Top = 104
-        Width = 93
+      ExplicitLeft = 8
+      object Label2: TLabel
+        Left = 32
+        Top = 16
+        Width = 40
         Height = 13
-        Caption = 'Informa'#231#245'es Gerais'
-        FocusControl = cxDBTextEdit1
+        Caption = 'aluno_id'
+        FocusControl = cxDBSpinEdit1
       end
       object Label3: TLabel
-        Left = 30
-        Top = 32
-        Width = 46
+        Left = 32
+        Top = 56
+        Width = 26
         Height = 13
-        Caption = 'Descri'#231#227'o'
+        Caption = 'nome'
         FocusControl = cxDBTextEdit1
       end
-      object cxDBMemo1: TcxDBMemo
-        Left = 30
-        Top = 123
-        DataBinding.DataField = 'informacoes_gerais'
+      object Label4: TLabel
+        Left = 32
+        Top = 96
+        Width = 53
+        Height = 13
+        Caption = 'sobrenome'
+        FocusControl = cxDBTextEdit2
+      end
+      object Label5: TLabel
+        Left = 32
+        Top = 136
+        Width = 82
+        Height = 13
+        Caption = 'data_nascimento'
+        FocusControl = cxDBDateEdit1
+      end
+      object Label6: TLabel
+        Left = 32
+        Top = 176
+        Width = 23
+        Height = 13
+        Caption = 'sexo'
+        FocusControl = cxDBTextEdit3
+      end
+      object Label7: TLabel
+        Left = 32
+        Top = 216
+        Width = 10
+        Height = 13
+        Caption = 'rg'
+        FocusControl = cxDBTextEdit4
+      end
+      object Label8: TLabel
+        Left = 32
+        Top = 256
+        Width = 15
+        Height = 13
+        Caption = 'cpf'
+        FocusControl = cxDBSpinEdit2
+      end
+      object Label9: TLabel
+        Left = 32
+        Top = 296
+        Width = 24
+        Height = 13
+        Caption = 'ativo'
+        FocusControl = cxDBTextEdit5
+      end
+      object Label10: TLabel
+        Left = 32
+        Top = 336
+        Width = 93
+        Height = 13
+        Caption = 'informacoes_gerais'
+        FocusControl = cxDBMemo1
+      end
+      object Label11: TLabel
+        Left = 32
+        Top = 448
+        Width = 44
+        Height = 13
+        Caption = 'escola_id'
+        FocusControl = cxDBSpinEdit3
+      end
+      object cxDBSpinEdit1: TcxDBSpinEdit
+        Left = 32
+        Top = 32
+        DataBinding.DataField = 'aluno_id'
         DataBinding.DataSource = dsCad
         TabOrder = 0
-        Height = 158
-        Width = 512
+        Width = 121
       end
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = 30
-        Top = 51
-        DataBinding.DataField = 'descricao'
+        Left = 32
+        Top = 72
+        DataBinding.DataField = 'nome'
         DataBinding.DataSource = dsCad
         TabOrder = 1
-        Width = 512
+        Width = 121
       end
-    end
-    inherited TaShRelatorio: TTabSheet
-      ExplicitWidth = 963
-      ExplicitHeight = 469
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 32
+        Top = 112
+        DataBinding.DataField = 'sobrenome'
+        DataBinding.DataSource = dsCad
+        TabOrder = 2
+        Width = 121
+      end
+      object cxDBDateEdit1: TcxDBDateEdit
+        Left = 32
+        Top = 152
+        DataBinding.DataField = 'data_nascimento'
+        DataBinding.DataSource = dsCad
+        TabOrder = 3
+        Width = 121
+      end
+      object cxDBTextEdit3: TcxDBTextEdit
+        Left = 32
+        Top = 192
+        DataBinding.DataField = 'sexo'
+        DataBinding.DataSource = dsCad
+        TabOrder = 4
+        Width = 121
+      end
+      object cxDBTextEdit4: TcxDBTextEdit
+        Left = 32
+        Top = 232
+        DataBinding.DataField = 'rg'
+        DataBinding.DataSource = dsCad
+        TabOrder = 5
+        Width = 121
+      end
+      object cxDBSpinEdit2: TcxDBSpinEdit
+        Left = 32
+        Top = 272
+        DataBinding.DataField = 'cpf'
+        DataBinding.DataSource = dsCad
+        TabOrder = 6
+        Width = 121
+      end
+      object cxDBTextEdit5: TcxDBTextEdit
+        Left = 32
+        Top = 312
+        DataBinding.DataField = 'ativo'
+        DataBinding.DataSource = dsCad
+        TabOrder = 7
+        Width = 121
+      end
+      object cxDBMemo1: TcxDBMemo
+        Left = 32
+        Top = 352
+        DataBinding.DataField = 'informacoes_gerais'
+        DataBinding.DataSource = dsCad
+        TabOrder = 8
+        Height = 89
+        Width = 185
+      end
+      object cxDBSpinEdit3: TcxDBSpinEdit
+        Left = 32
+        Top = 464
+        DataBinding.DataField = 'escola_id'
+        DataBinding.DataSource = dsCad
+        TabOrder = 9
+        Width = 121
+      end
+      object DBGrid1: TDBGrid
+        Left = 248
+        Top = 60
+        Width = 457
+        Height = 169
+        DataSource = dsFoto
+        TabOrder = 10
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
+      object DBNavigator1: TDBNavigator
+        Left = 248
+        Top = 29
+        Width = 240
+        Height = 25
+        DataSource = dsFoto
+        TabOrder = 11
+      end
     end
   end
   inherited smCadPadrao: TsmCadPadrao
-    Tabela = 'telefone_tipo'
+    Tabela = 'aluno'
     FieldsBusca = <
       item
-        FieldName = 'telefone_tipo_id'
-        DisplayName = 'Telefone_tipo_id'
-        ShowCombo = False
-        ShowGrid = False
+        FieldName = 'aluno_id'
+        DisplayName = 'Aluno_id'
+        ShowCombo = True
+        ShowGrid = True
         ShowSelect = True
-        FieldType = ftSmallint
+        FieldType = ftAutoInc
       end
       item
-        FieldName = 'descricao'
-        DisplayName = 'Descricao'
+        FieldName = 'nome'
+        DisplayName = 'Nome'
+        ShowCombo = True
+        ShowGrid = True
+        ShowSelect = True
+        FieldType = ftString
+      end
+      item
+        FieldName = 'sobrenome'
+        DisplayName = 'Sobrenome'
+        ShowCombo = True
+        ShowGrid = True
+        ShowSelect = True
+        FieldType = ftString
+      end
+      item
+        FieldName = 'data_nascimento'
+        DisplayName = 'Data_nascimento'
+        ShowCombo = True
+        ShowGrid = True
+        ShowSelect = True
+        FieldType = ftDate
+      end
+      item
+        FieldName = 'sexo'
+        DisplayName = 'Sexo'
+        ShowCombo = True
+        ShowGrid = True
+        ShowSelect = True
+        FieldType = ftString
+      end
+      item
+        FieldName = 'rg'
+        DisplayName = 'Rg'
+        ShowCombo = True
+        ShowGrid = True
+        ShowSelect = True
+        FieldType = ftString
+      end
+      item
+        FieldName = 'cpf'
+        DisplayName = 'Cpf'
+        ShowCombo = True
+        ShowGrid = True
+        ShowSelect = True
+        FieldType = ftLargeint
+      end
+      item
+        FieldName = 'ativo'
+        DisplayName = 'Ativo'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -125,12 +264,20 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
         ShowGrid = False
         ShowSelect = False
         FieldType = ftMemo
+      end
+      item
+        FieldName = 'escola_id'
+        DisplayName = 'Escola_id'
+        ShowCombo = True
+        ShowGrid = True
+        ShowSelect = True
+        FieldType = ftInteger
       end>
-    KeyField = 'telefone_tipo_id'
+    KeyField = 'aluno_id'
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -535,7 +682,7 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -941,40 +1088,191 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
   inherited fdqCad: TFDQuery
     Connection = DM.FDConnection
     SQL.Strings = (
-      'select * from telefone_tipo'#10
-      'where telefone_tipo_id = :telefone_tipo_id')
-    Top = 352
+      'SELECT * FROM aluno'
+      'where aluno_id = :aluno_id')
+    Left = 680
     ParamData = <
       item
-        Name = 'TELEFONE_TIPO_ID'
+        Position = 1
+        Name = 'ALUNO_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
       end>
+    object fdqCadaluno_id: TFDAutoIncField
+      FieldName = 'aluno_id'
+      Origin = 'aluno_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object fdqCadnome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 150
+    end
+    object fdqCadsobrenome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'sobrenome'
+      Origin = 'sobrenome'
+      Size = 150
+    end
+    object fdqCaddata_nascimento: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'data_nascimento'
+      Origin = 'data_nascimento'
+    end
+    object fdqCadsexo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'sexo'
+      Origin = 'sexo'
+      FixedChar = True
+      Size = 1
+    end
+    object fdqCadrg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'rg'
+      Origin = 'rg'
+      Size = 50
+    end
+    object fdqCadcpf: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'cpf'
+      Origin = 'cpf'
+    end
+    object fdqCadativo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ativo'
+      Origin = 'ativo'
+      FixedChar = True
+      Size = 1
+    end
+    object fdqCadinformacoes_gerais: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'informacoes_gerais'
+      Origin = 'informacoes_gerais'
+      BlobType = ftMemo
+    end
+    object fdqCadescola_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'escola_id'
+      Origin = 'escola_id'
+    end
   end
   inherited dsCad: TDataSource
-    Top = 400
-  end
-  inherited dsBusca: TDataSource
-    Left = 112
-    Top = 400
+    DataSet = cdsCad
+    Left = 680
+    Top = 424
   end
   inherited fdqBusca: TFDQuery
     Connection = DM.FDConnection
+  end
+  object dsFoto: TDataSource
+    DataSet = cdsFoto
+    Left = 608
+    Top = 424
+  end
+  object fdqFoto: TFDQuery
+    Connection = DM.FDConnection
     SQL.Strings = (
-      'select * from telefone_tipo'#10
-      'where telefone_tipo_id = :telefone_tipo_id')
-    Left = 112
-    Top = 352
+      'select * from aluno_foto'
+      'where aluno_id = :aluno_id')
+    Left = 608
+    Top = 248
     ParamData = <
       item
-        Name = 'TELEFONE_TIPO_ID'
+        Position = 1
+        Name = 'ALUNO_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
       end>
   end
-  inherited FDSchemaAdapter: TFDSchemaAdapter
-    Top = 352
+  object dspCad: TDataSetProvider
+    DataSet = fdqCad
+    Options = [poFetchDetailsOnDemand, poCascadeDeletes, poCascadeUpdates, poAllowMultiRecordUpdates, poAutoRefresh, poPropogateChanges, poAllowCommandText, poUseQuoteChar]
+    Left = 680
+    Top = 304
+  end
+  object cdsCad: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ALUNO_ID'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspCad'
+    Left = 680
+    Top = 368
+    object cdsCadaluno_id: TAutoIncField
+      FieldName = 'aluno_id'
+      ReadOnly = True
+    end
+    object cdsCadnome: TStringField
+      FieldName = 'nome'
+      Size = 150
+    end
+    object cdsCadsobrenome: TStringField
+      FieldName = 'sobrenome'
+      Size = 150
+    end
+    object cdsCaddata_nascimento: TDateField
+      FieldName = 'data_nascimento'
+    end
+    object cdsCadsexo: TStringField
+      FieldName = 'sexo'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCadrg: TStringField
+      FieldName = 'rg'
+      Size = 50
+    end
+    object cdsCadcpf: TLargeintField
+      FieldName = 'cpf'
+    end
+    object cdsCadativo: TStringField
+      FieldName = 'ativo'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCadinformacoes_gerais: TMemoField
+      FieldName = 'informacoes_gerais'
+      BlobType = ftMemo
+    end
+    object cdsCadescola_id: TIntegerField
+      FieldName = 'escola_id'
+    end
+  end
+  object dspFoto: TDataSetProvider
+    DataSet = fdqFoto
+    Options = [poFetchDetailsOnDemand, poCascadeDeletes, poCascadeUpdates, poAllowMultiRecordUpdates, poAutoRefresh, poPropogateChanges, poAllowCommandText, poUseQuoteChar]
+    Left = 608
+    Top = 312
+  end
+  object cdsFoto: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'aluno_id'
+    MasterFields = 'aluno_id'
+    MasterSource = dsCad
+    PacketRecords = 0
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ALUNO_ID'
+        ParamType = ptInput
+        Value = 0
+      end>
+    ProviderName = 'dspFoto'
+    Left = 608
+    Top = 368
+    object cdsFotoaluno_foto_id: TAutoIncField
+      FieldName = 'aluno_foto_id'
+    end
+    object cdsFotoaluno_id: TIntegerField
+      FieldName = 'aluno_id'
+      Required = True
+    end
+    object cdsFotofoto: TBlobField
+      FieldName = 'foto'
+    end
   end
 end

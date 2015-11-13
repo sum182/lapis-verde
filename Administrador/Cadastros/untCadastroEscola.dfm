@@ -1,31 +1,36 @@
 inherited frmCadastroEscola: TfrmCadastroEscola
   Caption = 'Cadastro de Escola'
-  ClientHeight = 517
+  ClientHeight = 525
   ClientWidth = 1038
+  OnCloseQuery = FormCloseQuery
+  ExplicitTop = -21
   ExplicitWidth = 1054
-  ExplicitHeight = 555
+  ExplicitHeight = 563
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
     Width = 1038
-    ExplicitWidth = 116
+    ExplicitWidth = 1038
   end
   inherited PaCoPadrao: TPageControl
     Width = 1038
-    Height = 476
-    ExplicitWidth = 116
+    Height = 484
+    ExplicitWidth = 1038
+    ExplicitHeight = 484
     inherited TaShConsulta: TTabSheet
-      ExplicitWidth = 112
+      ExplicitWidth = 1030
+      ExplicitHeight = 456
       inherited grbxPesquisa: TGroupBox
         Width = 1030
-        ExplicitWidth = 112
+        ExplicitWidth = 1030
         inherited ToolBar1: TToolBar
           Width = 1020
+          ExplicitWidth = 1020
         end
       end
       inherited grPesquisa: TsmDBGrid
         Width = 1030
-        Height = 333
+        Height = 341
         DataSource = dsBusca
         Columns = <
           item
@@ -80,38 +85,36 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end>
       end
       inherited stbrConsulta: TStatusBar
-        Top = 430
+        Top = 438
         Width = 1030
+        ExplicitTop = 438
+        ExplicitWidth = 1030
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 2
-      ExplicitWidth = 924
-      ExplicitHeight = 448
+      ExplicitWidth = 1030
+      ExplicitHeight = 456
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
         Width = 1030
-        Height = 448
+        Height = 456
         Align = alClient
         TabOrder = 0
-        Properties.ActivePage = cxTabSheet2
+        Properties.ActivePage = cxTabSheet1
         Properties.CustomButtons.Buttons = <>
-        ExplicitLeft = -3
-        ExplicitTop = 99
-        ExplicitWidth = 924
-        ClientRectBottom = 444
+        ClientRectBottom = 452
         ClientRectLeft = 4
         ClientRectRight = 1026
         ClientRectTop = 24
         object cxTabSheet1: TcxTabSheet
           Caption = 'Dados Principais'
           ImageIndex = 0
-          ExplicitLeft = 5
-          ExplicitTop = 25
+          ExplicitLeft = 3
+          ExplicitTop = 18
           object Label8: TLabel
             Left = 30
-            Top = 168
+            Top = 221
             Width = 24
             Height = 13
             Caption = 'Email'
@@ -119,7 +122,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object Label7: TLabel
             Left = 376
-            Top = 118
+            Top = 171
             Width = 70
             Height = 13
             Caption = 'Data Cadastro'
@@ -127,14 +130,14 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object Label5: TLabel
             Left = 30
-            Top = 118
+            Top = 171
             Width = 25
             Height = 13
             Caption = 'CNPJ'
           end
           object Label4: TLabel
             Left = 30
-            Top = 69
+            Top = 122
             Width = 60
             Height = 13
             Caption = 'Raz'#227'o Social'
@@ -142,7 +145,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object Label3: TLabel
             Left = 30
-            Top = 18
+            Top = 69
             Width = 71
             Height = 13
             Caption = 'Nome Fantasia'
@@ -150,30 +153,38 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object Label9: TLabel
             Left = 30
-            Top = 221
+            Top = 274
             Width = 93
             Height = 13
             Caption = 'Informa'#231#245'es Gerais'
           end
+          object Label2: TLabel
+            Left = 30
+            Top = 16
+            Width = 11
+            Height = 13
+            Caption = 'ID'
+            FocusControl = cxDBTextEdit1
+          end
           object cxDBTextEdit4: TcxDBTextEdit
             Left = 30
-            Top = 186
+            Top = 239
             DataBinding.DataField = 'email'
             DataBinding.DataSource = dsCad
-            TabOrder = 6
+            TabOrder = 5
             Width = 481
           end
           object cxDBDateEdit1: TcxDBDateEdit
             Left = 376
-            Top = 135
+            Top = 188
             DataBinding.DataField = 'data_cadastro'
             DataBinding.DataSource = dsCad
-            TabOrder = 5
+            TabOrder = 4
             Width = 137
           end
           object cxDBTextEdit2: TcxDBTextEdit
             Left = 30
-            Top = 86
+            Top = 139
             DataBinding.DataField = 'razao_social'
             DataBinding.DataSource = dsCad
             TabOrder = 2
@@ -181,40 +192,40 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object cxDBTextEdit1: TcxDBTextEdit
             Left = 30
-            Top = 35
+            Top = 88
             DataBinding.DataField = 'nome_fantasia'
             DataBinding.DataSource = dsCad
-            TabOrder = 0
+            TabOrder = 1
             Width = 481
           end
           object cxDBMemo1: TcxDBMemo
             Left = 30
-            Top = 240
+            Top = 293
             DataBinding.DataField = 'informacoes_gerais'
             DataBinding.DataSource = dsCad
-            TabOrder = 7
-            Height = 131
+            TabOrder = 6
+            Height = 113
             Width = 481
           end
           object cxDBCheckBox1: TcxDBCheckBox
             Left = 561
-            Top = 35
-            Caption = 'Ativo'
+            Top = 88
+            Caption = 'Escola Ativa'
             DataBinding.DataField = 'ativo'
             DataBinding.DataSource = dsCad
             Properties.NullStyle = nssUnchecked
             Properties.ValueChecked = 'S'
             Properties.ValueUnchecked = 'N'
-            TabOrder = 1
-            Width = 48
+            TabOrder = 7
+            Width = 96
           end
           object cxGroupBox1: TcxGroupBox
-            Left = 561
-            Top = 89
+            Left = 563
+            Top = 122
             Caption = 'Telefones'
-            TabOrder = 3
-            Height = 237
-            Width = 491
+            TabOrder = 8
+            Height = 308
+            Width = 456
             object Bevel1: TBevel
               Left = 208
               Top = 96
@@ -224,11 +235,12 @@ inherited frmCadastroEscola: TfrmCadastroEscola
             object Bevel2: TBevel
               Left = 2
               Top = 18
-              Width = 487
+              Width = 452
               Height = 44
               Align = alTop
               ExplicitLeft = 3
               ExplicitTop = 12
+              ExplicitWidth = 487
             end
             object DBNavigator1: TDBNavigator
               Left = 16
@@ -238,19 +250,16 @@ inherited frmCadastroEscola: TfrmCadastroEscola
               DataSource = dsTelefone
               VisibleButtons = [nbInsert, nbDelete, nbPost]
               Align = alCustom
+              ConfirmDelete = False
               TabOrder = 0
             end
             object cxGrid1: TcxGrid
               Left = 2
               Top = 62
-              Width = 487
-              Height = 173
+              Width = 452
+              Height = 244
               Align = alClient
               TabOrder = 1
-              ExplicitLeft = 30
-              ExplicitTop = 119
-              ExplicitWidth = 250
-              ExplicitHeight = 200
               object cxGrid1DBTableView1: TcxGridDBTableView
                 Navigator.Buttons.CustomButtons = <>
                 DataController.DataSource = dsTelefone
@@ -260,19 +269,26 @@ inherited frmCadastroEscola: TfrmCadastroEscola
                 OptionsView.GroupByBox = False
                 object cxGrid1DBTableView1escola_telefone_id: TcxGridDBColumn
                   DataBinding.FieldName = 'escola_telefone_id'
+                  Visible = False
+                  Width = 108
                 end
                 object cxGrid1DBTableView1escola_id: TcxGridDBColumn
                   DataBinding.FieldName = 'escola_id'
+                  Visible = False
+                  Width = 74
                 end
                 object cxGrid1DBTableView1telefone_tipo_id: TcxGridDBColumn
                   DataBinding.FieldName = 'telefone_tipo_id'
+                  Visible = False
                   Width = 107
                 end
                 object cxGrid1DBTableView1numero: TcxGridDBColumn
+                  Caption = 'N'#250'mero'
                   DataBinding.FieldName = 'numero'
-                  Width = 140
+                  Width = 179
                 end
                 object cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn
+                  Caption = 'Tipo'
                   DataBinding.FieldName = 'telefone_tipo_id'
                   PropertiesClassName = 'TcxLookupComboBoxProperties'
                   Properties.KeyFieldNames = 'telefone_tipo_id'
@@ -280,8 +296,9 @@ inherited frmCadastroEscola: TfrmCadastroEscola
                     item
                       FieldName = 'descricao'
                     end>
+                  Properties.ListOptions.ShowHeader = False
                   Properties.ListSource = dsTelefoneTipo
-                  Width = 81
+                  Width = 152
                 end
               end
               object cxGrid1Level1: TcxGridLevel
@@ -291,27 +308,26 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object cxDBMaskEdit2: TcxDBMaskEdit
             Left = 30
-            Top = 135
+            Top = 188
             DataBinding.DataField = 'cnpj'
             DataBinding.DataSource = dsCad
             Properties.EditMask = '99.999.999/9999-99;0;_'
-            TabOrder = 4
+            TabOrder = 3
             Width = 283
+          end
+          object cxDBTextEdit3: TcxDBTextEdit
+            Left = 30
+            Top = 32
+            DataBinding.DataField = 'escola_id'
+            DataBinding.DataSource = dsCad
+            Enabled = False
+            TabOrder = 0
+            Width = 121
           end
         end
         object cxTabSheet2: TcxTabSheet
           Caption = 'Endere'#231'o'
           ImageIndex = 1
-          ExplicitLeft = 5
-          ExplicitTop = 25
-          object Label2: TLabel
-            Left = 184
-            Top = 192
-            Width = 95
-            Height = 13
-            Caption = 'escola_endereco_id'
-            FocusControl = cxDBSpinEdit1
-          end
           object Label6: TLabel
             Left = 32
             Top = 24
@@ -364,23 +380,6 @@ inherited frmCadastroEscola: TfrmCadastroEscola
             Width = 13
             Height = 13
             Caption = 'UF'
-            FocusControl = cxDBTextEdit10
-          end
-          object Label16: TLabel
-            Left = 32
-            Top = 192
-            Width = 44
-            Height = 13
-            Caption = 'escola_id'
-            FocusControl = cxDBSpinEdit3
-          end
-          object cxDBSpinEdit1: TcxDBSpinEdit
-            Left = 184
-            Top = 208
-            DataBinding.DataField = 'escola_endereco_id'
-            DataBinding.DataSource = dsEndereco
-            TabOrder = 8
-            Width = 121
           end
           object cxDBTextEdit6: TcxDBTextEdit
             Left = 184
@@ -413,30 +412,6 @@ inherited frmCadastroEscola: TfrmCadastroEscola
             DataBinding.DataSource = dsEndereco
             TabOrder = 4
             Width = 439
-          end
-          object cxDBTextEdit10: TcxDBTextEdit
-            Left = 404
-            Top = 208
-            DataBinding.DataField = 'uf'
-            DataBinding.DataSource = dsEndereco
-            TabOrder = 9
-            Width = 121
-          end
-          object cxDBSpinEdit3: TcxDBSpinEdit
-            Left = 32
-            Top = 208
-            DataBinding.DataField = 'escola_id'
-            DataBinding.DataSource = dsEndereco
-            TabOrder = 7
-            Width = 121
-          end
-          object DBNavigator2: TDBNavigator
-            Left = 32
-            Top = 256
-            Width = 240
-            Height = 25
-            DataSource = dsEndereco
-            TabOrder = 10
           end
           object cxDBMaskEdit1: TcxDBMaskEdit
             Left = 32
@@ -494,6 +469,10 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
         end
       end
+    end
+    inherited TaShRelatorio: TTabSheet
+      ExplicitWidth = 1030
+      ExplicitHeight = 456
     end
   end
   inherited smCadPadrao: TsmCadPadrao
@@ -567,7 +546,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -972,7 +951,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1376,7 +1355,11 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       000000000000}
   end
   inherited fdqCad: TFDQuery
+    OnNewRecord = fdqCadNewRecord
+    CachedUpdates = True
     Connection = DM.FDConnection
+    SchemaAdapter = FDSchemaAdapter
+    UpdateOptions.AutoIncFields = 'escola_id'
     SQL.Strings = (
       'select * from escola '
       'where escola_id = :escola_id'
@@ -1390,6 +1373,53 @@ inherited frmCadastroEscola: TfrmCadastroEscola
         ParamType = ptInput
         Value = Null
       end>
+    object fdqCadescola_id: TFDAutoIncField
+      FieldName = 'escola_id'
+      Origin = 'escola_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object fdqCadnome_fantasia: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nome_fantasia'
+      Origin = 'nome_fantasia'
+      Size = 150
+    end
+    object fdqCadrazao_social: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'razao_social'
+      Origin = 'razao_social'
+      Size = 150
+    end
+    object fdqCadcnpj: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'cnpj'
+      Origin = 'cnpj'
+    end
+    object fdqCadativo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ativo'
+      Origin = 'ativo'
+      FixedChar = True
+      Size = 1
+    end
+    object fdqCaddata_cadastro: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'data_cadastro'
+      Origin = 'data_cadastro'
+    end
+    object fdqCademail: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 200
+    end
+    object fdqCadinformacoes_gerais: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'informacoes_gerais'
+      Origin = 'informacoes_gerais'
+      BlobType = ftMemo
+    end
   end
   inherited dsCad: TDataSource
     Left = 616
@@ -1414,86 +1444,43 @@ inherited frmCadastroEscola: TfrmCadastroEscola
         Value = Null
       end>
   end
-  object fdqEndereco: TFDQuery
-    MasterSource = dsCad
-    MasterFields = 'escola_id'
-    Connection = DM.FDConnection
-    FetchOptions.AssignedValues = [evCache]
-    FetchOptions.Cache = [fiBlobs, fiMeta]
-    SQL.Strings = (
-      'SELECT * FROM escola_endereco e'
-      'where e.escola_id = :escola_id')
-    Left = 552
-    Top = 240
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
-    object fdqEnderecoescola_endereco_id: TFDAutoIncField
-      FieldName = 'escola_endereco_id'
-      Origin = 'escola_endereco_id'
-      ProviderFlags = [pfInWhere, pfInKey]
-    end
-    object fdqEnderecocep: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cep'
-      Origin = 'cep'
-    end
-    object fdqEnderecologradouro: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'logradouro'
-      Origin = 'logradouro'
-      Size = 200
-    end
-    object fdqEndereconumero: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'numero'
-      Origin = 'numero'
-    end
-    object fdqEnderecocomplemento: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'complemento'
-      Origin = 'complemento'
-      Size = 50
-    end
-    object fdqEnderecocidade: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cidade'
-      Origin = 'cidade'
-      Size = 50
-    end
-    object fdqEnderecobairro: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'bairro'
-      Origin = 'bairro'
-      Size = 50
-    end
-    object fdqEnderecouf: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'uf'
-      Origin = 'uf'
-      Size = 10
-    end
-    object fdqEnderecoescola_id: TIntegerField
-      FieldName = 'escola_id'
-      Origin = 'escola_id'
-      Required = True
-    end
-  end
-  object dsEndereco: TDataSource
+  object dsEndereco: TDataSource [11]
     DataSet = fdqEndereco
     Left = 552
     Top = 296
   end
+  object dsTelefone: TDataSource [12]
+    DataSet = fdqTelefone
+    Left = 480
+    Top = 296
+  end
+  object fdqTelefoneTipo: TFDQuery [13]
+    Connection = DM.FDConnection
+    SQL.Strings = (
+      'select * from telefone_tipo t'
+      'order by t.descricao')
+    Left = 400
+    Top = 240
+  end
+  object dsTelefoneTipo: TDataSource [14]
+    DataSet = fdqTelefoneTipo
+    Left = 400
+    Top = 296
+  end
+  inherited FDSchemaAdapter: TFDSchemaAdapter
+    Left = 400
+    Top = 360
+  end
   object fdqTelefone: TFDQuery
+    CachedUpdates = True
+    IndexFieldNames = 'escola_id'
     MasterSource = dsCad
     MasterFields = 'escola_id'
     Connection = DM.FDConnection
-    FetchOptions.AssignedValues = [evCache]
-    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SchemaAdapter = FDSchemaAdapter
+    FetchOptions.AssignedValues = [evDetailCascade]
+    FetchOptions.DetailCascade = True
+    UpdateOptions.AutoIncFields = 'escola_telefone_id'
     SQL.Strings = (
       'SELECT * FROM escola_telefone t'
       'where t.escola_id = :escola_id')
@@ -1502,27 +1489,33 @@ inherited frmCadastroEscola: TfrmCadastroEscola
     ParamData = <
       item
         Name = 'ESCOLA_ID'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
+        Size = 4
         Value = Null
       end>
   end
-  object dsTelefone: TDataSource
-    DataSet = fdqTelefone
-    Left = 480
-    Top = 296
-  end
-  object fdqTelefoneTipo: TFDQuery
+  object fdqEndereco: TFDQuery
+    CachedUpdates = True
+    IndexFieldNames = 'escola_id'
+    MasterSource = dsCad
+    MasterFields = 'escola_id'
     Connection = DM.FDConnection
+    SchemaAdapter = FDSchemaAdapter
+    FetchOptions.AssignedValues = [evDetailCascade]
+    FetchOptions.DetailCascade = True
+    UpdateOptions.AutoIncFields = 'escola_endereco_id'
     SQL.Strings = (
-      'select * from telefone_tipo t'
-      'order by t.descricao')
-    Left = 400
+      'SELECT * FROM escola_endereco e'
+      'where e.escola_id = :escola_id')
+    Left = 552
     Top = 240
-  end
-  object dsTelefoneTipo: TDataSource
-    DataSet = fdqTelefoneTipo
-    Left = 400
-    Top = 296
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftAutoInc
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end

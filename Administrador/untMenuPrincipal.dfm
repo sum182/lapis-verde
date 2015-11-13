@@ -80,7 +80,12 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         item
         end
         item
-          ToolbarName = 'dxBarManager1Bar4'
+        end
+        item
+          ToolbarName = 'dxBarManager1Bar8'
+        end
+        item
+          ToolbarName = 'dxBarManager1Bar12'
         end>
       Index = 0
     end
@@ -46540,32 +46545,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Visible = False
       WholeRow = False
     end
-    object dxBarManager1Bar4: TdxBar
-      Caption = 
-        '                                                                ' +
-        '                       '
-      CaptionButtons = <>
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 910
-      FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton23'
-        end
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton24'
-        end>
-      OneOnRow = True
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
     object dxBarManager1Bar1: TdxBar
       Caption = 
         '                                                                ' +
@@ -46735,6 +46714,58 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           ItemName = 'dxBarLargeButton18'
         end>
       OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object dxBarManager1Bar8: TdxBar
+      Caption = 'Cadastros do Sistema'
+      CaptionButtons = <>
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 910
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton23'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton30'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton31'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton32'
+        end>
+      OneOnRow = False
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object dxBarManager1Bar12: TdxBar
+      Caption = 'Cadastros Operacionais'
+      CaptionButtons = <>
+      DockedLeft = 194
+      DockedTop = 0
+      FloatLeft = 910
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton24'
+        end>
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -50142,6 +50173,33 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Category = 0
       Hint = 'New Button'
       Visible = ivAlways
+    end
+    object dxBarLargeButton29: TdxBarLargeButton
+      Caption = 'New Button'
+      Category = 0
+      Hint = 'New Button'
+      Visible = ivAlways
+    end
+    object dxBarLargeButton30: TdxBarLargeButton
+      Caption = 'Aluno'
+      Category = 0
+      Hint = 'Aluno'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton30Click
+    end
+    object dxBarLargeButton31: TdxBarLargeButton
+      Caption = 'Teste'
+      Category = 0
+      Hint = 'Teste'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton31Click
+    end
+    object dxBarLargeButton32: TdxBarLargeButton
+      Caption = 'Teste 2'
+      Category = 0
+      Hint = 'Teste 2'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton32Click
     end
     object dxBarGroup1: TdxBarGroup
       Items = ()

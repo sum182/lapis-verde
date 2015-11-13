@@ -15,6 +15,15 @@
         <Projects Include="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\Centralized\Qry_SchemaAdapter.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\OnUpdateRecord\Qry_CachedUpdates.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\MasterDetail\Qry_MasterDetail.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +68,41 @@
     <Target Name="Leitura:Make">
         <MSBuild Projects="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Qry_SchemaAdapter">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\Centralized\Qry_SchemaAdapter.dproj"/>
+    </Target>
+    <Target Name="Qry_SchemaAdapter:Clean">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\Centralized\Qry_SchemaAdapter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Qry_SchemaAdapter:Make">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\Centralized\Qry_SchemaAdapter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Qry_CachedUpdates">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\OnUpdateRecord\Qry_CachedUpdates.dproj"/>
+    </Target>
+    <Target Name="Qry_CachedUpdates:Clean">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\OnUpdateRecord\Qry_CachedUpdates.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Qry_CachedUpdates:Make">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\CachedUpdates\OnUpdateRecord\Qry_CachedUpdates.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Qry_MasterDetail">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\MasterDetail\Qry_MasterDetail.dproj"/>
+    </Target>
+    <Target Name="Qry_MasterDetail:Clean">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\MasterDetail\Qry_MasterDetail.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Qry_MasterDetail:Make">
+        <MSBuild Projects="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Samples\Object Pascal\Database\FireDAC\Samples\Comp Layer\TFDQuery\MasterDetail\Qry_MasterDetail.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Administrador;Sum182;Sum182D15;Leitura"/>
+        <CallTarget Targets="Administrador;Sum182;Sum182D15;Leitura;Qry_SchemaAdapter;Qry_CachedUpdates;Qry_MasterDetail"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Administrador:Clean;Sum182:Clean;Sum182D15:Clean;Leitura:Clean"/>
+        <CallTarget Targets="Administrador:Clean;Sum182:Clean;Sum182D15:Clean;Leitura:Clean;Qry_SchemaAdapter:Clean;Qry_CachedUpdates:Clean;Qry_MasterDetail:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Administrador:Make;Sum182:Make;Sum182D15:Make;Leitura:Make"/>
+        <CallTarget Targets="Administrador:Make;Sum182:Make;Sum182D15:Make;Leitura:Make;Qry_SchemaAdapter:Make;Qry_CachedUpdates:Make;Qry_MasterDetail:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

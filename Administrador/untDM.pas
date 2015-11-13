@@ -41,7 +41,9 @@ type
     fdqUsuarioATIVO: TStringField;
     fdqUsuarioADMINISTRADOR: TStringField;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
+    FDTransaction: TFDTransaction;
     procedure DataModuleCreate(Sender: TObject);
+    procedure FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
   private
     fIniDataBase: string;
     fIniUser_Name: string;
@@ -125,6 +127,11 @@ procedure TDM.DataModuleCreate(Sender: TObject);
 begin
   LerIni;
   ConexaoBD;
+end;
+
+procedure TDM.FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
+begin
+  Msg('Erro na transição de dados:' + #13+ #13+ AException.Message,mtErro);
 end;
 
 function TDM.GetNomeAplicacao: string;

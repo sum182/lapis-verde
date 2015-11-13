@@ -15,6 +15,9 @@ object DM: TDM
       'Password=admin'
       'DriverID=MySQL')
     LoginPrompt = False
+    Transaction = FDTransaction
+    UpdateTransaction = FDTransaction
+    OnError = FDConnectionError
     Left = 42
     Top = 32
   end
@@ -40,7 +43,7 @@ object DM: TDM
     Left = 168
     Top = 224
     Bitmap = {
-      494C01012400AC00D40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012400AC00E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0000000010020000000000000A0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1428,6 +1431,11 @@ object DM: TDM
   object FDMySQLDriverLink: TFDPhysMySQLDriverLink
     VendorLib = 'C:\Program Files\MySQL\MySQL Server 5.6\lib\libmysql.dll'
     Left = 136
+    Top = 32
+  end
+  object FDTransaction: TFDTransaction
+    Connection = FDConnection
+    Left = 312
     Top = 32
   end
 end

@@ -45,7 +45,6 @@ type
     dxBarManager1: TdxBarManager;
     dxBarManager1Bar2: TdxBar;
     dxBarManager1Bar3: TdxBar;
-    dxBarManager1Bar4: TdxBar;
     dxBarManager1Bar1: TdxBar;
     dxBarManager1Bar5: TdxBar;
     dxBarManager1Bar6: TdxBar;
@@ -102,6 +101,12 @@ type
     dxBarLargeButton26: TdxBarLargeButton;
     dxBarLargeButton27: TdxBarLargeButton;
     dxBarLargeButton28: TdxBarLargeButton;
+    dxBarManager1Bar8: TdxBar;
+    dxBarLargeButton29: TdxBarLargeButton;
+    dxBarManager1Bar12: TdxBar;
+    dxBarLargeButton30: TdxBarLargeButton;
+    dxBarLargeButton31: TdxBarLargeButton;
+    dxBarLargeButton32: TdxBarLargeButton;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);
@@ -112,6 +117,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure dxBarLargeButton24Click(Sender: TObject);
     procedure dxBarLargeButton23Click(Sender: TObject);
+    procedure dxBarLargeButton30Click(Sender: TObject);
+    procedure dxBarLargeButton31Click(Sender: TObject);
+    procedure dxBarLargeButton32Click(Sender: TObject);
   private
     procedure ActivePg(Classe: TFormClass);
     procedure OpenForm(Classe: TFormClass; var Form;
@@ -130,7 +138,7 @@ implementation
 {$R *.dfm}
 
 uses
-  smGeral, smMensagens,untDM, untSobre, untCadastroTelefoneTipo, untCadastroEscola;
+  smGeral, smMensagens,untDM, untSobre, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno, untTeste, f_principal;
 
 procedure TfrmMenuPrincipal.ActivePg(Classe: TFormClass);
 var
@@ -218,6 +226,22 @@ end;
 procedure TfrmMenuPrincipal.dxBarLargeButton24Click(Sender: TObject);
 begin
   OpenForm(TfrmCadastroTelefoneTipo,frmCadastroTelefoneTipo);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton30Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroAluno,frmCadastroAluno);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton31Click(Sender: TObject);
+begin
+  OpenForm(TfrmTeste,frmTeste);
+
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton32Click(Sender: TObject);
+begin
+  OpenForm(Tfrm_principal,frm_principal);
 end;
 
 procedure TfrmMenuPrincipal.FecharAba1Click(Sender: TObject);
