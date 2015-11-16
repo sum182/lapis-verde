@@ -39,14 +39,12 @@ type
     cxImageList1: TcxImageList;
     dxRibbon1: TdxRibbon;
     dxRibbon1TabCadastros: TdxRibbonTab;
-    dxRibbon1Tab3: TdxRibbonTab;
     dxBarManager1: TdxBarManager;
     dxBarManager1Bar2: TdxBar;
     dxBarManager1Bar3: TdxBar;
     dxBarManager1Bar5: TdxBar;
     dxBarManager1Bar6: TdxBar;
     dxBarManager1Bar7: TdxBar;
-    dxBarManager1Bar9: TdxBar;
     dxBarManager1Bar10: TdxBar;
     dxBarSubItem1: TdxBarSubItem;
     dxBarButton1: TdxBarButton;
@@ -105,12 +103,13 @@ type
     dxRibbon1TabAdministrador: TdxRibbonTab;
     dxBarManager1Bar4: TdxBar;
     dxBarLargeButton33: TdxBarLargeButton;
+    dxRibbon1Tab1: TdxRibbonTab;
+    dxBarManager1Bar1: TdxBar;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure dxBarLargeButton16Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dxBarLargeButton23Click(Sender: TObject);
     procedure dxBarLargeButton30Click(Sender: TObject);
@@ -133,7 +132,7 @@ implementation
 {$R *.dfm}
 
 uses
-  smGeral, smMensagens,untDM, untSobre, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno, untTeste, f_principal;
+  smGeral, smMensagens,untDM, untSobre, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno;
 
 procedure TfrmMenuPrincipal.ActivePg(Classe: TFormClass);
 var
@@ -197,16 +196,6 @@ begin
 end;
 
 
-
-procedure TfrmMenuPrincipal.dxBarLargeButton16Click(Sender: TObject);
-begin
-  try
-    FrmSobre := TFrmSobre.Create(nil);
-    FrmSobre.ShowModal;
-  finally
-    FreeAndNil(FrmSobre);
-  end;
-end;
 
 procedure TfrmMenuPrincipal.dxBarLargeButton23Click(Sender: TObject);
 begin

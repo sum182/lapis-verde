@@ -31,7 +31,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.SkinName = 'Black'
     OnCanClose = pgPrincCanClose
-    ExplicitTop = 116
     ClientRectBottom = 378
     ClientRectLeft = 4
     ClientRectRight = 872
@@ -75,8 +74,15 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     Contexts = <>
     TabOrder = 2
     TabStop = False
+    object dxRibbon1Tab1: TdxRibbonTab
+      Caption = 'Agenda'
+      Groups = <
+        item
+          ToolbarName = 'dxBarManager1Bar1'
+        end>
+      Index = 0
+    end
     object dxRibbon1TabCadastros: TdxRibbonTab
-      Active = True
       Caption = 'Cadastros'
       Groups = <
         item
@@ -86,23 +92,16 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         item
           ToolbarName = 'dxBarManager1Bar8'
         end>
-      Index = 0
+      Index = 1
     end
     object dxRibbon1TabAdministrador: TdxRibbonTab
+      Active = True
       Caption = 'Administrador'
       Groups = <
         item
         end
         item
           ToolbarName = 'dxBarManager1Bar4'
-        end>
-      Index = 1
-    end
-    object dxRibbon1Tab3: TdxRibbonTab
-      Caption = 'Empresa'
-      Groups = <
-        item
-          ToolbarName = 'dxBarManager1Bar9'
         end>
       Index = 2
     end
@@ -46605,26 +46604,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Visible = False
       WholeRow = False
     end
-    object dxBarManager1Bar9: TdxBar
-      Caption = '                                 '
-      CaptionButtons = <>
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 910
-      FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton16'
-        end>
-      OneOnRow = True
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
     object dxBarManager1Bar10: TdxBar
       Caption = 'Custom 4'
       CaptionButtons = <>
@@ -46685,6 +46664,22 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Visible = True
           ItemName = 'dxBarLargeButton33'
         end>
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object dxBarManager1Bar1: TdxBar
+      Caption = 'Custom 5'
+      CaptionButtons = <>
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 910
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <>
       OneOnRow = True
       Row = 0
       UseOwnFont = False
@@ -49956,7 +49951,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Category = 0
       Hint = 'Sobre'
       Visible = ivAlways
-      OnClick = dxBarLargeButton16Click
       HotImageIndex = 18
     end
     object dxBarLargeButton17: TdxBarLargeButton

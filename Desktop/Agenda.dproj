@@ -102,10 +102,6 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="untSobre.pas">
-            <Form>FrmSobre</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="Cadastros\untCadastroTelefoneTipo.pas">
             <Form>frmCadastroTelefoneTipo</Form>
             <FormType>dfm</FormType>
@@ -117,14 +113,6 @@
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smMensagens.pas"/>
         <DCCReference Include="Cadastros\untCadastroAluno.pas">
             <Form>frmCadastroAluno</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Testes\f_principal.pas">
-            <Form>frm_principal</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Testes\untTeste.pas">
-            <Form>frmTeste</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
