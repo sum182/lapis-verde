@@ -38,20 +38,16 @@ type
     dxRibbonStatusBar1: TdxRibbonStatusBar;
     cxImageList1: TcxImageList;
     dxRibbon1: TdxRibbon;
-    dxRibbon1Tab2: TdxRibbonTab;
-    dxRibbon1Tab1: TdxRibbonTab;
+    dxRibbon1TabCadastros: TdxRibbonTab;
     dxRibbon1Tab3: TdxRibbonTab;
-    dxRibbon1Tab6: TdxRibbonTab;
     dxBarManager1: TdxBarManager;
     dxBarManager1Bar2: TdxBar;
     dxBarManager1Bar3: TdxBar;
-    dxBarManager1Bar1: TdxBar;
     dxBarManager1Bar5: TdxBar;
     dxBarManager1Bar6: TdxBar;
     dxBarManager1Bar7: TdxBar;
     dxBarManager1Bar9: TdxBar;
     dxBarManager1Bar10: TdxBar;
-    dxBarManager1Bar11: TdxBar;
     dxBarSubItem1: TdxBarSubItem;
     dxBarButton1: TdxBarButton;
     dxBarButton2: TdxBarButton;
@@ -103,24 +99,22 @@ type
     dxBarLargeButton28: TdxBarLargeButton;
     dxBarManager1Bar8: TdxBar;
     dxBarLargeButton29: TdxBarLargeButton;
-    dxBarManager1Bar12: TdxBar;
     dxBarLargeButton30: TdxBarLargeButton;
     dxBarLargeButton31: TdxBarLargeButton;
     dxBarLargeButton32: TdxBarLargeButton;
-    dxRibbon1Tab4: TdxRibbonTab;
+    dxRibbon1TabAdministrador: TdxRibbonTab;
+    dxBarManager1Bar4: TdxBar;
+    dxBarLargeButton33: TdxBarLargeButton;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);
-    procedure dxBarLargeButton18Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure dxBarLargeButton16Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure dxBarLargeButton24Click(Sender: TObject);
     procedure dxBarLargeButton23Click(Sender: TObject);
     procedure dxBarLargeButton30Click(Sender: TObject);
-    procedure dxBarLargeButton31Click(Sender: TObject);
-    procedure dxBarLargeButton32Click(Sender: TObject);
+    procedure dxBarLargeButton33Click(Sender: TObject);
   private
     procedure ActivePg(Classe: TFormClass);
     procedure OpenForm(Classe: TFormClass; var Form;
@@ -214,19 +208,9 @@ begin
   end;
 end;
 
-procedure TfrmMenuPrincipal.dxBarLargeButton18Click(Sender: TObject);
-begin
-  Close;
-end;
-
 procedure TfrmMenuPrincipal.dxBarLargeButton23Click(Sender: TObject);
 begin
   OpenForm(TfrmCadastroEscola,frmCadastroEscola);
-end;
-
-procedure TfrmMenuPrincipal.dxBarLargeButton24Click(Sender: TObject);
-begin
-  OpenForm(TfrmCadastroTelefoneTipo,frmCadastroTelefoneTipo);
 end;
 
 procedure TfrmMenuPrincipal.dxBarLargeButton30Click(Sender: TObject);
@@ -234,15 +218,9 @@ begin
   OpenForm(TfrmCadastroAluno,frmCadastroAluno);
 end;
 
-procedure TfrmMenuPrincipal.dxBarLargeButton31Click(Sender: TObject);
+procedure TfrmMenuPrincipal.dxBarLargeButton33Click(Sender: TObject);
 begin
-  OpenForm(TfrmTeste,frmTeste);
-
-end;
-
-procedure TfrmMenuPrincipal.dxBarLargeButton32Click(Sender: TObject);
-begin
-  OpenForm(Tfrm_principal,frm_principal);
+  OpenForm(TfrmCadastroTelefoneTipo,frmCadastroTelefoneTipo);
 end;
 
 procedure TfrmMenuPrincipal.FecharAba1Click(Sender: TObject);
@@ -274,7 +252,7 @@ end;
 
 procedure TfrmMenuPrincipal.FormShow(Sender: TObject);
 begin
-  dxRibbon1.ActiveTab:= dxRibbon1Tab2;
+  dxRibbon1.ActiveTab:= dxRibbon1TabCadastros;
 end;
 
 procedure TfrmMenuPrincipal.OpenForm(Classe: TFormClass; var Form;

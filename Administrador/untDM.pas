@@ -85,7 +85,7 @@ begin
   try
     try
       Dir := ExtractFilePath(Application.Exename);
-      Ini := TIniFile.Create(Dir + 'Administrador.INI');
+      Ini := TIniFile.Create(Dir + 'Agenda.ini');
       fIniDataBase := Ini.ReadString('BD', 'Database', EmptyStr);
       fIniUser_Name := Ini.ReadString('BD', 'User_Name', EmptyStr);
       fIniPassword := Ini.ReadString('BD', 'Password', EmptyStr);
@@ -136,7 +136,7 @@ end;
 
 function TDM.GetNomeAplicacao: string;
 begin
-  Result:= 'Sistema Adminstrador de Agenda';
+  Result:= 'Sistema Agenda';
 end;
 
 function TDM.GetNomeUsuario: String;
