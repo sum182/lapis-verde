@@ -3,6 +3,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   ClientHeight = 527
   ClientWidth = 938
   OnCloseQuery = FormCloseQuery
+  ExplicitTop = -6
   ExplicitWidth = 954
   ExplicitHeight = 565
   PixelsPerInch = 96
@@ -14,7 +15,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   inherited PaCoPadrao: TPageControl
     Width = 938
     Height = 486
-    ActivePage = TaShConsulta
     ExplicitWidth = 116
     inherited TaShConsulta: TTabSheet
       ExplicitWidth = 108
@@ -94,141 +94,171 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       ExplicitLeft = 8
       ExplicitWidth = 930
       ExplicitHeight = 450
-      object Label3: TLabel
-        Left = 32
-        Top = 14
-        Width = 27
-        Height = 13
-        Caption = 'Nome'
-        FocusControl = cxDBTextEdit1
-      end
-      object Label4: TLabel
-        Left = 32
-        Top = 67
-        Width = 54
-        Height = 13
-        Caption = 'Sobrenome'
-        FocusControl = cxDBTextEdit2
-      end
-      object Label5: TLabel
-        Left = 32
-        Top = 120
-        Width = 96
-        Height = 13
-        Caption = 'Data de Nascimento'
-        FocusControl = cxDBDateEdit1
-      end
-      object Label6: TLabel
-        Left = 232
-        Top = 120
-        Width = 24
-        Height = 13
-        Caption = 'Sexo'
-      end
-      object Label7: TLabel
-        Left = 32
-        Top = 168
-        Width = 14
-        Height = 13
-        Caption = 'RG'
-      end
-      object Label8: TLabel
-        Left = 232
-        Top = 168
-        Width = 19
-        Height = 13
-        Caption = 'CPF'
-      end
-      object Label9: TLabel
-        Left = 32
-        Top = 232
-        Width = 93
-        Height = 13
-        Caption = 'Informa'#231#245'es Gerais'
-      end
-      object cxDBTextEdit1: TcxDBTextEdit
-        Left = 32
-        Top = 31
-        DataBinding.DataField = 'nome'
-        DataBinding.DataSource = dsCad
+      object cxPageControl1: TcxPageControl
+        Left = 0
+        Top = 0
+        Width = 930
+        Height = 458
+        Align = alClient
         TabOrder = 0
-        Width = 489
-      end
-      object cxDBTextEdit2: TcxDBTextEdit
-        Left = 32
-        Top = 84
-        DataBinding.DataField = 'sobrenome'
-        DataBinding.DataSource = dsCad
-        TabOrder = 1
-        Width = 489
-      end
-      object cxDBDateEdit1: TcxDBDateEdit
-        Left = 32
-        Top = 139
-        DataBinding.DataField = 'data_nascimento'
-        DataBinding.DataSource = dsCad
-        TabOrder = 2
-        Width = 185
-      end
-      object cxDBCheckBox1: TcxDBCheckBox
-        Left = 600
-        Top = 31
-        Caption = 'Aluno Ativo'
-        DataBinding.DataField = 'ativo'
-        DataBinding.DataSource = dsCad
-        Properties.NullStyle = nssUnchecked
-        Properties.ValueChecked = 'S'
-        Properties.ValueUnchecked = 'N'
-        TabOrder = 7
-        Width = 80
-      end
-      object cxDBMemo1: TcxDBMemo
-        Left = 32
-        Top = 251
-        DataBinding.DataField = 'informacoes_gerais'
-        DataBinding.DataSource = dsCad
-        TabOrder = 6
-        Height = 113
-        Width = 489
-      end
-      object cxDBMaskEdit2: TcxDBMaskEdit
-        Left = 232
-        Top = 187
-        DataBinding.DataField = 'cpf'
-        DataBinding.DataSource = dsCad
-        Properties.EditMask = '999.999.999-99;0;_'
-        TabOrder = 5
-        Width = 203
-      end
-      object cxDBMaskEdit1: TcxDBMaskEdit
-        Left = 32
-        Top = 187
-        DataBinding.DataField = 'rg'
-        DataBinding.DataSource = dsCad
-        Properties.EditMask = '00.000.000-a;0'
-        TabOrder = 4
-        Width = 185
-      end
-      object cxDBImageComboBox1: TcxDBImageComboBox
-        Left = 232
-        Top = 139
-        DataBinding.DataField = 'sexo'
-        DataBinding.DataSource = dsCad
-        Properties.Items = <
-          item
-            Description = 'Masculino'
-            ImageIndex = 0
-            Value = 'M'
+        Properties.ActivePage = cxTabSheet2
+        Properties.CustomButtons.Buttons = <>
+        ExplicitLeft = 600
+        ExplicitTop = 84
+        ExplicitWidth = 329
+        ExplicitHeight = 261
+        ClientRectBottom = 454
+        ClientRectLeft = 4
+        ClientRectRight = 926
+        ClientRectTop = 24
+        object cxTabSheet1: TcxTabSheet
+          Caption = 'Dados Principais'
+          ImageIndex = 0
+          ExplicitLeft = 5
+          ExplicitTop = 25
+          object Label3: TLabel
+            Left = 32
+            Top = 14
+            Width = 27
+            Height = 13
+            Caption = 'Nome'
+            FocusControl = cxDBTextEdit1
           end
-          item
-            Description = 'Feminino'
-            Value = 'F'
-          end>
-        Style.Shadow = False
-        Style.ButtonStyle = btsSimple
-        Style.ButtonTransparency = ebtInactive
-        TabOrder = 3
-        Width = 121
+          object Label4: TLabel
+            Left = 32
+            Top = 67
+            Width = 54
+            Height = 13
+            Caption = 'Sobrenome'
+            FocusControl = cxDBTextEdit2
+          end
+          object Label5: TLabel
+            Left = 32
+            Top = 120
+            Width = 96
+            Height = 13
+            Caption = 'Data de Nascimento'
+            FocusControl = cxDBDateEdit1
+          end
+          object Label6: TLabel
+            Left = 232
+            Top = 120
+            Width = 24
+            Height = 13
+            Caption = 'Sexo'
+          end
+          object Label8: TLabel
+            Left = 232
+            Top = 168
+            Width = 19
+            Height = 13
+            Caption = 'CPF'
+          end
+          object Label7: TLabel
+            Left = 32
+            Top = 168
+            Width = 14
+            Height = 13
+            Caption = 'RG'
+          end
+          object Label9: TLabel
+            Left = 32
+            Top = 232
+            Width = 93
+            Height = 13
+            Caption = 'Informa'#231#245'es Gerais'
+          end
+          object cxDBTextEdit1: TcxDBTextEdit
+            Left = 32
+            Top = 31
+            DataBinding.DataField = 'nome'
+            DataBinding.DataSource = dsCad
+            TabOrder = 0
+            Width = 489
+          end
+          object cxDBTextEdit2: TcxDBTextEdit
+            Left = 32
+            Top = 84
+            DataBinding.DataField = 'sobrenome'
+            DataBinding.DataSource = dsCad
+            TabOrder = 1
+            Width = 489
+          end
+          object cxDBDateEdit1: TcxDBDateEdit
+            Left = 32
+            Top = 139
+            DataBinding.DataField = 'data_nascimento'
+            DataBinding.DataSource = dsCad
+            TabOrder = 2
+            Width = 185
+          end
+          object cxDBImageComboBox1: TcxDBImageComboBox
+            Left = 232
+            Top = 139
+            DataBinding.DataField = 'sexo'
+            DataBinding.DataSource = dsCad
+            Properties.Items = <
+              item
+                Description = 'Masculino'
+                ImageIndex = 0
+                Value = 'M'
+              end
+              item
+                Description = 'Feminino'
+                Value = 'F'
+              end>
+            Style.Shadow = False
+            Style.ButtonStyle = btsSimple
+            Style.ButtonTransparency = ebtInactive
+            TabOrder = 3
+            Width = 121
+          end
+          object cxDBCheckBox1: TcxDBCheckBox
+            Left = 600
+            Top = 31
+            Caption = 'Aluno Ativo'
+            DataBinding.DataField = 'ativo'
+            DataBinding.DataSource = dsCad
+            Properties.NullStyle = nssUnchecked
+            Properties.ValueChecked = 'S'
+            Properties.ValueUnchecked = 'N'
+            TabOrder = 4
+            Width = 80
+          end
+          object cxDBMaskEdit1: TcxDBMaskEdit
+            Left = 32
+            Top = 187
+            DataBinding.DataField = 'rg'
+            DataBinding.DataSource = dsCad
+            Properties.EditMask = '00.000.000-a;0'
+            TabOrder = 5
+            Width = 185
+          end
+          object cxDBMaskEdit2: TcxDBMaskEdit
+            Left = 232
+            Top = 187
+            DataBinding.DataField = 'cpf'
+            DataBinding.DataSource = dsCad
+            Properties.EditMask = '999.999.999-99;0;_'
+            TabOrder = 6
+            Width = 203
+          end
+          object cxDBMemo1: TcxDBMemo
+            Left = 32
+            Top = 251
+            DataBinding.DataField = 'informacoes_gerais'
+            DataBinding.DataSource = dsCad
+            TabOrder = 7
+            Height = 113
+            Width = 489
+          end
+        end
+        object cxTabSheet2: TcxTabSheet
+          Caption = 'Respons'#225'veis'
+          ImageIndex = 1
+          ExplicitLeft = 3
+          ExplicitTop = 18
+        end
       end
     end
     inherited TaShRelatorio: TTabSheet

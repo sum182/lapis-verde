@@ -17,7 +17,7 @@ uses
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
   dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, cxMemo, cxDBEdit, cxDropDownEdit, cxCalendar, cxTextEdit, cxMaskEdit,
   cxSpinEdit, Vcl.ExtCtrls, Vcl.DBCtrls, Datasnap.DBClient, Datasnap.Provider, cxCheckBox, cxImageComboBox, Vcl.Menus, cxButtons,
-  cxImage, cxBlobEdit, cxGroupBox;
+  cxImage, cxBlobEdit, cxGroupBox, dxSkinscxPCPainter, dxBarBuiltInMenu, cxPC;
 
 type
   TfrmCadastroAluno = class(TfrmCadFD)
@@ -31,21 +31,24 @@ type
     fdqCadativo: TStringField;
     fdqCadinformacoes_gerais: TMemoField;
     fdqCadescola_id: TIntegerField;
+    cxPageControl1: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
     Label3: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
     Label4: TLabel;
     cxDBTextEdit2: TcxDBTextEdit;
     Label5: TLabel;
     cxDBDateEdit1: TcxDBDateEdit;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    cxDBCheckBox1: TcxDBCheckBox;
-    cxDBMemo1: TcxDBMemo;
-    Label9: TLabel;
-    cxDBMaskEdit2: TcxDBMaskEdit;
-    cxDBMaskEdit1: TcxDBMaskEdit;
     cxDBImageComboBox1: TcxDBImageComboBox;
+    Label6: TLabel;
+    cxDBCheckBox1: TcxDBCheckBox;
+    cxDBMaskEdit1: TcxDBMaskEdit;
+    cxDBMaskEdit2: TcxDBMaskEdit;
+    Label8: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    cxDBMemo1: TcxDBMemo;
+    cxTabSheet2: TcxTabSheet;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
     procedure fdqCadAfterOpen(DataSet: TDataSet);

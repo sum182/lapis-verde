@@ -19,9 +19,9 @@ object frmMenuPrincipal: TfrmMenuPrincipal
   TextHeight = 13
   object pgPrinc: TcxPageControl
     Left = 0
-    Top = 126
+    Top = 122
     Width = 876
-    Height = 378
+    Height = 382
     Align = alClient
     PopupMenu = pmAbas
     TabOrder = 0
@@ -31,7 +31,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.SkinName = 'Black'
     OnCanClose = pgPrincCanClose
-    ClientRectBottom = 374
+    ClientRectBottom = 378
     ClientRectLeft = 4
     ClientRectRight = 872
     ClientRectTop = 4
@@ -67,14 +67,14 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     Left = 0
     Top = 0
     Width = 876
-    Height = 126
+    Height = 122
     BarManager = dxBarManager1
-    ColorSchemeName = 'Blue'
+    Style = rs2013
+    ColorSchemeName = 'White'
     Contexts = <>
     TabOrder = 2
     TabStop = False
     object dxRibbon1Tab2: TdxRibbonTab
-      Active = True
       Caption = 'Cadastros'
       Groups = <
         item
@@ -89,21 +89,11 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         end>
       Index = 0
     end
-    object dxRibbon1Tab1: TdxRibbonTab
-      Caption = 'Opera'#231#245'es'
-      Groups = <
-        item
-          ToolbarName = 'dxBarManager1Bar1'
-        end>
+    object dxRibbon1Tab4: TdxRibbonTab
+      Active = True
+      Caption = 'Administrador'
+      Groups = <>
       Index = 1
-    end
-    object dxRibbon1Tab3: TdxRibbonTab
-      Caption = 'Empresa'
-      Groups = <
-        item
-          ToolbarName = 'dxBarManager1Bar9'
-        end>
-      Index = 2
     end
     object dxRibbon1Tab6: TdxRibbonTab
       Caption = 'Sair'
@@ -111,7 +101,23 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         item
           ToolbarName = 'dxBarManager1Bar11'
         end>
+      Index = 2
+    end
+    object dxRibbon1Tab3: TdxRibbonTab
+      Caption = 'Empresa'
+      Groups = <
+        item
+          ToolbarName = 'dxBarManager1Bar9'
+        end>
       Index = 3
+    end
+    object dxRibbon1Tab1: TdxRibbonTab
+      Caption = 'Opera'#231#245'es'
+      Groups = <
+        item
+          ToolbarName = 'dxBarManager1Bar1'
+        end>
+      Index = 4
     end
   end
   object pmAbas: TPopupMenu
@@ -131,7 +137,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     ShareImages = True
     Width = 32
     FormatVersion = 1
-    DesignInfo = 17826112
+    DesignInfo = 17826232
     ImageInfo = <
       item
         Image.Data = {
@@ -46493,7 +46499,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     MenuAnimations = maUnfold
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 432
+    Left = 328
     Top = 272
     DockControlHeights = (
       0

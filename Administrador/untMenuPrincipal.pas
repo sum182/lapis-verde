@@ -107,6 +107,7 @@ type
     dxBarLargeButton30: TdxBarLargeButton;
     dxBarLargeButton31: TdxBarLargeButton;
     dxBarLargeButton32: TdxBarLargeButton;
+    dxRibbon1Tab4: TdxRibbonTab;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);
