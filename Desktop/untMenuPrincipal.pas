@@ -103,7 +103,7 @@ type
     dxRibbon1TabAdministrador: TdxRibbonTab;
     dxBarManager1Bar4: TdxBar;
     dxBarLargeButton33: TdxBarLargeButton;
-    dxRibbon1Tab1: TdxRibbonTab;
+    dxRibbon1TabAgenda: TdxRibbonTab;
     dxBarManager1Bar1: TdxBar;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
@@ -132,7 +132,7 @@ implementation
 {$R *.dfm}
 
 uses
-  smGeral, smMensagens,untDM, untSobre, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno;
+  smGeral, smMensagens,untDM, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno;
 
 procedure TfrmMenuPrincipal.ActivePg(Classe: TFormClass);
 var
@@ -241,7 +241,7 @@ end;
 
 procedure TfrmMenuPrincipal.FormShow(Sender: TObject);
 begin
-  dxRibbon1.ActiveTab:= dxRibbon1TabCadastros;
+  dxRibbon1.ActiveTab:= dxRibbon1TabAgenda;
 end;
 
 procedure TfrmMenuPrincipal.OpenForm(Classe: TFormClass; var Form;
