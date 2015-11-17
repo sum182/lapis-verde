@@ -1,15 +1,14 @@
-inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
-  Caption = 'Cadastro de Tipos de Telefones'
-  ClientHeight = 538
-  ClientWidth = 971
+inherited frmCadastroResponsavelTipo: TfrmCadastroResponsavelTipo
+  Caption = 'Cadastro de Tipos de Respons'#225'veis'
+  ClientHeight = 525
+  ClientWidth = 900
   OnClose = FormClose
-  ExplicitWidth = 987
-  ExplicitHeight = 576
+  ExplicitWidth = 916
+  ExplicitHeight = 563
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
-    Width = 971
-    ExplicitWidth = 971
+    Width = 900
     inherited ToolButton1: TToolButton
       ExplicitWidth = 14
     end
@@ -18,21 +17,18 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
     end
   end
   inherited PaCoPadrao: TPageControl
-    Width = 971
-    Height = 497
-    ExplicitWidth = 971
-    ExplicitHeight = 497
+    Width = 900
+    Height = 484
+    ActivePage = TaShConsulta
     inherited TaShConsulta: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 963
-      ExplicitHeight = 469
+      ExplicitWidth = 812
+      ExplicitHeight = 427
       inherited grbxPesquisa: TGroupBox
-        Width = 963
-        ExplicitWidth = 963
+        Width = 892
         inherited ToolBar1: TToolBar
-          Width = 953
-          ExplicitWidth = 953
+          Width = 882
           inherited ToolButton3: TToolButton
             ExplicitWidth = 24
           end
@@ -48,13 +44,13 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
         end
       end
       inherited grPesquisa: TsmDBGrid
-        Width = 963
-        Height = 354
+        Width = 892
+        Height = 341
         DataSource = dsBusca
         Columns = <
           item
             Expanded = False
-            FieldName = 'telefone_tipo_id'
+            FieldName = 'responsavel_tipo_id'
             Visible = False
           end
           item
@@ -71,25 +67,15 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
           end>
       end
       inherited stbrConsulta: TStatusBar
-        Top = 451
-        Width = 963
-        ExplicitTop = 451
-        ExplicitWidth = 963
+        Top = 438
+        Width = 892
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 2
+      ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 963
-      ExplicitHeight = 469
-      object Label4: TLabel
-        Left = 30
-        Top = 104
-        Width = 93
-        Height = 13
-        Caption = 'Informa'#231#245'es Gerais'
-        FocusControl = cxDBTextEdit1
-      end
+      ExplicitWidth = 812
+      ExplicitHeight = 427
       object Label3: TLabel
         Left = 30
         Top = 32
@@ -98,37 +84,45 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
         Caption = 'Descri'#231#227'o'
         FocusControl = cxDBTextEdit1
       end
-      object cxDBMemo1: TcxDBMemo
+      object Label4: TLabel
         Left = 30
-        Top = 123
-        DataBinding.DataField = 'informacoes_gerais'
-        DataBinding.DataSource = dsCad
-        TabOrder = 0
-        Height = 158
-        Width = 512
+        Top = 104
+        Width = 93
+        Height = 13
+        Caption = 'Informa'#231#245'es Gerais'
+        FocusControl = cxDBTextEdit1
       end
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 30
         Top = 51
         DataBinding.DataField = 'descricao'
         DataBinding.DataSource = dsCad
+        TabOrder = 0
+        Width = 512
+      end
+      object cxDBMemo1: TcxDBMemo
+        Left = 30
+        Top = 123
+        DataBinding.DataField = 'informacoes_gerais'
+        DataBinding.DataSource = dsCad
         TabOrder = 1
+        Height = 158
         Width = 512
       end
     end
     inherited TaShRelatorio: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 963
-      ExplicitHeight = 469
+      ExplicitWidth = 812
+      ExplicitHeight = 427
     end
   end
   inherited smCadPadrao: TsmCadPadrao
-    Tabela = 'telefone_tipo'
+    Tabela = 'responsavel_tipo'
     FieldsBusca = <
       item
-        FieldName = 'telefone_tipo_id'
-        DisplayName = 'Telefone_tipo_id'
+        FieldName = 'responsavel_tipo_id'
+        DisplayName = 'Responsavel_tipo_id'
         ShowCombo = False
         ShowGrid = False
         ShowSelect = True
@@ -150,11 +144,11 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
         ShowSelect = False
         FieldType = ftMemo
       end>
-    KeyField = 'telefone_tipo_id'
+    KeyField = 'responsavel_tipo_id'
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -559,7 +553,7 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -965,40 +959,43 @@ inherited frmCadastroTelefoneTipo: TfrmCadastroTelefoneTipo
   inherited fdqCad: TFDQuery
     Connection = DM.FDConnection
     SQL.Strings = (
-      'select * from telefone_tipo'#10
-      'where telefone_tipo_id = :telefone_tipo_id')
-    Top = 352
+      'SELECT * FROM responsavel_tipo'
+      'where responsavel_tipo_id = :responsavel_tipo_id')
+    Left = 624
+    Top = 296
     ParamData = <
       item
-        Name = 'TELEFONE_TIPO_ID'
+        Name = 'RESPONSAVEL_TIPO_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end>
   end
   inherited dsCad: TDataSource
-    Top = 400
+    Left = 624
+    Top = 352
   end
   inherited dsBusca: TDataSource
-    Left = 112
-    Top = 400
+    Left = 688
+    Top = 352
   end
   inherited fdqBusca: TFDQuery
     Connection = DM.FDConnection
     SQL.Strings = (
-      'select * from telefone_tipo'#10
-      'where telefone_tipo_id = :telefone_tipo_id')
-    Left = 112
-    Top = 352
+      'SELECT * FROM responsavel_tipo'
+      'where responsavel_tipo_id = :responsavel_tipo_id')
+    Left = 688
+    Top = 296
     ParamData = <
       item
-        Name = 'TELEFONE_TIPO_ID'
+        Name = 'RESPONSAVEL_TIPO_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end>
   end
   inherited FDSchemaAdapter: TFDSchemaAdapter
-    Top = 352
+    Left = 624
+    Top = 408
   end
 end

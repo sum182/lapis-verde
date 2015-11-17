@@ -1,34 +1,56 @@
 inherited frmCadastroAluno: TfrmCadastroAluno
   Caption = 'Cadastro de Aluno'
-  ClientHeight = 527
-  ClientWidth = 938
+  ClientHeight = 582
+  ClientWidth = 1073
   OnCloseQuery = FormCloseQuery
-  ExplicitTop = -6
-  ExplicitWidth = 954
-  ExplicitHeight = 565
+  ExplicitWidth = 1089
+  ExplicitHeight = 620
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
-    Width = 938
-    ExplicitWidth = 116
+    Width = 1073
+    ExplicitWidth = 938
+    inherited ToolButton1: TToolButton
+      ExplicitWidth = 14
+    end
+    inherited btnLocalizarTodosRegistros: TToolButton
+      ExplicitWidth = 70
+    end
   end
   inherited PaCoPadrao: TPageControl
-    Width = 938
-    Height = 486
-    ExplicitWidth = 116
+    Width = 1073
+    Height = 541
+    ActivePage = TaShConsulta
+    ExplicitWidth = 938
+    ExplicitHeight = 486
     inherited TaShConsulta: TTabSheet
-      ExplicitWidth = 108
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 930
+      ExplicitHeight = 458
       inherited grbxPesquisa: TGroupBox
-        Width = 930
-        ExplicitWidth = 108
+        Width = 1065
+        ExplicitWidth = 930
         inherited ToolBar1: TToolBar
-          Width = 920
+          Width = 1055
           ExplicitWidth = 920
+          inherited ToolButton3: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton4: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton5: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton6: TToolButton
+            ExplicitWidth = 24
+          end
         end
       end
       inherited grPesquisa: TsmDBGrid
-        Width = 930
-        Height = 343
+        Width = 1065
+        Height = 398
         Columns = <
           item
             Expanded = False
@@ -38,19 +60,14 @@ inherited frmCadastroAluno: TfrmCadastroAluno
           item
             Expanded = False
             FieldName = 'Nome'
-            Width = 188
+            Width = 230
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'Sobrenome'
-            Width = 391
+            Width = 245
             Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'data_nascimento'
-            Visible = False
           end
           item
             Expanded = False
@@ -60,12 +77,23 @@ inherited frmCadastroAluno: TfrmCadastroAluno
           item
             Expanded = False
             FieldName = 'rg'
-            Visible = False
+            Title.Caption = 'RG'
+            Width = 190
+            Visible = True
           end
           item
             Expanded = False
             FieldName = 'cpf'
-            Visible = False
+            Title.Caption = 'CPF'
+            Width = 190
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'data_nascimento'
+            Title.Caption = 'Data de Nascimento'
+            Width = 128
+            Visible = True
           end
           item
             Expanded = False
@@ -84,186 +112,157 @@ inherited frmCadastroAluno: TfrmCadastroAluno
           end>
       end
       inherited stbrConsulta: TStatusBar
-        Top = 440
-        Width = 930
-        ExplicitTop = 432
+        Top = 495
+        Width = 1065
+        ExplicitTop = 440
         ExplicitWidth = 930
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 8
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 930
-      ExplicitHeight = 450
-      object cxPageControl1: TcxPageControl
-        Left = 0
-        Top = 0
-        Width = 930
-        Height = 458
-        Align = alClient
+      ExplicitHeight = 458
+      object Label3: TLabel
+        Left = 32
+        Top = 14
+        Width = 27
+        Height = 13
+        Caption = 'Nome'
+        FocusControl = cxDBTextEdit1
+      end
+      object Label4: TLabel
+        Left = 32
+        Top = 67
+        Width = 54
+        Height = 13
+        Caption = 'Sobrenome'
+        FocusControl = cxDBTextEdit2
+      end
+      object Label5: TLabel
+        Left = 32
+        Top = 120
+        Width = 96
+        Height = 13
+        Caption = 'Data de Nascimento'
+        FocusControl = cxDBDateEdit1
+      end
+      object Label6: TLabel
+        Left = 232
+        Top = 120
+        Width = 24
+        Height = 13
+        Caption = 'Sexo'
+      end
+      object Label7: TLabel
+        Left = 32
+        Top = 168
+        Width = 14
+        Height = 13
+        Caption = 'RG'
+      end
+      object Label8: TLabel
+        Left = 232
+        Top = 168
+        Width = 19
+        Height = 13
+        Caption = 'CPF'
+      end
+      object Label9: TLabel
+        Left = 32
+        Top = 232
+        Width = 93
+        Height = 13
+        Caption = 'Informa'#231#245'es Gerais'
+      end
+      object cxDBTextEdit1: TcxDBTextEdit
+        Left = 32
+        Top = 31
+        DataBinding.DataField = 'nome'
+        DataBinding.DataSource = dsCad
         TabOrder = 0
-        Properties.ActivePage = cxTabSheet2
-        Properties.CustomButtons.Buttons = <>
-        ExplicitLeft = 600
-        ExplicitTop = 84
-        ExplicitWidth = 329
-        ExplicitHeight = 261
-        ClientRectBottom = 454
-        ClientRectLeft = 4
-        ClientRectRight = 926
-        ClientRectTop = 24
-        object cxTabSheet1: TcxTabSheet
-          Caption = 'Dados Principais'
-          ImageIndex = 0
-          ExplicitLeft = 5
-          ExplicitTop = 25
-          object Label3: TLabel
-            Left = 32
-            Top = 14
-            Width = 27
-            Height = 13
-            Caption = 'Nome'
-            FocusControl = cxDBTextEdit1
+        Width = 489
+      end
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 32
+        Top = 84
+        DataBinding.DataField = 'sobrenome'
+        DataBinding.DataSource = dsCad
+        TabOrder = 1
+        Width = 489
+      end
+      object cxDBDateEdit1: TcxDBDateEdit
+        Left = 32
+        Top = 139
+        DataBinding.DataField = 'data_nascimento'
+        DataBinding.DataSource = dsCad
+        TabOrder = 2
+        Width = 185
+      end
+      object cxDBCheckBox1: TcxDBCheckBox
+        Left = 600
+        Top = 31
+        Caption = 'Aluno Ativo'
+        DataBinding.DataField = 'ativo'
+        DataBinding.DataSource = dsCad
+        Properties.NullStyle = nssUnchecked
+        Properties.ValueChecked = 'S'
+        Properties.ValueUnchecked = 'N'
+        TabOrder = 7
+        Width = 80
+      end
+      object cxDBMemo1: TcxDBMemo
+        Left = 32
+        Top = 251
+        DataBinding.DataField = 'informacoes_gerais'
+        DataBinding.DataSource = dsCad
+        TabOrder = 6
+        Height = 113
+        Width = 489
+      end
+      object cxDBMaskEdit2: TcxDBMaskEdit
+        Left = 232
+        Top = 187
+        DataBinding.DataField = 'cpf'
+        DataBinding.DataSource = dsCad
+        Properties.EditMask = '999.999.999-99;0;_'
+        TabOrder = 5
+        Width = 203
+      end
+      object cxDBMaskEdit1: TcxDBMaskEdit
+        Left = 32
+        Top = 187
+        DataBinding.DataField = 'rg'
+        DataBinding.DataSource = dsCad
+        Properties.EditMask = '00.000.000-a;0'
+        TabOrder = 4
+        Width = 185
+      end
+      object cxDBImageComboBox1: TcxDBImageComboBox
+        Left = 232
+        Top = 139
+        DataBinding.DataField = 'sexo'
+        DataBinding.DataSource = dsCad
+        Properties.Items = <
+          item
+            Description = 'Masculino'
+            ImageIndex = 0
+            Value = 'M'
           end
-          object Label4: TLabel
-            Left = 32
-            Top = 67
-            Width = 54
-            Height = 13
-            Caption = 'Sobrenome'
-            FocusControl = cxDBTextEdit2
-          end
-          object Label5: TLabel
-            Left = 32
-            Top = 120
-            Width = 96
-            Height = 13
-            Caption = 'Data de Nascimento'
-            FocusControl = cxDBDateEdit1
-          end
-          object Label6: TLabel
-            Left = 232
-            Top = 120
-            Width = 24
-            Height = 13
-            Caption = 'Sexo'
-          end
-          object Label8: TLabel
-            Left = 232
-            Top = 168
-            Width = 19
-            Height = 13
-            Caption = 'CPF'
-          end
-          object Label7: TLabel
-            Left = 32
-            Top = 168
-            Width = 14
-            Height = 13
-            Caption = 'RG'
-          end
-          object Label9: TLabel
-            Left = 32
-            Top = 232
-            Width = 93
-            Height = 13
-            Caption = 'Informa'#231#245'es Gerais'
-          end
-          object cxDBTextEdit1: TcxDBTextEdit
-            Left = 32
-            Top = 31
-            DataBinding.DataField = 'nome'
-            DataBinding.DataSource = dsCad
-            TabOrder = 0
-            Width = 489
-          end
-          object cxDBTextEdit2: TcxDBTextEdit
-            Left = 32
-            Top = 84
-            DataBinding.DataField = 'sobrenome'
-            DataBinding.DataSource = dsCad
-            TabOrder = 1
-            Width = 489
-          end
-          object cxDBDateEdit1: TcxDBDateEdit
-            Left = 32
-            Top = 139
-            DataBinding.DataField = 'data_nascimento'
-            DataBinding.DataSource = dsCad
-            TabOrder = 2
-            Width = 185
-          end
-          object cxDBImageComboBox1: TcxDBImageComboBox
-            Left = 232
-            Top = 139
-            DataBinding.DataField = 'sexo'
-            DataBinding.DataSource = dsCad
-            Properties.Items = <
-              item
-                Description = 'Masculino'
-                ImageIndex = 0
-                Value = 'M'
-              end
-              item
-                Description = 'Feminino'
-                Value = 'F'
-              end>
-            Style.Shadow = False
-            Style.ButtonStyle = btsSimple
-            Style.ButtonTransparency = ebtInactive
-            TabOrder = 3
-            Width = 121
-          end
-          object cxDBCheckBox1: TcxDBCheckBox
-            Left = 600
-            Top = 31
-            Caption = 'Aluno Ativo'
-            DataBinding.DataField = 'ativo'
-            DataBinding.DataSource = dsCad
-            Properties.NullStyle = nssUnchecked
-            Properties.ValueChecked = 'S'
-            Properties.ValueUnchecked = 'N'
-            TabOrder = 4
-            Width = 80
-          end
-          object cxDBMaskEdit1: TcxDBMaskEdit
-            Left = 32
-            Top = 187
-            DataBinding.DataField = 'rg'
-            DataBinding.DataSource = dsCad
-            Properties.EditMask = '00.000.000-a;0'
-            TabOrder = 5
-            Width = 185
-          end
-          object cxDBMaskEdit2: TcxDBMaskEdit
-            Left = 232
-            Top = 187
-            DataBinding.DataField = 'cpf'
-            DataBinding.DataSource = dsCad
-            Properties.EditMask = '999.999.999-99;0;_'
-            TabOrder = 6
-            Width = 203
-          end
-          object cxDBMemo1: TcxDBMemo
-            Left = 32
-            Top = 251
-            DataBinding.DataField = 'informacoes_gerais'
-            DataBinding.DataSource = dsCad
-            TabOrder = 7
-            Height = 113
-            Width = 489
-          end
-        end
-        object cxTabSheet2: TcxTabSheet
-          Caption = 'Respons'#225'veis'
-          ImageIndex = 1
-          ExplicitLeft = 3
-          ExplicitTop = 18
-        end
+          item
+            Description = 'Feminino'
+            Value = 'F'
+          end>
+        Style.Shadow = False
+        Style.ButtonStyle = btsSimple
+        Style.ButtonTransparency = ebtInactive
+        TabOrder = 3
+        Width = 121
       end
     end
     inherited TaShRelatorio: TTabSheet
       ExplicitWidth = 930
-      ExplicitHeight = 450
+      ExplicitHeight = 458
     end
   end
   inherited smCadPadrao: TsmCadPadrao
@@ -272,7 +271,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       item
         FieldName = 'aluno_id'
         DisplayName = 'Aluno_id'
-        ShowCombo = True
+        ShowCombo = False
         ShowGrid = True
         ShowSelect = True
         FieldType = ftAutoInc
@@ -304,9 +303,9 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       item
         FieldName = 'sexo'
         DisplayName = 'Sexo'
-        ShowCombo = True
-        ShowGrid = True
-        ShowSelect = True
+        ShowCombo = False
+        ShowGrid = False
+        ShowSelect = False
         FieldType = ftString
       end
       item
@@ -328,9 +327,9 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       item
         FieldName = 'ativo'
         DisplayName = 'Ativo'
-        ShowCombo = True
-        ShowGrid = True
-        ShowSelect = True
+        ShowCombo = False
+        ShowGrid = False
+        ShowSelect = False
         FieldType = ftString
       end
       item
@@ -344,16 +343,16 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       item
         FieldName = 'escola_id'
         DisplayName = 'Escola_id'
-        ShowCombo = True
-        ShowGrid = True
-        ShowSelect = True
+        ShowCombo = False
+        ShowGrid = False
+        ShowSelect = False
         FieldType = ftInteger
       end>
     KeyField = 'aluno_id'
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -758,7 +757,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
