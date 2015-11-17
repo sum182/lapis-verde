@@ -75,7 +75,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     TabOrder = 2
     TabStop = False
     object dxRibbon1TabAgenda: TdxRibbonTab
-      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -96,6 +95,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Index = 1
     end
     object dxRibbon1TabAdministrador: TdxRibbonTab
+      Active = True
       Caption = 'Administrador'
       Groups = <
         item
@@ -46643,6 +46643,14 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         item
           Visible = True
           ItemName = 'dxBarLargeButton30'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton34'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton35'
         end>
       OneOnRow = True
       Row = 0
@@ -46663,6 +46671,14 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         item
           Visible = True
           ItemName = 'dxBarLargeButton33'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton36'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton37'
         end>
       OneOnRow = True
       Row = 0
@@ -50117,6 +50133,34 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Hint = 'Tipos de Telefone'
       Visible = ivAlways
       OnClick = dxBarLargeButton33Click
+    end
+    object dxBarLargeButton34: TdxBarLargeButton
+      Caption = 'Funcion'#225'rio'
+      Category = 0
+      Hint = 'Funcion'#225'rio'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton34Click
+    end
+    object dxBarLargeButton35: TdxBarLargeButton
+      Caption = 'Respons'#225'vel'
+      Category = 0
+      Hint = 'Respons'#225'vel'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton35Click
+    end
+    object dxBarLargeButton36: TdxBarLargeButton
+      Caption = 'Tipos de Funcion'#225'rio'
+      Category = 0
+      Hint = 'Tipos de Funcion'#225'rio'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton36Click
+    end
+    object dxBarLargeButton37: TdxBarLargeButton
+      Caption = 'Tipos de Respons'#225'vel'
+      Category = 0
+      Hint = 'Tipos de Respons'#225'vel'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton37Click
     end
     object dxBarGroup1: TdxBarGroup
       Items = ()

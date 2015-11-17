@@ -20,3 +20,24 @@ Colocar porta no INI
 Menu Principal
 Hints
 Nomes botoes
+
+
+colocar o escola_id na pesquisa - funcionarios
+colocar o escola_id na pesquisa - alunos
+colocar o escola_id na pesquisa - escola
+relacionamento aluno X resposaveis
+
+
+ver tds querys se tem algo com agenda.
+
+Alterar buscas e colocar rg/cpf
+
+
+erro
+---------------------------
+Sistema Agenda
+---------------------------
+[FireDAC][DatS]-16. Cannot process - no parent row. Constraint [ForeignKeyConstraint].
+---------------------------
+OK   
+---------------------------

@@ -102,17 +102,33 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Cadastros\untCadastroTelefoneTipo.pas">
-            <Form>frmCadastroTelefoneTipo</Form>
+        <DCCReference Include="C:\Componentes\sum182\D15\Units\smMensagens.pas"/>
+        <DCCReference Include="Cadastros\untCadastroAluno.pas">
+            <Form>frmCadastroAluno</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Cadastros\untCadastroEscola.pas">
             <Form>frmCadastroEscola</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="C:\Componentes\sum182\D15\Units\smMensagens.pas"/>
-        <DCCReference Include="Cadastros\untCadastroAluno.pas">
-            <Form>frmCadastroAluno</Form>
+        <DCCReference Include="Cadastros\untCadastroFuncionario.pas">
+            <Form>frmCadastroFuncionario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\untCadastroFuncionarioTipo.pas">
+            <Form>frmCadastroFuncionarioTipo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\untCadastroResponsavel.pas">
+            <Form>frmCadastroResponsavel</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\untCadastroResponsavelTipo.pas">
+            <Form>frmCadastroResponsavelTipo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\untCadastroTelefoneTipo.pas">
+            <Form>frmCadastroTelefoneTipo</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

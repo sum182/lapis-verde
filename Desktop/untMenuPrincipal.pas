@@ -105,6 +105,10 @@ type
     dxBarLargeButton33: TdxBarLargeButton;
     dxRibbon1TabAgenda: TdxRibbonTab;
     dxBarManager1Bar1: TdxBar;
+    dxBarLargeButton34: TdxBarLargeButton;
+    dxBarLargeButton35: TdxBarLargeButton;
+    dxBarLargeButton36: TdxBarLargeButton;
+    dxBarLargeButton37: TdxBarLargeButton;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);
@@ -114,6 +118,10 @@ type
     procedure dxBarLargeButton23Click(Sender: TObject);
     procedure dxBarLargeButton30Click(Sender: TObject);
     procedure dxBarLargeButton33Click(Sender: TObject);
+    procedure dxBarLargeButton34Click(Sender: TObject);
+    procedure dxBarLargeButton35Click(Sender: TObject);
+    procedure dxBarLargeButton36Click(Sender: TObject);
+    procedure dxBarLargeButton37Click(Sender: TObject);
   private
     procedure ActivePg(Classe: TFormClass);
     procedure OpenForm(Classe: TFormClass; var Form;
@@ -132,7 +140,8 @@ implementation
 {$R *.dfm}
 
 uses
-  smGeral, smMensagens,untDM, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno;
+  smGeral, smMensagens,untDM, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno, untCadastroFuncionario,
+  untCadastroFuncionarioTipo, untCadastroResponsavel, untCadastroResponsavelTipo;
 
 procedure TfrmMenuPrincipal.ActivePg(Classe: TFormClass);
 var
@@ -210,6 +219,26 @@ end;
 procedure TfrmMenuPrincipal.dxBarLargeButton33Click(Sender: TObject);
 begin
   OpenForm(TfrmCadastroTelefoneTipo,frmCadastroTelefoneTipo);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton34Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroFuncionario,frmCadastroFuncionario);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton35Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroResponsavel,frmCadastroResponsavel);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton36Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroFuncionarioTipo,frmCadastroFuncionarioTipo);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton37Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroResponsavelTipo,frmCadastroResponsavelTipo);
 end;
 
 procedure TfrmMenuPrincipal.FecharAba1Click(Sender: TObject);

@@ -8,10 +8,14 @@ uses
   smGeral in 'C:\Componentes\Sum182\D15\Units\smGeral.pas',
   smDB in 'C:\Componentes\Sum182\D15\Units\smDB.pas',
   untDM in 'untDM.pas' {DM: TDataModule},
-  untCadastroTelefoneTipo in 'Cadastros\untCadastroTelefoneTipo.pas' {frmCadastroTelefoneTipo},
-  untCadastroEscola in 'Cadastros\untCadastroEscola.pas' {frmCadastroEscola},
   smMensagens in 'C:\Componentes\sum182\D15\Units\smMensagens.pas',
-  untCadastroAluno in 'Cadastros\untCadastroAluno.pas' {frmCadastroAluno};
+  untCadastroAluno in 'Cadastros\untCadastroAluno.pas' {frmCadastroAluno},
+  untCadastroEscola in 'Cadastros\untCadastroEscola.pas' {frmCadastroEscola},
+  untCadastroFuncionario in 'Cadastros\untCadastroFuncionario.pas' {frmCadastroFuncionario},
+  untCadastroFuncionarioTipo in 'Cadastros\untCadastroFuncionarioTipo.pas' {frmCadastroFuncionarioTipo},
+  untCadastroResponsavel in 'Cadastros\untCadastroResponsavel.pas' {frmCadastroResponsavel},
+  untCadastroResponsavelTipo in 'Cadastros\untCadastroResponsavelTipo.pas' {frmCadastroResponsavelTipo},
+  untCadastroTelefoneTipo in 'Cadastros\untCadastroTelefoneTipo.pas' {frmCadastroTelefoneTipo};
 
 {$R *.res}
 
