@@ -54,6 +54,8 @@ type
     procedure AcNovoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
+    procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
   private
     procedure OpenQuerys;
   public
@@ -67,7 +69,7 @@ implementation
 
 {$R *.dfm}
 
-uses untDM;
+uses untDM, untFuncoes;
 
 procedure TfrmCadastroFuncionario.AcNovoExecute(Sender: TObject);
 begin
@@ -75,17 +77,30 @@ begin
   fdqCadnome.FocusControl;
 end;
 
+procedure TfrmCadastroFuncionario.fdqBuscaBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqBusca);
+
+end;
+
 procedure TfrmCadastroFuncionario.fdqCadNewRecord(DataSet: TDataSet);
 begin
   inherited;
   fdqCadativo.AsString:= 'S';
-
+  SetIdEscolaCadastro(fdqCad);
 end;
 
 procedure TfrmCadastroFuncionario.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
   frmCadastroFuncionario:= nil;
+end;
+
+procedure TfrmCadastroFuncionario.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetSQLEscolaIdBusca(smCadPadrao);
 end;
 
 procedure TfrmCadastroFuncionario.FormShow(Sender: TObject);

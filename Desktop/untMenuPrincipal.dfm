@@ -31,6 +31,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.SkinName = 'Black'
     OnCanClose = pgPrincCanClose
+    ExplicitTop = 116
     ClientRectBottom = 378
     ClientRectLeft = 4
     ClientRectRight = 872
@@ -75,7 +76,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     TabOrder = 2
     TabStop = False
     object dxRibbon1TabAgenda: TdxRibbonTab
-      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -84,6 +84,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Index = 0
     end
     object dxRibbon1TabCadastros: TdxRibbonTab
+      Active = True
       Caption = 'Cadastros'
       Groups = <
         item

@@ -10,12 +10,6 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
   inherited ToBaCadastro: TToolBar
     Width = 1223
     ExplicitWidth = 1223
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 14
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 70
-    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1223
@@ -23,8 +17,6 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     ExplicitWidth = 1223
     ExplicitHeight = 630
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1215
       ExplicitHeight = 602
       inherited grbxPesquisa: TGroupBox
@@ -33,18 +25,6 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
         inherited ToolBar1: TToolBar
           Width = 1205
           ExplicitWidth = 1205
-          inherited ToolButton3: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton4: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton5: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton6: TToolButton
-            ExplicitWidth = 24
-          end
         end
       end
       inherited grPesquisa: TsmDBGrid
@@ -126,8 +106,6 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1215
       ExplicitHeight = 602
       object Label3: TLabel
@@ -292,8 +270,6 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       end
     end
     inherited TaShRelatorio: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1215
       ExplicitHeight = 602
     end
@@ -401,7 +377,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Left = 1000
     Top = 352
     Bitmap = {
-      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -808,7 +784,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Left = 1000
     Top = 400
     Bitmap = {
-      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1298,7 +1274,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Left = 928
   end
   inherited fdqBusca: TFDQuery
-    Active = True
+    BeforeOpen = fdqBuscaBeforeOpen
     Connection = DM.FDConnection
     SQL.Strings = (
       'SELECT * FROM agenda.funcionario'

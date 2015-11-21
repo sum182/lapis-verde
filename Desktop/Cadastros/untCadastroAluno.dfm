@@ -10,12 +10,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   inherited ToBaCadastro: TToolBar
     Width = 1073
     ExplicitWidth = 1073
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 14
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 70
-    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1073
@@ -23,8 +17,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     ExplicitWidth = 1073
     ExplicitHeight = 541
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1065
       ExplicitHeight = 513
       inherited grbxPesquisa: TGroupBox
@@ -33,18 +25,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
         inherited ToolBar1: TToolBar
           Width = 1055
           ExplicitWidth = 1055
-          inherited ToolButton3: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton4: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton5: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton6: TToolButton
-            ExplicitWidth = 24
-          end
         end
       end
       inherited grPesquisa: TsmDBGrid
@@ -118,8 +98,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 8
-      ExplicitTop = 24
       ExplicitWidth = 1065
       ExplicitHeight = 513
       object Label3: TLabel
@@ -260,8 +238,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
     end
     inherited TaShRelatorio: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1065
       ExplicitHeight = 513
     end
@@ -353,7 +329,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -758,7 +734,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1173,6 +1149,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       'SELECT * FROM aluno'
       'where aluno_id = :aluno_id')
     Left = 680
+    Top = 256
     ParamData = <
       item
         Position = 1
@@ -1247,10 +1224,19 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     Left = 616
   end
   inherited fdqBusca: TFDQuery
+    BeforeOpen = fdqBuscaBeforeOpen
     Connection = DM.FDConnection
     Left = 616
+    Top = 256
+    ParamData = <
+      item
+        Name = 'escola_id'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
   inherited FDSchemaAdapter: TFDSchemaAdapter
     Left = 544
+    Top = 256
   end
 end

@@ -15,7 +15,9 @@ uses
   untCadastroFuncionarioTipo in 'Cadastros\untCadastroFuncionarioTipo.pas' {frmCadastroFuncionarioTipo},
   untCadastroResponsavel in 'Cadastros\untCadastroResponsavel.pas' {frmCadastroResponsavel},
   untCadastroResponsavelTipo in 'Cadastros\untCadastroResponsavelTipo.pas' {frmCadastroResponsavelTipo},
-  untCadastroTelefoneTipo in 'Cadastros\untCadastroTelefoneTipo.pas' {frmCadastroTelefoneTipo};
+  untCadastroTelefoneTipo in 'Cadastros\untCadastroTelefoneTipo.pas' {frmCadastroTelefoneTipo},
+  smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
+  untFuncoes in 'untFuncoes.pas';
 
 {$R *.res}
 

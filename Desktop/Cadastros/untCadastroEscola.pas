@@ -88,6 +88,13 @@ type
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure AcNovoExecute(Sender: TObject);
     procedure fdqCadAfterOpen(DataSet: TDataSet);
+    procedure fdqTelefoneBeforeEdit(DataSet: TDataSet);
+    procedure fdqTelefoneBeforeInsert(DataSet: TDataSet);
+    procedure AcCancelarExecute(Sender: TObject);
+    procedure fdqEnderecoBeforeEdit(DataSet: TDataSet);
+    procedure fdqEnderecoBeforeInsert(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
+    procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
   private
    procedure OpenQuerys;
    procedure SetPgtCtrlDefaut;
@@ -103,7 +110,7 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, smDB;
+uses untDM, smDB, smDBFireDac, untFuncoes;
 
 { TfrmCadastroEscola }
 
@@ -118,10 +125,27 @@ begin
  inherited;
 end;
 
+procedure TfrmCadastroEscola.AcCancelarExecute(Sender: TObject);
+begin
+  fdqTelefone.Cancel;
+  fdqTelefone.CancelUpdates;
+
+  fdqEndereco.Cancel;
+  fdqEndereco.CancelUpdates;
+
+  inherited;
+end;
+
 procedure TfrmCadastroEscola.AcNovoExecute(Sender: TObject);
 begin
   inherited;
   fdqCadnome_fantasia.FocusControl;
+end;
+
+procedure TfrmCadastroEscola.fdqBuscaBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqBusca);
 end;
 
 procedure TfrmCadastroEscola.fdqCadAfterOpen(DataSet: TDataSet);
@@ -137,10 +161,40 @@ begin
   fdqCaddata_cadastro.AsDateTime:=Now;
 end;
 
+procedure TfrmCadastroEscola.fdqEnderecoBeforeEdit(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroEscola.fdqEnderecoBeforeInsert(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroEscola.fdqTelefoneBeforeEdit(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroEscola.fdqTelefoneBeforeInsert(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
 procedure TfrmCadastroEscola.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
   frmCadastroEscola:=Nil;
+end;
+
+procedure TfrmCadastroEscola.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetSQLEscolaIdBusca(smCadPadrao);
 end;
 
 procedure TfrmCadastroEscola.FormShow(Sender: TObject);

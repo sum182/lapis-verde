@@ -42,6 +42,7 @@ type
     fdqUsuarioADMINISTRADOR: TStringField;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     FDTransaction: TFDTransaction;
+    fdqEscola: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
   private
@@ -51,13 +52,16 @@ type
     fIniServer: string;
     fIniDriverID: string;
     fVendorLib:string;
+    fIdEscola:integer;
     procedure LerIni;
     procedure ConexaoBD;
+    procedure OpenEscola;
   public
     function GetUsuario: Integer;
     function GetNomeUsuario: String;
     function GetPahConexao:string;
     function GetNomeAplicacao:string;
+    function GetIdEscola:integer;
   end;
 
 var
@@ -92,6 +96,7 @@ begin
       fIniServer := Ini.ReadString('BD', 'Server', EmptyStr);
       fIniDriverID := Ini.ReadString('BD', 'DriverID', EmptyStr);
       fVendorLib:=Ini.ReadString('BD', 'VendorLib', EmptyStr);
+      fIdEscola:=Ini.ReadInteger('Configuracoes', 'IdEscola',0);
     except
       on E: Exception do
         smMensagens.Msg('Erro ao ler o arquivo Leitura.ini!' + #13 +
@@ -99,6 +104,25 @@ begin
     end;
   finally
      Ini.Free;
+  end;
+end;
+
+procedure TDM.OpenEscola;
+begin
+  if fIdEscola <= 0 then
+  begin
+    smMensagens.Msg('Paramêtro Id_Escola não encontrdo.' + #13, mtErro);
+    Exit;
+  end;
+
+  fdqEscola.Close;
+  fdqEscola.ParamByName('escola_id').AsInteger := fIdEscola;
+  fdqEscola.Open;
+
+  if fdqEscola.RecordCount <= 0 then
+  begin
+    smMensagens.Msg('Paramêtro Escola_id['+ IntToStr(fIdEscola)+']' + 'não encontrado.' + #13,mtErro);
+    Exit;
   end;
 end;
 
@@ -127,11 +151,17 @@ procedure TDM.DataModuleCreate(Sender: TObject);
 begin
   LerIni;
   ConexaoBD;
+  OpenEscola;
 end;
 
 procedure TDM.FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
 begin
   Msg('Erro na transição de dados:' + #13+ #13+ AException.Message,mtErro);
+end;
+
+function TDM.GetIdEscola: integer;
+begin
+  Result:= fIdEscola;
 end;
 
 function TDM.GetNomeAplicacao: string;

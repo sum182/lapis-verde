@@ -68,10 +68,16 @@ type
     cxGrid1DBTableView1numero: TcxGridDBColumn;
     cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
+    TabSheet1: TTabSheet;
     procedure AcNovoExecute(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure fdqTelefoneBeforeEdit(DataSet: TDataSet);
+    procedure AcCancelarExecute(Sender: TObject);
+    procedure fdqTelefoneBeforeInsert(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
+    procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
   private
     procedure OpenQuerys;
   public
@@ -85,7 +91,15 @@ implementation
 
 {$R *.dfm}
 
-uses untDM;
+uses untDM, smDBFireDac, untFuncoes;
+
+procedure TfrmCadastroResponsavel.AcCancelarExecute(Sender: TObject);
+begin
+  fdqTelefone.Cancel;
+  fdqTelefone.CancelUpdates;
+  inherited;
+
+end;
 
 procedure TfrmCadastroResponsavel.AcNovoExecute(Sender: TObject);
 begin
@@ -93,16 +107,41 @@ begin
   fdqCadnome.FocusControl;
 end;
 
+procedure TfrmCadastroResponsavel.fdqBuscaBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqBusca);
+end;
+
 procedure TfrmCadastroResponsavel.fdqCadNewRecord(DataSet: TDataSet);
 begin
   inherited;
   fdqCadativo.AsString:= 'S';
+  SetIdEscolaCadastro(fdqCad);
+end;
+
+procedure TfrmCadastroResponsavel.fdqTelefoneBeforeEdit(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroResponsavel.fdqTelefoneBeforeInsert(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
 end;
 
 procedure TfrmCadastroResponsavel.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
   frmCadastroResponsavel:=nil;
+end;
+
+procedure TfrmCadastroResponsavel.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetSQLEscolaIdBusca(smCadPadrao);
 end;
 
 procedure TfrmCadastroResponsavel.FormShow(Sender: TObject);

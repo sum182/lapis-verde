@@ -141,7 +141,7 @@ implementation
 
 uses
   smGeral, smMensagens,untDM, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno, untCadastroFuncionario,
-  untCadastroFuncionarioTipo, untCadastroResponsavel, untCadastroResponsavelTipo;
+  untCadastroFuncionarioTipo, untCadastroResponsavel, untCadastroResponsavelTipo, untFuncoes;
 
 procedure TfrmMenuPrincipal.ActivePg(Classe: TFormClass);
 var
@@ -199,9 +199,9 @@ end;
 
 procedure TfrmMenuPrincipal.SetStatusBar;
 begin
-  dxRibbonStatusBar1.Panels[2].Text := 'Conexão: ' + DM.GetPahConexao;
+  dxRibbonStatusBar1.Panels[2].Text := 'Conexão: ' + GetPahConexao;
   dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + smGeral.GetVersion(Application.Exename);
-  dxRibbonStatusBar1.Panels[0].Text := 'Usuário: ' + Dm.GetNomeUsuario;
+  dxRibbonStatusBar1.Panels[0].Text := 'Usuário: ' + GetNomeUsuario;
 end;
 
 

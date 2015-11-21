@@ -14,6 +14,7 @@ object DM: TDM
       'User_Name=root'
       'Password=admin'
       'DriverID=MySQL')
+    Connected = True
     LoginPrompt = False
     Transaction = FDTransaction
     UpdateTransaction = FDTransaction
@@ -43,7 +44,7 @@ object DM: TDM
     Left = 168
     Top = 224
     Bitmap = {
-      494C01012400AC00E80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012400AC00EC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0000000010020000000000000A0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1437,5 +1438,19 @@ object DM: TDM
     Connection = FDConnection
     Left = 312
     Top = 32
+  end
+  object fdqEscola: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT * FROM escola'#10'where escola_id = :escola_id')
+    Left = 312
+    Top = 224
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end
