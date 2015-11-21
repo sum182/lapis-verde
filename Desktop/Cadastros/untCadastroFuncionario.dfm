@@ -9,7 +9,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
     Width = 1223
-    ExplicitWidth = 116
+    ExplicitWidth = 1223
     inherited ToolButton1: TToolButton
       ExplicitWidth = 14
     end
@@ -20,19 +20,19 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
   inherited PaCoPadrao: TPageControl
     Width = 1223
     Height = 630
-    ActivePage = TaShConsulta
-    ExplicitWidth = 116
+    ExplicitWidth = 1223
+    ExplicitHeight = 630
     inherited TaShConsulta: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 108
-      ExplicitHeight = 427
+      ExplicitWidth = 1215
+      ExplicitHeight = 602
       inherited grbxPesquisa: TGroupBox
         Width = 1215
-        ExplicitWidth = 108
+        ExplicitWidth = 1215
         inherited ToolBar1: TToolBar
           Width = 1205
-          ExplicitWidth = 98
+          ExplicitWidth = 1205
           inherited ToolButton3: TToolButton
             ExplicitWidth = 24
           end
@@ -121,12 +121,14 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       inherited stbrConsulta: TStatusBar
         Top = 584
         Width = 1215
-        ExplicitWidth = 108
+        ExplicitTop = 584
+        ExplicitWidth = 1215
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 8
-      ExplicitWidth = 1096
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 1215
       ExplicitHeight = 602
       object Label3: TLabel
         Left = 32
@@ -277,6 +279,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
         Top = 183
         DataBinding.DataField = 'funcionario_tipo_id'
         DataBinding.DataSource = dsCad
+        Properties.DropDownListStyle = lsFixedList
         Properties.KeyFieldNames = 'funcionario_tipo_id'
         Properties.ListColumns = <
           item
@@ -291,7 +294,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     inherited TaShRelatorio: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 1096
+      ExplicitWidth = 1215
       ExplicitHeight = 602
     end
   end
@@ -398,7 +401,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Left = 1000
     Top = 352
     Bitmap = {
-      494C01010B000C00740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -805,7 +808,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Left = 1000
     Top = 400
     Bitmap = {
-      494C01010B000C00740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1226,6 +1229,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       FieldName = 'funcionario_id'
       Origin = 'funcionario_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdqCadnome: TStringField
       AutoGenerateValue = arDefault
@@ -1315,7 +1319,8 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
   object fdqFuncionarioTipo: TFDQuery
     Connection = DM.FDConnection
     SQL.Strings = (
-      'SELECT * FROM funcionario_tipo;')
+      'SELECT * FROM funcionario_tipo'
+      'order by descricao')
     Left = 792
     Top = 248
   end

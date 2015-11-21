@@ -31,8 +31,6 @@ type
     fdqCadativo: TStringField;
     fdqCadinformacoes_gerais: TMemoField;
     fdqCadescola_id: TIntegerField;
-    cxPageControl1: TcxPageControl;
-    cxTabSheet1: TcxTabSheet;
     Label3: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
     Label4: TLabel;
@@ -48,7 +46,6 @@ type
     Label7: TLabel;
     Label9: TLabel;
     cxDBMemo1: TcxDBMemo;
-    cxTabSheet2: TcxTabSheet;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
     procedure fdqCadAfterOpen(DataSet: TDataSet);

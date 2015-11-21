@@ -9,7 +9,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
     Width = 1073
-    ExplicitWidth = 938
+    ExplicitWidth = 1073
     inherited ToolButton1: TToolButton
       ExplicitWidth = 14
     end
@@ -20,20 +20,19 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   inherited PaCoPadrao: TPageControl
     Width = 1073
     Height = 541
-    ActivePage = TaShConsulta
-    ExplicitWidth = 938
-    ExplicitHeight = 486
+    ExplicitWidth = 1073
+    ExplicitHeight = 541
     inherited TaShConsulta: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 930
-      ExplicitHeight = 458
+      ExplicitWidth = 1065
+      ExplicitHeight = 513
       inherited grbxPesquisa: TGroupBox
         Width = 1065
-        ExplicitWidth = 930
+        ExplicitWidth = 1065
         inherited ToolBar1: TToolBar
           Width = 1055
-          ExplicitWidth = 920
+          ExplicitWidth = 1055
           inherited ToolButton3: TToolButton
             ExplicitWidth = 24
           end
@@ -114,15 +113,15 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       inherited stbrConsulta: TStatusBar
         Top = 495
         Width = 1065
-        ExplicitTop = 440
-        ExplicitWidth = 930
+        ExplicitTop = 495
+        ExplicitWidth = 1065
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 4
+      ExplicitLeft = 8
       ExplicitTop = 24
-      ExplicitWidth = 930
-      ExplicitHeight = 458
+      ExplicitWidth = 1065
+      ExplicitHeight = 513
       object Label3: TLabel
         Left = 32
         Top = 14
@@ -261,8 +260,10 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
     end
     inherited TaShRelatorio: TTabSheet
-      ExplicitWidth = 930
-      ExplicitHeight = 458
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 1065
+      ExplicitHeight = 513
     end
   end
   inherited smCadPadrao: TsmCadPadrao
@@ -352,7 +353,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -757,7 +758,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

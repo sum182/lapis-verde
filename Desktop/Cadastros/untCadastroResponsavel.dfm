@@ -9,6 +9,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
     Width = 1230
+    ExplicitWidth = 1230
     inherited ToolButton1: TToolButton
       ExplicitWidth = 14
     end
@@ -19,15 +20,19 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   inherited PaCoPadrao: TPageControl
     Width = 1230
     Height = 483
+    ExplicitWidth = 1230
+    ExplicitHeight = 483
     inherited TaShConsulta: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 812
-      ExplicitHeight = 427
+      ExplicitWidth = 1222
+      ExplicitHeight = 455
       inherited grbxPesquisa: TGroupBox
         Width = 1222
+        ExplicitWidth = 1222
         inherited ToolBar1: TToolBar
           Width = 1212
+          ExplicitWidth = 1212
           inherited ToolButton3: TToolButton
             ExplicitWidth = 24
           end
@@ -111,13 +116,15 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       inherited stbrConsulta: TStatusBar
         Top = 437
         Width = 1222
+        ExplicitTop = 437
+        ExplicitWidth = 1222
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 2
+      ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 812
-      ExplicitHeight = 427
+      ExplicitWidth = 1222
+      ExplicitHeight = 455
       object Label3: TLabel
         Left = 32
         Top = 14
@@ -229,6 +236,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
         Top = 183
         DataBinding.DataField = 'responsavel_tipo_id'
         DataBinding.DataSource = dsCad
+        Properties.DropDownListStyle = lsFixedList
         Properties.KeyFieldNames = 'responsavel_tipo_id'
         Properties.ListColumns = <
           item
@@ -255,8 +263,8 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
             Value = 'F'
           end>
         Style.Shadow = False
-        Style.ButtonStyle = btsSimple
-        Style.ButtonTransparency = ebtAlways
+        Style.ButtonStyle = btsDefault
+        Style.ButtonTransparency = ebtNone
         TabOrder = 5
         Width = 121
       end
@@ -318,8 +326,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
           Height = 244
           Align = alClient
           TabOrder = 1
-          ExplicitTop = 49
-          ExplicitHeight = 257
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsTelefone
@@ -370,8 +376,8 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     inherited TaShRelatorio: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 812
-      ExplicitHeight = 427
+      ExplicitWidth = 1222
+      ExplicitHeight = 455
     end
   end
   inherited smCadPadrao: TsmCadPadrao
@@ -469,7 +475,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     Left = 1152
     Top = 384
     Bitmap = {
-      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -876,7 +882,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     Left = 1152
     Top = 432
     Bitmap = {
-      494C01010B000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1301,6 +1307,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       FieldName = 'responsavel_id'
       Origin = 'responsavel_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdqCadnome: TStringField
       AutoGenerateValue = arDefault
@@ -1394,7 +1401,8 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   object fdqResponsavelTipo: TFDQuery
     Connection = DM.FDConnection
     SQL.Strings = (
-      'SELECT * FROM responsavel_tipo;')
+      'SELECT * FROM responsavel_tipo'
+      'order by descricao')
     Left = 934
     Top = 280
   end
