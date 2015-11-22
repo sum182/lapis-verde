@@ -1,11 +1,21 @@
 
-Nome da Aplicacao
-  Alterar metodo do dm
-  testar menu principal
+-Nome da Aplicacao
+Alterar metodo do dm
+testar menu principal
 
-Login
-Sobre
+-Login
 
+-Sobre
+
+-Admin
+Funcionario Admin
+Usuario Admin
+Rotinas Usuario Admin
+Rotinas Funcionario Admin
+
+Funcionario
+Senha
+Campo Admin
 
 Rotinas ViewSource
   Login

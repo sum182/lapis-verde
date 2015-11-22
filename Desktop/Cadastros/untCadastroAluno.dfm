@@ -14,6 +14,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   inherited PaCoPadrao: TPageControl
     Width = 1073
     Height = 541
+    ActivePage = TaShCadastro
     ExplicitWidth = 1073
     ExplicitHeight = 541
     inherited TaShConsulta: TTabSheet
@@ -1138,7 +1139,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       000000000000}
   end
   inherited fdqCad: TFDQuery
-    Active = True
     AfterOpen = fdqCadAfterOpen
     OnNewRecord = fdqCadNewRecord
     CachedUpdates = True

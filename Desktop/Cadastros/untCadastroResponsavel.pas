@@ -18,27 +18,10 @@ uses
   dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, cxMemo, cxDBEdit, cxImageComboBox, cxDropDownEdit, cxLookupEdit,
   cxDBLookupEdit, cxDBLookupComboBox, cxCheckBox, cxMaskEdit, cxTextEdit, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxGridCustomView, cxGrid, Vcl.ExtCtrls, Vcl.DBCtrls, cxGroupBox;
+  cxGridCustomView, cxGrid, Vcl.ExtCtrls, Vcl.DBCtrls, cxGroupBox, dxBarBuiltInMenu, cxPC, Vcl.Menus, cxButtons;
 
 type
   TfrmCadastroResponsavel = class(TfrmCadFD)
-    Label3: TLabel;
-    cxDBTextEdit1: TcxDBTextEdit;
-    Label4: TLabel;
-    cxDBTextEdit2: TcxDBTextEdit;
-    Label7: TLabel;
-    cxDBMaskEdit1: TcxDBMaskEdit;
-    cxDBMaskEdit2: TcxDBMaskEdit;
-    Label8: TLabel;
-    cxDBCheckBox1: TcxDBCheckBox;
-    cxDBLookupComboBox1: TcxDBLookupComboBox;
-    Label5: TLabel;
-    cxDBImageComboBox1: TcxDBImageComboBox;
-    Label6: TLabel;
-    cxDBTextEdit3: TcxDBTextEdit;
-    Label2: TLabel;
-    cxDBMemo1: TcxDBMemo;
-    Label9: TLabel;
     fdqResponsavelTipo: TFDQuery;
     dsResponsavelTipo: TDataSource;
     fdqCadresponsavel_id: TFDAutoIncField;
@@ -56,6 +39,26 @@ type
     dsTelefoneTipo: TDataSource;
     dsTelefone: TDataSource;
     fdqTelefone: TFDQuery;
+    fdqAlunos: TFDQuery;
+    dsAlunos: TDataSource;
+    cxPageControl1: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label2: TLabel;
+    Label9: TLabel;
+    cxDBTextEdit1: TcxDBTextEdit;
+    cxDBTextEdit2: TcxDBTextEdit;
+    cxDBMaskEdit1: TcxDBMaskEdit;
+    cxDBMaskEdit2: TcxDBMaskEdit;
+    cxDBLookupComboBox1: TcxDBLookupComboBox;
+    cxDBImageComboBox1: TcxDBImageComboBox;
+    cxDBTextEdit3: TcxDBTextEdit;
+    cxDBMemo1: TcxDBMemo;
     cxGroupBox1: TcxGroupBox;
     Bevel1: TBevel;
     Bevel2: TBevel;
@@ -68,7 +71,33 @@ type
     cxGrid1DBTableView1numero: TcxGridDBColumn;
     cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
-    TabSheet1: TTabSheet;
+    cxDBCheckBox1: TcxDBCheckBox;
+    cxTabSheet2: TcxTabSheet;
+    DBNavigator2: TDBNavigator;
+    DBGrid1: TDBGrid;
+    cxGroupBox2: TcxGroupBox;
+    cxGrid2DBTableView1: TcxGridDBTableView;
+    cxGrid2Level1: TcxGridLevel;
+    cxGrid2: TcxGrid;
+    cxGrid2DBTableView1nome: TcxGridDBColumn;
+    cxGrid2DBTableView1sobrenome: TcxGridDBColumn;
+    fdqAlunosLookup: TFDQuery;
+    dsAlunosLookup: TDataSource;
+    fdqAlunosresponsavel_id: TIntegerField;
+    fdqAlunosaluno_id: TIntegerField;
+    fdqAlunosaluno_id_1: TIntegerField;
+    fdqAlunosnome: TStringField;
+    fdqAlunossobrenome: TStringField;
+    fdqAlunosdata_nascimento: TDateField;
+    fdqAlunossexo: TStringField;
+    fdqAlunosrg: TStringField;
+    fdqAlunoscpf: TLargeintField;
+    fdqAlunosativo: TStringField;
+    fdqAlunosinformacoes_gerais: TMemoField;
+    fdqAlunosescola_id: TIntegerField;
+    btnAlunoAdd: TcxButton;
+    cxButton2: TcxButton;
+    Bevel3: TBevel;
     procedure AcNovoExecute(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -78,8 +107,18 @@ type
     procedure fdqTelefoneBeforeInsert(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
+    procedure fdqAlunosBeforeEdit(DataSet: TDataSet);
+    procedure fdqAlunosBeforeInsert(DataSet: TDataSet);
+    procedure grPesquisaDblClick(Sender: TObject);
+    procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
+    procedure fdqCadAfterOpen(DataSet: TDataSet);
+    procedure fdqAlunosBeforeOpen(DataSet: TDataSet);
+    procedure fdqAlunosLookupBeforeOpen(DataSet: TDataSet);
+    procedure btnAlunoAddClick(Sender: TObject);
+    procedure cxButton2Click(Sender: TObject);
   private
     procedure OpenQuerys;
+    procedure SetPgtCtrlDefaut;
   public
     { Public declarations }
   end;
@@ -91,12 +130,15 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, smDBFireDac, untFuncoes;
+uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno;
 
 procedure TfrmCadastroResponsavel.AcCancelarExecute(Sender: TObject);
 begin
   fdqTelefone.Cancel;
   fdqTelefone.CancelUpdates;
+
+  fdqAlunos.Cancel;
+  fdqAlunos.CancelUpdates;
   inherited;
 
 end;
@@ -107,10 +149,57 @@ begin
   fdqCadnome.FocusControl;
 end;
 
+procedure TfrmCadastroResponsavel.btnAlunoAddClick(Sender: TObject);
+var
+  AlunoId:integer;
+begin
+  AlunoId:=frmPesquisaAluno.Open;
+
+  if AlunoId <= 0 then
+    Exit;
+
+  fdqAlunos.Append;
+  fdqAlunosaluno_id.AsInteger:= AlunoID;
+  fdqAlunos.Post;
+end;
+
+procedure TfrmCadastroResponsavel.cxButton2Click(Sender: TObject);
+begin
+  inherited;
+  if fdqAlunos.IsEmpty then
+    Exit;
+
+  fdqAlunos.Delete;
+end;
+
+procedure TfrmCadastroResponsavel.fdqAlunosBeforeEdit(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroResponsavel.fdqAlunosBeforeInsert(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroResponsavel.fdqAlunosBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqAlunos);
+end;
+
 procedure TfrmCadastroResponsavel.fdqBuscaBeforeOpen(DataSet: TDataSet);
 begin
   inherited;
   SetIdEscolaParamBusca(fdqBusca);
+end;
+
+procedure TfrmCadastroResponsavel.fdqCadAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  OpenQuerys;
 end;
 
 procedure TfrmCadastroResponsavel.fdqCadNewRecord(DataSet: TDataSet);
@@ -132,6 +221,12 @@ begin
   SalvarQueryMaster(fdqCad);
 end;
 
+procedure TfrmCadastroResponsavel.fdqAlunosLookupBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqAlunosLookup);
+end;
+
 procedure TfrmCadastroResponsavel.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
@@ -148,6 +243,19 @@ procedure TfrmCadastroResponsavel.FormShow(Sender: TObject);
 begin
   inherited;
   OpenQuerys;
+  SetPgtCtrlDefaut;
+end;
+
+procedure TfrmCadastroResponsavel.grPesquisaDblClick(Sender: TObject);
+begin
+  inherited;
+  SetPgtCtrlDefaut;
+end;
+
+procedure TfrmCadastroResponsavel.grPesquisaKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  SetPgtCtrlDefaut;
 end;
 
 procedure TfrmCadastroResponsavel.OpenQuerys;
@@ -160,6 +268,17 @@ begin
 
   fdqTelefoneTipo.Close;
   fdqTelefoneTipo.Open;
+
+  fdqAlunos.Close;
+  fdqAlunos.Open;
+
+  fdqAlunosLookup.Close;
+  fdqAlunosLookup.Open;
+end;
+
+procedure TfrmCadastroResponsavel.SetPgtCtrlDefaut;
+begin
+  cxPageControl1.ActivePageIndex:=0;
 end;
 
 end.

@@ -14,6 +14,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
   inherited PaCoPadrao: TPageControl
     Width = 1223
     Height = 630
+    ActivePage = TaShCadastro
     ExplicitWidth = 1223
     ExplicitHeight = 630
     inherited TaShConsulta: TTabSheet

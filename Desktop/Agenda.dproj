@@ -133,6 +133,10 @@
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smDBFireDac.pas"/>
         <DCCReference Include="untFuncoes.pas"/>
+        <DCCReference Include="Pesquisas\untPesquisaAluno.pas">
+            <Form>frmPesquisaAluno</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
