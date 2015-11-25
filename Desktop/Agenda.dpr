@@ -18,7 +18,8 @@ uses
   untCadastroTelefoneTipo in 'Cadastros\untCadastroTelefoneTipo.pas' {frmCadastroTelefoneTipo},
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
   untFuncoes in 'untFuncoes.pas',
-  untPesquisaAluno in 'Pesquisas\untPesquisaAluno.pas' {frmPesquisaAluno};
+  untPesquisaAluno in 'Pesquisas\untPesquisaAluno.pas' {frmPesquisaAluno},
+  untPesquisaResponsavel in 'Pesquisas\untPesquisaResponsavel.pas' {frmPesquisaResponsavel};
 
 {$R *.res}
 

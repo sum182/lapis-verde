@@ -1,4 +1,4 @@
-object frmPesquisaAluno: TfrmPesquisaAluno
+object frmPesquisaResponsavel: TfrmPesquisaResponsavel
   Left = 0
   Top = 0
   BorderIcons = [biMinimize, biMaximize]
@@ -94,7 +94,7 @@ object frmPesquisaAluno: TfrmPesquisaAluno
         'Nome'
         'Sobrenome')
       Properties.OnChange = cmbCampoPropertiesChange
-      TabOrder = 1
+      TabOrder = 0
       Text = 'Nome'
       Width = 129
     end

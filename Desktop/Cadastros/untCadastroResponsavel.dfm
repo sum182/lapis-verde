@@ -113,10 +113,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
         TabOrder = 0
         Properties.ActivePage = cxTabSheet2
         Properties.CustomButtons.Buttons = <>
-        ExplicitLeft = 214
-        ExplicitTop = 75
-        ExplicitWidth = 789
-        ExplicitHeight = 424
         ClientRectBottom = 451
         ClientRectLeft = 4
         ClientRectRight = 1218
@@ -124,10 +120,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
         object cxTabSheet1: TcxTabSheet
           Caption = 'Dados Principais'
           ImageIndex = 0
-          ExplicitLeft = 5
-          ExplicitTop = 25
-          ExplicitWidth = 281
-          ExplicitHeight = 165
           object Label3: TLabel
             Left = 32
             Top = 14
@@ -317,8 +309,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
               Height = 244
               Align = alClient
               TabOrder = 1
-              ExplicitTop = 49
-              ExplicitHeight = 257
               object cxGrid1DBTableView1: TcxGridDBTableView
                 Navigator.Buttons.CustomButtons = <>
                 DataController.DataSource = dsTelefone
@@ -382,38 +372,16 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
           Caption = 'Alunos'
           ImageIndex = 1
           ExplicitLeft = 5
-          ExplicitTop = 18
-          object DBNavigator2: TDBNavigator
-            Left = 630
-            Top = 121
-            Width = 290
-            Height = 25
-            DataSource = dsAlunos
-            TabOrder = 0
-          end
-          object DBGrid1: TDBGrid
-            Left = 598
-            Top = 152
-            Width = 452
-            Height = 193
-            DataSource = dsAlunos
+          ExplicitTop = 25
+          object grbxAlunos: TcxGroupBox
+            Left = 33
+            Top = 55
             TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
-          end
-          object cxGroupBox2: TcxGroupBox
-            Left = 31
-            Top = 24
-            Caption = 'cxGroupBox2'
-            TabOrder = 2
             Height = 369
             Width = 474
             object Bevel3: TBevel
               Left = 2
-              Top = 18
+              Top = 5
               Width = 470
               Height = 50
               Align = alTop
@@ -421,18 +389,16 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
               ExplicitTop = 160
               ExplicitWidth = 50
             end
-            object cxGrid2: TcxGrid
+            object cxGridAlunos: TcxGrid
               Left = 2
-              Top = 68
+              Top = 55
               Width = 470
-              Height = 299
+              Height = 312
               Align = alClient
-              TabOrder = 0
-              ExplicitLeft = 166
-              ExplicitTop = 232
-              ExplicitWidth = 420
-              ExplicitHeight = 198
-              object cxGrid2DBTableView1: TcxGridDBTableView
+              TabOrder = 2
+              ExplicitTop = 68
+              ExplicitHeight = 299
+              object cxGridAlunosDBTableView1: TcxGridDBTableView
                 Navigator.Buttons.CustomButtons = <>
                 DataController.DataSource = dsAlunos
                 DataController.Summary.DefaultGroupSummaryItems = <>
@@ -443,7 +409,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
                 OptionsData.Inserting = False
                 OptionsSelection.CellSelect = False
                 OptionsView.GroupByBox = False
-                object cxGrid2DBTableView1nome: TcxGridDBColumn
+                object cxGridAlunosDBTableView1nome: TcxGridDBColumn
                   Caption = 'Nome'
                   DataBinding.FieldName = 'aluno_id'
                   PropertiesClassName = 'TcxLookupComboBoxProperties'
@@ -453,9 +419,9 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
                       FieldName = 'nome'
                     end>
                   Properties.ListSource = dsAlunosLookup
-                  Width = 164
+                  Width = 182
                 end
-                object cxGrid2DBTableView1sobrenome: TcxGridDBColumn
+                object cxGridAlunosDBTableView1sobrenome: TcxGridDBColumn
                   Caption = 'Sobrenome'
                   DataBinding.FieldName = 'aluno_id'
                   PropertiesClassName = 'TcxLookupComboBoxProperties'
@@ -468,28 +434,43 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
                   Width = 189
                 end
               end
-              object cxGrid2Level1: TcxGridLevel
-                GridView = cxGrid2DBTableView1
+              object cxGridAlunosLevel1: TcxGridLevel
+                GridView = cxGridAlunosDBTableView1
               end
             end
-            object btnAlunoAdd: TcxButton
-              Left = 30
-              Top = 37
-              Width = 75
+            object btnAlunosAdd: TcxButton
+              Left = 20
+              Top = 17
+              Width = 50
               Height = 25
-              Caption = 'add'
+              OptionsImage.ImageIndex = 0
+              OptionsImage.Images = imgEnabled
+              TabOrder = 0
+              OnClick = btnAlunosAddClick
+            end
+            object btnAlunosExcluir: TcxButton
+              Left = 76
+              Top = 17
+              Width = 50
+              Height = 25
+              OptionsImage.ImageIndex = 1
+              OptionsImage.Images = imgEnabled
               TabOrder = 1
-              OnClick = btnAlunoAddClick
+              OnClick = btnAlunosExcluirClick
             end
-            object cxButton2: TcxButton
-              Left = 118
-              Top = 37
-              Width = 75
-              Height = 25
-              Caption = 'del'
-              TabOrder = 2
-              OnClick = cxButton2Click
-            end
+          end
+          object cxLabel1: TcxLabel
+            Left = 35
+            Top = 32
+            Caption = 'Alunos v'#237'nculos ao respons'#225'vel'
+            ParentFont = False
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clRed
+            Style.Font.Height = -12
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = [fsBold]
+            Style.IsFontAssigned = True
+            Transparent = True
           end
         end
       end
@@ -594,7 +575,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     Left = 1152
     Top = 384
     Bitmap = {
-      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1001,7 +982,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     Left = 1152
     Top = 432
     Bitmap = {
-      494C01010B000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1577,9 +1558,10 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end>
   end
   object fdqAlunos: TFDQuery
-    BeforeOpen = fdqAlunosBeforeOpen
     BeforeInsert = fdqAlunosBeforeInsert
     BeforeEdit = fdqAlunosBeforeEdit
+    BeforeDelete = fdqAlunosBeforeDelete
+    AfterScroll = fdqAlunosAfterScroll
     CachedUpdates = True
     IndexFieldNames = 'responsavel_id'
     MasterSource = dsCad
@@ -1589,23 +1571,14 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     FetchOptions.AssignedValues = [evDetailCascade]
     FetchOptions.DetailCascade = True
     SQL.Strings = (
-      'select ra.*,a.* from responsavel_aluno ra'#10' '
-      'inner join aluno a on (ra.aluno_id = a.aluno_id )  '#13#10#10
-      ''
-      'where responsavel_id = :responsavel_id'#10
-      'and escola_id = :escola_id ')
-    Left = 688
+      'select * from responsavel_aluno ra'#10' '
+      'where responsavel_id = :responsavel_id'#10)
+    Left = 616
     Top = 280
     ParamData = <
       item
         Name = 'RESPONSAVEL_ID'
         DataType = ftAutoInc
-        ParamType = ptInput
-        Value = Null
-      end
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end>
@@ -1621,88 +1594,11 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object fdqAlunosaluno_id_1: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'aluno_id_1'
-      Origin = 'aluno_id'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object fdqAlunosnome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'nome'
-      Origin = 'nome'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 150
-    end
-    object fdqAlunossobrenome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'sobrenome'
-      Origin = 'sobrenome'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 150
-    end
-    object fdqAlunosdata_nascimento: TDateField
-      AutoGenerateValue = arDefault
-      FieldName = 'data_nascimento'
-      Origin = 'data_nascimento'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object fdqAlunossexo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'sexo'
-      Origin = 'sexo'
-      ProviderFlags = []
-      ReadOnly = True
-      FixedChar = True
-      Size = 1
-    end
-    object fdqAlunosrg: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'rg'
-      Origin = 'rg'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 50
-    end
-    object fdqAlunoscpf: TLargeintField
-      AutoGenerateValue = arDefault
-      FieldName = 'cpf'
-      Origin = 'cpf'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object fdqAlunosativo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ativo'
-      Origin = 'ativo'
-      ProviderFlags = []
-      ReadOnly = True
-      FixedChar = True
-      Size = 1
-    end
-    object fdqAlunosinformacoes_gerais: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'informacoes_gerais'
-      Origin = 'informacoes_gerais'
-      ProviderFlags = []
-      ReadOnly = True
-      BlobType = ftMemo
-    end
-    object fdqAlunosescola_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'escola_id'
-      Origin = 'escola_id'
-      ProviderFlags = []
-      ReadOnly = True
-    end
   end
   object dsAlunos: TDataSource
     DataSet = fdqAlunos
-    Left = 688
+    OnStateChange = dsAlunosStateChange
+    Left = 616
     Top = 336
   end
   object fdqAlunosLookup: TFDQuery
@@ -1711,8 +1607,8 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     SQL.Strings = (
       'SELECT * FROM  aluno '
       'where escola_id = :escola_id ')
-    Left = 696
-    Top = 136
+    Left = 688
+    Top = 280
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -1723,7 +1619,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   end
   object dsAlunosLookup: TDataSource
     DataSet = fdqAlunosLookup
-    Left = 592
-    Top = 136
+    Left = 688
+    Top = 336
   end
 end

@@ -18,7 +18,7 @@ uses
   dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, cxMemo, cxDBEdit, cxImageComboBox, cxDropDownEdit, cxLookupEdit,
   cxDBLookupEdit, cxDBLookupComboBox, cxCheckBox, cxMaskEdit, cxTextEdit, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxGridCustomView, cxGrid, Vcl.ExtCtrls, Vcl.DBCtrls, cxGroupBox, dxBarBuiltInMenu, cxPC, Vcl.Menus, cxButtons;
+  cxGridCustomView, cxGrid, Vcl.ExtCtrls, Vcl.DBCtrls, cxGroupBox, dxBarBuiltInMenu, cxPC, Vcl.Menus, cxButtons, cxLabel;
 
 type
   TfrmCadastroResponsavel = class(TfrmCadFD)
@@ -73,31 +73,20 @@ type
     cxGrid1Level1: TcxGridLevel;
     cxDBCheckBox1: TcxDBCheckBox;
     cxTabSheet2: TcxTabSheet;
-    DBNavigator2: TDBNavigator;
-    DBGrid1: TDBGrid;
-    cxGroupBox2: TcxGroupBox;
-    cxGrid2DBTableView1: TcxGridDBTableView;
-    cxGrid2Level1: TcxGridLevel;
-    cxGrid2: TcxGrid;
-    cxGrid2DBTableView1nome: TcxGridDBColumn;
-    cxGrid2DBTableView1sobrenome: TcxGridDBColumn;
+    grbxAlunos: TcxGroupBox;
+    cxGridAlunosDBTableView1: TcxGridDBTableView;
+    cxGridAlunosLevel1: TcxGridLevel;
+    cxGridAlunos: TcxGrid;
+    cxGridAlunosDBTableView1nome: TcxGridDBColumn;
+    cxGridAlunosDBTableView1sobrenome: TcxGridDBColumn;
     fdqAlunosLookup: TFDQuery;
     dsAlunosLookup: TDataSource;
+    Bevel3: TBevel;
+    cxLabel1: TcxLabel;
+    btnAlunosAdd: TcxButton;
+    btnAlunosExcluir: TcxButton;
     fdqAlunosresponsavel_id: TIntegerField;
     fdqAlunosaluno_id: TIntegerField;
-    fdqAlunosaluno_id_1: TIntegerField;
-    fdqAlunosnome: TStringField;
-    fdqAlunossobrenome: TStringField;
-    fdqAlunosdata_nascimento: TDateField;
-    fdqAlunossexo: TStringField;
-    fdqAlunosrg: TStringField;
-    fdqAlunoscpf: TLargeintField;
-    fdqAlunosativo: TStringField;
-    fdqAlunosinformacoes_gerais: TMemoField;
-    fdqAlunosescola_id: TIntegerField;
-    btnAlunoAdd: TcxButton;
-    cxButton2: TcxButton;
-    Bevel3: TBevel;
     procedure AcNovoExecute(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -112,13 +101,16 @@ type
     procedure grPesquisaDblClick(Sender: TObject);
     procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
     procedure fdqCadAfterOpen(DataSet: TDataSet);
-    procedure fdqAlunosBeforeOpen(DataSet: TDataSet);
     procedure fdqAlunosLookupBeforeOpen(DataSet: TDataSet);
-    procedure btnAlunoAddClick(Sender: TObject);
-    procedure cxButton2Click(Sender: TObject);
+    procedure btnAlunosAddClick(Sender: TObject);
+    procedure btnAlunosExcluirClick(Sender: TObject);
+    procedure dsAlunosStateChange(Sender: TObject);
+    procedure fdqAlunosAfterScroll(DataSet: TDataSet);
+    procedure fdqAlunosBeforeDelete(DataSet: TDataSet);
   private
     procedure OpenQuerys;
     procedure SetPgtCtrlDefaut;
+    procedure SetStateButtonsAlunos;
   public
     { Public declarations }
   end;
@@ -149,7 +141,7 @@ begin
   fdqCadnome.FocusControl;
 end;
 
-procedure TfrmCadastroResponsavel.btnAlunoAddClick(Sender: TObject);
+procedure TfrmCadastroResponsavel.btnAlunosAddClick(Sender: TObject);
 var
   AlunoId:integer;
 begin
@@ -158,18 +150,39 @@ begin
   if AlunoId <= 0 then
     Exit;
 
+  if fdqAlunos.Locate('aluno_id',AlunoId,[]) then
+    Exit;
+
   fdqAlunos.Append;
-  fdqAlunosaluno_id.AsInteger:= AlunoID;
+  fdqAlunos.FieldByName('aluno_id').AsInteger:= AlunoID;
   fdqAlunos.Post;
 end;
 
-procedure TfrmCadastroResponsavel.cxButton2Click(Sender: TObject);
+procedure TfrmCadastroResponsavel.btnAlunosExcluirClick(Sender: TObject);
 begin
   inherited;
   if fdqAlunos.IsEmpty then
     Exit;
 
   fdqAlunos.Delete;
+end;
+
+procedure TfrmCadastroResponsavel.dsAlunosStateChange(Sender: TObject);
+begin
+  inherited;
+  SetStateButtonsAlunos;
+end;
+
+procedure TfrmCadastroResponsavel.fdqAlunosAfterScroll(DataSet: TDataSet);
+begin
+  inherited;
+  SetStateButtonsAlunos;
+end;
+
+procedure TfrmCadastroResponsavel.fdqAlunosBeforeDelete(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
 end;
 
 procedure TfrmCadastroResponsavel.fdqAlunosBeforeEdit(DataSet: TDataSet);
@@ -182,12 +195,6 @@ procedure TfrmCadastroResponsavel.fdqAlunosBeforeInsert(DataSet: TDataSet);
 begin
   inherited;
   SalvarQueryMaster(fdqCad);
-end;
-
-procedure TfrmCadastroResponsavel.fdqAlunosBeforeOpen(DataSet: TDataSet);
-begin
-  inherited;
-  SetIdEscolaParamBusca(fdqAlunos);
 end;
 
 procedure TfrmCadastroResponsavel.fdqBuscaBeforeOpen(DataSet: TDataSet);
@@ -279,6 +286,12 @@ end;
 procedure TfrmCadastroResponsavel.SetPgtCtrlDefaut;
 begin
   cxPageControl1.ActivePageIndex:=0;
+end;
+
+procedure TfrmCadastroResponsavel.SetStateButtonsAlunos;
+begin
+  btnAlunosAdd.Enabled := fdqAlunos.State in [dsBrowse, dsInactive, dsEdit];
+  btnAlunosExcluir.Enabled := (fdqAlunos.State in [dsEdit, dsBrowse, dsInactive]) and (fdqAlunos.RecordCount >= 1);
 end;
 
 end.
