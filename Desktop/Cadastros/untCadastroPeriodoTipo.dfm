@@ -1,48 +1,25 @@
-inherited frmCadastroResponsavelTipo: TfrmCadastroResponsavelTipo
-  Caption = 'Cadastro de Tipos de Respons'#225'veis'
-  ClientHeight = 525
-  ClientWidth = 900
-  OnClose = FormClose
-  ExplicitWidth = 916
-  ExplicitHeight = 563
+inherited frmCadastroPeriodoTipo: TfrmCadastroPeriodoTipo
+  Caption = 'frmCadastroPeriodoTipo'
+  OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
   TextHeight = 13
-  inherited ToBaCadastro: TToolBar
-    Width = 900
-    ExplicitWidth = 900
-  end
   inherited PaCoPadrao: TPageControl
-    Width = 900
-    Height = 484
-    ActivePage = TaShCadastro
-    ExplicitWidth = 900
-    ExplicitHeight = 484
     inherited TaShConsulta: TTabSheet
-      ExplicitWidth = 892
-      ExplicitHeight = 456
-      inherited grbxPesquisa: TGroupBox
-        Width = 892
-        ExplicitWidth = 892
-        inherited ToolBar1: TToolBar
-          Width = 882
-          ExplicitWidth = 882
-        end
-      end
       inherited grPesquisa: TsmDBGrid
-        Width = 892
-        Height = 341
         DataSource = dsBusca
         Columns = <
           item
             Expanded = False
-            FieldName = 'responsavel_tipo_id'
-            Visible = False
+            FieldName = 'periodo_tipo_id'
+            Title.Caption = 'ID'
+            Width = 104
+            Visible = True
           end
           item
             Expanded = False
             FieldName = 'descricao'
             Title.Caption = 'Descri'#231#227'o'
-            Width = 300
+            Width = 309
             Visible = True
           end
           item
@@ -51,16 +28,8 @@ inherited frmCadastroResponsavelTipo: TfrmCadastroResponsavelTipo
             Visible = False
           end>
       end
-      inherited stbrConsulta: TStatusBar
-        Top = 438
-        Width = 892
-        ExplicitTop = 438
-        ExplicitWidth = 892
-      end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitWidth = 892
-      ExplicitHeight = 456
       object Label3: TLabel
         Left = 30
         Top = 32
@@ -97,13 +66,13 @@ inherited frmCadastroResponsavelTipo: TfrmCadastroResponsavelTipo
     end
   end
   inherited smCadPadrao: TsmCadPadrao
-    Tabela = 'responsavel_tipo'
+    Tabela = 'periodo_tipo'
     FieldsBusca = <
       item
-        FieldName = 'responsavel_tipo_id'
-        DisplayName = 'Responsavel_tipo_id'
-        ShowCombo = False
-        ShowGrid = False
+        FieldName = 'periodo_tipo_id'
+        DisplayName = 'Periodo_tipo_id'
+        ShowCombo = True
+        ShowGrid = True
         ShowSelect = True
         FieldType = ftSmallint
       end
@@ -123,11 +92,11 @@ inherited frmCadastroResponsavelTipo: TfrmCadastroResponsavelTipo
         ShowSelect = False
         FieldType = ftMemo
       end>
-    KeyField = 'responsavel_tipo_id'
+    KeyField = 'periodo_tipo_id'
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -532,7 +501,7 @@ inherited frmCadastroResponsavelTipo: TfrmCadastroResponsavelTipo
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -936,45 +905,20 @@ inherited frmCadastroResponsavelTipo: TfrmCadastroResponsavelTipo
       000000000000}
   end
   inherited fdqCad: TFDQuery
+    Active = True
     Connection = DM.FDConnection
     SQL.Strings = (
-      'SELECT * FROM responsavel_tipo'
-      'where responsavel_tipo_id = :responsavel_tipo_id')
-    Left = 624
-    Top = 296
+      'SELECT * FROM periodo_tipo '#13#10#10
+      'where periodo_tipo_id = :periodo_tipo_id')
     ParamData = <
       item
-        Name = 'RESPONSAVEL_TIPO_ID'
+        Name = 'PERIODO_TIPO_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 0
       end>
-  end
-  inherited dsCad: TDataSource
-    Left = 624
-    Top = 352
-  end
-  inherited dsBusca: TDataSource
-    Left = 688
-    Top = 352
   end
   inherited fdqBusca: TFDQuery
     Connection = DM.FDConnection
-    SQL.Strings = (
-      'SELECT * FROM responsavel_tipo'
-      'where responsavel_tipo_id = :responsavel_tipo_id')
-    Left = 688
-    Top = 296
-    ParamData = <
-      item
-        Name = 'RESPONSAVEL_TIPO_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
-  end
-  inherited FDSchemaAdapter: TFDSchemaAdapter
-    Left = 624
-    Top = 408
   end
 end
