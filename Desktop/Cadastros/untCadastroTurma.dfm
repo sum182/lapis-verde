@@ -1,28 +1,56 @@
 inherited frmCadastroTurma: TfrmCadastroTurma
   Caption = 'Cadastro de Turmas'
-  ClientHeight = 684
+  ClientHeight = 689
   ClientWidth = 1046
   OnCloseQuery = FormCloseQuery
   ExplicitWidth = 1062
-  ExplicitHeight = 722
+  ExplicitHeight = 727
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
     Width = 1046
+    ExplicitWidth = 1046
+    inherited ToolButton1: TToolButton
+      ExplicitWidth = 14
+    end
+    inherited btnLocalizarTodosRegistros: TToolButton
+      ExplicitWidth = 70
+    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1046
-    Height = 643
+    Height = 648
+    ActivePage = TaShCadastro
+    ExplicitWidth = 1046
+    ExplicitHeight = 648
     inherited TaShConsulta: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 1038
+      ExplicitHeight = 620
       inherited grbxPesquisa: TGroupBox
         Width = 1038
+        ExplicitWidth = 1038
         inherited ToolBar1: TToolBar
           Width = 1028
+          ExplicitWidth = 1028
+          inherited ToolButton3: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton4: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton5: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton6: TToolButton
+            ExplicitWidth = 24
+          end
         end
       end
       inherited grPesquisa: TsmDBGrid
         Width = 1038
-        Height = 500
+        Height = 505
         DataSource = dsBusca
         Columns = <
           item
@@ -61,14 +89,17 @@ inherited frmCadastroTurma: TfrmCadastroTurma
           end>
       end
       inherited stbrConsulta: TStatusBar
-        Top = 597
+        Top = 602
         Width = 1038
+        ExplicitTop = 602
+        ExplicitWidth = 1038
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 2
+      ExplicitLeft = 8
+      ExplicitTop = 24
       ExplicitWidth = 1038
-      ExplicitHeight = 615
+      ExplicitHeight = 620
       object Label3: TLabel
         Left = 32
         Top = 14
@@ -124,14 +155,117 @@ inherited frmCadastroTurma: TfrmCadastroTurma
         TabOrder = 1
         Width = 169
       end
+      object cxGroupBox1: TcxGroupBox
+        Left = 32
+        Top = 232
+        Caption = 'Alunos Dispon'#237'veis'
+        TabOrder = 3
+        Height = 321
+        Width = 244
+        object cxGrid1: TcxGrid
+          Left = 2
+          Top = 18
+          Width = 240
+          Height = 301
+          Align = alClient
+          TabOrder = 0
+          object cxGrid1DBTableView1: TcxGridDBTableView
+            Navigator.Buttons.CustomButtons = <>
+            DataController.DataSource = dsAlunos
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsData.Deleting = False
+            OptionsData.Editing = False
+            OptionsData.Inserting = False
+            OptionsSelection.MultiSelect = True
+            OptionsView.GroupByBox = False
+            object cxGrid1DBTableView1nome_completo: TcxGridDBColumn
+              Caption = 'Aluno'
+              DataBinding.FieldName = 'nome_completo'
+            end
+          end
+          object cxGrid1Level1: TcxGridLevel
+            GridView = cxGrid1DBTableView1
+          end
+        end
+      end
+      object cxGroupBox2: TcxGroupBox
+        Left = 392
+        Top = 232
+        Caption = 'Alunos da Turma'
+        TabOrder = 4
+        Height = 321
+        Width = 244
+        object cxGrid2: TcxGrid
+          Left = 2
+          Top = 18
+          Width = 240
+          Height = 301
+          Align = alClient
+          TabOrder = 0
+          object cxGridDBTableView1: TcxGridDBTableView
+            Navigator.Buttons.CustomButtons = <>
+            DataController.DataSource = dsTurmaAluno
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsData.Deleting = False
+            OptionsData.Editing = False
+            OptionsData.Inserting = False
+            OptionsSelection.MultiSelect = True
+            OptionsView.GroupByBox = False
+            object cxGridDBColumn1: TcxGridDBColumn
+              Caption = 'Aluno'
+              DataBinding.FieldName = 'nome_completo'
+            end
+          end
+          object cxGridLevel1: TcxGridLevel
+            GridView = cxGridDBTableView1
+          end
+        end
+      end
+      object cxButton1: TcxButton
+        Left = 298
+        Top = 288
+        Width = 75
+        Height = 25
+        Caption = '->'
+        TabOrder = 5
+        OnClick = cxButton1Click
+      end
+      object cxButton2: TcxButton
+        Left = 298
+        Top = 319
+        Width = 75
+        Height = 25
+        Caption = '>>'
+        TabOrder = 6
+      end
+    end
+    inherited TaShRelatorio: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 1038
+      ExplicitHeight = 620
     end
   end
   inherited smCadPadrao: TsmCadPadrao
     BuscaSql.Strings = (
-      'SELECT t.*,p.descricao as periodo FROM turma t'
+      'SELECT t.*,'
+      '       '
+      '       (select periodo_tipo.descricao '
+      #9#9
+      '        from periodo_tipo '
+      '        '
       
-        'left outer join periodo_tipo p on (p.periodo_tipo_id = t.periodo' +
-        '_tipo_id)')
+        '        where periodo_tipo.periodo_tipo_id = t.periodo_tipo_id) ' +
+        'as periodo '
+      ' '
+      'FROM turma t'
+      ' '
+      ''
+      'where 1=1')
     Tabela = 'turma'
     FieldsBusca = <
       item
@@ -163,7 +297,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
         DisplayName = 'Periodo_tipo_id'
         ShowCombo = False
         ShowGrid = False
-        ShowSelect = True
+        ShowSelect = False
         FieldType = ftSmallint
       end
       item
@@ -173,6 +307,14 @@ inherited frmCadastroTurma: TfrmCadastroTurma
         ShowGrid = False
         ShowSelect = True
         FieldType = ftInteger
+      end
+      item
+        FieldName = 'periodo'
+        DisplayName = 'periodo'
+        ShowCombo = False
+        ShowGrid = True
+        ShowSelect = False
+        FieldType = ftString
       end>
     KeyField = 'turma_id'
     Left = 976
@@ -186,7 +328,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 536
     Bitmap = {
-      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -593,7 +735,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 584
     Bitmap = {
-      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -997,14 +1139,14 @@ inherited frmCadastroTurma: TfrmCadastroTurma
       000000000000}
   end
   inherited fdqCad: TFDQuery
-    Active = True
+    BeforeInsert = fdqCadBeforeInsert
     OnNewRecord = fdqCadNewRecord
     Connection = DM.FDConnection
     SQL.Strings = (
       'SELECT * FROM turma t'#13#10#10
       'where t.turma_id = :turma_id')
-    Left = 752
-    Top = 432
+    Left = 904
+    Top = 104
     ParamData = <
       item
         Name = 'TURMA_ID'
@@ -1014,36 +1156,27 @@ inherited frmCadastroTurma: TfrmCadastroTurma
       end>
   end
   inherited dsCad: TDataSource
-    Left = 752
-    Top = 488
+    Left = 904
+    Top = 160
   end
   inherited dsBusca: TDataSource
-    Left = 816
-    Top = 488
+    Left = 968
+    Top = 160
   end
   inherited fdqBusca: TFDQuery
+    BeforeOpen = fdqBuscaBeforeOpen
     Connection = DM.FDConnection
     SQL.Strings = (
-      'SELECT t.*,p.descricao as periodo FROM turma t'#13#10#10
-      ''
+      'SELECT t.*,'#10'       '
+      '       (select periodo_tipo.descricao '#10#9#9
+      '        from periodo_tipo '#10'        '
       
-        'left outer join periodo_tipo p on (p.periodo_tipo_id = t.periodo' +
-        '_tipo_id)'#13#10#10
-      ''
-      'where 1=1'
-      ''
-      'and t.escola_id = :escola_id'
-      ''
-      '')
-    Left = 816
-    Top = 432
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
+        '        where periodo_tipo.periodo_tipo_id = t.periodo_tipo_id) ' +
+        'as periodo '#10' '
+      'FROM turma t'#10' '
+      'where 1=1')
+    Left = 968
+    Top = 104
   end
   inherited FDSchemaAdapter: TFDSchemaAdapter
     Left = 896
@@ -1053,12 +1186,71 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Connection = DM.FDConnection
     SQL.Strings = (
       'SELECT * FROM periodo_tipo')
-    Left = 696
-    Top = 432
+    Left = 848
+    Top = 104
   end
   object dsPeriodo: TDataSource
     DataSet = fdqPeriodo
-    Left = 696
-    Top = 488
+    Left = 848
+    Top = 160
+  end
+  object fdqAlunos: TFDQuery
+    BeforeOpen = fdqAlunosBeforeOpen
+    Connection = DM.FDConnection
+    SQL.Strings = (
+      
+        'SELECT a.*, concat(coalesce(a.nome,'#39#39'),'#39' '#39', coalesce(a.sobrenome' +
+        ','#39#39')) as nome_completo '
+      'FROM aluno a'
+      'where 1=1'#10' '#10
+      'and escola_id = :escola_id'#10
+      'order by nome_completo'#10)
+    Left = 784
+    Top = 104
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object dsAlunos: TDataSource
+    DataSet = fdqAlunos
+    Left = 784
+    Top = 160
+  end
+  object fdqTurmaAluno: TFDQuery
+    MasterSource = dsCad
+    MasterFields = 'turma_id'
+    Connection = DM.FDConnection
+    SQL.Strings = (
+      #10'select '#10'  ta.*,'#10' '
+      
+        '         concat(coalesce(a.nome,'#39#39'),'#39' '#39', coalesce(a.sobrenome,'#39#39 +
+        ')) as nome_completo'#13#10#10
+      ''
+      ''
+      'from turma_aluno ta'#13#10#10
+      ''
+      ''
+      'inner join aluno a on (a.aluno_id = ta.aluno_id)'#13#10#10
+      ''
+      ''
+      'where ta.turma_id = :turma_id')
+    Left = 712
+    Top = 104
+    ParamData = <
+      item
+        Name = 'TURMA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsTurmaAluno: TDataSource
+    DataSet = fdqTurmaAluno
+    Left = 712
+    Top = 160
   end
 end

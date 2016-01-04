@@ -16,7 +16,9 @@ uses
   dxSkinOffice2013White, dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
   dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, cxMemo, cxDBEdit, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit,
-  cxDBLookupEdit, cxDBLookupComboBox;
+  cxDBLookupEdit, cxDBLookupComboBox, Vcl.DBCtrls, cxListBox, Vcl.CheckLst, smCheckListBox, cxStyles, dxSkinscxPCPainter,
+  cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator, cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxGridLevel, cxClasses, cxGridCustomView, cxGrid, cxGroupBox, Vcl.Menus, cxButtons;
 
 type
   TfrmCadastroTurma = class(TfrmCadFD)
@@ -28,10 +30,30 @@ type
     cxDBLookupComboBox1: TcxDBLookupComboBox;
     fdqPeriodo: TFDQuery;
     dsPeriodo: TDataSource;
+    fdqAlunos: TFDQuery;
+    dsAlunos: TDataSource;
+    cxGroupBox1: TcxGroupBox;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1nome_completo: TcxGridDBColumn;
+    fdqTurmaAluno: TFDQuery;
+    cxGroupBox2: TcxGroupBox;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn1: TcxGridDBColumn;
+    cxGridLevel1: TcxGridLevel;
+    dsTurmaAluno: TDataSource;
+    cxButton1: TcxButton;
+    cxButton2: TcxButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
+    procedure fdqCadBeforeInsert(DataSet: TDataSet);
+    procedure fdqAlunosBeforeOpen(DataSet: TDataSet);
+    procedure cxButton1Click(Sender: TObject);
   private
     procedure OpenQuerys;
   public
@@ -46,6 +68,33 @@ implementation
 {$R *.dfm}
 
 uses untDM, untFuncoes;
+
+procedure TfrmCadastroTurma.cxButton1Click(Sender: TObject);
+begin
+  inherited;
+  fdqTurmaAluno.Append;
+  fdqTurmaAluno.FieldByName('aluno_id').AsInteger := fdqAlunos.FieldByName('aluno_id').AsInteger;
+  fdqTurmaAluno.Post;
+
+end;
+
+procedure TfrmCadastroTurma.fdqAlunosBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqAlunos);
+end;
+
+procedure TfrmCadastroTurma.fdqBuscaBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqBusca);
+end;
+
+procedure TfrmCadastroTurma.fdqCadBeforeInsert(DataSet: TDataSet);
+begin
+  inherited;
+  fdqCad.FieldByName('nome').FocusControl;
+end;
 
 procedure TfrmCadastroTurma.fdqCadNewRecord(DataSet: TDataSet);
 begin
@@ -75,6 +124,14 @@ procedure TfrmCadastroTurma.OpenQuerys;
 begin
   fdqPeriodo.Close;
   fdqPeriodo.Open;
+
+  fdqAlunos.Close;
+  fdqAlunos.Open;
+
+  fdqTurmaAluno.Close;
+  fdqTurmaAluno.Open;
+
+
 end;
 
 end.
