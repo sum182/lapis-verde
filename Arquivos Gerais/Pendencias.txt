@@ -1,3 +1,8 @@
+Erro 
+Cad Resp
+Vinculo de Alunos
+ao Deletar e depois incluir o msm aluno ele fica duplicado
+
 
 -Nome da Aplicacao
 Alterar metodo do dm

@@ -109,6 +109,8 @@ type
     dxBarLargeButton35: TdxBarLargeButton;
     dxBarLargeButton36: TdxBarLargeButton;
     dxBarLargeButton37: TdxBarLargeButton;
+    dxBarLargeButton38: TdxBarLargeButton;
+    dxBarLargeButton39: TdxBarLargeButton;
     procedure pgPrincCanClose(Sender: TObject; var ACanClose: Boolean);
     procedure FecharAba1Click(Sender: TObject);
     procedure FecharTodasAbas1Click(Sender: TObject);
@@ -122,6 +124,8 @@ type
     procedure dxBarLargeButton35Click(Sender: TObject);
     procedure dxBarLargeButton36Click(Sender: TObject);
     procedure dxBarLargeButton37Click(Sender: TObject);
+    procedure dxBarLargeButton38Click(Sender: TObject);
+    procedure dxBarLargeButton39Click(Sender: TObject);
   private
     procedure ActivePg(Classe: TFormClass);
     procedure OpenForm(Classe: TFormClass; var Form;
@@ -141,7 +145,8 @@ implementation
 
 uses
   smGeral, smMensagens,untDM, untCadastroTelefoneTipo, untCadastroEscola, untCadastroAluno, untCadastroFuncionario,
-  untCadastroFuncionarioTipo, untCadastroResponsavel, untCadastroResponsavelTipo, untFuncoes;
+  untCadastroFuncionarioTipo, untCadastroResponsavel, untCadastroResponsavelTipo, untFuncoes, untCadastroPeriodoTipo,
+  untCadastroTurma;
 
 procedure TfrmMenuPrincipal.ActivePg(Classe: TFormClass);
 var
@@ -239,6 +244,16 @@ end;
 procedure TfrmMenuPrincipal.dxBarLargeButton37Click(Sender: TObject);
 begin
   OpenForm(TfrmCadastroResponsavelTipo,frmCadastroResponsavelTipo);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton38Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroPeriodoTipo,frmCadastroPeriodoTipo);
+end;
+
+procedure TfrmMenuPrincipal.dxBarLargeButton39Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadastroTurma,frmCadastroTurma);
 end;
 
 procedure TfrmMenuPrincipal.FecharAba1Click(Sender: TObject);

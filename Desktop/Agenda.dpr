@@ -19,7 +19,9 @@ uses
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
   untFuncoes in 'untFuncoes.pas',
   untPesquisaAluno in 'Pesquisas\untPesquisaAluno.pas' {frmPesquisaAluno},
-  untPesquisaResponsavel in 'Pesquisas\untPesquisaResponsavel.pas' {frmPesquisaResponsavel};
+  untPesquisaResponsavel in 'Pesquisas\untPesquisaResponsavel.pas' {frmPesquisaResponsavel},
+  untCadastroPeriodoTipo in 'Cadastros\untCadastroPeriodoTipo.pas' {frmCadastroPeriodoTipo},
+  untCadastroTurma in 'Cadastros\untCadastroTurma.pas' {frmCadastroTurma};
 
 {$R *.res}
 

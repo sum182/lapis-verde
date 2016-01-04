@@ -31,7 +31,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.SkinName = 'Black'
     OnCanClose = pgPrincCanClose
-    ExplicitTop = 116
     ClientRectBottom = 378
     ClientRectLeft = 4
     ClientRectRight = 872
@@ -46647,6 +46646,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         end
         item
           Visible = True
+          ItemName = 'dxBarLargeButton39'
+        end
+        item
+          Visible = True
           ItemName = 'dxBarLargeButton34'
         end
         item
@@ -46680,6 +46683,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         item
           Visible = True
           ItemName = 'dxBarLargeButton37'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton38'
         end>
       OneOnRow = True
       Row = 0
@@ -50162,6 +50169,20 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Hint = 'Tipos de Respons'#225'vel'
       Visible = ivAlways
       OnClick = dxBarLargeButton37Click
+    end
+    object dxBarLargeButton38: TdxBarLargeButton
+      Caption = 'Tipos de Per'#237'odo'
+      Category = 0
+      Hint = 'Tipos de Per'#237'odo'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton38Click
+    end
+    object dxBarLargeButton39: TdxBarLargeButton
+      Caption = 'Turma'
+      Category = 0
+      Hint = 'Turma'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton39Click
     end
     object dxBarGroup1: TdxBarGroup
       Items = ()

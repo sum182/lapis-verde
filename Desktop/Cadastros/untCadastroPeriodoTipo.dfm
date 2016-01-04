@@ -1,5 +1,5 @@
 inherited frmCadastroPeriodoTipo: TfrmCadastroPeriodoTipo
-  Caption = 'frmCadastroPeriodoTipo'
+  Caption = 'Cadastro de Tipos de Per'#237'odo'
   OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
   TextHeight = 13
