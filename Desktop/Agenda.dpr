@@ -21,7 +21,8 @@ uses
   untPesquisaAluno in 'Pesquisas\untPesquisaAluno.pas' {frmPesquisaAluno},
   untPesquisaResponsavel in 'Pesquisas\untPesquisaResponsavel.pas' {frmPesquisaResponsavel},
   untCadastroPeriodoTipo in 'Cadastros\untCadastroPeriodoTipo.pas' {frmCadastroPeriodoTipo},
-  untCadastroTurma in 'Cadastros\untCadastroTurma.pas' {frmCadastroTurma};
+  untCadastroTurma in 'Cadastros\untCadastroTurma.pas' {frmCadastroTurma},
+  untAgendaEnvio in 'untAgendaEnvio.pas' {frmAgendaEnvio};
 
 {$R *.res}
 

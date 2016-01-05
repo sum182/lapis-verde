@@ -36,9 +36,6 @@ type
     dsTurmaAluno: TDataSource;
     cxGroupBox3: TcxGroupBox;
     chklstAlunos: TsmCheckListBox;
-    cxButton1: TcxButton;
-    DBGrid1: TDBGrid;
-    cxButton2: TcxButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -52,10 +49,9 @@ type
     procedure AcApplyUpdateExecute(Sender: TObject);
     procedure AcCancelarExecute(Sender: TObject);
     procedure AcNovoExecute(Sender: TObject);
-    procedure fdqTurmaAlunoNewRecord(DataSet: TDataSet);
-    procedure fdqTurmaAlunoBeforeDelete(DataSet: TDataSet);
     procedure fdqTurmaAlunoBeforeEdit(DataSet: TDataSet);
     procedure fdqTurmaAlunoBeforeInsert(DataSet: TDataSet);
+    procedure fdqTurmaAlunoBeforeDelete(DataSet: TDataSet);
   private
     procedure OpenQuerys;
     procedure SetCheckLisBoxtAlunos;
@@ -76,7 +72,7 @@ uses untDM, untFuncoes, smDBFireDac;
 
 procedure TfrmCadastroTurma.AcApplyUpdateExecute(Sender: TObject);
 begin
-//  SalvarCheckListBoxAlunos;
+  SalvarCheckListBoxAlunos;
   inherited;
 end;
 
@@ -156,12 +152,6 @@ begin
   SalvarQueryMaster(fdqCad);
 end;
 
-procedure TfrmCadastroTurma.fdqTurmaAlunoNewRecord(DataSet: TDataSet);
-begin
-  inherited;
-//  fdqTurmaAluno.FieldByName('turma_id').AsInteger:=fdqCad.FieldByName('turma_id').AsInteger;
-end;
-
 procedure TfrmCadastroTurma.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
@@ -205,6 +195,7 @@ begin
   try
     Screen.Cursor := crSQLWait;
 
+    fdqTurmaAluno.First;
     while not(fdqTurmaAluno.Eof) do
       fdqTurmaAluno.Delete;
 
@@ -215,12 +206,12 @@ begin
       begin
         AlunoId:= Integer(chklstAlunos.Items.Objects[i]);
         //if not(fdqTurmaAluno.FindKey([AlunoId])) and (AlunoId > 0) then
-        //begin
+        if (AlunoId > 0) then
+        begin
           fdqTurmaAluno.Append;
           fdqTurmaAluno.FieldByName('aluno_id').AsInteger:=AlunoId;
-          fdqTurmaAluno.FieldByName('turma_id').AsInteger:=fdqCad.FieldByName('turma_id').AsInteger;
           fdqTurmaAluno.Post;
-        //end;
+        end;
       end;
 
   finally

@@ -1,56 +1,36 @@
 inherited frmCadastroTurma: TfrmCadastroTurma
   Caption = 'Cadastro de Turmas'
-  ClientHeight = 689
-  ClientWidth = 1046
+  ClientHeight = 679
+  ClientWidth = 1040
   OnCloseQuery = FormCloseQuery
-  ExplicitWidth = 1062
-  ExplicitHeight = 727
+  ExplicitWidth = 1056
+  ExplicitHeight = 717
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
-    Width = 1046
-    ExplicitWidth = 1046
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 14
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 70
-    end
+    Width = 1040
+    ExplicitWidth = 1040
   end
   inherited PaCoPadrao: TPageControl
-    Width = 1046
-    Height = 648
+    Width = 1040
+    Height = 638
     ActivePage = TaShCadastro
     ExplicitWidth = 1046
     ExplicitHeight = 648
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1038
       ExplicitHeight = 620
       inherited grbxPesquisa: TGroupBox
-        Width = 1038
+        Width = 1032
         ExplicitWidth = 1038
         inherited ToolBar1: TToolBar
-          Width = 1028
-          ExplicitWidth = 1028
-          inherited ToolButton3: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton4: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton5: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton6: TToolButton
-            ExplicitWidth = 24
-          end
+          Width = 1022
+          ExplicitWidth = 1022
         end
       end
       inherited grPesquisa: TsmDBGrid
-        Width = 1038
-        Height = 505
+        Width = 1032
+        Height = 495
         DataSource = dsBusca
         Columns = <
           item
@@ -89,15 +69,14 @@ inherited frmCadastroTurma: TfrmCadastroTurma
           end>
       end
       inherited stbrConsulta: TStatusBar
-        Top = 602
-        Width = 1038
+        Top = 592
+        Width = 1032
         ExplicitTop = 602
         ExplicitWidth = 1038
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 8
-      ExplicitTop = 24
+      ExplicitLeft = 4
       ExplicitWidth = 1038
       ExplicitHeight = 620
       object Label3: TLabel
@@ -174,47 +153,10 @@ inherited frmCadastroTurma: TfrmCadastroTurma
           KeyFieldAlias = 'aluno_id'
           TextField = 'nome_completo'
           DataSet = fdqAlunos
-          ExplicitLeft = 145
-          ExplicitTop = -96
-          ExplicitWidth = 217
-          ExplicitHeight = 304
         end
-      end
-      object cxButton1: TcxButton
-        Left = 446
-        Top = 340
-        Width = 75
-        Height = 25
-        Caption = 'Salvar'
-        TabOrder = 4
-        OnClick = cxButton1Click
-      end
-      object DBGrid1: TDBGrid
-        Left = 584
-        Top = 228
-        Width = 320
-        Height = 213
-        DataSource = dsTurmaAluno
-        TabOrder = 5
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-      end
-      object cxButton2: TcxButton
-        Left = 446
-        Top = 292
-        Width = 75
-        Height = 25
-        Caption = 'Setar'
-        TabOrder = 6
-        OnClick = cxButton2Click
       end
     end
     inherited TaShRelatorio: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1038
       ExplicitHeight = 620
     end
@@ -297,7 +239,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 536
     Bitmap = {
-      494C01010B000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -704,7 +646,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 584
     Bitmap = {
-      494C01010B000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1169,7 +1111,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Top = 160
   end
   object fdqAlunos: TFDQuery
-    Active = True
     BeforeOpen = fdqAlunosBeforeOpen
     Connection = DM.FDConnection
     SQL.Strings = (
@@ -1199,7 +1140,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     BeforeInsert = fdqTurmaAlunoBeforeInsert
     BeforeEdit = fdqTurmaAlunoBeforeEdit
     BeforeDelete = fdqTurmaAlunoBeforeDelete
-    OnNewRecord = fdqTurmaAlunoNewRecord
     CachedUpdates = True
     IndexFieldNames = 'turma_id'
     MasterSource = dsCad
@@ -1208,7 +1148,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     SchemaAdapter = FDSchemaAdapter
     FetchOptions.AssignedValues = [evCache, evDetailCascade]
     FetchOptions.DetailCascade = True
-    UpdateOptions.AutoIncFields = 'turma_id'
     SQL.Strings = (
       #10'select '#10'  ta.*'
       ''

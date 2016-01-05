@@ -11,12 +11,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   inherited ToBaCadastro: TToolBar
     Width = 1230
     ExplicitWidth = 1230
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 14
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 70
-    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1230
@@ -25,8 +19,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     ExplicitWidth = 1230
     ExplicitHeight = 483
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1222
       ExplicitHeight = 455
       inherited grbxPesquisa: TGroupBox
@@ -35,18 +27,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
         inherited ToolBar1: TToolBar
           Width = 1212
           ExplicitWidth = 1212
-          inherited ToolButton3: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton4: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton5: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton6: TToolButton
-            ExplicitWidth = 24
-          end
         end
       end
       inherited grPesquisa: TsmDBGrid
@@ -123,8 +103,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1222
       ExplicitHeight = 455
       object cxPageControl1: TcxPageControl
@@ -495,8 +473,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end
     end
     inherited TaShRelatorio: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1222
       ExplicitHeight = 455
     end

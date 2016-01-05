@@ -75,6 +75,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     TabOrder = 2
     TabStop = False
     object dxRibbon1TabAgenda: TdxRibbonTab
+      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -83,7 +84,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Index = 0
     end
     object dxRibbon1TabCadastros: TdxRibbonTab
-      Active = True
       Caption = 'Cadastros'
       Groups = <
         item
@@ -46703,7 +46703,11 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       FloatTop = 8
       FloatClientWidth = 0
       FloatClientHeight = 0
-      ItemLinks = <>
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton40'
+        end>
       OneOnRow = True
       Row = 0
       UseOwnFont = False
@@ -50183,6 +50187,13 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Hint = 'Turma'
       Visible = ivAlways
       OnClick = dxBarLargeButton39Click
+    end
+    object dxBarLargeButton40: TdxBarLargeButton
+      Caption = 'Envio de Agenda'
+      Category = 0
+      Hint = 'Envio de Agenda'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton40Click
     end
     object dxBarGroup1: TdxBarGroup
       Items = ()
