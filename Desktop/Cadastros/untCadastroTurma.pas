@@ -18,7 +18,7 @@ uses
   dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, cxMemo, cxDBEdit, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit,
   cxDBLookupEdit, cxDBLookupComboBox, Vcl.DBCtrls, cxListBox, Vcl.CheckLst, smCheckListBox, cxStyles, dxSkinscxPCPainter,
   cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator, cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGridLevel, cxClasses, cxGridCustomView, cxGrid, cxGroupBox, Vcl.Menus, cxButtons;
+  cxGridLevel, cxClasses, cxGridCustomView, cxGrid, cxGroupBox, Vcl.Menus, cxButtons, cxCheckListBox, cxDBCheckListBox;
 
 type
   TfrmCadastroTurma = class(TfrmCadFD)
@@ -32,19 +32,12 @@ type
     dsPeriodo: TDataSource;
     fdqAlunos: TFDQuery;
     dsAlunos: TDataSource;
-    cxGroupBox1: TcxGroupBox;
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1Level1: TcxGridLevel;
-    cxGrid1: TcxGrid;
-    cxGrid1DBTableView1nome_completo: TcxGridDBColumn;
     fdqTurmaAluno: TFDQuery;
-    cxGroupBox2: TcxGroupBox;
-    cxGrid2: TcxGrid;
-    cxGridDBTableView1: TcxGridDBTableView;
-    cxGridDBColumn1: TcxGridDBColumn;
-    cxGridLevel1: TcxGridLevel;
     dsTurmaAluno: TDataSource;
+    cxGroupBox3: TcxGroupBox;
+    chklstAlunos: TsmCheckListBox;
     cxButton1: TcxButton;
+    DBGrid1: TDBGrid;
     cxButton2: TcxButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure fdqCadNewRecord(DataSet: TDataSet);
@@ -53,9 +46,21 @@ type
     procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
     procedure fdqCadBeforeInsert(DataSet: TDataSet);
     procedure fdqAlunosBeforeOpen(DataSet: TDataSet);
+    procedure fdqCadAfterOpen(DataSet: TDataSet);
+    procedure cxButton2Click(Sender: TObject);
     procedure cxButton1Click(Sender: TObject);
+    procedure AcApplyUpdateExecute(Sender: TObject);
+    procedure AcCancelarExecute(Sender: TObject);
+    procedure AcNovoExecute(Sender: TObject);
+    procedure fdqTurmaAlunoNewRecord(DataSet: TDataSet);
+    procedure fdqTurmaAlunoBeforeDelete(DataSet: TDataSet);
+    procedure fdqTurmaAlunoBeforeEdit(DataSet: TDataSet);
+    procedure fdqTurmaAlunoBeforeInsert(DataSet: TDataSet);
   private
     procedure OpenQuerys;
+    procedure SetCheckLisBoxtAlunos;
+    procedure SalvarCheckListBoxAlunos;
+
   public
     { Public declarations }
   end;
@@ -67,15 +72,36 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, untFuncoes;
+uses untDM, untFuncoes, smDBFireDac;
+
+procedure TfrmCadastroTurma.AcApplyUpdateExecute(Sender: TObject);
+begin
+//  SalvarCheckListBoxAlunos;
+  inherited;
+end;
+
+procedure TfrmCadastroTurma.AcCancelarExecute(Sender: TObject);
+begin
+  fdqTurmaAluno.Cancel;
+  fdqTurmaAluno.CancelUpdates;
+  inherited;
+end;
+
+procedure TfrmCadastroTurma.AcNovoExecute(Sender: TObject);
+begin
+  inherited;
+  fdqCad.FieldByName('nome').FocusControl;
+end;
 
 procedure TfrmCadastroTurma.cxButton1Click(Sender: TObject);
 begin
   inherited;
-  fdqTurmaAluno.Append;
-  fdqTurmaAluno.FieldByName('aluno_id').AsInteger := fdqAlunos.FieldByName('aluno_id').AsInteger;
-  fdqTurmaAluno.Post;
+  SalvarCheckListBoxAlunos;
+end;
 
+procedure TfrmCadastroTurma.cxButton2Click(Sender: TObject);
+begin
+  SetCheckLisBoxtAlunos;
 end;
 
 procedure TfrmCadastroTurma.fdqAlunosBeforeOpen(DataSet: TDataSet);
@@ -90,6 +116,12 @@ begin
   SetIdEscolaParamBusca(fdqBusca);
 end;
 
+procedure TfrmCadastroTurma.fdqCadAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  OpenQuerys;
+end;
+
 procedure TfrmCadastroTurma.fdqCadBeforeInsert(DataSet: TDataSet);
 begin
   inherited;
@@ -100,6 +132,34 @@ procedure TfrmCadastroTurma.fdqCadNewRecord(DataSet: TDataSet);
 begin
   inherited;
   SetIdEscolaCadastro(fdqCad);
+  chklstAlunos.UnchekedAll;
+  SetCheckLisBoxtAlunos;
+end;
+
+
+
+procedure TfrmCadastroTurma.fdqTurmaAlunoBeforeDelete(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroTurma.fdqTurmaAlunoBeforeEdit(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroTurma.fdqTurmaAlunoBeforeInsert(DataSet: TDataSet);
+begin
+  inherited;
+  SalvarQueryMaster(fdqCad);
+end;
+
+procedure TfrmCadastroTurma.fdqTurmaAlunoNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+//  fdqTurmaAluno.FieldByName('turma_id').AsInteger:=fdqCad.FieldByName('turma_id').AsInteger;
 end;
 
 procedure TfrmCadastroTurma.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -131,7 +191,73 @@ begin
   fdqTurmaAluno.Close;
   fdqTurmaAluno.Open;
 
+  chklstAlunos.FillDataSet;
+  chklstAlunos.UnchekedAll;
 
+  SetCheckLisBoxtAlunos;
+end;
+
+procedure TfrmCadastroTurma.SalvarCheckListBoxAlunos;
+var
+  i:integer;
+  AlunoId:integer;
+begin
+  try
+    Screen.Cursor := crSQLWait;
+
+    while not(fdqTurmaAluno.Eof) do
+      fdqTurmaAluno.Delete;
+
+    //fdqTurmaAluno.IndexFieldNames:='aluno_id';
+
+    for i := 0 to chklstAlunos.Items.Count - 1 do
+      if chklstAlunos.Checked[i]Then
+      begin
+        AlunoId:= Integer(chklstAlunos.Items.Objects[i]);
+        //if not(fdqTurmaAluno.FindKey([AlunoId])) and (AlunoId > 0) then
+        //begin
+          fdqTurmaAluno.Append;
+          fdqTurmaAluno.FieldByName('aluno_id').AsInteger:=AlunoId;
+          fdqTurmaAluno.FieldByName('turma_id').AsInteger:=fdqCad.FieldByName('turma_id').AsInteger;
+          fdqTurmaAluno.Post;
+        //end;
+      end;
+
+  finally
+    Screen.Cursor := crDefault;
+    //fdqTurmaAluno.IndexFieldNames:='';
+  end;
+
+end;
+
+procedure TfrmCadastroTurma.SetCheckLisBoxtAlunos;
+var
+  i:integer;
+  AlunoId:integer;
+begin
+  try
+    chklstAlunos.UnchekedAll;
+
+    fdqTurmaAluno.First;
+    //fdqTurmaAluno.IndexFieldNames:='aluno_id';
+    while not (fdqTurmaAluno.Eof) do
+    begin
+      for i := 0 to chklstAlunos.Items.Count - 1 do
+      begin
+        AlunoId:= Integer(chklstAlunos.Items.Objects[i]);
+
+        if fdqTurmaAluno.FieldByName('aluno_id').AsInteger = AlunoId then
+        begin
+          chklstAlunos.Checked[i]:=True;
+          Continue;
+        end;
+      end;
+      fdqTurmaAluno.Next;
+    end;
+  finally
+    Screen.Cursor := crDefault;
+    //fdqTurmaAluno.IndexFieldNames:='';
+  end;
 end;
 
 end.

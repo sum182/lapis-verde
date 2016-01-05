@@ -155,92 +155,61 @@ inherited frmCadastroTurma: TfrmCadastroTurma
         TabOrder = 1
         Width = 169
       end
-      object cxGroupBox1: TcxGroupBox
+      object cxGroupBox3: TcxGroupBox
         Left = 32
-        Top = 232
-        Caption = 'Alunos Dispon'#237'veis'
+        Top = 210
+        Caption = 'Alunos'
         TabOrder = 3
-        Height = 321
-        Width = 244
-        object cxGrid1: TcxGrid
+        Height = 393
+        Width = 378
+        object chklstAlunos: TsmCheckListBox
           Left = 2
           Top = 18
-          Width = 240
-          Height = 301
+          Width = 374
+          Height = 373
           Align = alClient
+          ItemHeight = 13
           TabOrder = 0
-          object cxGrid1DBTableView1: TcxGridDBTableView
-            Navigator.Buttons.CustomButtons = <>
-            DataController.DataSource = dsAlunos
-            DataController.Summary.DefaultGroupSummaryItems = <>
-            DataController.Summary.FooterSummaryItems = <>
-            DataController.Summary.SummaryGroups = <>
-            OptionsData.Deleting = False
-            OptionsData.Editing = False
-            OptionsData.Inserting = False
-            OptionsSelection.MultiSelect = True
-            OptionsView.GroupByBox = False
-            object cxGrid1DBTableView1nome_completo: TcxGridDBColumn
-              Caption = 'Aluno'
-              DataBinding.FieldName = 'nome_completo'
-            end
-          end
-          object cxGrid1Level1: TcxGridLevel
-            GridView = cxGrid1DBTableView1
-          end
-        end
-      end
-      object cxGroupBox2: TcxGroupBox
-        Left = 392
-        Top = 232
-        Caption = 'Alunos da Turma'
-        TabOrder = 4
-        Height = 321
-        Width = 244
-        object cxGrid2: TcxGrid
-          Left = 2
-          Top = 18
-          Width = 240
-          Height = 301
-          Align = alClient
-          TabOrder = 0
-          object cxGridDBTableView1: TcxGridDBTableView
-            Navigator.Buttons.CustomButtons = <>
-            DataController.DataSource = dsTurmaAluno
-            DataController.Summary.DefaultGroupSummaryItems = <>
-            DataController.Summary.FooterSummaryItems = <>
-            DataController.Summary.SummaryGroups = <>
-            OptionsData.Deleting = False
-            OptionsData.Editing = False
-            OptionsData.Inserting = False
-            OptionsSelection.MultiSelect = True
-            OptionsView.GroupByBox = False
-            object cxGridDBColumn1: TcxGridDBColumn
-              Caption = 'Aluno'
-              DataBinding.FieldName = 'nome_completo'
-            end
-          end
-          object cxGridLevel1: TcxGridLevel
-            GridView = cxGridDBTableView1
-          end
+          KeyField = 'aluno_id'
+          KeyFieldAlias = 'aluno_id'
+          TextField = 'nome_completo'
+          DataSet = fdqAlunos
+          ExplicitLeft = 145
+          ExplicitTop = -96
+          ExplicitWidth = 217
+          ExplicitHeight = 304
         end
       end
       object cxButton1: TcxButton
-        Left = 298
-        Top = 288
+        Left = 446
+        Top = 340
         Width = 75
         Height = 25
-        Caption = '->'
-        TabOrder = 5
+        Caption = 'Salvar'
+        TabOrder = 4
         OnClick = cxButton1Click
       end
+      object DBGrid1: TDBGrid
+        Left = 584
+        Top = 228
+        Width = 320
+        Height = 213
+        DataSource = dsTurmaAluno
+        TabOrder = 5
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
       object cxButton2: TcxButton
-        Left = 298
-        Top = 319
+        Left = 446
+        Top = 292
         Width = 75
         Height = 25
-        Caption = '>>'
+        Caption = 'Setar'
         TabOrder = 6
+        OnClick = cxButton2Click
       end
     end
     inherited TaShRelatorio: TTabSheet
@@ -1139,9 +1108,14 @@ inherited frmCadastroTurma: TfrmCadastroTurma
       000000000000}
   end
   inherited fdqCad: TFDQuery
+    AfterOpen = fdqCadAfterOpen
     BeforeInsert = fdqCadBeforeInsert
     OnNewRecord = fdqCadNewRecord
+    CachedUpdates = True
+    IndexFieldNames = 'turma_id'
     Connection = DM.FDConnection
+    SchemaAdapter = FDSchemaAdapter
+    UpdateOptions.AutoIncFields = 'turma_id'
     SQL.Strings = (
       'SELECT * FROM turma t'#13#10#10
       'where t.turma_id = :turma_id')
@@ -1152,7 +1126,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
         Name = 'TURMA_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 12
       end>
   end
   inherited dsCad: TDataSource
@@ -1195,6 +1169,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Top = 160
   end
   object fdqAlunos: TFDQuery
+    Active = True
     BeforeOpen = fdqAlunosBeforeOpen
     Connection = DM.FDConnection
     SQL.Strings = (
@@ -1221,20 +1196,23 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Top = 160
   end
   object fdqTurmaAluno: TFDQuery
+    BeforeInsert = fdqTurmaAlunoBeforeInsert
+    BeforeEdit = fdqTurmaAlunoBeforeEdit
+    BeforeDelete = fdqTurmaAlunoBeforeDelete
+    OnNewRecord = fdqTurmaAlunoNewRecord
+    CachedUpdates = True
+    IndexFieldNames = 'turma_id'
     MasterSource = dsCad
     MasterFields = 'turma_id'
     Connection = DM.FDConnection
+    SchemaAdapter = FDSchemaAdapter
+    FetchOptions.AssignedValues = [evCache, evDetailCascade]
+    FetchOptions.DetailCascade = True
+    UpdateOptions.AutoIncFields = 'turma_id'
     SQL.Strings = (
-      #10'select '#10'  ta.*,'#10' '
-      
-        '         concat(coalesce(a.nome,'#39#39'),'#39' '#39', coalesce(a.sobrenome,'#39#39 +
-        ')) as nome_completo'#13#10#10
-      ''
+      #10'select '#10'  ta.*'
       ''
       'from turma_aluno ta'#13#10#10
-      ''
-      ''
-      'inner join aluno a on (a.aluno_id = ta.aluno_id)'#13#10#10
       ''
       ''
       'where ta.turma_id = :turma_id')
@@ -1243,9 +1221,10 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     ParamData = <
       item
         Name = 'TURMA_ID'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = Null
+        Size = 4
+        Value = 12
       end>
   end
   object dsTurmaAluno: TDataSource
