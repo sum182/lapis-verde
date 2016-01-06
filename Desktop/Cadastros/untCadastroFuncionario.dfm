@@ -10,6 +10,12 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
   inherited ToBaCadastro: TToolBar
     Width = 1223
     ExplicitWidth = 1223
+    inherited ToolButton1: TToolButton
+      ExplicitWidth = 14
+    end
+    inherited btnLocalizarTodosRegistros: TToolButton
+      ExplicitWidth = 70
+    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1223
@@ -18,6 +24,8 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     ExplicitWidth = 1223
     ExplicitHeight = 630
     inherited TaShConsulta: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 1215
       ExplicitHeight = 602
       inherited grbxPesquisa: TGroupBox
@@ -26,6 +34,18 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
         inherited ToolBar1: TToolBar
           Width = 1205
           ExplicitWidth = 1205
+          inherited ToolButton3: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton4: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton5: TToolButton
+            ExplicitWidth = 24
+          end
+          inherited ToolButton6: TToolButton
+            ExplicitWidth = 24
+          end
         end
       end
       inherited grPesquisa: TsmDBGrid
@@ -107,6 +127,8 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       end
     end
     inherited TaShCadastro: TTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 15
       ExplicitWidth = 1215
       ExplicitHeight = 602
       object Label3: TLabel
@@ -148,7 +170,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       end
       object Label9: TLabel
         Left = 32
-        Top = 275
+        Top = 323
         Width = 93
         Height = 13
         Caption = 'Informa'#231#245'es Gerais'
@@ -168,6 +190,14 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
         Height = 13
         Caption = 'Tipo de Funcion'#225'rio'
         FocusControl = cxDBTextEdit2
+      end
+      object Label10: TLabel
+        Left = 32
+        Top = 267
+        Width = 30
+        Height = 13
+        Caption = 'Senha'
+        FocusControl = cxDBTextEdit4
       end
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 32
@@ -226,7 +256,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       end
       object cxDBMemo1: TcxDBMemo
         Left = 32
-        Top = 294
+        Top = 342
         DataBinding.DataField = 'informacoes_gerais'
         DataBinding.DataSource = dsCad
         TabOrder = 7
@@ -269,8 +299,69 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
         TabOrder = 4
         Width = 185
       end
+      object cxDBTextEdit4: TcxDBTextEdit
+        Left = 32
+        Top = 286
+        DataBinding.DataField = 'senha'
+        DataBinding.DataSource = dsCad
+        Properties.EchoMode = eemPassword
+        TabOrder = 9
+        Width = 185
+      end
+      object cxDBTextEdit5: TcxDBTextEdit
+        Left = 592
+        Top = 84
+        DataBinding.DataField = 'senha'
+        DataBinding.DataSource = dsCad
+        TabOrder = 10
+        Width = 185
+      end
+      object Button1: TButton
+        Left = 880
+        Top = 149
+        Width = 75
+        Height = 25
+        Caption = 'cript'
+        TabOrder = 11
+        OnClick = Button1Click
+      end
+      object cxTextEdit2: TcxTextEdit
+        Left = 596
+        Top = 195
+        TabOrder = 12
+        Width = 121
+      end
+      object Button2: TButton
+        Left = 880
+        Top = 182
+        Width = 75
+        Height = 25
+        Caption = 'decript'
+        TabOrder = 13
+        OnClick = Button2Click
+      end
+      object cxTextEdit4: TcxTextEdit
+        Left = 740
+        Top = 195
+        TabOrder = 14
+        Width = 121
+      end
+      object cxTextEdit1: TcxTextEdit
+        Left = 596
+        Top = 151
+        TabOrder = 15
+        Width = 121
+      end
+      object cxTextEdit3: TcxTextEdit
+        Left = 740
+        Top = 151
+        TabOrder = 16
+        Width = 121
+      end
     end
     inherited TaShRelatorio: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 1215
       ExplicitHeight = 602
     end
@@ -378,7 +469,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Left = 1000
     Top = 352
     Bitmap = {
-      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -785,7 +876,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Left = 1000
     Top = 400
     Bitmap = {
-      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1266,6 +1357,12 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
       AutoGenerateValue = arDefault
       FieldName = 'escola_id'
       Origin = 'escola_id'
+    end
+    object fdqCadsenha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'senha'
+      Origin = 'senha'
+      Size = 150
     end
   end
   inherited dsCad: TDataSource

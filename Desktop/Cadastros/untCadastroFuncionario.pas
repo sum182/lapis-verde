@@ -50,12 +50,24 @@ type
     fdqFuncionarioTipo: TFDQuery;
     dsFuncionarioTipo: TDataSource;
     Label5: TLabel;
+    fdqCadsenha: TStringField;
+    Label10: TLabel;
+    cxDBTextEdit4: TcxDBTextEdit;
+    cxDBTextEdit5: TcxDBTextEdit;
+    Button1: TButton;
+    cxTextEdit2: TcxTextEdit;
+    Button2: TButton;
+    cxTextEdit4: TcxTextEdit;
+    cxTextEdit1: TcxTextEdit;
+    cxTextEdit3: TcxTextEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure AcNovoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     procedure OpenQuerys;
   public
@@ -69,12 +81,25 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, untFuncoes;
+uses untDM, untFuncoes, smCrypt;
 
 procedure TfrmCadastroFuncionario.AcNovoExecute(Sender: TObject);
 begin
   inherited;
   fdqCadnome.FocusControl;
+end;
+
+procedure TfrmCadastroFuncionario.Button1Click(Sender: TObject);
+begin
+  inherited;
+  cxTextEdit3.Text:= smCrypt.Encrypt(cxTextEdit1.Text);
+
+end;
+
+procedure TfrmCadastroFuncionario.Button2Click(Sender: TObject);
+begin
+  inherited;
+  cxTextEdit4.Text:= smCrypt.Decrypt(cxTextEdit2.Text);
 end;
 
 procedure TfrmCadastroFuncionario.fdqBuscaBeforeOpen(DataSet: TDataSet);
