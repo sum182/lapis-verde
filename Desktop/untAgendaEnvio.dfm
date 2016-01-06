@@ -1,9 +1,10 @@
 object frmAgendaEnvio: TfrmAgendaEnvio
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'Agenda'
-  ClientHeight = 472
-  ClientWidth = 1091
+  ClientHeight = 449
+  ClientWidth = 584
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,117 +12,145 @@ object frmAgendaEnvio: TfrmAgendaEnvio
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox
-    Left = 8
-    Top = 124
-    Align = alCustom
+    Left = 0
+    Top = 71
+    Align = alClient
     Caption = 'Mensagem'
     TabOrder = 0
-    Height = 249
-    Width = 625
+    ExplicitLeft = 8
+    ExplicitTop = 119
+    ExplicitWidth = 625
+    ExplicitHeight = 249
+    Height = 330
+    Width = 584
     object Label3: TLabel
-      Left = 24
-      Top = 82
+      Left = 16
+      Top = 73
       Width = 46
       Height = 13
       Caption = 'Descri'#231#227'o'
-      FocusControl = cxDBMemo1
+      FocusControl = memoDescricao
     end
     object Label2: TLabel
-      Left = 24
+      Left = 16
       Top = 16
       Width = 26
       Height = 13
       Caption = 'T'#237'tulo'
-      FocusControl = cxDBTextEdit1
+      FocusControl = edtTitulo
     end
-    object cxDBMemo1: TcxDBMemo
-      Left = 24
-      Top = 101
+    object memoDescricao: TcxDBMemo
+      Left = 16
+      Top = 90
       DataBinding.DataField = 'descricao'
       DataBinding.DataSource = dsAgenda
+      Properties.OnChange = memoDescricaoPropertiesChange
       TabOrder = 1
-      Height = 132
+      Height = 225
       Width = 545
     end
-    object cxDBTextEdit1: TcxDBTextEdit
-      Left = 24
-      Top = 35
+    object edtTitulo: TcxDBTextEdit
+      Left = 16
+      Top = 33
       DataBinding.DataField = 'titulo'
       DataBinding.DataSource = dsAgenda
+      Properties.OnChange = edtTituloPropertiesChange
       TabOrder = 0
       Width = 545
     end
   end
   object cxGroupBox2: TcxGroupBox
-    Left = 8
-    Top = 358
-    Align = alCustom
+    Left = 0
+    Top = 401
+    Align = alBottom
     TabOrder = 1
-    Height = 65
-    Width = 625
-    object cxButton1: TcxButton
-      Left = 442
-      Top = 21
-      Width = 75
+    ExplicitTop = 400
+    ExplicitWidth = 660
+    Height = 48
+    Width = 584
+    object btnEnviar: TcxButton
+      Left = 400
+      Top = 16
+      Width = 78
       Height = 25
       Align = alCustom
       Caption = 'Enviar'
       Default = True
+      OptionsImage.ImageIndex = 32
+      OptionsImage.Images = DM.ImageList1
       TabOrder = 0
-      OnClick = cxButton1Click
+      OnClick = btnEnviarClick
     end
-    object cxButton2: TcxButton
-      Left = 523
-      Top = 21
-      Width = 75
+    object btnCancelar: TcxButton
+      Left = 491
+      Top = 16
+      Width = 78
       Height = 25
       Cancel = True
       Caption = 'Cancelar'
       TabOrder = 1
-      OnClick = cxButton2Click
+      OnClick = btnCancelarClick
+    end
+    object lblStatus: TcxLabel
+      Left = 16
+      Top = 16
+      Caption = 'Status de Envio'
+      ParentFont = False
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clNavy
+      Style.Font.Height = -11
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
     end
   end
   object cxGroupBox3: TcxGroupBox
-    Left = 8
-    Top = 8
+    Left = 0
+    Top = 0
+    Align = alTop
     Caption = 'Destino'
     TabOrder = 2
-    Height = 105
-    Width = 657
+    ExplicitWidth = 595
+    Height = 71
+    Width = 584
     object cxLabel1: TcxLabel
-      Left = 40
-      Top = 32
+      Left = 16
+      Top = 17
       Caption = 'Tipo de Envio'
     end
-    object cxComboBox1: TcxComboBox
-      Left = 40
-      Top = 55
-      Properties.DropDownListStyle = lsFixedList
-      Properties.Items.Strings = (
-        'Aluno'
-        'Turma')
-      TabOrder = 1
-      Text = 'Aluno'
-      Width = 137
-    end
-    object cxLabel2: TcxLabel
-      Left = 224
-      Top = 33
+    object lblAluno: TcxLabel
+      Left = 200
+      Top = 18
       Caption = 'Aluno'
     end
-    object cxLabel3: TcxLabel
-      Left = 442
-      Top = 32
+    object lblTurma: TcxLabel
+      Left = 326
+      Top = 17
       Caption = 'Turma'
     end
-    object cxLookupComboBox2: TcxLookupComboBox
-      Left = 442
-      Top = 55
+    object cmbbxAluno: TcxLookupComboBox
+      Left = 200
+      Top = 36
+      Properties.DropDownListStyle = lsFixedList
+      Properties.KeyFieldNames = 'aluno_id'
+      Properties.ListColumns = <
+        item
+          FieldName = 'nome_completo'
+        end>
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListSource = dsAluno
+      TabOrder = 3
+      Width = 200
+    end
+    object cmbbxTurma: TcxLookupComboBox
+      Left = 326
+      Top = 36
       Properties.DropDownListStyle = lsFixedList
       Properties.KeyFieldNames = 'turma_id'
       Properties.ListColumns = <
@@ -131,48 +160,20 @@ object frmAgendaEnvio: TfrmAgendaEnvio
       Properties.ListOptions.ShowHeader = False
       Properties.ListSource = dsTurma
       TabOrder = 4
-      Width = 183
+      Width = 200
     end
-  end
-  object DBGrid1: TDBGrid
-    Left = 671
-    Top = 176
-    Width = 320
-    Height = 120
-    DataSource = dsAluno
-    TabOrder = 3
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-  end
-  object cxLookupComboBox1: TcxLookupComboBox
-    Left = 232
-    Top = 64
-    Properties.DropDownListStyle = lsFixedList
-    Properties.KeyFieldNames = 'aluno_id'
-    Properties.ListColumns = <
-      item
-        FieldName = 'nome_completo'
-      end>
-    Properties.ListOptions.ShowHeader = False
-    Properties.ListSource = dsAluno
-    TabOrder = 4
-    Width = 185
-  end
-  object DBGrid2: TDBGrid
-    Left = 664
-    Top = 344
-    Width = 320
-    Height = 120
-    DataSource = dsTurma
-    TabOrder = 5
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
+    object cmbbxTipo: TcxComboBox
+      Left = 16
+      Top = 36
+      Properties.DropDownListStyle = lsFixedList
+      Properties.Items.Strings = (
+        'Aluno'
+        'Turma')
+      Properties.OnChange = cmbbxTipoPropertiesChange
+      TabOrder = 5
+      Text = 'Aluno'
+      Width = 161
+    end
   end
   object fdqAgenda: TFDQuery
     BeforeOpen = fdqAgendaBeforeOpen
@@ -199,6 +200,7 @@ object frmAgendaEnvio: TfrmAgendaEnvio
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdqAgendatitulo: TStringField
       AutoGenerateValue = arDefault
@@ -322,6 +324,18 @@ object frmAgendaEnvio: TfrmAgendaEnvio
         ParamType = ptInput
         Value = Null
       end>
+    object fdqAgendaAlunoagenda_id: TIntegerField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqAgendaAlunoaluno_id: TIntegerField
+      FieldName = 'aluno_id'
+      Origin = 'aluno_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
   end
   object dsAgendaAluno: TDataSource
     DataSet = fdqAgendaAluno

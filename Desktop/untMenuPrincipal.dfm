@@ -46695,7 +46695,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       WholeRow = False
     end
     object dxBarManager1Bar1: TdxBar
-      Caption = 'Custom 5'
       CaptionButtons = <>
       DockedLeft = 0
       DockedTop = 0

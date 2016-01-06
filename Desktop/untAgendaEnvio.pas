@@ -29,44 +29,54 @@ type
     fdqAgendaagenda_tipo_id: TSmallintField;
     fdqAgendafuncionario_id: TIntegerField;
     cxGroupBox1: TcxGroupBox;
-    cxDBMemo1: TcxDBMemo;
+    memoDescricao: TcxDBMemo;
     Label3: TLabel;
-    cxDBTextEdit1: TcxDBTextEdit;
+    edtTitulo: TcxDBTextEdit;
     Label2: TLabel;
     cxGroupBox2: TcxGroupBox;
-    cxButton1: TcxButton;
-    cxButton2: TcxButton;
+    btnEnviar: TcxButton;
+    btnCancelar: TcxButton;
     fdqAgendaescola_id: TIntegerField;
     cxGroupBox3: TcxGroupBox;
     cxLabel1: TcxLabel;
-    cxComboBox1: TcxComboBox;
     fdqTurma: TFDQuery;
     fdqAluno: TFDQuery;
     dsAluno: TDataSource;
     dsTurma: TDataSource;
     dsTurmaAluno: TDataSource;
     fdqTurmaAluno: TFDQuery;
-    cxLabel2: TcxLabel;
-    cxLabel3: TcxLabel;
+    lblAluno: TcxLabel;
+    lblTurma: TcxLabel;
     fdqAgendaAluno: TFDQuery;
     dsAgendaAluno: TDataSource;
-    DBGrid1: TDBGrid;
-    cxLookupComboBox1: TcxLookupComboBox;
-    cxLookupComboBox2: TcxLookupComboBox;
-    DBGrid2: TDBGrid;
+    fdqAgendaAlunoagenda_id: TIntegerField;
+    fdqAgendaAlunoaluno_id: TIntegerField;
+    cmbbxAluno: TcxLookupComboBox;
+    cmbbxTurma: TcxLookupComboBox;
+    cmbbxTipo: TcxComboBox;
+    lblStatus: TcxLabel;
     procedure FormShow(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure cxButton1Click(Sender: TObject);
-    procedure cxButton2Click(Sender: TObject);
+    procedure btnEnviarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
     procedure fdqAgendaNewRecord(DataSet: TDataSet);
     procedure fdqAgendaBeforeOpen(DataSet: TDataSet);
     procedure fdqAlunoBeforeOpen(DataSet: TDataSet);
     procedure fdqTurmaBeforeOpen(DataSet: TDataSet);
+    procedure cmbbxTipoPropertiesChange(Sender: TObject);
+    procedure edtTituloPropertiesChange(Sender: TObject);
+    procedure memoDescricaoPropertiesChange(Sender: TObject);
   private
     procedure OpenQuerys;
     procedure NovaAgenda;
     procedure EnviarAgenda;
     procedure SetDadosAgenda;
+    procedure SetAgendaAluno;
+    procedure ValidarEnvio;
+    procedure ViewTipoEnvio;
+    procedure SetPositionFields;
+    procedure SetStateButtons;
+    procedure SetStatus(Mensagem: String);
   public
     { Public declarations }
   end;
@@ -87,8 +97,17 @@ end;
 
 procedure TfrmAgendaEnvio.FormShow(Sender: TObject);
 begin
+  SetPositionFields;
+  ViewTipoEnvio;
   OpenQuerys;
   NovaAgenda;
+  SetStateButtons;
+  lblStatus.Visible := False;
+end;
+
+procedure TfrmAgendaEnvio.memoDescricaoPropertiesChange(Sender: TObject);
+begin
+  SetStateButtons;
 end;
 
 procedure TfrmAgendaEnvio.NovaAgenda;
@@ -116,27 +135,54 @@ begin
   fdqTurmaAluno.Open;
 end;
 
-procedure TfrmAgendaEnvio.cxButton1Click(Sender: TObject);
+procedure TfrmAgendaEnvio.cmbbxTipoPropertiesChange(Sender: TObject);
+begin
+  ViewTipoEnvio;
+end;
+
+procedure TfrmAgendaEnvio.edtTituloPropertiesChange(Sender: TObject);
+begin
+  SetStateButtons;
+end;
+
+procedure TfrmAgendaEnvio.btnEnviarClick(Sender: TObject);
 begin
   EnviarAgenda;
 end;
 
-procedure TfrmAgendaEnvio.cxButton2Click(Sender: TObject);
+procedure TfrmAgendaEnvio.btnCancelarClick(Sender: TObject);
 begin
-  if not(Msg('Deseja cancelar as alterações desta agenda?',mtConfirmacao,Sim_Nao_Cancelar)) then
-    Exit;
+  if (edtTitulo.Text <> '') and (memoDescricao.Text <> '') then
+    if not(Msg('Deseja cancelar as alterações desta agenda?',mtConfirmacao,Sim_Nao_Cancelar)) then
+      Exit;
 
   fdqAgenda.Cancel;
-  NovaAgenda;
+  SetStatus('Mensagem cancelada com suceso!');
+
+  Close;
+  //NovaAgenda;
 end;
 
 procedure TfrmAgendaEnvio.EnviarAgenda;
 begin
+  ValidarEnvio;
+
   try
-    Screen.Cursor:=crSQLWait;
-    SetDadosAgenda;
-    fdqAgenda.Post;
-    NovaAgenda;
+    try
+      Screen.Cursor:=crSQLWait;
+      SetDadosAgenda;
+      fdqAgenda.Post;
+      SetAgendaAluno;
+      NovaAgenda;
+      cmbbxAluno.ItemIndex := -1;
+      cmbbxTurma.ItemIndex := -1;
+      SetStatus('Mensagem enviada com suceso!');
+    except on E:Exception do
+    begin
+      Msg('Erro ao enviar a mensagem!'+ #13 + E.Message,mtErro);
+      SetStatus('Erro ao enviar a mensagem!');
+    end;
+    end;
   finally
     Screen.Cursor:=crDefault;
   end;
@@ -164,9 +210,93 @@ begin
 
 end;
 
+procedure TfrmAgendaEnvio.SetAgendaAluno;
+begin
+
+  //Tipo de Envio - Aluno
+  if cmbbxTipo.ItemIndex = 0 then
+  begin
+    fdqAgendaAluno.Append;
+    fdqAgendaAlunoagenda_id.AsInteger := fdqAgendaagenda_id.AsInteger;
+    fdqAgendaAlunoaluno_id.AsVariant:= cmbbxAluno.EditValue;
+    fdqAgendaAluno.Post;
+  end;
+
+
+  //Tipo de Envio - Turma
+  if cmbbxTipo.ItemIndex = 1 then
+  begin
+    fdqTurmaAluno.Close;
+    fdqTurmaAluno.ParamByName('turma_id').AsInteger := cmbbxTurma.EditValue;
+    fdqTurmaAluno.Open;
+
+    fdqTurmaAluno.First;
+    while not(fdqTurmaAluno.Eof) do
+    begin
+      fdqAgendaAluno.Append;
+      fdqAgendaAlunoagenda_id.AsInteger := fdqAgendaagenda_id.AsInteger;
+      fdqAgendaAlunoaluno_id.AsInteger:= fdqTurmaAluno.FieldByName('aluno_id').AsInteger;
+      fdqAgendaAluno.Post;
+      fdqTurmaAluno.Next;
+    end;
+  end;
+end;
+
 procedure TfrmAgendaEnvio.SetDadosAgenda;
 begin
   fdqAgendadata.AsDateTime:=Now;
+end;
+
+procedure TfrmAgendaEnvio.SetPositionFields;
+begin
+  lblTurma.Top := lblAluno.Top;
+  lblTurma.Left := lblAluno.Left;
+
+  cmbbxTurma.Top:= cmbbxAluno.Top;
+  cmbbxTurma.Left:= cmbbxAluno.Left;
+end;
+
+procedure TfrmAgendaEnvio.SetStateButtons;
+begin
+  btnEnviar.Enabled := ((edtTitulo.Text <> '') and (memoDescricao.Text <> ''));
+end;
+
+procedure TfrmAgendaEnvio.SetStatus(Mensagem: String);
+begin
+  lblStatus.Caption := Mensagem;
+  lblStatus.Visible := True;
+end;
+
+procedure TfrmAgendaEnvio.ValidarEnvio;
+begin
+  //Tipo de Envio - Aluno
+  if cmbbxTipo.ItemIndex = 0 then
+  begin
+    if cmbbxAluno.EditValue <= 0 Then
+    begin
+      cmbbxAluno.SetFocus;
+      raise Exception.Create('È obrigatório selelcionar um aluno!');
+    end;
+  end;
+
+  //Tipo de Envio - Turma
+  if cmbbxTipo.ItemIndex = 1 then
+  begin
+    if cmbbxTurma.EditValue <= 0 Then
+    begin
+      cmbbxTurma.SetFocus;
+      raise Exception.Create('È obrigatório selelcionar uma turma!');
+    end;
+  end;
+end;
+
+procedure TfrmAgendaEnvio.ViewTipoEnvio;
+begin
+  lblAluno.Visible:= (cmbbxTipo.ItemIndex = 0);
+  cmbbxAluno.Visible:= (cmbbxTipo.ItemIndex = 0);
+
+  lblTurma.Visible:= (cmbbxTipo.ItemIndex = 1);
+  cmbbxTurma .Visible:= (cmbbxTipo.ItemIndex = 1);
 end;
 
 end.

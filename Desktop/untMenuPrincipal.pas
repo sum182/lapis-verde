@@ -260,7 +260,13 @@ end;
 
 procedure TfrmMenuPrincipal.dxBarLargeButton40Click(Sender: TObject);
 begin
-  OpenForm(TfrmAgendaEnvio,frmAgendaEnvio);
+//  OpenForm(TfrmAgendaEnvio,frmAgendaEnvio);
+  try
+    Application.CreateForm(TfrmAgendaEnvio, frmAgendaEnvio);
+    frmAgendaEnvio.ShowModal;
+  finally
+    FreeAndNil(frmAgendaEnvio);
+  end;
 end;
 
 procedure TfrmMenuPrincipal.FecharAba1Click(Sender: TObject);
