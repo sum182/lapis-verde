@@ -113,7 +113,7 @@ end;
 procedure TfrmAgendaEnvio.NovaAgenda;
 begin
   fdqAgenda.Append;
-  fdqAgendatitulo.FocusControl;
+  cmbbxTipo.SetFocus;
 end;
 
 procedure TfrmAgendaEnvio.OpenQuerys;
