@@ -52,24 +52,20 @@ type
     Label5: TLabel;
     fdqCadsenha: TStringField;
     Label10: TLabel;
-    cxDBTextEdit4: TcxDBTextEdit;
-    cxDBTextEdit5: TcxDBTextEdit;
-    Button1: TButton;
-    cxTextEdit2: TcxTextEdit;
-    Button2: TButton;
-    cxTextEdit4: TcxTextEdit;
-    cxTextEdit1: TcxTextEdit;
-    cxTextEdit3: TcxTextEdit;
+    edtSenha: TcxTextEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure AcNovoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
-    procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure fdqCadAfterOpen(DataSet: TDataSet);
+    procedure fdqCadBeforePost(DataSet: TDataSet);
+    procedure AcApplyUpdateExecute(Sender: TObject);
   private
     procedure OpenQuerys;
+    procedure ValidarCadastro;
   public
     { Public declarations }
   end;
@@ -81,7 +77,13 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, untFuncoes, smCrypt;
+uses untDM, untFuncoes, smCrypt,System.NetEncoding, smMensagens;
+
+procedure TfrmCadastroFuncionario.AcApplyUpdateExecute(Sender: TObject);
+begin
+  ValidarCadastro;
+  inherited;
+end;
 
 procedure TfrmCadastroFuncionario.AcNovoExecute(Sender: TObject);
 begin
@@ -89,17 +91,11 @@ begin
   fdqCadnome.FocusControl;
 end;
 
-procedure TfrmCadastroFuncionario.Button1Click(Sender: TObject);
-begin
-  inherited;
-  cxTextEdit3.Text:= smCrypt.Encrypt(cxTextEdit1.Text);
-
-end;
-
 procedure TfrmCadastroFuncionario.Button2Click(Sender: TObject);
+var
+str:AnsiString;
 begin
   inherited;
-  cxTextEdit4.Text:= smCrypt.Decrypt(cxTextEdit2.Text);
 end;
 
 procedure TfrmCadastroFuncionario.fdqBuscaBeforeOpen(DataSet: TDataSet);
@@ -109,10 +105,25 @@ begin
 
 end;
 
+procedure TfrmCadastroFuncionario.fdqCadAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  edtSenha.Text:= Decrypt(fdqCadsenha.AsString);
+end;
+
+procedure TfrmCadastroFuncionario.fdqCadBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+
+  if fdqCad.State in [dsInsert,dsEdit] then
+    fdqCadsenha.AsString:= Encrypt(edtSenha.Text);
+end;
+
 procedure TfrmCadastroFuncionario.fdqCadNewRecord(DataSet: TDataSet);
 begin
   inherited;
   fdqCadativo.AsString:= 'S';
+  edtSenha.Clear;
   SetIdEscolaCadastro(fdqCad);
 end;
 
@@ -138,6 +149,16 @@ procedure TfrmCadastroFuncionario.OpenQuerys;
 begin
   fdqFuncionarioTipo.Close;
   fdqFuncionarioTipo.Open
+end;
+
+procedure TfrmCadastroFuncionario.ValidarCadastro;
+begin
+  if (edtSenha.Text = '') then
+  begin
+    Msg('É obrigatório o preenchimento do campo: Senha', mtErro);
+    edtSenha.SetFocus;
+    Abort;
+  end;
 end;
 
 end.

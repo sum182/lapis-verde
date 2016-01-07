@@ -36,12 +36,21 @@ type
     dsTurmaAluno: TDataSource;
     cxGroupBox3: TcxGroupBox;
     chklstAlunos: TsmCheckListBox;
+    fdqFuncionario: TFDQuery;
+    dsFuncionario: TDataSource;
+    cxDBLookupComboBox2: TcxDBLookupComboBox;
+    Label4: TLabel;
+    fdqCadturma_id: TFDAutoIncField;
+    fdqCadnome: TStringField;
+    fdqCadinformacoes_gerais: TMemoField;
+    fdqCadperiodo_tipo_id: TSmallintField;
+    fdqCadescola_id: TIntegerField;
+    fdqCadfuncionario_id: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure fdqBuscaBeforeOpen(DataSet: TDataSet);
-    procedure fdqCadBeforeInsert(DataSet: TDataSet);
     procedure fdqAlunosBeforeOpen(DataSet: TDataSet);
     procedure fdqCadAfterOpen(DataSet: TDataSet);
     procedure cxButton2Click(Sender: TObject);
@@ -52,7 +61,9 @@ type
     procedure fdqTurmaAlunoBeforeEdit(DataSet: TDataSet);
     procedure fdqTurmaAlunoBeforeInsert(DataSet: TDataSet);
     procedure fdqTurmaAlunoBeforeDelete(DataSet: TDataSet);
+    procedure fdqFuncionarioBeforeOpen(DataSet: TDataSet);
   private
+    procedure ValidarCadastro;
     procedure OpenQuerys;
     procedure SetCheckLisBoxtAlunos;
     procedure SalvarCheckListBoxAlunos;
@@ -68,11 +79,13 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, untFuncoes, smDBFireDac;
+uses untDM, untFuncoes, smDBFireDac, smGeral;
 
 procedure TfrmCadastroTurma.AcApplyUpdateExecute(Sender: TObject);
 begin
+  Self.SetFocus;
   SalvarCheckListBoxAlunos;
+  ValidarCadastro;
   inherited;
 end;
 
@@ -118,12 +131,6 @@ begin
   OpenQuerys;
 end;
 
-procedure TfrmCadastroTurma.fdqCadBeforeInsert(DataSet: TDataSet);
-begin
-  inherited;
-  fdqCad.FieldByName('nome').FocusControl;
-end;
-
 procedure TfrmCadastroTurma.fdqCadNewRecord(DataSet: TDataSet);
 begin
   inherited;
@@ -133,6 +140,12 @@ begin
 end;
 
 
+
+procedure TfrmCadastroTurma.fdqFuncionarioBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqFuncionario);
+end;
 
 procedure TfrmCadastroTurma.fdqTurmaAlunoBeforeDelete(DataSet: TDataSet);
 begin
@@ -180,6 +193,9 @@ begin
 
   fdqTurmaAluno.Close;
   fdqTurmaAluno.Open;
+
+  fdqFuncionario.Close;
+  fdqFuncionario.Open;
 
   chklstAlunos.FillDataSet;
   chklstAlunos.UnchekedAll;
@@ -249,6 +265,13 @@ begin
     Screen.Cursor := crDefault;
     //fdqTurmaAluno.IndexFieldNames:='';
   end;
+end;
+
+procedure TfrmCadastroTurma.ValidarCadastro;
+begin
+  ValidarCampo(fdqCadnome);
+  ValidarCampo(fdqCadperiodo_tipo_id);
+  ValidarCampo(fdqCadfuncionario_id);
 end;
 
 end.

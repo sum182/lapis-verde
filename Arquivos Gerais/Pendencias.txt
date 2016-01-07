@@ -1,3 +1,7 @@
+validar senha
+senha obrigatorio
+index senha
+
 Agenda
 Setar funcionario logado
 Setar tipo de agenda
