@@ -36,7 +36,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     ClientRectRight = 872
     ClientRectTop = 4
   end
-  object dxRibbonStatusBar1: TdxRibbonStatusBar
+  object StatusBar: TdxRibbonStatusBar
     Left = 0
     Top = 504
     Width = 876
@@ -75,7 +75,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     TabOrder = 2
     TabStop = False
     object dxRibbon1TabAgenda: TdxRibbonTab
-      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -95,8 +94,9 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         end>
       Index = 1
     end
-    object dxRibbon1TabAdministrador: TdxRibbonTab
-      Caption = 'Administrador'
+    object mnAdministradorSistema: TdxRibbonTab
+      Active = True
+      Caption = 'Administrador Sistema'
       Groups = <
         item
         end

@@ -169,7 +169,7 @@ begin
 
   try
     try
-      Screen.Cursor:=crSQLWait;
+      Screen.Cursor:=crHourGlass;
       SetDadosAgenda;
       fdqAgenda.Post;
       SetAgendaAluno;
@@ -243,8 +243,15 @@ begin
 end;
 
 procedure TfrmAgendaEnvio.SetDadosAgenda;
+var
+  FuncionarioId:Integer;
 begin
   fdqAgendadata.AsDateTime:=Now;
+
+  FuncionarioId:= GetFuncionarioId;
+
+  if FuncionarioId > 0 then
+    fdqAgendafuncionario_id.AsInteger := GetFuncionarioId;
 end;
 
 procedure TfrmAgendaEnvio.SetPositionFields;

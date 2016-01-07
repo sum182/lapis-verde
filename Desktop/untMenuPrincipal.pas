@@ -35,7 +35,7 @@ type
     FecharAba1: TMenuItem;
     FecharTodasAbas1: TMenuItem;
     pgPrinc: TcxPageControl;
-    dxRibbonStatusBar1: TdxRibbonStatusBar;
+    StatusBar: TdxRibbonStatusBar;
     cxImageList1: TcxImageList;
     dxRibbon1: TdxRibbon;
     dxRibbon1TabCadastros: TdxRibbonTab;
@@ -100,7 +100,7 @@ type
     dxBarLargeButton30: TdxBarLargeButton;
     dxBarLargeButton31: TdxBarLargeButton;
     dxBarLargeButton32: TdxBarLargeButton;
-    dxRibbon1TabAdministrador: TdxRibbonTab;
+    mnAdministradorSistema: TdxRibbonTab;
     dxBarManager1Bar4: TdxBar;
     dxBarLargeButton33: TdxBarLargeButton;
     dxRibbon1TabAgenda: TdxRibbonTab;
@@ -134,6 +134,7 @@ type
       sConstruct: Boolean = False);
     procedure CloseForm;
     procedure SetStatusBar;
+    procedure SetViewMenus;
   public
     { Public declarations }
   end;
@@ -204,14 +205,21 @@ begin
   end;
 end;
 
+
+
 procedure TfrmMenuPrincipal.SetStatusBar;
 begin
-  dxRibbonStatusBar1.Panels[2].Text := 'Conexão: ' + GetPahConexao;
-  dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + smGeral.GetVersion(Application.Exename);
-  dxRibbonStatusBar1.Panels[0].Text := 'Usuário: ' + GetNomeUsuario;
+  StatusBar.Panels[2].Text := 'Conexão: ' + GetPahConexao;
+  StatusBar.Panels[1].Text := 'Versão: ' + smGeral.GetVersion(Application.Exename);
+  StatusBar.Panels[0].Text := 'Usuário: ' + GetFuncionarioNome;
 end;
 
 
+
+procedure TfrmMenuPrincipal.SetViewMenus;
+begin
+  mnAdministradorSistema.Visible:= UsuarioIsAdminSistema;
+end;
 
 procedure TfrmMenuPrincipal.dxBarLargeButton23Click(Sender: TObject);
 begin
@@ -299,6 +307,7 @@ end;
 procedure TfrmMenuPrincipal.FormShow(Sender: TObject);
 begin
   dxRibbon1.ActiveTab:= dxRibbon1TabAgenda;
+  SetViewMenus;
 end;
 
 procedure TfrmMenuPrincipal.OpenForm(Classe: TFormClass; var Form;

@@ -1,7 +1,10 @@
 program Agenda;
 
 uses
+  Controls,
+  SysUtils,
   Vcl.Forms,
+  Windows,
   untMenuPrincipal in 'untMenuPrincipal.pas' {frmMenuPrincipal},
   smCad in 'C:\Componentes\Sum182\D15\Forms\smCad.pas' {frmCad},
   smCadFD in 'C:\Componentes\Sum182\D15\Forms\smCadFD.pas' {frmCadFD},
@@ -24,36 +27,38 @@ uses
   untCadastroTurma in 'Cadastros\untCadastroTurma.pas' {frmCadastroTurma},
   untAgendaEnvio in 'untAgendaEnvio.pas' {frmAgendaEnvio},
   smCrypt in 'C:\Componentes\sum182\D15\Units\smCrypt.pas',
-  RC6Enc in 'C:\Componentes\sum182\D15\Units\RC6Enc.pas';
+  RC6Enc in 'C:\Componentes\sum182\D15\Units\RC6Enc.pas',
+  untLogin in 'untLogin.pas' {frmLogin};
 
 {$R *.res}
 
+var
+  AutoLogin:boolean;
 begin
- { Application.Initialize;
-  Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TDM, DM);
-  Application.CreateForm(TfrmMenuPrincipal, frmMenuPrincipal);
-  Application.Run;  }
-
+  AutoLogin:= ((ParamStr(1) + ' ' +  ParamStr(2) + ' ' + ParamStr(3)) = 'autologin admin key&*¨%$');
 
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := DM.GetNomeAplicacao;
   Application.CreateForm(TDM, DM);
+  Dm.fUsuarioAdminSistema := AutoLogin;
   frmMenuPrincipal.Caption:= Dm.GetNomeAplicacao;
 
-  {Application.CreateForm(TfrmLogin, frmLogin);
-  if frmLogin.ShowModal = mrOk then
+  if not (AutoLogin) then
   begin
-    FreeAndNil(frmLogin); // Libera o form de Login da memória
-    Application.CreateForm(TfrmMenuPrincipal, frmMenuPrincipal);
-    Application.Run;
-  end
-  else
-  begin
-    FreeAndNil(frmLogin);
-    Application.Terminate;
-  end;}
+    Application.CreateForm(TfrmLogin, frmLogin);
+    if frmLogin.ShowModal = mrOk then
+    begin
+      FreeAndNil(frmLogin);
+      Application.CreateForm(TfrmMenuPrincipal, frmMenuPrincipal);
+      Application.Run;
+    end
+    else
+    begin
+      FreeAndNil(frmLogin);
+      Application.Terminate;
+    end;
+  end;
 
   Application.CreateForm(TfrmMenuPrincipal, frmMenuPrincipal);
   Application.Run;

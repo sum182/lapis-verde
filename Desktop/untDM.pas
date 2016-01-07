@@ -33,16 +33,25 @@ type
     dspBusca: TDataSetProvider;
     ImageList1: TImageList;
     cxLookAndFeelController1: TcxLookAndFeelController;
-    fdqUsuario: TFDQuery;
-    fdqUsuarioID_USUARIO: TIntegerField;
-    fdqUsuarioLOGIN: TStringField;
-    fdqUsuarioNOME: TStringField;
-    fdqUsuarioSENHA: TStringField;
-    fdqUsuarioATIVO: TStringField;
-    fdqUsuarioADMINISTRADOR: TStringField;
+    fdqFuncionario: TFDQuery;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     FDTransaction: TFDTransaction;
     fdqEscola: TFDQuery;
+    fdqFuncionariofuncionario_id: TFDAutoIncField;
+    fdqFuncionarionome: TStringField;
+    fdqFuncionariosobrenome: TStringField;
+    fdqFuncionariosexo: TStringField;
+    fdqFuncionariorg: TStringField;
+    fdqFuncionariocpf: TLargeintField;
+    fdqFuncionarioativo: TStringField;
+    fdqFuncionarioemail: TStringField;
+    fdqFuncionariosenha: TStringField;
+    fdqFuncionarioinformacoes_gerais: TMemoField;
+    fdqFuncionariofuncionario_tipo_id: TSmallintField;
+    fdqFuncionarioescola_id: TIntegerField;
+    dsFuncionario: TDataSource;
+    dsEscola: TDataSource;
+    fdqFuncionarionome_completo: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
   private
@@ -57,8 +66,12 @@ type
     procedure ConexaoBD;
     procedure OpenEscola;
   public
-    function GetUsuario: Integer;
-    function GetNomeUsuario: String;
+    fUsuarioAdminSistema: boolean;
+
+    function GetFuncionarioId: Integer;
+    function GetFuncionarioNome: String;
+    function GetFuncionarioNomeCompleto: String;
+
     function GetPahConexao:string;
     function GetNomeAplicacao:string;
     function GetIdEscola:integer;
@@ -71,14 +84,17 @@ implementation
 
 { %CLASSGROUP 'Vcl.Controls.TControl' }
 
-uses untMenuPrincipal, smMensagens;
+uses untMenuPrincipal, smMensagens,Variants;
 
 {$R *.dfm}
 { TDM }
 
-function TDM.GetUsuario: Integer;
+function TDM.GetFuncionarioId: Integer;
 begin
-  Result := DM.fdqUsuarioID_USUARIO.AsInteger;
+  Result := DM.fdqFuncionariofuncionario_id.AsInteger;
+
+  if fUsuarioAdminSistema then
+    Result := -1;
 end;
 
 procedure TDM.LerIni;
@@ -169,9 +185,19 @@ begin
   Result:= 'Sistema Agenda';
 end;
 
-function TDM.GetNomeUsuario: String;
+function TDM.GetFuncionarioNomeCompleto: String;
 begin
-  Result := DM.fdqUsuarioNOME.AsString;
+  Result := DM.fdqFuncionarionome_completo.AsString;
+  if fUsuarioAdminSistema then
+    Result := 'Admin';
+end;
+
+function TDM.GetFuncionarioNome: String;
+begin
+  Result := DM.fdqFuncionarionome.AsString;
+
+  if fUsuarioAdminSistema then
+    Result := 'Admin';
 end;
 
 function TDM.GetPahConexao: string;

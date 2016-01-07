@@ -209,7 +209,7 @@ var
   AlunoId:integer;
 begin
   try
-    Screen.Cursor := crSQLWait;
+    Screen.Cursor := crHourGlass;
 
     fdqTurmaAluno.First;
     while not(fdqTurmaAluno.Eof) do

@@ -12,11 +12,14 @@ Uses
   procedure SetSQLEscolaIdBusca(smCadPadrao: TsmCadPadrao);
   procedure SetIdEscolaParamBusca(FDDataset: TFDQuery);
 
-  function GetUsuario: Integer;
-  function GetNomeUsuario: String;
+  function GetFuncionarioId: Integer;
+  function GetFuncionarioNome: string;
+  function GetFuncionarioNomeCompleto:string;
+
   function GetPahConexao:string;
   function GetNomeAplicacao:string;
   function GetIdEscola:integer;
+  function UsuarioIsAdminSistema:boolean;
 
 implementation
 
@@ -46,15 +49,21 @@ begin
   FDDataset.ParamByName('escola_id').AsInteger:=GetIdEscola;
 end;
 
-function GetUsuario: Integer;
+function GetFuncionarioId: Integer;
 begin
-  Result:= Dm.GetUsuario;
+  Result:= Dm.GetFuncionarioId;
 end;
 
-function GetNomeUsuario: String;
+function GetFuncionarioNome: string;
 begin
-  Result:= Dm.GetNomeUsuario;
+  Result:= Dm.GetFuncionarioNome;
 end;
+
+function GetFuncionarioNomeCompleto:string;
+begin
+  Result:= Dm.GetFuncionarioNomeCompleto;
+end;
+
 
 function GetPahConexao:string;
 begin
@@ -69,6 +78,11 @@ end;
 function GetIdEscola:integer;
 begin
   Result:= Dm.GetIdEscola;
+end;
+
+function UsuarioIsAdminSistema:boolean;
+begin
+   Result:= DM.fUsuarioAdminSistema;
 end;
 
 end.

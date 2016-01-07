@@ -23,10 +23,6 @@ object frmAgendaEnvio: TfrmAgendaEnvio
     Align = alClient
     Caption = 'Mensagem'
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 119
-    ExplicitWidth = 625
-    ExplicitHeight = 249
     Height = 330
     Width = 584
     object Label3: TLabel
@@ -70,8 +66,6 @@ object frmAgendaEnvio: TfrmAgendaEnvio
     Top = 401
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 400
-    ExplicitWidth = 660
     Height = 48
     Width = 584
     object btnEnviar: TcxButton
@@ -116,7 +110,6 @@ object frmAgendaEnvio: TfrmAgendaEnvio
     Align = alTop
     Caption = 'Destino'
     TabOrder = 2
-    ExplicitWidth = 595
     Height = 71
     Width = 584
     object cxLabel1: TcxLabel
