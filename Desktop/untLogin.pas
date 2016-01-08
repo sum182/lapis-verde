@@ -48,6 +48,7 @@ type
     procedure SetStateButtons;
     function GetTextoLogin:String;
     procedure Login;
+    function ValidarEscolaAtiva:Boolean;
   public
     { Public declarations }
   end;
@@ -130,38 +131,57 @@ end;
 procedure TfrmLogin.Login;
 begin
   try
-    Screen.Cursor:= crHourGlass;
-    Sleep(200);
+    try
+      Screen.Cursor:= crHourGlass;
+      Sleep(200);
 
-    dm.fdqFuncionario.Close;
-    dm.fdqFuncionario.ParamByName('login').AsString := GetTextoLogin;
-    dm.fdqFuncionario.ParamByName('senha').AsString := Encrypt(edtSenha.Text);
-    dm.fdqFuncionario.Open;
+      dm.fdqFuncionario.Close;
+      dm.fdqFuncionario.ParamByName('login').AsString := GetTextoLogin;
+      dm.fdqFuncionario.ParamByName('senha').AsString := Encrypt(edtSenha.Text);
+      dm.fdqFuncionario.Open;
 
+      //Login errado
+      if (dm.fdqFuncionario.IsEmpty) then
+      begin
+        lblStatus.Visible:= True;
+        lblStatus.Caption:= 'O login e a senha que você digitou não coincidem. ';
+        edtLogin.SetFocus;
+        Exit;
+      end;
 
-    if (dm.fdqFuncionario.IsEmpty) then
-    begin
-      //smMensagens.Msg('O login e a senha que você digitou não coincidem. ', mtAviso);
-      lblStatus.Visible:= True;
-      lblStatus.Caption:= 'O login e a senha que você digitou não coincidem. ';
-      edtLogin.SetFocus;
-    end
-    else
-    begin
+      //Escola Bloqueada
+      if not ValidarEscolaAtiva then
+        Exit;
+
       ModalResult := mrOk;
       lblStatus.Caption:= '';
       lblStatus.Visible:= False;
+    except on E:Exception do
+    begin
+      Msg('Erro ao realizar o login!'+ #13 + E.Message,mtErro);
+    end;
     end;
   finally
-    Screen.Cursor:= crDefault;
+    Screen.Cursor:=crDefault;
   end;
-
 
 end;
 
 procedure TfrmLogin.SetStateButtons;
 begin
   btnLogin.Enabled := ((edtSenha.Text <> '') and (edtLogin.Text <> ''));
+end;
+
+
+function TfrmLogin.ValidarEscolaAtiva: Boolean;
+begin
+  Result:= (DM.fdqEscola.FieldByName('ativo').AsString = 'S');
+
+  if Result  then
+    Exit;
+
+  lblStatus.Visible:= True;
+  lblStatus.Caption:= 'Escola bloqueada para utilização';
 end;
 
 end.

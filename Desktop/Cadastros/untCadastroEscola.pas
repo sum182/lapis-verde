@@ -36,7 +36,7 @@ type
     Label3: TLabel;
     cxDBMemo1: TcxDBMemo;
     Label9: TLabel;
-    cxDBCheckBox1: TcxDBCheckBox;
+    chkEscola: TcxDBCheckBox;
     dsEndereco: TDataSource;
     dsTelefone: TDataSource;
     cxGroupBox1: TcxGroupBox;
@@ -99,6 +99,7 @@ type
    procedure OpenQuerys;
    procedure SetPgtCtrlDefaut;
    procedure OpenFdqEndereco;
+   procedure ViewComponents;
   public
     { Public declarations }
   end;
@@ -202,6 +203,7 @@ begin
   inherited;
   OpenQuerys;
   SetPgtCtrlDefaut;
+  ViewComponents;
 end;
 
 procedure TfrmCadastroEscola.grPesquisaDblClick(Sender: TObject);
@@ -241,6 +243,11 @@ end;
 procedure TfrmCadastroEscola.SetPgtCtrlDefaut;
 begin
   cxPageControl1.ActivePageIndex:=0;
+end;
+
+procedure TfrmCadastroEscola.ViewComponents;
+begin
+  chkEscola.Visible := UsuarioIsAdminSistema;
 end;
 
 end.

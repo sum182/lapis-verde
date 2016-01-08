@@ -1,51 +1,50 @@
-validar senha
-senha obrigatorio
-index senha
 
-Agenda
-Setar funcionario logado
-Setar tipo de agenda
+relacionamento aluno X resposaveis
 
-Erro 
+
+***Nome da aplicação
+  Nome da Aplicacao
+  Alterar metodo do dm
+  testar menu principal
+
+
+***INI
+  Criptografar os itens abaixo
+  Tirar a senha do ini
+  Colocar porta no INI
+
+
+***Menu Principal
+  Hints
+  Nomes botoes
+  Imagens
+
+
+***Cadastros
+   Alterar buscas e colocar rg/cpf
+
+
+***Verificações
+   ver tds querys se tem algo com agenda.
+
+
+***Erros
 Cad Resp
 Vinculo de Alunos
 ao Deletar e depois incluir o msm aluno ele fica duplicado
 
 
--Nome da Aplicacao
-Alterar metodo do dm
-testar menu principal
-
--Login
-
--Sobre
-
--Admin
-Funcionario Admin
-Usuario Admin
-Rotinas Usuario Admin
-Rotinas Funcionario Admin
-
-Funcionario
-Senha
-Campo Admin
-
-Rotinas ViewSource
-  Login
 
 
-Tirar a senha do ini
-Colocar porta no INI
+------------------------------------------------------------------------------------------
 
-Menu Principal
-Hints
-Nomes botoes
-
-
-relacionamento aluno X resposaveis
+***Futuro
+   ***Agenda
+   Setar tipo de agenda
 
 
-ver tds querys se tem algo com agenda.
-
-Alterar buscas e colocar rg/cpf
-
+   ***Sobre
+ 
+ 
+   ***Admin
+   Funcionario Admin
