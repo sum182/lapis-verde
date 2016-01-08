@@ -75,6 +75,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     TabOrder = 2
     TabStop = False
     object dxRibbon1TabAgenda: TdxRibbonTab
+      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -95,7 +96,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Index = 1
     end
     object mnAdministradorSistema: TdxRibbonTab
-      Active = True
       Caption = 'Administrador Sistema'
       Groups = <
         item
@@ -46706,6 +46706,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         item
           Visible = True
           ItemName = 'dxBarLargeButton40'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton41'
         end>
       OneOnRow = True
       Row = 0
@@ -50193,6 +50197,13 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Hint = 'Envio de Agenda'
       Visible = ivAlways
       OnClick = dxBarLargeButton40Click
+    end
+    object dxBarLargeButton41: TdxBarLargeButton
+      Caption = 'Mensagens'
+      Category = 0
+      Hint = 'Mensagens'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton41Click
     end
     object dxBarGroup1: TdxBarGroup
       Items = ()

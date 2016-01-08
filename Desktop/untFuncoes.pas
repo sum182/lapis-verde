@@ -18,7 +18,7 @@ Uses
 
   function GetPahConexao:string;
   function GetNomeAplicacao:string;
-  function GetIdEscola:integer;
+  function GetEscolaId:integer;
   function UsuarioIsAdminSistema:boolean;
 
 implementation
@@ -35,7 +35,7 @@ begin
     Exit;
   end;
 
-  Dataset.FieldByName('Escola_id').AsInteger := DM.GetIdEscola;
+  Dataset.FieldByName('Escola_id').AsInteger := DM.GetEscolaId;
 end;
 
 procedure SetSQLEscolaIdBusca(smCadPadrao: TsmCadPadrao);
@@ -46,7 +46,7 @@ end;
 
 procedure SetIdEscolaParamBusca(FDDataset: TFDQuery);
 begin
-  FDDataset.ParamByName('escola_id').AsInteger:=GetIdEscola;
+  FDDataset.ParamByName('escola_id').AsInteger:=GetEscolaId;
 end;
 
 function GetFuncionarioId: Integer;
@@ -75,9 +75,9 @@ begin
   Result:= Dm.GetNomeAplicacao;
 end;
 
-function GetIdEscola:integer;
+function GetEscolaId:integer;
 begin
-  Result:= Dm.GetIdEscola;
+  Result:= Dm.GetEscolaId;
 end;
 
 function UsuarioIsAdminSistema:boolean;

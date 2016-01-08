@@ -74,7 +74,7 @@ type
 
     function GetPahConexao:string;
     function GetNomeAplicacao:string;
-    function GetIdEscola:integer;
+    function GetEscolaId:integer;
   end;
 
 var
@@ -175,7 +175,7 @@ begin
   Msg('Erro na transição de dados:' + #13+ #13+ AException.Message,mtErro);
 end;
 
-function TDM.GetIdEscola: integer;
+function TDM.GetEscolaId: integer;
 begin
   Result:= fIdEscola;
 end;

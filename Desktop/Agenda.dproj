@@ -136,13 +136,17 @@
         <DCCReference Include="Cadastros\untCadastroTurma.pas">
             <Form>frmCadastroTurma</Form>
         </DCCReference>
-        <DCCReference Include="untAgendaEnvio.pas">
-            <Form>frmAgendaEnvio</Form>
+        <DCCReference Include="untMensagens.pas">
+            <Form>frmMensagens</Form>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smCrypt.pas"/>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\RC6Enc.pas"/>
         <DCCReference Include="untLogin.pas">
             <Form>frmLogin</Form>
+        </DCCReference>
+        <DCCReference Include="untAgendaEnvio.pas">
+            <Form>frmAgendaEnvio</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

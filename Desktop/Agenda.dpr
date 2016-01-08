@@ -25,10 +25,11 @@ uses
   untPesquisaResponsavel in 'Pesquisas\untPesquisaResponsavel.pas' {frmPesquisaResponsavel},
   untCadastroPeriodoTipo in 'Cadastros\untCadastroPeriodoTipo.pas' {frmCadastroPeriodoTipo},
   untCadastroTurma in 'Cadastros\untCadastroTurma.pas' {frmCadastroTurma},
-  untAgendaEnvio in 'untAgendaEnvio.pas' {frmAgendaEnvio},
+  untMensagens in 'untMensagens.pas' {frmMensagens},
   smCrypt in 'C:\Componentes\sum182\D15\Units\smCrypt.pas',
   RC6Enc in 'C:\Componentes\sum182\D15\Units\RC6Enc.pas',
-  untLogin in 'untLogin.pas' {frmLogin};
+  untLogin in 'untLogin.pas' {frmLogin},
+  untAgendaEnvio in 'untAgendaEnvio.pas' {frmAgendaEnvio};
 
 {$R *.res}
 
