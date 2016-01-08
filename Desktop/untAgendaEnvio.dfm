@@ -4,7 +4,7 @@ object frmAgendaEnvio: TfrmAgendaEnvio
   BorderIcons = [biSystemMenu]
   Caption = 'Agenda'
   ClientHeight = 449
-  ClientWidth = 584
+  ClientWidth = 594
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object frmAgendaEnvio: TfrmAgendaEnvio
     Caption = 'Mensagem'
     TabOrder = 0
     Height = 330
-    Width = 584
+    Width = 594
     object Label3: TLabel
       Left = 16
       Top = 73
@@ -67,7 +67,7 @@ object frmAgendaEnvio: TfrmAgendaEnvio
     Align = alBottom
     TabOrder = 1
     Height = 48
-    Width = 584
+    Width = 594
     object btnEnviar: TcxButton
       Left = 400
       Top = 16
@@ -111,7 +111,7 @@ object frmAgendaEnvio: TfrmAgendaEnvio
     Caption = 'Destino'
     TabOrder = 2
     Height = 71
-    Width = 584
+    Width = 594
     object cxLabel1: TcxLabel
       Left = 16
       Top = 17

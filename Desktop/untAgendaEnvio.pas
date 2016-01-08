@@ -251,7 +251,7 @@ begin
   FuncionarioId:= GetFuncionarioId;
 
   if FuncionarioId > 0 then
-    fdqAgendafuncionario_id.AsInteger := GetFuncionarioId;
+    fdqAgendafuncionario_id.AsInteger := FuncionarioId;
 end;
 
 procedure TfrmAgendaEnvio.SetPositionFields;
