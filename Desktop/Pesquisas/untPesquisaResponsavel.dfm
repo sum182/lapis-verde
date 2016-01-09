@@ -2,7 +2,7 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
   Left = 0
   Top = 0
   BorderIcons = [biMinimize, biMaximize]
-  Caption = 'Pesquisa de Alunos'
+  Caption = 'Pesquisa de Respons'#225'veis'
   ClientHeight = 457
   ClientWidth = 587
   Color = clBtnFace
@@ -132,7 +132,7 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     IndexFieldNames = 'nome'
     Connection = DM.FDConnection
     SQL.Strings = (
-      'SELECT * FROM  aluno '
+      'SELECT * FROM  responsavel'
       'where escola_id = :escola_id ')
     Left = 508
     Top = 168

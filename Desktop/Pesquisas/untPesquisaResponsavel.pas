@@ -70,7 +70,7 @@ end;
 
 procedure TfrmPesquisaResponsavel.btnOKClick(Sender: TObject);
 begin
-  fId:= fdqPesquisa.FieldByName('aluno_id').AsInteger;
+  fId:= fdqPesquisa.FieldByName('responsavel_id').AsInteger;
   Close;
 end;
 
