@@ -99,146 +99,271 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
     end
     inherited TaShCadastro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 1065
       ExplicitHeight = 513
-      object Label3: TLabel
-        Left = 32
-        Top = 14
-        Width = 27
-        Height = 13
-        Caption = 'Nome'
-        FocusControl = cxDBTextEdit1
-      end
-      object Label4: TLabel
-        Left = 32
-        Top = 67
-        Width = 54
-        Height = 13
-        Caption = 'Sobrenome'
-        FocusControl = cxDBTextEdit2
-      end
-      object Label5: TLabel
-        Left = 32
-        Top = 120
-        Width = 96
-        Height = 13
-        Caption = 'Data de Nascimento'
-        FocusControl = cxDBDateEdit1
-      end
-      object Label6: TLabel
-        Left = 232
-        Top = 120
-        Width = 24
-        Height = 13
-        Caption = 'Sexo'
-      end
-      object Label7: TLabel
-        Left = 32
-        Top = 168
-        Width = 14
-        Height = 13
-        Caption = 'RG'
-      end
-      object Label8: TLabel
-        Left = 232
-        Top = 168
-        Width = 19
-        Height = 13
-        Caption = 'CPF'
-      end
-      object Label9: TLabel
-        Left = 32
-        Top = 232
-        Width = 93
-        Height = 13
-        Caption = 'Informa'#231#245'es Gerais'
-      end
-      object cxDBTextEdit1: TcxDBTextEdit
-        Left = 32
-        Top = 31
-        DataBinding.DataField = 'nome'
-        DataBinding.DataSource = dsCad
+      object cxPageControl1: TcxPageControl
+        Left = 0
+        Top = 0
+        Width = 1065
+        Height = 513
+        Align = alClient
         TabOrder = 0
-        Width = 489
-      end
-      object cxDBTextEdit2: TcxDBTextEdit
-        Left = 32
-        Top = 84
-        DataBinding.DataField = 'sobrenome'
-        DataBinding.DataSource = dsCad
-        TabOrder = 1
-        Width = 489
-      end
-      object cxDBDateEdit1: TcxDBDateEdit
-        Left = 32
-        Top = 139
-        DataBinding.DataField = 'data_nascimento'
-        DataBinding.DataSource = dsCad
-        TabOrder = 2
-        Width = 185
-      end
-      object cxDBCheckBox1: TcxDBCheckBox
-        Left = 600
-        Top = 31
-        Caption = 'Aluno Ativo'
-        DataBinding.DataField = 'ativo'
-        DataBinding.DataSource = dsCad
-        Properties.NullStyle = nssUnchecked
-        Properties.ValueChecked = 'S'
-        Properties.ValueUnchecked = 'N'
-        TabOrder = 7
-        Width = 80
-      end
-      object cxDBMemo1: TcxDBMemo
-        Left = 32
-        Top = 251
-        DataBinding.DataField = 'informacoes_gerais'
-        DataBinding.DataSource = dsCad
-        TabOrder = 6
-        Height = 113
-        Width = 489
-      end
-      object cxDBMaskEdit2: TcxDBMaskEdit
-        Left = 232
-        Top = 187
-        DataBinding.DataField = 'cpf'
-        DataBinding.DataSource = dsCad
-        Properties.EditMask = '999.999.999-99;0;_'
-        TabOrder = 5
-        Width = 203
-      end
-      object cxDBMaskEdit1: TcxDBMaskEdit
-        Left = 32
-        Top = 187
-        DataBinding.DataField = 'rg'
-        DataBinding.DataSource = dsCad
-        Properties.EditMask = '00.000.000-a;0'
-        TabOrder = 4
-        Width = 185
-      end
-      object cxDBImageComboBox1: TcxDBImageComboBox
-        Left = 232
-        Top = 139
-        DataBinding.DataField = 'sexo'
-        DataBinding.DataSource = dsCad
-        Properties.Items = <
-          item
-            Description = 'Masculino'
-            ImageIndex = 0
-            Value = 'M'
+        Properties.ActivePage = cxTabSheet2
+        Properties.CustomButtons.Buttons = <>
+        ClientRectBottom = 509
+        ClientRectLeft = 4
+        ClientRectRight = 1061
+        ClientRectTop = 24
+        object cxTabSheet1: TcxTabSheet
+          Caption = 'Dados Principais'
+          ImageIndex = 0
+          object Label3: TLabel
+            Left = 32
+            Top = 14
+            Width = 27
+            Height = 13
+            Caption = 'Nome'
+            FocusControl = cxDBTextEdit1
           end
-          item
-            Description = 'Feminino'
-            Value = 'F'
-          end>
-        Style.Shadow = False
-        Style.ButtonStyle = btsSimple
-        Style.ButtonTransparency = ebtInactive
-        TabOrder = 3
-        Width = 121
+          object Label4: TLabel
+            Left = 32
+            Top = 67
+            Width = 54
+            Height = 13
+            Caption = 'Sobrenome'
+            FocusControl = cxDBTextEdit2
+          end
+          object Label5: TLabel
+            Left = 32
+            Top = 120
+            Width = 96
+            Height = 13
+            Caption = 'Data de Nascimento'
+            FocusControl = cxDBDateEdit1
+          end
+          object Label6: TLabel
+            Left = 232
+            Top = 120
+            Width = 24
+            Height = 13
+            Caption = 'Sexo'
+          end
+          object Label8: TLabel
+            Left = 232
+            Top = 168
+            Width = 19
+            Height = 13
+            Caption = 'CPF'
+          end
+          object Label7: TLabel
+            Left = 32
+            Top = 168
+            Width = 14
+            Height = 13
+            Caption = 'RG'
+          end
+          object Label9: TLabel
+            Left = 32
+            Top = 232
+            Width = 93
+            Height = 13
+            Caption = 'Informa'#231#245'es Gerais'
+          end
+          object cxDBTextEdit1: TcxDBTextEdit
+            Left = 32
+            Top = 33
+            DataBinding.DataField = 'nome'
+            DataBinding.DataSource = dsCad
+            TabOrder = 0
+            Width = 489
+          end
+          object cxDBTextEdit2: TcxDBTextEdit
+            Left = 32
+            Top = 84
+            DataBinding.DataField = 'sobrenome'
+            DataBinding.DataSource = dsCad
+            TabOrder = 1
+            Width = 489
+          end
+          object cxDBDateEdit1: TcxDBDateEdit
+            Left = 32
+            Top = 139
+            DataBinding.DataField = 'data_nascimento'
+            DataBinding.DataSource = dsCad
+            TabOrder = 2
+            Width = 185
+          end
+          object cxDBImageComboBox1: TcxDBImageComboBox
+            Left = 232
+            Top = 139
+            DataBinding.DataField = 'sexo'
+            DataBinding.DataSource = dsCad
+            Properties.Items = <
+              item
+                Description = 'Masculino'
+                ImageIndex = 0
+                Value = 'M'
+              end
+              item
+                Description = 'Feminino'
+                Value = 'F'
+              end>
+            Style.Shadow = False
+            Style.ButtonStyle = btsSimple
+            Style.ButtonTransparency = ebtInactive
+            TabOrder = 3
+            Width = 121
+          end
+          object cxDBMaskEdit1: TcxDBMaskEdit
+            Left = 32
+            Top = 187
+            DataBinding.DataField = 'rg'
+            DataBinding.DataSource = dsCad
+            Properties.EditMask = '00.000.000-a;0'
+            TabOrder = 4
+            Width = 185
+          end
+          object cxDBMaskEdit2: TcxDBMaskEdit
+            Left = 232
+            Top = 187
+            DataBinding.DataField = 'cpf'
+            DataBinding.DataSource = dsCad
+            Properties.EditMask = '999.999.999-99;0;_'
+            TabOrder = 5
+            Width = 203
+          end
+          object cxDBMemo1: TcxDBMemo
+            Left = 32
+            Top = 251
+            DataBinding.DataField = 'informacoes_gerais'
+            DataBinding.DataSource = dsCad
+            TabOrder = 6
+            Height = 113
+            Width = 489
+          end
+          object cxDBCheckBox1: TcxDBCheckBox
+            Left = 600
+            Top = 31
+            Caption = 'Aluno Ativo'
+            DataBinding.DataField = 'ativo'
+            DataBinding.DataSource = dsCad
+            Properties.NullStyle = nssUnchecked
+            Properties.ValueChecked = 'S'
+            Properties.ValueUnchecked = 'N'
+            TabOrder = 7
+            Width = 80
+          end
+        end
+        object cxTabSheet2: TcxTabSheet
+          Caption = 'Respons'#225'veis'
+          ImageIndex = 1
+          ExplicitLeft = 5
+          ExplicitTop = 25
+          object cxLabel1: TcxLabel
+            Left = 35
+            Top = 32
+            Caption = 'Respons'#225'veis v'#237'nculados ao aluno'
+            ParentFont = False
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clRed
+            Style.Font.Height = -12
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = [fsBold]
+            Style.IsFontAssigned = True
+            Transparent = True
+          end
+          object grbxAlunos: TcxGroupBox
+            Left = 33
+            Top = 55
+            TabOrder = 1
+            Height = 369
+            Width = 474
+            object Bevel3: TBevel
+              Left = 2
+              Top = 5
+              Width = 470
+              Height = 50
+              Align = alTop
+              ExplicitLeft = 216
+              ExplicitTop = 160
+              ExplicitWidth = 50
+            end
+            object cxGridAlunos: TcxGrid
+              Left = 2
+              Top = 55
+              Width = 470
+              Height = 312
+              Align = alClient
+              TabOrder = 2
+              object cxGridAlunosDBTableView1: TcxGridDBTableView
+                Navigator.Buttons.CustomButtons = <>
+                DataController.DataSource = dsResponsaveis
+                DataController.Summary.DefaultGroupSummaryItems = <>
+                DataController.Summary.FooterSummaryItems = <>
+                DataController.Summary.SummaryGroups = <>
+                OptionsData.Deleting = False
+                OptionsData.Editing = False
+                OptionsData.Inserting = False
+                OptionsSelection.CellSelect = False
+                OptionsView.GroupByBox = False
+                object cxGridAlunosDBTableView1nome: TcxGridDBColumn
+                  Caption = 'Nome'
+                  DataBinding.FieldName = 'responsavel_id'
+                  PropertiesClassName = 'TcxLookupComboBoxProperties'
+                  Properties.KeyFieldNames = 'responsavel_id'
+                  Properties.ListColumns = <
+                    item
+                      FieldName = 'nome'
+                    end>
+                  Properties.ListSource = dsResponsaveisLookup
+                  Width = 182
+                end
+                object cxGridAlunosDBTableView1sobrenome: TcxGridDBColumn
+                  Caption = 'Sobrenome'
+                  DataBinding.FieldName = 'responsavel_id'
+                  PropertiesClassName = 'TcxLookupComboBoxProperties'
+                  Properties.KeyFieldNames = 'responsavel_id'
+                  Properties.ListColumns = <
+                    item
+                      FieldName = 'sobrenome'
+                    end>
+                  Properties.ListSource = dsResponsaveisLookup
+                  Width = 189
+                end
+              end
+              object cxGridAlunosLevel1: TcxGridLevel
+                GridView = cxGridAlunosDBTableView1
+              end
+            end
+            object btnResponsaveisAdd: TcxButton
+              Left = 20
+              Top = 17
+              Width = 50
+              Height = 25
+              OptionsImage.ImageIndex = 0
+              OptionsImage.Images = imgEnabled
+              TabOrder = 0
+              OnClick = btnResponsaveisAddClick
+            end
+            object btnResponsaveisExcluir: TcxButton
+              Left = 76
+              Top = 17
+              Width = 50
+              Height = 25
+              OptionsImage.ImageIndex = 1
+              OptionsImage.Images = imgEnabled
+              TabOrder = 1
+              OnClick = btnResponsaveisExcluirClick
+            end
+          end
+        end
       end
     end
     inherited TaShRelatorio: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 1065
       ExplicitHeight = 513
     end
@@ -327,10 +452,18 @@ inherited frmCadastroAluno: TfrmCadastroAluno
         FieldType = ftInteger
       end>
     KeyField = 'aluno_id'
+    Left = 952
+    Top = 264
+  end
+  inherited AcLi: TActionList
+    Left = 952
+    Top = 315
   end
   inherited imgEnabled: TImageList
+    Left = 952
+    Top = 368
     Bitmap = {
-      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -734,8 +867,10 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       000000000000}
   end
   inherited imgDisabled: TImageList
+    Left = 952
+    Top = 416
     Bitmap = {
-      494C01010B000C007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1148,8 +1283,8 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     SQL.Strings = (
       'SELECT * FROM aluno'
       'where aluno_id = :aluno_id')
-    Left = 680
-    Top = 256
+    Left = 892
+    Top = 264
     ParamData = <
       item
         Position = 1
@@ -1218,16 +1353,18 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     end
   end
   inherited dsCad: TDataSource
-    Left = 680
+    Left = 892
+    Top = 312
   end
   inherited dsBusca: TDataSource
-    Left = 616
+    Left = 840
+    Top = 312
   end
   inherited fdqBusca: TFDQuery
     BeforeOpen = fdqBuscaBeforeOpen
     Connection = DM.FDConnection
-    Left = 616
-    Top = 256
+    Left = 840
+    Top = 264
     ParamData = <
       item
         Name = 'escola_id'
@@ -1236,7 +1373,74 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end>
   end
   inherited FDSchemaAdapter: TFDSchemaAdapter
-    Left = 544
-    Top = 256
+    Left = 757
+    Top = 376
+  end
+  object fdqResponsaveis: TFDQuery
+    BeforeInsert = fdqResponsaveisBeforeInsert
+    BeforeEdit = fdqResponsaveisBeforeEdit
+    BeforeDelete = fdqResponsaveisBeforeDelete
+    AfterScroll = fdqResponsaveisAfterScroll
+    CachedUpdates = True
+    IndexFieldNames = 'aluno_id'
+    MasterSource = dsCad
+    MasterFields = 'aluno_id'
+    Connection = DM.FDConnection
+    SchemaAdapter = FDSchemaAdapter
+    FetchOptions.AssignedValues = [evDetailCascade]
+    FetchOptions.DetailCascade = True
+    SQL.Strings = (
+      'select * from responsavel_aluno ra'#10' '#10
+      'where aluno_id = :aluno_id')
+    Left = 648
+    Top = 264
+    ParamData = <
+      item
+        Name = 'ALUNO_ID'
+        DataType = ftAutoInc
+        ParamType = ptInput
+        Size = 4
+        Value = Null
+      end>
+    object fdqResponsaveisresponsavel_id: TIntegerField
+      FieldName = 'responsavel_id'
+      Origin = 'responsavel_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqResponsaveisaluno_id: TIntegerField
+      FieldName = 'aluno_id'
+      Origin = 'aluno_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+  end
+  object fdqResponsaveisLookup: TFDQuery
+    BeforeOpen = fdqResponsaveisLookupBeforeOpen
+    AfterScroll = fdqResponsaveisLookupAfterScroll
+    Connection = DM.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM  responsavel'
+      'where escola_id = :escola_id ')
+    Left = 756
+    Top = 264
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsResponsaveisLookup: TDataSource
+    DataSet = fdqResponsaveisLookup
+    Left = 756
+    Top = 312
+  end
+  object dsResponsaveis: TDataSource
+    DataSet = fdqResponsaveis
+    OnStateChange = dsResponsaveisStateChange
+    Left = 648
+    Top = 312
   end
 end
