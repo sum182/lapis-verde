@@ -157,7 +157,7 @@ begin
       Exit;
 
   fdqAgenda.Cancel;
-  SetStatus('Mensagem cancelada com suceso!');
+  SetStatus('Mensagem cancelada com sucesso!');
 
   Close;
   //NovaAgenda;

@@ -194,8 +194,12 @@ end;
 
 procedure TfrmCadastroEscola.FormCreate(Sender: TObject);
 begin
+  if not(UsuarioIsAdminSistema) then
+    smCadPadrao.Botoes:= [Localizar,Alterar,Salvar,Cancelar,LocalizarTudo];
+
   inherited;
   SetSQLEscolaIdBusca(smCadPadrao);
+
 end;
 
 procedure TfrmCadastroEscola.FormShow(Sender: TObject);
@@ -204,6 +208,7 @@ begin
   OpenQuerys;
   SetPgtCtrlDefaut;
   ViewComponents;
+
 end;
 
 procedure TfrmCadastroEscola.grPesquisaDblClick(Sender: TObject);

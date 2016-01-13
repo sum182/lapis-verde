@@ -140,7 +140,6 @@
             <Form>frmMensagens</Form>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smCrypt.pas"/>
-        <DCCReference Include="C:\Componentes\sum182\D15\Units\RC6Enc.pas"/>
         <DCCReference Include="untLogin.pas">
             <Form>frmLogin</Form>
         </DCCReference>
