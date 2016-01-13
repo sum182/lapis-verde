@@ -1,4 +1,8 @@
 
+- Cad Escola - analisar botoes ativos no cadastro - somente admin
+- Cad Padrao - botão alterar não esta habilitado
+
+
 relacionamento aluno X resposaveis
 
 
