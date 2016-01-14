@@ -16,19 +16,13 @@ uses
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, Vcl.ExtCtrls, Vcl.DBCtrls,
   cxDropDownEdit, cxCalendar, cxDBEdit, cxMemo, cxTextEdit, cxMaskEdit, cxSpinEdit, Vcl.StdCtrls, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.Menus, cxButtons, cxGroupBox, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxLabel, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ComCtrls, cxListView;
+  Vcl.DBGrids, Vcl.ComCtrls, cxListView, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
+  cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView, cxGrid;
 
 type
   TfrmMensagens = class(TForm)
-    cxGroupBox1: TcxGroupBox;
-    cxGroupBox2: TcxGroupBox;
-    btnEnviar: TcxButton;
-    cxGroupBox3: TcxGroupBox;
     fdqAluno: TFDQuery;
     dsAluno: TDataSource;
-    cmbbxAluno: TcxLookupComboBox;
-    lblAluno: TcxLabel;
-    cxListView1: TcxListView;
     fdqMensagem: TFDQuery;
     dsMensagem: TDataSource;
     fdqMensagemmensagem_id: TFDAutoIncField;
@@ -38,10 +32,7 @@ type
     fdqMensagemfuncionario_id: TIntegerField;
     fdqMensagemaluno_id: TIntegerField;
     fdqMensagemescola_id: TIntegerField;
-    memoMensagem: TcxMemo;
     fdqMensagemresponsavel_id: TIntegerField;
-    cxGroupBox4: TcxGroupBox;
-    cxListView2: TcxListView;
     fdqMsgHistorico: TFDQuery;
     FDAutoIncField1: TFDAutoIncField;
     MemoField1: TMemoField;
@@ -52,7 +43,23 @@ type
     IntegerField3: TIntegerField;
     IntegerField4: TIntegerField;
     dsMsgHistorico: TDataSource;
+    gbxEsquerda: TcxGroupBox;
+    gbxGeral: TcxGroupBox;
+    cxGroupBox2: TcxGroupBox;
+    btnEnviar: TcxButton;
+    memoMensagem: TcxMemo;
+    cxGroupBox1: TcxGroupBox;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
     DBGrid1: TDBGrid;
+    cmbbxAluno: TcxLookupComboBox;
+    lblAluno: TcxLabel;
+    cxGrid1DBTableView1nome_completo: TcxGridDBColumn;
+    cxStyleRepository1: TcxStyleRepository;
+    cxStyle1: TcxStyle;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
     procedure FormShow(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnEnviarClick(Sender: TObject);

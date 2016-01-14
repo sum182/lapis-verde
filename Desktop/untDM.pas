@@ -61,6 +61,7 @@ type
     fIniServer: string;
     fIniDriverID: string;
     fVendorLib:string;
+    fPort:string;
     fIdEscola:integer;
     procedure LerIni;
     procedure ConexaoBD;
@@ -84,7 +85,7 @@ implementation
 
 { %CLASSGROUP 'Vcl.Controls.TControl' }
 
-uses untMenuPrincipal, smMensagens,Variants;
+uses untMenuPrincipal, smMensagens,smCrypt,Variants;
 
 {$R *.dfm}
 { TDM }
@@ -106,12 +107,13 @@ begin
     try
       Dir := ExtractFilePath(Application.Exename);
       Ini := TIniFile.Create(Dir + 'Agenda.ini');
-      fIniDataBase := Ini.ReadString('BD', 'Database', EmptyStr);
-      fIniUser_Name := Ini.ReadString('BD', 'User_Name', EmptyStr);
-      fIniPassword := Ini.ReadString('BD', 'Password', EmptyStr);
+      fIniDataBase := Decrypt(Ini.ReadString('BD', 'Database', EmptyStr));
+      fIniUser_Name :=  Decrypt(Ini.ReadString('BD', 'User_Name', EmptyStr));
+      fIniPassword := Decrypt(Ini.ReadString('BD', 'Password', EmptyStr));
       fIniServer := Ini.ReadString('BD', 'Server', EmptyStr);
       fIniDriverID := Ini.ReadString('BD', 'DriverID', EmptyStr);
       fVendorLib:=Ini.ReadString('BD', 'VendorLib', EmptyStr);
+      fPort:= Ini.ReadString('BD', 'Port', EmptyStr);
       fIdEscola:=Ini.ReadInteger('Configuracoes', 'IdEscola',0);
     except
       on E: Exception do
@@ -152,6 +154,7 @@ begin
     DM.FDConnection.Params.Values['Password'] := fIniPassword;
     DM.FDConnection.Params.Values['Server'] := fIniServer;
     DM.FDConnection.Params.Values['DriverID'] := fIniDriverID;
+    DM.FDConnection.Params.Values['Port'] := fPort;
     DM.FDMySQLDriverLink.VendorLib:= fVendorLib;
     DM.FDConnection.Connected := True;
   except

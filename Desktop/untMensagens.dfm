@@ -3,7 +3,7 @@ object frmMensagens: TfrmMensagens
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Mensagens'
-  ClientHeight = 437
+  ClientHeight = 638
   ClientWidth = 981
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,67 +17,63 @@ object frmMensagens: TfrmMensagens
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object cxGroupBox1: TcxGroupBox
-    Left = 0
-    Top = 71
-    Align = alClient
-    Caption = 'Mensagem'
-    TabOrder = 0
-    ExplicitLeft = 88
-    ExplicitTop = 0
-    Height = 249
-    Width = 981
-    object cxListView1: TcxListView
-      Left = 16
-      Top = 24
-      Width = 377
-      Height = 219
-      Columns = <>
-      TabOrder = 0
-    end
-  end
-  object cxGroupBox2: TcxGroupBox
-    Left = 0
-    Top = 320
-    Align = alBottom
-    TabOrder = 1
-    Height = 117
-    Width = 981
-    object btnEnviar: TcxButton
-      Left = 399
-      Top = 80
-      Width = 78
-      Height = 25
-      Align = alCustom
-      Caption = 'Enviar'
-      Default = True
-      OptionsImage.ImageIndex = 32
-      OptionsImage.Images = DM.ImageList1
-      TabOrder = 0
-      OnClick = btnEnviarClick
-    end
-    object memoMensagem: TcxMemo
-      Left = 16
-      Top = 6
-      Lines.Strings = (
-        'memoMensagem')
-      Properties.OnChange = memoMensagemPropertiesChange
-      TabOrder = 1
-      Height = 89
-      Width = 377
-    end
-  end
-  object cxGroupBox3: TcxGroupBox
+  object gbxEsquerda: TcxGroupBox
     Left = 0
     Top = 0
-    Align = alTop
-    TabOrder = 2
-    ExplicitWidth = 584
-    Height = 71
-    Width = 981
+    Align = alLeft
+    TabOrder = 0
+    Height = 638
+    Width = 289
+    object Bevel1: TBevel
+      Left = 120
+      Top = 296
+      Width = 50
+      Height = 50
+    end
+    object Bevel2: TBevel
+      Left = 2
+      Top = 5
+      Width = 285
+      Height = 84
+      Align = alTop
+    end
+    object cxGrid1: TcxGrid
+      Left = 2
+      Top = 89
+      Width = 285
+      Height = 547
+      Align = alClient
+      TabOrder = 0
+      ExplicitLeft = 33
+      ExplicitTop = 199
+      ExplicitWidth = 250
+      ExplicitHeight = 200
+      object cxGrid1DBTableView1: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsAluno
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.GroupByBox = False
+        Styles.Content = cxStyle1
+        object cxGrid1DBTableView1nome_completo: TcxGridDBColumn
+          Caption = 'Nome'
+          DataBinding.FieldName = 'nome_completo'
+          Width = 251
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxGrid1DBTableView1
+      end
+    end
     object cmbbxAluno: TcxLookupComboBox
-      Left = 16
-      Top = 36
+      Left = 20
+      Top = 48
       Properties.DropDownListStyle = lsFixedList
       Properties.KeyFieldNames = 'aluno_id'
       Properties.ListColumns = <
@@ -87,44 +83,73 @@ object frmMensagens: TfrmMensagens
       Properties.ListOptions.ShowHeader = False
       Properties.ListSource = dsAluno
       Properties.OnChange = cmbbxAlunoPropertiesChange
-      TabOrder = 0
+      TabOrder = 1
       Width = 200
     end
     object lblAluno: TcxLabel
-      Left = 16
-      Top = 18
+      Left = 20
+      Top = 25
       Caption = 'Aluno'
     end
   end
-  object cxGroupBox4: TcxGroupBox
-    Left = 0
-    Top = 71
+  object gbxGeral: TcxGroupBox
+    Left = 289
+    Top = 0
     Align = alClient
-    Caption = 'Mensagem'
-    TabOrder = 3
-    ExplicitLeft = 8
-    Height = 249
-    Width = 981
-    object cxListView2: TcxListView
-      Left = 16
-      Top = 24
-      Width = 377
-      Height = 219
-      Columns = <>
+    TabOrder = 1
+    Height = 638
+    Width = 692
+    object cxGroupBox2: TcxGroupBox
+      Left = 2
+      Top = 519
+      Align = alBottom
       TabOrder = 0
+      Height = 117
+      Width = 688
+      object btnEnviar: TcxButton
+        Left = 399
+        Top = 80
+        Width = 78
+        Height = 25
+        Align = alCustom
+        Caption = 'Enviar'
+        Default = True
+        OptionsImage.ImageIndex = 32
+        OptionsImage.Images = DM.ImageList1
+        TabOrder = 0
+        OnClick = btnEnviarClick
+      end
+      object memoMensagem: TcxMemo
+        Left = 16
+        Top = 6
+        Lines.Strings = (
+          'memoMensagem')
+        Properties.OnChange = memoMensagemPropertiesChange
+        TabOrder = 1
+        Height = 89
+        Width = 377
+      end
     end
-    object DBGrid1: TDBGrid
-      Left = 472
-      Top = 24
-      Width = 473
-      Height = 201
-      DataSource = dsMsgHistorico
+    object cxGroupBox1: TcxGroupBox
+      Left = 2
+      Top = 5
+      Align = alClient
       TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
+      Height = 514
+      Width = 688
+      object DBGrid1: TDBGrid
+        Left = 32
+        Top = 291
+        Width = 369
+        Height = 107
+        DataSource = dsMsgHistorico
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
     end
   end
   object fdqAluno: TFDQuery
@@ -164,7 +189,6 @@ object frmMensagens: TfrmMensagens
     Top = 272
   end
   object fdqMensagem: TFDQuery
-    Active = True
     BeforeOpen = fdqMensagemBeforeOpen
     OnNewRecord = fdqMensagemNewRecord
     Connection = DM.FDConnection
@@ -191,6 +215,7 @@ object frmMensagens: TfrmMensagens
       FieldName = 'mensagem_id'
       Origin = 'mensagem_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdqMensagemmsg: TMemoField
       AutoGenerateValue = arDefault
@@ -345,5 +370,18 @@ object frmMensagens: TfrmMensagens
     DataSet = fdqMsgHistorico
     Left = 664
     Top = 272
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    Left = 104
+    Top = 448
+    PixelsPerInch = 96
+    object cxStyle1: TcxStyle
+      AssignedValues = [svFont]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -30
+      Font.Name = 'Tahoma'
+      Font.Style = []
+    end
   end
 end
