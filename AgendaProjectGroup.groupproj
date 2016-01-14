@@ -15,6 +15,9 @@
         <Projects Include="Desktop\Agenda.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Criptografia\Criptografia.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="Agenda:Make">
         <MSBuild Projects="Desktop\Agenda.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Criptografia">
+        <MSBuild Projects="Criptografia\Criptografia.dproj"/>
+    </Target>
+    <Target Name="Criptografia:Clean">
+        <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Criptografia:Make">
+        <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Sum182;Sum182D15;Leitura;Agenda"/>
+        <CallTarget Targets="Sum182;Sum182D15;Leitura;Agenda;Criptografia"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Leitura:Clean;Agenda:Clean"/>
+        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Leitura:Clean;Agenda:Clean;Criptografia:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Leitura:Make;Agenda:Make"/>
+        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Leitura:Make;Agenda:Make;Criptografia:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

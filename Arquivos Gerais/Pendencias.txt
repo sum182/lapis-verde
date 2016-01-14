@@ -1,21 +1,10 @@
 
-- Cad Escola - analisar botoes ativos no cadastro - somente admin
-- Cad Padrao - botão alterar não esta habilitado
-
-
-relacionamento aluno X resposaveis
-
+----Desktop--------------------------------------------------------------------------------------
 
 ***Nome da aplicação
   Nome da Aplicacao
   Alterar metodo do dm
   testar menu principal
-
-
-***INI
-  Criptografar os itens abaixo
-  Tirar a senha do ini
-  Colocar porta no INI
 
 
 ***Menu Principal
@@ -38,9 +27,10 @@ Vinculo de Alunos
 ao Deletar e depois incluir o msm aluno ele fica duplicado
 
 
+***Funcionalidade de Mensagens
+Após desenvolvimento do mobile estudar pegar a parte de msg e colocar no desktop
 
 
-------------------------------------------------------------------------------------------
 
 ***Futuro
    ***Agenda
@@ -52,3 +42,13 @@ ao Deletar e depois incluir o msm aluno ele fica duplicado
  
    ***Admin
    Funcionario Admin
+
+
+------------------------------------------------------------------------------------------
+
+
+
+
+
+----Mobile--------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
