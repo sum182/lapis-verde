@@ -9,7 +9,7 @@
 
 ***Cadastros
    Alterar buscas e colocar rg/cpf
-
+   erro na busca de dt nascimento
 
 ***Verificações
    ver tds querys se tem algo com agenda.
