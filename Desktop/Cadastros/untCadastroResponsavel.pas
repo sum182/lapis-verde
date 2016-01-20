@@ -107,6 +107,7 @@ type
     procedure dsAlunosStateChange(Sender: TObject);
     procedure fdqAlunosAfterScroll(DataSet: TDataSet);
     procedure fdqAlunosBeforeDelete(DataSet: TDataSet);
+    procedure BuProcessarClick(Sender: TObject);
   private
     procedure OpenQuerys;
     procedure SetPgtCtrlDefaut;
@@ -122,7 +123,7 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno;
+uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno, smGeral;
 
 procedure TfrmCadastroResponsavel.AcCancelarExecute(Sender: TObject);
 begin
@@ -165,6 +166,28 @@ begin
     Exit;
 
   fdqAlunos.Delete;
+end;
+
+procedure TfrmCadastroResponsavel.BuProcessarClick(Sender: TObject);
+var
+  ValorEdit: string;
+  ValorSomenteNumero: string;
+begin
+
+  if ( (UpperCase(CoBoCampos.Text) = 'RG') or (UpperCase(CoBoCampos.Text) = 'CPF')) then
+  begin
+    try
+      ValorEdit:= EdConteudoTexto.Text;
+      ValorSomenteNumero:= SomenteNumero(ValorEdit);
+      EdConteudoTexto.Text:= ValorSomenteNumero;
+      inherited;
+    finally
+      EdConteudoTexto.Text:= ValorEdit;
+    end;
+  end
+  else
+    inherited;
+
 end;
 
 procedure TfrmCadastroResponsavel.dsAlunosStateChange(Sender: TObject);

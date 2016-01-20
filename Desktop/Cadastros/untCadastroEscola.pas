@@ -36,7 +36,7 @@ type
     Label3: TLabel;
     cxDBMemo1: TcxDBMemo;
     Label9: TLabel;
-    chkEscola: TcxDBCheckBox;
+    chkEscolaAtiva: TcxDBCheckBox;
     dsEndereco: TDataSource;
     dsTelefone: TDataSource;
     cxGroupBox1: TcxGroupBox;
@@ -68,7 +68,7 @@ type
     cxDBSpinEdit2: TcxDBSpinEdit;
     cxDBMaskEdit2: TcxDBMaskEdit;
     cxDBComboBox1: TcxDBComboBox;
-    cxDBTextEdit3: TcxDBTextEdit;
+    edtId: TcxDBTextEdit;
     fdqCadescola_id: TFDAutoIncField;
     fdqCadnome_fantasia: TStringField;
     fdqCadrazao_social: TStringField;
@@ -79,7 +79,7 @@ type
     fdqCadinformacoes_gerais: TMemoField;
     fdqTelefone: TFDQuery;
     fdqEndereco: TFDQuery;
-    Label2: TLabel;
+    lblId: TLabel;
     procedure FormShow(Sender: TObject);
     procedure grPesquisaDblClick(Sender: TObject);
     procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
@@ -252,7 +252,9 @@ end;
 
 procedure TfrmCadastroEscola.ViewComponents;
 begin
-  chkEscola.Visible := UsuarioIsAdminSistema;
+  chkEscolaAtiva.Visible := UsuarioIsAdminSistema;
+  lblId.Visible:= UsuarioIsAdminSistema;
+  edtId.Visible := UsuarioIsAdminSistema;
 end;
 
 end.

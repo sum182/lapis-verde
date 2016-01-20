@@ -7,12 +7,6 @@
   testar menu principal
 
 
-***Menu Principal
-  Hints
-  Nomes botoes
-  Imagens
-
-
 ***Cadastros
    Alterar buscas e colocar rg/cpf
 

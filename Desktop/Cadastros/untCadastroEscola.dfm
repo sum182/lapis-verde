@@ -1,31 +1,23 @@
 inherited frmCadastroEscola: TfrmCadastroEscola
   Caption = 'Cadastro de Escola'
-  ClientHeight = 525
+  ClientHeight = 637
   ClientWidth = 1038
   OnCloseQuery = FormCloseQuery
   ExplicitWidth = 1054
-  ExplicitHeight = 563
+  ExplicitHeight = 675
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
     Width = 1038
     ExplicitWidth = 1038
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 14
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 70
-    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1038
-    Height = 484
+    Height = 596
     ActivePage = TaShCadastro
     ExplicitWidth = 1038
     ExplicitHeight = 484
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1030
       ExplicitHeight = 456
       inherited grbxPesquisa: TGroupBox
@@ -34,23 +26,11 @@ inherited frmCadastroEscola: TfrmCadastroEscola
         inherited ToolBar1: TToolBar
           Width = 1020
           ExplicitWidth = 1020
-          inherited ToolButton3: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton4: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton5: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton6: TToolButton
-            ExplicitWidth = 24
-          end
         end
       end
       inherited grPesquisa: TsmDBGrid
         Width = 1030
-        Height = 341
+        Height = 453
         DataSource = dsBusca
         Columns = <
           item
@@ -105,44 +85,44 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end>
       end
       inherited stbrConsulta: TStatusBar
-        Top = 438
+        Top = 550
         Width = 1030
         ExplicitTop = 438
         ExplicitWidth = 1030
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1030
       ExplicitHeight = 456
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
         Width = 1030
-        Height = 456
+        Height = 568
         Align = alClient
         TabOrder = 0
         Properties.ActivePage = cxTabSheet1
         Properties.CustomButtons.Buttons = <>
-        ClientRectBottom = 452
+        ExplicitHeight = 456
+        ClientRectBottom = 564
         ClientRectLeft = 4
         ClientRectRight = 1026
         ClientRectTop = 24
         object cxTabSheet1: TcxTabSheet
           Caption = 'Dados Principais'
           ImageIndex = 0
+          ExplicitHeight = 428
           object Label8: TLabel
             Left = 30
-            Top = 221
+            Top = 173
             Width = 24
             Height = 13
             Caption = 'Email'
             FocusControl = cxDBTextEdit4
           end
           object Label7: TLabel
-            Left = 376
-            Top = 171
+            Left = 374
+            Top = 123
             Width = 70
             Height = 13
             Caption = 'Data Cadastro'
@@ -150,14 +130,14 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object Label5: TLabel
             Left = 30
-            Top = 171
+            Top = 123
             Width = 25
             Height = 13
             Caption = 'CNPJ'
           end
           object Label4: TLabel
             Left = 30
-            Top = 122
+            Top = 74
             Width = 60
             Height = 13
             Caption = 'Raz'#227'o Social'
@@ -165,7 +145,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object Label3: TLabel
             Left = 30
-            Top = 69
+            Top = 21
             Width = 71
             Height = 13
             Caption = 'Nome Fantasia'
@@ -173,14 +153,14 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object Label9: TLabel
             Left = 30
-            Top = 274
+            Top = 226
             Width = 93
             Height = 13
             Caption = 'Informa'#231#245'es Gerais'
           end
-          object Label2: TLabel
-            Left = 30
-            Top = 16
+          object lblId: TLabel
+            Left = 742
+            Top = 24
             Width = 11
             Height = 13
             Caption = 'ID'
@@ -188,48 +168,48 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object cxDBTextEdit4: TcxDBTextEdit
             Left = 30
-            Top = 239
+            Top = 191
             DataBinding.DataField = 'email'
             DataBinding.DataSource = dsCad
-            TabOrder = 5
+            TabOrder = 6
             Width = 481
           end
           object cxDBDateEdit1: TcxDBDateEdit
-            Left = 376
-            Top = 188
+            Left = 374
+            Top = 140
             DataBinding.DataField = 'data_cadastro'
             DataBinding.DataSource = dsCad
-            TabOrder = 4
+            TabOrder = 5
             Width = 137
           end
           object cxDBTextEdit2: TcxDBTextEdit
             Left = 30
-            Top = 139
+            Top = 91
             DataBinding.DataField = 'razao_social'
             DataBinding.DataSource = dsCad
-            TabOrder = 2
+            TabOrder = 3
             Width = 481
           end
           object cxDBTextEdit1: TcxDBTextEdit
             Left = 30
-            Top = 88
+            Top = 40
             DataBinding.DataField = 'nome_fantasia'
             DataBinding.DataSource = dsCad
-            TabOrder = 1
+            TabOrder = 0
             Width = 481
           end
           object cxDBMemo1: TcxDBMemo
             Left = 30
-            Top = 293
+            Top = 245
             DataBinding.DataField = 'informacoes_gerais'
             DataBinding.DataSource = dsCad
-            TabOrder = 6
+            TabOrder = 8
             Height = 113
             Width = 481
           end
-          object chkEscola: TcxDBCheckBox
+          object chkEscolaAtiva: TcxDBCheckBox
             Left = 561
-            Top = 88
+            Top = 40
             Caption = 'Escola Ativa'
             DataBinding.DataField = 'ativo'
             DataBinding.DataSource = dsCad
@@ -241,9 +221,9 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object cxGroupBox1: TcxGroupBox
             Left = 563
-            Top = 122
+            Top = 74
             Caption = 'Telefones'
-            TabOrder = 8
+            TabOrder = 2
             Height = 308
             Width = 456
             object Bevel1: TBevel
@@ -328,26 +308,27 @@ inherited frmCadastroEscola: TfrmCadastroEscola
           end
           object cxDBMaskEdit2: TcxDBMaskEdit
             Left = 30
-            Top = 188
+            Top = 140
             DataBinding.DataField = 'cnpj'
             DataBinding.DataSource = dsCad
             Properties.EditMask = '99.999.999/9999-99;0;_'
-            TabOrder = 3
+            TabOrder = 4
             Width = 283
           end
-          object cxDBTextEdit3: TcxDBTextEdit
-            Left = 30
-            Top = 32
+          object edtId: TcxDBTextEdit
+            Left = 742
+            Top = 40
             DataBinding.DataField = 'escola_id'
             DataBinding.DataSource = dsCad
             Enabled = False
-            TabOrder = 0
+            TabOrder = 1
             Width = 121
           end
         end
         object cxTabSheet2: TcxTabSheet
           Caption = 'Endere'#231'o'
           ImageIndex = 1
+          ExplicitHeight = 428
           object Label6: TLabel
             Left = 32
             Top = 24
@@ -503,14 +484,14 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       item
         FieldName = 'escola_id'
         DisplayName = 'Escola_id'
-        ShowCombo = True
+        ShowCombo = False
         ShowGrid = True
         ShowSelect = True
         FieldType = ftAutoInc
       end
       item
         FieldName = 'nome_fantasia'
-        DisplayName = 'Nome_fantasia'
+        DisplayName = 'Nome Fantasia'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -518,7 +499,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       end
       item
         FieldName = 'razao_social'
-        DisplayName = 'Razao_social'
+        DisplayName = 'Raz'#227'o Social'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -526,7 +507,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       end
       item
         FieldName = 'cnpj'
-        DisplayName = 'Cnpj'
+        DisplayName = 'CNPJ'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -535,25 +516,25 @@ inherited frmCadastroEscola: TfrmCadastroEscola
       item
         FieldName = 'ativo'
         DisplayName = 'Ativo'
-        ShowCombo = True
-        ShowGrid = True
-        ShowSelect = True
+        ShowCombo = False
+        ShowGrid = False
+        ShowSelect = False
         FieldType = ftString
       end
       item
         FieldName = 'data_cadastro'
         DisplayName = 'Data_cadastro'
-        ShowCombo = True
-        ShowGrid = True
-        ShowSelect = True
+        ShowCombo = False
+        ShowGrid = False
+        ShowSelect = False
         FieldType = ftDate
       end
       item
         FieldName = 'email'
         DisplayName = 'Email'
-        ShowCombo = True
-        ShowGrid = True
-        ShowSelect = True
+        ShowCombo = False
+        ShowGrid = False
+        ShowSelect = False
         FieldType = ftString
       end
       item
@@ -568,7 +549,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
   end
   inherited imgEnabled: TImageList
     Bitmap = {
-      494C01010B000C00880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -973,7 +954,7 @@ inherited frmCadastroEscola: TfrmCadastroEscola
   end
   inherited imgDisabled: TImageList
     Bitmap = {
-      494C01010B000C00880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

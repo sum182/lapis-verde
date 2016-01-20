@@ -14,7 +14,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   inherited PaCoPadrao: TPageControl
     Width = 1073
     Height = 541
-    ActivePage = TaShCadastro
     ExplicitWidth = 1073
     ExplicitHeight = 541
     inherited TaShConsulta: TTabSheet
@@ -99,8 +98,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1065
       ExplicitHeight = 513
       object cxPageControl1: TcxPageControl
@@ -259,8 +256,6 @@ inherited frmCadastroAluno: TfrmCadastroAluno
         object cxTabSheet2: TcxTabSheet
           Caption = 'Respons'#225'veis'
           ImageIndex = 1
-          ExplicitLeft = 5
-          ExplicitTop = 25
           object cxLabel1: TcxLabel
             Left = 35
             Top = 32
@@ -397,7 +392,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
       item
         FieldName = 'data_nascimento'
-        DisplayName = 'Data_nascimento'
+        DisplayName = 'Data de Nascimento'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -413,7 +408,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
       item
         FieldName = 'rg'
-        DisplayName = 'Rg'
+        DisplayName = 'RG'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -421,11 +416,11 @@ inherited frmCadastroAluno: TfrmCadastroAluno
       end
       item
         FieldName = 'cpf'
-        DisplayName = 'Cpf'
+        DisplayName = 'CPF'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
-        FieldType = ftLargeint
+        FieldType = ftString
       end
       item
         FieldName = 'ativo'
@@ -463,7 +458,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     Left = 952
     Top = 368
     Bitmap = {
-      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -870,7 +865,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     Left = 952
     Top = 416
     Bitmap = {
-      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -63,6 +63,7 @@ type
     procedure fdqCadAfterOpen(DataSet: TDataSet);
     procedure fdqCadBeforePost(DataSet: TDataSet);
     procedure AcApplyUpdateExecute(Sender: TObject);
+    procedure BuProcessarClick(Sender: TObject);
   private
     procedure OpenQuerys;
     procedure ValidarCadastro;
@@ -77,7 +78,7 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, untFuncoes, smCrypt,System.NetEncoding, smMensagens;
+uses untDM, untFuncoes, smCrypt,System.NetEncoding, smMensagens, smGeral;
 
 procedure TfrmCadastroFuncionario.AcApplyUpdateExecute(Sender: TObject);
 begin
@@ -89,6 +90,28 @@ procedure TfrmCadastroFuncionario.AcNovoExecute(Sender: TObject);
 begin
   inherited;
   fdqCadnome.FocusControl;
+end;
+
+procedure TfrmCadastroFuncionario.BuProcessarClick(Sender: TObject);
+var
+  ValorEdit: string;
+  ValorSomenteNumero: string;
+begin
+
+  if ( (UpperCase(CoBoCampos.Text) = 'RG') or (UpperCase(CoBoCampos.Text) = 'CPF')) then
+  begin
+    try
+      ValorEdit:= EdConteudoTexto.Text;
+      ValorSomenteNumero:= SomenteNumero(ValorEdit);
+      EdConteudoTexto.Text:= ValorSomenteNumero;
+      inherited;
+    finally
+      EdConteudoTexto.Text:= ValorEdit;
+    end;
+  end
+  else
+    inherited;
+
 end;
 
 procedure TfrmCadastroFuncionario.Button2Click(Sender: TObject);

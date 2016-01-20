@@ -11,22 +11,13 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   inherited ToBaCadastro: TToolBar
     Width = 1230
     ExplicitWidth = 1230
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 66
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 66
-    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1230
     Height = 483
-    ActivePage = TaShCadastro
     ExplicitWidth = 1230
     ExplicitHeight = 483
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1222
       ExplicitHeight = 455
       inherited grbxPesquisa: TGroupBox
@@ -35,18 +26,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
         inherited ToolBar1: TToolBar
           Width = 1212
           ExplicitWidth = 1212
-          inherited ToolButton3: TToolButton
-            ExplicitWidth = 43
-          end
-          inherited ToolButton4: TToolButton
-            ExplicitWidth = 43
-          end
-          inherited ToolButton5: TToolButton
-            ExplicitWidth = 43
-          end
-          inherited ToolButton6: TToolButton
-            ExplicitWidth = 43
-          end
         end
       end
       inherited grPesquisa: TsmDBGrid
@@ -123,6 +102,8 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end
     end
     inherited TaShCadastro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 1222
       ExplicitHeight = 455
       object cxPageControl1: TcxPageControl
@@ -493,6 +474,8 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end
     end
     inherited TaShRelatorio: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 1222
       ExplicitHeight = 455
     end
@@ -534,7 +517,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end
       item
         FieldName = 'rg'
-        DisplayName = 'Rg'
+        DisplayName = 'RG'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -542,7 +525,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end
       item
         FieldName = 'cpf'
-        DisplayName = 'Cpf'
+        DisplayName = 'CPF'
         ShowCombo = True
         ShowGrid = True
         ShowSelect = True
@@ -592,7 +575,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     Left = 1152
     Top = 384
     Bitmap = {
-      494C01010B000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -999,7 +982,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     Left = 1152
     Top = 432
     Bitmap = {
-      494C01010B000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
