@@ -7,14 +7,6 @@
   testar menu principal
 
 
-***Cadastros
-   Alterar buscas e colocar rg/cpf
-   erro na busca de dt nascimento
-
-***Verificações
-   ver tds querys se tem algo com agenda.
-
-
 ***Erros
 Cad Resp
 Vinculo de Alunos
@@ -36,6 +28,10 @@ Após desenvolvimento do mobile estudar pegar a parte de msg e colocar no desktop
  
    ***Admin
    Funcionario Admin
+ 
+   
+   ***Verificações
+   ver tds querys se tem algo com agenda.
 
 
 ------------------------------------------------------------------------------------------

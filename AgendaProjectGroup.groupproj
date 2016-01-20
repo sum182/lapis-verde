@@ -9,9 +9,6 @@
         <Projects Include="C:\Componentes\sum182\D15\Sum182D15.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Desktop\Agenda.dproj">
             <Dependencies/>
         </Projects>
@@ -44,15 +41,6 @@
     <Target Name="Sum182D15:Make">
         <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Leitura">
-        <MSBuild Projects="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj"/>
-    </Target>
-    <Target Name="Leitura:Clean">
-        <MSBuild Projects="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Leitura:Make">
-        <MSBuild Projects="..\MHZ\Leitura de Guias\Fontes\Leitura.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Agenda">
         <MSBuild Projects="Desktop\Agenda.dproj"/>
     </Target>
@@ -72,13 +60,13 @@
         <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="Sum182;Sum182D15;Leitura;Agenda;Criptografia"/>
+        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Leitura:Clean;Agenda:Clean;Criptografia:Clean"/>
+        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Leitura:Make;Agenda:Make;Criptografia:Make"/>
+        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
