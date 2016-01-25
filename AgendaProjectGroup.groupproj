@@ -15,6 +15,12 @@
         <Projects Include="Criptografia\Criptografia.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Server Application\Versao-1\AgendaServer\AgendaServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Device Portable\Versao-1\AgendaDevicePortable.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +65,32 @@
     <Target Name="Criptografia:Make">
         <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Make"/>
     </Target>
+    <Target Name="AgendaServer">
+        <MSBuild Projects="Server Application\Versao-1\AgendaServer\AgendaServer.dproj"/>
+    </Target>
+    <Target Name="AgendaServer:Clean">
+        <MSBuild Projects="Server Application\Versao-1\AgendaServer\AgendaServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AgendaServer:Make">
+        <MSBuild Projects="Server Application\Versao-1\AgendaServer\AgendaServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AgendaDevicePortable">
+        <MSBuild Projects="Device Portable\Versao-1\AgendaDevicePortable.dproj"/>
+    </Target>
+    <Target Name="AgendaDevicePortable:Clean">
+        <MSBuild Projects="Device Portable\Versao-1\AgendaDevicePortable.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AgendaDevicePortable:Make">
+        <MSBuild Projects="Device Portable\Versao-1\AgendaDevicePortable.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia"/>
+        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;AgendaServer;AgendaDevicePortable"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean"/>
+        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean;AgendaServer:Clean;AgendaDevicePortable:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make"/>
+        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make;AgendaServer:Make;AgendaDevicePortable:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
