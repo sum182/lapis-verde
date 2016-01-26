@@ -57,6 +57,7 @@ begin
     begin
       FreeAndNil(frmLogin);
       Application.Terminate;
+      Exit;
     end;
   end;
 
