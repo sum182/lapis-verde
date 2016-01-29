@@ -15,10 +15,10 @@
         <Projects Include="Criptografia\Criptografia.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Server Application\Versao-1\AgendaServer\AgendaServer.dproj">
+        <Projects Include="Server Application\Versao-2\AgendaServer\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Device Portable\Versao-1\AgendaDevicePortable.dproj">
+        <Projects Include="Device Portable\Versao-2\AgendaDevicePortable.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -66,22 +66,22 @@
         <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Make"/>
     </Target>
     <Target Name="AgendaServer">
-        <MSBuild Projects="Server Application\Versao-1\AgendaServer\AgendaServer.dproj"/>
+        <MSBuild Projects="Server Application\Versao-2\AgendaServer\AgendaServer.dproj"/>
     </Target>
     <Target Name="AgendaServer:Clean">
-        <MSBuild Projects="Server Application\Versao-1\AgendaServer\AgendaServer.dproj" Targets="Clean"/>
+        <MSBuild Projects="Server Application\Versao-2\AgendaServer\AgendaServer.dproj" Targets="Clean"/>
     </Target>
     <Target Name="AgendaServer:Make">
-        <MSBuild Projects="Server Application\Versao-1\AgendaServer\AgendaServer.dproj" Targets="Make"/>
+        <MSBuild Projects="Server Application\Versao-2\AgendaServer\AgendaServer.dproj" Targets="Make"/>
     </Target>
     <Target Name="AgendaDevicePortable">
-        <MSBuild Projects="Device Portable\Versao-1\AgendaDevicePortable.dproj"/>
+        <MSBuild Projects="Device Portable\Versao-2\AgendaDevicePortable.dproj"/>
     </Target>
     <Target Name="AgendaDevicePortable:Clean">
-        <MSBuild Projects="Device Portable\Versao-1\AgendaDevicePortable.dproj" Targets="Clean"/>
+        <MSBuild Projects="Device Portable\Versao-2\AgendaDevicePortable.dproj" Targets="Clean"/>
     </Target>
     <Target Name="AgendaDevicePortable:Make">
-        <MSBuild Projects="Device Portable\Versao-1\AgendaDevicePortable.dproj" Targets="Make"/>
+        <MSBuild Projects="Device Portable\Versao-2\AgendaDevicePortable.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;AgendaServer;AgendaDevicePortable"/>
