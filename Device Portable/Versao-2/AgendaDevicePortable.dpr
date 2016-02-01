@@ -5,13 +5,14 @@ uses
   FMX.Forms,
   untTestes in 'untTestes.pas' {Form1},
   Proxy in 'Proxy.pas',
-  untModuloCliente in 'untModuloCliente.pas' {ModuloCliente: TDataModule};
+  untModuloCliente in 'untModuloCliente.pas' {ModuloCliente: TDataModule},
+  smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmTestes, frmTestes);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.Run;
 end.

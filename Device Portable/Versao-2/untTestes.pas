@@ -7,23 +7,30 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Controls.Presentation, FMX.Edit, FMX.StdCtrls, FMX.Layouts,
   FMX.ListBox, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect, FireDAC.Stan.StorageBin,
-  FMX.ListView.Types, FMX.ListView,Proxy;
+  FMX.ListView.Types, FMX.ListView,Proxy, FMX.TabControl;
 
 type
-  TForm1 = class(TForm)
+  TfrmTestes = class(TForm)
+    fdmAlunos: TFDMemTable;
+    FDStanStorageBinLink1: TFDStanStorageBinLink;
+    StyleBookDefaut: TStyleBook;
+    StyleBookAndroid: TStyleBook;
+    TabControl1: TTabControl;
+    TabItem1: TTabItem;
+    TabItem2: TTabItem;
+    TabItem3: TTabItem;
     ListBox1: TListBox;
     Label1: TLabel;
     SpeedButton1: TSpeedButton;
     Edit1: TEdit;
     ListBox2: TListBox;
-    SpeedButton2: TSpeedButton;
-    fdmAlunos: TFDMemTable;
-    FDStanStorageBinLink1: TFDStanStorageBinLink;
-    SpeedButton3: TSpeedButton;
     ListView1: TListView;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure SetStyle;
   private
     { Private declarations }
   public
@@ -31,20 +38,26 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmTestes: TfrmTestes;
 
 implementation
 
 {$R *.fmx}
 
-uses untModuloCliente;
+uses untModuloCliente, smGeralFMX;
 
-procedure TForm1.SpeedButton1Click(Sender: TObject);
+procedure TfrmTestes.SetStyle;
+begin
+  if (IsSysOSAndroid) and (frmTestes.StyleBook <> StyleBookAndroid)then
+    frmTestes.StyleBook := StyleBookAndroid;
+end;
+
+procedure TfrmTestes.SpeedButton1Click(Sender: TObject);
 begin
   Edit1.Text := ModuloCliente.SrvServerMetodosClient.ReverseString(Edit1.Text);
 end;
 
-procedure TForm1.SpeedButton2Click(Sender: TObject);
+procedure TfrmTestes.SpeedButton2Click(Sender: TObject);
 var
   LDataSetList  : TFDJSONDataSets;
 begin
@@ -68,7 +81,7 @@ begin
 
 end;
 
-procedure TForm1.SpeedButton3Click(Sender: TObject);
+procedure TfrmTestes.SpeedButton3Click(Sender: TObject);
 var
   ClientRest: TSrvServerMetodosClient;
   RetClient: TFDJSONDataSets;
