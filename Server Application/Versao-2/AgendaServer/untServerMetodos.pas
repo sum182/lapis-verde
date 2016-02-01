@@ -13,10 +13,12 @@ type
 {$METHODINFO ON}
   TSrvServerMetodos = class(TDataModule)
     fdqAlunos: TFDQuery;
-    FDConnection: TFDConnection;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     FDWaitCursor: TFDGUIxWaitCursor;
     FDStanStorageBinLink1: TFDStanStorageBinLink;
+    FDConnection: TFDConnection;
+    FDConnectionLocal: TFDConnection;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,6 +36,14 @@ implementation
 
 
 uses System.StrUtils;
+
+procedure TSrvServerMetodos.DataModuleCreate(Sender: TObject);
+begin
+  FDConnection.Close;
+  FDConnection.Open;
+
+  FDConnectionLocal.Close;
+end;
 
 function TSrvServerMetodos.EchoString(Value: string): string;
 begin
