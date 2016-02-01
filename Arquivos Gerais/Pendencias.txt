@@ -6,7 +6,7 @@ install clint mysql
 
 
 ----Desktop--------------------------------------------------------------------------------------
-conexao nao aparecer qdo naofor admin
+conexao nao aparecer qdo nao for admin
 
 ***Nome da aplicação
   Nome da Aplicacao
