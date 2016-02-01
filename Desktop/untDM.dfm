@@ -10,11 +10,11 @@ object DM: TDM
   end
   object FDConnection: TFDConnection
     Params.Strings = (
-      'Database=agenda'
-      'User_Name=root'
-      'Password=admin'
+      'Database=agendadb'
+      'User_Name=admin'
+      'Password=senhabdagenda'
+      'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Transaction = FDTransaction
     UpdateTransaction = FDTransaction
@@ -44,7 +44,7 @@ object DM: TDM
     Left = 168
     Top = 224
     Bitmap = {
-      494C01012600AC00180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012600AC00200110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0000000010020000000000000A0
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000495962FF495962FF495962FF495962FF495962FF495962FF4959
@@ -1512,7 +1512,7 @@ object DM: TDM
   object fdqEscola: TFDQuery
     Connection = FDConnection
     SQL.Strings = (
-      'SELECT * FROM escola'#10'where escola_id = :escola_id')
+      'SELECT * FROM escola '#10'where escola_id = :escola_id')
     Left = 320
     Top = 224
     ParamData = <
@@ -1532,5 +1532,16 @@ object DM: TDM
     DataSet = fdqEscola
     Left = 320
     Top = 280
+  end
+  object FDConnectionLocal: TFDConnection
+    Params.Strings = (
+      'Database=agenda'
+      'User_Name=root'
+      'Password=admin'
+      'DriverID=MySQL')
+    Connected = True
+    LoginPrompt = False
+    Left = 42
+    Top = 160
   end
 end

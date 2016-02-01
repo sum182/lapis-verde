@@ -52,6 +52,7 @@ type
     dsFuncionario: TDataSource;
     dsEscola: TDataSource;
     fdqFuncionarionome_completo: TStringField;
+    FDConnectionLocal: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
     procedure FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
   private
@@ -110,7 +111,7 @@ begin
       fIniDataBase := Decrypt(Ini.ReadString('BD', 'Database', EmptyStr));
       fIniUser_Name :=  Decrypt(Ini.ReadString('BD', 'User_Name', EmptyStr));
       fIniPassword := Decrypt(Ini.ReadString('BD', 'Password', EmptyStr));
-      fIniServer := Ini.ReadString('BD', 'Server', EmptyStr);
+      fIniServer := Decrypt(Ini.ReadString('BD', 'Server', EmptyStr));
       fIniDriverID := Ini.ReadString('BD', 'DriverID', EmptyStr);
       fVendorLib:=Ini.ReadString('BD', 'VendorLib', EmptyStr);
       fPort:= Ini.ReadString('BD', 'Port', EmptyStr);
