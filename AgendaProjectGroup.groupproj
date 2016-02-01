@@ -21,6 +21,9 @@
         <Projects Include="Device Portable\Versao-2\AgendaDevicePortable.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\FuelApp\FuelApp.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -83,14 +86,23 @@
     <Target Name="AgendaDevicePortable:Make">
         <MSBuild Projects="Device Portable\Versao-2\AgendaDevicePortable.dproj" Targets="Make"/>
     </Target>
+    <Target Name="FuelApp">
+        <MSBuild Projects="..\FuelApp\FuelApp.dproj"/>
+    </Target>
+    <Target Name="FuelApp:Clean">
+        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FuelApp:Make">
+        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;AgendaServer;AgendaDevicePortable"/>
+        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;AgendaServer;AgendaDevicePortable;FuelApp"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean;AgendaServer:Clean;AgendaDevicePortable:Clean"/>
+        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean;AgendaServer:Clean;AgendaDevicePortable:Clean;FuelApp:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make;AgendaServer:Make;AgendaDevicePortable:Make"/>
+        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make;AgendaServer:Make;AgendaDevicePortable:Make;FuelApp:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
