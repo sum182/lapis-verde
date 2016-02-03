@@ -1,31 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2016/01/29 14:48:58.000.418,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\FormUnit1.pas</Transaction>
-    <Transaction>2016/01/29 14:48:58.000.931,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\WebModuleUnit1.pas</Transaction>
-    <Transaction>2016/01/29 14:48:58.000.643,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\ServerMethodsUnit1.pas</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.241,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\base64.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.369,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\templates\ReverseString.html</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.324,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\base64-min.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.382,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\images\collapse.png</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.351,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\ServerFunctionInvoker.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.339,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\CallbackFramework-min.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.391,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\images\expand.png</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.357,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\css\main.css</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.301,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\json2.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.278,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\ServerFunctionExecutor.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.334,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\ServerFunctionExecutor-min.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.312,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\CallbackFramework.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.375,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\templates\ServerFunctionInvoker.html</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.319,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\ServerFunctions.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.363,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\css\ServerFunctionInvoker.css</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.344,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\connection.js</Transaction>
-    <Transaction>2016/01/29 14:49:08.000.328,=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\js\json2-min.js</Transaction>
-    <Transaction>2016/01/29 15:03:13.000.061,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\FormUnit1.pas=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untFrmMainServer.pas</Transaction>
-    <Transaction>2016/01/29 15:03:13.000.061,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\FormUnit1.dfm=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untFrmMainServer.dfm</Transaction>
-    <Transaction>2016/01/29 15:03:40.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\ServerMethodsUnit1.dfm=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untServerMetodos.dfm</Transaction>
-    <Transaction>2016/01/29 15:03:40.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\ServerMethodsUnit1.pas=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untServerMetodos.pas</Transaction>
-    <Transaction>2016/01/29 15:05:58.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\WebModuleUnit1.dfm=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untWebModulo.dfm</Transaction>
-    <Transaction>2016/01/29 15:05:58.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\WebModuleUnit1.pas=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untWebModulo.pas</Transaction>
+    <Transaction>2016/01/29 15:03:13.000.061,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untFrmMainServer.dfm=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\FormUnit1.dfm</Transaction>
+    <Transaction>2016/01/29 15:03:13.000.061,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untFrmMainServer.pas=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\FormUnit1.pas</Transaction>
+    <Transaction>2016/01/29 15:03:40.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untServerMetodos.pas=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2016/01/29 15:03:40.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untServerMetodos.dfm=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\ServerMethodsUnit1.dfm</Transaction>
+    <Transaction>2016/01/29 15:05:58.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untWebModulo.dfm=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\WebModuleUnit1.dfm</Transaction>
+    <Transaction>2016/01/29 15:05:58.000.786,C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\untWebModulo.pas=C:\Projetos\Agenda\Server Application\Versao-2\AgendaServer\WebModuleUnit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

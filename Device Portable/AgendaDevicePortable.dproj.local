@@ -3,13 +3,13 @@
 	<Transactions>
     <Transaction>2014/11/26 17:19:53.000.465,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2016/01/29 15:11:42.000.366,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2016/01/29 15:12:05.000.137,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\Projetos\Agenda\Device Portable\Versao-2\untTestes.fmx</Transaction>
-    <Transaction>2016/01/29 15:12:05.000.137,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Projetos\Agenda\Device Portable\Versao-2\untTestes.pas</Transaction>
-    <Transaction>2016/01/29 15:12:12.000.021,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Projetos\Agenda\Device Portable\Versao-2\AgendaDevicePortable.dproj</Transaction>
-    <Transaction>2016/01/29 15:15:52.304,=C:\Projetos\Agenda\Device Portable\Versao-2\ClientClassesUnit1.pas</Transaction>
-    <Transaction>2016/01/29 15:15:55.535,=C:\Projetos\Agenda\Device Portable\Versao-2\ClientModuleUnit1.pas</Transaction>
-    <Transaction>2016/01/29 15:34:58.802,C:\Projetos\Agenda\Device Portable\Versao-2\Proxy.pas=C:\Projetos\Agenda\Device Portable\Versao-2\ClientClassesUnit1.pas</Transaction>
-    <Transaction>2016/01/29 15:38:38.015,C:\Projetos\Agenda\Device Portable\Versao-2\untModuloCliente.pas=C:\Projetos\Agenda\Device Portable\Versao-2\ClientModuleUnit1.pas</Transaction>
-    <Transaction>2016/01/29 15:38:38.015,C:\Projetos\Agenda\Device Portable\Versao-2\untModuloCliente.dfm=C:\Projetos\Agenda\Device Portable\Versao-2\ClientModuleUnit1.dfm</Transaction>
+    <Transaction>2016/01/29 15:12:05.000.137,C:\Projetos\Agenda\Device Portable\Versao-2\untTestes.pas=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/01/29 15:12:05.000.137,C:\Projetos\Agenda\Device Portable\Versao-2\untTestes.fmx=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2016/01/29 15:12:12.000.021,C:\Projetos\Agenda\Device Portable\Versao-2\AgendaDevicePortable.dproj=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2016/01/29 15:15:52.000.304,=C:\Projetos\Agenda\Device Portable\Versao-2\ClientClassesUnit1.pas</Transaction>
+    <Transaction>2016/01/29 15:15:55.000.535,=C:\Projetos\Agenda\Device Portable\Versao-2\ClientModuleUnit1.pas</Transaction>
+    <Transaction>2016/01/29 15:34:58.000.802,C:\Projetos\Agenda\Device Portable\Versao-2\ClientClassesUnit1.pas=C:\Projetos\Agenda\Device Portable\Versao-2\Proxy.pas</Transaction>
+    <Transaction>2016/01/29 15:38:38.000.015,C:\Projetos\Agenda\Device Portable\Versao-2\ClientModuleUnit1.dfm=C:\Projetos\Agenda\Device Portable\Versao-2\untModuloCliente.dfm</Transaction>
+    <Transaction>2016/01/29 15:38:38.000.015,C:\Projetos\Agenda\Device Portable\Versao-2\ClientModuleUnit1.pas=C:\Projetos\Agenda\Device Portable\Versao-2\untModuloCliente.pas</Transaction>
   </Transactions>
 </BorlandProject>
