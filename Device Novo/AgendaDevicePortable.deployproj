@@ -4,14 +4,6 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <ItemGroup Condition="'$(Platform)'=='Android'">
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortable\res\drawable-xlarge\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortable\res\drawable-large\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
@@ -28,22 +20,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortable\res\drawable-mdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="c:\program files\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortable\library\lib\armeabi\</RemoteDir>
-            <RemoteName>libAgendaDevicePortable.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="Android\Debug\splash_image_def.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortable\res\drawable\</RemoteDir>
             <RemoteName>splash_image_def.xml</RemoteName>
@@ -55,14 +31,6 @@
         <DeployFile Include="C:\Users\Public\Documents\Embarcadero\Studio\15.0\PlatformSDKs\android-ndk-r9c\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortable\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>gdbserver</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortable\</RemoteDir>
-            <RemoteName>AndroidManifest.xml</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -92,22 +60,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\styles.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortable\res\values\</RemoteDir>
-            <RemoteName>styles.xml</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="c:\program files\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortable\library\lib\x86\</RemoteDir>
-            <RemoteName>libAgendaDevicePortable.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortable\res\drawable-ldpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -115,15 +67,6 @@
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Debug\libAgendaDevicePortable.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortable\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libAgendaDevicePortable.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="c:\program files\embarcadero\studio\15.0\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortable\library\lib\mips\</RemoteDir>
@@ -149,9 +92,107 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\res\drawable-xlarge\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\res\drawable-mdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="c:\program files\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\library\lib\armeabi\</RemoteDir>
+            <RemoteName>libAgendaDevicePortable.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\</RemoteDir>
+            <RemoteName>AndroidManifest.xml</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\res\values\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="c:\program files\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\library\lib\x86\</RemoteDir>
+            <RemoteName>libAgendaDevicePortable.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortable\.assets\internal\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\libAgendaDevicePortable.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libAgendaDevicePortable.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\.assets\internal\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
     </ItemGroup>
-    <ItemGroup Condition="'$(Platform)'=='iOSDevice'"/>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice'">
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortable.app\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable.app\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortable\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="Win32\Debug\AgendaDevicePortable.exe" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortable\</RemoteDir>
             <RemoteName>AgendaDevicePortable.exe</RemoteName>
@@ -161,12 +202,36 @@
             <Overwrite>True</Overwrite>
             <Required>True</Required>
         </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='OSX32'">
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortable.app\Contents\MacOS\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib">
             <RemoteDir>AgendaDevicePortable.app\Contents\MacOS\</RemoteDir>
             <RemoteName>libcgunwind.1.0.dylib</RemoteName>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable.app\Contents\MacOS\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -181,6 +246,39 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortable.app\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable.app\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
     </ItemGroup>
-    <ItemGroup Condition="'$(Platform)'=='Win64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Win64'">
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortable\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortable\</RemoteDir>
+            <RemoteName>db.s3db</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
 </Project>

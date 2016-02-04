@@ -47,7 +47,7 @@ begin
     end;
 
     FDConnectionSQLite.Open;
-
+    ShowMessage(DataBase);
   except
    on E: Exception do
         ShowMessage('Erro ao conectar ao banco de dados local!' + #13 +
