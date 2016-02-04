@@ -24,6 +24,12 @@
         <Projects Include="Server Application\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Device Portable\AgendaDevicePortable2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Forms\NovaTecnicaNavegacao.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -95,14 +101,32 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
     </Target>
+    <Target Name="AgendaDevicePortable2">
+        <MSBuild Projects="Device Portable\AgendaDevicePortable2.dproj"/>
+    </Target>
+    <Target Name="AgendaDevicePortable2:Clean">
+        <MSBuild Projects="Device Portable\AgendaDevicePortable2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AgendaDevicePortable2:Make">
+        <MSBuild Projects="Device Portable\AgendaDevicePortable2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="NovaTecnicaNavegacao">
+        <MSBuild Projects="Forms\NovaTecnicaNavegacao.dproj"/>
+    </Target>
+    <Target Name="NovaTecnicaNavegacao:Clean">
+        <MSBuild Projects="Forms\NovaTecnicaNavegacao.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NovaTecnicaNavegacao:Make">
+        <MSBuild Projects="Forms\NovaTecnicaNavegacao.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;FuelApp;AgendaDevicePortable;AgendaServer"/>
+        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;FuelApp;AgendaDevicePortable;AgendaServer;AgendaDevicePortable2;NovaTecnicaNavegacao"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean;FuelApp:Clean;AgendaDevicePortable:Clean;AgendaServer:Clean"/>
+        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean;FuelApp:Clean;AgendaDevicePortable:Clean;AgendaServer:Clean;AgendaDevicePortable2:Clean;NovaTecnicaNavegacao:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make;FuelApp:Make;AgendaDevicePortable:Make;AgendaServer:Make"/>
+        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make;FuelApp:Make;AgendaDevicePortable:Make;AgendaServer:Make;AgendaDevicePortable2:Make;NovaTecnicaNavegacao:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
