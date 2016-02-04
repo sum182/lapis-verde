@@ -256,6 +256,10 @@
         <DCCReference Include="Testes\untTesteJsonFdMem.pas">
             <Form>frmTesteJsonFdMem</Form>
         </DCCReference>
+        <DCCReference Include="Testes\untTesteJsonXSqLite.pas">
+            <Form>frmTesteJsonXSqLite</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -16,6 +16,7 @@ type
     layPrincipal: TLayout;
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -36,7 +37,7 @@ implementation
 
 {$R *.fmx}
 
-uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto;
+uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite;
 
 { TfrmPrincipal }
 
@@ -93,7 +94,7 @@ end;
 
 procedure TfrmPrincipal.SpeedButton5Click(Sender: TObject);
 begin
-  AbreForm(TfrmTesteJsonFdMem);
+  AbreForm(TfrmTesteJsonXSqLite);
 end;
 
 

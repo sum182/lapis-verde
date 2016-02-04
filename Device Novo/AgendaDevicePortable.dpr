@@ -14,7 +14,8 @@ uses
   untTesteFornecedores in 'Testes\untTesteFornecedores.pas' {frmTesteFornecedores},
   untTesteProduto in 'Testes\untTesteProduto.pas' {frmTesteProduto},
   untTesteString in 'Testes\untTesteString.pas' {frmTesteString},
-  untTesteJsonFdMem in 'Testes\untTesteJsonFdMem.pas' {frmTesteJsonFdMem};
+  untTesteJsonFdMem in 'Testes\untTesteJsonFdMem.pas' {frmTesteJsonFdMem},
+  untTesteJsonXSqLite in 'Testes\untTesteJsonXSqLite.pas' {frmTesteJsonXSqLite};
 
 {$R *.res}
 

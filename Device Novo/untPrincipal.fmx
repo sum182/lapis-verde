@@ -63,6 +63,16 @@ object frmPrincipal: TfrmPrincipal
       Text = 'Teste Json x FDMem'
       OnClick = SpeedButton5Click
     end
+    object SpeedButton6: TSpeedButton
+      Align = Top
+      Position.Y = 240.000000000000000000
+      Size.Width = 249.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'buttonstyle'
+      Text = 'Teste Json x SQLite'
+      OnClick = SpeedButton5Click
+    end
   end
   object layPrincipal: TLayout
     Align = Client
