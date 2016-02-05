@@ -80,5 +80,16 @@ object frmPrincipal: TfrmPrincipal
     Size.Height = 480.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family, FontColor]
+      Size.Width = 390.000000000000000000
+      Size.Height = 480.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 24.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.HorzAlign = Center
+      Text = 'Teste'
+    end
   end
 end

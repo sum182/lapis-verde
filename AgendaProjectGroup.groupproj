@@ -21,7 +21,7 @@
         <Projects Include="Server Application\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Device Novo\AgendaDevicePortable.dproj">
+        <Projects Include="Device Portable\AgendaDevicePortable.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -87,13 +87,13 @@
         <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
     </Target>
     <Target Name="AgendaDevicePortable">
-        <MSBuild Projects="Device Novo\AgendaDevicePortable.dproj"/>
+        <MSBuild Projects="Device Portable\AgendaDevicePortable.dproj"/>
     </Target>
     <Target Name="AgendaDevicePortable:Clean">
-        <MSBuild Projects="Device Novo\AgendaDevicePortable.dproj" Targets="Clean"/>
+        <MSBuild Projects="Device Portable\AgendaDevicePortable.dproj" Targets="Clean"/>
     </Target>
     <Target Name="AgendaDevicePortable:Make">
-        <MSBuild Projects="Device Novo\AgendaDevicePortable.dproj" Targets="Make"/>
+        <MSBuild Projects="Device Portable\AgendaDevicePortable.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;FuelApp;AgendaServer;AgendaDevicePortable"/>
