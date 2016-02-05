@@ -58,8 +58,9 @@ end;
 
 procedure TDM.DataModuleCreate(Sender: TObject);
 begin
+  FDConnectionSQLite.Close;
   fDataBaseNameSQLite:= 'db.s3db';
-  ConectarSQLite;
+  //ConectarSQLite;
 end;
 
 end.

@@ -1,8 +1,9 @@
-inherited frmTesteJsonXSqLite: TfrmTesteJsonXSqLite
+inherited frmTesteJsonFdMem: TfrmTesteJsonFdMem
   Caption = 'frmBase1'
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     inherited ToolBar1: TToolBar
+      TabOrder = 2
       object SpeedButton1: TSpeedButton
         Align = MostRight
         Position.X = 592.000000000000000000
@@ -14,33 +15,16 @@ inherited frmTesteJsonXSqLite: TfrmTesteJsonXSqLite
         OnClick = SpeedButton1Click
       end
     end
-    object ListBox3: TListBox
+    object ListView1: TListView
+      ItemAppearanceClassName = 'TListItemAppearance'
+      ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+      HeaderAppearanceClassName = 'TListHeaderObjects'
+      FooterAppearanceClassName = 'TListHeaderObjects'
       Align = Client
       Size.Width = 640.000000000000000000
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 0
-      DisableFocusEffect = True
-      DefaultItemStyles.ItemStyle = ''
-      DefaultItemStyles.GroupHeaderStyle = ''
-      DefaultItemStyles.GroupFooterStyle = ''
-    end
-  end
-  object fdqAluno: TFDQuery
-    Connection = DM.FDConnectionSQLite
-    SQL.Strings = (
-      'select * from aluno')
-    Left = 88
-    Top = 192
-    object fdqAlunoaluno_id: TIntegerField
-      FieldName = 'aluno_id'
-      Origin = 'aluno_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object fdqAlunonome: TStringField
-      FieldName = 'nome'
-      Origin = 'nome'
-      Size = 150
+      TabOrder = 1
     end
   end
   object fdmAlunos: TFDMemTable
@@ -60,7 +44,7 @@ inherited frmTesteJsonXSqLite: TfrmTesteJsonXSqLite
     AutoCommitUpdates = False
     StoreDefs = True
     Left = 88
-    Top = 248
+    Top = 256
     object fdmAlunosaluno_id: TIntegerField
       FieldName = 'aluno_id'
     end
@@ -69,29 +53,8 @@ inherited frmTesteJsonXSqLite: TfrmTesteJsonXSqLite
       Size = 150
     end
   end
-  object BindSourceDB1: TBindSourceDB
-    DataSet = fdqAluno
-    ScopeMappings = <>
+  object FDStanStorageBinLink1: TFDStanStorageBinLink
     Left = 88
-    Top = 136
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 92
-    Top = 85
-    object LinkFillControlToField1: TLinkFillControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'nome'
-      Control = ListBox3
-      Track = True
-      FillDataSource = BindSourceDB1
-      FillDisplayFieldName = 'nome'
-      AutoFill = True
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
+    Top = 320
   end
 end

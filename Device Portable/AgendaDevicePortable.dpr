@@ -13,8 +13,8 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TfrmTestes, frmTestes);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TfrmTestes, frmTestes);
   Application.Run;
 end.

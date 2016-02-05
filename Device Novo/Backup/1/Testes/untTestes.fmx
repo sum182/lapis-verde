@@ -32724,14 +32724,14 @@ object frmTestes: TfrmTestes
     Size.Height = 674.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 14
     TabPosition = PlatformDefault
     object TabItem1: TTabItem
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 169.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -32858,7 +32858,7 @@ object frmTestes: TfrmTestes
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 168.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -32925,7 +32925,6 @@ object frmTestes: TfrmTestes
     Top = 320
   end
   object fdqAluno: TFDQuery
-    Connection = DM.FDConnectionSQLite
     SQL.Strings = (
       'select * from aluno')
     Left = 88
@@ -32950,8 +32949,8 @@ object frmTestes: TfrmTestes
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 20
-    Top = 5
+    Left = 284
+    Top = 229
     object LinkFillControlToField2: TLinkFillControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
