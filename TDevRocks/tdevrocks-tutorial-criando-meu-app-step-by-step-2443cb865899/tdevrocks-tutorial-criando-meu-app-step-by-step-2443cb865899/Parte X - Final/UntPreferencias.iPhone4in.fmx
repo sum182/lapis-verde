@@ -1,0 +1,19 @@
+inherited frmPreferencias_iPhone4in: TfrmPreferencias_iPhone4in
+  ClientHeight = 548
+  ClientWidth = 320
+  DesignerMasterStyle = 0
+  inherited lytPreferencias: TLayout
+    Size.Width = 320.000000000000000000
+    Size.Height = 548.000000000000000000
+    inherited ListBox1: TListBox
+      Size.Width = 320.000000000000000000
+      Size.Height = 500.000000000000000000
+    end
+    inherited ToolBar1: TToolBar
+      Size.Width = 320.000000000000000000
+      inherited spbGravar: TSpeedButton
+        Position.X = 232.000000000000000000
+      end
+    end
+  end
+end

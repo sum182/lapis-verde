@@ -1,0 +1,21 @@
+inherited frmUsuarios_LgXhdpiTb: TfrmUsuarios_LgXhdpiTb
+  ClientHeight = 829
+  ClientWidth = 480
+  DesignerMasterStyle = 0
+  inherited lytUsuarios: TLayout
+    Size.Width = 480.000000000000000000
+    Size.Height = 829.000000000000000000
+    inherited ToolBar1: TToolBar
+      Size.Width = 480.000000000000000000
+      Size.Height = 48.000000000000000000
+      inherited spbBack: TSpeedButton
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+      end
+    end
+    inherited Label1: TLabel
+      Size.Width = 480.000000000000000000
+      Size.Height = 781.000000000000000000
+    end
+  end
+end

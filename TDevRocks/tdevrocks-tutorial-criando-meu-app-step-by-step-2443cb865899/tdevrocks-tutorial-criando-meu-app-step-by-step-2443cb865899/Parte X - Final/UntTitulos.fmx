@@ -1,0 +1,450 @@
+object frmTitulos: TfrmTitulos
+  Left = 0
+  Top = 0
+  Caption = 'T'#237'tulos'
+  ClientHeight = 480
+  ClientWidth = 320
+  Position = Designed
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
+  object lytTitulos: TLayout
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object tabctrlTitulos: TTabControl
+      Align = Client
+      FullSize = True
+      Size.Width = 320.000000000000000000
+      Size.Height = 480.000000000000000000
+      Size.PlatformDefault = False
+      TabHeight = 49.000000000000000000
+      TabIndex = 1
+      TabOrder = 0
+      TabPosition = Bottom
+      object tbitemLisTitulos: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'T'#237'tulos'
+        object toolTitulos: TToolBar
+          Size.Width = 320.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object lblTituloT: TLabel
+            Align = Contents
+            Size.Width = 320.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxheaderlabel'
+            TextSettings.HorzAlign = Center
+            Text = 'T'#237'tulos'
+          end
+          object spbBack: TSpeedButton
+            Align = Left
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'detailstoolbutton'
+            Text = 'Voltar'
+          end
+          object spbNovo: TSpeedButton
+            Align = Right
+            Margins.Right = 8.000000000000000000
+            Position.X = 264.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'addtoolbuttonbordered'
+            Text = 'spbNovo'
+            OnClick = spbNovoClick
+          end
+        end
+        object lsvTitulos: TListView
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Size.Width = 320.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          ItemAppearanceObjects.ItemObjects.Image.Visible = True
+          OnItemClick = lsvTitulosItemClick
+        end
+      end
+      object tbitemDetalhes: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Detalhes'
+        object ToolBar1: TToolBar
+          Size.Width = 320.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object lblTituloDet: TLabel
+            Align = Contents
+            Size.Width = 320.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxheaderlabel'
+            TextSettings.HorzAlign = Center
+            Text = 'Detalhes'
+          end
+          object spbVoltar: TSpeedButton
+            Align = Left
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'backtoolbutton'
+            Text = 'Voltar'
+            OnClick = spbVoltarClick
+          end
+          object spbEdicao: TSpeedButton
+            Align = Right
+            Margins.Right = 8.000000000000000000
+            Position.X = 264.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'composetoolbuttonbordered'
+            Text = 'Editar'
+            OnClick = spbEdicaoClick
+          end
+          object SpeedButton2: TSpeedButton
+            Align = Right
+            Position.X = 285.000000000000000000
+            Size.Width = 86.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Biblioteca'
+            Visible = False
+          end
+          object SpeedButton1: TSpeedButton
+            Align = Right
+            Position.X = 371.000000000000000000
+            Size.Width = 73.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Foto'
+            Visible = False
+          end
+          object spbSalvar: TSpeedButton
+            Align = Right
+            Position.X = 216.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'donetoolbutton'
+            Text = 'Salvar'
+            OnClick = spbSalvarClick
+          end
+          object spbCancelar: TSpeedButton
+            Align = Left
+            Position.X = 56.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'deletetoolbutton'
+            Text = 'Cancelar'
+            OnClick = spbCancelarClick
+          end
+        end
+        object lsboxDetalhe: TListBox
+          Align = Client
+          Size.Width = 320.000000000000000000
+          Size.Height = 335.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          DisableFocusEffect = True
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 320.000000000000000000
+          Viewport.Height = 335.000000000000000000
+          object lsitTituloSub: TListBoxItem
+            Selectable = False
+            Size.Width = 320.000000000000000000
+            Size.Height = 105.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object imgFoto: TImage
+              MultiResBitmap = <
+                item
+                end>
+              Align = Left
+              Margins.Left = 8.000000000000000000
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Margins.Bottom = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Position.Y = 8.000000000000000000
+              Size.Width = 89.000000000000000000
+              Size.Height = 89.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgFotoClick
+            end
+            object Layout1: TLayout
+              Align = Client
+              Size.Width = 215.000000000000000000
+              Size.Height = 105.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object ListBox2: TListBox
+                Align = Client
+                Size.Width = 215.000000000000000000
+                Size.Height = 105.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                DisableFocusEffect = True
+                DefaultItemStyles.ItemStyle = ''
+                DefaultItemStyles.GroupHeaderStyle = ''
+                DefaultItemStyles.GroupFooterStyle = ''
+                Viewport.Width = 215.000000000000000000
+                Viewport.Height = 105.000000000000000000
+                object ListBoxItem2: TListBoxItem
+                  TabOrder = 0
+                  object edtTitulo: TEdit
+                    Touch.InteractiveGestures = [LongTap, DoubleTap]
+                    Align = Client
+                    TabOrder = 0
+                    ReadOnly = True
+                    Enabled = False
+                    Margins.Top = 8.000000000000000000
+                    Margins.Right = 8.000000000000000000
+                    Size.Width = 207.000000000000000000
+                    Size.Height = 32.000000000000000000
+                    Size.PlatformDefault = False
+                    TextPrompt = 'T'#237'tulo'
+                  end
+                end
+                object ListBoxItem3: TListBoxItem
+                  Position.Y = 44.000000000000000000
+                  TabOrder = 1
+                  object edtSubTitulo: TEdit
+                    Touch.InteractiveGestures = [LongTap, DoubleTap]
+                    Align = Client
+                    TabOrder = 0
+                    ReadOnly = True
+                    Enabled = False
+                    Margins.Top = 8.000000000000000000
+                    Margins.Right = 8.000000000000000000
+                    Margins.Bottom = 8.000000000000000000
+                    Size.Width = 207.000000000000000000
+                    Size.Height = 32.000000000000000000
+                    Size.PlatformDefault = False
+                    TextPrompt = 'Sub-T'#237'tulo'
+                  end
+                end
+              end
+            end
+          end
+          object lstitAnoLancamento: TListBoxItem
+            Selectable = False
+            Position.Y = 105.000000000000000000
+            TabOrder = 1
+            Text = 'Ano Lan'#231'amento:'
+            object edtAno: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Right
+              StyleLookup = 'transparentedit'
+              TabOrder = 0
+              KeyboardType = NumberPad
+              ReadOnly = True
+              Position.X = 212.000000000000000000
+              Position.Y = 6.000000000000000000
+              EnableDragHighlight = False
+              Enabled = False
+              Margins.Right = 8.000000000000000000
+              Size.Width = 100.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = '9999'
+              KillFocusByReturn = True
+            end
+          end
+        end
+        object ToolBar3: TToolBar
+          Align = Bottom
+          Position.Y = 383.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'bottomtoolbar'
+          TabOrder = 2
+          object spbExcluir: TSpeedButton
+            Align = Client
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 304.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Excluir'
+            OnClick = spbExcluirClick
+          end
+        end
+      end
+    end
+    object lstPopUpFoto: TListBox
+      Position.X = 8.000000000000000000
+      Position.Y = 240.000000000000000000
+      Size.Width = 217.000000000000000000
+      Size.Height = 137.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Visible = False
+      DisableFocusEffect = True
+      ItemHeight = 45.000000000000000000
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 217.000000000000000000
+      Viewport.Height = 137.000000000000000000
+      object lstitNovaFoto: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.Style = [fsBold]
+        TextSettings.HorzAlign = Center
+        StyledSettings = [Family, FontColor]
+        Size.Width = 217.000000000000000000
+        Size.Height = 45.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Nova Foto'
+        OnClick = lstitNovaFotoClick
+      end
+      object lstitBiblioteca: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.Style = [fsBold]
+        TextSettings.HorzAlign = Center
+        StyledSettings = [Family, FontColor]
+        Position.Y = 45.000000000000000000
+        Size.Width = 217.000000000000000000
+        Size.Height = 45.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Biblioteca'
+        OnClick = lstitBibliotecaClick
+      end
+      object lstitCancelar: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.Style = [fsBold]
+        StyledSettings = [Family, FontColor, Other]
+        Position.Y = 90.000000000000000000
+        Size.Width = 217.000000000000000000
+        Size.Height = 45.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'listboxitemlabel'
+        TabOrder = 2
+        Text = 'Cancelar'
+        OnClick = lstitCancelarClick
+      end
+      object ShadowEffect1: TShadowEffect
+        Distance = 3.000000000000000000
+        Direction = 45.000000000000000000
+        Softness = 0.300000011920929000
+        Opacity = 0.600000023841857900
+        ShadowColor = claBlack
+      end
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.qryTitulos
+    ScopeMappings = <>
+    Left = 259
+    Top = 272
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 259
+    Top = 216
+    object LinkPropertyToFieldBitmap: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'FOTO'
+      Component = imgFoto
+      ComponentProperty = 'Bitmap'
+    end
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'ANO_LANCAMENTO'
+      Control = edtAno
+      Track = False
+    end
+    object LinkControlToField2: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'TITULO'
+      Control = edtTitulo
+      Track = False
+    end
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'TITULO'
+      Control = lsvTitulos
+      FillExpressions = <
+        item
+          SourceMemberName = 'SUBTITULO'
+          ControlMemberName = 'Detail1'
+        end
+        item
+          SourceMemberName = 'FOTO'
+          ControlMemberName = 'Bitmap'
+        end
+        item
+          SourceMemberName = 'ANO_LANCAMENTO'
+          ControlMemberName = 'Detail2'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkControlToField3: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'SUBTITULO'
+      Control = edtSubTitulo
+      Track = False
+    end
+  end
+  object AcoesGeral: TActionList
+    Left = 259
+    Top = 324
+    object actFotoBiblioteca: TTakePhotoFromLibraryAction
+      Category = 'Media Library'
+      OnDidFinishTaking = actFotoBibliotecaDidFinishTaking
+    end
+    object actFotoCamera: TTakePhotoFromCameraAction
+      Category = 'Media Library'
+      OnDidFinishTaking = actFotoCameraDidFinishTaking
+    end
+  end
+end

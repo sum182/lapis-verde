@@ -1,0 +1,105 @@
+inherited frmTitulos_NmXhdpiPh: TfrmTitulos_NmXhdpiPh
+  ClientHeight = 615
+  ClientWidth = 400
+  DesignerMasterStyle = 3
+  inherited lytTitulos: TLayout
+    Size.Width = 400.000000000000000000
+    Size.Height = 615.000000000000000000
+    inherited tabctrlTitulos: TTabControl
+      Size.Width = 400.000000000000000000
+      Size.Height = 615.000000000000000000
+      inherited tbitemLisTitulos: TTabItem
+        Size.Width = 200.000000000000000000
+        inherited toolTitulos: TToolBar
+          Size.Width = 400.000000000000000000
+          inherited spbBack: TSpeedButton [0]
+          end
+          inherited spbNovo: TSpeedButton [1]
+            Position.X = 344.000000000000000000
+          end
+          inherited lblTituloT: TLabel [2]
+            Size.Width = 400.000000000000000000
+          end
+        end
+        inherited lsvTitulos: TListView
+          Size.Width = 400.000000000000000000
+          Size.Height = 518.000000000000000000
+        end
+      end
+      inherited tbitemDetalhes: TTabItem
+        Size.Width = 200.000000000000000000
+        inherited ToolBar1: TToolBar
+          Size.Width = 400.000000000000000000
+          inherited lblTituloDet: TLabel
+            Size.Width = 400.000000000000000000
+          end
+          inherited spbEdicao: TSpeedButton
+            Position.X = 296.000000000000000000
+          end
+          inherited SpeedButton2: TSpeedButton
+            Position.X = 136.000000000000000000
+          end
+          inherited SpeedButton1: TSpeedButton
+            Position.X = 149.000000000000000000
+          end
+          inherited spbSalvar: TSpeedButton
+            Position.X = 352.000000000000000000
+          end
+        end
+        inherited lsboxDetalhe: TListBox
+          Size.Width = 400.000000000000000000
+          Size.Height = 470.000000000000000000
+          Viewport.Width = 400.000000000000000000
+          Viewport.Height = 470.000000000000000000
+          inherited lsitTituloSub: TListBoxItem
+            Size.Width = 400.000000000000000000
+            inherited Layout1: TLayout
+              Size.Width = 295.000000000000000000
+              inherited ListBox2: TListBox
+                Size.Width = 295.000000000000000000
+                Viewport.Width = 295.000000000000000000
+                Viewport.Height = 105.000000000000000000
+                inherited ListBoxItem2: TListBoxItem
+                  inherited edtTitulo: TEdit
+                    Size.Width = 287.000000000000000000
+                  end
+                end
+                inherited ListBoxItem3: TListBoxItem
+                  inherited edtSubTitulo: TEdit
+                    Size.Width = 287.000000000000000000
+                  end
+                end
+              end
+            end
+          end
+          inherited lstitAnoLancamento: TListBoxItem
+            inherited edtAno: TEdit
+              Position.X = 292.000000000000000000
+              Position.Y = 8.000000000000000000
+              Size.Height = 29.000000000000000000
+            end
+          end
+        end
+        inherited ToolBar3: TToolBar
+          Position.Y = 518.000000000000000000
+          Size.Width = 400.000000000000000000
+          inherited spbExcluir: TSpeedButton
+            Size.Width = 384.000000000000000000
+          end
+        end
+      end
+    end
+    inherited lstPopUpFoto: TListBox
+      Viewport.Width = 213.000000000000000000
+      Viewport.Height = 133.000000000000000000
+    end
+  end
+  inherited BindSourceDB1: TBindSourceDB
+    Left = 48
+    Top = 312
+  end
+  inherited BindingsList1: TBindingsList
+    Left = 51
+    Top = 248
+  end
+end

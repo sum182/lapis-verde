@@ -1,0 +1,55 @@
+object frmCadastro: TfrmCadastro
+  Left = 0
+  Top = 0
+  Caption = 'Cadastro'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 2
+  object lytCadastro: TLayout
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object ToolBar1: TToolBar
+      Size.Width = 640.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object spbVoltar: TSpeedButton
+        Align = Left
+        Margins.Left = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'backtoolbutton'
+        Text = 'Voltar'
+        OnClick = spbVoltarClick
+      end
+      object spbGravar: TSpeedButton
+        Align = Right
+        Margins.Right = 8.000000000000000000
+        Position.X = 552.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Gravar'
+        OnClick = spbGravarClick
+      end
+    end
+    object lblDialogo: TLabel
+      Align = Client
+      Size.Width = 640.000000000000000000
+      Size.Height = 436.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'listboxitemlabel'
+      TextSettings.HorzAlign = Center
+      Text = 'Cadastro'
+    end
+  end
+end

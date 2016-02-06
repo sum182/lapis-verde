@@ -1,0 +1,35 @@
+inherited frmPrincipal_iPhone55in: TfrmPrincipal_iPhone55in
+  ClientHeight = 716
+  ClientWidth = 414
+  DesignerMasterStyle = 3
+  inherited lytPrincipal: TLayout
+    Size.Width = 414.000000000000000000
+    Size.Height = 716.000000000000000000
+    inherited tbctrlPrincipal: TTabControl
+      Size.Width = 414.000000000000000000
+      Size.Height = 716.000000000000000000
+      inherited tbitemPrincipal: TTabItem
+        Size.Width = 138.000000000000000000
+        inherited Label1: TLabel
+          Size.Width = 414.000000000000000000
+          Size.Height = 623.000000000000000000
+        end
+        inherited ToolBar1: TToolBar
+          Size.Width = 414.000000000000000000
+          Size.Height = 44.000000000000000000
+          inherited spbNovo: TSpeedButton
+            Position.X = 362.000000000000000000
+            Size.Width = 44.000000000000000000
+            Size.Height = 44.000000000000000000
+          end
+        end
+      end
+      inherited tbitemDialogo1: TTabItem
+        Size.Width = 138.000000000000000000
+      end
+      inherited tbitemCadastro: TTabItem
+        Size.Width = 138.000000000000000000
+      end
+    end
+  end
+end
