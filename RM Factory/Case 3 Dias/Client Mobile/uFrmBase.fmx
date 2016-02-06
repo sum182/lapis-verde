@@ -1,0 +1,26 @@
+object FrmBase: TFrmBase
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 320
+  Fill.Kind = Gradient
+  Fill.Gradient.Points = <
+    item
+      Color = xFFF2F4F7
+      Offset = 0.000000000000000000
+    end
+    item
+      Color = xFFEFF4F7
+      Offset = 0.263975143432617200
+    end
+    item
+      Color = claWhite
+      Offset = 0.745341598987579300
+    end>
+  Fill.Gradient.Style = Radial
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+end
