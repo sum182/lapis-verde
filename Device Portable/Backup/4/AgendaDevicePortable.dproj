@@ -267,10 +267,12 @@
         </DCCReference>
         <DCCReference Include="Testes\untTesteJsonXSqLite.pas">
             <Form>frmTesteJsonXSqLite</Form>
+            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Proxy.pas"/>
         <DCCReference Include="untLogin.pas">
             <Form>frmLogin</Form>
+            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smCrypt.pas"/>
         <BuildConfiguration Include="Release">
@@ -566,13 +568,13 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\db.s3db" Configuration="Debug" Class="File">
-                    <Platform Name="Win32">
+                    <Platform Name="OSX32">
                         <RemoteName>db.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\db.s3db" Configuration="Debug" Class="File">
-                    <Platform Name="OSX32">
+                    <Platform Name="Win32">
                         <RemoteName>db.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
