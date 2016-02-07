@@ -13,17 +13,17 @@ inherited frmTitulos_iPad: TfrmTitulos_iPad
         inherited toolTitulos: TToolBar
           Size.Width = 768.000000000000000000
           Size.Height = 44.000000000000000000
-          inherited spbBack: TSpeedButton [0]
+          inherited lblTituloT: TLabel
+            Size.Width = 768.000000000000000000
+            Size.Height = 44.000000000000000000
+          end
+          inherited spbBack: TSpeedButton
             Size.Width = 44.000000000000000000
             Size.Height = 44.000000000000000000
           end
-          inherited spbNovo: TSpeedButton [1]
+          inherited spbNovo: TSpeedButton
             Position.X = 716.000000000000000000
             Size.Width = 44.000000000000000000
-            Size.Height = 44.000000000000000000
-          end
-          inherited lblTituloT: TLabel [2]
-            Size.Width = 768.000000000000000000
             Size.Height = 44.000000000000000000
           end
         end
@@ -66,26 +66,22 @@ inherited frmTitulos_iPad: TfrmTitulos_iPad
         inherited lsboxDetalhe: TListBox
           Size.Width = 768.000000000000000000
           Size.Height = 867.000000000000000000
-          Viewport.Width = 768.000000000000000000
-          Viewport.Height = 867.000000000000000000
           inherited lsitTituloSub: TListBoxItem
             Size.Width = 768.000000000000000000
             inherited Layout1: TLayout
               Size.Width = 663.000000000000000000
               inherited ListBox2: TListBox
                 Size.Width = 663.000000000000000000
-                Viewport.Width = 663.000000000000000000
-                Viewport.Height = 105.000000000000000000
                 inherited ListBoxItem2: TListBoxItem
                   inherited edtTitulo: TEdit
-                    Size.Width = 655.000000000000000000
-                    Size.Height = 30.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 36.000000000000000000
                   end
                 end
                 inherited ListBoxItem3: TListBoxItem
                   inherited edtSubTitulo: TEdit
-                    Size.Width = 655.000000000000000000
-                    Size.Height = 30.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 28.000000000000000000
                   end
                 end
               end
@@ -93,7 +89,6 @@ inherited frmTitulos_iPad: TfrmTitulos_iPad
           end
           inherited lstitAnoLancamento: TListBoxItem
             inherited edtAno: TEdit
-              Position.X = 660.000000000000000000
               Position.Y = 8.000000000000000000
               Size.Height = 29.000000000000000000
             end
@@ -109,10 +104,6 @@ inherited frmTitulos_iPad: TfrmTitulos_iPad
           end
         end
       end
-    end
-    inherited lstPopUpFoto: TListBox
-      Viewport.Width = 213.000000000000000000
-      Viewport.Height = 133.000000000000000000
     end
   end
 end

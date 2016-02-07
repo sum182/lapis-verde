@@ -53,6 +53,7 @@ type
     procedure spbSincronizarClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure lstitTitulosAlugadosClick(Sender: TObject);
   private
     procedure AtualizarTitulos(AMemoryTable: TFDMemTable);
     { Private declarations }
@@ -239,7 +240,12 @@ begin
   {$ENDIF}
 end;
 
-procedure TfrmMain.lstitTitulosClick(Sender: TObject);
+pprocedure TfrmMain.lstitTitulosAlugadosClick(Sender: TObject);
+begin
+
+end;
+
+rocedure TfrmMain.lstitTitulosClick(Sender: TObject);
 begin
   if not Assigned(FTitulos) then
     FTitulos := TfrmTitulos.Create(Self);

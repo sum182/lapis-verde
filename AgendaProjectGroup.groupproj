@@ -3,25 +3,19 @@
         <ProjectGuid>{B666703C-8E5F-4FA9-9E73-E6F953DD90AD}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="C:\Componentes\sum182\D15\Sum182.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="C:\Componentes\sum182\D15\Sum182D15.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Desktop\Agenda.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Criptografia\Criptografia.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\FuelApp\FuelApp.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Server Application\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Device Portable\AgendaDevicePortable.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\FuelApp\FuelApp.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -32,24 +26,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="Sum182">
-        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj"/>
-    </Target>
-    <Target Name="Sum182:Clean">
-        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Sum182:Make">
-        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="Sum182D15">
-        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj"/>
-    </Target>
-    <Target Name="Sum182D15:Clean">
-        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Sum182D15:Make">
-        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Agenda">
         <MSBuild Projects="Desktop\Agenda.dproj"/>
     </Target>
@@ -67,15 +43,6 @@
     </Target>
     <Target Name="Criptografia:Make">
         <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="FuelApp">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj"/>
-    </Target>
-    <Target Name="FuelApp:Clean">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="FuelApp:Make">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Make"/>
     </Target>
     <Target Name="AgendaServer">
         <MSBuild Projects="Server Application\AgendaServer.dproj"/>
@@ -95,14 +62,23 @@
     <Target Name="AgendaDevicePortable:Make">
         <MSBuild Projects="Device Portable\AgendaDevicePortable.dproj" Targets="Make"/>
     </Target>
+    <Target Name="FuelApp">
+        <MSBuild Projects="..\FuelApp\FuelApp.dproj"/>
+    </Target>
+    <Target Name="FuelApp:Clean">
+        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FuelApp:Make">
+        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Sum182;Sum182D15;Agenda;Criptografia;FuelApp;AgendaServer;AgendaDevicePortable"/>
+        <CallTarget Targets="Agenda;Criptografia;AgendaServer;AgendaDevicePortable;FuelApp"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Sum182:Clean;Sum182D15:Clean;Agenda:Clean;Criptografia:Clean;FuelApp:Clean;AgendaServer:Clean;AgendaDevicePortable:Clean"/>
+        <CallTarget Targets="Agenda:Clean;Criptografia:Clean;AgendaServer:Clean;AgendaDevicePortable:Clean;FuelApp:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Sum182:Make;Sum182D15:Make;Agenda:Make;Criptografia:Make;FuelApp:Make;AgendaServer:Make;AgendaDevicePortable:Make"/>
+        <CallTarget Targets="Agenda:Make;Criptografia:Make;AgendaServer:Make;AgendaDevicePortable:Make;FuelApp:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

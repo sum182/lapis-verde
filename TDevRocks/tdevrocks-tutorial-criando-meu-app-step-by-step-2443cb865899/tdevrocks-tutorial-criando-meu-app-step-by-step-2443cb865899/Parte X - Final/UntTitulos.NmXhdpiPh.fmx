@@ -12,13 +12,11 @@ inherited frmTitulos_NmXhdpiPh: TfrmTitulos_NmXhdpiPh
         Size.Width = 200.000000000000000000
         inherited toolTitulos: TToolBar
           Size.Width = 400.000000000000000000
-          inherited spbBack: TSpeedButton [0]
-          end
-          inherited spbNovo: TSpeedButton [1]
-            Position.X = 344.000000000000000000
-          end
-          inherited lblTituloT: TLabel [2]
+          inherited lblTituloT: TLabel
             Size.Width = 400.000000000000000000
+          end
+          inherited spbNovo: TSpeedButton
+            Position.X = 344.000000000000000000
           end
         end
         inherited lsvTitulos: TListView
@@ -49,34 +47,25 @@ inherited frmTitulos_NmXhdpiPh: TfrmTitulos_NmXhdpiPh
         inherited lsboxDetalhe: TListBox
           Size.Width = 400.000000000000000000
           Size.Height = 470.000000000000000000
-          Viewport.Width = 400.000000000000000000
-          Viewport.Height = 470.000000000000000000
           inherited lsitTituloSub: TListBoxItem
             Size.Width = 400.000000000000000000
             inherited Layout1: TLayout
               Size.Width = 295.000000000000000000
               inherited ListBox2: TListBox
                 Size.Width = 295.000000000000000000
-                Viewport.Width = 295.000000000000000000
-                Viewport.Height = 105.000000000000000000
                 inherited ListBoxItem2: TListBoxItem
                   inherited edtTitulo: TEdit
-                    Size.Width = 287.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 36.000000000000000000
                   end
                 end
                 inherited ListBoxItem3: TListBoxItem
                   inherited edtSubTitulo: TEdit
-                    Size.Width = 287.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 28.000000000000000000
                   end
                 end
               end
-            end
-          end
-          inherited lstitAnoLancamento: TListBoxItem
-            inherited edtAno: TEdit
-              Position.X = 292.000000000000000000
-              Position.Y = 8.000000000000000000
-              Size.Height = 29.000000000000000000
             end
           end
         end
@@ -88,10 +77,6 @@ inherited frmTitulos_NmXhdpiPh: TfrmTitulos_NmXhdpiPh
           end
         end
       end
-    end
-    inherited lstPopUpFoto: TListBox
-      Viewport.Width = 213.000000000000000000
-      Viewport.Height = 133.000000000000000000
     end
   end
   inherited BindSourceDB1: TBindSourceDB

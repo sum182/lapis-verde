@@ -8,16 +8,16 @@ inherited frmTitulos_iPhone4in: TfrmTitulos_iPhone4in
       inherited tbitemLisTitulos: TTabItem
         inherited toolTitulos: TToolBar
           Size.Height = 44.000000000000000000
-          inherited spbBack: TSpeedButton [0]
+          inherited lblTituloT: TLabel
+            Size.Height = 44.000000000000000000
+          end
+          inherited spbBack: TSpeedButton
             Size.Width = 44.000000000000000000
             Size.Height = 44.000000000000000000
           end
-          inherited spbNovo: TSpeedButton [1]
+          inherited spbNovo: TSpeedButton
             Position.X = 268.000000000000000000
             Size.Width = 44.000000000000000000
-            Size.Height = 44.000000000000000000
-          end
-          inherited lblTituloT: TLabel [2]
             Size.Height = 44.000000000000000000
           end
         end
@@ -55,21 +55,19 @@ inherited frmTitulos_iPhone4in: TfrmTitulos_iPhone4in
         end
         inherited lsboxDetalhe: TListBox
           Size.Height = 411.000000000000000000
-          Viewport.Width = 320.000000000000000000
-          Viewport.Height = 411.000000000000000000
           inherited lsitTituloSub: TListBoxItem
             inherited Layout1: TLayout
               inherited ListBox2: TListBox
-                Viewport.Width = 215.000000000000000000
-                Viewport.Height = 105.000000000000000000
                 inherited ListBoxItem2: TListBoxItem
                   inherited edtTitulo: TEdit
-                    Size.Height = 30.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 36.000000000000000000
                   end
                 end
                 inherited ListBoxItem3: TListBoxItem
                   inherited edtSubTitulo: TEdit
-                    Size.Height = 30.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 28.000000000000000000
                   end
                 end
               end
@@ -90,10 +88,6 @@ inherited frmTitulos_iPhone4in: TfrmTitulos_iPhone4in
           end
         end
       end
-    end
-    inherited lstPopUpFoto: TListBox
-      Viewport.Width = 213.000000000000000000
-      Viewport.Height = 133.000000000000000000
     end
   end
 end

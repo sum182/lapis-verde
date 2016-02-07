@@ -18,6 +18,8 @@ type
     FDStanStorageBinLink1: TFDStanStorageBinLink;
     FDConnection: TFDConnection;
     FDConnectionLocal: TFDConnection;
+    fdqLoginFuncionario: TFDQuery;
+    fdqLoginResponsavel: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -26,6 +28,9 @@ type
     function EchoString(Value: string): string;
     function ReverseString(Value: string): string;
     function GetAlunos:TFDJSONDataSets;
+    function LoginFuncionario(Login:string; Senha:string):Boolean;
+    function LoginResponsavel(Login:string; Senha:string):Boolean;
+
   end;
 {$METHODINFO OFF}
 
@@ -57,6 +62,24 @@ begin
   fdqAlunos.Active := False;
   Result := TFDJSONDataSets.Create;
   TFDJSONDataSetsWriter.ListAdd(Result, fdqAlunos);
+end;
+
+function TSrvServerMetodos.LoginFuncionario(Login, Senha: string): Boolean;
+begin
+  fdqLoginFuncionario.Close;
+  fdqLoginFuncionario.ParamByName('login').AsString := Login;
+  fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
+  fdqLoginFuncionario.Open;
+  Result:= not (fdqLoginFuncionario.IsEmpty);
+end;
+
+function TSrvServerMetodos.LoginResponsavel(Login, Senha: string): Boolean;
+begin
+  fdqLoginResponsavel.Close;
+  fdqLoginResponsavel.ParamByName('login').AsString := Login;
+  fdqLoginResponsavel.ParamByName('senha').AsString := Senha;
+  fdqLoginResponsavel.Open;
+  Result:= not (fdqLoginResponsavel.IsEmpty);
 end;
 
 function TSrvServerMetodos.ReverseString(Value: string): string;

@@ -12,13 +12,11 @@ inherited frmTitulos_LgXhdpiTb: TfrmTitulos_LgXhdpiTb
         Size.Width = 240.000000000000000000
         inherited toolTitulos: TToolBar
           Size.Width = 480.000000000000000000
-          inherited spbBack: TSpeedButton [0]
-          end
-          inherited spbNovo: TSpeedButton [1]
-            Position.X = 424.000000000000000000
-          end
-          inherited lblTituloT: TLabel [2]
+          inherited lblTituloT: TLabel
             Size.Width = 480.000000000000000000
+          end
+          inherited spbNovo: TSpeedButton
+            Position.X = 424.000000000000000000
           end
         end
         inherited lsvTitulos: TListView
@@ -49,31 +47,22 @@ inherited frmTitulos_LgXhdpiTb: TfrmTitulos_LgXhdpiTb
         inherited lsboxDetalhe: TListBox
           Size.Width = 480.000000000000000000
           Size.Height = 684.000000000000000000
-          Viewport.Width = 480.000000000000000000
-          Viewport.Height = 684.000000000000000000
           inherited lsitTituloSub: TListBoxItem
             inherited Layout1: TLayout
               inherited ListBox2: TListBox
-                Viewport.Width = 375.000000000000000000
-                Viewport.Height = 105.000000000000000000
                 inherited ListBoxItem2: TListBoxItem
                   inherited edtTitulo: TEdit
-                    Size.Width = 367.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 36.000000000000000000
                   end
                 end
                 inherited ListBoxItem3: TListBoxItem
                   inherited edtSubTitulo: TEdit
-                    Size.Width = 367.000000000000000000
+                    Size.Width = 36.000000000000000000
+                    Size.Height = 28.000000000000000000
                   end
                 end
               end
-            end
-          end
-          inherited lstitAnoLancamento: TListBoxItem
-            inherited edtAno: TEdit
-              Position.X = 372.000000000000000000
-              Position.Y = 8.000000000000000000
-              Size.Height = 29.000000000000000000
             end
           end
         end
@@ -85,10 +74,6 @@ inherited frmTitulos_LgXhdpiTb: TfrmTitulos_LgXhdpiTb
           end
         end
       end
-    end
-    inherited lstPopUpFoto: TListBox
-      Viewport.Width = 213.000000000000000000
-      Viewport.Height = 133.000000000000000000
     end
   end
 end

@@ -23,14 +23,14 @@ object frmTitulos: TfrmTitulos
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       TabPosition = Bottom
       object tbitemLisTitulos: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 160.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -90,7 +90,7 @@ object frmTitulos: TfrmTitulos
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 160.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -181,8 +181,6 @@ object frmTitulos: TfrmTitulos
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 320.000000000000000000
-          Viewport.Height = 335.000000000000000000
           object lsitTituloSub: TListBoxItem
             Selectable = False
             Size.Width = 320.000000000000000000
@@ -221,8 +219,6 @@ object frmTitulos: TfrmTitulos
                 DefaultItemStyles.ItemStyle = ''
                 DefaultItemStyles.GroupHeaderStyle = ''
                 DefaultItemStyles.GroupFooterStyle = ''
-                Viewport.Width = 215.000000000000000000
-                Viewport.Height = 105.000000000000000000
                 object ListBoxItem2: TListBoxItem
                   TabOrder = 0
                   object edtTitulo: TEdit
@@ -322,8 +318,6 @@ object frmTitulos: TfrmTitulos
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
-      Viewport.Width = 217.000000000000000000
-      Viewport.Height = 137.000000000000000000
       object lstitNovaFoto: TListBoxItem
         Selectable = False
         TextSettings.Font.Size = 14.000000000000000000
@@ -375,7 +369,6 @@ object frmTitulos: TfrmTitulos
     end
   end
   object BindSourceDB1: TBindSourceDB
-    DataSet = DM.qryTitulos
     ScopeMappings = <>
     Left = 259
     Top = 272
