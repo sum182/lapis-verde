@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 29/01/2016 16:10:00
+// 06/02/2016 17:16:21
 //
 
 unit Proxy;
@@ -15,18 +15,24 @@ type
 
   TSrvServerMetodosClient = class(TDSAdminRestClient)
   private
+    FDataModuleCreateCommand: TDSRestCommand;
     FEchoStringCommand: TDSRestCommand;
     FReverseStringCommand: TDSRestCommand;
     FGetAlunosCommand: TDSRestCommand;
     FGetAlunosCommand_Cache: TDSRestCommand;
+    FLoginFuncionarioCommand: TDSRestCommand;
+    FLoginResponsavelCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
+    procedure DataModuleCreate(Sender: TObject);
     function EchoString(Value: string; const ARequestFilter: string = ''): string;
     function ReverseString(Value: string; const ARequestFilter: string = ''): string;
     function GetAlunos(const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAlunos_Cache(const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
+    function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
   end;
 
   IDSRestCachedTFDJSONDataSets = interface(IDSRestCachedObject<TFDJSONDataSets>)
@@ -36,6 +42,11 @@ type
   end;
 
 const
+  TSrvServerMetodos_DataModuleCreate: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
+  );
+
   TSrvServerMetodos_EchoString: array [0..1] of TDSRestParameterMetaData =
   (
     (Name: 'Value'; Direction: 1; DBXType: 26; TypeName: 'string'),
@@ -58,7 +69,46 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
+  TSrvServerMetodos_LoginFuncionario: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSrvServerMetodos_LoginResponsavel: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
 implementation
+
+procedure TSrvServerMetodosClient.DataModuleCreate(Sender: TObject);
+begin
+  if FDataModuleCreateCommand = nil then
+  begin
+    FDataModuleCreateCommand := FConnection.CreateCommand;
+    FDataModuleCreateCommand.RequestType := 'POST';
+    FDataModuleCreateCommand.Text := 'TSrvServerMetodos."DataModuleCreate"';
+    FDataModuleCreateCommand.Prepare(TSrvServerMetodos_DataModuleCreate);
+  end;
+  if not Assigned(Sender) then
+    FDataModuleCreateCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FDataModuleCreateCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FDataModuleCreateCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FDataModuleCreateCommand.Execute;
+end;
 
 function TSrvServerMetodosClient.EchoString(Value: string; const ARequestFilter: string): string;
 begin
@@ -126,6 +176,36 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAlunosCommand_Cache.Parameters[0].Value.GetString);
 end;
 
+function TSrvServerMetodosClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
+begin
+  if FLoginFuncionarioCommand = nil then
+  begin
+    FLoginFuncionarioCommand := FConnection.CreateCommand;
+    FLoginFuncionarioCommand.RequestType := 'GET';
+    FLoginFuncionarioCommand.Text := 'TSrvServerMetodos.LoginFuncionario';
+    FLoginFuncionarioCommand.Prepare(TSrvServerMetodos_LoginFuncionario);
+  end;
+  FLoginFuncionarioCommand.Parameters[0].Value.SetWideString(Login);
+  FLoginFuncionarioCommand.Parameters[1].Value.SetWideString(Senha);
+  FLoginFuncionarioCommand.Execute(ARequestFilter);
+  Result := FLoginFuncionarioCommand.Parameters[2].Value.GetBoolean;
+end;
+
+function TSrvServerMetodosClient.LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string): Boolean;
+begin
+  if FLoginResponsavelCommand = nil then
+  begin
+    FLoginResponsavelCommand := FConnection.CreateCommand;
+    FLoginResponsavelCommand.RequestType := 'GET';
+    FLoginResponsavelCommand.Text := 'TSrvServerMetodos.LoginResponsavel';
+    FLoginResponsavelCommand.Prepare(TSrvServerMetodos_LoginResponsavel);
+  end;
+  FLoginResponsavelCommand.Parameters[0].Value.SetWideString(Login);
+  FLoginResponsavelCommand.Parameters[1].Value.SetWideString(Senha);
+  FLoginResponsavelCommand.Execute(ARequestFilter);
+  Result := FLoginResponsavelCommand.Parameters[2].Value.GetBoolean;
+end;
+
 constructor TSrvServerMetodosClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -138,13 +218,15 @@ end;
 
 destructor TSrvServerMetodosClient.Destroy;
 begin
+  FDataModuleCreateCommand.DisposeOf;
   FEchoStringCommand.DisposeOf;
   FReverseStringCommand.DisposeOf;
   FGetAlunosCommand.DisposeOf;
   FGetAlunosCommand_Cache.DisposeOf;
+  FLoginFuncionarioCommand.DisposeOf;
+  FLoginResponsavelCommand.DisposeOf;
   inherited;
 end;
 
 end.
-
 

@@ -18,7 +18,8 @@ type
     fDataBaseNameSQLite:string;
     procedure ConectarSQLite;
   public
-    { Public declarations }
+    fUsuarioLogadoIsResponsavel:boolean;
+    fUsuarioLogadoIsFuncionario:boolean;
   end;
 
 var
