@@ -3,10 +3,11 @@ object frmPrincipal: TfrmPrincipal
   Top = 0
   Caption = 'Form1'
   ClientHeight = 480
-  ClientWidth = 640
+  ClientWidth = 430
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   DesignerMasterStyle = 3
   object MultiView1: TMultiView
     DragMode = dmAutomatic
@@ -73,17 +74,27 @@ object frmPrincipal: TfrmPrincipal
       Text = 'Teste Json x SQLite'
       OnClick = SpeedButton6Click
     end
+    object SpeedButton7: TSpeedButton
+      Align = Top
+      Position.Y = 288.000000000000000000
+      Size.Width = 249.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'buttonstyle'
+      Text = 'Teste Login'
+      OnClick = SpeedButton7Click
+    end
   end
   object layPrincipal: TLayout
     Align = Client
-    Size.Width = 390.000000000000000000
+    Size.Width = 180.000000000000000000
     Size.Height = 480.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     object Label1: TLabel
       Align = Contents
       StyledSettings = [Family, FontColor]
-      Size.Width = 390.000000000000000000
+      Size.Width = 180.000000000000000000
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 24.000000000000000000

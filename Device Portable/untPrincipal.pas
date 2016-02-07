@@ -18,12 +18,15 @@ type
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
     Label1: TLabel;
+    SpeedButton7: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -39,7 +42,7 @@ implementation
 
 {$R *.fmx}
 
-uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite;
+uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin;
 
 { TfrmPrincipal }
 
@@ -72,6 +75,12 @@ begin
     MultiView1.MasterButton := TControl(BotaoMenu);
 end;
 
+procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+   Application.Terminate;
+end;
+
 procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
 begin
   AbreForm(TfrmTesteClientes);
@@ -102,6 +111,12 @@ end;
 procedure TfrmPrincipal.SpeedButton6Click(Sender: TObject);
 begin
   AbreForm(TfrmTesteJsonXSqLite);
+end;
+
+
+procedure TfrmPrincipal.SpeedButton7Click(Sender: TObject);
+begin
+  AbreForm(TfrmLogin);
 end;
 
 
