@@ -3,6 +3,11 @@ Mapear
 S:\Desenvolvimento\Delphi\Estudos\Caderno
 Caderno de estudo delphi
 
+Problema Edits
+http://vivaitaocara.com.br/landersongomes/sobre
+
+http://cc.embarcadero.com/download.aspx?id=30110&nl=y
+
 
 ----Mobile--------------------------------------------------------------------------------
 
@@ -12,6 +17,15 @@ Caderno de estudo delphi
 ----Server--------------------------------------------------------------------------------
 ini
 install clint mysql
+
+criar rotinas para log de erros
+tratar erros login
+
+
+analisar senha responsavel
+nao pode ser vinculado a escola
+login face
+
 ------------------------------------------------------------------------------------------
 
 
