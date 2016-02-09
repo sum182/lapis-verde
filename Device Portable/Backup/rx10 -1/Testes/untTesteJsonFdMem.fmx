@@ -1,0 +1,101 @@
+inherited frmTesteJsonFdMem: TfrmTesteJsonFdMem
+  Caption = 'frmBase1'
+  DesignerMasterStyle = 3
+  inherited layBase: TLayout
+    inherited ToolBar1: TToolBar
+      TabOrder = 2
+      object SpeedButton1: TSpeedButton
+        Position.X = 168.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Alternativa 2'
+        OnClick = SpeedButton1Click
+      end
+      object SpeedButton2: TSpeedButton
+        Position.X = 8.000000000000000000
+        Size.Width = 153.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Alternativa 1'
+        OnClick = SpeedButton2Click
+      end
+    end
+    object ListView1: TListView
+      ItemAppearanceClassName = 'TListItemAppearance'
+      ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+      HeaderAppearanceClassName = 'TListHeaderObjects'
+      FooterAppearanceClassName = 'TListHeaderObjects'
+      Align = Client
+      Size.Width = 640.000000000000000000
+      Size.Height = 432.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object ListView2: TListView
+      ItemAppearanceClassName = 'TListItemAppearance'
+      ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+      HeaderAppearanceClassName = 'TListHeaderObjects'
+      FooterAppearanceClassName = 'TListHeaderObjects'
+      Align = Client
+      Size.Width = 640.000000000000000000
+      Size.Height = 432.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+    end
+  end
+  object fdmAlunos: TFDMemTable
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 2147483647
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode]
+    ResourceOptions.Persistent = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockWait, uvRefreshMode, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.LockWait = True
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 88
+    Top = 256
+    object fdmAlunosaluno_id: TIntegerField
+      FieldName = 'aluno_id'
+    end
+    object fdmAlunosnome: TStringField
+      FieldName = 'nome'
+      Size = 150
+    end
+  end
+  object FDStanStorageBinLink1: TFDStanStorageBinLink
+    Left = 88
+    Top = 320
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = fdmAlunos
+    ScopeMappings = <>
+    Left = 96
+    Top = 192
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'nome'
+      Control = ListView1
+      Track = True
+      FillDataSource = BindSourceDB1
+      FillDisplayFieldName = 'nome'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+end
