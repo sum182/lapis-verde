@@ -26,8 +26,8 @@ begin
  Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TModuloCliente, ModuloCliente);
-  Application.CreateForm(TfrmLogin, frmLogin);
-  //Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  //Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Run;
   exit;
 

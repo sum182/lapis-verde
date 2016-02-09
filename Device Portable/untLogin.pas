@@ -25,9 +25,6 @@ type
     lblErrorLogin: TLabel;
     ShadowEffect2: TShadowEffect;
     lblStatus: TLabel;
-    ListBox1: TListBox;
-    ListBoxItem1: TListBoxItem;
-    ListBoxItem2: TListBoxItem;
     procedure ImgBtnLoginClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -125,19 +122,19 @@ end;
 procedure TfrmLogin.edtSenhaChange(Sender: TObject);
 begin
   inherited;
-//  SetLabelsEdits;
+  SetLabelsEdits;
 end;
 
 procedure TfrmLogin.edtSenhaChangeTracking(Sender: TObject);
 begin
   inherited;
-//  SetLabelsEdits;
+  SetLabelsEdits;
 end;
 
 procedure TfrmLogin.edtSenhaExit(Sender: TObject);
 begin
   inherited;
-//  SetLabelsEdits;
+  SetLabelsEdits;
 end;
 
 procedure TfrmLogin.edtSenhaKeyDown(Sender: TObject; var Key: Word;
@@ -217,6 +214,7 @@ end;
 
 procedure TfrmLogin.OpenFrmPrincipal;
 begin
+  exit;
   frmLogin.DisposeOf;
   frmLogin := nil;
 
