@@ -58,7 +58,6 @@ inherited frmTesteJsonFdMem: TfrmTesteJsonFdMem
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockWait, uvRefreshMode, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.LockWait = True
     UpdateOptions.CheckRequired = False
-    AutoCommitUpdates = False
     StoreDefs = True
     Left = 88
     Top = 256
