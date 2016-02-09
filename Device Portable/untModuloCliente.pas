@@ -8,6 +8,8 @@ uses
 type
   TModuloCliente = class(TDataModule)
     DSRestConnection1: TDSRestConnection;
+    DSRestConnectionLocal: TDSRestConnection;
+    DSRestConnectionAWS: TDSRestConnection;
   private
     FInstanceOwner: Boolean;
     FSrvServerMetodosClient: TSrvServerMetodosClient;
