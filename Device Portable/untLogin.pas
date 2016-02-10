@@ -6,46 +6,50 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  smFrmBaseForAll, FMX.Effects, FMX.Objects,
+  smFrmBaseForAll,smGeralFMX, FMX.Effects, FMX.Objects,
   FMX.Controls.Presentation, FMX.Edit, FMX.Layouts, smCrypt, FMX.ListBox,
   FMX.TabControl;
 
 type
   TfrmLogin = class(TfrmBaseForAll)
     layBase: TLayout;
-    edtUsuario: TEdit;
     lblUsuario: TLabel;
     layUsuario: TLayout;
     laySenha: TLayout;
-    edtSenha: TEdit;
     lblSenha: TLabel;
     layBotoes: TLayout;
     SpeedButton1: TSpeedButton;
-    ImgBtnLogin: TImage;
     lblErrorLogin: TLabel;
     ShadowEffect2: TShadowEffect;
     lblStatus: TLabel;
-    procedure ImgBtnLoginClick(Sender: TObject);
+    edtSenha: TEdit;
+    edtUsuario: TEdit;
+    btnLogin: TSpeedButton;
+    lauCabecalho: TLayout;
+    layStatus: TLayout;
+    layTestes: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
-    procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
+    procedure edtUsuarioChange(Sender: TObject);
+    procedure edtUsuarioChangeTracking(Sender: TObject);
+    procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
     procedure edtSenhaKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
-    procedure edtUsuarioChange(Sender: TObject);
-    procedure edtUsuarioExit(Sender: TObject);
     procedure edtSenhaExit(Sender: TObject);
-    procedure edtUsuarioChangeTracking(Sender: TObject);
+    procedure edtUsuarioExit(Sender: TObject);
     procedure edtSenhaChange(Sender: TObject);
     procedure edtSenhaChangeTracking(Sender: TObject);
+    procedure btnLoginClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     fLogin: string;
     fSenha: string;
     function LoginResponsavel: boolean;
     function LoginFuncionario: boolean;
     procedure OpenFrmPrincipal;
-    function Dologon: boolean;
     procedure SetLabelsEdits;
+    procedure Login;
 
   public
     { Public declarations }
@@ -61,32 +65,17 @@ implementation
 uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
   FMX.Platform;
 
-function TfrmLogin.Dologon: boolean;
-var
-  LogIn: TfrmLogin;
+procedure TfrmLogin.btnLoginClick(Sender: TObject);
 begin
-  LogIn := TfrmLogin.Create(nil);
-  LogIn.ShowModal(
-    procedure(ModalResult: TModalResult)
-    begin
-      // ModalResult:=True;
-
-      // if ModalResult = mrOK then begin
-      if True then
-      begin
-        ShowMessage('Welcome');
-        Application.CreateForm(TfrmPrincipal, frmPrincipal);
-        LogIn.DisposeOf;
-      end;
-      LogIn.DisposeOf;
-    end);
+  inherited;
+  Login;
 end;
+
 
 procedure TfrmLogin.edtUsuarioChange(Sender: TObject);
 begin
   inherited;
   SetLabelsEdits;
-
 end;
 
 procedure TfrmLogin.edtUsuarioChangeTracking(Sender: TObject);
@@ -99,30 +88,25 @@ procedure TfrmLogin.edtUsuarioExit(Sender: TObject);
 begin
   inherited;
   SetLabelsEdits;
+  KeyboardHide;
 end;
 
 procedure TfrmLogin.edtUsuarioKeyDown(Sender: TObject; var Key: Word;
-var KeyChar: Char; Shift: TShiftState);
-var
-  Keyboard: IFMXVirtualKeyboardService;
+  var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   SetLabelsEdits;
   if Key = vkReturn then
-  begin
-    if TPlatformServices.Current.SupportsPlatformService
-      (IFMXVirtualKeyboardService, Keyboard) then
-    begin
-      Keyboard.HideVirtualKeyboard;
-    end;
-  end;
+    KeyboardHide;
 
 end;
+
 
 procedure TfrmLogin.edtSenhaChange(Sender: TObject);
 begin
   inherited;
   SetLabelsEdits;
+
 end;
 
 procedure TfrmLogin.edtSenhaChangeTracking(Sender: TObject);
@@ -135,35 +119,35 @@ procedure TfrmLogin.edtSenhaExit(Sender: TObject);
 begin
   inherited;
   SetLabelsEdits;
+  KeyboardHide;
 end;
 
 procedure TfrmLogin.edtSenhaKeyDown(Sender: TObject; var Key: Word;
-var KeyChar: Char; Shift: TShiftState);
+  var KeyChar: Char; Shift: TShiftState);
 var
   Keyboard: IFMXVirtualKeyboardService;
 begin
-   exit;
   inherited;
   SetLabelsEdits;
   if Key = vkReturn then
-  begin
-    if TPlatformServices.Current.SupportsPlatformService
-      (IFMXVirtualKeyboardService, Keyboard) then
-    begin
-      Keyboard.HideVirtualKeyboard;
-    end;
-  end;
-
+    KeyboardHide;
 end;
 
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
-  // Dologon;
   lblErrorLogin.Visible := False;
 end;
 
-procedure TfrmLogin.ImgBtnLoginClick(Sender: TObject);
+procedure TfrmLogin.FormShow(Sender: TObject);
+begin
+  inherited;
+  lblStatus.Visible:=False;
+  lblErrorLogin.Visible:=False;
+end;
+
+
+procedure TfrmLogin.Login;
 begin
   lblErrorLogin.Visible := False;
   fLogin := edtUsuario.Text;
@@ -173,6 +157,7 @@ begin
   begin
     DM.fUsuarioLogadoIsResponsavel := True;
     DM.fUsuarioLogadoIsFuncionario := False;
+    lblStatus.Visible:=True;
     lblStatus.Text := 'Login OK - Responsavel';
     // ModalResult := mrOk;
 
@@ -182,6 +167,7 @@ begin
   begin
     DM.fUsuarioLogadoIsResponsavel := False;
     DM.fUsuarioLogadoIsFuncionario := True;
+    lblStatus.Visible:=True;
     lblStatus.Text := 'Login OK - Funcionario';
     edtUsuario.Text := EmptyStr;
     edtSenha.Text := EmptyStr;
@@ -193,6 +179,7 @@ begin
   begin
     edtUsuario.Text := EmptyStr;
     edtSenha.Text := EmptyStr;
+    lblStatus.Visible:=True;
     lblStatus.Text := 'Login Erro';
     lblErrorLogin.Visible := True;
     ModalResult := mrCancel;
@@ -214,14 +201,17 @@ end;
 
 procedure TfrmLogin.OpenFrmPrincipal;
 begin
-  exit;
-  frmLogin.DisposeOf;
-  frmLogin := nil;
-
+  KeyboardHide;
   if not Assigned(frmPrincipal) then
     Application.CreateForm(TfrmPrincipal, frmPrincipal);
+
   frmPrincipal.Show;
 
+  if IsSysOSWindows then
+  begin
+    frmLogin.DisposeOf;
+    frmLogin := nil;
+  end;
 end;
 
 procedure TfrmLogin.SetLabelsEdits;
@@ -238,7 +228,7 @@ begin
   lblStatus.Text := 'Login OK - Funcionario';
   edtUsuario.Text := EmptyStr;
   edtSenha.Text := EmptyStr;
-  // ModalResult := mrOk;
+   ModalResult := mrOk;
 
   OpenFrmPrincipal;
 

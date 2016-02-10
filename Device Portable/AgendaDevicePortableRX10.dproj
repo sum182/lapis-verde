@@ -324,7 +324,6 @@
             <Form>ModuloCliente</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas"/>
         <DCCReference Include="C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas">
             <Form>frmBaseForAll</Form>
         </DCCReference>
@@ -354,6 +353,7 @@
             <Form>frmLogin</Form>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smCrypt.pas"/>
+        <DCCReference Include="C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -380,8 +380,9 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="2">
-                <DeployFile LocalName="Android\Release\styles.xml" Configuration="Release" Class="AndroidSplashStyles">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Release" Class="Android_LauncherIcon144">
                     <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -391,9 +392,8 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Release" Class="Android_LauncherIcon144">
+                <DeployFile LocalName="Android\Release\styles.xml" Configuration="Release" Class="AndroidSplashStyles">
                     <Platform Name="Android">
-                        <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

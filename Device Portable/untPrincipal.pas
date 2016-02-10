@@ -77,7 +77,7 @@ end;
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-   Application.Terminate;
+  Application.Terminate;
 end;
 
 procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
