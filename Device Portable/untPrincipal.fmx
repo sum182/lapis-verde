@@ -8,6 +8,7 @@ object frmPrincipal: TfrmPrincipal
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   OnClose = FormClose
   DesignerMasterStyle = 3
   object layPrincipal: TLayout

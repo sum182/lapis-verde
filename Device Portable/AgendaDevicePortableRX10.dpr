@@ -18,7 +18,8 @@ uses
   Proxy in 'Proxy.pas',
   untLogin in 'untLogin.pas' {frmLogin},
   smCrypt in 'C:\Componentes\sum182\D15\Units\smCrypt.pas',
-  smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas';
+  smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas',
+  untFuncoes in 'untFuncoes.pas';
 
 {$R *.res}
 

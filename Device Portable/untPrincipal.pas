@@ -26,6 +26,7 @@ type
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -41,7 +42,8 @@ implementation
 
 {$R *.fmx}
 
-uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin;
+uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
+  untFuncoes;
 
 { TfrmPrincipal }
 
@@ -78,6 +80,12 @@ procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
   Application.Terminate;
+end;
+
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetStyle(Self);
 end;
 
 procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);

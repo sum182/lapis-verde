@@ -18,16 +18,16 @@ type
     laySenha: TLayout;
     lblSenha: TLabel;
     layBotoes: TLayout;
-    SpeedButton1: TSpeedButton;
     lblErrorLogin: TLabel;
-    ShadowEffect2: TShadowEffect;
-    lblStatus: TLabel;
     edtSenha: TEdit;
     edtUsuario: TEdit;
     btnLogin: TSpeedButton;
     lauCabecalho: TLayout;
     layStatus: TLayout;
-    layTestes: TLayout;
+    VertScrollBox1: TVertScrollBox;
+    Label1: TLabel;
+    imgUsuario: TImage;
+    imgSenha: TImage;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure edtUsuarioChange(Sender: TObject);
@@ -63,7 +63,7 @@ implementation
 {$R *.fmx}
 
 uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
-  FMX.Platform;
+  FMX.Platform, untFuncoes;
 
 procedure TfrmLogin.btnLoginClick(Sender: TObject);
 begin
@@ -137,12 +137,12 @@ procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
   lblErrorLogin.Visible := False;
+  SetStyle(Self);
 end;
 
 procedure TfrmLogin.FormShow(Sender: TObject);
 begin
   inherited;
-  lblStatus.Visible:=False;
   lblErrorLogin.Visible:=False;
 end;
 
@@ -157,33 +157,24 @@ begin
   begin
     DM.fUsuarioLogadoIsResponsavel := True;
     DM.fUsuarioLogadoIsFuncionario := False;
-    lblStatus.Visible:=True;
-    lblStatus.Text := 'Login OK - Responsavel';
-    // ModalResult := mrOk;
-
     OpenFrmPrincipal;
   end
   else if LoginFuncionario then
   begin
     DM.fUsuarioLogadoIsResponsavel := False;
     DM.fUsuarioLogadoIsFuncionario := True;
-    lblStatus.Visible:=True;
-    lblStatus.Text := 'Login OK - Funcionario';
     edtUsuario.Text := EmptyStr;
     edtSenha.Text := EmptyStr;
-    // ModalResult := mrOk;
-
     OpenFrmPrincipal;
   end
   else
   begin
-    edtUsuario.Text := EmptyStr;
+    //edtUsuario.Text := EmptyStr;
     edtSenha.Text := EmptyStr;
-    lblStatus.Visible:=True;
-    lblStatus.Text := 'Login Erro';
     lblErrorLogin.Visible := True;
+    //ShowMessage('O login e a senha que você digitou não coincidem.');
     ModalResult := mrCancel;
-
+    KeyboardHide;
   end;
 end;
 
@@ -225,7 +216,6 @@ begin
   inherited;
   DM.fUsuarioLogadoIsResponsavel := False;
   DM.fUsuarioLogadoIsFuncionario := True;
-  lblStatus.Text := 'Login OK - Funcionario';
   edtUsuario.Text := EmptyStr;
   edtSenha.Text := EmptyStr;
    ModalResult := mrOk;
