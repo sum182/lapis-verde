@@ -149,6 +149,8 @@ end;
 
 procedure TfrmLogin.Login;
 begin
+  KeyboardHide;
+  btnLogin.SetFocus;
   lblErrorLogin.Visible := False;
   fLogin := edtUsuario.Text;
   fSenha := Encrypt(edtSenha.Text);

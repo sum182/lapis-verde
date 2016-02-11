@@ -39,7 +39,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico\Android\drawable-xxhdpi-144 x 144\ic_launcher.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\res\drawable-xxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon144</DeployClass>
@@ -48,7 +48,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico\Android\drawable-ldpi-36 x 36\ic_launcher.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\res\drawable-ldpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon36</DeployClass>
@@ -75,7 +75,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico\Android\drawable-xhdpi-96 x 96\ic_launcher.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon96</DeployClass>
@@ -139,7 +139,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon72</DeployClass>
@@ -202,7 +202,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico\Android\drawable-mdpi-48 x 48\ic_launcher.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon48</DeployClass>
