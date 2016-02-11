@@ -3,13 +3,13 @@
         <ProjectGuid>{D7F7BC09-D38A-4A17-A8B9-275F1926FE56}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Device Portable\AgendaDevicePortable.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Device Portable\AgendaDevicePortableRX10.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Server Application\AgendaServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -20,15 +20,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="AgendaDevicePortable">
-        <MSBuild Projects="Device Portable\AgendaDevicePortable.dproj"/>
-    </Target>
-    <Target Name="AgendaDevicePortable:Clean">
-        <MSBuild Projects="Device Portable\AgendaDevicePortable.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="AgendaDevicePortable:Make">
-        <MSBuild Projects="Device Portable\AgendaDevicePortable.dproj" Targets="Make"/>
-    </Target>
     <Target Name="AgendaDevicePortableRX10">
         <MSBuild Projects="Device Portable\AgendaDevicePortableRX10.dproj"/>
     </Target>
@@ -47,14 +38,23 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
     </Target>
+    <Target Name="LocadoraDelphi">
+        <MSBuild Projects="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj"/>
+    </Target>
+    <Target Name="LocadoraDelphi:Clean">
+        <MSBuild Projects="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LocadoraDelphi:Make">
+        <MSBuild Projects="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortable;AgendaDevicePortableRX10;AgendaServer"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;LocadoraDelphi"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortable:Clean;AgendaDevicePortableRX10:Clean;AgendaServer:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;LocadoraDelphi:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortable:Make;AgendaDevicePortableRX10:Make;AgendaServer:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;LocadoraDelphi:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

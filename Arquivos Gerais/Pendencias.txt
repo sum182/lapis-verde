@@ -12,6 +12,13 @@ http://cc.embarcadero.com/download.aspx?id=30110&nl=y
 ----Mobile--------------------------------------------------------------------------------
 login
 ao chegar no principal e voltar deve fechar app e nao voltar ao login
+styles
+configuracoes de usuario
+cad usuario nao vinculado a escola
+menu princiapl
+
+formularios base e base for all
+criar DM para os estilos 
 ------------------------------------------------------------------------------------------
 
 
