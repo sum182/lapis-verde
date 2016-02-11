@@ -13,10 +13,8 @@ uses
 type
   TfrmLogin = class(TfrmBaseForAll)
     layBase: TLayout;
-    lblUsuario: TLabel;
     layUsuario: TLayout;
     laySenha: TLayout;
-    lblSenha: TLabel;
     layBotoes: TLayout;
     lblErrorLogin: TLabel;
     edtSenha: TEdit;
@@ -28,27 +26,30 @@ type
     Label1: TLabel;
     imgUsuario: TImage;
     imgSenha: TImage;
+    layContaUsuario: TLayout;
+    btnEsqueceuSenha: TSpeedButton;
+    Layout1: TLayout;
+    btnCriarConta: TSpeedButton;
+    Layout2: TLayout;
     procedure FormCreate(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure edtUsuarioChange(Sender: TObject);
-    procedure edtUsuarioChangeTracking(Sender: TObject);
     procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
     procedure edtSenhaKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure edtSenhaExit(Sender: TObject);
     procedure edtUsuarioExit(Sender: TObject);
-    procedure edtSenhaChange(Sender: TObject);
-    procedure edtSenhaChangeTracking(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure lblEsqueceuSenhaDblClick(Sender: TObject);
+    procedure lblCriarContaDblClick(Sender: TObject);
+    procedure btnEsqueceuSenhaClick(Sender: TObject);
+    procedure btnCriarContaClick(Sender: TObject);
   private
     fLogin: string;
     fSenha: string;
     function LoginResponsavel: boolean;
     function LoginFuncionario: boolean;
     procedure OpenFrmPrincipal;
-    procedure SetLabelsEdits;
     procedure Login;
 
   public
@@ -65,6 +66,18 @@ implementation
 uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
   FMX.Platform, untFuncoes;
 
+procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Criar conta...')
+end;
+
+procedure TfrmLogin.btnEsqueceuSenhaClick(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Esqueceu sua senha...');
+end;
+
 procedure TfrmLogin.btnLoginClick(Sender: TObject);
 begin
   inherited;
@@ -72,22 +85,9 @@ begin
 end;
 
 
-procedure TfrmLogin.edtUsuarioChange(Sender: TObject);
-begin
-  inherited;
-  SetLabelsEdits;
-end;
-
-procedure TfrmLogin.edtUsuarioChangeTracking(Sender: TObject);
-begin
-  inherited;
-  SetLabelsEdits;
-end;
-
 procedure TfrmLogin.edtUsuarioExit(Sender: TObject);
 begin
   inherited;
-  SetLabelsEdits;
   KeyboardHide;
 end;
 
@@ -95,30 +95,15 @@ procedure TfrmLogin.edtUsuarioKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  SetLabelsEdits;
   if Key = vkReturn then
     KeyboardHide;
 
 end;
 
 
-procedure TfrmLogin.edtSenhaChange(Sender: TObject);
-begin
-  inherited;
-  SetLabelsEdits;
-
-end;
-
-procedure TfrmLogin.edtSenhaChangeTracking(Sender: TObject);
-begin
-  inherited;
-  SetLabelsEdits;
-end;
-
 procedure TfrmLogin.edtSenhaExit(Sender: TObject);
 begin
   inherited;
-  SetLabelsEdits;
   KeyboardHide;
 end;
 
@@ -128,7 +113,6 @@ var
   Keyboard: IFMXVirtualKeyboardService;
 begin
   inherited;
-  SetLabelsEdits;
   if Key = vkReturn then
     KeyboardHide;
 end;
@@ -146,6 +130,18 @@ begin
   lblErrorLogin.Visible:=False;
 end;
 
+
+procedure TfrmLogin.lblCriarContaDblClick(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Criar Conta!');
+end;
+
+procedure TfrmLogin.lblEsqueceuSenhaDblClick(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Esqueceu sua senha?');
+end;
 
 procedure TfrmLogin.Login;
 begin
@@ -207,23 +203,5 @@ begin
   end;
 end;
 
-procedure TfrmLogin.SetLabelsEdits;
-begin
-  lblUsuario.Visible := (edtUsuario.Text = '');
-  lblSenha.Visible := (edtSenha.Text = '');
-end;
-
-procedure TfrmLogin.SpeedButton1Click(Sender: TObject);
-begin
-  inherited;
-  DM.fUsuarioLogadoIsResponsavel := False;
-  DM.fUsuarioLogadoIsFuncionario := True;
-  edtUsuario.Text := EmptyStr;
-  edtSenha.Text := EmptyStr;
-   ModalResult := mrOk;
-
-  OpenFrmPrincipal;
-
-end;
 
 end.

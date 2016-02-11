@@ -1,6 +1,6 @@
 inherited frmLogin: TfrmLogin
   Caption = 'Login Agenda'
-  ClientHeight = 554
+  ClientHeight = 579
   ClientWidth = 320
   Position = DesktopCenter
   OnCreate = FormCreate
@@ -9,15 +9,15 @@ inherited frmLogin: TfrmLogin
   object VertScrollBox1: TVertScrollBox
     Align = Client
     Size.Width = 320.000000000000000000
-    Size.Height = 554.000000000000000000
+    Size.Height = 579.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     Viewport.Width = 320.000000000000000000
-    Viewport.Height = 554.000000000000000000
+    Viewport.Height = 579.000000000000000000
     object layBase: TLayout
       Align = Client
       Size.Width = 320.000000000000000000
-      Size.Height = 554.000000000000000000
+      Size.Height = 579.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       object layUsuario: TLayout
@@ -35,19 +35,9 @@ inherited frmLogin: TfrmLogin
           Size.Width = 260.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
-          OnChange = edtUsuarioChange
-          OnChangeTracking = edtUsuarioChangeTracking
+          TextPrompt = 'Email / CPF'
           OnKeyDown = edtUsuarioKeyDown
           OnExit = edtUsuarioExit
-          object lblUsuario: TLabel
-            Align = Contents
-            Margins.Left = 6.000000000000000000
-            Size.Width = 254.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'listboxitemdetaillabel'
-            Text = 'Email / CPF'
-          end
           object imgUsuario: TImage
             MultiResBitmap.Height = 36
             MultiResBitmap.Width = 36
@@ -98,19 +88,9 @@ inherited frmLogin: TfrmLogin
           Size.Width = 260.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
-          OnChange = edtSenhaChange
-          OnChangeTracking = edtSenhaChangeTracking
+          TextPrompt = 'Senha'
           OnKeyDown = edtSenhaKeyDown
           OnExit = edtSenhaExit
-          object lblSenha: TLabel
-            Align = Contents
-            Margins.Left = 6.000000000000000000
-            Size.Width = 254.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'listboxitemdetaillabel'
-            Text = 'Senha'
-          end
           object imgSenha: TImage
             MultiResBitmap.Height = 36
             MultiResBitmap.Width = 36
@@ -169,29 +149,30 @@ inherited frmLogin: TfrmLogin
       end
       object layStatus: TLayout
         Align = Top
-        Position.Y = 331.000000000000000000
+        Position.Y = 337.000000000000000000
         Size.Width = 320.000000000000000000
-        Size.Height = 38.000000000000000000
+        Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
         object lblErrorLogin: TLabel
           Align = Center
-          StyledSettings = [Family]
+          StyledSettings = []
           Size.Width = 320.000000000000000000
           Size.Height = 18.000000000000000000
           Size.PlatformDefault = False
-          TextSettings.Font.Size = 11.000000000000000000
+          TextSettings.Font.Family = 'Segoe UI Semibold'
+          TextSettings.Font.Size = 13.000000000000000000
           TextSettings.Font.Style = [fsBold]
           TextSettings.FontColor = claCrimson
           TextSettings.HorzAlign = Center
-          Text = 'O login e a senha que voc'#234' digitou n'#227'o coincidem.'
+          Text = 'Nome de usu'#225'rio ou senha inv'#225'lidos!'
         end
       end
       object layBotoes: TLayout
         Align = Top
         Position.Y = 263.000000000000000000
         Size.Width = 320.000000000000000000
-        Size.Height = 68.000000000000000000
+        Size.Height = 74.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
         object btnLogin: TSpeedButton
@@ -199,9 +180,54 @@ inherited frmLogin: TfrmLogin
           Size.Width = 260.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
+          StyleLookup = 'buttonstyle'
           Text = 'Entrar'
           OnClick = btnLoginClick
         end
+      end
+      object layContaUsuario: TLayout
+        Align = Top
+        Position.Y = 425.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 60.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        object btnEsqueceuSenha: TSpeedButton
+          Align = Center
+          Size.Width = 260.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'speedbuttonstyle'
+          Text = 'Esqueceu sua senha?'
+          TextSettings.FontColor = claBlue
+          OnClick = btnEsqueceuSenhaClick
+        end
+      end
+      object Layout1: TLayout
+        Align = Top
+        Position.Y = 485.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 60.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        object btnCriarConta: TSpeedButton
+          Align = Center
+          Size.Width = 260.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'toolbutton'
+          Text = 'Criar Conta'
+          TextSettings.FontColor = claBlue
+          OnClick = btnCriarContaClick
+        end
+      end
+      object Layout2: TLayout
+        Align = Top
+        Position.Y = 385.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
       end
     end
   end
