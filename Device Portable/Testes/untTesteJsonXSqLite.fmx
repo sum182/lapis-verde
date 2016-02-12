@@ -24,6 +24,8 @@ inherited frmTesteJsonXSqLite: TfrmTesteJsonXSqLite
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 640.000000000000000000
+      Viewport.Height = 432.000000000000000000
     end
   end
   object fdqAluno: TFDQuery
@@ -57,7 +59,6 @@ inherited frmTesteJsonXSqLite: TfrmTesteJsonXSqLite
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockWait, uvRefreshMode, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.LockWait = True
     UpdateOptions.CheckRequired = False
-    AutoCommitUpdates = False
     StoreDefs = True
     Left = 88
     Top = 248

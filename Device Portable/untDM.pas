@@ -14,10 +14,6 @@ type
     FDConnectionSQLite: TFDConnection;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
-    styleIOS: TStyleBook;
-    styleWindows: TStyleBook;
-    styleAndroidTDevRocks: TStyleBook;
-    styleAndroid: TStyleBook;
     ImageList1: TImageList;
     procedure DataModuleCreate(Sender: TObject);
   private

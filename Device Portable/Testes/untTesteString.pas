@@ -5,10 +5,10 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls, smFrmBase, FMX.Controls.Presentation, FMX.Edit,
-  FMX.Layouts;
+  FMX.Layouts,smFrmBaseToolBar;
 
 type
-  TfrmTesteString = class(TfrmBase)
+  TfrmTesteString = class(TfrmBaseToolBar)
     SpeedButton1: TSpeedButton;
     Edit1: TEdit;
     Label1: TLabel;

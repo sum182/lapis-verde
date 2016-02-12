@@ -1,11 +1,10 @@
 inherited frmTesteJsonFdMem: TfrmTesteJsonFdMem
-  Caption = 'frmBase1'
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     inherited ToolBar1: TToolBar
       TabOrder = 2
       object SpeedButton1: TSpeedButton
-        Position.X = 168.000000000000000000
+        Position.X = 272.000000000000000000
         Size.Width = 121.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -13,7 +12,7 @@ inherited frmTesteJsonFdMem: TfrmTesteJsonFdMem
         OnClick = SpeedButton1Click
       end
       object SpeedButton2: TSpeedButton
-        Position.X = 8.000000000000000000
+        Position.X = 112.000000000000000000
         Size.Width = 153.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False

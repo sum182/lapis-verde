@@ -1,0 +1,234 @@
+inherited frmLogin: TfrmLogin
+  Caption = 'Login Agenda'
+  ClientHeight = 579
+  ClientWidth = 320
+  Position = DesktopCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object VertScrollBox1: TVertScrollBox
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 579.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 320.000000000000000000
+    Viewport.Height = 579.000000000000000000
+    object layBase: TLayout
+      Align = Client
+      Size.Width = 320.000000000000000000
+      Size.Height = 579.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object layUsuario: TLayout
+        Align = Top
+        Position.Y = 113.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 75.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object edtUsuario: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Center
+          StyleLookup = 'editstyle'
+          TabOrder = 1
+          Size.Width = 260.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Email / CPF'
+          OnKeyDown = edtUsuarioKeyDown
+          OnExit = edtUsuarioExit
+          object imgUsuario: TImage
+            MultiResBitmap.Height = 36
+            MultiResBitmap.Width = 36
+            MultiResBitmap = <
+              item
+                Width = 36
+                Height = 36
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                  98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  0144494441545847ED97DB6D023110451790921FD201692214123A813412A082
+                  A40328049A480AE0F51B29B917D9ABC96866CD63B1F8F0918E2CAD67EDD9D961
+                  85AB42A190994738871BF87B6377907B3D4017065837DF52EEE992A3325AEEE9
+                  220347F05B5D6BC32FF8AAAEB9E8A03E9CC11F28E72E916B4C21D72472CEC50B
+                  1AC23594F3E7B8822F5022E75D64D0120E60A40727F000655C937B3886BC37F2
+                  0CB9B68C739141949B3309B92093D40B5A2EA07EA037683D908B0E8CB2E47C6D
+                  12AFE963D34A52AFDCC50A8EB229D9E0B129896C7ADDB4E409F23B93FA51B858
+                  C15A5685D591B002A756D0D2C50AF6D44D1FB19A36A58B15DCA46CFAA6A64D59
+                  D30963E4DFE419B061B996FED69C4A9D475B095D4B9D47378C77434928454928
+                  C5DD27C4BF0BB9D986F1884EE8338C39F908A3098F24B98E41DCE31D361E830A
+                  8542BB54D51FE4555A7F0BB4E34E0000000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_email_black_36dp\android\drawable-' +
+                  'mdpi\ic_email_black_36dp.png'
+              end>
+            Align = Right
+            Margins.Right = 5.000000000000000000
+            Position.X = 233.000000000000000000
+            Size.Width = 22.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+      end
+      object laySenha: TLayout
+        Align = Top
+        Position.Y = 188.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 75.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object edtSenha: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Center
+          StyleLookup = 'editstyle'
+          TabOrder = 2
+          Password = True
+          Size.Width = 260.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Senha'
+          OnKeyDown = edtSenhaKeyDown
+          OnExit = edtSenhaExit
+          object imgSenha: TImage
+            MultiResBitmap.Height = 36
+            MultiResBitmap.Width = 36
+            MultiResBitmap = <
+              item
+                Width = 36
+                Height = 36
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                  98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  019E494441545847ED974D2B065114C787BC45CA021B215912B1B3F711583DDF
+                  49D94A58D9F9084A492CACD929624579499412FFFFCCBD351DC7DCB9F3DC3BCD
+                  627EF5EBCCDCEEDC39CF7D69CE93348D1E13AB3206D7E12C1C8037F0183EC15A
+                  99803BF00BFE08D9B60727612D2CC05B2813913EC045E885EF9271662EE14C7A
+                  97249FF0105EC06FB8063B70181226B5021FD3BB087099EC0C5CC1392861DB35
+                  B4FD766114B881ED9EF9805A329679C8D9635F3E330E83B3017D7EF53EB4FD37
+                  D950865E13CBC0A36DE19E71716E22E18C95C227A15113C9BB894570592D4326
+                  3AF149A8161A97501183701B3E43BB39BBF515724C7E66BCE183DAA021E4D8DE
+                  849C1929C75629FA74F0C198A8EF6E4F998BC62514620FDDC1A3EC32FDDE4D67
+                  974EBCABD5FCA9F8CF13686B1F32024FA1D657EA8D368874194A56A1D657AAD2
+                  ED92F541568A79FA216B2017518EFD928979B4B620C829D6E47EE1BEB1B04439
+                  835A5FA94A8853760FF3A76C2ABB74A2BE3B44425589B28782D326E4A228A137
+                  1363F062E21F8A123A303106FCCFE60DEBDED03535C7DA82956AEA96069224BF
+                  5232D34AFE3E16490000000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_lock_black_36dp\android\drawable-m' +
+                  'dpi\ic_lock_black_36dp.png'
+              end>
+            Align = Right
+            Margins.Right = 5.000000000000000000
+            Position.X = 232.000000000000000000
+            Size.Width = 23.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+      end
+      object lauCabecalho: TLayout
+        Align = Top
+        Size.Width = 320.000000000000000000
+        Size.Height = 113.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Label1: TLabel
+          Align = HorzCenter
+          StyledSettings = [Size, FontColor]
+          Size.Width = 320.000000000000000000
+          Size.Height = 113.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'listboxheaderlabel'
+          TextSettings.Font.Family = 'Segoe UI Semibold'
+          TextSettings.Font.Style = [fsBold]
+          TextSettings.HorzAlign = Center
+          Text = 'Agenda'
+        end
+      end
+      object layStatus: TLayout
+        Align = Top
+        Position.Y = 337.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object lblErrorLogin: TLabel
+          Align = Center
+          StyledSettings = []
+          Size.Width = 320.000000000000000000
+          Size.Height = 18.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Segoe UI Semibold'
+          TextSettings.Font.Size = 13.000000000000000000
+          TextSettings.Font.Style = [fsBold]
+          TextSettings.FontColor = claCrimson
+          TextSettings.HorzAlign = Center
+          Text = 'Nome de usu'#225'rio ou senha inv'#225'lidos!'
+        end
+      end
+      object layBotoes: TLayout
+        Align = Top
+        Position.Y = 263.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 74.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object btnLogin: TSpeedButton
+          Align = Center
+          Size.Width = 260.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'buttonstyle'
+          Text = 'Entrar'
+          OnClick = btnLoginClick
+        end
+      end
+      object layContaUsuario: TLayout
+        Align = Top
+        Position.Y = 425.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 60.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        object btnEsqueceuSenha: TSpeedButton
+          Align = Center
+          Size.Width = 260.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'speedbuttonstyle'
+          Text = 'Esqueceu sua senha?'
+          TextSettings.FontColor = claBlue
+          OnClick = btnEsqueceuSenhaClick
+        end
+      end
+      object Layout1: TLayout
+        Align = Top
+        Position.Y = 485.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 60.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        object btnCriarConta: TSpeedButton
+          Align = Center
+          Size.Width = 260.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'toolbutton'
+          Text = 'Criar Conta'
+          TextSettings.FontColor = claBlue
+          OnClick = btnCriarContaClick
+        end
+      end
+      object Layout2: TLayout
+        Align = Top
+        Position.Y = 385.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+      end
+    end
+  end
+end

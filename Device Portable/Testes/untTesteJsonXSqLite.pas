@@ -7,11 +7,11 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls, smFrmBase, FMX.Layouts, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Stan.StorageBin, FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, FMX.ListBox,
-  System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,
-  Data.Bind.DBScope;
+  System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,smFrmBaseToolBar,
+  Data.Bind.DBScope, FMX.Controls.Presentation;
 
 type
-  TfrmTesteJsonXSqLite = class(TfrmBase)
+  TfrmTesteJsonXSqLite = class(TfrmBaseToolBar)
     SpeedButton1: TSpeedButton;
     ListBox3: TListBox;
     fdqAluno: TFDQuery;

@@ -7,12 +7,12 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls, smFrmBase, FMX.ListView.Types, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.StorageBin, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FMX.ListView, FMX.Layouts,Data.FireDACJSONReflect,
-  System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,
+  System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,smFrmBaseToolBar,
   Data.Bind.DBScope, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   FMX.Controls.Presentation;
 
 type
-  TfrmTesteJsonFdMem = class(TfrmBase)
+  TfrmTesteJsonFdMem = class(TfrmBaseToolBar)
     SpeedButton1: TSpeedButton;
     ListView1: TListView;
     fdmAlunos: TFDMemTable;

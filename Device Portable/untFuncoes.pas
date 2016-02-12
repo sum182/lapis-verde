@@ -8,21 +8,21 @@ Uses  FMX.Forms;
 
 implementation
 
-uses untDM;
+uses untDM, untDMStyles;
 
 
 procedure SetStyle(Formulario:TForm);
 begin
    {$IFDEF ANDROID}
-    Formulario.StyleBook := DM.styleAndroid;
+    Formulario.StyleBook := DMStyles.styleAndroid;
   {$ENDIF}
 
   {$IFDEF IOS}
-    Formulario.StyleBook := DM.styleIOS;
+    Formulario.StyleBook := DMStyles.styleIOS;
   {$ENDIF}
 
   {$IFDEF MSWINDOWS}
-    Formulario.StyleBook := DM.styleWindows;
+    Formulario.StyleBook := DMStyles.styleWindows;
   {$ENDIF}
 end;
 
