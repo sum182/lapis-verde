@@ -12,6 +12,10 @@ http://cc.embarcadero.com/download.aspx?id=30110&nl=y
 ----Mobile--------------------------------------------------------------------------------
 login
 ao chegar no principal e voltar deve fechar app e nao voltar ao login
+Esqueceu sua senha?
+Criar Conta
+
+
 styles
 configuracoes de usuario
 cad usuario nao vinculado a escola

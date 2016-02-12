@@ -144,35 +144,56 @@ begin
 end;
 
 procedure TfrmLogin.Login;
+var
+CS: IFMXCursorService;
 begin
-  KeyboardHide;
-  btnLogin.SetFocus;
-  lblErrorLogin.Visible := False;
-  fLogin := edtUsuario.Text;
-  fSenha := Encrypt(edtSenha.Text);
 
-  if LoginResponsavel then
-  begin
-    DM.fUsuarioLogadoIsResponsavel := True;
-    DM.fUsuarioLogadoIsFuncionario := False;
-    OpenFrmPrincipal;
-  end
-  else if LoginFuncionario then
-  begin
-    DM.fUsuarioLogadoIsResponsavel := False;
-    DM.fUsuarioLogadoIsFuncionario := True;
-    edtUsuario.Text := EmptyStr;
-    edtSenha.Text := EmptyStr;
-    OpenFrmPrincipal;
-  end
-  else
-  begin
-    //edtUsuario.Text := EmptyStr;
-    edtSenha.Text := EmptyStr;
-    lblErrorLogin.Visible := True;
-    //ShowMessage('O login e a senha que você digitou não coincidem.');
-    ModalResult := mrCancel;
+  try
+    if TPlatformServices.Current.SupportsPlatformService(IFMXCursorService) then
+    begin
+      CS := TPlatformServices.Current.GetPlatformService(IFMXCursorService) as IFMXCursorService;
+    end;
+
+    if Assigned(CS) then
+    begin
+    Cursor := CS.GetCursor;
+    CS.SetCursor(crHourGlass);
+    end;
+
+    //SetCursorWait(self,CS);
+
     KeyboardHide;
+    btnLogin.SetFocus;
+    lblErrorLogin.Visible := False;
+    fLogin := edtUsuario.Text;
+    fSenha := Encrypt(edtSenha.Text);
+
+    if LoginResponsavel then
+    begin
+      DM.fUsuarioLogadoIsResponsavel := True;
+      DM.fUsuarioLogadoIsFuncionario := False;
+      OpenFrmPrincipal;
+    end
+    else if LoginFuncionario then
+    begin
+      DM.fUsuarioLogadoIsResponsavel := False;
+      DM.fUsuarioLogadoIsFuncionario := True;
+      edtUsuario.Text := EmptyStr;
+      edtSenha.Text := EmptyStr;
+      OpenFrmPrincipal;
+    end
+    else
+    begin
+      //edtUsuario.Text := EmptyStr;
+      edtSenha.Text := EmptyStr;
+      lblErrorLogin.Visible := True;
+      //ShowMessage('O login e a senha que você digitou não coincidem.');
+      ModalResult := mrCancel;
+      KeyboardHide;
+    end;
+  finally
+    CS.SetCursor(Cursor);
+    //cursor:=crDefault;
   end;
 end;
 
