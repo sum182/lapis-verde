@@ -127,10 +127,6 @@ inherited frmLogin: TfrmLogin
             Size.PlatformDefault = False
           end
         end
-        object AniIndicator: TAniIndicator
-          Align = Center
-          Style = Circular
-        end
       end
       object lauCabecalho: TLayout
         Align = Top

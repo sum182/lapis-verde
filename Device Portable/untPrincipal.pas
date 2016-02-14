@@ -5,32 +5,43 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.MultiView, FMX.Layouts,smFrmBaseForAll;
+  FMX.Controls.Presentation, FMX.MultiView, FMX.Layouts,smFrmBaseForAll,
+  FMX.ListBox, FMX.Objects;
 
 type
   TfrmPrincipal = class(TfrmBaseForAll)
-    MultiView1: TMultiView;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
     layPrincipal: TLayout;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
-    SpeedButton6: TSpeedButton;
-    SpeedButton7: TSpeedButton;
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
-    procedure SpeedButton5Click(Sender: TObject);
-    procedure SpeedButton6Click(Sender: TObject);
-    procedure SpeedButton7Click(Sender: TObject);
+    MultiView1: TMultiView;
+    lstMnuMain: TListBox;
+    lstgrpListas: TListBoxGroupHeader;
+    lstClientes: TListBoxItem;
+    lstgrpConfig: TListBoxGroupHeader;
+    lstitLogin: TListBoxItem;
+    lstPreferencias: TListBoxItem;
+    lstSincronizar: TListBoxItem;
+    spbSincronizar: TSpeedButton;
+    ListBoxItem2: TListBoxItem;
+    ListBoxItem3: TListBoxItem;
+    ListBoxItem4: TListBoxItem;
+    ListBoxItem5: TListBoxItem;
+    ListBoxItem6: TListBoxItem;
+    recBackground: TRectangle;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure lstClientesClick(Sender: TObject);
+    procedure ListBoxItem4Click(Sender: TObject);
+    procedure ListBoxItem2Click(Sender: TObject);
+    procedure ListBoxItem5Click(Sender: TObject);
+    procedure ListBoxItem6Click(Sender: TObject);
+    procedure lstitLoginClick(Sender: TObject);
+    procedure ListBoxItem3Click(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
     procedure AbreForm(aFormClass: TComponentClass);
+    procedure ShowBackground(AParent: TFmxObject; AOnClick: TNotifyEvent = nil);
+    procedure HideBackground;
+
   public
     { Public declarations }
   end;
@@ -74,6 +85,8 @@ begin
   BotaoMenu := FActiveForm.FindComponent('btnMenu');
   if Assigned(BotaoMenu) then
     MultiView1.MasterButton := TControl(BotaoMenu);
+
+   MultiView1.HideMaster;
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -86,45 +99,69 @@ procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
+  recBackground.Visible := False;
+  recBackground.Align   := TAlignLayout.Contents;
 end;
 
-procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
+procedure TfrmPrincipal.HideBackground;
 begin
-  AbreForm(TfrmTesteClientes);
+  recBackground.AnimateFloat('opacity', 0, 0.1);
+  recBackground.Visible := False;
 end;
 
-procedure TfrmPrincipal.SpeedButton2Click(Sender: TObject);
+procedure TfrmPrincipal.ListBoxItem3Click(Sender: TObject);
 begin
-  AbreForm(TfrmTesteProduto);
-end;
-
-procedure TfrmPrincipal.SpeedButton3Click(Sender: TObject);
-begin
+  inherited;
   AbreForm(TfrmTesteFornecedores);
 end;
 
-
-
-procedure TfrmPrincipal.SpeedButton4Click(Sender: TObject);
+procedure TfrmPrincipal.ListBoxItem4Click(Sender: TObject);
 begin
-  AbreForm(TfrmTesteString);
+  inherited;
+   AbreForm(TfrmTesteProduto);
 end;
 
-procedure TfrmPrincipal.SpeedButton5Click(Sender: TObject);
+procedure TfrmPrincipal.lstClientesClick(Sender: TObject);
 begin
-  AbreForm(TfrmTesteJsonFdMem);
+  inherited;
+  AbreForm(TfrmTesteClientes);
 end;
 
-procedure TfrmPrincipal.SpeedButton6Click(Sender: TObject);
+procedure TfrmPrincipal.ListBoxItem2Click(Sender: TObject);
 begin
+  inherited;
+    AbreForm(TfrmTesteString);
+end;
+
+procedure TfrmPrincipal.ListBoxItem5Click(Sender: TObject);
+begin
+  inherited;
+    AbreForm(TfrmTesteJsonFdMem);
+end;
+
+procedure TfrmPrincipal.ListBoxItem6Click(Sender: TObject);
+begin
+  inherited;
   AbreForm(TfrmTesteJsonXSqLite);
 end;
 
-
-procedure TfrmPrincipal.SpeedButton7Click(Sender: TObject);
+procedure TfrmPrincipal.lstitLoginClick(Sender: TObject);
 begin
-  AbreForm(TfrmLogin);
+  inherited;
+    AbreForm(TfrmLogin);
 end;
 
+
+procedure TfrmPrincipal.ShowBackground(AParent: TFmxObject;
+  AOnClick: TNotifyEvent);
+begin
+  recBackground.OnClick := AOnClick;
+  recBackground.Parent  := AParent;
+  recBackground.BringToFront;
+  recBackground.Opacity := 0;
+  recBackground.Visible := True;
+  recBackground.AnimateFloat('opacity', 0.5, 0.1);
+
+end;
 
 end.

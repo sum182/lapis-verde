@@ -2,8 +2,8 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Agenda'
-  ClientHeight = 480
-  ClientWidth = 430
+  ClientHeight = 538
+  ClientWidth = 576
   Position = DesktopCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -13,86 +13,145 @@ object frmPrincipal: TfrmPrincipal
   DesignerMasterStyle = 3
   object layPrincipal: TLayout
     Align = Client
-    Size.Width = 430.000000000000000000
-    Size.Height = 480.000000000000000000
+    Size.Width = 576.000000000000000000
+    Size.Height = 538.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 1
-  end
-  object MultiView1: TMultiView
-    DragMode = dmAutomatic
-    Size.Width = 250.000000000000000000
-    Size.Height = 480.000000000000000000
-    Size.PlatformDefault = False
-    Visible = False
     TabOrder = 0
-    object SpeedButton1: TSpeedButton
-      Align = Top
-      Size.Width = 249.000000000000000000
-      Size.Height = 48.000000000000000000
+    object MultiView1: TMultiView
+      Size.Width = 250.000000000000000000
+      Size.Height = 538.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'buttonstyle'
-      Text = 'Clientes'
-      OnClick = SpeedButton1Click
+      StyleLookup = 'multiviewstyle'
+      TabOrder = 1
+      object lstMnuMain: TListBox
+        Align = Client
+        Size.Width = 249.000000000000000000
+        Size.Height = 538.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'transparentlistboxstyle'
+        TabOrder = 0
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        GroupingKind = Grouped
+        Viewport.Width = 249.000000000000000000
+        Viewport.Height = 538.000000000000000000
+        object lstgrpListas: TListBoxGroupHeader
+          Size.Width = 249.000000000000000000
+          Size.Height = 56.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Testes'
+        end
+        object lstClientes: TListBoxItem
+          Position.Y = 56.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 7
+          Text = 'Clientes'
+          OnClick = lstClientesClick
+        end
+        object ListBoxItem3: TListBoxItem
+          Position.Y = 100.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'Fornecedores'
+          OnClick = ListBoxItem3Click
+        end
+        object ListBoxItem4: TListBoxItem
+          Position.Y = 144.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          Text = 'Produtos'
+          OnClick = ListBoxItem4Click
+        end
+        object ListBoxItem2: TListBoxItem
+          Position.Y = 188.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 6
+          Text = 'String'
+          OnClick = ListBoxItem2Click
+        end
+        object ListBoxItem5: TListBoxItem
+          Position.Y = 232.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 5
+          Text = 'Json X FDMem'
+          OnClick = ListBoxItem5Click
+        end
+        object ListBoxItem6: TListBoxItem
+          Position.Y = 276.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Json X SQLite'
+          OnClick = ListBoxItem6Click
+        end
+        object lstgrpConfig: TListBoxGroupHeader
+          Position.Y = 320.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 56.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Configura'#231#245'es'
+        end
+        object lstitLogin: TListBoxItem
+          ItemData.Accessory = aMore
+          Position.Y = 376.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 8
+          Text = 'Login'
+          OnClick = lstitLoginClick
+        end
+        object lstPreferencias: TListBoxItem
+          Position.Y = 420.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 9
+          Text = 'Prefer'#234'ncias'
+        end
+        object lstSincronizar: TListBoxItem
+          Position.Y = 464.000000000000000000
+          Size.Width = 249.000000000000000000
+          Size.Height = 45.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 10
+          object spbSincronizar: TSpeedButton
+            Align = Center
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 241.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Sincronizar'
+          end
+        end
+      end
     end
-    object SpeedButton2: TSpeedButton
-      Align = Top
-      Position.Y = 96.000000000000000000
-      Size.Width = 249.000000000000000000
-      Size.Height = 48.000000000000000000
+    object recBackground: TRectangle
+      Fill.Color = claBlack
+      Opacity = 0.500000000000000000
+      Position.X = 520.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'buttonstyle'
-      Text = 'Produtos'
-      OnClick = SpeedButton2Click
-    end
-    object SpeedButton3: TSpeedButton
-      Align = Top
-      Position.Y = 48.000000000000000000
-      Size.Width = 249.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'buttonstyle'
-      Text = 'Fornecedores'
-      OnClick = SpeedButton3Click
-    end
-    object SpeedButton4: TSpeedButton
-      Align = Top
-      Position.Y = 144.000000000000000000
-      Size.Width = 249.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'buttonstyle'
-      Text = 'Teste String'
-      OnClick = SpeedButton4Click
-    end
-    object SpeedButton5: TSpeedButton
-      Align = Top
-      Position.Y = 192.000000000000000000
-      Size.Width = 249.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'buttonstyle'
-      Text = 'Teste Json x FDMem'
-      OnClick = SpeedButton5Click
-    end
-    object SpeedButton6: TSpeedButton
-      Align = Top
-      Position.Y = 240.000000000000000000
-      Size.Width = 249.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'buttonstyle'
-      Text = 'Teste Json x SQLite'
-      OnClick = SpeedButton6Click
-    end
-    object SpeedButton7: TSpeedButton
-      Align = Top
-      Position.Y = 288.000000000000000000
-      Size.Width = 249.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'buttonstyle'
-      Text = 'Teste Login'
-      OnClick = SpeedButton7Click
     end
   end
 end

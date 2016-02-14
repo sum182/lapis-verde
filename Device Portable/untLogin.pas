@@ -31,7 +31,6 @@ type
     Layout1: TLayout;
     btnCriarConta: TSpeedButton;
     Layout2: TLayout;
-    AniIndicator: TAniIndicator;
     fgActivityDialog: TfgActivityDialog;
     procedure FormCreate(Sender: TObject);
     procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;
@@ -47,9 +46,8 @@ type
     procedure btnEsqueceuSenhaClick(Sender: TObject);
     procedure btnCriarContaClick(Sender: TObject);
   private
-    FProgressDialogThread: TThread;
     FActivityDialogThread: TThread;
-
+    fLoginOK:boolean;
     fLogin: string;
     fSenha: string;
     function LoginResponsavel: boolean;
@@ -69,7 +67,7 @@ implementation
 {$R *.fmx}
 
 uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
-  FMX.Platform, untFuncoes, untFrmWait;
+  FMX.Platform, untFuncoes;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
 begin
@@ -80,65 +78,7 @@ end;
 procedure TfrmLogin.btnEsqueceuSenhaClick(Sender: TObject);
 begin
   inherited;
-//  ShowMessage('Esqueceu sua senha...');
-
-  if not fgActivityDialog.IsShown then
-  begin
-    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
-      begin
-        try
-          TThread.Synchronize(nil, procedure
-          begin
-            fgActivityDialog.Message := 'Please, Wait';
-            fgActivityDialog.Show;
-          end);
-          Sleep(1000);
-          if TThread.CheckTerminated then
-            Exit;
-
-          TThread.Synchronize(nil, procedure
-          begin
-            fgActivityDialog.Message := 'Downloading file info.txt';
-          end);
-          Sleep(1000);
-          if TThread.CheckTerminated then
-            Exit;
-
-          TThread.Synchronize(nil, procedure
-          begin
-            fgActivityDialog.Message := 'Downloading file game.level';
-          end);
-          Sleep(1000);
-          if TThread.CheckTerminated then
-            Exit;
-
-          TThread.Synchronize(nil, procedure
-          begin
-            fgActivityDialog.Message := 'Downloading file delphi.zip';
-          end);
-          Sleep(1000);
-          if TThread.CheckTerminated then
-            Exit;
-
-          TThread.Synchronize(nil, procedure
-          begin
-            fgActivityDialog.Message := 'Finishig';
-          end);
-          Sleep(500);
-
-          if TThread.CheckTerminated then
-            Exit;
-        finally
-          if not TThread.CheckTerminated then
-            TThread.Synchronize(nil, procedure
-            begin
-              fgActivityDialog.Hide;
-            end);
-        end;
-      end);
-    FActivityDialogThread.FreeOnTerminate := False;
-    FActivityDialogThread.Start;
-  end;
+  ShowMessage('Esqueceu sua senha...');
 end;
 
 procedure TfrmLogin.btnLoginClick(Sender: TObject);
@@ -165,9 +105,24 @@ begin
           if not TThread.CheckTerminated then
             TThread.Synchronize(nil, procedure
             begin
-              fgActivityDialog.Hide;
-              layBase.Enabled:=True;
-              Application.ProcessMessages;
+              if fLoginOk then
+              begin
+                OpenFrmPrincipal;
+                fgActivityDialog.Hide;
+                Application.ProcessMessages;
+              end
+              else
+              begin
+                fgActivityDialog.Hide;
+                layBase.Enabled:=True;
+                Application.ProcessMessages;
+
+                lblErrorLogin.Visible := True;
+                KeyboardHide;
+                edtSenha.Text:= EmptyStr;
+                edtSenha.SetFocus;
+
+              end;
             end);
         end;
       end);
@@ -239,7 +194,6 @@ procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
   lblErrorLogin.Visible := False;
-  AniIndicator.Visible:=False;
   SetStyle(Self);
 end;
 
@@ -274,15 +228,17 @@ begin
   begin
     DM.fUsuarioLogadoIsResponsavel := True;
     DM.fUsuarioLogadoIsFuncionario := False;
-    OpenFrmPrincipal;
+    fLoginOk:=True;
+    //OpenFrmPrincipal;
   end
   else if LoginFuncionario then
   begin
+    fLoginOk:=True;
     DM.fUsuarioLogadoIsResponsavel := False;
     DM.fUsuarioLogadoIsFuncionario := True;
-    OpenFrmPrincipal;
-  end
-  else
+    //OpenFrmPrincipal;
+  end ;
+ { else
   begin
 
     lblErrorLogin.Visible := True;
@@ -293,7 +249,7 @@ begin
     KeyboardHide;
     edtSenha.Text:= EmptyStr;
     edtSenha.SetFocus;
-  end;
+  end; }
 end;
 
 function TfrmLogin.LoginFuncionario: boolean;
@@ -310,7 +266,7 @@ end;
 
 procedure TfrmLogin.OpenFrmPrincipal;
 begin
-  if not (DM.fUsuarioLogadoIsResponsavel) and not( DM.fUsuarioLogadoIsFuncionario) then
+  if not (fLoginOK) then
     Exit;
 
   KeyboardHide;
