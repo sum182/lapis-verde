@@ -35,7 +35,7 @@ inherited frmLogin: TfrmLogin
           Size.Width = 260.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Email / CPF'
+          TextPrompt = 'Email ou CPF'
           OnKeyDown = edtUsuarioKeyDown
           OnExit = edtUsuarioExit
           object imgUsuario: TImage
@@ -126,6 +126,10 @@ inherited frmLogin: TfrmLogin
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
           end
+        end
+        object AniIndicator: TAniIndicator
+          Align = Center
+          Style = Circular
         end
       end
       object lauCabecalho: TLayout
@@ -230,5 +234,9 @@ inherited frmLogin: TfrmLogin
         TabOrder = 7
       end
     end
+  end
+  object fgActivityDialog: TfgActivityDialog
+    Left = 144
+    Top = 144
   end
 end

@@ -21,7 +21,8 @@ uses
   untDMStyles in 'untDMStyles.pas' {DMStyles: TDataModule},
   smFrmBase in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.pas' {frmBase},
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
-  smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar};
+  smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
+  untFrmWait in 'untFrmWait.pas' {FrmWait};
 
 {$R *.res}
 
@@ -36,5 +37,6 @@ begin
   Application.CreateForm(TfrmBaseForAll, frmBaseForAll);
   Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
   Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
+  Application.CreateForm(TFrmWait, FrmWait);
   Application.Run;
 end.
