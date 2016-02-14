@@ -9,7 +9,16 @@
         <Projects Include="Server Application\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj">
+        <Projects Include="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemoRX10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\FMXExpress\Firemonkey-master\Firemonkey-master\Embarcadero\Demos\NativeControls\NativeControlsDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\ProgressCircle-master\ProgressCircle-master\TestProgressCircle.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -38,23 +47,50 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ProgressDialogDemoRX10">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemoRX10.dproj"/>
+    </Target>
+    <Target Name="ProgressDialogDemoRX10:Clean">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemoRX10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProgressDialogDemoRX10:Make">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemoRX10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="NativeControlsDemo">
+        <MSBuild Projects="..\FMXExpress\Firemonkey-master\Firemonkey-master\Embarcadero\Demos\NativeControls\NativeControlsDemo.dproj"/>
+    </Target>
+    <Target Name="NativeControlsDemo:Clean">
+        <MSBuild Projects="..\FMXExpress\Firemonkey-master\Firemonkey-master\Embarcadero\Demos\NativeControls\NativeControlsDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NativeControlsDemo:Make">
+        <MSBuild Projects="..\FMXExpress\Firemonkey-master\Firemonkey-master\Embarcadero\Demos\NativeControls\NativeControlsDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestProgressCircle">
+        <MSBuild Projects="..\ProgressCircle-master\ProgressCircle-master\TestProgressCircle.dproj"/>
+    </Target>
+    <Target Name="TestProgressCircle:Clean">
+        <MSBuild Projects="..\ProgressCircle-master\ProgressCircle-master\TestProgressCircle.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestProgressCircle:Make">
+        <MSBuild Projects="..\ProgressCircle-master\ProgressCircle-master\TestProgressCircle.dproj" Targets="Make"/>
+    </Target>
     <Target Name="LocadoraDelphi">
-        <MSBuild Projects="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj"/>
+        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj"/>
     </Target>
     <Target Name="LocadoraDelphi:Clean">
-        <MSBuild Projects="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Clean"/>
+        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Clean"/>
     </Target>
     <Target Name="LocadoraDelphi:Make">
-        <MSBuild Projects="..\Projetos\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Make"/>
+        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;LocadoraDelphi"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;ProgressDialogDemoRX10;NativeControlsDemo;TestProgressCircle;LocadoraDelphi"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;LocadoraDelphi:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;ProgressDialogDemoRX10:Clean;NativeControlsDemo:Clean;TestProgressCircle:Clean;LocadoraDelphi:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;LocadoraDelphi:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;ProgressDialogDemoRX10:Make;NativeControlsDemo:Make;TestProgressCircle:Make;LocadoraDelphi:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
