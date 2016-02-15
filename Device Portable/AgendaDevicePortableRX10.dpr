@@ -16,12 +16,13 @@ uses
   Proxy in 'Proxy.pas',
   untLogin in 'untLogin.pas' {frmLogin},
   smCrypt in 'C:\Componentes\sum182\D15\Units\smCrypt.pas',
-  smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas',
   untFuncoes in 'untFuncoes.pas',
   untDMStyles in 'untDMStyles.pas' {DMStyles: TDataModule},
   smFrmBase in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.pas' {frmBase},
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
-  smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar};
+  smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
+  smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas';
+
 {$R *.res}
 
 begin

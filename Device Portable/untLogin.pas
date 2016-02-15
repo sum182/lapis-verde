@@ -31,7 +31,6 @@ type
     Layout1: TLayout;
     btnCriarConta: TSpeedButton;
     Layout2: TLayout;
-    fgActivityDialog: TfgActivityDialog;
     procedure FormCreate(Sender: TObject);
     procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
@@ -54,6 +53,7 @@ type
     function LoginFuncionario: boolean;
     procedure OpenFrmPrincipal;
     procedure Login;
+    function GetTextoLogin:String;
 
   public
     { Public declarations }
@@ -83,7 +83,7 @@ end;
 
 procedure TfrmLogin.btnLoginClick(Sender: TObject);
 begin
- if not fgActivityDialog.IsShown then
+ if not DM.fgActivityDialog.IsShown then
   begin
     FActivityDialogThread := TThread.CreateAnonymousThread(procedure
       begin
@@ -91,8 +91,8 @@ begin
           TThread.Synchronize(nil, procedure
           begin
             layBase.Enabled:=False;
-            fgActivityDialog.Message := 'Entrando';
-            fgActivityDialog.Show;
+            DM.fgActivityDialog.Message := 'Entrando';
+            DM.fgActivityDialog.Show;
           end);
 
           Login;
@@ -108,12 +108,12 @@ begin
               if fLoginOk then
               begin
                 OpenFrmPrincipal;
-                fgActivityDialog.Hide;
+                DM.fgActivityDialog.Hide;
                 Application.ProcessMessages;
               end
               else
               begin
-                fgActivityDialog.Hide;
+                DM.fgActivityDialog.Hide;
                 layBase.Enabled:=True;
                 Application.ProcessMessages;
 
@@ -129,32 +129,6 @@ begin
     FActivityDialogThread.FreeOnTerminate := False;
     FActivityDialogThread.Start;
   end;
-
-
-
-{ Código antigo
-
-  layBase.Enabled:=False;
-  AniIndicator.Visible := True;
-  AniIndicator.Enabled := True;
-  Application.ProcessMessages;
-
-
-  TThread.CreateAnonymousThread(procedure
-  begin
-    try
-      Login;
-    finally
-      layBase.Enabled:=True;
-      AniIndicator.Visible := False;
-      AniIndicator.Enabled := False;
-      Application.ProcessMessages;
-    end;
-  end).Start;
-
-  Application.ProcessMessages;
-
-  }
 end;
 
 
@@ -194,6 +168,8 @@ procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
   lblErrorLogin.Visible := False;
+  btnEsqueceuSenha.Visible:=False;
+  btnCriarConta.Visible:=False;
   SetStyle(Self);
 end;
 
@@ -203,6 +179,20 @@ begin
   lblErrorLogin.Visible:=False;
 end;
 
+
+function TfrmLogin.GetTextoLogin: String;
+var
+  Login:string;
+  LoginPorEmail:boolean;
+begin
+  Login:= edtUsuario.Text;
+
+  LoginPorEmail:= ( pos('@',Login)>0) ;
+  if not(LoginPorEmail) then
+    Login:= StringReplace(Login,'.','',[rfReplaceAll]);
+
+  Result := Login;
+end;
 
 procedure TfrmLogin.lblCriarContaDblClick(Sender: TObject);
 begin
@@ -218,10 +208,11 @@ end;
 
 procedure TfrmLogin.Login;
 begin
+  fLoginOK:=False;
   KeyboardHide;
   btnLogin.SetFocus;
   lblErrorLogin.Visible := False;
-  fLogin := edtUsuario.Text;
+  fLogin := GetTextoLogin;
   fSenha := Encrypt(edtSenha.Text);
 
   if LoginResponsavel then
@@ -229,39 +220,49 @@ begin
     DM.fUsuarioLogadoIsResponsavel := True;
     DM.fUsuarioLogadoIsFuncionario := False;
     fLoginOk:=True;
-    //OpenFrmPrincipal;
   end
   else if LoginFuncionario then
   begin
     fLoginOk:=True;
     DM.fUsuarioLogadoIsResponsavel := False;
     DM.fUsuarioLogadoIsFuncionario := True;
-    //OpenFrmPrincipal;
   end ;
- { else
-  begin
-
-    lblErrorLogin.Visible := True;
-    //layBase.Enabled:=True;
-    //AniIndicator.Visible := False;
-    //AniIndicator.Enabled := False;
-    //Application.ProcessMessages;
-    KeyboardHide;
-    edtSenha.Text:= EmptyStr;
-    edtSenha.SetFocus;
-  end; }
 end;
 
 function TfrmLogin.LoginFuncionario: boolean;
 begin
-  Result := ModuloCliente.SrvServerMetodosClient.LoginFuncionario
-    (fLogin, fSenha)
+  try
+    try
+      Result := ModuloCliente.SrvServerMetodosClient.LoginFuncionario
+      (fLogin, fSenha) ;
+    finally
+       //
+    end;
+  except
+  on E:Exception do
+    begin
+      showmessage('Erro ao realizar o Login.');
+      fLoginOk:=False;
+    end;
+  end;
 end;
 
 function TfrmLogin.LoginResponsavel: boolean;
 begin
-  Result := ModuloCliente.SrvServerMetodosClient.LoginResponsavel
+  try
+    try
+       Result := ModuloCliente.SrvServerMetodosClient.LoginResponsavel
     (fLogin, fSenha);
+    finally
+       //
+    end;
+  except
+  on E:Exception do
+    begin
+      showmessage('Erro ao realizar o Login.');
+      fLoginOk:=False;
+    end;
+  end;
 end;
 
 procedure TfrmLogin.OpenFrmPrincipal;

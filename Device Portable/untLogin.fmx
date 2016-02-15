@@ -144,7 +144,7 @@ inherited frmLogin: TfrmLogin
           TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.Font.Style = [fsBold]
           TextSettings.HorzAlign = Center
-          Text = 'Agenda'
+          Text = 'Teste'
         end
       end
       object layStatus: TLayout
@@ -160,7 +160,6 @@ inherited frmLogin: TfrmLogin
           Size.Width = 320.000000000000000000
           Size.Height = 18.000000000000000000
           Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.Font.Size = 13.000000000000000000
           TextSettings.Font.Style = [fsBold]
           TextSettings.FontColor = claCrimson
@@ -230,9 +229,5 @@ inherited frmLogin: TfrmLogin
         TabOrder = 7
       end
     end
-  end
-  object fgActivityDialog: TfgActivityDialog
-    Left = 144
-    Top = 144
   end
 end

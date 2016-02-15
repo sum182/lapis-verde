@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,System.IOUtils,
-  FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList;
+  FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog;
 
 type
   TDM = class(TDataModule)
@@ -15,6 +15,7 @@ type
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     ImageList1: TImageList;
+    fgActivityDialog: TfgActivityDialog;
     procedure DataModuleCreate(Sender: TObject);
   private
     fDataBaseNameSQLite:string;

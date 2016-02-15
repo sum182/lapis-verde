@@ -1,3 +1,5 @@
+Atualizar CNWizard
+s:\desenvolvimento
 
 Mapear
 S:\Desenvolvimento\Delphi\Estudos\Caderno
@@ -11,23 +13,20 @@ http://cc.embarcadero.com/download.aspx?id=30110&nl=y
 rotinas de cursor smfmx
 
 ----Mobile--------------------------------------------------------------------------------
-login
-ao chegar no principal e voltar deve fechar app e nao voltar ao login
-Esqueceu sua senha?
+**Login
+Esqueceu sua senha
 Criar Conta
+Tratar excecoes login
 
+**Menu princiapl
+Ao chegar no principal e voltar deve fechar app e nao voltar ao login
 
-styles
-configuracoes de usuario
+**Geral
+Styles
+Configuracoes de usuario
 cad usuario nao vinculado a escola
-menu princiapl
-
-formularios base e base for all
-criar DM para os estilos 
-
-Aguarde
 Splash
-
+Tratar excecoes rest/json
 ------------------------------------------------------------------------------------------
 
 
