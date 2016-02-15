@@ -54,7 +54,7 @@ implementation
 {$R *.fmx}
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
-  untFuncoes;
+  untFuncoes, untDMStyles;
 
 { TfrmPrincipal }
 

@@ -33,7 +33,7 @@ inherited frmLogin: TfrmLogin
           StyleLookup = 'editstyle'
           TabOrder = 1
           Size.Width = 260.000000000000000000
-          Size.Height = 40.000000000000000000
+          Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Email ou CPF'
           OnKeyDown = edtUsuarioKeyDown
@@ -67,7 +67,7 @@ inherited frmLogin: TfrmLogin
             Margins.Right = 5.000000000000000000
             Position.X = 233.000000000000000000
             Size.Width = 22.000000000000000000
-            Size.Height = 40.000000000000000000
+            Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
           end
         end
@@ -86,7 +86,7 @@ inherited frmLogin: TfrmLogin
           TabOrder = 2
           Password = True
           Size.Width = 260.000000000000000000
-          Size.Height = 40.000000000000000000
+          Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Senha'
           OnKeyDown = edtSenhaKeyDown
@@ -123,7 +123,7 @@ inherited frmLogin: TfrmLogin
             Margins.Right = 5.000000000000000000
             Position.X = 232.000000000000000000
             Size.Width = 23.000000000000000000
-            Size.Height = 40.000000000000000000
+            Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
           end
         end
@@ -194,7 +194,7 @@ inherited frmLogin: TfrmLogin
         object btnEsqueceuSenha: TSpeedButton
           Align = Center
           Size.Width = 260.000000000000000000
-          Size.Height = 40.000000000000000000
+          Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'speedbuttonstyle'
           Text = 'Esqueceu sua senha?'
@@ -212,7 +212,7 @@ inherited frmLogin: TfrmLogin
         object btnCriarConta: TSpeedButton
           Align = Center
           Size.Width = 260.000000000000000000
-          Size.Height = 40.000000000000000000
+          Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'toolbutton'
           Text = 'Criar Conta'

@@ -67,7 +67,7 @@ implementation
 {$R *.fmx}
 
 uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
-  FMX.Platform, untFuncoes;
+  FMX.Platform, untFuncoes, untDMStyles;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
 begin

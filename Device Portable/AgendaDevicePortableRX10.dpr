@@ -31,7 +31,6 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmBase, frmBase);
   Application.CreateForm(TfrmBaseForAll, frmBaseForAll);
   Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
