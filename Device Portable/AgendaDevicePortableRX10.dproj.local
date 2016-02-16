@@ -9,6 +9,6 @@
     <Transaction>2016/02/13 19:13:44.000.577,C:\Projetos\Agenda\Device Portable\Unit2.fmx=C:\Projetos\Agenda\Device Portable\untFrmWait.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_Nexus_4_by_Google"/>
+		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
 	</ActiveMobileDevice>
 </BorlandProject>

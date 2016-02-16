@@ -16,7 +16,7 @@ type
     lstgrpListas: TListBoxGroupHeader;
     lstClientes: TListBoxItem;
     lstgrpConfig: TListBoxGroupHeader;
-    lstitLogin: TListBoxItem;
+    lstConta: TListBoxItem;
     lstPreferencias: TListBoxItem;
     lstSincronizar: TListBoxItem;
     spbSincronizar: TSpeedButton;
@@ -26,6 +26,8 @@ type
     ListBoxItem5: TListBoxItem;
     ListBoxItem6: TListBoxItem;
     recBackground: TRectangle;
+    ToolBar1: TToolBar;
+    spbBack: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstClientesClick(Sender: TObject);
@@ -33,7 +35,7 @@ type
     procedure ListBoxItem2Click(Sender: TObject);
     procedure ListBoxItem5Click(Sender: TObject);
     procedure ListBoxItem6Click(Sender: TObject);
-    procedure lstitLoginClick(Sender: TObject);
+    procedure lstContaClick(Sender: TObject);
     procedure ListBoxItem3Click(Sender: TObject);
   private
     { Private declarations }
@@ -54,7 +56,7 @@ implementation
 {$R *.fmx}
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
-  untFuncoes, untDMStyles;
+  untFuncoes, untDMStyles, untDM;
 
 { TfrmPrincipal }
 
@@ -145,7 +147,7 @@ begin
   AbreForm(TfrmTesteJsonXSqLite);
 end;
 
-procedure TfrmPrincipal.lstitLoginClick(Sender: TObject);
+procedure TfrmPrincipal.lstContaClick(Sender: TObject);
 begin
   inherited;
     AbreForm(TfrmLogin);

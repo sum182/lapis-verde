@@ -1,6 +1,3 @@
-Atualizar CNWizard
-s:\desenvolvimento
-
 Mapear
 S:\Desenvolvimento\Delphi\Estudos\Caderno
 Caderno de estudo delphi

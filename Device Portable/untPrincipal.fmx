@@ -14,9 +14,9 @@ object frmPrincipal: TfrmPrincipal
   object layPrincipal: TLayout
     Align = Client
     Size.Width = 326.000000000000000000
-    Size.Height = 538.000000000000000000
+    Size.Height = 494.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 0
+    TabOrder = 1
     object recBackground: TRectangle
       Fill.Color = claBlack
       Opacity = 0.500000000000000000
@@ -28,27 +28,33 @@ object frmPrincipal: TfrmPrincipal
     end
   end
   object MultiView1: TMultiView
+    MasterButton = spbBack
     Size.Width = 250.000000000000000000
-    Size.Height = 538.000000000000000000
+    Size.Height = 494.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'multiviewstyle'
-    TabOrder = 2
+    TabOrder = 3
     object lstMnuMain: TListBox
       Align = Client
       Size.Width = 249.000000000000000000
-      Size.Height = 538.000000000000000000
+      Size.Height = 494.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'transparentlistboxstyle'
       TabOrder = 0
       DisableFocusEffect = True
-      DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
+      Images = DM.ImageList1
+      DefaultItemStyles.ItemStyle = 'listboxitembottomdetail'
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       GroupingKind = Grouped
-      Viewport.Width = 249.000000000000000000
-      Viewport.Height = 538.000000000000000000
+      Viewport.Width = 233.000000000000000000
+      Viewport.Height = 494.000000000000000000
       object lstgrpListas: TListBoxGroupHeader
-        Size.Width = 249.000000000000000000
+        TextSettings.Font.Family = 'Segoe UI Semibold'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.Style = [fsBold]
+        StyledSettings = [FontColor, Other]
+        Size.Width = 233.000000000000000000
         Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -56,7 +62,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object lstClientes: TListBoxItem
         Position.Y = 56.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 7
@@ -65,7 +71,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem3: TListBoxItem
         Position.Y = 100.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
@@ -74,7 +80,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem4: TListBoxItem
         Position.Y = 144.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
@@ -83,7 +89,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem2: TListBoxItem
         Position.Y = 188.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 6
@@ -92,7 +98,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem5: TListBoxItem
         Position.Y = 232.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 5
@@ -101,7 +107,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem6: TListBoxItem
         Position.Y = 276.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
@@ -109,34 +115,41 @@ object frmPrincipal: TfrmPrincipal
         OnClick = ListBoxItem6Click
       end
       object lstgrpConfig: TListBoxGroupHeader
+        TextSettings.Font.Family = 'Segoe UI Semibold'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.Style = [fsBold]
+        StyledSettings = [FontColor, Other]
         Position.Y = 320.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         Text = 'Configura'#231#245'es'
       end
-      object lstitLogin: TListBoxItem
-        ItemData.Accessory = aMore
+      object lstConta: TListBoxItem
+        StyledSettings = [Family, Size, Style, FontColor]
+        ImageIndex = 0
         Position.Y = 376.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'listboxitembottomdetail'
         TabOrder = 8
-        Text = 'Login'
-        OnClick = lstitLoginClick
+        Text = 'Conta'
+        OnClick = lstContaClick
       end
       object lstPreferencias: TListBoxItem
         Position.Y = 420.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'lstPreferenciasStyle1'
         TabOrder = 9
         Text = 'Prefer'#234'ncias'
       end
       object lstSincronizar: TListBoxItem
         Position.Y = 464.000000000000000000
-        Size.Width = 249.000000000000000000
+        Size.Width = 233.000000000000000000
         Size.Height = 45.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 10
@@ -152,6 +165,23 @@ object frmPrincipal: TfrmPrincipal
           Text = 'Sincronizar'
         end
       end
+    end
+  end
+  object ToolBar1: TToolBar
+    Size.Width = 576.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object spbBack: TSpeedButton
+      Align = Left
+      Margins.Left = 8.000000000000000000
+      Position.X = 8.000000000000000000
+      Size.Width = 44.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'detailstoolbutton'
+      Text = 'spbBack'
+      Visible = False
     end
   end
 end
