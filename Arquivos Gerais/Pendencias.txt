@@ -14,6 +14,8 @@ rotinas de cursor smfmx
 Esqueceu sua senha
 Criar Conta
 Tratar excecoes login
+ao dar erro no login vai pro principal sem se logar
+corrigir referencias das imagens, retirar duplicidades
 
 **Menu princiapl
 Ao chegar no principal e voltar deve fechar app e nao voltar ao login

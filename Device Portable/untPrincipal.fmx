@@ -2,113 +2,173 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Agenda'
-  ClientHeight = 538
-  ClientWidth = 576
+  ClientHeight = 668
+  ClientWidth = 752
   Position = DesktopCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   OnClose = FormClose
-  DesignerMasterStyle = 0
+  DesignerMasterStyle = 3
   object layPrincipal: TLayout
     Align = Client
-    Size.Width = 326.000000000000000000
-    Size.Height = 494.000000000000000000
+    Size.Width = 502.000000000000000000
+    Size.Height = 620.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     object recBackground: TRectangle
       Fill.Color = claBlack
       Opacity = 0.500000000000000000
-      Position.X = 520.000000000000000000
-      Position.Y = 8.000000000000000000
+      Position.X = 360.000000000000000000
+      Position.Y = 32.000000000000000000
       Size.Width = 50.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
     end
   end
+  object ToolBar1: TToolBar
+    Size.Width = 752.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object spbMenu: TSpeedButton
+      Align = Left
+      Images = DM.ImageList1
+      ImageIndex = 2
+      Margins.Left = 8.000000000000000000
+      Position.X = 8.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      object imgUsuario: TImage
+        MultiResBitmap.Height = 36
+        MultiResBitmap.Width = 36
+        MultiResBitmap = <
+          item
+            Width = 36
+            Height = 36
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+              98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              0041494441545847EDD4310EC0200C0441C3FFFF9C2064D152255868A63997AE
+              36000E6BB9CB33E4F98B36E439F5DC32CA3D04D7D1A11D1D82AFE9D08E0E01D4
+              16F102C8C70C10567B8E900000000049454E44AE426082}
+            FileName = 
+              'C:\Projetos\Agenda\Imagens\ic_menu\ic_menu_white_36dp\ic_menu_wh' +
+              'ite_36dp\android\drawable-mdpi\ic_menu_white_36dp.png'
+          end
+          item
+            Scale = 1.500000000000000000
+            Width = 54
+            Height = 54
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000360000003608060000008C456A
+              DD000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              0059494441546843EDD6310E80300C03C09697F373E890A542B021D5D5DD928C
+              F110C90D00005EF49A0FD750EBD2FA50EBE4A8B91DC1D27CFDD859EBD2C68B45
+              DC09C02F74C53482A5D1150148A62BA6112C8DAE0800007B68ED06A2E6181978
+              EA57F10000000049454E44AE426082}
+            FileName = 
+              'C:\Projetos\Agenda\Imagens\ic_menu\ic_menu_white_36dp\ic_menu_wh' +
+              'ite_36dp\android\drawable-hdpi\ic_menu_white_36dp.png'
+          end>
+        Align = Right
+        Enabled = False
+        Margins.Right = 5.000000000000000000
+        Position.X = 21.000000000000000000
+        Size.Width = 22.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
   object MultiView1: TMultiView
-    MasterButton = spbBack
+    DrawerOptions.TouchAreaSize = 40.000000000000000000
+    MasterButton = spbMenu
+    ClipChildren = True
+    ClipParent = True
     Size.Width = 250.000000000000000000
-    Size.Height = 494.000000000000000000
+    Size.Height = 620.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'multiviewstyle'
     TabOrder = 3
     object lstMnuMain: TListBox
       Align = Client
       Size.Width = 249.000000000000000000
-      Size.Height = 494.000000000000000000
+      Size.Height = 620.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'transparentlistboxstyle'
       TabOrder = 0
       DisableFocusEffect = True
+      ItemHeight = 60.000000000000000000
       Images = DM.ImageList1
       DefaultItemStyles.ItemStyle = 'listboxitembottomdetail'
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       GroupingKind = Grouped
-      Viewport.Width = 233.000000000000000000
-      Viewport.Height = 494.000000000000000000
+      Viewport.Width = 249.000000000000000000
+      Viewport.Height = 620.000000000000000000
       object lstgrpListas: TListBoxGroupHeader
         TextSettings.Font.Family = 'Segoe UI Semibold'
         TextSettings.Font.Size = 14.000000000000000000
         TextSettings.Font.Style = [fsBold]
         StyledSettings = [FontColor, Other]
-        Size.Width = 233.000000000000000000
-        Size.Height = 56.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         Text = 'Testes'
       end
       object lstClientes: TListBoxItem
-        Position.Y = 56.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 60.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 7
         Text = 'Clientes'
         OnClick = lstClientesClick
       end
       object ListBoxItem3: TListBoxItem
-        Position.Y = 100.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 120.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
         Text = 'Fornecedores'
         OnClick = ListBoxItem3Click
       end
       object ListBoxItem4: TListBoxItem
-        Position.Y = 144.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 180.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
         Text = 'Produtos'
         OnClick = ListBoxItem4Click
       end
       object ListBoxItem2: TListBoxItem
-        Position.Y = 188.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 240.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 6
         Text = 'String'
         OnClick = ListBoxItem2Click
       end
       object ListBoxItem5: TListBoxItem
-        Position.Y = 232.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 300.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 5
         Text = 'Json X FDMem'
         OnClick = ListBoxItem5Click
       end
       object ListBoxItem6: TListBoxItem
-        Position.Y = 276.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 360.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
         Text = 'Json X SQLite'
@@ -119,19 +179,18 @@ object frmPrincipal: TfrmPrincipal
         TextSettings.Font.Size = 14.000000000000000000
         TextSettings.Font.Style = [fsBold]
         StyledSettings = [FontColor, Other]
-        Position.Y = 320.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 56.000000000000000000
+        Position.Y = 420.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         Text = 'Configura'#231#245'es'
       end
       object lstConta: TListBoxItem
         StyledSettings = [Family, Size, Style, FontColor]
-        ImageIndex = 0
-        Position.Y = 376.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 480.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'listboxitembottomdetail'
         TabOrder = 8
@@ -139,49 +198,14 @@ object frmPrincipal: TfrmPrincipal
         OnClick = lstContaClick
       end
       object lstPreferencias: TListBoxItem
-        Position.Y = 420.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 44.000000000000000000
+        Position.Y = 540.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'lstPreferenciasStyle1'
         TabOrder = 9
         Text = 'Prefer'#234'ncias'
       end
-      object lstSincronizar: TListBoxItem
-        Position.Y = 464.000000000000000000
-        Size.Width = 233.000000000000000000
-        Size.Height = 45.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 10
-        object spbSincronizar: TSpeedButton
-          Align = Center
-          Margins.Left = 4.000000000000000000
-          Margins.Top = 4.000000000000000000
-          Margins.Right = 4.000000000000000000
-          Margins.Bottom = 4.000000000000000000
-          Size.Width = 241.000000000000000000
-          Size.Height = 48.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'Sincronizar'
-        end
-      end
-    end
-  end
-  object ToolBar1: TToolBar
-    Size.Width = 576.000000000000000000
-    Size.Height = 44.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 0
-    object spbBack: TSpeedButton
-      Align = Left
-      Margins.Left = 8.000000000000000000
-      Position.X = 8.000000000000000000
-      Size.Width = 44.000000000000000000
-      Size.Height = 44.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'detailstoolbutton'
-      Text = 'spbBack'
-      Visible = False
     end
   end
 end

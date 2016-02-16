@@ -26,6 +26,7 @@ object DM: TDM
       item
         MultiResBitmap.Height = 36
         MultiResBitmap.Width = 36
+        MultiResBitmap.LoadSize = 2
         MultiResBitmap = <
           item
             Width = 36
@@ -61,6 +62,44 @@ object DM: TDM
               'ck_24dp.png'
           end>
         Name = 'ic_account_circle_black_24dp'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 1.500000000000000000
+            Width = 24
+            Height = 24
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+              F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              003449444154484B631805C31F30426938F80F04502659801108A04C306082D2
+              A30027188D838107A37130F060340E46C1A0070C0C00E9AF100DFFFADF5C0000
+              000049454E44AE426082}
+            FileName = 
+              'C:\Projetos\Agenda\Imagens\ic_view_headline_white_24dp\ic_view_h' +
+              'eadline_white_24dp\android\drawable-mdpi\ic_view_headline_white_' +
+              '24dp.png'
+          end>
+        Name = 'ic_view_headline_white_24dp'
+      end
+      item
+        MultiResBitmap.Height = 18
+        MultiResBitmap.Width = 18
+        MultiResBitmap = <
+          item
+            Width = 18
+            Height = 18
+            PNG = {
+              89504E470D0A1A0A0000000D494844520000001200000012080600000056CE8E
+              57000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              003649444154384F6318050401239466F80F04502649801108C0349807044073
+              1AA04C9200D01CB2F4D11E8C861161301A46430F30300000C87C1807033E4F31
+              0000000049454E44AE426082}
+            FileName = 
+              'C:\Projetos\Agenda\Imagens\ic_menu_white_18dp\ic_menu_white_18dp' +
+              '\android\drawable-mdpi\ic_menu_white_18dp.png'
+          end>
+        Name = 'ic_menu_white_18dp'
       end>
     Destination = <
       item
@@ -69,6 +108,20 @@ object DM: TDM
             Name = 'ic_account_circle_black_24dp'
             SourceRect.Right = 36.000000000000000000
             SourceRect.Bottom = 36.000000000000000000
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'ic_view_headline_white_24dp'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'ic_menu_white_18dp'
+            SourceRect.Right = 18.000000000000000000
+            SourceRect.Bottom = 18.000000000000000000
           end>
       end>
     Left = 184

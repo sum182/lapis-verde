@@ -26,7 +26,27 @@ uses
 {$R *.res}
 
 begin
- Application.Initialize;
+  //Modo Teste
+  Application.Initialize;
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDMStyles, DMStyles);
+  Application.CreateForm(TModuloCliente, ModuloCliente);
+
+  //Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+
+
+  Application.CreateForm(TfrmBase, frmBase);
+  Application.CreateForm(TfrmBaseForAll, frmBaseForAll);
+  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
+  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
+  Application.Run;
+  Exit;
+  // Fim do Teste
+
+
+   //Modo Correto
+  Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);

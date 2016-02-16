@@ -18,8 +18,6 @@ type
     lstgrpConfig: TListBoxGroupHeader;
     lstConta: TListBoxItem;
     lstPreferencias: TListBoxItem;
-    lstSincronizar: TListBoxItem;
-    spbSincronizar: TSpeedButton;
     ListBoxItem2: TListBoxItem;
     ListBoxItem3: TListBoxItem;
     ListBoxItem4: TListBoxItem;
@@ -27,7 +25,8 @@ type
     ListBoxItem6: TListBoxItem;
     recBackground: TRectangle;
     ToolBar1: TToolBar;
-    spbBack: TSpeedButton;
+    spbMenu: TSpeedButton;
+    imgUsuario: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstClientesClick(Sender: TObject);

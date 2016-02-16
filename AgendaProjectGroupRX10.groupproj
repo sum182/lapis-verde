@@ -21,6 +21,9 @@
         <Projects Include="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\FMXExpress\Firemonkey-master\Firemonkey-master\DeveloperDemos\LiveWorldTourXE7\03 MultiDevice\MultiView\MultiViewDemo.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -83,14 +86,23 @@
     <Target Name="LocadoraDelphi:Make">
         <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Make"/>
     </Target>
+    <Target Name="MultiViewDemo">
+        <MSBuild Projects="..\FMXExpress\Firemonkey-master\Firemonkey-master\DeveloperDemos\LiveWorldTourXE7\03 MultiDevice\MultiView\MultiViewDemo.dproj"/>
+    </Target>
+    <Target Name="MultiViewDemo:Clean">
+        <MSBuild Projects="..\FMXExpress\Firemonkey-master\Firemonkey-master\DeveloperDemos\LiveWorldTourXE7\03 MultiDevice\MultiView\MultiViewDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MultiViewDemo:Make">
+        <MSBuild Projects="..\FMXExpress\Firemonkey-master\Firemonkey-master\DeveloperDemos\LiveWorldTourXE7\03 MultiDevice\MultiView\MultiViewDemo.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;ProgressDialogDemoRX10;NativeControlsDemo;TestProgressCircle;LocadoraDelphi"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;ProgressDialogDemoRX10;NativeControlsDemo;TestProgressCircle;LocadoraDelphi;MultiViewDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;ProgressDialogDemoRX10:Clean;NativeControlsDemo:Clean;TestProgressCircle:Clean;LocadoraDelphi:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;ProgressDialogDemoRX10:Clean;NativeControlsDemo:Clean;TestProgressCircle:Clean;LocadoraDelphi:Clean;MultiViewDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;ProgressDialogDemoRX10:Make;NativeControlsDemo:Make;TestProgressCircle:Make;LocadoraDelphi:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;ProgressDialogDemoRX10:Make;NativeControlsDemo:Make;TestProgressCircle:Make;LocadoraDelphi:Make;MultiViewDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
