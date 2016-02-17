@@ -25,8 +25,9 @@ type
     ListBoxItem6: TListBoxItem;
     recBackground: TRectangle;
     ToolBar1: TToolBar;
-    spbMenu: TSpeedButton;
+    btnMenu: TSpeedButton;
     imgUsuario: TImage;
+    lblTitulo: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstClientesClick(Sender: TObject);
@@ -88,6 +89,7 @@ begin
     MultiView1.MasterButton := TControl(BotaoMenu);
 
    MultiView1.HideMaster;
+   ToolBar1.Visible:=False;
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);

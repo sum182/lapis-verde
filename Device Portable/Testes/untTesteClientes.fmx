@@ -1,7 +1,11 @@
 inherited frmTesteClientes: TfrmTesteClientes
-  Caption = 'frmBase1'
   DesignerMasterStyle = 3
   inherited layBase: TLayout
+    inherited ToolBar1: TToolBar
+      inherited lblTitulo: TLabel
+        Text = 'Clientes'
+      end
+    end
     object Label1: TLabel
       Align = Contents
       StyledSettings = [Family, FontColor]

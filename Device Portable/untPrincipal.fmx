@@ -32,9 +32,10 @@ object frmPrincipal: TfrmPrincipal
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    object spbMenu: TSpeedButton
+    object btnMenu: TSpeedButton
       Align = Left
       Margins.Left = 12.000000000000000000
+      Position.X = 12.000000000000000000
       Size.Width = 36.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
@@ -63,10 +64,19 @@ object frmPrincipal: TfrmPrincipal
         Size.PlatformDefault = False
       end
     end
+    object lblTitulo: TLabel
+      Align = Left
+      Margins.Left = 60.000000000000000000
+      Position.X = 60.000000000000000000
+      Size.Width = 82.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Principal'
+    end
   end
   object MultiView1: TMultiView
     DrawerOptions.TouchAreaSize = 40.000000000000000000
-    MasterButton = spbMenu
+    MasterButton = btnMenu
     ClipChildren = True
     ClipParent = True
     Size.Width = 300.000000000000000000
