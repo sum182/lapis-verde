@@ -23,12 +23,11 @@ type
     ListBoxItem4: TListBoxItem;
     ListBoxItem5: TListBoxItem;
     ListBoxItem6: TListBoxItem;
-    ToolBar1: TToolBar;
+    ToolBarPincipal: TToolBar;
     btnMenu: TSpeedButton;
     imgUsuario: TImage;
     lblTitulo: TLabel;
     layToolBarMenu: TLayout;
-    recBackground: TRectangle;
     layMenu: TLayout;
     GridPanelLayout1: TGridPanelLayout;
     Image1: TImage;
@@ -51,10 +50,10 @@ type
   private
     { Private declarations }
     FActiveForm: TForm;
-    procedure AbreForm(aFormClass: TComponentClass);
-    procedure ShowBackground(AParent: TFmxObject; AOnClick: TNotifyEvent = nil);
-    procedure HideBackground;
+    procedure OpenForm(aFormClass: TComponentClass);
     procedure BotaoVoltarOnClick(Sender: TObject);
+    procedure ShowMenuPrincipal;
+    procedure HideMenuPrincipal;
 
   public
     { Public declarations }
@@ -72,9 +71,9 @@ uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, 
 
 { TfrmPrincipal }
 
-procedure TfrmPrincipal.AbreForm(AFormClass: TComponentClass);
+procedure TfrmPrincipal.OpenForm(AFormClass: TComponentClass);
 var
-  LayoutBase, BotaoMenu, BotaoVoltar: TComponent;
+  LayoutBase, BotaoVoltar: TComponent;
 begin
   if Assigned(FActiveForm) then
   begin
@@ -98,29 +97,26 @@ begin
     layPrincipal.Visible:=True;
   end;
 
-  //encontra o Botão de controle de Menu no form a ser exibido para
-  //associá-lo ao MultiView do frmPrincipal
-  //BotaoMenu := FActiveForm.FindComponent('btnMenu');
-  //if Assigned(BotaoMenu) then
-    //MultiView1.MasterButton := TControl(BotaoMenu);
-
   BotaoVoltar := FActiveForm.FindComponent('btnVoltar');
   if Assigned(BotaoVoltar) then
     TControl(BotaoVoltar).OnClick := BotaoVoltarOnClick;
 
    MultiView1.HideMaster;
-   ToolBar1.Visible:=False;
+   ToolBarPincipal.Visible:=False;
 end;
 
 
-procedure TfrmPrincipal.BotaoVoltarOnClick(Sender: TObject);
-var
-  LayoutBase, BotaoMenu: TComponent;
+procedure TfrmPrincipal.ShowMenuPrincipal;
 begin
   layPrincipal.Visible:=False;
   layMenu.Visible:=True;
-  ToolBar1.Visible:=True;
+  ToolBarPincipal.Visible:=True;
   MultiView1.HideMaster;
+end;
+
+procedure TfrmPrincipal.BotaoVoltarOnClick(Sender: TObject);
+begin
+  ShowMenuPrincipal;
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -133,69 +129,59 @@ procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
-  recBackground.Visible := False;
-  recBackground.Align   := TAlignLayout.Contents;
 end;
 
-procedure TfrmPrincipal.HideBackground;
+
+procedure TfrmPrincipal.HideMenuPrincipal;
 begin
-  recBackground.AnimateFloat('opacity', 0, 0.1);
-  recBackground.Visible := False;
+  layPrincipal.Visible:=False;
+  layMenu.Visible:=True;
+  ToolBarPincipal.Visible:=True;
+  MultiView1.HideMaster;
+
 end;
 
 procedure TfrmPrincipal.ListBoxItem3Click(Sender: TObject);
 begin
   inherited;
-  AbreForm(TfrmTesteFornecedores);
+  OpenForm(TfrmTesteFornecedores);
 end;
 
 procedure TfrmPrincipal.ListBoxItem4Click(Sender: TObject);
 begin
   inherited;
-   AbreForm(TfrmTesteProduto);
+   OpenForm(TfrmTesteProduto);
 end;
 
 procedure TfrmPrincipal.lstClientesClick(Sender: TObject);
 begin
   inherited;
-  AbreForm(TfrmTesteClientes);
+  OpenForm(TfrmTesteClientes);
 end;
 
 procedure TfrmPrincipal.ListBoxItem2Click(Sender: TObject);
 begin
   inherited;
-    AbreForm(TfrmTesteString);
+    OpenForm(TfrmTesteString);
 end;
 
 procedure TfrmPrincipal.ListBoxItem5Click(Sender: TObject);
 begin
   inherited;
-    AbreForm(TfrmTesteJsonFdMem);
+    OpenForm(TfrmTesteJsonFdMem);
 end;
 
 procedure TfrmPrincipal.ListBoxItem6Click(Sender: TObject);
 begin
   inherited;
-  AbreForm(TfrmTesteJsonXSqLite);
+  OpenForm(TfrmTesteJsonXSqLite);
 end;
 
 procedure TfrmPrincipal.lstContaClick(Sender: TObject);
 begin
   inherited;
-    AbreForm(TfrmLogin);
+    OpenForm(TfrmLogin);
 end;
 
-
-procedure TfrmPrincipal.ShowBackground(AParent: TFmxObject;
-  AOnClick: TNotifyEvent);
-begin
-  recBackground.OnClick := AOnClick;
-  recBackground.Parent  := AParent;
-  recBackground.BringToFront;
-  recBackground.Opacity := 0;
-  recBackground.Visible := True;
-  recBackground.AnimateFloat('opacity', 0.5, 0.1);
-
-end;
 
 end.

@@ -12,7 +12,7 @@ object frmPrincipal: TfrmPrincipal
   OnCreate = FormCreate
   OnClose = FormClose
   DesignerMasterStyle = 3
-  object ToolBar1: TToolBar
+  object ToolBarPincipal: TToolBar
     Size.Width = 752.000000000000000000
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
@@ -74,16 +74,6 @@ object frmPrincipal: TfrmPrincipal
     Size.Height = 620.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
-    object recBackground: TRectangle
-      Fill.Color = claBlack
-      Opacity = 0.500000000000000000
-      Position.X = 328.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 50.000000000000000000
-      Size.Height = 50.000000000000000000
-      Size.PlatformDefault = False
-      Visible = False
-    end
   end
   object layMenu: TLayout
     Align = Client
