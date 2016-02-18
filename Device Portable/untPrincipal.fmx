@@ -5,6 +5,7 @@ object frmPrincipal: TfrmPrincipal
   ClientHeight = 668
   ClientWidth = 752
   Position = DesktopCenter
+  StyleBook = DMStyles.styleAndroid
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -5552,14 +5553,14 @@ object frmPrincipal: TfrmPrincipal
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       GroupingKind = Grouped
-      Viewport.Width = 299.000000000000000000
+      Viewport.Width = 259.000000000000000000
       Viewport.Height = 620.000000000000000000
       object lstgrpListas: TListBoxGroupHeader
         TextSettings.Font.Family = 'Segoe UI Semibold'
         TextSettings.Font.Size = 14.000000000000000000
         TextSettings.Font.Style = [fsBold]
         StyledSettings = [FontColor, Other]
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -5567,7 +5568,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object lstClientes: TListBoxItem
         Position.Y = 50.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 7
@@ -5576,7 +5577,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem3: TListBoxItem
         Position.Y = 100.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
@@ -5585,7 +5586,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem4: TListBoxItem
         Position.Y = 150.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
@@ -5594,7 +5595,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem2: TListBoxItem
         Position.Y = 200.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 6
@@ -5603,7 +5604,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem5: TListBoxItem
         Position.Y = 250.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 5
@@ -5612,7 +5613,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object ListBoxItem6: TListBoxItem
         Position.Y = 300.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
@@ -5625,7 +5626,7 @@ object frmPrincipal: TfrmPrincipal
         TextSettings.Font.Style = [fsBold]
         StyledSettings = [FontColor, Other]
         Position.Y = 350.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
@@ -5634,7 +5635,7 @@ object frmPrincipal: TfrmPrincipal
       object lstConta: TListBoxItem
         StyledSettings = [Family, Size, Style, FontColor]
         Position.Y = 400.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'listboxitembottomdetail'
@@ -5644,7 +5645,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object lstPreferencias: TListBoxItem
         Position.Y = 450.000000000000000000
-        Size.Width = 299.000000000000000000
+        Size.Width = 259.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'lstPreferenciasStyle1'
