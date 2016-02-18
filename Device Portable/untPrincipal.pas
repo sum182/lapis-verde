@@ -23,11 +23,22 @@ type
     ListBoxItem4: TListBoxItem;
     ListBoxItem5: TListBoxItem;
     ListBoxItem6: TListBoxItem;
-    recBackground: TRectangle;
     ToolBar1: TToolBar;
     btnMenu: TSpeedButton;
     imgUsuario: TImage;
     lblTitulo: TLabel;
+    layToolBarMenu: TLayout;
+    recBackground: TRectangle;
+    layMenu: TLayout;
+    GridPanelLayout1: TGridPanelLayout;
+    Image1: TImage;
+    Label2: TLabel;
+    Image2: TImage;
+    Label3: TLabel;
+    Image3: TImage;
+    Label4: TLabel;
+    Image4: TImage;
+    Label5: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstClientesClick(Sender: TObject);
@@ -43,6 +54,7 @@ type
     procedure AbreForm(aFormClass: TComponentClass);
     procedure ShowBackground(AParent: TFmxObject; AOnClick: TNotifyEvent = nil);
     procedure HideBackground;
+    procedure BotaoVoltarOnClick(Sender: TObject);
 
   public
     { Public declarations }
@@ -62,7 +74,7 @@ uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, 
 
 procedure TfrmPrincipal.AbreForm(AFormClass: TComponentClass);
 var
-  LayoutBase, BotaoMenu: TComponent;
+  LayoutBase, BotaoMenu, BotaoVoltar: TComponent;
 begin
   if Assigned(FActiveForm) then
   begin
@@ -80,16 +92,35 @@ begin
   //Encontra o Layout Base no form a ser exibido para adicionar ao frmPrincipal
   LayoutBase := FActiveForm.FindComponent('layBase');
   if Assigned(LayoutBase) then
+  begin
     layPrincipal.AddObject(TLayout(LayoutBase));
+    layMenu.Visible:=False;
+    layPrincipal.Visible:=True;
+  end;
 
   //encontra o Botão de controle de Menu no form a ser exibido para
   //associá-lo ao MultiView do frmPrincipal
-  BotaoMenu := FActiveForm.FindComponent('btnMenu');
-  if Assigned(BotaoMenu) then
-    MultiView1.MasterButton := TControl(BotaoMenu);
+  //BotaoMenu := FActiveForm.FindComponent('btnMenu');
+  //if Assigned(BotaoMenu) then
+    //MultiView1.MasterButton := TControl(BotaoMenu);
+
+  BotaoVoltar := FActiveForm.FindComponent('btnVoltar');
+  if Assigned(BotaoVoltar) then
+    TControl(BotaoVoltar).OnClick := BotaoVoltarOnClick;
 
    MultiView1.HideMaster;
    ToolBar1.Visible:=False;
+end;
+
+
+procedure TfrmPrincipal.BotaoVoltarOnClick(Sender: TObject);
+var
+  LayoutBase, BotaoMenu: TComponent;
+begin
+  layPrincipal.Visible:=False;
+  layMenu.Visible:=True;
+  ToolBar1.Visible:=True;
+  MultiView1.HideMaster;
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);

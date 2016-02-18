@@ -1,5 +1,4 @@
 inherited frmTesteFornecedores: TfrmTesteFornecedores
-  Caption = 'frmBase1'
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     object Label1: TLabel

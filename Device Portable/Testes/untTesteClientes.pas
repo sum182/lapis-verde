@@ -23,4 +23,6 @@ implementation
 
 {$R *.fmx}
 
+uses untDMStyles;
+
 end.
