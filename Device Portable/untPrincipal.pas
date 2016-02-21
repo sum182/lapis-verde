@@ -13,40 +13,48 @@ type
     layPrincipal: TLayout;
     MultiView1: TMultiView;
     lstMnuMain: TListBox;
-    lstgrpListas: TListBoxGroupHeader;
-    lstClientes: TListBoxItem;
-    lstgrpConfig: TListBoxGroupHeader;
-    lstConta: TListBoxItem;
-    lstPreferencias: TListBoxItem;
-    ListBoxItem2: TListBoxItem;
-    ListBoxItem3: TListBoxItem;
-    ListBoxItem4: TListBoxItem;
-    ListBoxItem5: TListBoxItem;
-    ListBoxItem6: TListBoxItem;
+    lstGroupHeaderTestes: TListBoxGroupHeader;
+    lstItemTesteClientes: TListBoxItem;
+    lstGroupHeaderConfig: TListBoxGroupHeader;
+    lstItemConta: TListBoxItem;
+    lstItemPreferencias: TListBoxItem;
+    lstItemTesteString: TListBoxItem;
+    lstItemTesteFornecedores: TListBoxItem;
+    lstItemTesteProdutos: TListBoxItem;
+    lstItemTesteJsonFdMem: TListBoxItem;
+    lstItemTesteJsonSQLite: TListBoxItem;
     ToolBarPincipal: TToolBar;
     btnMenu: TSpeedButton;
-    imgUsuario: TImage;
     lblTitulo: TLabel;
     layToolBarMenu: TLayout;
     layMenu: TLayout;
     GridPanelLayout1: TGridPanelLayout;
-    Image1: TImage;
-    Label2: TLabel;
-    Image2: TImage;
-    Label3: TLabel;
-    Image3: TImage;
-    Label4: TLabel;
-    Image4: TImage;
-    Label5: TLabel;
+    imgAgenda: TImage;
+    lblAgenda: TLabel;
+    imgMensagens: TImage;
+    lblMensagens: TLabel;
+    imgMenu: TImage;
+    lstGroupHeaderPrincipal: TListBoxGroupHeader;
+    lstGroupFooter: TListBoxGroupFooter;
+    lstItemAgenda: TListBoxItem;
+    lstItemMensagem: TListBoxItem;
+    lstItemTesteLogin: TListBoxItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure lstClientesClick(Sender: TObject);
-    procedure ListBoxItem4Click(Sender: TObject);
-    procedure ListBoxItem2Click(Sender: TObject);
-    procedure ListBoxItem5Click(Sender: TObject);
-    procedure ListBoxItem6Click(Sender: TObject);
-    procedure lstContaClick(Sender: TObject);
-    procedure ListBoxItem3Click(Sender: TObject);
+    procedure lstItemTesteClientesClick(Sender: TObject);
+    procedure lstItemTesteProdutosClick(Sender: TObject);
+    procedure lstItemTesteStringClick(Sender: TObject);
+    procedure lstItemTesteJsonFdMemClick(Sender: TObject);
+    procedure lstItemTesteJsonSQLiteClick(Sender: TObject);
+    procedure lstItemTesteFornecedoresClick(Sender: TObject);
+    procedure imgMenuClick(Sender: TObject);
+    procedure lstItemTesteLoginClick(Sender: TObject);
+    procedure lstItemAgendaClick(Sender: TObject);
+    procedure imgAgendaClick(Sender: TObject);
+    procedure lstItemMensagemClick(Sender: TObject);
+    procedure imgMensagensClick(Sender: TObject);
+    procedure lblAgendaClick(Sender: TObject);
+    procedure lblMensagensClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -54,6 +62,8 @@ type
     procedure BotaoVoltarOnClick(Sender: TObject);
     procedure ShowMenuPrincipal;
     procedure HideMenuPrincipal;
+    procedure AbrirAgenda;
+    procedure AbrirMensagens;
 
   public
     { Public declarations }
@@ -67,7 +77,7 @@ implementation
 {$R *.fmx}
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
-  untFuncoes, untDMStyles, untDM;
+  untFuncoes, untDMStyles, untDM, untAgenda, untMensagens;
 
 { TfrmPrincipal }
 
@@ -112,6 +122,17 @@ begin
   layMenu.Visible:=True;
   ToolBarPincipal.Visible:=True;
   MultiView1.HideMaster;
+  FActiveForm:=Nil;
+end;
+
+procedure TfrmPrincipal.AbrirAgenda;
+begin
+  OpenForm(TfrmAgenda);
+end;
+
+procedure TfrmPrincipal.AbrirMensagens;
+begin
+  OpenForm(TfrmMensagens);
 end;
 
 procedure TfrmPrincipal.BotaoVoltarOnClick(Sender: TObject);
@@ -141,47 +162,88 @@ begin
 
 end;
 
-procedure TfrmPrincipal.ListBoxItem3Click(Sender: TObject);
+procedure TfrmPrincipal.imgMensagensClick(Sender: TObject);
+begin
+  inherited;
+  AbrirMensagens;
+end;
+
+procedure TfrmPrincipal.imgAgendaClick(Sender: TObject);
+begin
+  inherited;
+  AbrirAgenda;
+end;
+
+procedure TfrmPrincipal.imgMenuClick(Sender: TObject);
+begin
+  inherited;
+  btnMenu.OnClick(self);
+end;
+
+procedure TfrmPrincipal.lblAgendaClick(Sender: TObject);
+begin
+  inherited;
+  AbrirAgenda;
+end;
+
+procedure TfrmPrincipal.lblMensagensClick(Sender: TObject);
+begin
+  inherited;
+  AbrirMensagens;
+end;
+
+procedure TfrmPrincipal.lstItemTesteFornecedoresClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmTesteFornecedores);
 end;
 
-procedure TfrmPrincipal.ListBoxItem4Click(Sender: TObject);
+procedure TfrmPrincipal.lstItemTesteProdutosClick(Sender: TObject);
 begin
   inherited;
    OpenForm(TfrmTesteProduto);
 end;
 
-procedure TfrmPrincipal.lstClientesClick(Sender: TObject);
+procedure TfrmPrincipal.lstItemAgendaClick(Sender: TObject);
+begin
+  inherited;
+  AbrirAgenda;
+end;
+
+procedure TfrmPrincipal.lstItemMensagemClick(Sender: TObject);
+begin
+  inherited;
+  AbrirMensagens;
+end;
+
+procedure TfrmPrincipal.lstItemTesteClientesClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmTesteClientes);
 end;
 
-procedure TfrmPrincipal.ListBoxItem2Click(Sender: TObject);
+procedure TfrmPrincipal.lstItemTesteStringClick(Sender: TObject);
 begin
   inherited;
     OpenForm(TfrmTesteString);
 end;
 
-procedure TfrmPrincipal.ListBoxItem5Click(Sender: TObject);
+procedure TfrmPrincipal.lstItemTesteJsonFdMemClick(Sender: TObject);
 begin
   inherited;
     OpenForm(TfrmTesteJsonFdMem);
 end;
 
-procedure TfrmPrincipal.ListBoxItem6Click(Sender: TObject);
+procedure TfrmPrincipal.lstItemTesteJsonSQLiteClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmTesteJsonXSqLite);
 end;
 
-procedure TfrmPrincipal.lstContaClick(Sender: TObject);
+procedure TfrmPrincipal.lstItemTesteLoginClick(Sender: TObject);
 begin
   inherited;
-    OpenForm(TfrmLogin);
+  OpenForm(TfrmLogin);
 end;
-
 
 end.
