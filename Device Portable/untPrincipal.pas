@@ -57,13 +57,16 @@ type
     procedure lblMensagensClick(Sender: TObject);
   private
     { Private declarations }
-    FActiveForm: TForm;
+    fShowForm:Boolean;
+    fShowMenuPrincipal:Boolean;
+    fActiveForm: TForm;
     procedure OpenForm(aFormClass: TComponentClass);
     procedure BotaoVoltarOnClick(Sender: TObject);
     procedure ShowMenuPrincipal;
     procedure HideMenuPrincipal;
     procedure AbrirAgenda;
     procedure AbrirMensagens;
+  protected
 
   public
     { Public declarations }
@@ -85,21 +88,31 @@ procedure TfrmPrincipal.OpenForm(AFormClass: TComponentClass);
 var
   LayoutBase, BotaoVoltar: TComponent;
 begin
-  if Assigned(FActiveForm) then
+  if Assigned(fActiveForm)then
   begin
-    if FActiveForm.ClassType = AFormClass then
-      exit
+    if fActiveForm.ClassType = AFormClass then
+    begin
+      //exit
+      fActiveForm.DisposeOf;
+      fActiveForm := nil;
+
+    end
     else
     begin
-      FActiveForm.DisposeOf;
-      FActiveForm := nil;
+      fActiveForm.DisposeOf;
+      fActiveForm := nil;
     end;
   end;
 
-  Application.CreateForm(AFormClass, FActiveForm);
+
+  Application.CreateForm(AFormClass, fActiveForm);
+
+
+  fShowMenuPrincipal:=False;
+  fShowForm:=True;
 
   //Encontra o Layout Base no form a ser exibido para adicionar ao frmPrincipal
-  LayoutBase := FActiveForm.FindComponent('layBase');
+  LayoutBase := fActiveForm.FindComponent('layBase');
   if Assigned(LayoutBase) then
   begin
     layPrincipal.AddObject(TLayout(LayoutBase));
@@ -107,7 +120,7 @@ begin
     layPrincipal.Visible:=True;
   end;
 
-  BotaoVoltar := FActiveForm.FindComponent('btnVoltar');
+  BotaoVoltar := fActiveForm.FindComponent('btnVoltar');
   if Assigned(BotaoVoltar) then
     TControl(BotaoVoltar).OnClick := BotaoVoltarOnClick;
 
@@ -122,7 +135,8 @@ begin
   layMenu.Visible:=True;
   ToolBarPincipal.Visible:=True;
   MultiView1.HideMaster;
-  FActiveForm:=Nil;
+  fShowMenuPrincipal:=True;
+  fShowForm:=False;
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;
@@ -150,6 +164,8 @@ procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
+  fShowMenuPrincipal:=True;
+  fShowForm:=False;
 end;
 
 
