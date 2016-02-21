@@ -388,7 +388,7 @@ inherited frmLogin: TfrmLogin
           TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.Font.Style = [fsBold]
           TextSettings.HorzAlign = Center
-          Text = 'Teste'
+          Text = 'Agenda Bee'
         end
       end
       object layStatus: TLayout

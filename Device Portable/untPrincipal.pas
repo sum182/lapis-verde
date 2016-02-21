@@ -95,7 +95,6 @@ begin
       //exit
       fActiveForm.DisposeOf;
       fActiveForm := nil;
-
     end
     else
     begin
