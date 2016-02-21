@@ -7,15 +7,11 @@ http://vivaitaocara.com.br/landersongomes/sobre
 
 http://cc.embarcadero.com/download.aspx?id=30110&nl=y
 
-rotinas de cursor smfmx
-
 ----Mobile--------------------------------------------------------------------------------
 **Login
 Esqueceu sua senha
 Criar Conta
 Tratar excecoes login
-ao dar erro no login vai pro principal sem se logar
-corrigir referencias das imagens, retirar duplicidades
 
 **Menu princiapl
 Ao chegar no principal e voltar deve fechar app e nao voltar ao login
@@ -26,6 +22,8 @@ Configuracoes de usuario
 cad usuario nao vinculado a escola
 Splash
 Tratar excecoes rest/json
+voltar nativo do android tem q fazer o msm do botao voltar e nao fechar a app
+ao voltar a um form aberto reabrilo e manter da msm forma ao inves de dar um dispose
 ------------------------------------------------------------------------------------------
 
 
