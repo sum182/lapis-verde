@@ -44,6 +44,8 @@ type
     procedure lblCriarContaDblClick(Sender: TObject);
     procedure btnEsqueceuSenhaClick(Sender: TObject);
     procedure btnCriarContaClick(Sender: TObject);
+    procedure edtUsuarioChange(Sender: TObject);
+    procedure edtSenhaChange(Sender: TObject);
   private
     FActivityDialogThread: TThread;
     fLoginOK:boolean;
@@ -54,6 +56,7 @@ type
     procedure OpenFrmPrincipal;
     procedure Login;
     function GetTextoLogin:String;
+    procedure SetStateButtons;
 
   public
     { Public declarations }
@@ -132,6 +135,12 @@ begin
 end;
 
 
+procedure TfrmLogin.edtUsuarioChange(Sender: TObject);
+begin
+  inherited;
+  SetStateButtons;
+end;
+
 procedure TfrmLogin.edtUsuarioExit(Sender: TObject);
 begin
   inherited;
@@ -147,6 +156,12 @@ begin
 
 end;
 
+
+procedure TfrmLogin.edtSenhaChange(Sender: TObject);
+begin
+  inherited;
+  SetStateButtons;
+end;
 
 procedure TfrmLogin.edtSenhaExit(Sender: TObject);
 begin
@@ -176,6 +191,7 @@ procedure TfrmLogin.FormShow(Sender: TObject);
 begin
   inherited;
   lblErrorLogin.Visible:=False;
+  SetStateButtons;
 end;
 
 
@@ -282,5 +298,11 @@ begin
   end;
 end;
 
+
+procedure TfrmLogin.SetStateButtons;
+begin
+  btnLogin.Enabled := ( (edtUsuario.Text <> EmptyStr) and
+                              (edtSenha.Text <> EmptyStr));
+end;
 
 end.

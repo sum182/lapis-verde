@@ -37,6 +37,7 @@ inherited frmLogin: TfrmLogin
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Email ou CPF'
+          OnChange = edtUsuarioChange
           OnKeyDown = edtUsuarioKeyDown
           OnExit = edtUsuarioExit
           object imgUsuario: TImage
@@ -205,6 +206,7 @@ inherited frmLogin: TfrmLogin
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Senha'
+          OnChange = edtSenhaChange
           OnKeyDown = edtSenhaKeyDown
           OnExit = edtSenhaExit
           object imgSenha: TImage
