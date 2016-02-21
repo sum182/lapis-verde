@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2016/02/09 17:57:25.000.297,C:\Projetos\Agenda\Device Portable\Unit1.fmx=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
-    <Transaction>2016/02/09 17:57:34.000.388,C:\Projetos\Agenda\Device Portable\AgendaDevicePortableRX10.dproj=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2016/02/12 12:03:12.000.056,C:\Projetos\Agenda\Device Portable\untDMStyles.dfm=C:\Projetos\Agenda\Device Portable\Unit1.dfm</Transaction>
-    <Transaction>2016/02/12 12:07:40.000.686,C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.fmx=C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.fmx</Transaction>
-    <Transaction>2016/02/12 12:30:12.000.913,C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.fmx=C:\Projetos\Agenda\Device Portable\Unit1.fmx</Transaction>
-    <Transaction>2016/02/13 19:13:44.000.577,C:\Projetos\Agenda\Device Portable\untFrmWait.fmx=C:\Projetos\Agenda\Device Portable\Unit2.fmx</Transaction>
+    <Transaction>2016/02/09 17:57:25.000.297,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\Projetos\Agenda\Device Portable\Unit1.fmx</Transaction>
+    <Transaction>2016/02/09 17:57:34.000.388,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Projetos\Agenda\Device Portable\AgendaDevicePortableRX10.dproj</Transaction>
+    <Transaction>2016/02/12 12:03:12.000.056,C:\Projetos\Agenda\Device Portable\Unit1.dfm=C:\Projetos\Agenda\Device Portable\untDMStyles.dfm</Transaction>
+    <Transaction>2016/02/12 12:07:40.000.686,C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.fmx=C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.fmx</Transaction>
+    <Transaction>2016/02/12 12:30:12.000.913,C:\Projetos\Agenda\Device Portable\Unit1.fmx=C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.fmx</Transaction>
+    <Transaction>2016/02/13 19:13:44.000.577,C:\Projetos\Agenda\Device Portable\Unit2.fmx=C:\Projetos\Agenda\Device Portable\untFrmWait.fmx</Transaction>
+    <Transaction>2016/02/21 10:35:19.203,C:\Projetos\Agenda\Device Portable\Agenda\untFrmAgenda.fmx=C:\Projetos\Agenda\Device Portable\Unit1.fmx</Transaction>
+    <Transaction>2016/02/21 10:35:19.203,C:\Projetos\Agenda\Device Portable\Agenda\untFrmAgenda.pas=C:\Projetos\Agenda\Device Portable\Unit1.pas</Transaction>
+    <Transaction>2016/02/21 10:35:57.311,C:\Projetos\Agenda\Device Portable\Agenda\untAgenda.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untFrmAgenda.fmx</Transaction>
+    <Transaction>2016/02/21 10:38:38.362,C:\Projetos\Agenda\Device Portable\Mensagens\untMensagens.fmx=C:\Projetos\Agenda\Device Portable\Unit1.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
