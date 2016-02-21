@@ -10,8 +10,9 @@ http://cc.embarcadero.com/download.aspx?id=30110&nl=y
 ----Mobile--------------------------------------------------------------------------------
 **Login
 Esqueceu sua senha
-Criar Conta
 Tratar excecoes login
+colocar scroll pois os botoes do rodape qdo vira o cel nao aparece
+erro na senha o teclado sobrepoe a msg
 
 **Menu princiapl
 Ao chegar no principal e voltar deve fechar app e nao voltar ao login
@@ -24,6 +25,9 @@ Splash
 Tratar excecoes rest/json
 voltar nativo do android tem q fazer o msm do botao voltar e nao fechar a app
 ao voltar a um form aberto reabrilo e manter da msm forma ao inves de dar um dispose
+
+**Criar Conta
+Label Titulo - nome da app
 ------------------------------------------------------------------------------------------
 
 

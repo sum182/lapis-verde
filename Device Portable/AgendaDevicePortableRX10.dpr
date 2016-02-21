@@ -23,13 +23,14 @@ uses
   smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
   smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas',
   untAgenda in 'Agenda\untAgenda.pas' {frmAgenda},
-  untMensagens in 'Mensagens\untMensagens.pas' {frmMensagens};
+  untMensagens in 'Mensagens\untMensagens.pas' {frmMensagens},
+  untCriarConta in 'Usuario\untCriarConta.pas' {frmCriarConta};
 
 {$R *.res}
 
 begin
   //Modo Teste
-  Application.Initialize;
+  {Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
@@ -42,7 +43,7 @@ begin
   Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
   Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
   Application.Run;
-  Exit;
+  Exit;            }
   // Fim do Teste
 
 
@@ -52,9 +53,9 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmBase, frmBase);
+  {Application.CreateForm(TfrmBase, frmBase);
   Application.CreateForm(TfrmBaseForAll, frmBaseForAll);
   Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
-  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
+  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar); }
   Application.Run;
 end.

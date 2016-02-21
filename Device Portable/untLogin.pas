@@ -67,12 +67,13 @@ implementation
 {$R *.fmx}
 
 uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
-  FMX.Platform, untFuncoes, untDMStyles;
+  FMX.Platform, untFuncoes, untDMStyles, untCriarConta;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
 begin
   inherited;
-  ShowMessage('Criar conta...')
+  Application.CreateForm(TfrmCriarConta, frmCriarConta);
+  frmCriarConta.Show;
 end;
 
 procedure TfrmLogin.btnEsqueceuSenhaClick(Sender: TObject);
@@ -118,10 +119,9 @@ begin
                 Application.ProcessMessages;
 
                 lblErrorLogin.Visible := True;
-                KeyboardHide;
                 edtSenha.Text:= EmptyStr;
-                edtSenha.SetFocus;
-
+                //edtSenha.SetFocus;
+                KeyboardHide;
               end;
             end);
         end;
@@ -169,7 +169,6 @@ begin
   inherited;
   lblErrorLogin.Visible := False;
   btnEsqueceuSenha.Visible:=False;
-  btnCriarConta.Visible:=False;
   SetStyle(Self);
 end;
 

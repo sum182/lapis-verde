@@ -3,9 +3,10 @@ inherited frmLogin: TfrmLogin
   ClientHeight = 579
   ClientWidth = 320
   Position = DesktopCenter
+  StyleBook = DMStyles.styleAndroid
   OnCreate = FormCreate
   OnShow = FormShow
-  DesignerMasterStyle = 0
+  DesignerMasterStyle = 3
   object VertScrollBox1: TVertScrollBox
     Align = Client
     Size.Width = 320.000000000000000000
@@ -384,7 +385,7 @@ inherited frmLogin: TfrmLogin
           Size.Width = 320.000000000000000000
           Size.Height = 113.000000000000000000
           Size.PlatformDefault = False
-          StyleLookup = 'listboxheaderlabel'
+          StyleLookup = 'labelstyle'
           TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.Font.Style = [fsBold]
           TextSettings.HorzAlign = Center
@@ -455,10 +456,10 @@ inherited frmLogin: TfrmLogin
         TabOrder = 6
         object btnCriarConta: TSpeedButton
           Align = Center
-          Size.Width = 260.000000000000000000
-          Size.Height = 48.000000000000000000
+          Size.Width = 124.000000000000000000
+          Size.Height = 38.000000000000000000
           Size.PlatformDefault = False
-          StyleLookup = 'toolbutton'
+          StyleLookup = 'buttonstyle'
           Text = 'Criar Conta'
           TextSettings.FontColor = claBlue
           OnClick = btnCriarContaClick
