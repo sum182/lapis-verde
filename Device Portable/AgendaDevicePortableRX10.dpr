@@ -21,7 +21,9 @@ uses
   smFrmBase in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.pas' {frmBase},
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
   smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
-  smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas';
+  smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas',
+  untAgenda in 'Agenda\untAgenda.pas' {frmAgenda},
+  untMensagens in 'Mensagens\untMensagens.pas' {frmMensagens};
 
 {$R *.res}
 
@@ -31,7 +33,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
-
   //Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
 
