@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.StorageBin, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FMX.ListView, FMX.Layouts,Data.FireDACJSONReflect,
   System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,smFrmBaseToolBar,
   Data.Bind.DBScope, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.Controls.Presentation;
+  FMX.Controls.Presentation, FMX.Objects;
 
 type
   TfrmTesteJsonFdMem = class(TfrmBaseToolBar)
