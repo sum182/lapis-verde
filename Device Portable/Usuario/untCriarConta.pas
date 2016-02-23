@@ -238,6 +238,7 @@ begin
       //DM.fgActivityDialog.Hide;
       //layPrincipalDadosPrincipais.Enabled:=True;
       //Application.ProcessMessages;
+      Abort;
     end;
   end;
 
@@ -615,7 +616,7 @@ begin
   except on E:Exception do
     begin
       ShowMessage('Erro ao validar E-mail' + #13 + E.Message);
-      //Abort;
+      Abort;
     end;
   end;
   fEmailOk:=True;
