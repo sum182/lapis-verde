@@ -11,7 +11,7 @@ http://cc.embarcadero.com/download.aspx?id=30110&nl=y
 **Criar Conta
 Label Titulo - nome da app
 testar todos as chamadas rest e validar os try except
-
+deixar em uppercase email para teste
 
 **Login
 Esqueceu sua senha
@@ -37,6 +37,9 @@ Setar o estilo de todas as telas
 
 
 ----Server--------------------------------------------------------------------------------
+testar login - uppercase
+testar validar email - uppercase
+
 ini
 install clint mysql
 

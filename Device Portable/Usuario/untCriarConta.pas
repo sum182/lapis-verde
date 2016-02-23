@@ -219,10 +219,9 @@ begin
   if not ValidarCPF Then
   begin
     fCriarContaOk:=False;
-    fCPFOk:=False;
-    lblErrorCriarConta.Text := 'Este CPF já está cadastrado';
-    lblErrorCriarConta.Visible:=True;
-    Application.ProcessMessages;
+    //lblErrorCriarConta.Text := 'Este CPF já está cadastrado';
+    //lblErrorCriarConta.Visible:=True;
+    //Application.ProcessMessages;
     Exit;
   end;
 
@@ -232,10 +231,13 @@ begin
     begin
       fCriarContaOk:=False;
       ShowMessage('Erro ao criar conta' + #13 + E.Message);
-      lblErrorCriarConta.Text := 'Erro ao criar conta' + #13 + E.Message;
-      lblErrorCriarConta.Visible:=True;
-      Application.ProcessMessages;
-      //Abort;
+      //lblErrorCriarConta.Text := 'Erro ao criar conta' + #13 + E.Message;
+      //lblErrorCriarConta.Visible:=True;
+      //Application.ProcessMessages;
+
+      //DM.fgActivityDialog.Hide;
+      //layPrincipalDadosPrincipais.Enabled:=True;
+      //Application.ProcessMessages;
     end;
   end;
 
@@ -583,8 +585,10 @@ begin
     begin
       fCPFOk:= False;
       ShowMessage('Erro ao validar CPF' + #13 + E.Message);
-      Application.ProcessMessages;
-      //Abort;
+      Abort;
+      //DM.fgActivityDialog.Hide;
+      //layPrincipalDadosPrincipais.Enabled:=True;
+      //Application.ProcessMessages;
     end;
   end;
   fCPFOk:=True;
@@ -628,8 +632,9 @@ end;
 
 procedure TfrmCriarConta.btnFinalizarClick(Sender: TObject);
 begin
- SetClearFields;
- if not DM.fgActivityDialog.IsShown then
+  SetClearFields;
+
+  if not DM.fgActivityDialog.IsShown then
   begin
     fCriarContaOk:=False;
     lblErrorCriarConta.Visible:= False;
@@ -668,19 +673,11 @@ begin
               else
               begin
                 if not fCPFOk Then
-                begin
-                  lblErrorCriarConta.Text := 'Este CPF já está cadastrado';
-                  lblErrorCriarConta.Visible:=True;
-                  Application.ProcessMessages;
-                end;
-
-                if not fCriarContaOk Then
-                begin
+                  lblErrorCriarConta.Text := 'Este CPF já está cadastrado'
+                else
                   lblErrorCriarConta.Text := 'Erro ao criar conta';
-                  lblErrorCriarConta.Visible:=True;
-                  Application.ProcessMessages;
-                end;
 
+                lblErrorCriarConta.Visible:=True;
                 DM.fgActivityDialog.Hide;
                 layPrincipalDadosPrincipais.Enabled:=True;
                 Application.ProcessMessages;

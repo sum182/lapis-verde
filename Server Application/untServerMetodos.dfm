@@ -85,8 +85,10 @@ object SrvServerMetodos: TSrvServerMetodos
         ','#39#39')) as nome_completo'
       'FROM responsavel r'
       'where 1=1'#10#10
-      'and (r.cpf = :login) or (r.email = :login) '#13#10#10
+      'and (r.cpf = :login) or (Upper(r.email) = Upper(:login)) '#13#10#10
+      ''
       'and r.senha = :senha'#13#10#10
+      ''
       ''
       ''
       ''
@@ -111,15 +113,9 @@ object SrvServerMetodos: TSrvServerMetodos
   object fdqValidarEmailResponsavel: TFDQuery
     Connection = FDConnection
     SQL.Strings = (
-      'SELECT r.* '
-      'FROM responsavel r'
-      'where 1=1'#10#10
-      'and r.email = :email'
-      ''
-      ''
-      ''
-      ''
-      '')
+      'SELECT r.* '#10'FROM responsavel r'#13#10#10
+      'where 1=1'#10#10#10
+      'and Upper(r.email) = Upper(:email)'#10)
     Left = 402
     Top = 192
     ParamData = <
