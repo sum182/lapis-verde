@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 09/02/2016 18:33:22
+// 23/02/2016 12:28:55
 //
 
 unit Proxy;
@@ -22,6 +22,9 @@ type
     FGetAlunosCommand_Cache: TDSRestCommand;
     FLoginFuncionarioCommand: TDSRestCommand;
     FLoginResponsavelCommand: TDSRestCommand;
+    FValidarEmailExistenteResponsavelCommand: TDSRestCommand;
+    FValidarCPFExistenteResponsavelCommand: TDSRestCommand;
+    FCriarUsuarioResponsavelCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -33,6 +36,9 @@ type
     function GetAlunos_Cache(const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
     function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
+    function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
+    function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
+    function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
   end;
 
   IDSRestCachedTFDJSONDataSets = interface(IDSRestCachedObject<TFDJSONDataSets>)
@@ -81,6 +87,31 @@ const
     (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSrvServerMetodos_ValidarEmailExistenteResponsavel: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Email'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSrvServerMetodos_ValidarCPFExistenteResponsavel: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSrvServerMetodos_CriarUsuarioResponsavel: array [0..8] of TDSRestParameterMetaData =
+  (
+    (Name: 'Nome'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'SobreNome'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Email'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Telefone'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'RG'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Sexo'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
 implementation
@@ -206,6 +237,55 @@ begin
   Result := FLoginResponsavelCommand.Parameters[2].Value.GetBoolean;
 end;
 
+function TSrvServerMetodosClient.ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string): Boolean;
+begin
+  if FValidarEmailExistenteResponsavelCommand = nil then
+  begin
+    FValidarEmailExistenteResponsavelCommand := FConnection.CreateCommand;
+    FValidarEmailExistenteResponsavelCommand.RequestType := 'GET';
+    FValidarEmailExistenteResponsavelCommand.Text := 'TSrvServerMetodos.ValidarEmailExistenteResponsavel';
+    FValidarEmailExistenteResponsavelCommand.Prepare(TSrvServerMetodos_ValidarEmailExistenteResponsavel);
+  end;
+  FValidarEmailExistenteResponsavelCommand.Parameters[0].Value.SetWideString(Email);
+  FValidarEmailExistenteResponsavelCommand.Execute(ARequestFilter);
+  Result := FValidarEmailExistenteResponsavelCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TSrvServerMetodosClient.ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string): Boolean;
+begin
+  if FValidarCPFExistenteResponsavelCommand = nil then
+  begin
+    FValidarCPFExistenteResponsavelCommand := FConnection.CreateCommand;
+    FValidarCPFExistenteResponsavelCommand.RequestType := 'GET';
+    FValidarCPFExistenteResponsavelCommand.Text := 'TSrvServerMetodos.ValidarCPFExistenteResponsavel';
+    FValidarCPFExistenteResponsavelCommand.Prepare(TSrvServerMetodos_ValidarCPFExistenteResponsavel);
+  end;
+  FValidarCPFExistenteResponsavelCommand.Parameters[0].Value.SetWideString(CPF);
+  FValidarCPFExistenteResponsavelCommand.Execute(ARequestFilter);
+  Result := FValidarCPFExistenteResponsavelCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TSrvServerMetodosClient.CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string): string;
+begin
+  if FCriarUsuarioResponsavelCommand = nil then
+  begin
+    FCriarUsuarioResponsavelCommand := FConnection.CreateCommand;
+    FCriarUsuarioResponsavelCommand.RequestType := 'GET';
+    FCriarUsuarioResponsavelCommand.Text := 'TSrvServerMetodos.CriarUsuarioResponsavel';
+    FCriarUsuarioResponsavelCommand.Prepare(TSrvServerMetodos_CriarUsuarioResponsavel);
+  end;
+  FCriarUsuarioResponsavelCommand.Parameters[0].Value.SetWideString(Nome);
+  FCriarUsuarioResponsavelCommand.Parameters[1].Value.SetWideString(SobreNome);
+  FCriarUsuarioResponsavelCommand.Parameters[2].Value.SetWideString(Email);
+  FCriarUsuarioResponsavelCommand.Parameters[3].Value.SetWideString(Senha);
+  FCriarUsuarioResponsavelCommand.Parameters[4].Value.SetWideString(Telefone);
+  FCriarUsuarioResponsavelCommand.Parameters[5].Value.SetWideString(CPF);
+  FCriarUsuarioResponsavelCommand.Parameters[6].Value.SetWideString(RG);
+  FCriarUsuarioResponsavelCommand.Parameters[7].Value.SetWideString(Sexo);
+  FCriarUsuarioResponsavelCommand.Execute(ARequestFilter);
+  Result := FCriarUsuarioResponsavelCommand.Parameters[8].Value.GetWideString;
+end;
+
 constructor TSrvServerMetodosClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -225,6 +305,9 @@ begin
   FGetAlunosCommand_Cache.DisposeOf;
   FLoginFuncionarioCommand.DisposeOf;
   FLoginResponsavelCommand.DisposeOf;
+  FValidarEmailExistenteResponsavelCommand.DisposeOf;
+  FValidarCPFExistenteResponsavelCommand.DisposeOf;
+  FCriarUsuarioResponsavelCommand.DisposeOf;
   inherited;
 end;
 

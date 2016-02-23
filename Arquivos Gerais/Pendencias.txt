@@ -44,6 +44,8 @@ analisar senha responsavel
 nao pode ser vinculado a escola
 login face
 
+criar DM para agenda, criar conta/login, msg
+
 ------------------------------------------------------------------------------------------
 
 

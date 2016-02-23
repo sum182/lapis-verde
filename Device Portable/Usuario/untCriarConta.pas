@@ -80,6 +80,12 @@ type
     laySexo: TLayout;
     cmbSexo: TComboBox;
     lblSexo: TLabel;
+    layErrorSenha: TLayout;
+    lblErrorSenhas: TLabel;
+    layErrorEmail: TLayout;
+    lblErrorEmail: TLabel;
+    Layout1: TLayout;
+    lblErrorCriarConta: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnProximaNomeClick(Sender: TObject);
     procedure btnVoltarNomeClick(Sender: TObject);
@@ -93,7 +99,6 @@ type
       var KeyChar: Char; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure cmbSexoChange(Sender: TObject);
-    procedure cmbSexoExit(Sender: TObject);
     procedure btnProximaEmailClick(Sender: TObject);
     procedure btnProximaSenhaClick(Sender: TObject);
     procedure btnVoltarEmailClick(Sender: TObject);
@@ -130,7 +135,6 @@ type
     procedure cmbSexoKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure edtNomeChangeTracking(Sender: TObject);
-    procedure cmbSexoClosePopup(Sender: TObject);
     procedure edtSobrenomeChangeTracking(Sender: TObject);
     procedure edtEmailChangeTracking(Sender: TObject);
     procedure edtCriarSenhaChangeTracking(Sender: TObject);
@@ -138,17 +142,34 @@ type
     procedure edtTelefoneChangeTracking(Sender: TObject);
     procedure edtCPFChangeTracking(Sender: TObject);
     procedure edtRGChangeTracking(Sender: TObject);
-    procedure cmbSexoClick(Sender: TObject);
-    procedure cmbSexoDragEnd(Sender: TObject);
-    procedure cmbSexoEnter(Sender: TObject);
+    procedure btnFinalizarClick(Sender: TObject);
   private
+    MsgCriarConta:String;
+    fActivityDialogThread: TThread;
+    fEmailOk:Boolean;
+    fCPFOk:Boolean;
+    fCriarContaOk:Boolean;
+    fNome:String;
+    fSobreNome: String;
+    fEmail: String;
+    fSenha: String;
+    fTelefone: String;
+    fCPF: String;
+    fRG: String;
+    fSexo: String;
     procedure SetStateButtonsNome;
     procedure SetStateButtonsEmail;
     procedure SetStateButtonsSenha;
     procedure SetStateButtonsTelefone;
     procedure SetStateButtonsDadosPessoais;
-
-
+    procedure SetNotVisibleObjects;
+    procedure ValidarEmail;
+    function ValidarSenha:Boolean;
+    function ValidarCPF:Boolean;
+    procedure CriarConta;
+    procedure SetClearFields;
+    procedure SetFields;
+    procedure SetVisibleLabelSexo;
   public
     { Public declarations }
   end;
@@ -160,7 +181,7 @@ implementation
 
 {$R *.fmx}
 
-uses smGeralFMX, untFuncoes, untDMStyles;
+uses smGeralFMX, untFuncoes, untDMStyles, untDM, untModuloCliente, smCrypt;
 
 procedure TfrmCriarConta.btnProximaNomeClick(Sender: TObject);
 begin
@@ -172,46 +193,15 @@ procedure TfrmCriarConta.btnVoltarNomeClick(Sender: TObject);
 begin
   inherited;
   frmCriarConta.Close;
+  //frmCriarConta.DisposeOf;
+  //frmCriarConta:= nil;
 end;
 
 procedure TfrmCriarConta.cmbSexoChange(Sender: TObject);
 begin
   inherited;
-  lblSexo.Visible:= cmbSexo.ItemIndex <> -1;
+  SetVisibleLabelSexo;
   SetStateButtonsDadosPessoais;
-end;
-
-procedure TfrmCriarConta.cmbSexoClick(Sender: TObject);
-begin
-  inherited;
-  SetStateButtonsDadosPessoais;
-
-end;
-
-procedure TfrmCriarConta.cmbSexoClosePopup(Sender: TObject);
-begin
-  inherited;
-  lblSexo.Visible:= cmbSexo.ItemIndex <> -1;
-
-end;
-
-procedure TfrmCriarConta.cmbSexoDragEnd(Sender: TObject);
-begin
-  inherited;
-  SetStateButtonsDadosPessoais;
-
-end;
-
-procedure TfrmCriarConta.cmbSexoEnter(Sender: TObject);
-begin
-  inherited;
-  lblSexo.Visible:=False;
-end;
-
-procedure TfrmCriarConta.cmbSexoExit(Sender: TObject);
-begin
-  inherited;
-  lblSexo.Visible:= cmbSexo.ItemIndex <> -1;
 end;
 
 procedure TfrmCriarConta.cmbSexoKeyDown(Sender: TObject; var Key: Word;
@@ -221,6 +211,43 @@ begin
   if Key = vkReturn then
     KeyboardHide;
 end;
+
+procedure TfrmCriarConta.CriarConta;
+begin
+  SetFields;
+
+  if not ValidarCPF Then
+  begin
+    fCriarContaOk:=False;
+    fCPFOk:=False;
+    lblErrorCriarConta.Text := 'Este CPF já está cadastrado';
+    lblErrorCriarConta.Visible:=True;
+    Application.ProcessMessages;
+    Exit;
+  end;
+
+  try
+    MsgCriarConta:= ModuloCliente.SrvServerMetodosClient.CriarUsuarioResponsavel(fNome,fSobreNome,fEmail,fSenha,fTelefone,fCPF,fRG,fSexo);
+  except on E:Exception do
+    begin
+      fCriarContaOk:=False;
+      ShowMessage('Erro ao criar conta' + #13 + E.Message);
+      lblErrorCriarConta.Text := 'Erro ao criar conta' + #13 + E.Message;
+      lblErrorCriarConta.Visible:=True;
+      Application.ProcessMessages;
+      //Abort;
+    end;
+  end;
+
+
+  if (MsgCriarConta = 'OK') then
+  begin
+    fCriarContaOk:=True;
+  end
+  else
+    fCriarContaOk:=False;
+end;
+
 
 procedure TfrmCriarConta.edtConfirmarSenhaChange(Sender: TObject);
 begin
@@ -398,7 +425,7 @@ begin
   SetStateButtonsSenha;
   SetStateButtonsTelefone;
   SetStateButtonsDadosPessoais;
-
+  SetNotVisibleObjects;
 end;
 
 procedure TfrmCriarConta.imgFinalizarClick(Sender: TObject);
@@ -461,6 +488,38 @@ begin
   btnVoltarTelefone.OnClick(self);
 end;
 
+procedure TfrmCriarConta.SetClearFields;
+begin
+  fNome:= EmptyStr;
+  fSobreNome:=EmptyStr;
+  fEmail:=EmptyStr;
+  fSenha:=EmptyStr;
+  fTelefone:= EmptyStr;
+  fCPF:=EmptyStr;
+  fRG:=EmptyStr;
+  fSexo:= EmptyStr;
+end;
+
+procedure TfrmCriarConta.SetFields;
+begin
+  SetClearFields;
+  fNome:= edtNome.Text;
+  fSobreNome:=edtSobrenome.Text;
+  fEmail:=edtEmail.Text;
+  fSenha:=Encrypt(edtCriarSenha.Text);
+  fTelefone:= SomenteNumero(edtTelefone.Text);
+  fCPF:=SomenteNumero(edtCPF.Text);
+  fRG:=SomenteNumero(edtRG.Text);
+  fSexo:= Copy(cmbSexo.Selected.Text,0,1);
+end;
+
+procedure TfrmCriarConta.SetNotVisibleObjects;
+begin
+  lblErrorEmail.Visible:=False;
+  lblErrorSenhas.Visible:=False;
+  lblErrorCriarConta.Visible:=False;
+end;
+
 procedure TfrmCriarConta.SetStateButtonsDadosPessoais;
 begin
   btnFinalizar.Enabled := ( (edtCPF.Text <> EmptyStr) and
@@ -491,11 +550,13 @@ end;
 procedure TfrmCriarConta.SetStateButtonsSenha;
 begin
   btnProximaSenha.Enabled := ( (edtCriarSenha.Text <> EmptyStr) and
-                              (edtConfirmarSenha.Text <> EmptyStr));
+                              (edtConfirmarSenha.Text <> EmptyStr)
+                             );
+
 
   imgProximaSenha.Enabled := ( (edtCriarSenha.Text <> EmptyStr) and
-                              (edtConfirmarSenha.Text <> EmptyStr));
-
+                               (edtConfirmarSenha.Text <> EmptyStr)
+                             );
 end;
 
 procedure TfrmCriarConta.SetStateButtonsTelefone;
@@ -504,10 +565,184 @@ begin
   imgProximaTelefone.Enabled := (edtTelefone.Text <> EmptyStr);
 end;
 
+
+procedure TfrmCriarConta.SetVisibleLabelSexo;
+begin
+  lblSexo.Visible:= cmbSexo.ItemIndex = -1;
+end;
+
+function TfrmCriarConta.ValidarCPF: Boolean;
+begin
+  try
+    if not ModuloCliente.SrvServerMetodosClient.ValidarCPFExistenteResponsavel(edtCPF.Text) then
+    begin
+      fCPFOk:= False;
+      lblErrorCriarConta.Visible:= True;
+      Application.ProcessMessages;
+      Exit;
+    end;
+  except on E:Exception do
+    begin
+      fCPFOk:= False;
+      ShowMessage('Erro ao validar CPF' + #13 + E.Message);
+      Application.ProcessMessages;
+      //Abort;
+    end;
+  end;
+  fCPFOk:=True;
+  Result:=fCPFOk;
+end;
+
+procedure TfrmCriarConta.ValidarEmail;
+begin
+  if not (smGeralFMX.ValidarEMail(edtEmail.Text))Then
+  begin
+    fEmailOk:= False;
+    lblErrorEmail.Text:= 'Endereço de E-mail inválido!';
+    Exit;
+  end;
+
+  try
+    if not ModuloCliente.SrvServerMetodosClient.ValidarEmailExistenteResponsavel(edtEmail.Text) then
+    begin
+      fEmailOk:= False;
+      lblErrorEmail.Text:= 'Este E-mail já está cadastrado';
+      Application.ProcessMessages;
+      Exit;
+    end;
+  except on E:Exception do
+    begin
+      ShowMessage('Erro ao validar E-mail' + #13 + E.Message);
+      //Abort;
+    end;
+  end;
+  fEmailOk:=True;
+end;
+
+function TfrmCriarConta.ValidarSenha: Boolean;
+begin
+  Result:=((edtCriarSenha.Text = edtConfirmarSenha.Text) and
+           (edtCriarSenha.Text <> EmptyStr) and
+           (edtConfirmarSenha.Text <> EmptyStr)
+           );
+  lblErrorSenhas.Visible:= not Result;
+end;
+
+procedure TfrmCriarConta.btnFinalizarClick(Sender: TObject);
+begin
+ SetClearFields;
+ if not DM.fgActivityDialog.IsShown then
+  begin
+    fCriarContaOk:=False;
+    lblErrorCriarConta.Visible:= False;
+    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+      begin
+        try
+          TThread.Synchronize(nil, procedure
+          begin
+            layPrincipalDadosPrincipais.Enabled:=False;
+            DM.fgActivityDialog.Message := 'Criando conta';
+            DM.fgActivityDialog.Show;
+          end);
+
+
+          Sleep(200);
+          CriarConta;
+
+          if TThread.CheckTerminated then
+            Exit;
+
+
+        finally
+          if not TThread.CheckTerminated then
+            TThread.Synchronize(nil, procedure
+            begin
+              if fCriarContaOk then
+              begin
+                DM.fgActivityDialog.Hide;
+                layPrincipalDadosPrincipais.Enabled:=True;
+                ShowMessage(fNome + ' sua conta criada com sucesso!');
+                frmCriarConta.Close;
+                //frmCriarConta.DisposeOf;
+                //frmCriarConta:= nil;
+                Application.ProcessMessages;
+              end
+              else
+              begin
+                if not ValidarCPF Then
+                begin
+                  lblErrorCriarConta.Text := 'Este CPF já está cadastrado';
+                  lblErrorCriarConta.Visible:=True;
+                  Application.ProcessMessages;
+                end;
+
+                if not fCriarContaOk Then
+                begin
+                  lblErrorCriarConta.Text := 'Erro ao criar conta';
+                  lblErrorCriarConta.Visible:=True;
+                  Application.ProcessMessages;
+                end;
+
+                DM.fgActivityDialog.Hide;
+                layPrincipalDadosPrincipais.Enabled:=True;
+                Application.ProcessMessages;
+              end;
+            end);
+        end;
+      end);
+    FActivityDialogThread.FreeOnTerminate := False;
+    FActivityDialogThread.Start;
+  end;
+
+end;
+
 procedure TfrmCriarConta.btnProximaEmailClick(Sender: TObject);
 begin
-  inherited;
-  tbCtrlPrincipal.ActiveTab := tbItemSenha;
+ if not DM.fgActivityDialog.IsShown then
+  begin
+    fEmailOk:=False;
+    lblErrorEmail.Visible:=False;
+    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+      begin
+        try
+          TThread.Synchronize(nil, procedure
+          begin
+            layPrincipalEmail.Enabled:=False;
+            DM.fgActivityDialog.Message := 'Validando E-Mail';
+            DM.fgActivityDialog.Show;
+          end);
+
+          Sleep(200);
+          ValidarEmail;
+
+          if TThread.CheckTerminated then
+            Exit;
+
+
+        finally
+          if not TThread.CheckTerminated then
+            TThread.Synchronize(nil, procedure
+            begin
+              if fEmailOk then
+              begin
+                DM.fgActivityDialog.Hide;
+                layPrincipalEmail.Enabled:=True;
+                tbCtrlPrincipal.ActiveTab := tbItemSenha;
+                Application.ProcessMessages;
+              end
+              else
+              begin
+                DM.fgActivityDialog.Hide;
+                layPrincipalEmail.Enabled:=True;
+                Application.ProcessMessages;
+                lblErrorEmail.Visible:=True;
+              end;
+            end);
+        end;
+      end);
+    FActivityDialogThread.FreeOnTerminate := False;
+    FActivityDialogThread.Start;
+  end;
 end;
 
 procedure TfrmCriarConta.btnVoltarEmailClick(Sender: TObject);
@@ -519,7 +754,11 @@ end;
 procedure TfrmCriarConta.btnProximaSenhaClick(Sender: TObject);
 begin
   inherited;
+  lblErrorSenhas.Visible:= False;;
+  if ValidarSenha then
+  begin
     tbCtrlPrincipal.ActiveTab := tbItemTelefone;
+  end;
 end;
 
 procedure TfrmCriarConta.btnVoltarSenhaClick(Sender: TObject);

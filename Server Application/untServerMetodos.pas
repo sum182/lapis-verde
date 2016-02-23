@@ -20,6 +20,10 @@ type
     FDConnectionLocal: TFDConnection;
     fdqLoginFuncionario: TFDQuery;
     fdqLoginResponsavel: TFDQuery;
+    fdqValidarEmailResponsavel: TFDQuery;
+    fdqValidarCPFResponsavel: TFDQuery;
+    fdqResponsavel: TFDQuery;
+    fdqResponsavelTelefone: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -30,6 +34,16 @@ type
     function GetAlunos:TFDJSONDataSets;
     function LoginFuncionario(Login:string; Senha:string):Boolean;
     function LoginResponsavel(Login:string; Senha:string):Boolean;
+    function ValidarEmailExistenteResponsavel(Email:String):Boolean;
+    function ValidarCPFExistenteResponsavel(CPF:String):Boolean;
+    function CriarUsuarioResponsavel( Nome:String;
+                                      SobreNome: String;
+                                      Email: String;
+                                      Senha: String;
+                                      Telefone: String;
+                                      CPF: String;
+                                      RG: String;
+                                      Sexo: String):String;
 
   end;
 {$METHODINFO OFF}
@@ -41,6 +55,42 @@ implementation
 
 
 uses System.StrUtils;
+
+function TSrvServerMetodos.CriarUsuarioResponsavel(Nome, SobreNome, Email,
+  Senha, Telefone, CPF, RG, Sexo: String): String;
+begin
+  try
+    fdqResponsavel.Close;
+    fdqResponsavel.ParamByName('responsavel_id').AsInteger:=0;
+    fdqResponsavel.Open;
+    fdqResponsavel.Append;
+    //fdqResponsavel.FieldByName('responsavel_id').AsString := 0;
+    fdqResponsavel.FieldByName('nome').AsString := Nome;
+    fdqResponsavel.FieldByName('sobrenome').AsString := SobreNome;
+    fdqResponsavel.FieldByName('sexo').AsString := Sexo;
+    fdqResponsavel.FieldByName('rg').AsString := RG;
+    fdqResponsavel.FieldByName('cpf').AsString := CPF;
+    fdqResponsavel.FieldByName('ativo').AsString := 'S';
+    fdqResponsavel.FieldByName('email').AsString := Email;
+    fdqResponsavel.FieldByName('senha').AsString := Senha;
+    fdqResponsavel.Post;
+
+    //Criando o Telefone
+    fdqResponsavelTelefone.Close;
+    fdqResponsavelTelefone.Open;
+    fdqResponsavelTelefone.Append;
+    fdqResponsavelTelefone.FieldByName('responsavel_id').AsInteger := fdqResponsavel.FieldByName('responsavel_id').AsInteger;
+    fdqResponsavelTelefone.FieldByName('telefone_tipo_id').AsInteger := 2;
+    fdqResponsavelTelefone.FieldByName('numero').AsString := Telefone;
+    fdqResponsavelTelefone.Post;
+
+    Result:= 'OK';
+  except on E:Exception do
+    begin
+      Result:= 'Erro ao criar usuário ' + #13 + E.Message;
+    end;
+  end;
+end;
 
 procedure TSrvServerMetodos.DataModuleCreate(Sender: TObject);
 begin
@@ -85,6 +135,24 @@ end;
 function TSrvServerMetodos.ReverseString(Value: string): string;
 begin
   Result := System.StrUtils.ReverseString(Value);
+end;
+
+function TSrvServerMetodos.ValidarCPFExistenteResponsavel(
+  CPF: String): Boolean;
+begin
+  fdqValidarCPFResponsavel.Close;
+  fdqValidarCPFResponsavel.ParamByName('cpf').AsString := cpf;
+  fdqValidarCPFResponsavel.Open;
+  Result:=(fdqValidarCPFResponsavel.IsEmpty);
+end;
+
+function TSrvServerMetodos.ValidarEmailExistenteResponsavel(
+  Email: String): Boolean;
+begin
+  fdqValidarEmailResponsavel.Close;
+  fdqValidarEmailResponsavel.ParamByName('email').AsString := Email;
+  fdqValidarEmailResponsavel.Open;
+  Result:= (fdqValidarEmailResponsavel.IsEmpty);
 end;
 
 end.

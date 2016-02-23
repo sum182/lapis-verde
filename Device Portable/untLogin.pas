@@ -46,6 +46,8 @@ type
     procedure btnCriarContaClick(Sender: TObject);
     procedure edtUsuarioChange(Sender: TObject);
     procedure edtSenhaChange(Sender: TObject);
+    procedure edtSenhaChangeTracking(Sender: TObject);
+    procedure edtUsuarioChangeTracking(Sender: TObject);
   private
     FActivityDialogThread: TThread;
     fLoginOK:boolean;
@@ -141,6 +143,12 @@ begin
   SetStateButtons;
 end;
 
+procedure TfrmLogin.edtUsuarioChangeTracking(Sender: TObject);
+begin
+  inherited;
+  SetStateButtons;
+end;
+
 procedure TfrmLogin.edtUsuarioExit(Sender: TObject);
 begin
   inherited;
@@ -158,6 +166,12 @@ end;
 
 
 procedure TfrmLogin.edtSenhaChange(Sender: TObject);
+begin
+  inherited;
+  SetStateButtons;
+end;
+
+procedure TfrmLogin.edtSenhaChangeTracking(Sender: TObject);
 begin
   inherited;
   SetStateButtons;

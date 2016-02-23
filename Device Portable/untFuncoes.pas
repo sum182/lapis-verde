@@ -6,9 +6,10 @@ Uses  FMX.Forms;
 
   procedure SetStyle(Formulario:TForm);
 
+
 implementation
 
-uses untDM, untDMStyles;
+uses untDM, untDMStyles, System.SysUtils;
 
 
 procedure SetStyle(Formulario:TForm);
@@ -25,6 +26,8 @@ begin
     Formulario.StyleBook := DMStyles.styleWindows;
   {$ENDIF}
 end;
+
+
 
 
 end.
