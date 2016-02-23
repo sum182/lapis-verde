@@ -1,0 +1,21 @@
+inherited frmTesteClientes: TfrmTesteClientes
+  DesignerMasterStyle = 3
+  inherited layBase: TLayout
+    inherited ToolBar1: TToolBar
+      inherited lblTitulo: TLabel
+        Text = 'Clientes'
+      end
+    end
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family, FontColor]
+      Size.Width = 640.000000000000000000
+      Size.Height = 480.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 24.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.HorzAlign = Center
+      Text = 'Clientes'
+    end
+  end
+end
