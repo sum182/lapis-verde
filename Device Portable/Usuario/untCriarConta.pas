@@ -577,8 +577,6 @@ begin
     if not ModuloCliente.SrvServerMetodosClient.ValidarCPFExistenteResponsavel(edtCPF.Text) then
     begin
       fCPFOk:= False;
-      lblErrorCriarConta.Visible:= True;
-      Application.ProcessMessages;
       Exit;
     end;
   except on E:Exception do
@@ -661,7 +659,7 @@ begin
               begin
                 DM.fgActivityDialog.Hide;
                 layPrincipalDadosPrincipais.Enabled:=True;
-                ShowMessage(fNome + ' sua conta criada com sucesso!');
+                ShowMessage('Conta criada com sucesso!');
                 frmCriarConta.Close;
                 //frmCriarConta.DisposeOf;
                 //frmCriarConta:= nil;
@@ -669,7 +667,7 @@ begin
               end
               else
               begin
-                if not ValidarCPF Then
+                if not fCPFOk Then
                 begin
                   lblErrorCriarConta.Text := 'Este CPF já está cadastrado';
                   lblErrorCriarConta.Visible:=True;

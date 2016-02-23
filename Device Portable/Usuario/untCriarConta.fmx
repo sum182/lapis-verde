@@ -15,7 +15,7 @@ inherited frmCriarConta: TfrmCriarConta
       Size.PlatformDefault = False
       StyleLookup = 'tabcontrolstyle'
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 4
       TabOrder = 0
       TabPosition = PlatformDefault
       object tbItemNome: TTabItem
@@ -352,7 +352,7 @@ inherited frmCriarConta: TfrmCriarConta
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 64.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -1343,7 +1343,7 @@ inherited frmCriarConta: TfrmCriarConta
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 64.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
