@@ -73,10 +73,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    005049444154484B631805A3803EE0DFBF7F8DFFFFFF6F8072A90B8086EB02F1
-                    1FA0052040334B22E86149243D2C89A28725D1A458C204A5070720D5F5248121
-                    6D38ED331AC8609A193E0A460101C0C00000CCE592772EBC878C000000004945
-                    4E44AE426082}
+                    005249444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA70B
+                    B4E00FD00210A0992511F4B024921E9644D1C39268522C6182D2830390EA7A92
+                    C090369CF6190D6430CD0C1F05A38000606000003D309259F5A0C24300000000
+                    49454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
                     'te_24dp\ic_navigate_next_white_24dp\android\drawable-mdpi\ic_nav' +
@@ -89,11 +89,11 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
                     98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0080494441545847EDD0CB0A8020108561A9A01EBB7AA72E4FA71D73C68D6E02
-                    6124CE0722B39A9F714444D488F77E0B21AC32DA42CC8E18651B85801141476A
-                    C96CA31034E39D12A31855E839EA9218C5A802021644DDA925FB1C35C8FF2FB8
-                    4493EB3481C58CA9C262C65461F1D44D8C8A01A9E3651BA3624837314444FFE5
-                    DC03A58A4BC71FC39CE30000000049454E44AE426082}
+                    0081494441545847EDD0CB0A8020148461A9A01EBB7AA72E2FA736A6C78D6E02
+                    E148CCB71157F3730C11113562ADDDBCF76BFAEA42CC8E18A11B85801141476C
+                    C974A39C7333A2CE14231855E839EA4A31825105042C88BA634BF6396A48EFBF
+                    E0124DAED3048619538561C6546178EA26468480D8F1D28D1121A49B1822A2FF
+                    32E601BD144B9A0D30AA400000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
                     'te_24dp\ic_navigate_next_white_24dp\android\drawable-hdpi\ic_nav' +
@@ -106,12 +106,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0091494441546843EDD2410AC2301844E1D45B59BD98E0427B64DD274EF40FE4
-                    008DCDC0FBA084EEDE8424000000EC23E7FC2CA53CE2D78BE237C5375E23147F
-                    8FF09ECF080D38EB7B45788F117FC588593062168C98C5C811A738475BE2F4A3
-                    9B5F6D9F90C22FC41F21E2DF11DC237E28455E893F82227DE32BC5DF22B8E711
-                    DFD4E05FF797577C53C36DE3010000ECA4F401A3361D26C4D0C5CF0000000049
-                    454E44AE426082}
+                    0093494441546843EDD24B0E022114445174577E3666E2405DB28E010B7D242C
+                    406C2AB967427A768B26010000E03772CEF75AEB2D3EBD28FEA1F8CE6B4429E5
+                    1AE1239F111A70D01F7846F888117FC588553062158C58C5CC11FB3867DBC5E9
+                    47B77FB47D428A3F11BF85887F45F088F8A91479267E0B8AF48D6FF4EE2F113C
+                    F288EF5AF0B7FBC32BBE6BE1B6F100000076527A0366C81CED968C8219000000
+                    0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
                     'te_24dp\ic_navigate_next_white_24dp\android\drawable-xhdpi\ic_na' +
@@ -124,15 +124,16 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
                     47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    010849444154785EEDD9590E8230144661E2025C80F3521D56E9EC4AC0BFF692
-                    D4A4B77D32A29C2FB9213CF6044881060000000000000086ADEBBA6D183B45AA
-                    6DDB9DE2F48894529CBD85491129509C8305C9197724C5996A8E16C333FA4833
-                    CDC96278461F69AE395B0C0F918854A1400BCDC562788844A40A055A12A9C222
-                    5D2D86874844AA50809522DD620B17918854A1406BCDDD62788844A40A05D828
-                    D223B6707D3CD2C48EF825768B7DFDEA19249E3F05C429B038EC8172B4703688
-                    1E2D9C381E2D3CC4E1253547617883F710A780380516874FAC390AC3477A8FC2
-                    845FCFC42909016287AC71C7E98510B1C71BE2A44290D8E5853839210C710000
-                    0000000000FC9BA679020DF2A2015E9D40970000000049454E44AE426082}
+                    010D49444154785EEDD9590E8230144661E2025C80F3521D56E9EC4600FFDA4B
+                    82496FFB6444395F42088F3DA14D0B15000000000000000C5BDBB6DB70D923FA
+                    EABADE294E87487D8AB3B7307D440A14E7604152C61DA9699AA9021D2D8667F4
+                    91668A74B2189ED1479A2BD2D962788844A402455A28D2C562788844A402455A
+                    12A9C0225D2D868748442A50809522DD620B17918854A0E9B656A4BBC5F01089
+                    48050AB051A4476CE1FA78A489DDF14B6C8A7DFDED1924D69F0CE264581CF640
+                    291A381B448F064E1C8F061EE270484DD19AC309DE439C0CE264581C3EB1A628
+                    0E1FE93D8A137E3D13272704881D92C61DA71342C41E6F88D31782C42E2FC449
+                    09618803000000000000E0DF54D5131EC3A1A7690C17F30000000049454E44AE
+                    426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
                     'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxhdpi\ic_n' +
@@ -145,16 +146,16 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
                     38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    011D49444154785EEDD44B4EC4301045D1C01CD824BD0F3E7B03569550266E09
-                    24686590B8AAD1399265657A5FE409000000000000000060A465599EDAE99F8C
-                    34CFF373C43F33C24811FFA587FFCE0823FC11FFCC08478AF8AF3DF425463842
-                    C43FF5C05B18616F31C05D9CB71E780B23ECCD080518A10023146084028C5080
-                    110A3042014628C0080518A10023146084028C5080110A3042014628E01A47B8
-                    EDF77F71D36F468B3FFFDE139444FC44E227EAF1DF7BD82DC4DF8BF889C44F24
-                    7E22F113899FA8C7FFE861B7107F2FE227123F51C47C103F49C4143F4BC4143F
-                    4BC4143F4BC4143F53C47FEC61B710FF082DECDAF722F18FD402AF9D7F25FE08
-                    2DF4DAFB07F1476AC1D7EE5FC4CFD0C28B0F00000000000000005C9769FA040F
-                    991D12757A21140000000049454E44AE426082}
+                    012149444154785EEDD64D4E845010855174AE6ED2DE873F7B53370558C8EB44
+                    13ED308057D5E69C84BC30FD2E10060000000000000000809EE6797E5AAE764B
+                    4FE3383E47FC3323F414F15F5AF8EF8CD0C31FF1CF8C70A488FFDA425F628423
+                    4CD3746A81B730C2DE6280BB7803DE5AE02D8CB03723146084028C5080110A30
+                    42014628C0080518A10023146084028C5080110A3042014628C0080518A1806B
+                    1CE1B69DFFC54D3BE92D9EFE7B9FA024E227123F518BFFDEC26E21FE5EC44F24
+                    7E22F113899F48FC442DFE470BBB85F87B113F91F88922E683F84922A6F85922
+                    A6F85922A6F85922A6F899E28FE7B185DD42FC232C61D7BE17897FA425F0DAF9
+                    57E2F7B0845E7BFF207E4F4BF0B5FB17F1332CE1C5070000000000000000AECB
+                    307C02891E1C9D776FA3C00000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
                     'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxxhdpi\ic_' +
@@ -186,10 +187,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006849444154484BEDD34B0A80300C04D0E8717A1E3FB729DE5B494C6184D095
-                    C888207910426731A58B4A4ADF30B3AD0D8E5C283755DD7D0A628EAE7C42CC11
-                    CB7DCD883962B9CF829823941F4FCA47ECBB066CAEEE152B62AEDF5EC2FD6897
-                    768997571C537A95C8097DBD9251733025C70000000049454E44AE426082}
+                    006A49444154484BEDD34B0A80300C04D0EA713C8F9FDB88F7D624A63042E84A
+                    6444903C28A1B398B68B9694BE61665B5DD872A1DC446457D5013147533E22E6
+                    88E53E26C41CB1DC6F3E23E608E5C793F21EF3AE0E93AB79C58298EBB787703F
+                    DAA51EE2E52BB629BDAA941302A89236AEEB96B00000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-mdpi\' +
@@ -202,12 +203,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
                     98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    008C494441545847EDD5410A83301445D1D442BB6941B7D4D6F525DEE0D3814E
-                    04ADDFC13B10BE31835C9C98CCCCECCF4A297D5DDAC652CC2C36AA064C1D939C
-                    F387F1D4F1B5B8781DF365BC747C2D2EBE75CC8FE198DBC70C8CD3621ACD4308
-                    7AE83106019BAFC47AEB38061D8EDA850E47ED42C7268A11F3739D11B04411D4
-                    EA752C5A7A623A6DCDCCEC98944675594E7D61D9FC590000000049454E44AE42
-                    6082}
+                    008D494441545847EDD5CB0A80201484612BA8970EEA95BABC9EDA84638BDA04
+                    5D8E8BF9204EE6C21F37391111F9588C71DC1F2E6D3126B38DDA035247E2BD9F
+                    301A6EFF0B079F63668C96DBFFC2C145C72C188A293E66C5782DA6E67C044115
+                    5F6D20E0724B21848EDB36D0A1A85BD0A1A85BD07189C2B0F9B9660838A27043
+                    3D3FDB42CB8898814B111179C6B90DE7BE4E56517ABC060000000049454E44AE
+                    426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-hdpi\' +
@@ -220,12 +221,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    009F494441546843EDD2510A82401485E1A14D650B0B7A895C726D60A6231D85
-                    C85E0A9C7BEBFF40429D87FF4805000000DB68AD8DD3E5DB5C1C3FCB35620A7E
-                    743F39F9756C0A5D8BBFD65AF73E12974289EF42A1C477A150E2BB5028F19FDA
-                    F9F7BFE98BE7FD0BCD14FC3242036E8CD89A9ADF8D187C243E35FFF488838FC4
-                    A7664684A0E6B51147BFCE41CDCB08C59FFD3817B58F8ABFF8160000005F29E5
-                    0E0EE01CE228FA75680000000049454E44AE426082}
+                    00A1494441546843EDD2410AC2301844E1E0A5AC0713DC487B643D4012A73815
+                    A4BA5168FEE8FBA048DB2CDE1413000000B6516B9DE6CBB77D71FCA2AF1173F0
+                    BDFBC9C9AF6353E8ABF84B2965EF23712994F826144A7C130A25BE098512FFA9
+                    9D7FFF9BBE78BF7FA18582572372CE57466C4DCDEF460C3E129F9A7F7AC4C147
+                    E25333234250F36A84061CFDBA0F6A7E8C50FCD98FFBA2F649F1A36F010000F0
+                    95946EEAA51CCD2C4CC20C0000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
@@ -238,17 +239,17 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
                     47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    012E49444154785EEDD9DB4E02311485E109D73E00A8BCA907DE52117C951957
-                    D35533C4D6CD9D87FD7F49D30CF466FFE110860900000000000000FE9765590E
-                    65F9126B8ED31069AD04A95D2E10A928216A8FAEDC914A80DAA16F9EE7176D37
-                    3E9E8B06BF26CED6C773D1E0519C576DC4E92971B4763E9E8BE68FE21C8933E0
-                    38B73E9E8BE68FE2BC11678038DF509893D69D8FE7A2F98933A2F9A33867AD7B
-                    1FCF45F3136744F34771DEB5F63E9E8BE6FFD37136DEF193F442E12D1651876B
-                    3EA4895473F43952CE6FB2461D881451072245D4218A94F72747A30E448AA803
-                    9122EA10452AF786885473F43952CE1B688D3A1029A20E448AA84314E9A82DE7
-                    5FCF8D020C2329D0838FE5A6165F2229CEA39F46A1269F9114E7C90F634D6D0E
-                    8AF3EC4B00000000000000F895A6E9037A66A15F1F3CC0290000000049454E44
-                    AE426082}
+                    012F49444154785EEDD9496EC2401046612BEB1C2003DC3403B7640A47B19DBF
+                    D4D5C8886E8A5D867A9F842C436DEAC980300300000000000000FC2FF33C6FEC
+                    E1A758F2381591962C48E9728148C642941E4DB9235980D2A16D1CC7AD0E8F3E
+                    9E8B16BF27CE938FE7A2C5A3383B1D88D36271A6697AF6F15CB47F14674F9C0E
+                    8FF3E2E3B968FF28CE81381DC4B941718E8AF3EAE3B9687FE2F468FF28CE97E2
+                    AC7C3C17ED4F9C1EED1FC53929CEDAC773D1FE7F3ACE831FF19374A1F0168BA8
+                    C33D1FD2442A39DA527F9355EA40A4883A1029A20E51A4BC3F392A752052441D
+                    881451872892DD1B2252C9D1E69172DE40ABD4814811752052441DA2487B1D72
+                    FEF55C29403792AEA0371FCB4D2DAE2229CEBBBF0CA326E7488AF3E14F63496D
+                    368AF3E9A700000000000000F02B0DC3379FFFA10EDF90D7640000000049454E
+                    44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxhdp' +
@@ -261,18 +262,18 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
                     38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    014B49444154785EEDD45B4AC3500045D1E2B7CE51E7E1A37353A7D57A42AE82
-                    F80C363948D7821052727FF609DD010000000000000000FC27C7E3713F5DE391
-                    2D8DF8AF8CB0A529F8DCFD1D236C610A3DF7FE9411D634059E3B7FCB086B98C2
-                    CE7D7F76381C6EC6314E214D97C47FCCED721CE5AF1253FC96C414BF2531C56F
-                    494CF15B1253FC96C414BF2531C56F494CF15B1253FC96C414BF2531C56F494C
-                    F15B1253FC96C414BF2531C56F494CF15B12F3ACE35F8C3BE72C5FB5BFA0B644
-                    35425BA21AA12D518DD096A84B4678CACD08A796A846684B5423B425AA11DA12
-                    75D108B9AEC6514E256D8DD096B646684B5B23B4A5ED92119E8DB082B435425B
-                    DA1AA12D6D8DD096B646684BDB5F8F10D7E318A794B03F8E90AFFF76BCCE1AD2
-                    F8CB1112FF6EBCC69AD2FAC308E26F2CCDDF4648FCFBF1335B4AFB7DE23F8C47
-                    0000000000000000800DEC762F67771C9649AF066E0000000049454E44AE4260
-                    82}
+                    015049444154785EEDD45B4AC3500045D1E2B7CE51E7E16B6EEAB09A7A42AF82
+                    F86AB1C941BA16949092FBB34FC8060000000000000000E03FD9ED768FF36FDC
+                    B2A611FF8D11D63407DF77FFC0086B9843EF7B7FC9084B9A03EF3BFFC8084B98
+                    C3EEFBFE6E9AA69B718C5348D383E36FB7DBA75C2EC751FE2A31C56F494CF15B
+                    1253FC96C414BF2531C56F494CF15B1253FC96C414BF2531C56F494CF15B1253
+                    FC96C414BF2531C56F494CF15B1253FC96C414BF2531CF3AFEC5B872CEF256FB
+                    04B525AA11DA12D5086D896A84B6443D6684E75C8C706A896A84B64435425BA2
+                    1AA12D518F1A619AA6AB719453495B23B4A5AD11DAD2D6086D697BCC082F4658
+                    40DA1AA12D6D8DD096B646684B5B23B4A5EDC123C4F538C62925ECAF23E4EDBF
+                    1D8FB38434FE7684C4BF1B8FB1A4B4FE3482F82B4BF3F71112FF7EFCCD9AD2FE
+                    31F11FC62D0000000000000000C00A369B57CE851C2D68198A3B000000004945
+                    4E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxxhd' +
@@ -302,6 +303,7 @@ inherited frmCriarConta: TfrmCriarConta
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Contents
               TabOrder = 0
+              KeyboardType = Alphabet
               Margins.Left = 20.000000000000000000
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
@@ -311,6 +313,7 @@ inherited frmCriarConta: TfrmCriarConta
               Size.PlatformDefault = False
               TextPrompt = 'Nome'
               OnChange = edtNomeChange
+              OnChangeTracking = edtNomeChangeTracking
               OnKeyDown = edtNomeKeyDown
             end
           end
@@ -325,6 +328,7 @@ inherited frmCriarConta: TfrmCriarConta
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Contents
               TabOrder = 0
+              KeyboardType = Alphabet
               Margins.Left = 20.000000000000000000
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
@@ -334,6 +338,7 @@ inherited frmCriarConta: TfrmCriarConta
               Size.PlatformDefault = False
               TextPrompt = 'Sobrenome'
               OnChange = edtSobrenomeChange
+              OnChangeTracking = edtSobrenomeChangeTracking
               OnKeyDown = edtSobrenomeKeyDown
             end
           end
@@ -360,20 +365,299 @@ inherited frmCriarConta: TfrmCriarConta
         Text = 'Email'
         ExplicitSize.cx = 213.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
-        object ToolBar2: TToolBar
-          Size.Width = 640.000000000000000000
+        object layCabecalhoEmail: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+        end
+        object layPrincipalEmail: TLayout
+          Align = Client
+          Size.Width = 320.000000000000000000
+          Size.Height = 300.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object layEmail: TLayout
+            Align = Top
+            Size.Width = 320.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object edtEmail: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Contents
+              TabOrder = 0
+              KeyboardType = EmailAddress
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 20.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 20.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Email'
+              OnChange = edtEmailChange
+              OnChangeTracking = edtEmailChangeTracking
+              OnKeyDown = edtEmailKeyDown
+            end
+          end
+        end
+        object layRodapeEmail: TLayout
+          Align = Bottom
+          Position.Y = 381.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object btnProximaEmail: TSpeedButton
+            Align = Right
+            Position.X = 192.000000000000000000
+            Size.Width = 128.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Pr'#243'xima'
+            OnClick = btnProximaEmailClick
+            object imgProximaEmail: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    005149444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
+                    070880168000CD2C89A0872591F4B0248A1E964493620913941E1C8054D79304
+                    86B4E1B4CF6820836966F82818050400030300C170923E0EDD0B400000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-mdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0081494441545847EDD0CB0A8020148461A9A01EBB7AA72E2FA736A6C78D6E02
+                    E148CCB71157F3730C11113562ADDDBCF76BFAEA42CC8E18A11B85801141476C
+                    C974A39C7333A2CE14231855E839EA4A31825105042C88BA634BF6396A48EFBF
+                    E0124DAED3048619538561C6546178EA26468480D8F1D28D1121A49B1822A2FF
+                    32E601BD144B9A0D30AA400000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-hdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0094494441546843EDD24D0EC220144561EAAEAC6ECCC48176C93AE5C7873E12
+                    16502C3739DF84303B9710000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F001C9271CBA3A4F92350000
+                    000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xhdpi\ic_na' +
+                    'vigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    010E49444154785EEDD9590AC2301446E1E2025C80F3521D56E9EC423AF8C75C
+                    A1426EF2240E3D1F94D2C71C9A90B415000000000000007CB7AEEBD6E1B247F4
+                    354DB3519C2722F529CED6C2F41129509C9D05491976A4B66DC7755DEF2D8667
+                    F091268A74B0189EC1479A2AD2D162788844A402459A29D2C962788844A40245
+                    9A13A9C0229D2D868748442A508085225D620B17918854A0E9B654A4ABC5F010
+                    8948050AB052A45B6CE17A7BA491DDF14B6C8A7DFCEDF94AAC3F19C4C9B038EC
+                    8152347036881E0D9C381E0D3CC4E1909AA2358713BC873819C4C9B0387C624D
+                    511C3ED27B1427FC7A264E4E08103B240D3BCE5308117BBC204E5F0812BB3C10
+                    272584210E000000000000807F5355773C28A1568308BB720000000049454E44
+                    AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxhdpi\ic_n' +
+                    'avigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    012249444154785EEDD64B4AC4401486D1E85CDDA4BD0F1F7B5317958755A61A
+                    14B4C920A97B5BCE815064FAFDA1C8000000000000000000D0D3B22C4FF569AF
+                    F4344DD373897F66849E4AFC9716FE3B23F4F047FC33231CA9C47F6DA12F31C2
+                    11E6793EB5C05B18616F6580BB711CDF5AE02D8CB03723246084048C90801112
+                    3042024648C0080918210123246084048C908011123042024648C00809182181
+                    6B1CE1B69DFFC54D3BE9AD7CFDF7AEA020E207123F508BFFDEC26E21FE5EC40F
+                    247E20F103891F48FC402DFE470BBB85F87B113F90F8814ACC07F1839498E247
+                    2931C58F52628A1FA5C4143F52F9E3796C61B710FF0835ECDAF722F18F5403AF
+                    9D7F257E0F35F4DAFB07F17BAAC1D7EE5FC48F50C38B0F00000000000000005C
+                    9761F804E2401C346342C6D40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxxhdpi\ic_' +
+                    'navigate_next_white_24dp.png'
+                end>
+              Align = Right
+              Position.X = 96.000000000000000000
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgProximaEmailClick
+            end
+          end
+          object btnVoltarEmail: TSpeedButton
+            Align = Left
+            Size.Width = 113.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Voltar'
+            OnClick = btnVoltarEmailClick
+            object imgVoltarEmail: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    006A49444154484BEDD3410A80300C04C0EA737C8FDADF88FF3624A6B042E849
+                    6445900C94D03D6CDB434B4ADF30B3BD2D6CB9506E2272A8EA8498A32B9F1173
+                    C4721F0B628E58EE375F1173847279523E62DE35607275AFA888B97E7B08F7A3
+                    5DDA215EBE619BD2AB4A39018784921B4F4B5BF40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-mdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    008D494441545847EDD5CB0A80201484612BA8970EEA95BABC9EDA84638BDA04
+                    5D8E8BF9204EE6C21F37391111F9588C71DC1F2E6D3126B38DDA035247E2BD9F
+                    301A6EFF0B079F63668C96DBFFC2C145C72C188A293E66C5782DA6E67C044115
+                    5F6D20E0724B21848EDB36D0A1A85BD0A1A85BD07189C2B0F9B9660838A27043
+                    3D3FDB42CB8898814B111179C6B90DE7BE4E56517ABC060000000049454E44AE
+                    426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-hdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    00A1494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD87C4294E05
+                    A96E149A3FFA3E28D2368B37C5040000806DD45AA7F9F26D5F1CBFE86BC41C7C
+                    EF7E72F2EBD814FA2AFE524AD9FB485C0A25BE098512DF8442896F42A1C47F6A
+                    E7DFFFA62FDEEF5F68A1E0D5889CF395115B53F3BB11838FC4A7E69F1E71F091
+                    F8D4CC8810D4BC1AA10147BFEE839A1F23147FF6E3BEA87D52FCE85B0000007C
+                    25A51BC6791CB82DEAB3420000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
+                    '\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    013049444154785EEDD9496EC2401046612BEB1C2003DC3403B7640A37B1ECFC
+                    A5AE46467453EC32D4FB2464196A534F06841900000000000000E07F99E77963
+                    0F3FC592C7A988B464414A970B443216A2F468CA1DC902940E6DE3386E7578F4
+                    F15CB4F83D719E7C3C172D1EC5D9E9409C168B334DD3B38FE7A2FDA3387BE274
+                    789C171FCF45FB47710EC4E920CE0D8A73549C571FCF45FB13A747FB4771BE14
+                    67E5E3B9687FE2F468FF28CE4971D63E9E8BF6FFD3711EFC889FA40B85B75844
+                    1DEEF9902652C9D196FA9BAC52072245D4814811758822E5FDC951A9039122EA
+                    40A4883A4491ECDE10914A8E368F94F3065AA50E448AA8039122EA1045DAEB90
+                    F3AFE74A01BA917405BDF9586E6A71154971DEFD6518353947529C0F7F1A4B6A
+                    B3519C4F3F05000000000000805F6918BE01C598A0BD98ECB74D000000004945
+                    4E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxhdp' +
+                    'i\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    015149444154785EEDD45B4AC3500045D1E2B7CE51E7E16B6EEAAC4AEA09BD0A
+                    E2ABC52607E95A50424AEECF3E211B000000000000000080FF64B7DB3DCEBF71
+                    CB9A46FC374658D31C7CDFFD0323AC610EBDEFFD25232C690EBCEFFC23232C61
+                    0EBBEFFBBB699A6EC6314E214D0F8EBFDD6E9F72B91C47F9ABC414BF2531C56F
+                    494CF15B1253FC96C414BF2531C56F494CF15B1253FC96C414BF2531C56F494C
+                    F15B1253FC96C414BF2531C56F494CF15B1253FC96C43CEBF817E3CA39CB5BED
+                    13D496A846684B5423B425AA11DA12F598119E7331C2A925AA11DA12D5086D89
+                    6A84B6443D6A84699AAEC6514E256D8DD096B646684B5B23B4A5ED3123BC1861
+                    01696B84B6B435425BDA1AA12D6D8DD096B6078F10D7E318A794B0BF8E90B7FF
+                    763CCE12D2F8DB1112FF6E3CC692D2FAD308E2AF2CCDDF4748FCFBF1376B4AFB
+                    C7C47F18B70000000000000000002BD86C5E0135A21BC4F7D59E090000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxxhd' +
+                    'pi\ic_navigate_before_white_24dp.png'
+                end>
+              Align = Left
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgVoltarEmailClick
+            end
+          end
+        end
+        object ToolBarEmail: TToolBar
+          Size.Width = 320.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
-          object Label1: TLabel
+          object lblTituloEmail: TLabel
             Align = Left
-            Margins.Left = 23.000000000000000000
-            Position.X = 23.000000000000000000
-            Size.Width = 154.000000000000000000
+            Margins.Left = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Size.Width = 322.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'toollabel'
-            Text = 'T'#237'tulo'
+            Text = 'Informe seu email'
           end
         end
       end
@@ -390,24 +674,329 @@ inherited frmCriarConta: TfrmCriarConta
         Text = 'Senha'
         ExplicitSize.cx = 214.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
-        object ToolBar3: TToolBar
-          Size.Width = 640.000000000000000000
+        object layCabecalhoSenha: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+        end
+        object layPrincipalSenha: TLayout
+          Align = Client
+          Size.Width = 320.000000000000000000
+          Size.Height = 300.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object layCriarSenha: TLayout
+            Align = Top
+            Size.Width = 320.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object edtCriarSenha: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Contents
+              TabOrder = 0
+              ReturnKeyType = Next
+              Password = True
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 20.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 20.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Criar Senha'
+              OnChange = edtCriarSenhaChange
+              OnChangeTracking = edtCriarSenhaChangeTracking
+              OnKeyDown = edtCriarSenhaKeyDown
+            end
+          end
+          object layConfirmarSenha: TLayout
+            Align = Top
+            Position.Y = 73.000000000000000000
+            Size.Width = 320.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object edtConfirmarSenha: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Contents
+              TabOrder = 0
+              Password = True
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 20.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 20.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Confirmar Senha'
+              OnChange = edtConfirmarSenhaChange
+              OnChangeTracking = edtConfirmarSenhaChangeTracking
+              OnKeyDown = edtConfirmarSenhaKeyDown
+            end
+          end
+        end
+        object layRodapeSenha: TLayout
+          Align = Bottom
+          Position.Y = 381.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object btnProximaSenha: TSpeedButton
+            Align = Right
+            Position.X = 192.000000000000000000
+            Size.Width = 128.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Pr'#243'xima'
+            OnClick = btnProximaSenhaClick
+            object imgProximaSenha: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    005149444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
+                    070880168000CD2C89A0872591F4B0248A1E964493620913941E1C8054D79304
+                    86B4E1B4CF6820836966F82818050400030300C170923E0EDD0B400000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-mdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0081494441545847EDD0CB0A8020148461A9A01EBB7AA72E2FA736A6C78D6E02
+                    E148CCB71157F3730C11113562ADDDBCF76BFAEA42CC8E18A11B85801141476C
+                    C974A39C7333A2CE14231855E839EA4A31825105042C88BA634BF6396A48EFBF
+                    E0124DAED3048619538561C6546178EA26468480D8F1D28D1121A49B1822A2FF
+                    32E601BD144B9A0D30AA400000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-hdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0094494441546843EDD24D0EC220144561EAAEAC6ECCC48176C93AE5C7873E12
+                    16502C3739DF84303B9710000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F001C9271CBA3A4F92350000
+                    000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xhdpi\ic_na' +
+                    'vigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    010E49444154785EEDD9590AC2301446E1E2025C80F3521D56E9EC423AF8C75C
+                    A1426EF2240E3D1F94D2C71C9A90B415000000000000007CB7AEEBD6E1B247F4
+                    354DB3519C2722F529CED6C2F41129509C9D05491976A4B66DC7755DEF2D8667
+                    F091268A74B0189EC1479A2AD2D162788844A402459A29D2C962788844A40245
+                    9A13A9C0229D2D868748442A508085225D620B17918854A0E9B654A4ABC5F010
+                    8948050AB052A45B6CE17A7BA491DDF14B6C8A7DFCEDF94AAC3F19C4C9B038EC
+                    8152347036881E0D9C381E0D3CC4E1909AA2358713BC873819C4C9B0387C624D
+                    511C3ED27B1427FC7A264E4E08103B240D3BCE5308117BBC204E5F0812BB3C10
+                    272584210E000000000000807F5355773C28A1568308BB720000000049454E44
+                    AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxhdpi\ic_n' +
+                    'avigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    012249444154785EEDD64B4AC4401486D1E85CDDA4BD0F1F7B5317958755A61A
+                    14B4C920A97B5BCE815064FAFDA1C8000000000000000000D0D3B22C4FF569AF
+                    F4344DD373897F66849E4AFC9716FE3B23F4F047FC33231CA9C47F6DA12F31C2
+                    11E6793EB5C05B18616F6580BB711CDF5AE02D8CB03723246084048C90801112
+                    3042024648C0080918210123246084048C908011123042024648C00809182181
+                    6B1CE1B69DFFC54D3BE9AD7CFDF7AEA020E207123F508BFFDEC26E21FE5EC40F
+                    247E20F103891F48FC402DFE470BBB85F87B113F90F8814ACC07F1839498E247
+                    2931C58F52628A1FA5C4143F52F9E3796C61B710FF0835ECDAF722F18F5403AF
+                    9D7F257E0F35F4DAFB07F17BAAC1D7EE5FC48F50C38B0F00000000000000005C
+                    9761F804E2401C346342C6D40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxxhdpi\ic_' +
+                    'navigate_next_white_24dp.png'
+                end>
+              Align = Right
+              Position.X = 96.000000000000000000
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgProximaSenhaClick
+            end
+          end
+          object btnVoltarSenha: TSpeedButton
+            Align = Left
+            Size.Width = 113.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Voltar'
+            OnClick = btnVoltarSenhaClick
+            object imgVoltarSenha: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    006A49444154484BEDD3410A80300C04C0EA737C8FDADF88FF3624A6B042E849
+                    6445900C94D03D6CDB434B4ADF30B3BD2D6CB9506E2272A8EA8498A32B9F1173
+                    C4721F0B628E58EE375F1173847279523E62DE35607275AFA888B97E7B08F7A3
+                    5DDA215EBE619BD2AB4A39018784921B4F4B5BF40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-mdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    008D494441545847EDD5CB0A80201484612BA8970EEA95BABC9EDA84638BDA04
+                    5D8E8BF9204EE6C21F37391111F9588C71DC1F2E6D3126B38DDA035247E2BD9F
+                    301A6EFF0B079F63668C96DBFFC2C145C72C188A293E66C5782DA6E67C044115
+                    5F6D20E0724B21848EDB36D0A1A85BD0A1A85BD07189C2B0F9B9660838A27043
+                    3D3FDB42CB8898814B111179C6B90DE7BE4E56517ABC060000000049454E44AE
+                    426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-hdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    00A1494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD87C4294E05
+                    A96E149A3FFA3E28D2368B37C5040000806DD45AA7F9F26D5F1CBFE86BC41C7C
+                    EF7E72F2EBD814FA2AFE524AD9FB485C0A25BE098512DF8442896F42A1C47F6A
+                    E7DFFFA62FDEEF5F68A1E0D5889CF395115B53F3BB11838FC4A7E69F1E71F091
+                    F8D4CC8810D4BC1AA10147BFEE839A1F23147FF6E3BEA87D52FCE85B0000007C
+                    25A51BC6791CB82DEAB3420000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
+                    '\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    013049444154785EEDD9496EC2401046612BEB1C2003DC3403B7640A37B1ECFC
+                    A5AE46467453EC32D4FB2464196A534F06841900000000000000E07F99E77963
+                    0F3FC592C7A988B464414A970B443216A2F468CA1DC902940E6DE3386E7578F4
+                    F15CB4F83D719E7C3C172D1EC5D9E9409C168B334DD3B38FE7A2FDA3387BE274
+                    789C171FCF45FB47710EC4E920CE0D8A73549C571FCF45FB13A747FB4771BE14
+                    67E5E3B9687FE2F468FF28CE4971D63E9E8BF6FFD3711EFC889FA40B85B75844
+                    1DEEF9902652C9D196FA9BAC52072245D4814811758822E5FDC951A9039122EA
+                    40A4883A4491ECDE10914A8E368F94F3065AA50E448AA8039122EA1045DAEB90
+                    F3AFE74A01BA917405BDF9586E6A71154971DEFD6518353947529C0F7F1A4B6A
+                    B3519C4F3F05000000000000805F6918BE01C598A0BD98ECB74D000000004945
+                    4E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxhdp' +
+                    'i\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    015149444154785EEDD45B4AC3500045D1E2B7CE51E7E16B6EEAAC4AEA09BD0A
+                    E2ABC52607E95A50424AEECF3E211B000000000000000080FF64B7DB3DCEBF71
+                    CB9A46FC374658D31C7CDFFD0323AC610EBDEFFD25232C690EBCEFFC23232C61
+                    0EBBEFFBBB699A6EC6314E214D0F8EBFDD6E9F72B91C47F9ABC414BF2531C56F
+                    494CF15B1253FC96C414BF2531C56F494CF15B1253FC96C414BF2531C56F494C
+                    F15B1253FC96C414BF2531C56F494CF15B1253FC96C43CEBF817E3CA39CB5BED
+                    13D496A846684B5423B425AA11DA12F598119E7331C2A925AA11DA12D5086D89
+                    6A84B6443D6A84699AAEC6514E256D8DD096B646684B5B23B4A5ED3123BC1861
+                    01696B84B6B435425BDA1AA12D6D8DD096B6078F10D7E318A794B0BF8E90B7FF
+                    763CCE12D2F8DB1112FF6E3CC692D2FAD308E2AF2CCDDF4748FCFBF1376B4AFB
+                    C7C47F18B70000000000000000002BD86C5E0135A21BC4F7D59E090000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxxhd' +
+                    'pi\ic_navigate_before_white_24dp.png'
+                end>
+              Align = Left
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgVoltarSenhaClick
+            end
+          end
+        end
+        object ToolBarSenha: TToolBar
+          Size.Width = 320.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
-          object Label2: TLabel
+          object lblTituloSenha: TLabel
             Align = Left
-            Margins.Left = 23.000000000000000000
-            Position.X = 23.000000000000000000
-            Size.Width = 154.000000000000000000
+            Margins.Left = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Size.Width = 322.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'toollabel'
-            Text = 'T'#237'tulo'
+            Text = 'Defina uma senha'
           end
         end
       end
-      object Telefone: TTabItem
+      object tbItemTelefone: TTabItem
         CustomIcon = <
           item
           end>
@@ -418,6 +1007,303 @@ inherited frmCriarConta: TfrmCriarConta
         StyleLookup = ''
         TabOrder = 0
         Text = 'Telefone'
+        ExplicitSize.cx = 64.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object layCabecalhoTelefone: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+        end
+        object layPrincipalTelefone: TLayout
+          Align = Client
+          Size.Width = 320.000000000000000000
+          Size.Height = 300.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object layTelefone: TLayout
+            Align = Top
+            Size.Width = 320.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object edtTelefone: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Contents
+              TabOrder = 0
+              KeyboardType = PhonePad
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 20.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 20.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Telefone'
+              OnChange = edtTelefoneChange
+              OnChangeTracking = edtTelefoneChangeTracking
+              OnKeyDown = edtTelefoneKeyDown
+            end
+          end
+        end
+        object layRodapeTelefone: TLayout
+          Align = Bottom
+          Position.Y = 381.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object btnProximaTelefone: TSpeedButton
+            Align = Right
+            Position.X = 192.000000000000000000
+            Size.Width = 128.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Pr'#243'xima'
+            OnClick = btnProximaTelefoneClick
+            object imgProximaTelefone: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    005149444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
+                    070880168000CD2C89A0872591F4B0248A1E964493620913941E1C8054D79304
+                    86B4E1B4CF6820836966F82818050400030300C170923E0EDD0B400000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-mdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0081494441545847EDD0CB0A8020148461A9A01EBB7AA72E2FA736A6C78D6E02
+                    E148CCB71157F3730C11113562ADDDBCF76BFAEA42CC8E18A11B85801141476C
+                    C974A39C7333A2CE14231855E839EA4A31825105042C88BA634BF6396A48EFBF
+                    E0124DAED3048619538561C6546178EA26468480D8F1D28D1121A49B1822A2FF
+                    32E601BD144B9A0D30AA400000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-hdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0094494441546843EDD24D0EC220144561EAAEAC6ECCC48176C93AE5C7873E12
+                    16502C3739DF84303B9710000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F001C9271CBA3A4F92350000
+                    000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xhdpi\ic_na' +
+                    'vigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    010E49444154785EEDD9590AC2301446E1E2025C80F3521D56E9EC423AF8C75C
+                    A1426EF2240E3D1F94D2C71C9A90B415000000000000007CB7AEEBD6E1B247F4
+                    354DB3519C2722F529CED6C2F41129509C9D05491976A4B66DC7755DEF2D8667
+                    F091268A74B0189EC1479A2AD2D162788844A402459A29D2C962788844A40245
+                    9A13A9C0229D2D868748442A508085225D620B17918854A0E9B654A4ABC5F010
+                    8948050AB052A45B6CE17A7BA491DDF14B6C8A7DFCEDF94AAC3F19C4C9B038EC
+                    8152347036881E0D9C381E0D3CC4E1909AA2358713BC873819C4C9B0387C624D
+                    511C3ED27B1427FC7A264E4E08103B240D3BCE5308117BBC204E5F0812BB3C10
+                    272584210E000000000000807F5355773C28A1568308BB720000000049454E44
+                    AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxhdpi\ic_n' +
+                    'avigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    012249444154785EEDD64B4AC4401486D1E85CDDA4BD0F1F7B5317958755A61A
+                    14B4C920A97B5BCE815064FAFDA1C8000000000000000000D0D3B22C4FF569AF
+                    F4344DD373897F66849E4AFC9716FE3B23F4F047FC33231CA9C47F6DA12F31C2
+                    11E6793EB5C05B18616F6580BB711CDF5AE02D8CB03723246084048C90801112
+                    3042024648C0080918210123246084048C908011123042024648C00809182181
+                    6B1CE1B69DFFC54D3BE9AD7CFDF7AEA020E207123F508BFFDEC26E21FE5EC40F
+                    247E20F103891F48FC402DFE470BBB85F87B113F90F8814ACC07F1839498E247
+                    2931C58F52628A1FA5C4143F52F9E3796C61B710FF0835ECDAF722F18F5403AF
+                    9D7F257E0F35F4DAFB07F17BAAC1D7EE5FC48F50C38B0F00000000000000005C
+                    9761F804E2401C346342C6D40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxxhdpi\ic_' +
+                    'navigate_next_white_24dp.png'
+                end>
+              Align = Right
+              Position.X = 96.000000000000000000
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgProximaTelefoneClick
+            end
+          end
+          object btnVoltarTelefone: TSpeedButton
+            Align = Left
+            Size.Width = 113.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Voltar'
+            OnClick = btnVoltarTelefoneClick
+            object imgVoltarTelefone: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    006A49444154484BEDD3410A80300C04C0EA737C8FDADF88FF3624A6B042E849
+                    6445900C94D03D6CDB434B4ADF30B3BD2D6CB9506E2272A8EA8498A32B9F1173
+                    C4721F0B628E58EE375F1173847279523E62DE35607275AFA888B97E7B08F7A3
+                    5DDA215EBE619BD2AB4A39018784921B4F4B5BF40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-mdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    008D494441545847EDD5CB0A80201484612BA8970EEA95BABC9EDA84638BDA04
+                    5D8E8BF9204EE6C21F37391111F9588C71DC1F2E6D3126B38DDA035247E2BD9F
+                    301A6EFF0B079F63668C96DBFFC2C145C72C188A293E66C5782DA6E67C044115
+                    5F6D20E0724B21848EDB36D0A1A85BD0A1A85BD07189C2B0F9B9660838A27043
+                    3D3FDB42CB8898814B111179C6B90DE7BE4E56517ABC060000000049454E44AE
+                    426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-hdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    00A1494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD87C4294E05
+                    A96E149A3FFA3E28D2368B37C5040000806DD45AA7F9F26D5F1CBFE86BC41C7C
+                    EF7E72F2EBD814FA2AFE524AD9FB485C0A25BE098512DF8442896F42A1C47F6A
+                    E7DFFFA62FDEEF5F68A1E0D5889CF395115B53F3BB11838FC4A7E69F1E71F091
+                    F8D4CC8810D4BC1AA10147BFEE839A1F23147FF6E3BEA87D52FCE85B0000007C
+                    25A51BC6791CB82DEAB3420000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
+                    '\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    013049444154785EEDD9496EC2401046612BEB1C2003DC3403B7640A37B1ECFC
+                    A5AE46467453EC32D4FB2464196A534F06841900000000000000E07F99E77963
+                    0F3FC592C7A988B464414A970B443216A2F468CA1DC902940E6DE3386E7578F4
+                    F15CB4F83D719E7C3C172D1EC5D9E9409C168B334DD3B38FE7A2FDA3387BE274
+                    789C171FCF45FB47710EC4E920CE0D8A73549C571FCF45FB13A747FB4771BE14
+                    67E5E3B9687FE2F468FF28CE4971D63E9E8BF6FFD3711EFC889FA40B85B75844
+                    1DEEF9902652C9D196FA9BAC52072245D4814811758822E5FDC951A9039122EA
+                    40A4883A4491ECDE10914A8E368F94F3065AA50E448AA8039122EA1045DAEB90
+                    F3AFE74A01BA917405BDF9586E6A71154971DEFD6518353947529C0F7F1A4B6A
+                    B3519C4F3F05000000000000805F6918BE01C598A0BD98ECB74D000000004945
+                    4E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxhdp' +
+                    'i\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    015149444154785EEDD45B4AC3500045D1E2B7CE51E7E16B6EEAAC4AEA09BD0A
+                    E2ABC52607E95A50424AEECF3E211B000000000000000080FF64B7DB3DCEBF71
+                    CB9A46FC374658D31C7CDFFD0323AC610EBDEFFD25232C690EBCEFFC23232C61
+                    0EBBEFFBBB699A6EC6314E214D0F8EBFDD6E9F72B91C47F9ABC414BF2531C56F
+                    494CF15B1253FC96C414BF2531C56F494CF15B1253FC96C414BF2531C56F494C
+                    F15B1253FC96C414BF2531C56F494CF15B1253FC96C43CEBF817E3CA39CB5BED
+                    13D496A846684B5423B425AA11DA12F598119E7331C2A925AA11DA12D5086D89
+                    6A84B6443D6A84699AAEC6514E256D8DD096B646684B5B23B4A5ED3123BC1861
+                    01696B84B6B435425BDA1AA12D6D8DD096B6078F10D7E318A794B0BF8E90B7FF
+                    763CCE12D2F8DB1112FF6E3CC692D2FAD308E2AF2CCDDF4748FCFBF1376B4AFB
+                    C7C47F18B70000000000000000002BD86C5E0135A21BC4F7D59E090000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxxhd' +
+                    'pi\ic_navigate_before_white_24dp.png'
+                end>
+              Align = Left
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgVoltarTelefoneClick
+            end
+          end
+        end
+        object ToolBarTelefone: TToolBar
+          Size.Width = 320.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object lblTituloTelefone: TLabel
+            Align = Left
+            Margins.Left = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Size.Width = 322.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'toollabel'
+            Text = 'Adicionar n'#250'mero de telefone'
+          end
+        end
       end
       object tbItemDadosPessoais: TTabItem
         CustomIcon = <
@@ -430,6 +1316,365 @@ inherited frmCriarConta: TfrmCriarConta
         StyleLookup = ''
         TabOrder = 0
         Text = 'Dados Pessoais'
+        ExplicitSize.cx = 64.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object layCabecalhoDadosPessoais: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+        end
+        object layPrincipalDadosPrincipais: TLayout
+          Align = Client
+          Size.Width = 320.000000000000000000
+          Size.Height = 300.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object layCPF: TLayout
+            Align = Top
+            Size.Width = 320.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object edtCPF: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Contents
+              TabOrder = 0
+              KeyboardType = NumberPad
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 20.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 20.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'CPF'
+              OnChange = edtCPFChange
+              OnChangeTracking = edtCPFChangeTracking
+              OnKeyDown = edtCPFKeyDown
+            end
+          end
+          object layRG: TLayout
+            Align = Top
+            Position.Y = 73.000000000000000000
+            Size.Width = 320.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            object edtRG: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Contents
+              TabOrder = 0
+              KeyboardType = NumberPad
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 20.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 20.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'RG'
+              OnChange = edtRGChange
+              OnChangeTracking = edtRGChangeTracking
+              OnKeyDown = edtRGKeyDown
+            end
+          end
+          object laySexo: TLayout
+            Align = Top
+            Position.Y = 146.000000000000000000
+            Size.Width = 320.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object cmbSexo: TComboBox
+              Align = Contents
+              Items.Strings = (
+                'Masculino'
+                'Feminino')
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 20.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 20.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              OnChange = cmbSexoChange
+              OnClosePopup = cmbSexoClosePopup
+              OnDragEnd = cmbSexoDragEnd
+              OnKeyDown = cmbSexoKeyDown
+              OnClick = cmbSexoClick
+              OnEnter = cmbSexoEnter
+              OnExit = cmbSexoExit
+              object lblSexo: TLabel
+                Align = Contents
+                Enabled = False
+                Margins.Left = 5.000000000000000000
+                Size.Width = 265.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Sexo'
+              end
+            end
+          end
+        end
+        object layRodapeDadosPrincipais: TLayout
+          Align = Bottom
+          Position.Y = 381.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object btnFinalizar: TSpeedButton
+            Align = Right
+            Position.X = 192.000000000000000000
+            Size.Width = 128.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Finalizar'
+            object imgFinalizar: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    005149444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
+                    070880168000CD2C89A0872591F4B0248A1E964493620913941E1C8054D79304
+                    86B4E1B4CF6820836966F82818050400030300C170923E0EDD0B400000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-mdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0081494441545847EDD0CB0A8020148461A9A01EBB7AA72E2FA736A6C78D6E02
+                    E148CCB71157F3730C11113562ADDDBCF76BFAEA42CC8E18A11B85801141476C
+                    C974A39C7333A2CE14231855E839EA4A31825105042C88BA634BF6396A48EFBF
+                    E0124DAED3048619538561C6546178EA26468480D8F1D28D1121A49B1822A2FF
+                    32E601BD144B9A0D30AA400000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-hdpi\ic_nav' +
+                    'igate_next_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    0094494441546843EDD24D0EC220144561EAAEAC6ECCC48176C93AE5C7873E12
+                    16502C3739DF84303B9710000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F001C9271CBA3A4F92350000
+                    000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xhdpi\ic_na' +
+                    'vigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    010E49444154785EEDD9590AC2301446E1E2025C80F3521D56E9EC423AF8C75C
+                    A1426EF2240E3D1F94D2C71C9A90B415000000000000007CB7AEEBD6E1B247F4
+                    354DB3519C2722F529CED6C2F41129509C9D05491976A4B66DC7755DEF2D8667
+                    F091268A74B0189EC1479A2AD2D162788844A402459A29D2C962788844A40245
+                    9A13A9C0229D2D868748442A508085225D620B17918854A0E9B654A4ABC5F010
+                    8948050AB052A45B6CE17A7BA491DDF14B6C8A7DFCEDF94AAC3F19C4C9B038EC
+                    8152347036881E0D9C381E0D3CC4E1909AA2358713BC873819C4C9B0387C624D
+                    511C3ED27B1427FC7A264E4E08103B240D3BCE5308117BBC204E5F0812BB3C10
+                    272584210E000000000000807F5355773C28A1568308BB720000000049454E44
+                    AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxhdpi\ic_n' +
+                    'avigate_next_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    012249444154785EEDD64B4AC4401486D1E85CDDA4BD0F1F7B5317958755A61A
+                    14B4C920A97B5BCE815064FAFDA1C8000000000000000000D0D3B22C4FF569AF
+                    F4344DD373897F66849E4AFC9716FE3B23F4F047FC33231CA9C47F6DA12F31C2
+                    11E6793EB5C05B18616F6580BB711CDF5AE02D8CB03723246084048C90801112
+                    3042024648C0080918210123246084048C908011123042024648C00809182181
+                    6B1CE1B69DFFC54D3BE9AD7CFDF7AEA020E207123F508BFFDEC26E21FE5EC40F
+                    247E20F103891F48FC402DFE470BBB85F87B113F90F8814ACC07F1839498E247
+                    2931C58F52628A1FA5C4143F52F9E3796C61B710FF0835ECDAF722F18F5403AF
+                    9D7F257E0F35F4DAFB07F17BAAC1D7EE5FC48F50C38B0F00000000000000005C
+                    9761F804E2401C346342C6D40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
+                    'te_24dp\ic_navigate_next_white_24dp\android\drawable-xxxhdpi\ic_' +
+                    'navigate_next_white_24dp.png'
+                end>
+              Align = Right
+              Position.X = 96.000000000000000000
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgFinalizarClick
+            end
+          end
+          object btnVoltarDadosPessoais: TSpeedButton
+            Align = Left
+            Size.Width = 113.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Voltar'
+            OnClick = btnVoltarDadosPessoaisClick
+            object imgVoltarDadosPessoais: TImage
+              MultiResBitmap.Height = 24
+              MultiResBitmap.Width = 24
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    006A49444154484BEDD3410A80300C04C0EA737C8FDADF88FF3624A6B042E849
+                    6445900C94D03D6CDB434B4ADF30B3BD2D6CB9506E2272A8EA8498A32B9F1173
+                    C4721F0B628E58EE375F1173847279523E62DE35607275AFA888B97E7B08F7A3
+                    5DDA215EBE619BD2AB4A39018784921B4F4B5BF40000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-mdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 1.500000000000000000
+                  Width = 36
+                  Height = 36
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    008D494441545847EDD5CB0A80201484612BA8970EEA95BABC9EDA84638BDA04
+                    5D8E8BF9204EE6C21F37391111F9588C71DC1F2E6D3126B38DDA035247E2BD9F
+                    301A6EFF0B079F63668C96DBFFC2C145C72C188A293E66C5782DA6E67C044115
+                    5F6D20E0724B21848EDB36D0A1A85BD0A1A85BD07189C2B0F9B9660838A27043
+                    3D3FDB42CB8898814B111179C6B90DE7BE4E56517ABC060000000049454E44AE
+                    426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-hdpi\' +
+                    'ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 2.000000000000000000
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    00A1494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD87C4294E05
+                    A96E149A3FFA3E28D2368B37C5040000806DD45AA7F9F26D5F1CBFE86BC41C7C
+                    EF7E72F2EBD814FA2AFE524AD9FB485C0A25BE098512DF8442896F42A1C47F6A
+                    E7DFFFA62FDEEF5F68A1E0D5889CF395115B53F3BB11838FC4A7E69F1E71F091
+                    F8D4CC8810D4BC1AA10147BFEE839A1F23147FF6E3BEA87D52FCE85B0000007C
+                    25A51BC6791CB82DEAB3420000000049454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
+                    '\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 3.000000000000000000
+                  Width = 72
+                  Height = 72
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    013049444154785EEDD9496EC2401046612BEB1C2003DC3403B7640A37B1ECFC
+                    A5AE46467453EC32D4FB2464196A534F06841900000000000000E07F99E77963
+                    0F3FC592C7A988B464414A970B443216A2F468CA1DC902940E6DE3386E7578F4
+                    F15CB4F83D719E7C3C172D1EC5D9E9409C168B334DD3B38FE7A2FDA3387BE274
+                    789C171FCF45FB47710EC4E920CE0D8A73549C571FCF45FB13A747FB4771BE14
+                    67E5E3B9687FE2F468FF28CE4971D63E9E8BF6FFD3711EFC889FA40B85B75844
+                    1DEEF9902652C9D196FA9BAC52072245D4814811758822E5FDC951A9039122EA
+                    40A4883A4491ECDE10914A8E368F94F3065AA50E448AA8039122EA1045DAEB90
+                    F3AFE74A01BA917405BDF9586E6A71154971DEFD6518353947529C0F7F1A4B6A
+                    B3519C4F3F05000000000000805F6918BE01C598A0BD98ECB74D000000004945
+                    4E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxhdp' +
+                    'i\ic_navigate_before_white_24dp.png'
+                end
+                item
+                  Scale = 4.000000000000000000
+                  Width = 96
+                  Height = 96
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    015149444154785EEDD45B4AC3500045D1E2B7CE51E7E16B6EEAAC4AEA09BD0A
+                    E2ABC52607E95A50424AEECF3E211B000000000000000080FF64B7DB3DCEBF71
+                    CB9A46FC374658D31C7CDFFD0323AC610EBDEFFD25232C690EBCEFFC23232C61
+                    0EBBEFFBBB699A6EC6314E214D0F8EBFDD6E9F72B91C47F9ABC414BF2531C56F
+                    494CF15B1253FC96C414BF2531C56F494CF15B1253FC96C414BF2531C56F494C
+                    F15B1253FC96C414BF2531C56F494CF15B1253FC96C43CEBF817E3CA39CB5BED
+                    13D496A846684B5423B425AA11DA12F598119E7331C2A925AA11DA12D5086D89
+                    6A84B6443D6A84699AAEC6514E256D8DD096B646684B5B23B4A5ED3123BC1861
+                    01696B84B6B435425BDA1AA12D6D8DD096B6078F10D7E318A794B0BF8E90B7FF
+                    763CCE12D2F8DB1112FF6E3CC692D2FAD308E2AF2CCDDF4748FCFBF1376B4AFB
+                    C7C47F18B70000000000000000002BD86C5E0135A21BC4F7D59E090000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
+                    '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xxxhd' +
+                    'pi\ic_navigate_before_white_24dp.png'
+                end>
+              Align = Left
+              Size.Width = 32.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = imgVoltarDadosPessoaisClick
+            end
+          end
+        end
+        object ToolBarDadosPessoais: TToolBar
+          Size.Width = 320.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object lblTituloDadosPessoais: TLabel
+            Align = Left
+            Margins.Left = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Size.Width = 322.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'toollabel'
+            Text = 'Dados Pessoais'
+          end
+        end
       end
     end
   end

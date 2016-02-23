@@ -258,6 +258,7 @@ begin
     begin
       showmessage('Erro ao realizar o Login.');
       fLoginOk:=False;
+      Abort;
     end;
   end;
 end;
@@ -276,6 +277,7 @@ begin
     begin
       showmessage('Erro ao realizar o Login.');
       fLoginOk:=False;
+      Abort;
     end;
   end;
 end;
