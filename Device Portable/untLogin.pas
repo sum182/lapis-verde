@@ -161,9 +161,7 @@ procedure TfrmLogin.edtUsuarioKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
-
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 
@@ -191,8 +189,13 @@ var
   Keyboard: IFMXVirtualKeyboardService;
 begin
   inherited;
+  SetStateButtons;
   if Key = vkReturn then
+  begin
     KeyboardHide;
+    btnLogin.Enabled:=True;
+    btnLogin.SetFocus;
+   end;
 end;
 
 procedure TfrmLogin.FormCreate(Sender: TObject);

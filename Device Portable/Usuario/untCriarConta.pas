@@ -175,7 +175,6 @@ type
     procedure SetClearFields;
     procedure SetFields;
     procedure SetVisibleLabelSexo;
-    procedure TesteMsg;
   public
     { Public declarations }
   end;
@@ -187,7 +186,8 @@ implementation
 
 {$R *.fmx}
 
-uses smGeralFMX, untFuncoes, untDMStyles, untDM, untModuloCliente, smCrypt;
+uses smGeralFMX, untFuncoes, untDMStyles, untDM, untModuloCliente, smCrypt,
+  untLogin;
 
 procedure TfrmCriarConta.btnProximaNomeClick(Sender: TObject);
 begin
@@ -596,17 +596,6 @@ begin
   lblSexo.Visible:= cmbSexo.ItemIndex = -1;
 end;
 
-procedure TfrmCriarConta.TesteMsg;
-var
-  Intent: JIntent;
-begin
-  Intent := TJIntent.JavaClass.init(StringToJString('com.google.zxing.client.android.SCAN'));
-  Intent.setPackage(StringToJString('com.google.zxing.client.android'));
-  // If you want to target QR codes
-  //Intent.putExtra(StringToJString('SCAN_MODE'), StringToJString('QR_CODE_MODE'));
-  if not LaunchActivityForResult(Intent, RequestCode) then
-    Toast('Cannot display QR scanner', ShortToast);
-end;
 
 function TfrmCriarConta.ValidarCPF: Boolean;
 begin
@@ -700,10 +689,10 @@ begin
                 layPrincipalDadosPrincipais.Enabled:=True;
                 Application.ProcessMessages;
                 ShowMessage('Conta criada com sucesso!');
-                SetClearFields;
                 frmCriarConta.Close;
                 frmCriarConta.DisposeOf;
                 frmCriarConta:= nil;
+                frmLogin.Show;
               end
               else
               begin

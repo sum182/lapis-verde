@@ -33,6 +33,9 @@ voltar nativo do android tem q fazer o msm do botao voltar e nao fechar a app
 ao voltar a um form aberto reabrilo e manter da msm forma ao inves de dar um dispose
 Setar o estilo de todas as telas
 
+
+**Rest/Json
+Otimizar consultas, esta demorando mt da forma q esta
 ------------------------------------------------------------------------------------------
 
 
