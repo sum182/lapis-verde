@@ -143,7 +143,11 @@ type
     procedure edtCPFChangeTracking(Sender: TObject);
     procedure edtRGChangeTracking(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
+    fAllowCloseForm : Boolean;
     MsgCriarConta:String;
     fActivityDialogThread: TThread;
     fEmailOk:Boolean;
@@ -157,6 +161,7 @@ type
     fCPF: String;
     fRG: String;
     fSexo: String;
+    msgErrorCriarConta:string;
     procedure SetStateButtonsNome;
     procedure SetStateButtonsEmail;
     procedure SetStateButtonsSenha;
@@ -170,6 +175,7 @@ type
     procedure SetClearFields;
     procedure SetFields;
     procedure SetVisibleLabelSexo;
+    procedure TesteMsg;
   public
     { Public declarations }
   end;
@@ -192,6 +198,7 @@ end;
 procedure TfrmCriarConta.btnVoltarNomeClick(Sender: TObject);
 begin
   inherited;
+  fAllowCloseForm := True;
   frmCriarConta.Close;
   //frmCriarConta.DisposeOf;
   //frmCriarConta:= nil;
@@ -208,8 +215,7 @@ procedure TfrmCriarConta.cmbSexoKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.CriarConta;
@@ -219,9 +225,6 @@ begin
   if not ValidarCPF Then
   begin
     fCriarContaOk:=False;
-    //lblErrorCriarConta.Text := 'Este CPF já está cadastrado';
-    //lblErrorCriarConta.Visible:=True;
-    //Application.ProcessMessages;
     Exit;
   end;
 
@@ -230,14 +233,9 @@ begin
   except on E:Exception do
     begin
       fCriarContaOk:=False;
-      ShowMessage('Erro ao criar conta' + #13 + E.Message);
-      //lblErrorCriarConta.Text := 'Erro ao criar conta' + #13 + E.Message;
-      //lblErrorCriarConta.Visible:=True;
-      //Application.ProcessMessages;
-
-      //DM.fgActivityDialog.Hide;
-      //layPrincipalDadosPrincipais.Enabled:=True;
-      //Application.ProcessMessages;
+      msgErrorCriarConta:= 'Erro ao criar conta';
+      ShowMessage( msgErrorCriarConta + #13 + E.Message);
+      lblErrorCriarConta.Text:= msgErrorCriarConta;
       Abort;
     end;
   end;
@@ -268,8 +266,7 @@ procedure TfrmCriarConta.edtConfirmarSenhaKeyDown(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.edtCPFChange(Sender: TObject);
@@ -288,8 +285,7 @@ procedure TfrmCriarConta.edtCPFKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.edtCriarSenhaChange(Sender: TObject);
@@ -308,8 +304,7 @@ procedure TfrmCriarConta.edtCriarSenhaKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.edtEmailChange(Sender: TObject);
@@ -328,8 +323,7 @@ procedure TfrmCriarConta.edtEmailKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.edtNomeChange(Sender: TObject);
@@ -348,8 +342,7 @@ procedure TfrmCriarConta.edtNomeKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.edtRGChange(Sender: TObject);
@@ -368,8 +361,7 @@ procedure TfrmCriarConta.edtRGKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.edtSobrenomeChange(Sender: TObject);
@@ -388,8 +380,7 @@ procedure TfrmCriarConta.edtSobrenomeKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
 procedure TfrmCriarConta.edtTelefoneChange(Sender: TObject);
@@ -408,8 +399,13 @@ procedure TfrmCriarConta.edtTelefoneKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkReturn then
-    KeyboardHide;
+  OnEnterFields(self,Key, KeyChar, Shift);
+end;
+
+procedure TfrmCriarConta.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  inherited;
+  CanClose := fAllowCloseForm;
 end;
 
 procedure TfrmCriarConta.FormCreate(Sender: TObject);
@@ -418,6 +414,32 @@ begin
   SetStyle(Self);
   tbCtrlPrincipal.ActiveTab:= tbItemNome;
   tbCtrlPrincipal.TabPosition:= TTabPosition.None;
+  fAllowCloseForm:= False;
+end;
+
+procedure TfrmCriarConta.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkHardwareBack then
+  begin
+    Key := 0;
+
+    if tbCtrlPrincipal.ActiveTab = tbItemNome then
+      btnVoltarNome.OnClick(self);
+
+    if tbCtrlPrincipal.ActiveTab = tbItemEmail then
+      btnVoltarEmail.OnClick(self);
+
+    if tbCtrlPrincipal.ActiveTab = tbItemSenha then
+      btnVoltarSenha.OnClick(self);
+
+    if tbCtrlPrincipal.ActiveTab = tbItemTelefone then
+      btnVoltarTelefone.OnClick(self);
+
+    if tbCtrlPrincipal.ActiveTab = tbItemDadosPessoais then
+      btnVoltarDadosPessoais.OnClick(self);
+  end;
 end;
 
 procedure TfrmCriarConta.FormShow(Sender: TObject);
@@ -574,22 +596,34 @@ begin
   lblSexo.Visible:= cmbSexo.ItemIndex = -1;
 end;
 
+procedure TfrmCriarConta.TesteMsg;
+var
+  Intent: JIntent;
+begin
+  Intent := TJIntent.JavaClass.init(StringToJString('com.google.zxing.client.android.SCAN'));
+  Intent.setPackage(StringToJString('com.google.zxing.client.android'));
+  // If you want to target QR codes
+  //Intent.putExtra(StringToJString('SCAN_MODE'), StringToJString('QR_CODE_MODE'));
+  if not LaunchActivityForResult(Intent, RequestCode) then
+    Toast('Cannot display QR scanner', ShortToast);
+end;
+
 function TfrmCriarConta.ValidarCPF: Boolean;
 begin
   try
     if not ModuloCliente.SrvServerMetodosClient.ValidarCPFExistenteResponsavel(edtCPF.Text) then
     begin
       fCPFOk:= False;
+      msgErrorCriarConta:= 'Este CPF já está cadastrado';
       Exit;
     end;
   except on E:Exception do
     begin
       fCPFOk:= False;
-      ShowMessage('Erro ao validar CPF' + #13 + E.Message);
+      msgErrorCriarConta:= 'Erro ao validar CPF';
+      ShowMessage( msgErrorCriarConta + #13 + E.Message);
+      lblErrorCriarConta.Text:= msgErrorCriarConta;
       Abort;
-      //DM.fgActivityDialog.Hide;
-      //layPrincipalDadosPrincipais.Enabled:=True;
-      //Application.ProcessMessages;
     end;
   end;
   fCPFOk:=True;
@@ -634,12 +668,13 @@ end;
 procedure TfrmCriarConta.btnFinalizarClick(Sender: TObject);
 begin
   SetClearFields;
+  msgErrorCriarConta:= EmptyStr;
+  fCriarContaOk:=False;
+  lblErrorCriarConta.Visible:= False;
 
   if not DM.fgActivityDialog.IsShown then
   begin
-    fCriarContaOk:=False;
-    lblErrorCriarConta.Visible:= False;
-    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+  FActivityDialogThread := TThread.CreateAnonymousThread(procedure
       begin
         try
           TThread.Synchronize(nil, procedure
@@ -649,13 +684,10 @@ begin
             DM.fgActivityDialog.Show;
           end);
 
-
-          Sleep(200);
           CriarConta;
 
           if TThread.CheckTerminated then
             Exit;
-
 
         finally
           if not TThread.CheckTerminated then
@@ -663,21 +695,19 @@ begin
             begin
               if fCriarContaOk then
               begin
+                lblErrorCriarConta.Visible:=False;
                 DM.fgActivityDialog.Hide;
                 layPrincipalDadosPrincipais.Enabled:=True;
-                ShowMessage('Conta criada com sucesso!');
-                frmCriarConta.Close;
-                //frmCriarConta.DisposeOf;
-                //frmCriarConta:= nil;
                 Application.ProcessMessages;
+                ShowMessage('Conta criada com sucesso!');
+                SetClearFields;
+                frmCriarConta.Close;
+                frmCriarConta.DisposeOf;
+                frmCriarConta:= nil;
               end
               else
               begin
-                if not fCPFOk Then
-                  lblErrorCriarConta.Text := 'Este CPF já está cadastrado'
-                else
-                  lblErrorCriarConta.Text := 'Erro ao criar conta';
-
+                lblErrorCriarConta.Text:= msgErrorCriarConta;
                 lblErrorCriarConta.Visible:=True;
                 DM.fgActivityDialog.Hide;
                 layPrincipalDadosPrincipais.Enabled:=True;
@@ -708,7 +738,6 @@ begin
             DM.fgActivityDialog.Show;
           end);
 
-          Sleep(200);
           ValidarEmail;
 
           if TThread.CheckTerminated then

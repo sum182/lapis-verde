@@ -55,11 +55,17 @@ type
     procedure imgMensagensClick(Sender: TObject);
     procedure lblAgendaClick(Sender: TObject);
     procedure lblMensagensClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
     fShowMenuPrincipal:Boolean;
     fActiveForm: TForm;
+    fAllowCloseForm : Boolean;
+    LayoutBase, btnVoltarForms: TComponent;
     procedure OpenForm(aFormClass: TComponentClass);
     procedure BotaoVoltarOnClick(Sender: TObject);
     procedure ShowMenuPrincipal;
@@ -85,8 +91,6 @@ uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, 
 { TfrmPrincipal }
 
 procedure TfrmPrincipal.OpenForm(AFormClass: TComponentClass);
-var
-  LayoutBase, BotaoVoltar: TComponent;
 begin
   if Assigned(fActiveForm)then
   begin
@@ -119,9 +123,9 @@ begin
     layPrincipal.Visible:=True;
   end;
 
-  BotaoVoltar := fActiveForm.FindComponent('btnVoltar');
-  if Assigned(BotaoVoltar) then
-    TControl(BotaoVoltar).OnClick := BotaoVoltarOnClick;
+  btnVoltarForms := fActiveForm.FindComponent('btnVoltar');
+  if Assigned(btnVoltarForms) then
+    TControl(btnVoltarForms).OnClick := BotaoVoltarOnClick;
 
    MultiView1.HideMaster;
    ToolBarPincipal.Visible:=False;
@@ -159,14 +163,45 @@ begin
   Application.Terminate;
 end;
 
+procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  inherited;
+  CanClose := fAllowCloseForm;
+end;
+
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   inherited;
+  fAllowCloseForm:= False;
   SetStyle(Self);
   fShowMenuPrincipal:=True;
   fShowForm:=False;
 end;
 
+
+procedure TfrmPrincipal.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm))then
+  begin
+    if Key = vkHardwareBack then
+    begin
+      Key := 0;
+      BotaoVoltarOnClick(self);
+    end;
+  end
+  else
+    fAllowCloseForm:=True;
+
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+begin
+  inherited;
+  frmLogin.DisposeOf;
+  frmLogin:= nil;
+end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;
 begin

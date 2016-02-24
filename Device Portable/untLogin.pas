@@ -77,7 +77,9 @@ uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
 begin
   inherited;
-  Application.CreateForm(TfrmCriarConta, frmCriarConta);
+  if not Assigned(frmCriarConta) then
+    Application.CreateForm(TfrmCriarConta, frmCriarConta);
+
   frmCriarConta.Show;
 end;
 

@@ -9,8 +9,8 @@ uses
 
 type
   TfrmMensagens = class(TfrmBaseToolBar)
+    procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
   public
     { Public declarations }
   end;
@@ -21,5 +21,13 @@ var
 implementation
 
 {$R *.fmx}
+
+uses untFuncoes;
+
+procedure TfrmMensagens.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetStyle(Self);
+end;
 
 end.
