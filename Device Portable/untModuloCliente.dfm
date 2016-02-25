@@ -6,7 +6,7 @@ object ModuloCliente: TModuloCliente
     Host = '54.200.116.223'
     Port = 8080
     LoginPrompt = False
-    Left = 48
+    Left = 56
     Top = 40
     UniqueId = '{4F60CF93-9F71-4D79-9871-2DBBE4BC6725}'
   end

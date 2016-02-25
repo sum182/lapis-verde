@@ -1,8 +1,8 @@
 object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 257
-  Width = 355
+  Height = 455
+  Width = 510
   object FDConnectionSQLite: TFDConnection
     Params.Strings = (
       'Database=C:\Projetos\Agenda\BD\SQLite\db.s3db'
@@ -56,5 +56,28 @@ object DM: TDM
   object fgActivityDialog: TfgActivityDialog
     Left = 184
     Top = 32
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    BaseURL = 'http://54.200.116.223:8080/datasnap/rest/TSrvServerMetodos'
+    Params = <>
+    HandleRedirects = True
+    RaiseExceptionOn500 = False
+    Left = 80
+    Top = 288
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 80
+    Top = 384
+  end
+  object RESTResponse1: TRESTResponse
+    ContentType = 'text/html'
+    Left = 80
+    Top = 336
   end
 end

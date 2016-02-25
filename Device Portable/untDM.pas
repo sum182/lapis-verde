@@ -7,7 +7,8 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,System.IOUtils,
-  FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog;
+  FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
+  IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,REST.Types;
 
 type
   TDM = class(TDataModule)
@@ -16,6 +17,9 @@ type
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     ImageList1: TImageList;
     fgActivityDialog: TfgActivityDialog;
+    RESTClient1: TRESTClient;
+    RESTRequest1: TRESTRequest;
+    RESTResponse1: TRESTResponse;
     procedure DataModuleCreate(Sender: TObject);
   private
     fDataBaseNameSQLite:string;
@@ -23,10 +27,14 @@ type
   public
     fUsuarioLogadoIsResponsavel:boolean;
     fUsuarioLogadoIsFuncionario:boolean;
+    procedure ResetRESTConnection;
   end;
 
 var
   DM: TDM;
+
+const
+  BASE_URL: String = 'http://54.200.116.223:8080/datasnap/rest/TSrvServerMetodos';
 
 implementation
 
@@ -65,6 +73,14 @@ begin
   FDConnectionSQLite.Close;
   fDataBaseNameSQLite:= 'db.s3db';
   ConectarSQLite;
+end;
+
+procedure TDM.ResetRESTConnection;
+begin
+  RESTClient1.ResetToDefaults;
+  RESTRequest1.ResetToDefaults;
+  RESTResponse1.ResetToDefaults;
+  RESTClient1.BaseURL := BASE_URL;
 end;
 
 end.
