@@ -13,6 +13,6 @@
     <Transaction>2016/02/21 14:26:44.000.875,C:\Projetos\Agenda\Device Portable\Unit1.fmx=C:\Projetos\Agenda\Device Portable\Usuario\untCriarConta.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
+		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_4_WVGA_Nexus_S"/>
 	</ActiveMobileDevice>
 </BorlandProject>
