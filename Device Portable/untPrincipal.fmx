@@ -527,16 +527,17 @@ object frmPrincipal: TfrmPrincipal
             FileName = 'C:\Projetos\Agenda\Imagens\ico\1456080967_address-book.png'
           end>
         Anchors = []
-        Position.X = 64.000000000000000000
-        Position.Y = 106.000000000000000000
-        Size.Width = 98.000000000000000000
-        Size.Height = 98.000000000000000000
+        Position.X = 77.000000000000000000
+        Position.Y = 119.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 72.000000000000000000
         Size.PlatformDefault = False
         OnClick = imgAgendaClick
         object lblAgenda: TLabel
           Anchors = []
           StyledSettings = [Family, Style, FontColor]
-          Position.Y = 97.000000000000000000
+          Position.X = -12.867346763610840000
+          Position.Y = 68.214286804199220000
           Size.Width = 97.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
@@ -754,17 +755,17 @@ object frmPrincipal: TfrmPrincipal
             FileName = 'C:\Projetos\Agenda\Imagens\png\1456081233_message.png'
           end>
         Anchors = []
-        Position.X = 290.000000000000000000
-        Position.Y = 106.000000000000000000
-        Size.Width = 98.000000000000000000
-        Size.Height = 98.000000000000000000
+        Position.X = 303.000000000000000000
+        Position.Y = 119.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 72.000000000000000000
         Size.PlatformDefault = False
         OnClick = imgMensagensClick
         object lblMensagens: TLabel
           Anchors = []
           StyledSettings = [Family, Style, FontColor]
-          Position.X = -2.000000000000000000
-          Position.Y = 97.000000000000000000
+          Position.X = -14.602041244506840000
+          Position.Y = 68.214286804199220000
           Size.Width = 99.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False

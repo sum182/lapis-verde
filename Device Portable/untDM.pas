@@ -48,11 +48,10 @@ begin
     begin
       DataBase := TPath.GetDocumentsPath + PathDelim + fDataBaseNameSQLite;
       FDConnectionSQLite.Params.Values['Database']:= DataBase;
-      FDConnectionSQLite.ExecSQL('CREATE TABLE aluno (   aluno_id INTEGER (11)  PRIMARY KEY,    nome     VARCHAR (150) );');
+      //FDConnectionSQLite.ExecSQL('CREATE TABLE aluno (   aluno_id INTEGER (11)  PRIMARY KEY,    nome     VARCHAR (150) );');
     end;
 
     FDConnectionSQLite.Open;
-    //ShowMessage(DataBase);
   except
    on E: Exception do
         ShowMessage('Erro ao conectar ao banco de dados local!' + #13 +

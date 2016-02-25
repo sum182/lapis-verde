@@ -86,7 +86,7 @@ implementation
 {$R *.fmx}
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
-  untFuncoes, untDMStyles, untDM, untAgenda, untMensagens;
+  untFuncoes, untDMStyles, untDM, untAgenda, untMensagens, smGeralFMX;
 
 { TfrmPrincipal }
 
@@ -166,7 +166,8 @@ end;
 procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
-  CanClose := fAllowCloseForm;
+  if (IsSysOSAndroid) or (IsSysOSiOS)then
+    CanClose := fAllowCloseForm;
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
@@ -183,16 +184,22 @@ procedure TfrmPrincipal.FormKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm))then
-  begin
-    if Key = vkHardwareBack then
+
+  if Key = vkHardwareBack then
+    //Caso tenha algum form aberto
+    if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm)) then
     begin
       Key := 0;
       BotaoVoltarOnClick(self);
-    end;
-  end
-  else
-    fAllowCloseForm:=True;
+    end
+    //Caso o menu estiver aberto
+    else if (MultiView1.IsShowed) then
+    begin
+        Key := 0;
+        MultiView1.HideMaster;
+    end
+    else
+      fAllowCloseForm:=True;
 
 end;
 

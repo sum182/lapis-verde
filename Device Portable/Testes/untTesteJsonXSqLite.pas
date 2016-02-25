@@ -24,6 +24,7 @@ type
     BindingsList1: TBindingsList;
     LinkFillControlToField1: TLinkFillControlToField;
     procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +38,13 @@ implementation
 
 {$R *.fmx}
 
-uses Proxy, untModuloCliente, untDM;
+uses Proxy, untModuloCliente, untDM, untFuncoes;
+
+procedure TfrmTesteJsonXSqLite.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetStyle(Self);
+end;
 
 procedure TfrmTesteJsonXSqLite.SpeedButton1Click(Sender: TObject);
 var

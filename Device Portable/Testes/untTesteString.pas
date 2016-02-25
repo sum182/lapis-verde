@@ -13,6 +13,7 @@ type
     Edit1: TEdit;
     Label1: TLabel;
     procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,7 +27,13 @@ implementation
 
 {$R *.fmx}
 
-uses untModuloCliente;
+uses untModuloCliente, untFuncoes;
+
+procedure TfrmTesteString.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetStyle(Self);
+end;
 
 procedure TfrmTesteString.SpeedButton1Click(Sender: TObject);
 begin

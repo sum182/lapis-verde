@@ -6,8 +6,9 @@ object DM: TDM
   object FDConnectionSQLite: TFDConnection
     Params.Strings = (
       'Database=C:\Projetos\Agenda\BD\SQLite\db.s3db'
-      'DriverID=SQLite'
-      'LockingMode=Normal')
+      'LockingMode=Normal'
+      'OpenMode=ReadWrite'
+      'DriverID=SQLite')
     LoginPrompt = False
     Left = 80
     Top = 32
@@ -24,6 +25,7 @@ object DM: TDM
   object ImageList1: TImageList
     Source = <
       item
+        MultiResBitmap.LoadSize = 2
         MultiResBitmap = <
           item
             Scale = 1.500000000000000000

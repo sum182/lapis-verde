@@ -26,6 +26,7 @@ type
     ListView2: TListView;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,7 +40,13 @@ implementation
 
 {$R *.fmx}
 
-uses Proxy, untModuloCliente;
+uses Proxy, untModuloCliente, untFuncoes;
+
+procedure TfrmTesteJsonFdMem.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetStyle(Self);
+end;
 
 procedure TfrmTesteJsonFdMem.SpeedButton1Click(Sender: TObject);
 var

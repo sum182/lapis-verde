@@ -10,6 +10,7 @@ uses
 type
   TfrmTesteFornecedores = class(TfrmBaseToolBar)
     Label1: TLabel;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,5 +23,13 @@ var
 implementation
 
 {$R *.fmx}
+
+uses untFuncoes;
+
+procedure TfrmTesteFornecedores.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetStyle(Self);
+end;
 
 end.
