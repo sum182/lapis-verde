@@ -186,21 +186,21 @@ begin
   inherited;
 
   if Key = vkHardwareBack then
-    //Caso tenha algum form aberto
-    if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm)) then
+    //Caso o menu estiver aberto
+    if (MultiView1.IsShowed) then
     begin
       Key := 0;
-      BotaoVoltarOnClick(self);
+      MultiView1.HideMaster;
+      Exit;
     end
-    //Caso o menu estiver aberto
-    else if (MultiView1.IsShowed) then
+    //Caso tenha algum form aberto
+    else if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm)) then
     begin
         Key := 0;
-        MultiView1.HideMaster;
+        BotaoVoltarOnClick(self);
     end
     else
       fAllowCloseForm:=True;
-
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
