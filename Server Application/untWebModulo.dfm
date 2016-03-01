@@ -19,8 +19,8 @@ object webModulo: TwebModulo
       OnAction = WebModuleDefaultAction
     end>
   BeforeDispatch = WebModuleBeforeDispatch
-  Height = 333
-  Width = 414
+  Height = 334
+  Width = 555
   object DSServer1: TDSServer
     Left = 96
     Top = 11
@@ -35,7 +35,7 @@ object webModulo: TwebModulo
   object DSServerClass1: TDSServerClass
     OnGetClass = DSServerClass1GetClass
     Server = DSServer1
-    Left = 312
+    Left = 432
     Top = 19
   end
   object ServerFunctionInvoker: TPageProducer
@@ -105,12 +105,25 @@ object webModulo: TwebModulo
   object DSServerClassTeste: TDSServerClass
     OnGetClass = DSServerClassTesteGetClass
     Server = DSServer1
-    Left = 312
+    Left = 432
     Top = 88
   end
   object DSServerClassMain: TDSServerClass
     OnGetClass = DSServerClassMainGetClass
-    Left = 312
+    Server = DSServer1
+    Left = 432
     Top = 144
+  end
+  object DSServerClassEscola: TDSServerClass
+    OnGetClass = DSServerClassEscolaGetClass
+    Server = DSServer1
+    Left = 432
+    Top = 192
+  end
+  object DSServerClassResponsavel: TDSServerClass
+    OnGetClass = DSServerClassResponsavelGetClass
+    Server = DSServer1
+    Left = 432
+    Top = 248
   end
 end

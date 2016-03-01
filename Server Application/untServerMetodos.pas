@@ -147,7 +147,6 @@ begin
 
   Result := TFDJSONDataSets.Create;
   TFDJSONDataSetsWriter.ListAdd(Result, fdqTurma);
-
 end;
 
 function TSrvServerMetodos.GetAlunosTeste: TFDJSONDataSets;

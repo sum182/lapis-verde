@@ -11,7 +11,9 @@ uses
   untServerMetodos in 'untServerMetodos.pas' {SrvServerMetodos: TDataModule},
   untWebModulo in 'untWebModulo.pas' {webModulo: TWebModule},
   untSmTeste in 'untSmTeste.pas' {SmTeste: TDataModule},
-  untSmMain in 'untSmMain.pas' {SmMain: TDataModule};
+  untSmMain in 'untSmMain.pas' {SmMain: TDataModule},
+  untSmEscola in 'untSmEscola.pas' {SmEscola: TDataModule},
+  untSmResponsavel in 'untSmResponsavel.pas' {SmResponsavel: TDataModule};
 
 {$R *.res}
 

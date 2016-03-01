@@ -22,6 +22,8 @@ type
     DSServerMetaDataProvider1: TDSServerMetaDataProvider;
     DSServerClassTeste: TDSServerClass;
     DSServerClassMain: TDSServerClass;
+    DSServerClassEscola: TDSServerClass;
+    DSServerClassResponsavel: TDSServerClass;
     procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
@@ -37,6 +39,10 @@ type
     procedure DSServerClassTesteGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure DSServerClassMainGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure DSServerClassEscolaGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure DSServerClassResponsavelGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
   private
     { Private declarations }
@@ -54,7 +60,8 @@ implementation
 
 {$R *.dfm}
 
-uses untServerMetodos, Web.WebReq, untSmTeste, untSmMain;
+uses untServerMetodos, Web.WebReq, untSmTeste, untSmMain, untSmEscola,
+  untSmResponsavel;
 
 procedure TwebModulo.DSServerClass1GetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
@@ -62,10 +69,22 @@ begin
   PersistentClass := untServerMetodos.TSrvServerMetodos;
 end;
 
+procedure TwebModulo.DSServerClassEscolaGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := untSmEscola.TSmEscola;
+end;
+
 procedure TwebModulo.DSServerClassMainGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
 begin
   PersistentClass := untSmMain.TSmMain;
+end;
+
+procedure TwebModulo.DSServerClassResponsavelGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := untSmResponsavel.TSmResponsavel;
 end;
 
 procedure TwebModulo.DSServerClassTesteGetClass(DSServerClass: TDSServerClass;

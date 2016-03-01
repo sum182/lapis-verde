@@ -88,7 +88,7 @@ begin
 
 
   //Efetua o download da tabela TITULOS vinda do Servidor DataSnap
-  LDataSetList := ModuloCliente.ServerMethodsTesteClient.GetAlunosTeste;
+  LDataSetList := ModuloCliente.SmTesteClient.GetAlunosTeste;
 
   //Prepara o MemoryTable temporário
   fdmAlunos.Active := False;

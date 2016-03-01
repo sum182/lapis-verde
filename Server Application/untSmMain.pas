@@ -11,6 +11,7 @@ uses
   FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet;
 
 type
+{$METHODINFO ON}
   TSmMain = class(TDataModule)
     fdqAlunos: TFDQuery;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
@@ -27,6 +28,7 @@ type
 
 var
   SmMain: TSmMain;
+{$METHODINFO OFF}
 
 implementation
 

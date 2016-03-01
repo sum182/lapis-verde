@@ -10,19 +10,28 @@ type
     DSRestConnection1: TDSRestConnection;
     DSRestConnectionLocal: TDSRestConnection;
     DSRestConnectionAWS: TDSRestConnection;
-  private
+    private
     FInstanceOwner: Boolean;
     FSrvServerMetodosClient: TSrvServerMetodosClient;
-    FServerMethodsTesteClient: TSmTesteClient;
+    FSmTesteClient: TSmTesteClient;
+    FSmMainClient: TSmMainClient;
+    FSmEscolaClient: TSmEscolaClient;
+    FSmResponsavelClient: TSmResponsavelClient;
     function GetSrvServerMetodosClient: TSrvServerMetodosClient;
-    function GetServerMethodsTesteClient: TSmTesteClient;
+    function GetSmTesteClient: TSmTesteClient;
+    function GetSmMainClient: TSmMainClient;
+    function GetSmEscolaClient: TSmEscolaClient;
+    function GetSmResponsavelClient: TSmResponsavelClient;
     { Private declarations }
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     property InstanceOwner: Boolean read FInstanceOwner write FInstanceOwner;
     property SrvServerMetodosClient: TSrvServerMetodosClient read GetSrvServerMetodosClient write FSrvServerMetodosClient;
-    property ServerMethodsTesteClient: TSmTesteClient read GetServerMethodsTesteClient write FServerMethodsTesteClient;
+    property SmTesteClient: TSmTesteClient read GetSmTesteClient write FSmTesteClient;
+    property SmMainClient: TSmMainClient read GetSmMainClient write FSmMainClient;
+    property SmEscolaClient: TSmEscolaClient read GetSmEscolaClient write FSmEscolaClient;
+    property SmResponsavelClient: TSmResponsavelClient read GetSmResponsavelClient write FSmResponsavelClient;
 
 end;
 
@@ -44,7 +53,10 @@ end;
 destructor TModuloCliente.Destroy;
 begin
   FSrvServerMetodosClient.Free;
-  FServerMethodsTesteClient.Free;
+  FSmTesteClient.Free;
+  FSmMainClient.Free;
+  FSmEscolaClient.Free;
+  FSmResponsavelClient.Free;
   inherited;
 end;
 
@@ -54,12 +66,30 @@ begin
     FSrvServerMetodosClient:= TSrvServerMetodosClient.Create(DSRestConnection1, FInstanceOwner);
   Result := FSrvServerMetodosClient;
 end;
-
-
-function TModuloCliente.GetServerMethodsTesteClient: TSmTesteClient;
+function TModuloCliente.GetSmTesteClient: TSmTesteClient;
 begin
-  if FServerMethodsTesteClient = nil then
-    FServerMethodsTesteClient:= TSmTesteClient.Create(DSRestConnection1, FInstanceOwner);
-  Result := FServerMethodsTesteClient;
+  if FSmTesteClient = nil then
+    FSmTesteClient:= TSmTesteClient.Create(DSRestConnection1, FInstanceOwner);
+  Result := FSmTesteClient;
 end;
+function TModuloCliente.GetSmMainClient: TSmMainClient;
+begin
+  if FSmMainClient = nil then
+    FSmMainClient:= TSmMainClient.Create(DSRestConnection1, FInstanceOwner);
+  Result := FSmMainClient;
+end;
+function TModuloCliente.GetSmEscolaClient: TSmEscolaClient;
+begin
+  if FSmEscolaClient = nil then
+    FSmEscolaClient:= TSmEscolaClient.Create(DSRestConnection1, FInstanceOwner);
+  Result := FSmEscolaClient;
+end;
+function TModuloCliente.GetSmResponsavelClient: TSmResponsavelClient;
+begin
+  if FSmResponsavelClient = nil then
+    FSmResponsavelClient:= TSmResponsavelClient.Create(DSRestConnection1, FInstanceOwner);
+  Result := FSmResponsavelClient;
+end;
+
+
 end.
