@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 23/02/2016 12:28:55
+// 01/03/2016 00:23:22
 //
 
 unit Proxy;
@@ -18,13 +18,17 @@ type
     FDataModuleCreateCommand: TDSRestCommand;
     FEchoStringCommand: TDSRestCommand;
     FReverseStringCommand: TDSRestCommand;
-    FGetAlunosCommand: TDSRestCommand;
-    FGetAlunosCommand_Cache: TDSRestCommand;
+    FGetAlunosTesteCommand: TDSRestCommand;
+    FGetAlunosTesteCommand_Cache: TDSRestCommand;
     FLoginFuncionarioCommand: TDSRestCommand;
     FLoginResponsavelCommand: TDSRestCommand;
     FValidarEmailExistenteResponsavelCommand: TDSRestCommand;
     FValidarCPFExistenteResponsavelCommand: TDSRestCommand;
     FCriarUsuarioResponsavelCommand: TDSRestCommand;
+    FGetAlunosCommand: TDSRestCommand;
+    FGetAlunosCommand_Cache: TDSRestCommand;
+    FGetTurmasCommand: TDSRestCommand;
+    FGetTurmasCommand_Cache: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -32,13 +36,17 @@ type
     procedure DataModuleCreate(Sender: TObject);
     function EchoString(Value: string; const ARequestFilter: string = ''): string;
     function ReverseString(Value: string; const ARequestFilter: string = ''): string;
-    function GetAlunos(const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetAlunos_Cache(const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetAlunosTeste(const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAlunosTeste_Cache(const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
     function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
     function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
     function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
     function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
+    function GetAlunos(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAlunos_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetTurmas(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
   IDSRestCachedTFDJSONDataSets = interface(IDSRestCachedObject<TFDJSONDataSets>)
@@ -65,12 +73,12 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
-  TSrvServerMetodos_GetAlunos: array [0..0] of TDSRestParameterMetaData =
+  TSrvServerMetodos_GetAlunosTeste: array [0..0] of TDSRestParameterMetaData =
   (
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
-  TSrvServerMetodos_GetAlunos_Cache: array [0..0] of TDSRestParameterMetaData =
+  TSrvServerMetodos_GetAlunosTeste_Cache: array [0..0] of TDSRestParameterMetaData =
   (
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
@@ -112,6 +120,34 @@ const
     (Name: 'RG'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Sexo'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSrvServerMetodos_GetAlunos: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSrvServerMetodos_GetAlunos_Cache: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSrvServerMetodos_GetTurmas: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSrvServerMetodos_GetTurmas_Cache: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
 implementation
@@ -169,23 +205,23 @@ begin
   Result := FReverseStringCommand.Parameters[1].Value.GetWideString;
 end;
 
-function TSrvServerMetodosClient.GetAlunos(const ARequestFilter: string): TFDJSONDataSets;
+function TSrvServerMetodosClient.GetAlunosTeste(const ARequestFilter: string): TFDJSONDataSets;
 begin
-  if FGetAlunosCommand = nil then
+  if FGetAlunosTesteCommand = nil then
   begin
-    FGetAlunosCommand := FConnection.CreateCommand;
-    FGetAlunosCommand.RequestType := 'GET';
-    FGetAlunosCommand.Text := 'TSrvServerMetodos.GetAlunos';
-    FGetAlunosCommand.Prepare(TSrvServerMetodos_GetAlunos);
+    FGetAlunosTesteCommand := FConnection.CreateCommand;
+    FGetAlunosTesteCommand.RequestType := 'GET';
+    FGetAlunosTesteCommand.Text := 'TSrvServerMetodos.GetAlunosTeste';
+    FGetAlunosTesteCommand.Prepare(TSrvServerMetodos_GetAlunosTeste);
   end;
-  FGetAlunosCommand.Execute(ARequestFilter);
-  if not FGetAlunosCommand.Parameters[0].Value.IsNull then
+  FGetAlunosTesteCommand.Execute(ARequestFilter);
+  if not FGetAlunosTesteCommand.Parameters[0].Value.IsNull then
   begin
-    FUnMarshal := TDSRestCommand(FGetAlunosCommand.Parameters[0].ConnectionHandler).GetJSONUnMarshaler;
+    FUnMarshal := TDSRestCommand(FGetAlunosTesteCommand.Parameters[0].ConnectionHandler).GetJSONUnMarshaler;
     try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAlunosCommand.Parameters[0].Value.GetJSONValue(True)));
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAlunosTesteCommand.Parameters[0].Value.GetJSONValue(True)));
       if FInstanceOwner then
-        FGetAlunosCommand.FreeOnExecute(Result);
+        FGetAlunosTesteCommand.FreeOnExecute(Result);
     finally
       FreeAndNil(FUnMarshal)
     end
@@ -194,17 +230,17 @@ begin
     Result := nil;
 end;
 
-function TSrvServerMetodosClient.GetAlunos_Cache(const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSrvServerMetodosClient.GetAlunosTeste_Cache(const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
-  if FGetAlunosCommand_Cache = nil then
+  if FGetAlunosTesteCommand_Cache = nil then
   begin
-    FGetAlunosCommand_Cache := FConnection.CreateCommand;
-    FGetAlunosCommand_Cache.RequestType := 'GET';
-    FGetAlunosCommand_Cache.Text := 'TSrvServerMetodos.GetAlunos';
-    FGetAlunosCommand_Cache.Prepare(TSrvServerMetodos_GetAlunos_Cache);
+    FGetAlunosTesteCommand_Cache := FConnection.CreateCommand;
+    FGetAlunosTesteCommand_Cache.RequestType := 'GET';
+    FGetAlunosTesteCommand_Cache.Text := 'TSrvServerMetodos.GetAlunosTeste';
+    FGetAlunosTesteCommand_Cache.Prepare(TSrvServerMetodos_GetAlunosTeste_Cache);
   end;
-  FGetAlunosCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAlunosCommand_Cache.Parameters[0].Value.GetString);
+  FGetAlunosTesteCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAlunosTesteCommand_Cache.Parameters[0].Value.GetString);
 end;
 
 function TSrvServerMetodosClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
@@ -286,6 +322,90 @@ begin
   Result := FCriarUsuarioResponsavelCommand.Parameters[8].Value.GetWideString;
 end;
 
+function TSrvServerMetodosClient.GetAlunos(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
+begin
+  if FGetAlunosCommand = nil then
+  begin
+    FGetAlunosCommand := FConnection.CreateCommand;
+    FGetAlunosCommand.RequestType := 'GET';
+    FGetAlunosCommand.Text := 'TSrvServerMetodos.GetAlunos';
+    FGetAlunosCommand.Prepare(TSrvServerMetodos_GetAlunos);
+  end;
+  FGetAlunosCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAlunosCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetAlunosCommand.Execute(ARequestFilter);
+  if not FGetAlunosCommand.Parameters[2].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetAlunosCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAlunosCommand.Parameters[2].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetAlunosCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSrvServerMetodosClient.GetAlunos_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FGetAlunosCommand_Cache = nil then
+  begin
+    FGetAlunosCommand_Cache := FConnection.CreateCommand;
+    FGetAlunosCommand_Cache.RequestType := 'GET';
+    FGetAlunosCommand_Cache.Text := 'TSrvServerMetodos.GetAlunos';
+    FGetAlunosCommand_Cache.Prepare(TSrvServerMetodos_GetAlunos_Cache);
+  end;
+  FGetAlunosCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAlunosCommand_Cache.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetAlunosCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAlunosCommand_Cache.Parameters[2].Value.GetString);
+end;
+
+function TSrvServerMetodosClient.GetTurmas(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
+begin
+  if FGetTurmasCommand = nil then
+  begin
+    FGetTurmasCommand := FConnection.CreateCommand;
+    FGetTurmasCommand.RequestType := 'GET';
+    FGetTurmasCommand.Text := 'TSrvServerMetodos.GetTurmas';
+    FGetTurmasCommand.Prepare(TSrvServerMetodos_GetTurmas);
+  end;
+  FGetTurmasCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetTurmasCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetTurmasCommand.Execute(ARequestFilter);
+  if not FGetTurmasCommand.Parameters[2].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetTurmasCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetTurmasCommand.Parameters[2].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetTurmasCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSrvServerMetodosClient.GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FGetTurmasCommand_Cache = nil then
+  begin
+    FGetTurmasCommand_Cache := FConnection.CreateCommand;
+    FGetTurmasCommand_Cache.RequestType := 'GET';
+    FGetTurmasCommand_Cache.Text := 'TSrvServerMetodos.GetTurmas';
+    FGetTurmasCommand_Cache.Prepare(TSrvServerMetodos_GetTurmas_Cache);
+  end;
+  FGetTurmasCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetTurmasCommand_Cache.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetTurmasCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetTurmasCommand_Cache.Parameters[2].Value.GetString);
+end;
+
 constructor TSrvServerMetodosClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -301,13 +421,17 @@ begin
   FDataModuleCreateCommand.DisposeOf;
   FEchoStringCommand.DisposeOf;
   FReverseStringCommand.DisposeOf;
-  FGetAlunosCommand.DisposeOf;
-  FGetAlunosCommand_Cache.DisposeOf;
+  FGetAlunosTesteCommand.DisposeOf;
+  FGetAlunosTesteCommand_Cache.DisposeOf;
   FLoginFuncionarioCommand.DisposeOf;
   FLoginResponsavelCommand.DisposeOf;
   FValidarEmailExistenteResponsavelCommand.DisposeOf;
   FValidarCPFExistenteResponsavelCommand.DisposeOf;
   FCriarUsuarioResponsavelCommand.DisposeOf;
+  FGetAlunosCommand.DisposeOf;
+  FGetAlunosCommand_Cache.DisposeOf;
+  FGetTurmasCommand.DisposeOf;
+  FGetTurmasCommand_Cache.DisposeOf;
   inherited;
 end;
 

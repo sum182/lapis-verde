@@ -86,7 +86,8 @@ implementation
 {$R *.fmx}
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
-  untFuncoes, untDMStyles, untDM, untAgenda, untMensagens, smGeralFMX;
+  untFuncoes, untDMStyles, untDM, untAgenda, untMensagens, smGeralFMX,
+  untAgendaEscola;
 
 { TfrmPrincipal }
 
@@ -144,7 +145,7 @@ end;
 
 procedure TfrmPrincipal.AbrirAgenda;
 begin
-  OpenForm(TfrmAgenda);
+  OpenForm(TfrmAgendaEscola);
 end;
 
 procedure TfrmPrincipal.AbrirMensagens;

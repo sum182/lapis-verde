@@ -1,8 +1,8 @@
 object SrvServerMetodos: TSrvServerMetodos
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 330
-  Width = 602
+  Height = 457
+  Width = 629
   object fdqAlunos: TFDQuery
     Connection = FDConnection
     SQL.Strings = (
@@ -60,8 +60,8 @@ object SrvServerMetodos: TSrvServerMetodos
       ''
       ''
       '')
-    Left = 50
-    Top = 208
+    Left = 338
+    Top = 40
     ParamData = <
       item
         Name = 'LOGIN'
@@ -93,8 +93,8 @@ object SrvServerMetodos: TSrvServerMetodos
       ''
       ''
       '')
-    Left = 162
-    Top = 208
+    Left = 338
+    Top = 104
     ParamData = <
       item
         Name = 'LOGIN'
@@ -116,8 +116,8 @@ object SrvServerMetodos: TSrvServerMetodos
       'SELECT r.* '#10'FROM responsavel r'#13#10#10
       'where 1=1'#10#10#10
       'and Upper(r.email) = Upper(:email)'#10)
-    Left = 402
-    Top = 192
+    Left = 474
+    Top = 136
     ParamData = <
       item
         Name = 'EMAIL'
@@ -138,8 +138,8 @@ object SrvServerMetodos: TSrvServerMetodos
       ''
       ''
       '')
-    Left = 402
-    Top = 248
+    Left = 474
+    Top = 192
     ParamData = <
       item
         Name = 'CPF'
@@ -160,8 +160,8 @@ object SrvServerMetodos: TSrvServerMetodos
       ''
       ''
       '')
-    Left = 402
-    Top = 144
+    Left = 474
+    Top = 88
     ParamData = <
       item
         Name = 'RESPONSAVEL_ID'
@@ -177,11 +177,149 @@ object SrvServerMetodos: TSrvServerMetodos
       'FROM responsavel_telefone rt'
       'where 1=1'#10#10
       'and rt.responsavel_id = :responsavel_id')
-    Left = 402
-    Top = 88
+    Left = 474
+    Top = 32
     ParamData = <
       item
         Name = 'RESPONSAVEL_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object fdqAgenda: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'select * from agenda'
+      'where agenda.agenda_id = :agenda_id'
+      'and escola_id = :escola_id')
+    Left = 50
+    Top = 304
+    ParamData = <
+      item
+        Name = 'AGENDA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ESCOLA_ID'
+        ParamType = ptInput
+      end>
+    object fdqAgendaagenda_id: TFDAutoIncField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object fdqAgendatitulo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'titulo'
+      Origin = 'titulo'
+      Size = 50
+    end
+    object fdqAgendadescricao: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      BlobType = ftMemo
+    end
+    object fdqAgendadata: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'data'
+      Origin = '`data`'
+    end
+    object fdqAgendaagenda_tipo_id: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'agenda_tipo_id'
+      Origin = 'agenda_tipo_id'
+    end
+    object fdqAgendafuncionario_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'funcionario_id'
+      Origin = 'funcionario_id'
+    end
+    object fdqAgendaescola_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'escola_id'
+      Origin = 'escola_id'
+    end
+  end
+  object fdqAgendaAluno: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT * FROM agenda_aluno '
+      'where agenda_id = :agenda_id')
+    Left = 50
+    Top = 352
+    ParamData = <
+      item
+        Name = 'AGENDA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object fdqAgendaAlunoagenda_id: TIntegerField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqAgendaAlunoaluno_id: TIntegerField
+      FieldName = 'aluno_id'
+      Origin = 'aluno_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+  end
+  object fdqTurmaAluno: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      #10'select '#10'  ta.*'
+      'from turma_aluno ta'#13#10#10
+      'where ta.turma_id = :turma_id'
+      '')
+    Left = 138
+    Top = 352
+    ParamData = <
+      item
+        Name = 'TURMA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object fdqTurma: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT * FROM turma t'#13#10#10
+      'where escola_id = :escola_id'
+      'order by nome')
+    Left = 210
+    Top = 304
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqAluno: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      
+        'SELECT a.*, concat(coalesce(a.nome,'#39#39'),'#39' '#39', coalesce(a.sobrenome' +
+        ','#39#39')) as nome_completo '
+      'FROM aluno a'
+      'where 1=1'#10' '#10
+      'and escola_id = :escola_id'#10
+      'order by nome_completo'#10)
+    Left = 138
+    Top = 304
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = Null

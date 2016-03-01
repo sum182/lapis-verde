@@ -1,4 +1,14 @@
+Instalar pacotes abaixo e setar este diretorio no search path do projeto
+C:\Users\Public\Documents\Embarcadero\Studio\17.0\Samples\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewMultiDetailAppearance
+C:\Users\Public\Documents\Embarcadero\Studio\17.0\Samples\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewRatingsAppearance
+
+
+Mapear
+S:\Desenvolvimento\Delphi\Estudos\Caderno
+Caderno de estudo delphi
+=======
 Atualizar atalhos VM
+
 
 
 ----Mobile--------------------------------------------------------------------------------
@@ -49,6 +59,11 @@ Analisar dados do banco local quando tiver uma nova versao ou alteração do banco
 
 
 ----Server--------------------------------------------------------------------------------
+Criar DM para Criar Conta
+Criar DM para Agenda Escola
+Criar DM para Agenda Responsavel
+
+
 testar login - uppercase
 testar validar email - uppercase
 

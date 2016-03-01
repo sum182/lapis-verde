@@ -24,16 +24,35 @@ type
     fdqValidarCPFResponsavel: TFDQuery;
     fdqResponsavel: TFDQuery;
     fdqResponsavelTelefone: TFDQuery;
+    fdqAgenda: TFDQuery;
+    fdqAgendaagenda_id: TFDAutoIncField;
+    fdqAgendatitulo: TStringField;
+    fdqAgendadescricao: TMemoField;
+    fdqAgendadata: TDateTimeField;
+    fdqAgendaagenda_tipo_id: TSmallintField;
+    fdqAgendafuncionario_id: TIntegerField;
+    fdqAgendaescola_id: TIntegerField;
+    fdqAgendaAluno: TFDQuery;
+    fdqAgendaAlunoagenda_id: TIntegerField;
+    fdqAgendaAlunoaluno_id: TIntegerField;
+    fdqTurmaAluno: TFDQuery;
+    fdqTurma: TFDQuery;
+    fdqAluno: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    //Testes
     function EchoString(Value: string): string;
     function ReverseString(Value: string): string;
-    function GetAlunos:TFDJSONDataSets;
+    function GetAlunosTeste:TFDJSONDataSets;overload;
+
+    //Login
     function LoginFuncionario(Login:string; Senha:string):Boolean;
     function LoginResponsavel(Login:string; Senha:string):Boolean;
+
+    //Criar Conta
     function ValidarEmailExistenteResponsavel(Email:String):Boolean;
     function ValidarCPFExistenteResponsavel(CPF:String):Boolean;
     function CriarUsuarioResponsavel( Nome:String;
@@ -44,6 +63,10 @@ type
                                       CPF: String;
                                       RG: String;
                                       Sexo: String):String;
+    //Agenda Escola
+    function GetAlunos(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;overload;
+    function GetTurmas(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;overload;
+
 
   end;
 {$METHODINFO OFF}
@@ -105,7 +128,28 @@ begin
   Result := Value;
 end;
 
-function TSrvServerMetodos.GetAlunos: TFDJSONDataSets;
+function TSrvServerMetodos.GetAlunos(EscolaId,
+  FuncionarioId: Integer): TFDJSONDataSets;
+begin
+  fdqAluno.Active := False;
+  fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+
+  Result := TFDJSONDataSets.Create;
+  TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
+end;
+
+function TSrvServerMetodos.GetTurmas(EscolaId,
+  FuncionarioId: Integer): TFDJSONDataSets;
+begin
+  fdqTurma.Active := False;
+  fdqTurma.ParamByName('escola_id').AsInteger:= EscolaId;
+
+  Result := TFDJSONDataSets.Create;
+  TFDJSONDataSetsWriter.ListAdd(Result, fdqTurma);
+
+end;
+
+function TSrvServerMetodos.GetAlunosTeste: TFDJSONDataSets;
 begin
   //Devolve para o cliente o DataSet de Pedidos
   //Elimina cache

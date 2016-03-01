@@ -25,7 +25,8 @@ uses
   untAgenda in 'Agenda\untAgenda.pas' {frmAgenda},
   untMensagens in 'Mensagens\untMensagens.pas' {frmMensagens},
   untCriarConta in 'Usuario\untCriarConta.pas' {frmCriarConta},
-  untTesteString2 in 'Testes\untTesteString2.pas' {frmTesteString2};
+  untTesteString2 in 'Testes\untTesteString2.pas' {frmTesteString2},
+  untAgendaEscola in 'Agenda\untAgendaEscola.pas' {frmAgendaEscola};
 
 {$R *.res}
 

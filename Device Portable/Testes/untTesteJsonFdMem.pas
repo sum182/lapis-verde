@@ -58,7 +58,7 @@ begin
   ListView2.Visible:=True;
 
   ClientRest:= TSrvServerMetodosClient.Create(ModuloCliente.DSRestConnection1);
-  RetClient:= ClientRest.GetAlunos;
+  RetClient:= ClientRest.GetAlunosTeste;
   Assert(TFDJSONDataSetsReader.GetListCount(RetClient) = 1);
 
   fdmAlunos.Close;
@@ -88,7 +88,7 @@ begin
 
 
   //Efetua o download da tabela TITULOS vinda do Servidor DataSnap
-  LDataSetList := ModuloCliente.SrvServerMetodosClient.GetAlunos;
+  LDataSetList := ModuloCliente.SrvServerMetodosClient.GetAlunosTeste;
 
   //Prepara o MemoryTable temporário
   fdmAlunos.Active := False;
