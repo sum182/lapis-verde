@@ -39,8 +39,11 @@ type
     bsTurmas: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
     procedure btnAtualizarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
+    procedure GetAlunos;
+    procedure GetTurmas;
+    procedure OpenQuerys;
   public
     { Public declarations }
   end;
@@ -55,76 +58,95 @@ implementation
 uses untModuloCliente, Data.FireDACJSONReflect;
 
 procedure TfrmAgendaEscola.btnAtualizarClick(Sender: TObject);
+begin
+  GetAlunos;
+  GetTurmas;
+end;
+
+procedure TfrmAgendaEscola.FormCreate(Sender: TObject);
+begin
+  inherited;
+  OpenQuerys;
+end;
+
+procedure TfrmAgendaEscola.GetAlunos;
 var
   LDataSetList  : TFDJSONDataSets;
 begin
+  LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(1,0);
 
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(1,0);
+  //Prepara o MemoryTable temporário
+  fdmAlunos.Active := False;
 
-      //Prepara o MemoryTable temporário
-      fdmAlunos.Active := False;
+  //Fazemos um teste para verifica se realmente há DataSet no retorno da função
+  Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
 
-      //Fazemos um teste para verifica se realmente há DataSet no retorno da função
-      Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
+  //Adicionamos o conteúdo do DataSet "baixado" ao Memory Table
+  fdmAlunos.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
 
-      //Adicionamos o conteúdo do DataSet "baixado" ao Memory Table
-      fdmAlunos.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
+  fdqAluno.Close;
+  fdqAluno.Open;
 
-      {fdqAluno.Close;
-      fdqAluno.Open;
+  fdqAluno.First;
+  while not(fdqAluno.Eof) do
+  begin
+    fdqAluno.Delete;
+  end;
 
-      fdmAlunos.First;
-      while not(fdmAlunos.EOF) do
-      begin
-        fdqAluno.Append;
-        fdqAluno.FieldByName('nome').AsString := fdmAlunos.FieldByName('nome').AsString;
-        fdqAluno.Post;
+  fdqAluno.Close;
+  fdqAluno.Open;
 
-        fdmAlunos.Next;
-      end;
+  fdmAlunos.First;
+  while not(fdmAlunos.EOF) do
+  begin
+    fdqAluno.Append;
+    fdqAluno.FieldByName('nome').AsString := fdmAlunos.FieldByName('nome').AsString;
+    fdqAluno.Post;
 
-      fdqAluno.Close;
-      fdqAluno.Open;  }
+    fdmAlunos.Next;
+  end;
 
+  fdqAluno.Close;
+  fdqAluno.Open;
+end;
 
+procedure TfrmAgendaEscola.GetTurmas;
+var
+  LDataSetList  : TFDJSONDataSets;
+begin
+  LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(1,0);
 
+  //Prepara o MemoryTable temporário
+  fdmTurmas.Active := False;
 
+  //Fazemos um teste para verifica se realmente há DataSet no retorno da função
+  Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
 
+  //Adicionamos o conteúdo do DataSet "baixado" ao Memory Table
+  fdmTurmas.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
 
+  {fdqAluno.Close;
+  fdqAluno.Open;
 
+  fdmTurmas.First;
+  while not(fdmTurmas.EOF) do
+  begin
+    fdqAluno.Append;
+    fdqAluno.FieldByName('nome').AsString := fdmTurmas.FieldByName('nome').AsString;
+    fdqAluno.Post;
 
+    fdmTurmas.Next;
+  end;
 
+  fdqAluno.Close;
+  fdqAluno.Open;  }
 
+end;
 
-
-
-
-      LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(1,0);
-
-      //Prepara o MemoryTable temporário
-      fdmTurmas.Active := False;
-
-      //Fazemos um teste para verifica se realmente há DataSet no retorno da função
-      Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
-
-      //Adicionamos o conteúdo do DataSet "baixado" ao Memory Table
-      fdmTurmas.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
-
-      {fdqAluno.Close;
-      fdqAluno.Open;
-
-      fdmTurmas.First;
-      while not(fdmTurmas.EOF) do
-      begin
-        fdqAluno.Append;
-        fdqAluno.FieldByName('nome').AsString := fdmTurmas.FieldByName('nome').AsString;
-        fdqAluno.Post;
-
-        fdmTurmas.Next;
-      end;
-
-      fdqAluno.Close;
-      fdqAluno.Open;  }
+procedure TfrmAgendaEscola.OpenQuerys;
+begin
+  fdqAluno.Close;
+  fdqAluno.Open;
 end;
 
 end.

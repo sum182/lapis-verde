@@ -3,23 +3,23 @@ object DM: TDM
   OnCreate = DataModuleCreate
   Height = 455
   Width = 510
-  object FDConnectionSQLite: TFDConnection
+  object FDConnectionDB: TFDConnection
     Params.Strings = (
       'Database=C:\Projetos\Agenda\BD\SQLite\db.s3db'
       'LockingMode=Normal'
       'OpenMode=ReadWrite'
       'DriverID=SQLite')
     LoginPrompt = False
-    Left = 80
+    Left = 64
     Top = 32
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
-    Left = 80
+    Left = 64
     Top = 96
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'FMX'
-    Left = 80
+    Left = 64
     Top = 152
   end
   object ImageList1: TImageList
@@ -50,12 +50,12 @@ object DM: TDM
             Name = 'ic_menu_white_24dp'
           end>
       end>
-    Left = 184
+    Left = 248
     Top = 152
   end
   object fgActivityDialog: TfgActivityDialog
-    Left = 184
-    Top = 32
+    Left = 168
+    Top = 152
   end
   object RESTClient1: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
@@ -79,5 +79,25 @@ object DM: TDM
     ContentType = 'text/html'
     Left = 80
     Top = 336
+  end
+  object FDConnectionDBEscola: TFDConnection
+    Params.Strings = (
+      'Database=C:\Projetos\Agenda\BD\SQLite\dbEscola.s3db'
+      'LockingMode=Normal'
+      'OpenMode=ReadWrite'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 192
+    Top = 32
+  end
+  object FDConnectionDBResponsavel: TFDConnection
+    Params.Strings = (
+      'Database=C:\Projetos\Agenda\BD\SQLite\dbResponsavel.s3db'
+      'LockingMode=Normal'
+      'OpenMode=ReadWrite'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 344
+    Top = 32
   end
 end

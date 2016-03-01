@@ -12,7 +12,7 @@ uses
 
 type
   TDM = class(TDataModule)
-    FDConnectionSQLite: TFDConnection;
+    FDConnectionDB: TFDConnection;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     ImageList1: TImageList;
@@ -20,10 +20,16 @@ type
     RESTClient1: TRESTClient;
     RESTRequest1: TRESTRequest;
     RESTResponse1: TRESTResponse;
+    FDConnectionDBEscola: TFDConnection;
+    FDConnectionDBResponsavel: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
   private
-    fDataBaseNameSQLite:string;
-    procedure ConectarSQLite;
+    procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
+    procedure ConectarBases;
+    procedure ConectarDB;
+    procedure ConectarDBEscola;
+    procedure ConectarDBResponsavel;
+
   public
     fUsuarioLogadoIsResponsavel:boolean;
     fUsuarioLogadoIsFuncionario:boolean;
@@ -44,22 +50,44 @@ uses smGeralFMX, FMX.Dialogs;
 
 {$R *.dfm}
 
-procedure TDM.ConectarSQLite;
+procedure TDM.ConectarBases;
+begin
+  ConectarDB;
+  ConectarDBEscola;
+  ConectarDBResponsavel;
+end;
+
+procedure TDM.ConectarDB;
+begin
+  ConectarSQLite(FDConnectionDBEscola,'db.s3db');
+end;
+
+procedure TDM.ConectarDBEscola;
+begin
+  ConectarSQLite(FDConnectionDBEscola,'dbEscola.s3db');
+end;
+
+procedure TDM.ConectarDBResponsavel;
+begin
+  ConectarSQLite(FDConnectionDBEscola,'dbResponsavel.s3db');
+end;
+
+procedure TDM.ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
 var
   DataBase:string;
 begin
 
   try
-    FDConnectionSQLite.Close;
+    FDConnection.Close;
 
     if smGeralFMX.IsSysOSAndroid or (smGeralFMX.IsSysOSiOS) then
     begin
-      DataBase := TPath.GetDocumentsPath + PathDelim + fDataBaseNameSQLite;
-      FDConnectionSQLite.Params.Values['Database']:= DataBase;
-      //FDConnectionSQLite.ExecSQL('CREATE TABLE aluno (   aluno_id INTEGER (11)  PRIMARY KEY,    nome     VARCHAR (150) );');
+      DataBase := TPath.GetDocumentsPath + PathDelim + DataBaseName;
+      FDConnection.Params.Values['Database']:= DataBase;
+      //FDConnection.ExecSQL('CREATE TABLE aluno (   aluno_id INTEGER (11)  PRIMARY KEY,    nome     VARCHAR (150) );');
     end;
 
-    FDConnectionSQLite.Open;
+    FDConnection.Open;
   except
    on E: Exception do
         ShowMessage('Erro ao conectar ao banco de dados local!' + #13 +
@@ -70,9 +98,10 @@ end;
 
 procedure TDM.DataModuleCreate(Sender: TObject);
 begin
-  FDConnectionSQLite.Close;
-  fDataBaseNameSQLite:= 'db.s3db';
-  ConectarSQLite;
+  FDConnectionDB.Close;
+  FDConnectionDBEscola.Close;
+  FDConnectionDBResponsavel.Close;
+  ConectarBases;
 end;
 
 procedure TDM.ResetRESTConnection;

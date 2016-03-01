@@ -1,0 +1,5 @@
+A base do sistema é dividida em:
+
+db.s3db --> banco de dados comum para escola e responsavel
+dbEscola.s3db --> banco de dados para informações de Escola
+dbResponsavel.s3db  --> banco de dados para informações de Responsável
