@@ -23,9 +23,6 @@ type
     lstTurmas: TListView;
     lstAlunos: TListView;
     btnAtualizar: TSpeedButton;
-    fdmAlunos: TFDMemTable;
-    fdmAlunosaluno_id: TIntegerField;
-    fdmAlunosnome: TStringField;
     FDStanStorageBinLink1: TFDStanStorageBinLink;
     bsAlunos: TBindSourceDB;
     BindingsList1: TBindingsList;
@@ -55,7 +52,7 @@ implementation
 
 {$R *.fmx}
 
-uses untModuloCliente, Data.FireDACJSONReflect;
+uses untModuloCliente, Data.FireDACJSONReflect, untDM;
 
 procedure TfrmAgendaEscola.btnAtualizarClick(Sender: TObject);
 begin
@@ -72,42 +69,54 @@ end;
 procedure TfrmAgendaEscola.GetAlunos;
 var
   LDataSetList  : TFDJSONDataSets;
+  fdmTemp : TFDMemTable;
 begin
-  LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(1,0);
 
-  //Prepara o MemoryTable temporário
-  fdmAlunos.Active := False;
+  try
+    fdmTemp := TFDMemTable.Create(self);
 
-  //Fazemos um teste para verifica se realmente há DataSet no retorno da função
-  Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
+    LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(1,0);
 
-  //Adicionamos o conteúdo do DataSet "baixado" ao Memory Table
-  fdmAlunos.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
+    //Prepara o MemoryTable temporário
+    fdmTemp.Active := False;
 
-  fdqAluno.Close;
-  fdqAluno.Open;
+    //Fazemos um teste para verifica se realmente há DataSet no retorno da função
+    Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
 
-  fdqAluno.First;
-  while not(fdqAluno.Eof) do
-  begin
-    fdqAluno.Delete;
+    //Adicionamos o conteúdo do DataSet "baixado" ao Memory Table
+    fdmTemp.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
+
+    fdqAluno.Close;
+    fdqAluno.Open;
+
+    fdqAluno.First;
+    while not(fdqAluno.Eof) do
+    begin
+      fdqAluno.Delete;
+    end;
+
+    fdqAluno.Close;
+    fdqAluno.Open;
+
+    fdmTemp.First;
+    while not(fdmTemp.EOF) do
+    begin
+      fdqAluno.Append;
+      fdqAluno.FieldByName('aluno_id').AsString := fdmTemp.FieldByName('aluno_id').AsString;
+      fdqAluno.FieldByName('nome').AsString := fdmTemp.FieldByName('nome').AsString;
+      fdqAluno.Post;
+
+      fdmTemp.Next;
+    end;
+
+    fdqAluno.Close;
+    fdqAluno.Open;
+
+
+  finally
+    fdmTemp.DisposeOf;
   end;
 
-  fdqAluno.Close;
-  fdqAluno.Open;
-
-  fdmAlunos.First;
-  while not(fdmAlunos.EOF) do
-  begin
-    fdqAluno.Append;
-    fdqAluno.FieldByName('nome').AsString := fdmAlunos.FieldByName('nome').AsString;
-    fdqAluno.Post;
-
-    fdmAlunos.Next;
-  end;
-
-  fdqAluno.Close;
-  fdqAluno.Open;
 end;
 
 procedure TfrmAgendaEscola.GetTurmas;

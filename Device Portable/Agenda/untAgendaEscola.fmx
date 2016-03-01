@@ -191,31 +191,6 @@ inherited frmAgendaEscola: TfrmAgendaEscola
       end
     end
   end
-  object fdmAlunos: TFDMemTable
-    FieldDefs = <>
-    IndexDefs = <>
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale]
-    FormatOptions.MaxBcdPrecision = 2147483647
-    FormatOptions.MaxBcdScale = 2147483647
-    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode]
-    ResourceOptions.Persistent = True
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockWait, uvRefreshMode, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
-    UpdateOptions.LockWait = True
-    UpdateOptions.CheckRequired = False
-    StoreDefs = True
-    Left = 328
-    Top = 312
-    object fdmAlunosaluno_id: TIntegerField
-      FieldName = 'aluno_id'
-    end
-    object fdmAlunosnome: TStringField
-      FieldName = 'nome'
-      Size = 150
-    end
-  end
   object FDStanStorageBinLink1: TFDStanStorageBinLink
     Left = 88
     Top = 320
@@ -251,7 +226,7 @@ inherited frmAgendaEscola: TfrmAgendaEscola
     end
   end
   object fdqAluno: TFDQuery
-    Connection = DM.FDConnectionSQLite
+    Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
       'select * from aluno')
     Left = 88

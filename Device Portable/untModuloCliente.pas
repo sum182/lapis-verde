@@ -10,6 +10,7 @@ type
     DSRestConnection1: TDSRestConnection;
     DSRestConnectionLocal: TDSRestConnection;
     DSRestConnectionAWS: TDSRestConnection;
+    procedure DataModuleCreate(Sender: TObject);
     private
     FInstanceOwner: Boolean;
     FSrvServerMetodosClient: TSrvServerMetodosClient;
@@ -42,12 +43,20 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
+uses smGeralFMX;
+
 {$R *.dfm}
 
 constructor TModuloCliente.Create(AOwner: TComponent);
 begin
   inherited;
   FInstanceOwner := True;
+end;
+
+procedure TModuloCliente.DataModuleCreate(Sender: TObject);
+begin
+  if not IsSysOSWindows then
+    DSRestConnection1.Host := DSRestConnectionAWS.Host;
 end;
 
 destructor TModuloCliente.Destroy;

@@ -1,5 +1,6 @@
 object ModuloCliente: TModuloCliente
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 271
   Width = 415
   object DSRestConnection1: TDSRestConnection
