@@ -50,14 +50,14 @@ end;
 
 procedure TfrmTesteJsonFdMem.SpeedButton1Click(Sender: TObject);
 var
-  ClientRest: TSrvServerMetodosClient;
+  ClientRest: TSmTesteClient;
   RetClient: TFDJSONDataSets;
   ItemAdd: TListViewItem;
 begin
   ListView1.Visible:=False;
   ListView2.Visible:=True;
 
-  ClientRest:= TSrvServerMetodosClient.Create(ModuloCliente.DSRestConnection1);
+  ClientRest:= TSmTesteClient.Create(ModuloCliente.DSRestConnection1);
   RetClient:= ClientRest.GetAlunosTeste;
   Assert(TFDJSONDataSetsReader.GetListCount(RetClient) = 1);
 
@@ -88,7 +88,7 @@ begin
 
 
   //Efetua o download da tabela TITULOS vinda do Servidor DataSnap
-  LDataSetList := ModuloCliente.SrvServerMetodosClient.GetAlunosTeste;
+  LDataSetList := ModuloCliente.ServerMethodsTesteClient.GetAlunosTeste;
 
   //Prepara o MemoryTable temporário
   fdmAlunos.Active := False;

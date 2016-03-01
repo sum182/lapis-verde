@@ -29,14 +29,14 @@ object webModulo: TwebModulo
     Server = DSServer1
     Filters = <>
     WebDispatch.PathInfo = 'datasnap*'
-    Left = 96
+    Left = 104
     Top = 75
   end
   object DSServerClass1: TDSServerClass
     OnGetClass = DSServerClass1GetClass
     Server = DSServer1
-    Left = 200
-    Top = 11
+    Left = 312
+    Top = 19
   end
   object ServerFunctionInvoker: TPageProducer
     HTMLFile = 'Templates\ServerFunctionInvoker.html'
@@ -101,5 +101,16 @@ object webModulo: TwebModulo
     Server = DSServer1
     Left = 208
     Top = 248
+  end
+  object DSServerClassTeste: TDSServerClass
+    OnGetClass = DSServerClassTesteGetClass
+    Server = DSServer1
+    Left = 312
+    Top = 88
+  end
+  object DSServerClassMain: TDSServerClass
+    OnGetClass = DSServerClassMainGetClass
+    Left = 312
+    Top = 144
   end
 end

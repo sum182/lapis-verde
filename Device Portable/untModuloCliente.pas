@@ -13,13 +13,16 @@ type
   private
     FInstanceOwner: Boolean;
     FSrvServerMetodosClient: TSrvServerMetodosClient;
+    FServerMethodsTesteClient: TSmTesteClient;
     function GetSrvServerMetodosClient: TSrvServerMetodosClient;
+    function GetServerMethodsTesteClient: TSmTesteClient;
     { Private declarations }
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     property InstanceOwner: Boolean read FInstanceOwner write FInstanceOwner;
     property SrvServerMetodosClient: TSrvServerMetodosClient read GetSrvServerMetodosClient write FSrvServerMetodosClient;
+    property ServerMethodsTesteClient: TSmTesteClient read GetServerMethodsTesteClient write FServerMethodsTesteClient;
 
 end;
 
@@ -41,6 +44,7 @@ end;
 destructor TModuloCliente.Destroy;
 begin
   FSrvServerMetodosClient.Free;
+  FServerMethodsTesteClient.Free;
   inherited;
 end;
 
@@ -51,4 +55,11 @@ begin
   Result := FSrvServerMetodosClient;
 end;
 
+
+function TModuloCliente.GetServerMethodsTesteClient: TSmTesteClient;
+begin
+  if FServerMethodsTesteClient = nil then
+    FServerMethodsTesteClient:= TSmTesteClient.Create(DSRestConnection1, FInstanceOwner);
+  Result := FServerMethodsTesteClient;
+end;
 end.

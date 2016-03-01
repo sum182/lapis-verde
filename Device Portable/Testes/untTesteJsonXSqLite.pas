@@ -55,7 +55,7 @@ begin
     procedure (const AResult: TModalResult)
     begin
       //Efetua o download da tabela TITULOS vinda do Servidor DataSnap
-      LDataSetList := ModuloCliente.SrvServerMetodosClient.GetAlunosTeste;
+      LDataSetList := ModuloCliente.ServerMethodsTesteClient.GetAlunosTeste;
 
       //Prepara o MemoryTable temporário
       fdmAlunos.Active := False;

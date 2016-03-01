@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 01/03/2016 00:23:22
+// 01/03/2016 13:00:08
 //
 
 unit Proxy;
@@ -47,6 +47,22 @@ type
     function GetAlunos_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetTurmas(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+  end;
+
+  TSmTesteClient = class(TDSAdminRestClient)
+  private
+    FEchoStringCommand: TDSRestCommand;
+    FReverseStringCommand: TDSRestCommand;
+    FGetAlunosTesteCommand: TDSRestCommand;
+    FGetAlunosTesteCommand_Cache: TDSRestCommand;
+  public
+    constructor Create(ARestConnection: TDSRestConnection); overload;
+    constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function EchoString(Value: string; const ARequestFilter: string = ''): string;
+    function ReverseString(Value: string; const ARequestFilter: string = ''): string;
+    function GetAlunosTeste(const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAlunosTeste_Cache(const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
   IDSRestCachedTFDJSONDataSets = interface(IDSRestCachedObject<TFDJSONDataSets>)
@@ -147,6 +163,28 @@ const
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmTeste_EchoString: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Value'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmTeste_ReverseString: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Value'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmTeste_GetAlunosTeste: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSmTeste_GetAlunosTeste_Cache: array [0..0] of TDSRestParameterMetaData =
+  (
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
@@ -432,6 +470,91 @@ begin
   FGetAlunosCommand_Cache.DisposeOf;
   FGetTurmasCommand.DisposeOf;
   FGetTurmasCommand_Cache.DisposeOf;
+  inherited;
+end;
+
+function TSmTesteClient.EchoString(Value: string; const ARequestFilter: string): string;
+begin
+  if FEchoStringCommand = nil then
+  begin
+    FEchoStringCommand := FConnection.CreateCommand;
+    FEchoStringCommand.RequestType := 'GET';
+    FEchoStringCommand.Text := 'TSmTeste.EchoString';
+    FEchoStringCommand.Prepare(TSmTeste_EchoString);
+  end;
+  FEchoStringCommand.Parameters[0].Value.SetWideString(Value);
+  FEchoStringCommand.Execute(ARequestFilter);
+  Result := FEchoStringCommand.Parameters[1].Value.GetWideString;
+end;
+
+function TSmTesteClient.ReverseString(Value: string; const ARequestFilter: string): string;
+begin
+  if FReverseStringCommand = nil then
+  begin
+    FReverseStringCommand := FConnection.CreateCommand;
+    FReverseStringCommand.RequestType := 'GET';
+    FReverseStringCommand.Text := 'TSmTeste.ReverseString';
+    FReverseStringCommand.Prepare(TSmTeste_ReverseString);
+  end;
+  FReverseStringCommand.Parameters[0].Value.SetWideString(Value);
+  FReverseStringCommand.Execute(ARequestFilter);
+  Result := FReverseStringCommand.Parameters[1].Value.GetWideString;
+end;
+
+function TSmTesteClient.GetAlunosTeste(const ARequestFilter: string): TFDJSONDataSets;
+begin
+  if FGetAlunosTesteCommand = nil then
+  begin
+    FGetAlunosTesteCommand := FConnection.CreateCommand;
+    FGetAlunosTesteCommand.RequestType := 'GET';
+    FGetAlunosTesteCommand.Text := 'TSmTeste.GetAlunosTeste';
+    FGetAlunosTesteCommand.Prepare(TSmTeste_GetAlunosTeste);
+  end;
+  FGetAlunosTesteCommand.Execute(ARequestFilter);
+  if not FGetAlunosTesteCommand.Parameters[0].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetAlunosTesteCommand.Parameters[0].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAlunosTesteCommand.Parameters[0].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetAlunosTesteCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSmTesteClient.GetAlunosTeste_Cache(const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FGetAlunosTesteCommand_Cache = nil then
+  begin
+    FGetAlunosTesteCommand_Cache := FConnection.CreateCommand;
+    FGetAlunosTesteCommand_Cache.RequestType := 'GET';
+    FGetAlunosTesteCommand_Cache.Text := 'TSmTeste.GetAlunosTeste';
+    FGetAlunosTesteCommand_Cache.Prepare(TSmTeste_GetAlunosTeste_Cache);
+  end;
+  FGetAlunosTesteCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAlunosTesteCommand_Cache.Parameters[0].Value.GetString);
+end;
+
+constructor TSmTesteClient.Create(ARestConnection: TDSRestConnection);
+begin
+  inherited Create(ARestConnection);
+end;
+
+constructor TSmTesteClient.Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ARestConnection, AInstanceOwner);
+end;
+
+destructor TSmTesteClient.Destroy;
+begin
+  FEchoStringCommand.DisposeOf;
+  FReverseStringCommand.DisposeOf;
+  FGetAlunosTesteCommand.DisposeOf;
+  FGetAlunosTesteCommand_Cache.DisposeOf;
   inherited;
 end;
 

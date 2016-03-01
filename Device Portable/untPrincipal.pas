@@ -217,8 +217,7 @@ begin
   layMenu.Visible:=True;
   ToolBarPincipal.Visible:=True;
   MultiView1.HideMaster;
-
-end;
+end;
 
 procedure TfrmPrincipal.imgMensagensClick(Sender: TObject);
 begin

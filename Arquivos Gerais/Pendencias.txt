@@ -1,12 +1,7 @@
-Instalar pacotes abaixo e setar este diretorio no search path do projeto
-C:\Users\Public\Documents\Embarcadero\Studio\17.0\Samples\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewMultiDetailAppearance
-C:\Users\Public\Documents\Embarcadero\Studio\17.0\Samples\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewRatingsAppearance
-
-
 Mapear
 S:\Desenvolvimento\Delphi\Estudos\Caderno
 Caderno de estudo delphi
-=======
+
 Atualizar atalhos VM
 
 
@@ -38,6 +33,8 @@ Tratar excecoes rest/json
 voltar nativo do android tem q fazer o msm do botao voltar e nao fechar a app
 ao voltar a um form aberto reabrilo e manter da msm forma ao inves de dar um dispose
 Setar o estilo de todas as telas
+
+voltar minimizar teclado - analisar (wagner)
 
 
 **Rest/Json

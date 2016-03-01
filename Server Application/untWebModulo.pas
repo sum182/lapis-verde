@@ -20,6 +20,8 @@ type
     WebFileDispatcher1: TWebFileDispatcher;
     DSProxyGenerator1: TDSProxyGenerator;
     DSServerMetaDataProvider1: TDSServerMetaDataProvider;
+    DSServerClassTeste: TDSServerClass;
+    DSServerClassMain: TDSServerClass;
     procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
@@ -32,6 +34,10 @@ type
       const AFileName: string; Request: TWebRequest; Response: TWebResponse;
       var Handled: Boolean);
     procedure WebModuleCreate(Sender: TObject);
+    procedure DSServerClassTesteGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure DSServerClassMainGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
@@ -48,12 +54,24 @@ implementation
 
 {$R *.dfm}
 
-uses untServerMetodos, Web.WebReq;
+uses untServerMetodos, Web.WebReq, untSmTeste, untSmMain;
 
 procedure TwebModulo.DSServerClass1GetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := untServerMetodos.TSrvServerMetodos;
+end;
+
+procedure TwebModulo.DSServerClassMainGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := untSmMain.TSmMain;
+end;
+
+procedure TwebModulo.DSServerClassTesteGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := untSmTeste.TSmTeste;
 end;
 
 procedure TwebModulo.ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
