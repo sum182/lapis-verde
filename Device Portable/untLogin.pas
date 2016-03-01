@@ -267,7 +267,7 @@ function TfrmLogin.LoginFuncionario: boolean;
 begin
   try
     try
-      Result := ModuloCliente.SrvServerMetodosClient.LoginFuncionario
+      Result := ModuloCliente.SmEscolaClient.LoginFuncionario
       (fLogin, fSenha) ;
     finally
        //
@@ -286,7 +286,7 @@ function TfrmLogin.LoginResponsavel: boolean;
 begin
   try
     try
-       Result := ModuloCliente.SrvServerMetodosClient.LoginResponsavel
+       Result := ModuloCliente.SmResponsavelClient.LoginResponsavel
     (fLogin, fSenha);
     finally
        //

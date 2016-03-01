@@ -229,7 +229,7 @@ begin
   end;
 
   try
-    MsgCriarConta:= ModuloCliente.SrvServerMetodosClient.CriarUsuarioResponsavel(fNome,fSobreNome,fEmail,fSenha,fTelefone,fCPF,fRG,fSexo);
+    MsgCriarConta:= ModuloCliente.SmResponsavelClient.CriarUsuarioResponsavel(fNome,fSobreNome,fEmail,fSenha,fTelefone,fCPF,fRG,fSexo);
   except on E:Exception do
     begin
       fCriarContaOk:=False;
@@ -600,7 +600,7 @@ end;
 function TfrmCriarConta.ValidarCPF: Boolean;
 begin
   try
-    if not ModuloCliente.SrvServerMetodosClient.ValidarCPFExistenteResponsavel(edtCPF.Text) then
+    if not ModuloCliente.SmResponsavelClient.ValidarCPFExistenteResponsavel(edtCPF.Text) then
     begin
       fCPFOk:= False;
       msgErrorCriarConta:= 'Este CPF já está cadastrado';
@@ -629,7 +629,7 @@ begin
   end;
 
   try
-    if not ModuloCliente.SrvServerMetodosClient.ValidarEmailExistenteResponsavel(edtEmail.Text) then
+    if not ModuloCliente.SmResponsavelClient.ValidarEmailExistenteResponsavel(edtEmail.Text) then
     begin
       fEmailOk:= False;
       lblErrorEmail.Text:= 'Este E-mail já está cadastrado';

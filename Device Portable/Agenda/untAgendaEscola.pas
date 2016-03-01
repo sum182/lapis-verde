@@ -59,7 +59,7 @@ var
   LDataSetList  : TFDJSONDataSets;
 begin
 
-      LDataSetList := ModuloCliente.SrvServerMetodosClient.GetAlunos(1,0);
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(1,0);
 
       //Prepara o MemoryTable temporário
       fdmAlunos.Active := False;
@@ -99,7 +99,7 @@ begin
 
 
 
-      LDataSetList := ModuloCliente.SrvServerMetodosClient.GetTurmas(1,0);
+      LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(1,0);
 
       //Prepara o MemoryTable temporário
       fdmTurmas.Active := False;

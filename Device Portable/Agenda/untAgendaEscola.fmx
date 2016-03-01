@@ -106,10 +106,10 @@ inherited frmAgendaEscola: TfrmAgendaEscola
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5D45D68671C218A
+                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5D2DD68671C218A
                   145712070A7D20A55924D2D0D4455563CE79C595EB2CB74F534ABB880C88398A
                   F20531472B7FE552FE156A6E1D4E5FF623FF3DD1A5189911733D46363B26C45C
-                  EE23F65C2362AE62A447CC8591886B5385100EF3C5FCDA10C0E0DF0000000049
+                  EE23F65C2362AE62A447CC8591886B5385100E4EE3FCB6E145A39C0000000049
                   454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -183,8 +183,8 @@ inherited frmAgendaEscola: TfrmAgendaEscola
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
           Align = Client
-          Size.Width = 640.000000000000000000
-          Size.Height = 383.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
         end

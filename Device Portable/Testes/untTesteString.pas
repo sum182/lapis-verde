@@ -38,7 +38,7 @@ end;
 procedure TfrmTesteString.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  Edit1.Text := ModuloCliente.SrvServerMetodosClient.ReverseString(Edit1.Text);
+  Edit1.Text := ModuloCliente.SmTesteClient.ReverseString(Edit1.Text);
 end;
 
 end.

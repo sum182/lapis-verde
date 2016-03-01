@@ -7,6 +7,20 @@ Atualizar atalhos VM
 
 
 ----Mobile--------------------------------------------------------------------------------
+
+try except server
+  try
+    LDataSetList := ClientModule2.ServerMethods1Client.GetDepartmentNames();
+    UpdateDepartmentNames(LDataSetList);
+  except
+    on E: TDSRestProtocolException do
+      HandleRestException(ClientModule2.DSRestConnection1, 'Get Departments error', E)
+    else
+      raise;
+  end;
+  
+  
+
 **Criar Conta
 Label Titulo - nome da app
 testar todos as chamadas rest e validar os try except
