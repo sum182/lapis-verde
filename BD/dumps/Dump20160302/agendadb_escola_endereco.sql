@@ -16,6 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `escola_endereco`
+--
+
+DROP TABLE IF EXISTS `escola_endereco`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `escola_endereco` (
+  `escola_endereco_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cep` varchar(20) DEFAULT NULL,
+  `logradouro` varchar(200) DEFAULT NULL,
+  `numero` smallint(6) DEFAULT NULL,
+  `complemento` varchar(50) DEFAULT NULL,
+  `cidade` varchar(50) DEFAULT NULL,
+  `bairro` varchar(50) DEFAULT NULL,
+  `uf` varchar(10) DEFAULT NULL,
+  `escola_id` int(11) NOT NULL,
+  PRIMARY KEY (`escola_endereco_id`),
+  KEY `fk_escola_endereco_idx` (`escola_id`),
+  KEY `idx_escola_escola_endereco_cep` (`cep`),
+  KEY `idx_escola_escola_endereco_logradouro` (`logradouro`),
+  KEY `idx_escola_escola_endereco_numero` (`numero`),
+  KEY `idx_escola_escola_endereco_cidade` (`cidade`),
+  KEY `idx_escola_escola_endereco_bairro` (`bairro`),
+  KEY `idx_escola_escola_endereco_uf` (`uf`),
+  CONSTRAINT `fk_escola_endereco_x_escola` FOREIGN KEY (`escola_id`) REFERENCES `escola` (`escola_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `escola_endereco`
 --
 
@@ -34,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:29:56
+-- Dump completed on 2016-03-02 17:01:11

@@ -16,6 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `escola_telefone`
+--
+
+DROP TABLE IF EXISTS `escola_telefone`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `escola_telefone` (
+  `escola_telefone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `escola_id` int(11) DEFAULT NULL,
+  `telefone_tipo_id` smallint(6) DEFAULT NULL,
+  `numero` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`escola_telefone_id`),
+  KEY `fk_escola_telefone_escola_idx` (`escola_id`),
+  KEY `fk_escola_telefone_telefone_tipo_idx` (`telefone_tipo_id`),
+  KEY `idx_escola_telefone_numero` (`numero`),
+  CONSTRAINT `fk_escola_telefone_x_escola` FOREIGN KEY (`escola_id`) REFERENCES `escola` (`escola_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_escola_telefone_x_telefone_tipo` FOREIGN KEY (`telefone_tipo_id`) REFERENCES `telefone_tipo` (`telefone_tipo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `escola_telefone`
 --
 
@@ -34,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:29:52
+-- Dump completed on 2016-03-02 17:01:08

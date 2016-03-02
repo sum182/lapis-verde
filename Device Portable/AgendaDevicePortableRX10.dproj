@@ -5,8 +5,8 @@
         <FrameworkType>FMX</FrameworkType>
         <MainSource>AgendaDevicePortableRX10.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Android</Platform>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1119</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -326,12 +326,24 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="untPrincipal.pas">
-            <Form>frmPrincipal</Form>
-        </DCCReference>
-        <DCCReference Include="untDM.pas">
+        <DCCReference Include="DM\untDM.pas">
             <Form>DM</Form>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="DM\untDMStyles.pas">
+            <Form>DMStyles</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="DM\untDmResponsavel.pas">
+            <Form>DmResponsavel</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="DM\untDmEscola.pas">
+            <Form>DmEscola</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="untPrincipal.pas">
+            <Form>frmPrincipal</Form>
         </DCCReference>
         <DCCReference Include="untModuloCliente.pas">
             <Form>ModuloCliente</Form>
@@ -361,43 +373,30 @@
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smCrypt.pas"/>
         <DCCReference Include="untFuncoes.pas"/>
-        <DCCReference Include="untDMStyles.pas">
-            <Form>DMStyles</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.pas">
             <Form>frmBase</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas">
             <Form>frmBaseForAll</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas">
             <Form>frmBaseToolBar</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas"/>
         <DCCReference Include="Agenda\untAgenda.pas">
             <Form>frmAgenda</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Mensagens\untMensagens.pas">
             <Form>frmMensagens</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Usuario\untCriarConta.pas">
             <Form>frmCriarConta</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Testes\untTesteString2.pas">
             <Form>frmTesteString2</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Agenda\untAgendaEscola.pas">
             <Form>frmAgendaEscola</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

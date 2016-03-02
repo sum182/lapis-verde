@@ -43,6 +43,11 @@ colocar scroll pois os botoes do rodape qdo vira o cel nao aparece
 erro na senha o teclado sobrepoe a msg
 Auto Login
 
+
+estudar 
+http://www.tdevrocks.com.br/2014/09/21/tutorial-criando-meu-app-step-by-step-parte-ii/
+
+
 **Menu princiapl
 
 

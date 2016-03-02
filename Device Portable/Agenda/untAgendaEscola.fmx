@@ -5,7 +5,7 @@ inherited frmAgendaEscola: TfrmAgendaEscola
     inherited ToolBar1: TToolBar
       inherited lblTitulo: TLabel
         Size.Width = 132.000000000000000000
-        Text = 'Agenda'
+        Text = 'teste'
       end
       inherited layToolBarVoltar: TLayout
         inherited btnVoltar: TSpeedButton
@@ -191,21 +191,17 @@ inherited frmAgendaEscola: TfrmAgendaEscola
       end
     end
   end
-  object FDStanStorageBinLink1: TFDStanStorageBinLink
-    Left = 88
-    Top = 320
-  end
   object bsAlunos: TBindSourceDB
-    DataSet = fdqAluno
+    DataSet = DmEscola.fdqAluno
     ScopeMappings = <>
-    Left = 320
-    Top = 248
+    Left = 48
+    Top = 200
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 324
-    Top = 317
+    Left = 52
+    Top = 261
     object LinkListControlToField1: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = bsAlunos
@@ -225,34 +221,10 @@ inherited frmAgendaEscola: TfrmAgendaEscola
       FillBreakGroups = <>
     end
   end
-  object fdqAluno: TFDQuery
-    Connection = DM.FDConnectionDBEscola
-    SQL.Strings = (
-      'select * from aluno')
-    Left = 88
-    Top = 200
-    object fdqAlunoaluno_id: TIntegerField
-      FieldName = 'aluno_id'
-      Origin = 'aluno_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object fdqAlunonome: TStringField
-      FieldName = 'nome'
-      Origin = 'nome'
-      Size = 150
-    end
-  end
   object bsTurmas: TBindSourceDB
-    DataSet = fdqTurma
+    DataSet = DmEscola.fdqTurma
     ScopeMappings = <>
-    Left = 320
-    Top = 192
-  end
-  object fdqTurma: TFDQuery
-    Connection = DM.FDConnectionDBEscola
-    SQL.Strings = (
-      'select * from turma')
-    Left = 88
-    Top = 264
+    Left = 48
+    Top = 136
   end
 end

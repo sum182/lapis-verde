@@ -16,6 +16,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `turma_aluno`
+--
+
+DROP TABLE IF EXISTS `turma_aluno`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `turma_aluno` (
+  `turma_id` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,
+  PRIMARY KEY (`turma_id`,`aluno_id`),
+  KEY `fk_turma_aluno_x_aluno_idx` (`aluno_id`),
+  CONSTRAINT `fk_turma_aluno_x_aluno` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_turma_aluno_x_turma` FOREIGN KEY (`turma_id`) REFERENCES `turma` (`turma_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `turma_aluno`
 --
 
@@ -34,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:29:58
+-- Dump completed on 2016-03-02 17:01:12

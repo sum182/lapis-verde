@@ -16,6 +16,21 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `agenda_tipo`
+--
+
+DROP TABLE IF EXISTS `agenda_tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `agenda_tipo` (
+  `agenda_tipo_id` smallint(6) NOT NULL,
+  `descricao` varchar(150) DEFAULT NULL,
+  `informacoes_gerais` text,
+  PRIMARY KEY (`agenda_tipo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela para armazenar o tipo da agenda.\nExemplo:\n1 - Para Responsaveis\n2 - Para Professores';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `agenda_tipo`
 --
 
@@ -33,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:29:58
+-- Dump completed on 2016-03-02 17:01:13

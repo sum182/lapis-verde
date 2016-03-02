@@ -4,8 +4,11 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   System.UITypes,
+  untDM in 'DM\untDM.pas' {DM: TDataModule},
+  untDMStyles in 'DM\untDMStyles.pas' {DMStyles: TDataModule},
+  untDmResponsavel in 'DM\untDmResponsavel.pas' {DmResponsavel: TDataModule},
+  untDmEscola in 'DM\untDmEscola.pas' {DmEscola: TDataModule} ,
   untPrincipal in 'untPrincipal.pas' {frmPrincipal},
-  untDM in 'untDM.pas' {DM: TDataModule},
   untModuloCliente in 'untModuloCliente.pas' {ModuloCliente: TDataModule},
   untTesteClientes in 'Testes\untTesteClientes.pas' {frmTesteClientes},
   untTesteFornecedores in 'Testes\untTesteFornecedores.pas' {frmTesteFornecedores},
@@ -17,7 +20,6 @@ uses
   untLogin in 'untLogin.pas' {frmLogin},
   smCrypt in 'C:\Componentes\sum182\D15\Units\smCrypt.pas',
   untFuncoes in 'untFuncoes.pas',
-  untDMStyles in 'untDMStyles.pas' {DMStyles: TDataModule},
   smFrmBase in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.pas' {frmBase},
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
   smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
@@ -52,6 +54,8 @@ begin
    //Modo Correto
   Application.Initialize;
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDmResponsavel, DmResponsavel);
+  Application.CreateForm(TDmEscola, DmEscola);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmLogin, frmLogin);

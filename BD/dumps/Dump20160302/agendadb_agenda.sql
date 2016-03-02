@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `agenda`
+--
+
+DROP TABLE IF EXISTS `agenda`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `agenda` (
+  `agenda_id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(50) DEFAULT NULL,
+  `descricao` text,
+  `data` datetime DEFAULT NULL,
+  `agenda_tipo_id` smallint(6) DEFAULT NULL,
+  `funcionario_id` int(11) DEFAULT NULL,
+  `escola_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`agenda_id`),
+  KEY `fk_agenda_agenda_tipo_idx` (`agenda_tipo_id`),
+  KEY `fk_agenda_x_funcionario_idx` (`funcionario_id`),
+  KEY `idx_agenda_titulo` (`titulo`),
+  KEY `idx_agenda_data` (`data`),
+  KEY `fk_agenda_x_escola_idx` (`escola_id`),
+  CONSTRAINT `fk_agenda_x_agenda_tipo` FOREIGN KEY (`agenda_tipo_id`) REFERENCES `agenda_tipo` (`agenda_tipo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agenda_x_escola` FOREIGN KEY (`escola_id`) REFERENCES `escola` (`escola_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agenda_x_funcionario` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionario` (`funcionario_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `agenda`
 --
 
@@ -34,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:30:02
+-- Dump completed on 2016-03-02 17:01:15

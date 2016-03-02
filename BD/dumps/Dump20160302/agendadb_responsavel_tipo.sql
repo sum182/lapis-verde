@@ -16,6 +16,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `responsavel_tipo`
+--
+
+DROP TABLE IF EXISTS `responsavel_tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `responsavel_tipo` (
+  `responsavel_tipo_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(150) DEFAULT NULL,
+  `informacoes_gerais` text,
+  PRIMARY KEY (`responsavel_tipo_id`),
+  KEY `idx_responsavel_tipo_descricao` (`descricao`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `responsavel_tipo`
 --
 
@@ -34,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:29:53
+-- Dump completed on 2016-03-02 17:01:09

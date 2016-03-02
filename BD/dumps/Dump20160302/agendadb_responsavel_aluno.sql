@@ -16,6 +16,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `responsavel_aluno`
+--
+
+DROP TABLE IF EXISTS `responsavel_aluno`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `responsavel_aluno` (
+  `responsavel_id` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,
+  PRIMARY KEY (`responsavel_id`,`aluno_id`),
+  KEY `responsavel_aluno_x_aluno_idx` (`aluno_id`),
+  CONSTRAINT `responsavel_aluno_x_aluno` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `responsavel_aluno_x_responsavel` FOREIGN KEY (`responsavel_id`) REFERENCES `responsavel` (`responsavel_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `responsavel_aluno`
 --
 
@@ -34,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:29:56
+-- Dump completed on 2016-03-02 17:01:12

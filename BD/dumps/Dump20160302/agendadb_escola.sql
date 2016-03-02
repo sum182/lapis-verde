@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `escola`
+--
+
+DROP TABLE IF EXISTS `escola`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `escola` (
+  `escola_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_fantasia` varchar(150) DEFAULT NULL,
+  `razao_social` varchar(150) DEFAULT NULL,
+  `cnpj` bigint(20) DEFAULT NULL,
+  `ativo` char(1) DEFAULT NULL,
+  `data_cadastro` date DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `informacoes_gerais` text,
+  PRIMARY KEY (`escola_id`),
+  KEY `idx_escola_nome_fantasia` (`nome_fantasia`),
+  KEY `idx_escola_razao_social` (`razao_social`),
+  KEY `idx_escola_cnpj` (`cnpj`),
+  KEY `idx_escola_ativo` (`ativo`),
+  KEY `idx_escola_data_cadastro` (`data_cadastro`),
+  KEY `idx_escola_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `escola`
 --
 
@@ -34,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:30:00
+-- Dump completed on 2016-03-02 17:01:14

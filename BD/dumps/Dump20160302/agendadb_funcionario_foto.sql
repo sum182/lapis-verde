@@ -16,6 +16,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `funcionario_foto`
+--
+
+DROP TABLE IF EXISTS `funcionario_foto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `funcionario_foto` (
+  `funcionario_foto_id` int(11) NOT NULL AUTO_INCREMENT,
+  `funcionario_id` int(11) DEFAULT NULL,
+  `foto` blob,
+  PRIMARY KEY (`funcionario_foto_id`),
+  KEY `fk_funcionario_foto_funcionario_id_idx` (`funcionario_id`),
+  CONSTRAINT `fk_funcionario_foto_x_funcionario` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionario` (`funcionario_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `funcionario_foto`
 --
 
@@ -33,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-02 14:30:02
+-- Dump completed on 2016-03-02 17:01:15
