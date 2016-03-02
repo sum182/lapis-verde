@@ -136,14 +136,14 @@ inherited frmAgendaEscola: TfrmAgendaEscola
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 1
       TabPosition = PlatformDefault
       object tbitTurma: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 320.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -168,7 +168,7 @@ inherited frmAgendaEscola: TfrmAgendaEscola
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 320.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -198,14 +198,14 @@ inherited frmAgendaEscola: TfrmAgendaEscola
   object bsAlunos: TBindSourceDB
     DataSet = fdqAluno
     ScopeMappings = <>
-    Left = 248
-    Top = 312
+    Left = 320
+    Top = 248
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 516
-    Top = 237
+    Left = 324
+    Top = 317
     object LinkListControlToField1: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = bsAlunos
@@ -242,28 +242,17 @@ inherited frmAgendaEscola: TfrmAgendaEscola
       Size = 150
     end
   end
-  object fdmTurmas: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 248
-    Top = 192
-    object fdmTurmasturma_id: TIntegerField
-      FieldName = 'turma_id'
-    end
-    object fdmTurmasnome: TStringField
-      FieldName = 'nome'
-      Size = 150
-    end
-  end
   object bsTurmas: TBindSourceDB
-    DataSet = fdmTurmas
+    DataSet = fdqTurma
     ScopeMappings = <>
     Left = 320
     Top = 192
+  end
+  object fdqTurma: TFDQuery
+    Connection = DM.FDConnectionDBEscola
+    SQL.Strings = (
+      'select * from turma')
+    Left = 88
+    Top = 264
   end
 end

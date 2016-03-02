@@ -59,7 +59,7 @@ end;
 
 procedure TDM.ConectarDB;
 begin
-  ConectarSQLite(FDConnectionDBEscola,'db.s3db');
+  ConectarSQLite(FDConnectionDB,'db.s3db');
 end;
 
 procedure TDM.ConectarDBEscola;
@@ -69,7 +69,7 @@ end;
 
 procedure TDM.ConectarDBResponsavel;
 begin
-  ConectarSQLite(FDConnectionDBEscola,'dbResponsavel.s3db');
+  ConectarSQLite(FDConnectionDBResponsavel,'dbResponsavel.s3db');
 end;
 
 procedure TDM.ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);

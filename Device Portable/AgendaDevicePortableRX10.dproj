@@ -449,7 +449,7 @@
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\dbEscola.s3db" Configuration="Release" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>.assets\internal\</RemoteDir>
+                        <RemoteDir>.\assets\internal\</RemoteDir>
                         <RemoteName>dbEscola.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -502,7 +502,7 @@
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\dbResponsavel.s3db" Configuration="Debug" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>.assets\internal\</RemoteDir>
+                        <RemoteDir>.\assets\internal\</RemoteDir>
                         <RemoteName>dbResponsavel.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -520,7 +520,7 @@
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\db.s3db" Configuration="Debug" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>.assets\internal\</RemoteDir>
+                        <RemoteDir>.\assets\internal\</RemoteDir>
                         <RemoteName>db.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -533,7 +533,7 @@
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\db.s3db" Configuration="Release" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>.assets\internal\</RemoteDir>
+                        <RemoteDir>.\assets\internal\</RemoteDir>
                         <RemoteName>db.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -551,7 +551,7 @@
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\dbResponsavel.s3db" Configuration="Release" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>.assets\internal\</RemoteDir>
+                        <RemoteDir>.\assets\internal\</RemoteDir>
                         <RemoteName>dbResponsavel.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -593,7 +593,7 @@
                 </DeployFile>
                 <DeployFile LocalName="..\BD\SQLite\dbEscola.s3db" Configuration="Debug" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>.assets\internal\</RemoteDir>
+                        <RemoteDir>.\assets\internal\</RemoteDir>
                         <RemoteName>dbEscola.s3db</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>

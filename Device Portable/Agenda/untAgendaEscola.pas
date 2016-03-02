@@ -30,11 +30,9 @@ type
     fdqAluno: TFDQuery;
     fdqAlunoaluno_id: TIntegerField;
     fdqAlunonome: TStringField;
-    fdmTurmas: TFDMemTable;
-    fdmTurmasturma_id: TIntegerField;
-    fdmTurmasnome: TStringField;
     bsTurmas: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
+    fdqTurma: TFDQuery;
     procedure btnAtualizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -122,33 +120,42 @@ end;
 procedure TfrmAgendaEscola.GetTurmas;
 var
   LDataSetList  : TFDJSONDataSets;
+  fdmTemp : TFDMemTable;
 begin
+  try
+    fdmTemp := TFDMemTable.Create(self);
+
   LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(1,0);
 
   //Prepara o MemoryTable temporário
-  fdmTurmas.Active := False;
+  fdmTemp.Active := False;
 
   //Fazemos um teste para verifica se realmente há DataSet no retorno da função
   Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
 
   //Adicionamos o conteúdo do DataSet "baixado" ao Memory Table
-  fdmTurmas.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
+  fdmTemp.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
 
-  {fdqAluno.Close;
-  fdqAluno.Open;
+  fdqTurma.Close;
+  fdqTurma.Open;
 
-  fdmTurmas.First;
-  while not(fdmTurmas.EOF) do
+  fdmTemp.First;
+  while not(fdmTemp.EOF) do
   begin
-    fdqAluno.Append;
-    fdqAluno.FieldByName('nome').AsString := fdmTurmas.FieldByName('nome').AsString;
-    fdqAluno.Post;
+    fdqTurma.Append;
+    fdqTurma.FieldByName('turma_id').AsString := fdmTemp.FieldByName('turma_id').AsString;
+    fdqTurma.FieldByName('nome').AsString := fdmTemp.FieldByName('nome').AsString;
+    fdqTurma.Post;
 
-    fdmTurmas.Next;
+    fdmTemp.Next;
   end;
 
-  fdqAluno.Close;
-  fdqAluno.Open;  }
+  fdqTurma.Close;
+  fdqTurma.Open;
+
+  finally
+    fdmTemp.DisposeOf;
+  end;
 
 end;
 
@@ -156,6 +163,9 @@ procedure TfrmAgendaEscola.OpenQuerys;
 begin
   fdqAluno.Close;
   fdqAluno.Open;
+
+  fdqTurma.Close;
+  fdqTurma.Open;
 end;
 
 end.
