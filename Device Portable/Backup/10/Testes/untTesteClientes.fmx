@@ -1,0 +1,133 @@
+inherited frmTesteClientes: TfrmTesteClientes
+  DesignerMasterStyle = 3
+  inherited layBase: TLayout
+    inherited ToolBar1: TToolBar
+      inherited lblTitulo: TLabel
+        Text = 'Clientes'
+      end
+      inherited layToolBarVoltar: TLayout
+        inherited btnVoltar: TSpeedButton
+          inherited imgVoltar: TImage
+            MultiResBitmap.Height = 24
+            MultiResBitmap.Width = 24
+            MultiResBitmap = <
+              item
+                Width = 24
+                Height = 24
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                  F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  007149444154484BEDD05D0A8020100460E93841B7E9E73A766C2977DB608A90
+                  9E625A10FC20C4799809435317558D39E71557AEB3DC3E4D29ED223220E628CA
+                  17C41CADFC954BF957A8B975387DD98FFCF74497626446CCF518D9EC981073B9
+                  8FD8738D88B98A911E31174622AE4D154238003DA7FD22D55192180000000049
+                  454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-mdpi\ic_arrow_back_w' +
+                  'hite_24dp.png'
+              end
+              item
+                Scale = 1.500000000000000000
+                Width = 36
+                Height = 36
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                  98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  00C5494441545847EDD67D0AC2300C87E1B6163CB65EC1BBF8713471D0CE5FD6
+                  04A41551C1A5C53C2065F68FBC6C58E78C312398E7794F1FBED4C53142378A02
+                  4A479152BA60D9F0F6BA30B889C9396F797B5D985FC79C2D86607E1D73B21882
+                  F975CCF16F623CAF4F613E1D74BB72E5DC344DD718E3218470E3AFBEE6BDFFEC
+                  10A598E596FC088F69045EBB31CE231314B5DC63A6FA0B13E8E8E70C12E81822
+                  4AEF7F4CA0C3A2DE828E3A4AEF054DA0A389C212795B07021EA3745FF2058574
+                  13638C79C9B93B53AD0105E79427D30000000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-hdpi\ic_arrow_back_w' +
+                  'hite_24dp.png'
+              end
+              item
+                Scale = 2.000000000000000000
+                Width = 48
+                Height = 48
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                  87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  00A6494441546843EDD8410A83301046E1D04BF56A2E3D724F90F40F9D810A71
+                  53D09929EF031151C21BD14D1A0000571963ECF3B0CB5A2CDED51A62067FBA0F
+                  36BB9D9B4257F1AFDEFBD31EC94BA1C4875028F121144A7C0885121F42A1C487
+                  50E82AFE1696F03BAD11163F59C6A9879DFF9B5E44DD4FC869ADBA3FB1533043
+                  A4A060864841C10C9182821922050533440A0A5E0D51636BD129F87B88D23BD4
+                  35E3010005B4F606DD0016D88691173A0000000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-xhdpi\ic_arrow_back_' +
+                  'white_24dp.png'
+              end
+              item
+                Scale = 3.000000000000000000
+                Width = 72
+                Height = 72
+                PNG = {
+                  89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                  47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  015149444154785EEDD9DD6E8240108661EC0534E9797F2EB56D9A5EA5DA5E08
+                  61E937321A8DEE0E7066E77D12B2A27B326F5013E80000000000B98DE3F86187
+                  9FE29CC7391886E1D3DF865193539C2345FAF28F73538BAB38478AF4EDDB7252
+                  836A1CD3F7FDAF9627DF9E8B060FE39452DE7C7B2E9A9F38359A9F38359A3F8A
+                  F3439C0AE23410A781380D1647CBAB6FCF458313A7468313A7468313A7468347
+                  71F65A88730B711A88D3409C86FF1067E3EB621ADC6EAEBF4F67F76323FE7296
+                  075F17B9D7386B2C0E94298E59750565B23890BEC27605A5796EB5EA0ACA1669
+                  35FB3DD251657FF3A59417DF9E933A1029A20E448AA8039122EA40A4883A4491
+                  764422524C1D8814518739919E7D7B4EEA40A4883A1029A20E448AA8039122EA
+                  1045DA12894831752052441DE6447AF4ED39A9432B92DDB98485987A5C20CE39
+                  0B32753920CE2D16863800000000905DD7FD018701BB1CE7CDB0A50000000049
+                  454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-xxhdpi\ic_arrow_back' +
+                  '_white_24dp.png'
+              end
+              item
+                Scale = 4.000000000000000000
+                Width = 96
+                Height = 96
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                  38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  019449444154785EEDDC4D6ADB5000855127E36CB22B49BAB66ECBD8B9AF4F1D
+                  0442EA583FD79073C0C81A68F25D6461303E0100000000003CB2EBF5FA365ECB
+                  29475AE2FF6384238DE0B3FB074638C2083D7B7FCA087B1A8167E72F19610F23
+                  ECECFB7F97CBE5D772195B48D39BE39FCFE73F39BC2C97B256628ADF9298E2B7
+                  24A6F82D89297E4B628ADF9298E2B724A6F82D89297E4B628ADF9298E2B724A6
+                  F82D89297E4B628ADF9298E2B724A6F82D89297E4B628ADF9298E2B724A6F82D
+                  89297E4B628AFF0D4FCB711389397E93F33ACF7E86A758DEDEE57939AEF613E3
+                  6F619301C4BFDFEA01C45F67B38F20EEB37A803C83C61DF07B9EF15D9BDC0146
+                  B8DF661F41467810E3A19CD74D7C11DB49A21AA12D518DD096A846684B5423B4
+                  25AA11DA12D5086D896A84B64435425BA21AA12D518DD096A846684B5423B425
+                  AA11DA12D5086D896A84B64435425BA21AA12D518DD096A846684B5423B425AA
+                  11DA12F5E611FC69DF4ED2F69611C6EF93D8CB083C3B7F4AFC238CD0B3F707E2
+                  1F69049FDDFF12BF6184171F0000000000786CA7D33BA8D4F1B7D4B6BE3A0000
+                  000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-xxxhdpi\ic_arrow_bac' +
+                  'k_white_24dp.png'
+              end>
+          end
+        end
+      end
+    end
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family, FontColor]
+      Size.Width = 640.000000000000000000
+      Size.Height = 480.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 24.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.HorzAlign = Center
+      Text = 'Clientes'
+    end
+  end
+end
