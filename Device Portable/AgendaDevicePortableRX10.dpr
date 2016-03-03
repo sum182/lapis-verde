@@ -7,7 +7,7 @@ uses
   untDM in 'DM\untDM.pas' {DM: TDataModule},
   untDMStyles in 'DM\untDMStyles.pas' {DMStyles: TDataModule},
   untDmResponsavel in 'DM\untDmResponsavel.pas' {DmResponsavel: TDataModule},
-  untDmEscola in 'DM\untDmEscola.pas' {DmEscola: TDataModule} ,
+  untDmEscola in 'DM\untDmEscola.pas' {DmEscola: TDataModule},
   untPrincipal in 'untPrincipal.pas' {frmPrincipal},
   untModuloCliente in 'untModuloCliente.pas' {ModuloCliente: TDataModule},
   untTesteClientes in 'Testes\untTesteClientes.pas' {frmTesteClientes},
@@ -28,7 +28,8 @@ uses
   untMensagens in 'Mensagens\untMensagens.pas' {frmMensagens},
   untCriarConta in 'Usuario\untCriarConta.pas' {frmCriarConta},
   untTesteString2 in 'Testes\untTesteString2.pas' {frmTesteString2},
-  untAgendaEscola in 'Agenda\untAgendaEscola.pas' {frmAgendaEscola};
+  untAgendaEscola in 'Agenda\untAgendaEscola.pas' {frmAgendaEscola},
+  smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas';
 
 {$R *.res}
 

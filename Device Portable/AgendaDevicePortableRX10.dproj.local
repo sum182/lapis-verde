@@ -12,16 +12,14 @@
     <Transaction>2016/02/21 10:38:38.000.362,C:\Projetos\Agenda\Device Portable\Mensagens\untMensagens.fmx=C:\Projetos\Agenda\Device Portable\Unit1.fmx</Transaction>
     <Transaction>2016/02/21 14:26:44.000.875,C:\Projetos\Agenda\Device Portable\Unit1.fmx=C:\Projetos\Agenda\Device Portable\Usuario\untCriarConta.fmx</Transaction>
     <Transaction>2016/02/25 17:21:06.000.996,C:\Projetos\Agenda\Device Portable\Unit3.fmx=C:\Projetos\Agenda\Device Portable\Testes\untTesteString2.fmx</Transaction>
-    <Transaction>2016/03/02 16:42:20.198,C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.dfm=C:\Projetos\Agenda\Device Portable\Unit1.dfm</Transaction>
-    <Transaction>2016/03/02 16:42:40.713,C:\Projetos\Agenda\Device Portable\DM\untDMEscola.dfm=C:\Projetos\Agenda\Device Portable\Unit2.dfm</Transaction>
-    <Transaction>2016/03/02 16:48:04.653,C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.pas=C:\Projetos\Agenda\Device Portable\DM\untDMEscola.pas</Transaction>
-    <Transaction>2016/03/02 16:48:04.653,C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMEscola.dfm</Transaction>
-    <Transaction>2016/03/02 16:48:12.362,C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.pas=C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.pas</Transaction>
-    <Transaction>2016/03/02 16:48:12.362,C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.dfm</Transaction>
-    <Transaction>2016/03/02 16:48:16.886,C:\Projetos\Agenda\Device Portable\DM\untDmResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm</Transaction>
-    <Transaction>2016/03/02 16:48:21.694,C:\Projetos\Agenda\Device Portable\DM\untDmEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm</Transaction>
+    <Transaction>2016/03/02 16:42:20.000.198,C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.dfm=C:\Projetos\Agenda\Device Portable\Unit1.dfm</Transaction>
+    <Transaction>2016/03/02 16:42:40.000.713,C:\Projetos\Agenda\Device Portable\DM\untDMEscola.dfm=C:\Projetos\Agenda\Device Portable\Unit2.dfm</Transaction>
+    <Transaction>2016/03/02 16:48:04.000.653,C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMEscola.dfm</Transaction>
+    <Transaction>2016/03/02 16:48:12.000.362,C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.dfm</Transaction>
+    <Transaction>2016/03/02 16:48:16.000.886,C:\Projetos\Agenda\Device Portable\DM\untDmResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm</Transaction>
+    <Transaction>2016/03/02 16:48:21.000.694,C:\Projetos\Agenda\Device Portable\DM\untDmEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_4_WVGA_Nexus_S"/>
+		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
 	</ActiveMobileDevice>
 </BorlandProject>

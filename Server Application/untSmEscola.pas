@@ -14,19 +14,11 @@ type
   TSmEscola = class(TDataModule)
     fdqLoginFuncionario: TFDQuery;
     fdqAgenda: TFDQuery;
-    fdqAgendaagenda_id: TFDAutoIncField;
-    fdqAgendatitulo: TStringField;
-    fdqAgendadescricao: TMemoField;
-    fdqAgendadata: TDateTimeField;
-    fdqAgendaagenda_tipo_id: TSmallintField;
-    fdqAgendafuncionario_id: TIntegerField;
-    fdqAgendaescola_id: TIntegerField;
     fdqAgendaAluno: TFDQuery;
-    fdqAgendaAlunoagenda_id: TIntegerField;
-    fdqAgendaAlunoaluno_id: TIntegerField;
     fdqTurmaAluno: TFDQuery;
     fdqTurma: TFDQuery;
     fdqAluno: TFDQuery;
+    fdqAgendaTurma: TFDQuery;
   private
     { Private declarations }
   public
@@ -34,6 +26,8 @@ type
     function GetAlunos(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
     function GetTurmas(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
 
+    function GetAgendaAluno(EscolaId:Integer;FuncionarioId:Integer;AlunoId:Integer;AgendaId:Integer):TFDJSONDataSets;
+    function GetAgendaTurma(EscolaId:Integer;FuncionarioId:Integer;TurmaId:Integer;AgendaId:Integer):TFDJSONDataSets;
   end;
 
 var
@@ -49,6 +43,32 @@ uses untSmMain;
 {$R *.dfm}
 
 { TSmEscola }
+
+function TSmEscola.GetAgendaAluno(EscolaId, FuncionarioId, AlunoId,
+  AgendaId: Integer): TFDJSONDataSets;
+begin
+  fdqAgendaAluno.Active := False;
+
+  fdqAgendaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+  fdqAgendaAluno.ParamByName('aluno_id').AsInteger:= AlunoId;
+  fdqAgendaAluno.ParamByName('agenda_id').AsInteger:= AgendaId;
+
+  Result := TFDJSONDataSets.Create;
+  TFDJSONDataSetsWriter.ListAdd(Result, fdqAgendaAluno);
+end;
+
+function TSmEscola.GetAgendaTurma(EscolaId, FuncionarioId, TurmaId,
+  AgendaId: Integer): TFDJSONDataSets;
+begin
+  fdqAgendaTurma.Active := False;
+
+  fdqAgendaTurma.ParamByName('escola_id').AsInteger:= EscolaId;
+  fdqAgendaTurma.ParamByName('turma_id').AsInteger:= TurmaId;
+  fdqAgendaTurma.ParamByName('agenda_id').AsInteger:= EscolaId;
+
+  Result := TFDJSONDataSets.Create;
+  TFDJSONDataSetsWriter.ListAdd(Result, fdqAgendaTurma);
+end;
 
 function TSmEscola.GetAlunos(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
 begin

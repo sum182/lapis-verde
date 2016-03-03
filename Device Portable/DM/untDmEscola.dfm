@@ -8,16 +8,6 @@ object DmEscola: TDmEscola
       'select * from aluno')
     Left = 48
     Top = 38
-    object fdqAlunoaluno_id: TIntegerField
-      FieldName = 'aluno_id'
-      Origin = 'aluno_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object fdqAlunonome: TStringField
-      FieldName = 'nome'
-      Origin = 'nome'
-      Size = 150
-    end
   end
   object fdqTurma: TFDQuery
     Connection = DM.FDConnectionDBEscola
@@ -29,5 +19,13 @@ object DmEscola: TDmEscola
   object FDStanStorageBinLink1: TFDStanStorageBinLink
     Left = 48
     Top = 172
+  end
+  object fdqAgenda: TFDQuery
+    Active = True
+    Connection = DM.FDConnectionDBEscola
+    SQL.Strings = (
+      'select * from agenda')
+    Left = 120
+    Top = 38
   end
 end

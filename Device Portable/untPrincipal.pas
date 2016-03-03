@@ -66,7 +66,7 @@ type
     fActiveForm: TForm;
     fAllowCloseForm : Boolean;
     LayoutBase, btnVoltarForms: TComponent;
-    procedure OpenForm(aFormClass: TComponentClass);
+
     procedure BotaoVoltarOnClick(Sender: TObject);
     procedure ShowMenuPrincipal;
     procedure HideMenuPrincipal;
@@ -75,7 +75,7 @@ type
   protected
 
   public
-    { Public declarations }
+     procedure OpenForm(aFormClass: TComponentClass);
   end;
 
 var

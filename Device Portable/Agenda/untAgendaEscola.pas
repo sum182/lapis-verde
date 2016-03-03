@@ -19,7 +19,7 @@ type
   TfrmAgendaEscola = class(TfrmBaseToolBar)
     tbctrlPrincipal: TTabControl;
     tbitTurma: TTabItem;
-    TabItem2: TTabItem;
+    tbitAlunos: TTabItem;
     lstTurmas: TListView;
     lstAlunos: TListView;
     btnAtualizar: TSpeedButton;
@@ -30,6 +30,7 @@ type
     LinkListControlToField2: TLinkListControlToField;
     procedure btnAtualizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure lstAlunosClick(Sender: TObject);
   private
   public
     { Public declarations }
@@ -42,7 +43,8 @@ implementation
 
 {$R *.fmx}
 
-uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola;
+uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgenda,
+  untPrincipal;
 
 procedure TfrmAgendaEscola.btnAtualizarClick(Sender: TObject);
 begin
@@ -54,9 +56,16 @@ procedure TfrmAgendaEscola.FormCreate(Sender: TObject);
 begin
   inherited;
   DmEscola.OpenQuerys;
+  tbctrlPrincipal.ActiveTab := tbitTurma;
 end;
 
 
+
+procedure TfrmAgendaEscola.lstAlunosClick(Sender: TObject);
+begin
+  inherited;
+  frmPrincipal.OpenForm(TfrmAgenda);
+end;
 
 end.
 

@@ -17,7 +17,7 @@ object SmEscola: TSmEscola
       ''
       '')
     Left = 63
-    Top = 48
+    Top = 40
     ParamData = <
       item
         Name = 'LOGIN'
@@ -39,8 +39,8 @@ object SmEscola: TSmEscola
       'select * from agenda'
       'where agenda.agenda_id = :agenda_id'
       'and escola_id = :escola_id')
-    Left = 50
-    Top = 144
+    Left = 154
+    Top = 384
     ParamData = <
       item
         Name = 'AGENDA_ID'
@@ -52,71 +52,39 @@ object SmEscola: TSmEscola
         Name = 'ESCOLA_ID'
         ParamType = ptInput
       end>
-    object fdqAgendaagenda_id: TFDAutoIncField
-      FieldName = 'agenda_id'
-      Origin = 'agenda_id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-    end
-    object fdqAgendatitulo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'titulo'
-      Origin = 'titulo'
-      Size = 50
-    end
-    object fdqAgendadescricao: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'descricao'
-      Origin = 'descricao'
-      BlobType = ftMemo
-    end
-    object fdqAgendadata: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'data'
-      Origin = '`data`'
-    end
-    object fdqAgendaagenda_tipo_id: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'agenda_tipo_id'
-      Origin = 'agenda_tipo_id'
-    end
-    object fdqAgendafuncionario_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'funcionario_id'
-      Origin = 'funcionario_id'
-    end
-    object fdqAgendaescola_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'escola_id'
-      Origin = 'escola_id'
-    end
   end
   object fdqAgendaAluno: TFDQuery
     Connection = SmMain.FDConnection
     SQL.Strings = (
-      'SELECT * FROM agenda_aluno '
-      'where agenda_id = :agenda_id')
-    Left = 50
-    Top = 192
+      'select '
+      '  ag.*'
+      'from agenda ag'
+      'inner join agenda_aluno al on (ag.agenda_id = al.agenda_id) '
+      'where 1=1'
+      'and  ag.agenda_id >= :agenda_id'
+      'and  ag.escola_id = :escola_id'
+      'and  al.aluno_id = :aluno_id')
+    Left = 66
+    Top = 168
     ParamData = <
       item
         Name = 'AGENDA_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 0
+      end
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end
+      item
+        Name = 'ALUNO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 19
       end>
-    object fdqAgendaAlunoagenda_id: TIntegerField
-      FieldName = 'agenda_id'
-      Origin = 'agenda_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object fdqAgendaAlunoaluno_id: TIntegerField
-      FieldName = 'aluno_id'
-      Origin = 'aluno_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
   end
   object fdqTurmaAluno: TFDQuery
     Connection = SmMain.FDConnection
@@ -125,8 +93,8 @@ object SmEscola: TSmEscola
       'from turma_aluno ta'#13#10#10
       'where ta.turma_id = :turma_id'
       '')
-    Left = 138
-    Top = 192
+    Left = 58
+    Top = 384
     ParamData = <
       item
         Name = 'TURMA_ID'
@@ -141,8 +109,8 @@ object SmEscola: TSmEscola
       'SELECT * FROM turma t'#13#10#10
       'where escola_id = :escola_id'
       'order by nome')
-    Left = 210
-    Top = 144
+    Left = 138
+    Top = 104
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -161,14 +129,47 @@ object SmEscola: TSmEscola
       'where 1=1'#10' '#10
       'and escola_id = :escola_id'#10
       'order by nome_completo'#10)
-    Left = 138
-    Top = 144
+    Left = 66
+    Top = 104
     ParamData = <
       item
         Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = Null
+      end>
+  end
+  object fdqAgendaTurma: TFDQuery
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select '
+      '  ag.*'
+      'from agenda ag'
+      'inner join agenda_turma at on (ag.agenda_id = at.agenda_id) '
+      'where 1=1'
+      'and  ag.agenda_id >= :agenda_id'
+      'and  ag.escola_id = :escola_id'
+      'and  at.turma_id = :turma_id')
+    Left = 154
+    Top = 168
+    ParamData = <
+      item
+        Name = 'AGENDA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end
+      item
+        Name = 'TURMA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
       end>
   end
 end
