@@ -9,7 +9,7 @@ Coordinates=500,50,107,278
 Visible=True
 
 [bsAlunos]
-Coordinates=660,90,115,300
+Coordinates=660,90,115,328
 
 [ToolBar1]
 Coordinates=31,900,67,36
@@ -43,8 +43,8 @@ Coordinates=214,772,83,58
 Coordinates=504,772,69,36
 
 []
-Coordinates=380,221,132,33
-Visible=False
+Coordinates=840,60,107,278
+Visible=True
 
 [DM.RESTResponse1]
 Coordinates=1040,520,137,344
@@ -53,7 +53,7 @@ Coordinates=1040,520,137,344
 Coordinates=760,640,112,80
 
 [DM.RESTRequest1]
-Coordinates=950,250,127,102
+Coordinates=1170,210,127,102
 
 [DmEscola.fdqAluno]
 Visible=False
@@ -64,5 +64,9 @@ Visible=False
 Coordinates=146,1,131,36
 
 [tbitAlunos]
-Coordinates=346,900,69,36
+Coordinates=346,900,71,36
+
+[DmEscola.fdqAgenda]
+Coordinates=27,55,138,58
+Visible=False
 

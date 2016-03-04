@@ -20,6 +20,7 @@ type
     SpeedButton1: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure btnVoltarClick(Sender: TObject);
   private
 
   public
@@ -35,16 +36,25 @@ implementation
 
 uses untFuncoes, untDmEscola, untDM;
 
+procedure TfrmAgenda.btnVoltarClick(Sender: TObject);
+begin
+  inherited;
+  frmAgenda.Close;
+  frmAgenda.DisposeOf;
+  frmAgenda:=nil;
+end;
+
 procedure TfrmAgenda.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
+  DmEscola.OpenAgenda;
 end;
 
 procedure TfrmAgenda.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  DmEscola.GetAgendaAluno(19,0);
+  DmEscola.GetAgenda(0,0);
 end;
 
 end.

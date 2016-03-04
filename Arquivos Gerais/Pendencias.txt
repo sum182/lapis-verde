@@ -133,7 +133,9 @@ Após desenvolvimento do mobile estudar pegar a parte de msg e colocar no desktop
 ***Futuro
    ***Agenda
    Setar tipo de agenda
-
+   Retirar Titulo da agenda  
+   
+   Uma turma ter mais de um funcionario responsavel
 
    ***Sobre
  

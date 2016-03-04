@@ -14,16 +14,21 @@ type
     fdqTurma: TFDQuery;
     FDStanStorageBinLink1: TFDStanStorageBinLink;
     fdqAgenda: TFDQuery;
+    fdqAgendaAluno: TFDQuery;
+    fdqAgendaTurma: TFDQuery;
   private
     { Private declarations }
   public
-    procedure OpenQuerys;
+    procedure OpenAgenda;
+    procedure OpenAlunos;
+    procedure OpenTurmas;
+
 
     procedure GetAlunos;
     procedure GetTurmas;
 
-    procedure GetAgendaAluno(AlunoId:Integer;AgendaId:Integer);
-    procedure GetAgendaTurma(TurmaId:Integer;AgendaId:Integer);
+
+    procedure GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
 
   end;
 
@@ -41,66 +46,53 @@ uses untDM, untModuloCliente, Data.FireDACJSONReflect, smDBFireDac,
 
 { TDmEscola }
 
-procedure TDmEscola.GetAgendaAluno(AlunoId, AgendaId: Integer);
+procedure TDmEscola.GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
 var
   LDataSetList  : TFDJSONDataSets;
-  fdmTemp : TFDMemTable;
+  fdmTempAgenda : TFDMemTable;
+  fdmTempAgendaAluno : TFDMemTable;
+  fdmTempAgendaTurma : TFDMemTable;
+
+  LDataSet: TFDDataSet;
 begin
   try
-    fdmTemp := TFDMemTable.Create(self);
+    fdmTempAgenda := TFDMemTable.Create(self);
+    fdmTempAgendaAluno := TFDMemTable.Create(self);
+    fdmTempAgendaTurma := TFDMemTable.Create(self);
+
     try
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgendaAluno(1,0,19,0);
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(1,0,0);
 
-      //Prepara o MemoryTable temporário
-      fdmTemp.Active := False;
+      //Pegando dados da agenda
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
+      fdmTempAgenda.Active := False;
+      fdmTempAgenda.AppendData(LDataSet);
+      CopyDataSet(fdmTempAgenda,fdqAgenda,True);
 
-      //Fazemos um teste para verifica se realmente há DataSet no retorno da função
-      Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
+      //Pegando dados da agenda_aluno
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
+      fdmTempAgendaAluno.Active := False;
+      fdmTempAgendaAluno.AppendData(LDataSet);
+      CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,True);
 
-      //Adicionando o conteúdo do DataSet "baixado" ao Memory Table
-      fdmTemp.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
-
-      //CopyDataSet(fdmTemp,fdqAgenda,False);
-      CopyDataSet(fdmTemp,fdqAgenda,True);
+      //Pegando dados da agenda_turma
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
+      fdmTempAgendaTurma.Active := False;
+      fdmTempAgendaTurma.AppendData(LDataSet);
+      CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,True);
     except on E:Exception do
-      ShowMessage('Erro na busca dos alunos' + #13 + E.Message);
+      ShowMessage('Erro na busca da agenda' + #13 + E.Message);
     end;
 
   finally
-    fdmTemp.DisposeOf;
+    fdmTempAgenda.DisposeOf;
+    fdmTempAgendaAluno.DisposeOf;
+    fdmTempAgendaTurma.DisposeOf;
   end;
 
 end;
 
-procedure TDmEscola.GetAgendaTurma(TurmaId, AgendaId: Integer);
-var
-  LDataSetList  : TFDJSONDataSets;
-  fdmTemp : TFDMemTable;
-begin
-  try
-    fdmTemp := TFDMemTable.Create(self);
-    try
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgendaTurma(1,0,19,0);
 
-      //Prepara o MemoryTable temporário
-      fdmTemp.Active := False;
-
-      //Fazemos um teste para verifica se realmente há DataSet no retorno da função
-      Assert(TFDJSONDataSetsReader.GetListCount(LDataSetList) = 1);
-
-      //Adicionando o conteúdo do DataSet "baixado" ao Memory Table
-      fdmTemp.AppendData(TFDJSONDataSetsReader.GetListValue(LDataSetList, 0));
-
-      //CopyDataSet(fdmTemp,fdqAgenda,False);
-      CopyDataSet(fdmTemp,fdqAgenda,True);
-    except on E:Exception do
-      ShowMessage('Erro na busca dos alunos' + #13 + E.Message);
-    end;
-
-  finally
-    fdmTemp.DisposeOf;
-  end;
-end;
 
 procedure TDmEscola.GetAlunos;
 var
@@ -160,11 +152,26 @@ begin
   end;
 end;
 
-procedure TDmEscola.OpenQuerys;
+procedure TDmEscola.OpenAgenda;
+begin
+  fdqAgenda.Close;
+  fdqAgenda.Open;
+
+  fdqAgendaAluno.Close;
+  fdqAgendaAluno.Open;
+
+  fdqAgendaTurma.Close;
+  fdqAgendaTurma.Open;
+end;
+
+procedure TDmEscola.OpenAlunos;
 begin
   fdqAluno.Close;
   fdqAluno.Open;
+end;
 
+procedure TDmEscola.OpenTurmas;
+begin
   fdqTurma.Close;
   fdqTurma.Open;
 end;

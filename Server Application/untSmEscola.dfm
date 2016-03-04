@@ -37,54 +37,26 @@ object SmEscola: TSmEscola
     Connection = SmMain.FDConnection
     SQL.Strings = (
       'select * from agenda'
-      'where agenda.agenda_id = :agenda_id'
-      'and escola_id = :escola_id')
-    Left = 154
-    Top = 384
-    ParamData = <
-      item
-        Name = 'AGENDA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end
-      item
-        Name = 'ESCOLA_ID'
-        ParamType = ptInput
-      end>
-  end
-  object fdqAgendaAluno: TFDQuery
-    Connection = SmMain.FDConnection
-    SQL.Strings = (
-      'select '
-      '  ag.*'
-      'from agenda ag'
-      'inner join agenda_aluno al on (ag.agenda_id = al.agenda_id) '
       'where 1=1'
-      'and  ag.agenda_id >= :agenda_id'
-      'and  ag.escola_id = :escola_id'
-      'and  al.aluno_id = :aluno_id')
+      'and escola_id = :escola_id')
     Left = 66
     Top = 168
     ParamData = <
-      item
-        Name = 'AGENDA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 0
-      end
       item
         Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = 1
-      end
-      item
-        Name = 'ALUNO_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 19
       end>
+  end
+  object fdqAgendaAluno: TFDQuery
+    Connection = SmMain.FDConnection
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SQL.Strings = (
+      'select * from agenda_aluno'#13#10#10)
+    Left = 146
+    Top = 168
   end
   object fdqTurmaAluno: TFDQuery
     Connection = SmMain.FDConnection
@@ -93,8 +65,8 @@ object SmEscola: TSmEscola
       'from turma_aluno ta'#13#10#10
       'where ta.turma_id = :turma_id'
       '')
-    Left = 58
-    Top = 384
+    Left = 522
+    Top = 72
     ParamData = <
       item
         Name = 'TURMA_ID'
@@ -142,34 +114,13 @@ object SmEscola: TSmEscola
   object fdqAgendaTurma: TFDQuery
     Connection = SmMain.FDConnection
     SQL.Strings = (
-      'select '
-      '  ag.*'
-      'from agenda ag'
-      'inner join agenda_turma at on (ag.agenda_id = at.agenda_id) '
-      'where 1=1'
-      'and  ag.agenda_id >= :agenda_id'
-      'and  ag.escola_id = :escola_id'
-      'and  at.turma_id = :turma_id')
-    Left = 154
+      'select * from agenda_turma '#13#10#10)
+    Left = 234
     Top = 168
-    ParamData = <
-      item
-        Name = 'AGENDA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 0
-      end
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 1
-      end
-      item
-        Name = 'TURMA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 0
-      end>
+  end
+  object dsAgenda: TDataSource
+    DataSet = fdqAgenda
+    Left = 64
+    Top = 224
   end
 end

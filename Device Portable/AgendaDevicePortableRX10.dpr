@@ -35,20 +35,15 @@ uses
 
 begin
   //Modo Teste
-  {Application.Initialize;
+  Application.Initialize;
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDmResponsavel, DmResponsavel);
+  Application.CreateForm(TDmEscola, DmEscola);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
-  //Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-
-
-  Application.CreateForm(TfrmBase, frmBase);
-  Application.CreateForm(TfrmBaseForAll, frmBaseForAll);
-  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
-  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
   Application.Run;
-  Exit;            }
+  Exit;
   // Fim do Teste
 
 
@@ -60,9 +55,5 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmLogin, frmLogin);
-  {Application.CreateForm(TfrmBase, frmBase);
-  Application.CreateForm(TfrmBaseForAll, frmBaseForAll);
-  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar);
-  Application.CreateForm(TfrmBaseToolBar, frmBaseToolBar); }
   Application.Run;
 end.
