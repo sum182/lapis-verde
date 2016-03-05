@@ -40,6 +40,7 @@ type
     lstItemMensagem: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
     SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteClientesClick(Sender: TObject);
@@ -61,6 +62,7 @@ type
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -89,7 +91,7 @@ implementation
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untAgenda, untMensagens, smGeralFMX,
-  untAgendaEscola;
+  untAgendaEscola, untAgendaEscolaNew;
 
 { TfrmPrincipal }
 
@@ -149,6 +151,12 @@ procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
    OpenForm(TfrmAgenda);
+end;
+
+procedure TfrmPrincipal.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  OpenForm(TfrmAgendaEscolaNew);
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;

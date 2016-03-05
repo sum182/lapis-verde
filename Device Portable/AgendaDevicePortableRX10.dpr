@@ -29,7 +29,8 @@ uses
   untCriarConta in 'Usuario\untCriarConta.pas' {frmCriarConta},
   untTesteString2 in 'Testes\untTesteString2.pas' {frmTesteString2},
   untAgendaEscola in 'Agenda\untAgendaEscola.pas' {frmAgendaEscola},
-  smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas';
+  smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
+  untAgendaEscolaNew in 'Agenda\untAgendaEscolaNew.pas' {frmAgendaEscolaNew};
 
 {$R *.res}
 
@@ -42,6 +43,7 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmAgendaEscolaNew, frmAgendaEscolaNew);
   Application.Run;
   Exit;
   // Fim do Teste

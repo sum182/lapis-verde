@@ -3,7 +3,7 @@ unit untDmEscola;
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin;
@@ -29,7 +29,8 @@ type
 
 
     procedure GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
-
+    procedure CriarAgenda(Texto: string; FuncionarioId: Integer = 0; AlunoId: Integer = 0; TurmaId: Integer = 0);
+    procedure AgendaApplyChanges;
   end;
 
 var
@@ -40,11 +41,92 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses untDM, untModuloCliente, Data.FireDACJSONReflect, smDBFireDac,
-  FMX.Dialogs;
+  FMX.Dialogs, System.SysUtils, smGeralFMX;
 
 {$R *.dfm}
 
 { TDmEscola }
+
+procedure TDmEscola.AgendaApplyChanges;
+var
+  Deltas:TFDJSONDeltas;
+  fdmTempAgenda : TFDMemTable;
+  fdmTempAgendaAluno : TFDMemTable;
+  fdmTempAgendaTurma : TFDMemTable;
+begin
+  try
+    // Post if editing
+    if fdqAgenda.State in dsEditModes then
+      fdqAgenda.Post;
+
+    if fdqAgendaAluno.State in dsEditModes then
+      fdqAgendaAluno.Post;
+
+    if fdqAgendaTurma.State in dsEditModes then
+      fdqAgendaTurma.Post;
+
+
+    fdmTempAgenda := TFDMemTable.Create(self);
+    fdmTempAgendaAluno := TFDMemTable.Create(self);
+    fdmTempAgendaTurma := TFDMemTable.Create(self);
+
+    fdmTempAgenda.Data := fdqAgenda.Delta;
+    fdmTempAgendaAluno.Data := fdqAgendaAluno.Delta;
+    fdmTempAgendaTurma.Data := fdqAgendaTurma.Delta;
+
+    // Create a delta list
+    Deltas := TFDJSONDeltas.Create;
+    // Add deltas
+    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda', fdmTempAgenda);
+    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_aluno', fdmTempAgendaAluno);
+    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_turma', fdmTempAgendaTurma);
+
+
+
+    try
+      ModuloCliente.SmEscolaClient.CriarAgenda(Deltas);
+    except on E:Exception do
+      ShowMessage('Erro no apply' + #13 + E.Message);
+    end;
+
+  finally
+
+    fdmTempAgenda.DisposeOf;
+    fdmTempAgendaAluno.DisposeOf;
+    fdmTempAgendaTurma.DisposeOf;
+  end;
+
+
+end;
+
+procedure TDmEscola.CriarAgenda(Texto: string; FuncionarioId: Integer = 0; AlunoId: Integer = 0; TurmaId: Integer = 0);
+begin
+  if Texto = EmptyStr then
+    Exit;
+
+  if fdqAgenda.State in [dsInactive] then
+    fdqAgenda.Open;
+
+  if fdqAgendaAluno.State in [dsInactive] then
+    fdqAgendaAluno.Open;
+
+
+  if fdqAgendaTurma.State in [dsInactive] then
+    fdqAgendaTurma.Open;
+
+  fdqAgenda.Append;
+  fdqAgenda.FieldByName('agenda_id').AsString:=GetGUID;
+  fdqAgenda.FieldByName('descricao').AsString:=Texto;
+  fdqAgenda.FieldByName('data').AsDateTime:=Now;
+  fdqAgenda.FieldByName('funcionario_id').AsInteger:=16;
+  fdqAgenda.FieldByName('escola_id').AsInteger:=1;
+  fdqAgenda.Post;
+
+  fdqAgendaAluno.Append;
+  fdqAgendaAluno.FieldByName('agenda_id').AsInteger := 58;
+  fdqAgendaAluno.FieldByName('aluno_id').AsInteger := 19;
+  fdqAgendaAluno.Post;
+end;
 
 procedure TDmEscola.GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
 var
@@ -68,18 +150,22 @@ begin
       fdmTempAgenda.Active := False;
       fdmTempAgenda.AppendData(LDataSet);
       CopyDataSet(fdmTempAgenda,fdqAgenda,True);
+      fdqAgenda.ApplyUpdates(-1);
 
       //Pegando dados da agenda_aluno
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
       fdmTempAgendaAluno.Active := False;
       fdmTempAgendaAluno.AppendData(LDataSet);
       CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,True);
+      fdqAgendaAluno.ApplyUpdates(-1);
 
       //Pegando dados da agenda_turma
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
       fdmTempAgendaTurma.Active := False;
       fdmTempAgendaTurma.AppendData(LDataSet);
       CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,True);
+      fdqAgendaTurma.ApplyUpdates(-1);
+
     except on E:Exception do
       ShowMessage('Erro na busca da agenda' + #13 + E.Message);
     end;

@@ -1,72 +1,82 @@
-﻿[BindingsList1]
-Coordinates=271,452,91,36
+﻿[TabItem2]
+Coordinates=519,510,59,33
 
-[btnVoltar]
-Coordinates=122,772,66,58
+[tbitTurma]
+Coordinates=440,510,61,33
+
+[layToolBarVoltar]
+Coordinates=320,510,96,33
 
 [lstAlunos]
-Coordinates=500,50,107,278
+Coordinates=900,30,89,231
 Visible=True
 
-[bsAlunos]
-Coordinates=660,90,115,328
-
-[ToolBar1]
-Coordinates=31,900,67,36
-
-[bsTurmas]
-Coordinates=330,70,119,102
+[tbctrlPrincipal]
+Coordinates=217,510,83,33
 
 [lstTurmas]
-Coordinates=170,60,107,278
+Coordinates=250,20,89,231
 Visible=True
 
 [imgVoltar]
-Coordinates=409,772,69,58
+Coordinates=622,520,61,51
 
-[tbctrlPrincipal]
-Coordinates=599,772,93,36
+[btnVoltar]
+Coordinates=794,520,59,51
 
-[lblTitulo]
-Coordinates=323,772,60,58
-
-[layToolBarVoltar]
-Coordinates=210,900,110,36
+[ToolBar1]
+Coordinates=140,510,58,33
 
 [layBase]
-Coordinates=124,900,60,36
+Coordinates=940,520,53,33
+
+[lblTitulo]
+Coordinates=870,520,54,51
 
 [btnAtualizar]
-Coordinates=214,772,83,58
+Coordinates=701,520,73,51
 
-[tbitTurma]
-Coordinates=504,772,69,36
+[FDStanStorageBinLink1]
+Coordinates=419,1,132,33
+
+[fdmAlunosaluno_id]
+Coordinates=44,393,110,33
+
+[fdmAlunos]
+Coordinates=530,20,68,33
+Visible=False
+
+[fdmAlunosnome]
+Coordinates=419,111,95,33
 
 []
-Coordinates=840,60,107,278
-Visible=True
+Coordinates=419,56,91,36
 
-[DM.RESTResponse1]
-Coordinates=1040,520,137,344
+[BindingsList1]
+Coordinates=136,1,82,33
 
-[DM.RESTClient1]
-Coordinates=760,640,112,80
+[fdqAlunonome]
+Coordinates=161,178,87,33
 
-[DM.RESTRequest1]
-Coordinates=1170,210,127,102
+[fdqAluno]
+Coordinates=0,0,59,87
 
-[DmEscola.fdqAluno]
+[fdmTurmasturma_id]
+Coordinates=42,178,113,33
+
+[fdqAlunoaluno_id]
+Coordinates=377,53,101,33
+
+[fdmTurmasnome]
+Coordinates=377,163,97,33
+
+[fdmTurmas]
+Coordinates=470,40,70,33
 Visible=False
-Coordinates=0,0,127,36
 
-[DmEscola.fdqTurma]
-Visible=False
-Coordinates=146,1,131,36
+[bsAlunos]
+Coordinates=670,40,92,105
 
-[tbitAlunos]
-Coordinates=346,900,71,36
-
-[DmEscola.fdqAgenda]
-Coordinates=27,55,138,58
-Visible=False
+[bsTurmas]
+Coordinates=530,40,92,105
 
