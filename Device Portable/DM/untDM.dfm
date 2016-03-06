@@ -97,7 +97,7 @@ object DM: TDM
       'OpenMode=ReadWrite'
       'DriverID=SQLite')
     LoginPrompt = False
-    Left = 344
+    Left = 328
     Top = 32
   end
 end

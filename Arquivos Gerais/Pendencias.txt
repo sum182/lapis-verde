@@ -15,6 +15,12 @@ Braspress
 ataualizar projeto
 https://bitbucket.org/tdevrocks/curso-criando-aplicativos-m-veis-com-delphi/downloads
 C:\Projetos\TDevRocks\tdevrocks-atualizador-autom-tico-0b4a5744166e\tdevrocks-atualizador-autom-tico-0b4a5744166e
+
+Alterar diretorio de dumps
+C:\Projetos\Agenda\BD\dumps
+Edit--Preferences
+
+Setar gexperts - fdconnection antes de compilar
 --------------------------------------------------------------------------------------------
 
 

@@ -28,7 +28,7 @@ Coordinates=470,30,89,231
 Visible=True
 
 [bsAgenda]
-Coordinates=640,40,105,195
+Coordinates=640,40,105,87
 
 [blAgenda]
 Coordinates=0,0,61,33
@@ -49,5 +49,11 @@ Coordinates=275,1,115,285
 Coordinates=428,280,84,51
 
 [DmEscola.fdqAluno]
-Coordinates=80,1,112,231
+Coordinates=80,1,112,51
+
+[DmEscola.fdqAgendaAluno]
+Coordinates=96,78,149,51
+
+[DmEscola.fdqAgendaTurma]
+Coordinates=88,1,152,51
 

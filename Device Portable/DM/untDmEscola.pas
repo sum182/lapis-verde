@@ -12,10 +12,28 @@ type
   TDmEscola = class(TDataModule)
     fdqAluno: TFDQuery;
     fdqTurma: TFDQuery;
-    FDStanStorageBinLink1: TFDStanStorageBinLink;
+    fdStanStorageBinLink: TFDStanStorageBinLink;
     fdqAgenda: TFDQuery;
     fdqAgendaAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
+    fdqAgendaApply: TFDQuery;
+    fdqAgendaAlunoApply: TFDQuery;
+    fdqAgendaTurmaApply: TFDQuery;
+    FDMemTable1: TFDMemTable;
+    fdqAgendaApplyagenda_id: TStringField;
+    fdqAgendaApplydescricao: TStringField;
+    fdqAgendaApplydata_insert_local: TDateTimeField;
+    fdqAgendaApplydata_insert_server: TDateTimeField;
+    fdqAgendaApplyagenda_tipo_id: TSmallintField;
+    fdqAgendaApplyfuncionario_id: TIntegerField;
+    fdqAgendaApplyescola_id: TIntegerField;
+    FDMemTable1agenda_id: TStringField;
+    FDMemTable1descricao: TStringField;
+    FDMemTable1data_insert_local: TDateTimeField;
+    FDMemTable1data_insert_server: TDateTimeField;
+    FDMemTable1agenda_tipo_id: TSmallintField;
+    FDMemTable1funcionario_id: TIntegerField;
+    FDMemTable1escola_id: TIntegerField;
   private
     { Private declarations }
   public
@@ -54,7 +72,7 @@ var
   fdmTempAgendaAluno : TFDMemTable;
   fdmTempAgendaTurma : TFDMemTable;
 begin
-  try
+   try
     // Post if editing
     if fdqAgenda.State in dsEditModes then
       fdqAgenda.Post;
@@ -71,20 +89,20 @@ begin
     fdmTempAgendaTurma := TFDMemTable.Create(self);
 
     fdmTempAgenda.Data := fdqAgenda.Delta;
-    fdmTempAgendaAluno.Data := fdqAgendaAluno.Delta;
-    fdmTempAgendaTurma.Data := fdqAgendaTurma.Delta;
+    //fdmTempAgendaAluno.Data := fdqAgendaAluno.Delta;
+    //fdmTempAgendaTurma.Data := fdqAgendaTurma.Delta;
 
     // Create a delta list
     Deltas := TFDJSONDeltas.Create;
     // Add deltas
     TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda', fdmTempAgenda);
-    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_aluno', fdmTempAgendaAluno);
-    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_turma', fdmTempAgendaTurma);
+    //TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_aluno', fdmTempAgendaAluno);
+    //TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_turma', fdmTempAgendaTurma);
 
 
 
     try
-      ModuloCliente.SmEscolaClient.CriarAgenda(Deltas);
+      ModuloCliente.SmEscolaClient.ApplyChangesAgenda(Deltas);
     except on E:Exception do
       ShowMessage('Erro no apply' + #13 + E.Message);
     end;
@@ -95,8 +113,6 @@ begin
     fdmTempAgendaAluno.DisposeOf;
     fdmTempAgendaTurma.DisposeOf;
   end;
-
-
 end;
 
 procedure TDmEscola.CriarAgenda(Texto: string; FuncionarioId: Integer = 0; AlunoId: Integer = 0; TurmaId: Integer = 0);
@@ -117,13 +133,13 @@ begin
   fdqAgenda.Append;
   fdqAgenda.FieldByName('agenda_id').AsString:=GetGUID;
   fdqAgenda.FieldByName('descricao').AsString:=Texto;
-  fdqAgenda.FieldByName('data').AsDateTime:=Now;
+  fdqAgenda.FieldByName('data_insert_local').AsDateTime:=Now;
   fdqAgenda.FieldByName('funcionario_id').AsInteger:=16;
   fdqAgenda.FieldByName('escola_id').AsInteger:=1;
   fdqAgenda.Post;
 
   fdqAgendaAluno.Append;
-  fdqAgendaAluno.FieldByName('agenda_id').AsInteger := 58;
+  fdqAgendaAluno.FieldByName('agenda_id').AsString := fdqAgenda.FieldByName('agenda_id').AsString;
   fdqAgendaAluno.FieldByName('aluno_id').AsInteger := 19;
   fdqAgendaAluno.Post;
 end;
@@ -150,21 +166,21 @@ begin
       fdmTempAgenda.Active := False;
       fdmTempAgenda.AppendData(LDataSet);
       CopyDataSet(fdmTempAgenda,fdqAgenda,True);
-      fdqAgenda.ApplyUpdates(-1);
+      //fdqAgenda.ApplyUpdates(-1);
 
       //Pegando dados da agenda_aluno
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
       fdmTempAgendaAluno.Active := False;
       fdmTempAgendaAluno.AppendData(LDataSet);
       CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,True);
-      fdqAgendaAluno.ApplyUpdates(-1);
+      //fdqAgendaAluno.ApplyUpdates(-1);
 
       //Pegando dados da agenda_turma
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
       fdmTempAgendaTurma.Active := False;
       fdmTempAgendaTurma.AppendData(LDataSet);
       CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,True);
-      fdqAgendaTurma.ApplyUpdates(-1);
+      //fdqAgendaTurma.ApplyUpdates(-1);
 
     except on E:Exception do
       ShowMessage('Erro na busca da agenda' + #13 + E.Message);

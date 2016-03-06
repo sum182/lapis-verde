@@ -20,6 +20,7 @@ type
     fdqAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
     dsAgenda: TDataSource;
+    procedure fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
   private
     { Private declarations }
   public
@@ -27,8 +28,9 @@ type
     function GetAlunos(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
     function GetTurmas(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
 
+    //Metodos de Agenda
     function GetAgenda(EscolaId:Integer;FuncionarioId:Integer;AgendaId:Integer):TFDJSONDataSets;
-    procedure CriarAgenda(const ADeltaList: TFDJSONDeltas);
+    procedure ApplyChangesAgenda(const ADeltaList: TFDJSONDeltas);
   end;
 
 var
@@ -45,20 +47,15 @@ uses untSmMain;
 
 { TSmEscola }
 
-procedure TSmEscola.CriarAgenda(const ADeltaList: TFDJSONDeltas);
+procedure TSmEscola.ApplyChangesAgenda(const ADeltaList: TFDJSONDeltas);
 var
   LApply: IFDJSONDeltasApplyUpdates;
 begin
-  // Create the apply object
+ // Create the apply object
   LApply := TFDJSONDeltasApplyUpdates.Create(ADeltaList);
+
   // Apply the agenda delta
   LApply.ApplyUpdates('agenda', fdqAgenda.Command);
-
-
-  if LApply.Errors.Count > 0 then
-   // Raise an exception if any errors.
-    raise Exception.Create(LApply.Errors.Strings.Text);
-
 
   if LApply.Errors.Count = 0 then
   begin
@@ -67,6 +64,14 @@ begin
     LApply.ApplyUpdates('agenda_turma', fdqAgendaAluno.Command);
   end;
 
+  if LApply.Errors.Count > 0 then
+   // Raise an exception if any errors.
+    raise Exception.Create(LApply.Errors.Strings.Text);
+end;
+
+procedure TSmEscola.fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
+begin
+  fdqAgenda.FieldByName('data_insert_server').AsDateTime:=Now;
 end;
 
 function TSmEscola.GetAgenda(EscolaId, FuncionarioId,

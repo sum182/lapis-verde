@@ -13,8 +13,10 @@ type
     Memo1: TMemo;
     ToolBar2: TToolBar;
     SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,6 +42,11 @@ procedure TfrmAgendaEscolaNew.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
   DmEscola.CriarAgenda(Memo1.Text);
+end;
+
+procedure TfrmAgendaEscolaNew.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
   DmEscola.AgendaApplyChanges;
 end;
 

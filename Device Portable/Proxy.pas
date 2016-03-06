@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 05/03/2016 16:09:58
+// 06/03/2016 11:27:05
 //
 
 unit Proxy;
@@ -84,7 +84,7 @@ type
     FGetTurmasCommand_Cache: TDSRestCommand;
     FGetAgendaCommand: TDSRestCommand;
     FGetAgendaCommand_Cache: TDSRestCommand;
-    FCriarAgendaCommand: TDSRestCommand;
+    FApplyChangesAgendaCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -96,7 +96,7 @@ type
     function GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetAgenda(EscolaId: Integer; FuncionarioId: Integer; AgendaId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAgenda_Cache(EscolaId: Integer; FuncionarioId: Integer; AgendaId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    procedure CriarAgenda(ADeltaList: TFDJSONDeltas);
+    procedure ApplyChangesAgenda(ADeltaList: TFDJSONDeltas);
   end;
 
   TSmResponsavelClient = class(TDSAdminRestClient)
@@ -294,7 +294,7 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmEscola_CriarAgenda: array [0..0] of TDSRestParameterMetaData =
+  TSmEscola_ApplyChangesAgenda: array [0..0] of TDSRestParameterMetaData =
   (
     (Name: 'ADeltaList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDeltas')
   );
@@ -885,29 +885,29 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[3].Value.GetString);
 end;
 
-procedure TSmEscolaClient.CriarAgenda(ADeltaList: TFDJSONDeltas);
+procedure TSmEscolaClient.ApplyChangesAgenda(ADeltaList: TFDJSONDeltas);
 begin
-  if FCriarAgendaCommand = nil then
+  if FApplyChangesAgendaCommand = nil then
   begin
-    FCriarAgendaCommand := FConnection.CreateCommand;
-    FCriarAgendaCommand.RequestType := 'POST';
-    FCriarAgendaCommand.Text := 'TSmEscola."CriarAgenda"';
-    FCriarAgendaCommand.Prepare(TSmEscola_CriarAgenda);
+    FApplyChangesAgendaCommand := FConnection.CreateCommand;
+    FApplyChangesAgendaCommand.RequestType := 'POST';
+    FApplyChangesAgendaCommand.Text := 'TSmEscola."ApplyChangesAgenda"';
+    FApplyChangesAgendaCommand.Prepare(TSmEscola_ApplyChangesAgenda);
   end;
   if not Assigned(ADeltaList) then
-    FCriarAgendaCommand.Parameters[0].Value.SetNull
+    FApplyChangesAgendaCommand.Parameters[0].Value.SetNull
   else
   begin
-    FMarshal := TDSRestCommand(FCriarAgendaCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    FMarshal := TDSRestCommand(FApplyChangesAgendaCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
     try
-      FCriarAgendaCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(ADeltaList), True);
+      FApplyChangesAgendaCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(ADeltaList), True);
       if FInstanceOwner then
         ADeltaList.Free
     finally
       FreeAndNil(FMarshal)
     end
     end;
-  FCriarAgendaCommand.Execute;
+  FApplyChangesAgendaCommand.Execute;
 end;
 
 constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection);
@@ -929,7 +929,7 @@ begin
   FGetTurmasCommand_Cache.DisposeOf;
   FGetAgendaCommand.DisposeOf;
   FGetAgendaCommand_Cache.DisposeOf;
-  FCriarAgendaCommand.DisposeOf;
+  FApplyChangesAgendaCommand.DisposeOf;
   inherited;
 end;
 

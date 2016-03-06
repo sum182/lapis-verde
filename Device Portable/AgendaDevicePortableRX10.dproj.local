@@ -18,7 +18,7 @@
     <Transaction>2016/03/02 16:48:12.000.362,C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.dfm</Transaction>
     <Transaction>2016/03/02 16:48:16.000.886,C:\Projetos\Agenda\Device Portable\DM\untDmResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm</Transaction>
     <Transaction>2016/03/02 16:48:21.000.694,C:\Projetos\Agenda\Device Portable\DM\untDmEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm</Transaction>
-    <Transaction>2016/03/05 16:06:22.452,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaNew.fmx=C:\Projetos\Agenda\Device Portable\Unit1.fmx</Transaction>
+    <Transaction>2016/03/05 16:06:22.000.452,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaNew.fmx=C:\Projetos\Agenda\Device Portable\Unit1.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
