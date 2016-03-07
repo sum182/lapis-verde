@@ -20,7 +20,9 @@ type
     fdqAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
     dsAgenda: TDataSource;
-    procedure fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
+    procedure fdqAgendaNewRecord(DataSet: TDataSet);
+    procedure fdqAgendaAfterInsert(DataSet: TDataSet);
+    procedure fdqAgendaBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -30,6 +32,7 @@ type
 
     //Metodos de Agenda
     function GetAgenda(EscolaId:Integer;FuncionarioId:Integer;AgendaId:Integer):TFDJSONDataSets;
+    function  SalvarAgenda(LDataSetList: TFDJSONDataSets):String;
     procedure ApplyChangesAgenda(const ADeltaList: TFDJSONDeltas);
   end;
 
@@ -41,7 +44,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain;
+uses untSmMain, smDBFireDac;
 
 {$R *.dfm}
 
@@ -69,7 +72,18 @@ begin
     raise Exception.Create(LApply.Errors.Strings.Text);
 end;
 
-procedure TSmEscola.fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
+procedure TSmEscola.fdqAgendaAfterInsert(DataSet: TDataSet);
+begin
+  fdqAgenda.FieldByName('data_insert_server').AsDateTime:=Now;
+end;
+
+procedure TSmEscola.fdqAgendaBeforePost(DataSet: TDataSet);
+begin
+  if Dataset.State in [dsInsert]  then
+    fdqAgenda.FieldByName('data_insert_server').AsDateTime:=Now;
+end;
+
+procedure TSmEscola.fdqAgendaNewRecord(DataSet: TDataSet);
 begin
   fdqAgenda.FieldByName('data_insert_server').AsDateTime:=Now;
 end;
@@ -115,6 +129,41 @@ begin
   fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
   fdqLoginFuncionario.Open;
   Result:= not (fdqLoginFuncionario.IsEmpty);
+end;
+
+function TSmEscola.SalvarAgenda(LDataSetList: TFDJSONDataSets): String;
+var
+  LDataSet: TFDDataSet;
+  Exceptions:string;
+begin
+  try
+    Result:=EmptyStr;
+    Exceptions:=EmptyStr;
+
+    try
+      //Pegando dados da agenda
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
+      CopyDataSetByRecord(LDataSet,fdqAgenda,Exceptions);
+
+      //Pegando dados da agenda_aluno
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
+      CopyDataSetByRecord(LDataSet,fdqAgendaAluno,Exceptions);
+
+      //Pegando dados da agenda_turma
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
+      CopyDataSetByRecord(LDataSet,fdqAgendaTurma,Exceptions);
+
+    except on E:Exception do
+      Exceptions:=  Exceptions + E.Message;
+    end;
+
+    if (Exceptions <> EmptyStr) then
+      Result:= 'Erro ao salvar agenda' + #13 + Exceptions;
+  finally
+    fdqAgenda.Close;
+    fdqAgendaAluno.Close;
+    fdqAgendaTurma.Close;
+  end;
 end;
 
 end.

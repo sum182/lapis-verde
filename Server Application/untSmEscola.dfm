@@ -34,7 +34,9 @@ object SmEscola: TSmEscola
       end>
   end
   object fdqAgenda: TFDQuery
-    BeforeApplyUpdates = fdqAgendaBeforeApplyUpdates
+    AfterInsert = fdqAgendaAfterInsert
+    BeforePost = fdqAgendaBeforePost
+    OnNewRecord = fdqAgendaNewRecord
     Connection = SmMain.FDConnection
     SQL.Strings = (
       'select * from agenda'

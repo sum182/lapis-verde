@@ -1,13 +1,13 @@
 //
 // Created by the DataSnap proxy generator.
-// 06/03/2016 11:27:05
+// 07/03/2016 18:50:16
 //
 
 unit Proxy;
 
 interface
 
-uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.FireDACJSONReflect, Data.DBXJSONReflect;
+uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.FireDACJSONReflect, FireDAC.Comp.DataSet, Data.DBXJSONReflect;
 
 type
 
@@ -77,6 +77,7 @@ type
 
   TSmEscolaClient = class(TDSAdminRestClient)
   private
+    FfdqAgendaBeforeApplyUpdatesCommand: TDSRestCommand;
     FLoginFuncionarioCommand: TDSRestCommand;
     FGetAlunosCommand: TDSRestCommand;
     FGetAlunosCommand_Cache: TDSRestCommand;
@@ -84,11 +85,13 @@ type
     FGetTurmasCommand_Cache: TDSRestCommand;
     FGetAgendaCommand: TDSRestCommand;
     FGetAgendaCommand_Cache: TDSRestCommand;
+    FSalvarAgendaCommand: TDSRestCommand;
     FApplyChangesAgendaCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
+    procedure fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
     function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
     function GetAlunos(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAlunos_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
@@ -96,6 +99,7 @@ type
     function GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetAgenda(EscolaId: Integer; FuncionarioId: Integer; AgendaId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAgenda_Cache(EscolaId: Integer; FuncionarioId: Integer; AgendaId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function SalvarAgenda(LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     procedure ApplyChangesAgenda(ADeltaList: TFDJSONDeltas);
   end;
 
@@ -243,6 +247,11 @@ const
     (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
   );
 
+  TSmEscola_fdqAgendaBeforeApplyUpdates: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'DataSet'; Direction: 1; DBXType: 37; TypeName: 'TFDDataSet')
+  );
+
   TSmEscola_LoginFuncionario: array [0..2] of TDSRestParameterMetaData =
   (
     (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
@@ -292,6 +301,12 @@ const
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'AgendaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmEscola_SalvarAgenda: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
   TSmEscola_ApplyChangesAgenda: array [0..0] of TDSRestParameterMetaData =
@@ -742,6 +757,31 @@ begin
   inherited;
 end;
 
+procedure TSmEscolaClient.fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
+begin
+  if FfdqAgendaBeforeApplyUpdatesCommand = nil then
+  begin
+    FfdqAgendaBeforeApplyUpdatesCommand := FConnection.CreateCommand;
+    FfdqAgendaBeforeApplyUpdatesCommand.RequestType := 'POST';
+    FfdqAgendaBeforeApplyUpdatesCommand.Text := 'TSmEscola."fdqAgendaBeforeApplyUpdates"';
+    FfdqAgendaBeforeApplyUpdatesCommand.Prepare(TSmEscola_fdqAgendaBeforeApplyUpdates);
+  end;
+  if not Assigned(DataSet) then
+    FfdqAgendaBeforeApplyUpdatesCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FfdqAgendaBeforeApplyUpdatesCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FfdqAgendaBeforeApplyUpdatesCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(DataSet), True);
+      if FInstanceOwner then
+        DataSet.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FfdqAgendaBeforeApplyUpdatesCommand.Execute;
+end;
+
 function TSmEscolaClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
 begin
   if FLoginFuncionarioCommand = nil then
@@ -885,6 +925,32 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[3].Value.GetString);
 end;
 
+function TSmEscolaClient.SalvarAgenda(LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+begin
+  if FSalvarAgendaCommand = nil then
+  begin
+    FSalvarAgendaCommand := FConnection.CreateCommand;
+    FSalvarAgendaCommand.RequestType := 'POST';
+    FSalvarAgendaCommand.Text := 'TSmEscola."SalvarAgenda"';
+    FSalvarAgendaCommand.Prepare(TSmEscola_SalvarAgenda);
+  end;
+  if not Assigned(LDataSetList) then
+    FSalvarAgendaCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FSalvarAgendaCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FSalvarAgendaCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      if FInstanceOwner then
+        LDataSetList.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FSalvarAgendaCommand.Execute(ARequestFilter);
+  Result := FSalvarAgendaCommand.Parameters[1].Value.GetWideString;
+end;
+
 procedure TSmEscolaClient.ApplyChangesAgenda(ADeltaList: TFDJSONDeltas);
 begin
   if FApplyChangesAgendaCommand = nil then
@@ -922,6 +988,7 @@ end;
 
 destructor TSmEscolaClient.Destroy;
 begin
+  FfdqAgendaBeforeApplyUpdatesCommand.DisposeOf;
   FLoginFuncionarioCommand.DisposeOf;
   FGetAlunosCommand.DisposeOf;
   FGetAlunosCommand_Cache.DisposeOf;
@@ -929,6 +996,7 @@ begin
   FGetTurmasCommand_Cache.DisposeOf;
   FGetAgendaCommand.DisposeOf;
   FGetAgendaCommand_Cache.DisposeOf;
+  FSalvarAgendaCommand.DisposeOf;
   FApplyChangesAgendaCommand.DisposeOf;
   inherited;
 end;

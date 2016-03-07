@@ -19,7 +19,6 @@ type
     fdqAgendaApply: TFDQuery;
     fdqAgendaAlunoApply: TFDQuery;
     fdqAgendaTurmaApply: TFDQuery;
-    FDMemTable1: TFDMemTable;
     fdqAgendaApplyagenda_id: TStringField;
     fdqAgendaApplydescricao: TStringField;
     fdqAgendaApplydata_insert_local: TDateTimeField;
@@ -27,13 +26,6 @@ type
     fdqAgendaApplyagenda_tipo_id: TSmallintField;
     fdqAgendaApplyfuncionario_id: TIntegerField;
     fdqAgendaApplyescola_id: TIntegerField;
-    FDMemTable1agenda_id: TStringField;
-    FDMemTable1descricao: TStringField;
-    FDMemTable1data_insert_local: TDateTimeField;
-    FDMemTable1data_insert_server: TDateTimeField;
-    FDMemTable1agenda_tipo_id: TSmallintField;
-    FDMemTable1funcionario_id: TIntegerField;
-    FDMemTable1escola_id: TIntegerField;
   private
     { Private declarations }
   public
@@ -49,6 +41,7 @@ type
     procedure GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
     procedure CriarAgenda(Texto: string; FuncionarioId: Integer = 0; AlunoId: Integer = 0; TurmaId: Integer = 0);
     procedure AgendaApplyChanges;
+    procedure SalvarAgenda;
   end;
 
 var
@@ -165,22 +158,23 @@ begin
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
       fdmTempAgenda.Active := False;
       fdmTempAgenda.AppendData(LDataSet);
-      CopyDataSet(fdmTempAgenda,fdqAgenda,True);
-      //fdqAgenda.ApplyUpdates(-1);
+      //CopyDataSet(fdmTempAgenda,fdqAgenda,True);
+      CopyDataSet(fdmTempAgenda,fdqAgenda,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_aluno
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
       fdmTempAgendaAluno.Active := False;
       fdmTempAgendaAluno.AppendData(LDataSet);
-      CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,True);
-      //fdqAgendaAluno.ApplyUpdates(-1);
+      //CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,True);
+      CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,False,[coAppend,coEdit]);
+
 
       //Pegando dados da agenda_turma
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
       fdmTempAgendaTurma.Active := False;
       fdmTempAgendaTurma.AppendData(LDataSet);
-      CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,True);
-      //fdqAgendaTurma.ApplyUpdates(-1);
+      //CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,True);
+      CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,False,[coAppend,coEdit]);
 
     except on E:Exception do
       ShowMessage('Erro na busca da agenda' + #13 + E.Message);
@@ -276,6 +270,31 @@ procedure TDmEscola.OpenTurmas;
 begin
   fdqTurma.Close;
   fdqTurma.Open;
+end;
+
+procedure TDmEscola.SalvarAgenda;
+var
+  LDataSetList  : TFDJSONDataSets;
+  MsgSalvar:string;
+begin
+  fdqAgendaApply.Active := False;
+  fdqAgendaAlunoApply.Active := False;
+  fdqAgendaTurmaApply.Active := False;
+
+  LDataSetList := TFDJSONDataSets.Create;
+  TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda',fdqAgendaApply);
+  TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_aluno',fdqAgendaAlunoApply);
+  TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurmaApply);
+
+    try
+      MsgSalvar:= ModuloCliente.SmEscolaClient.SalvarAgenda(LDataSetList);
+    except on E:Exception do
+      ShowMessage('Erro no apply' + #13 + E.Message);
+    end;
+
+  if MsgSalvar <> EmptyStr then
+    ShowMessage(MsgSalvar);
+
 end;
 
 end.

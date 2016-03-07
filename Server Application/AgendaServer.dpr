@@ -13,7 +13,8 @@ uses
   untSmTeste in 'untSmTeste.pas' {SmTeste: TDataModule},
   untSmMain in 'untSmMain.pas' {SmMain: TDataModule},
   untSmEscola in 'untSmEscola.pas' {SmEscola: TDataModule},
-  untSmResponsavel in 'untSmResponsavel.pas' {SmResponsavel: TDataModule};
+  untSmResponsavel in 'untSmResponsavel.pas' {SmResponsavel: TDataModule},
+  smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas';
 
 {$R *.res}
 
