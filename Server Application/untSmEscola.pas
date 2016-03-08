@@ -44,7 +44,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain, smDBFireDac;
+uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX;
 
 {$R *.dfm}
 
@@ -80,7 +80,7 @@ end;
 procedure TSmEscola.fdqAgendaBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
-    fdqAgenda.FieldByName('data_insert_server').AsDateTime:=Now;
+    Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 end;
 
 procedure TSmEscola.fdqAgendaNewRecord(DataSet: TDataSet);
@@ -158,7 +158,15 @@ begin
     end;
 
     if (Exceptions <> EmptyStr) then
+    begin
       Result:= 'Erro ao salvar agenda' + #13 + Exceptions;
+      SmMain.SetLogError(Exceptions,
+                         ExtractFileName(Application.Exename), 
+                         UnitName,
+                         ClassName,
+                         'SalvarAgenda',
+                         Now);
+    end;
   finally
     fdqAgenda.Close;
     fdqAgendaAluno.Close;

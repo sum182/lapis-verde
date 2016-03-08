@@ -45,4 +45,25 @@ object SmMain: TSmMain
     Left = 42
     Top = 152
   end
+  object fdqLogError: TFDQuery
+    BeforePost = fdqLogErrorBeforePost
+    Connection = FDConnection
+    SQL.Strings = (
+      'select * from log_error l'
+      'where l.log_error_id = :log_error_id')
+    Left = 40
+    Top = 256
+    ParamData = <
+      item
+        Name = 'LOG_ERROR_ID'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object ApplicationEvents: TApplicationEvents
+    OnException = ApplicationEventsException
+    Left = 168
+    Top = 152
+  end
 end

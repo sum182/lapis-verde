@@ -40,8 +40,10 @@ type
 
     procedure GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
     procedure CriarAgenda(Texto: string; FuncionarioId: Integer = 0; AlunoId: Integer = 0; TurmaId: Integer = 0);
-    procedure AgendaApplyChanges;
     procedure SalvarAgenda;
+
+    procedure AgendaApplyChanges;
+
   end;
 
 var
@@ -82,15 +84,15 @@ begin
     fdmTempAgendaTurma := TFDMemTable.Create(self);
 
     fdmTempAgenda.Data := fdqAgenda.Delta;
-    //fdmTempAgendaAluno.Data := fdqAgendaAluno.Delta;
-    //fdmTempAgendaTurma.Data := fdqAgendaTurma.Delta;
+    fdmTempAgendaAluno.Data := fdqAgendaAluno.Delta;
+    fdmTempAgendaTurma.Data := fdqAgendaTurma.Delta;
 
     // Create a delta list
     Deltas := TFDJSONDeltas.Create;
     // Add deltas
     TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda', fdmTempAgenda);
-    //TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_aluno', fdmTempAgendaAluno);
-    //TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_turma', fdmTempAgendaTurma);
+    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_aluno', fdmTempAgendaAluno);
+    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_turma', fdmTempAgendaTurma);
 
 
 
@@ -139,52 +141,28 @@ end;
 
 procedure TDmEscola.GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
 var
-  LDataSetList  : TFDJSONDataSets;
-  fdmTempAgenda : TFDMemTable;
-  fdmTempAgendaAluno : TFDMemTable;
-  fdmTempAgendaTurma : TFDMemTable;
-
+  LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
 begin
-  try
-    fdmTempAgenda := TFDMemTable.Create(self);
-    fdmTempAgendaAluno := TFDMemTable.Create(self);
-    fdmTempAgendaTurma := TFDMemTable.Create(self);
-
     try
       LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(1,0,0);
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
-      fdmTempAgenda.Active := False;
-      fdmTempAgenda.AppendData(LDataSet);
-      //CopyDataSet(fdmTempAgenda,fdqAgenda,True);
-      CopyDataSet(fdmTempAgenda,fdqAgenda,False,[coAppend,coEdit]);
+      CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_aluno
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
-      fdmTempAgendaAluno.Active := False;
-      fdmTempAgendaAluno.AppendData(LDataSet);
-      //CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,True);
-      CopyDataSet(fdmTempAgendaAluno,fdqAgendaAluno,False,[coAppend,coEdit]);
-
+      CopyDataSet(LDataSet,fdqAgendaAluno,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_turma
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
-      fdmTempAgendaTurma.Active := False;
-      fdmTempAgendaTurma.AppendData(LDataSet);
-      //CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,True);
-      CopyDataSet(fdmTempAgendaTurma,fdqAgendaTurma,False,[coAppend,coEdit]);
+      CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
 
     except on E:Exception do
       ShowMessage('Erro na busca da agenda' + #13 + E.Message);
     end;
 
-  finally
-    fdmTempAgenda.DisposeOf;
-    fdmTempAgendaAluno.DisposeOf;
-    fdmTempAgendaTurma.DisposeOf;
-  end;
 
 end;
 

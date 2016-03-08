@@ -14,7 +14,9 @@ uses
   untSmMain in 'untSmMain.pas' {SmMain: TDataModule},
   untSmEscola in 'untSmEscola.pas' {SmEscola: TDataModule},
   untSmResponsavel in 'untSmResponsavel.pas' {SmResponsavel: TDataModule},
-  smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas';
+  smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
+  smGeral in 'C:\Componentes\sum182\D15\Units\smGeral.pas',
+  untResourceString in '..\Lib\untResourceString.pas';
 
 {$R *.res}
 
