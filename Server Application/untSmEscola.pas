@@ -78,6 +78,8 @@ procedure TSmEscola.fdqAgendaBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
+
+  Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
 function TSmEscola.GetAgenda(EscolaId, FuncionarioId,
@@ -113,10 +115,9 @@ begin
 
     end;
   finally
-      fdqAgenda.Active := False;
-      fdqAgendaAluno.Active := False;
-      fdqAgendaTurma.Active := False;
-
+    fdqAgenda.Active := False;
+    fdqAgendaAluno.Active := False;
+    fdqAgendaTurma.Active := False;
   end;
 end;
 
@@ -147,15 +148,6 @@ begin
   finally
     fdqAluno.Active := False;
   end;
-
-
-
-  {Código Antigo
-  fdqAluno.Active := False;
-  fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
-
-  Result := TFDJSONDataSets.Create;
-  TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);}
 end;
 
 function TSmEscola.GetTurmas(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
@@ -185,13 +177,6 @@ begin
   finally
     fdqTurma.Active := False;
   end;
-
-  {codigo antigo
-  fdqTurma.Active := False;
-  fdqTurma.ParamByName('escola_id').AsInteger:= EscolaId;
-
-  Result := TFDJSONDataSets.Create;
-  TFDJSONDataSetsWriter.ListAdd(Result, fdqTurma); }
 end;
 
 function TSmEscola.LoginFuncionario(Login, Senha: string): Boolean;
@@ -218,13 +203,6 @@ begin
     fdqLoginFuncionario.Active := False;
   end;
 
-
-  {COD ANTIGO
-  fdqLoginFuncionario.Close;
-  fdqLoginFuncionario.ParamByName('login').AsString := Login;
-  fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
-  fdqLoginFuncionario.Open;
-  Result:= not (fdqLoginFuncionario.IsEmpty);}
 end;
 
 function TSmEscola.SalvarAgenda(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets): String;

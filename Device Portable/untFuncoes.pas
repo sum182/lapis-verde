@@ -2,7 +2,7 @@ unit untFuncoes;
 
 interface
 
-Uses  FMX.Forms;
+Uses  FMX.Forms, Data.DB;
 
   procedure SetStyle(Formulario:TForm);
   function GetEscolaId:Integer;
@@ -10,6 +10,8 @@ Uses  FMX.Forms;
   function GetResponsavelId:Integer;
   function UsuarioLogadoIsResponsavel:boolean;
   function UsuarioLogadoIsFuncionario:boolean;
+  function GetApplicationName:string;
+  procedure SetFlagEnviado(DataSet:TDataset;Campo:String ='enviado_server');
 
 
 implementation
@@ -58,6 +60,25 @@ begin
   Result:= DM.fUsuarioLogadoIsFuncionario;
 end;
 
+function GetApplicationName:string;
+begin
+  Result:= 'Agenda Bee';
+end;
+
+procedure SetFlagEnviado(DataSet:TDataset;Campo:String ='enviado_server');
+begin
+  if DataSet.State in [dsInactive] then
+    DataSet.Active := True;
+
+  DataSet.First;
+  while not(DataSet.Eof) do
+  begin
+    DataSet.Edit;
+    DataSet.FieldByName(Campo).AsString:= 'S';
+    DataSet.Post;
+    DataSet.Next;
+  end;
+end;
 
 
 end.

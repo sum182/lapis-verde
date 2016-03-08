@@ -95,7 +95,7 @@ begin
 
     if (Exceptions <> EmptyStr) then
     begin
-      Result:= 'Erro ao salvar logs' + #13 + Exceptions;
+      Result:= 'Erro ao Salvar logs' + #13 + Exceptions;
       SmMain.SetLogError(Exceptions,
                          ExtractFileName(Application.Exename),
                          UnitName,

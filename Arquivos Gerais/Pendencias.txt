@@ -20,6 +20,8 @@ Braspress
 
 ----Mobile--------------------------------------------------------------------------------
 
+Analisar atualizacao de banco 
+
 try except server
   try
     LDataSetList := ClientModule2.ServerMethods1Client.GetDepartmentNames();
@@ -161,3 +163,55 @@ TDevRocks
 https://bitbucket.org/tdevrocks/curso-criando-aplicativos-m-veis-com-delphi/downloads
 C:\Projetos\TDevRocks\tdevrocks-atualizador-autom-tico-0b4a5744166e\tdevrocks-atualizador-autom-tico-0b4a5744166e
 
+
+
+
+
+
+
+
+ Modelo Exception
+
+  try
+    try
+      fdqAgendaSaveServer.Active := True;
+
+      if fdqAgendaSaveServer.RecordCount <=0 then
+        Exit;
+
+      fdqAgendaSaveServer.Active := False;
+      fdqAgendaAlunoSaveServer.Active := False;
+      fdqAgendaTurmaSaveServer.Active := False;
+
+      LDataSetList := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda',fdqAgendaSaveServer);
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_aluno',fdqAgendaAlunoSaveServer);
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurmaSaveServer);
+
+
+      MsgRetornoServer:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,GetFuncionarioId,LDataSetList);
+
+      //Flagando registros como enviado
+      if MsgRetornoServer = EmptyStr then
+        SetFlagEnviado(fdqAgendaSaveServer);
+
+    except on E:Exception do
+      MsgRetornoServer := MsgRetornoServer + E.Message;
+    end;
+  finally
+    if MsgRetornoServer <> EmptyStr then
+      DM.SetLogError( MsgRetornoServer,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'SalvarAgenda',
+                      Now,
+                      'Erro ao Salvar Agenda' + #13 + MsgRetornoServer,
+                      GetEscolaId,
+                      0,
+                      GetFuncionarioId
+                    );
+      fdqAgendaSaveServer.Active := False;
+      fdqAgendaAlunoSaveServer.Active := False;
+      fdqAgendaTurmaSaveServer.Active := False;
+  end;

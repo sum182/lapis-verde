@@ -42,12 +42,13 @@ type
     procedure ResetRESTConnection;
     procedure SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                            Data:TDateTime;
-                           MsgUsuario = '';
+                           MsgUsuario:String = '';
                            EscolaId:Integer = 0;
                            ResponsavelId:Integer=0;
                            FuncionarioId:Integer=0
                           );
     procedure SalvarLogError;
+    procedure SalvarDadosServer;
 
   end;
 
@@ -62,7 +63,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
-  untFuncoes;
+  untFuncoes, smDBFireDac;
 
 {$R *.dfm}
 
@@ -100,7 +101,6 @@ begin
     begin
       DataBase := TPath.GetDocumentsPath + PathDelim + DataBaseName;
       FDConnection.Params.Values['Database']:= DataBase;
-      //FDConnection.ExecSQL('CREATE TABLE aluno (   aluno_id INTEGER (11)  PRIMARY KEY,    nome     VARCHAR (150) );');
     end;
 
     FDConnection.Open;
@@ -137,33 +137,53 @@ begin
   RESTClient1.BaseURL := BASE_URL;
 end;
 
+procedure TDM.SalvarDadosServer;
+begin
+  SalvarLogError;
+end;
+
 procedure TDM.SalvarLogError;
 var
   LDataSetList  : TFDJSONDataSets;
-  MsgSalvar:string;
+  MsgRetornoServer:string;
 begin
-  fdqLogErrorSaveServer.Active := False;
-
-  LDataSetList := TFDJSONDataSets.Create;
-  TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogErrorSaveServer);
-
+  //Método para Salvar os Logs de Erro no Server
   try
-    MsgSalvar:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,GetFuncionarioId,LDataSetList);
-  except on E:Exception do
-    ShowMessage('Erro ao salvar LogError' + #13 + E.Message);
+    try
+      MsgRetornoServer := EmptyStr;
+      fdqLogErrorSaveServer.Active := False;
+
+      LDataSetList := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogErrorSaveServer);
+
+      MsgRetornoServer:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,GetFuncionarioId,LDataSetList);
+
+    except on E:Exception do
+      MsgRetornoServer := MsgRetornoServer + E.Message;
+    end;
+  finally
+    if MsgRetornoServer = '' then
+      DataSetDelete(fdqLogError)
+    else
+      DM.SetLogError( MsgRetornoServer,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'SalvarLogError',
+                      Now,
+                      'Erro ao Salvar LogError' + #13 + MsgRetornoServer,
+                      GetEscolaId,
+                      0,
+                      GetFuncionarioId
+                    );
+    fdqLogErrorSaveServer.Active := False;
   end;
-
-  if MsgSalvar <> EmptyStr then
-    ShowMessage('Erro ao Salvar LogError' + #13 +MsgSalvar);
-
-
-
 end;
 
 procedure TDM.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
-  Data: TDateTime; EscolaId, ResponsavelId, FuncionarioId: Integer);
+  Data: TDateTime; MsgUsuario:String; EscolaId, ResponsavelId, FuncionarioId: Integer);
 begin
-try
+  try
     fdqLogError.Active:=False;
     fdqLogError.Active:=True;
 
@@ -187,7 +207,8 @@ try
     fdqLogError.FieldByName('data').AsDateTime:= Data;
     fdqLogError.Post;
 
-    if Msg then
+    if MsgUsuario <> '' then
+      ShowMessage(MsgUsuario);
 
   finally
     fdqLogError.Active:=False;
