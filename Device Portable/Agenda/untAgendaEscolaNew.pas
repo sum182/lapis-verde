@@ -47,8 +47,8 @@ end;
 procedure TfrmAgendaEscolaNew.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-//  DmEscola.AgendaApplyChanges;
   DmEscola.SalvarAgenda;
+  DM.SalvarLogError;
 end;
 
 end.

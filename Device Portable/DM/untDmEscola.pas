@@ -54,7 +54,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses untDM, untModuloCliente, Data.FireDACJSONReflect, smDBFireDac,
-  FMX.Dialogs, System.SysUtils, smGeralFMX;
+  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms;
 
 {$R *.dfm}
 
@@ -97,7 +97,7 @@ begin
 
 
     try
-      ModuloCliente.SmEscolaClient.ApplyChangesAgenda(Deltas);
+      ModuloCliente.SmEscolaClient.ApplyChangesAgenda(GetEscolaId,GetFuncionarioId,Deltas);
     except on E:Exception do
       ShowMessage('Erro no apply' + #13 + E.Message);
     end;
@@ -129,8 +129,8 @@ begin
   fdqAgenda.FieldByName('agenda_id').AsString:=GetGUID;
   fdqAgenda.FieldByName('descricao').AsString:=Texto;
   fdqAgenda.FieldByName('data_insert_local').AsDateTime:=Now;
-  fdqAgenda.FieldByName('funcionario_id').AsInteger:=16;
-  fdqAgenda.FieldByName('escola_id').AsInteger:=1;
+  fdqAgenda.FieldByName('funcionario_id').AsInteger:=GetFuncionarioId;
+  fdqAgenda.FieldByName('escola_id').AsInteger:=GetEscolaId;
   fdqAgenda.Post;
 
   fdqAgendaAluno.Append;
@@ -144,8 +144,61 @@ var
   LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
 begin
+ //Método para retornar as Agendas
+  try
     try
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(1,0,0);
+       LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,0);
+
+      //Pegando dados da agenda
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
+      CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
+
+      //Pegando dados da agenda_aluno
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
+      CopyDataSet(LDataSet,fdqAgendaAluno,False,[coAppend,coEdit]);
+
+      //Pegando dados da agenda_turma
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
+      CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
+
+    except on E:Exception do
+    begin
+      DM.SetLogError(E.Message,
+                         //ExtractFileName(Application.Exename),
+                         'AgendaDevicePortableRX10',
+                         UnitName,
+                         ClassName,
+                         'GetAgenda',
+                         Now,
+                         GetEscolaId,
+                         0,
+                         GetFuncionarioId
+                         );
+       ShowMessage('Erro na busca da agenda' + #13 + E.Message);
+    end;
+
+
+    end;
+  finally
+  end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   {codigo antigo
+
+    try
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,0);
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
@@ -162,7 +215,7 @@ begin
     except on E:Exception do
       ShowMessage('Erro na busca da agenda' + #13 + E.Message);
     end;
-
+    }
 
 end;
 
@@ -176,7 +229,7 @@ begin
   try
     fdmTemp := TFDMemTable.Create(self);
     try
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(1,0);
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(GetEscolaId,GetFuncionarioId);
 
       //Prepara o MemoryTable temporário
       fdmTemp.Active := False;
@@ -205,7 +258,7 @@ begin
   try
     fdmTemp := TFDMemTable.Create(self);
     try
-      LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(1,0);
+      LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(GetEscolaId,GetFuncionarioId);
 
       //Prepara o MemoryTable temporário
       fdmTemp.Active := False;
@@ -264,15 +317,14 @@ begin
   TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_aluno',fdqAgendaAlunoApply);
   TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurmaApply);
 
-    try
-      MsgSalvar:= ModuloCliente.SmEscolaClient.SalvarAgenda(LDataSetList);
-    except on E:Exception do
-      ShowMessage('Erro no apply' + #13 + E.Message);
-    end;
+  try
+    MsgSalvar:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,GetFuncionarioId,LDataSetList);
+  except on E:Exception do
+    ShowMessage('Erro ao Salvar Agenda' + #13 + E.Message);
+  end;
 
   if MsgSalvar <> EmptyStr then
-    ShowMessage(MsgSalvar);
-
+    ShowMessage('Erro ao Salvar Agenda' + #13 +MsgSalvar);
 end;
 
 end.

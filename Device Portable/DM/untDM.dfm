@@ -9,6 +9,7 @@ object DM: TDM
       'LockingMode=Normal'
       'OpenMode=ReadWrite'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 64
     Top = 32
@@ -99,5 +100,28 @@ object DM: TDM
     LoginPrompt = False
     Left = 328
     Top = 32
+  end
+  object fdqLogError: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select * from log_error l'
+      'where l.log_error_id = :log_error_id')
+    Left = 176
+    Top = 288
+    ParamData = <
+      item
+        Name = 'LOG_ERROR_ID'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object fdqLogErrorSaveServer: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select * from log_error l'
+      'where data_insert_server is null')
+    Left = 288
+    Top = 288
   end
 end

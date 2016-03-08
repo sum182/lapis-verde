@@ -18,9 +18,8 @@
     <Transaction>2016/03/02 16:48:12.000.362,C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm</Transaction>
     <Transaction>2016/03/02 16:48:16.000.886,C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmResponsavel.dfm</Transaction>
     <Transaction>2016/03/02 16:48:21.000.694,C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmEscola.dfm</Transaction>
-    <Transaction>2016/03/05 16:06:22.000.452,C:\Projetos\Agenda\Device Portable\Unit1.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaNew.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_4_WVGA_Nexus_S"/>
+		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_Nexus_4_by_Google"/>
 	</ActiveMobileDevice>
 </BorlandProject>

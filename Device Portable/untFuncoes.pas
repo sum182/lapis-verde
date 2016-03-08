@@ -5,6 +5,11 @@ interface
 Uses  FMX.Forms;
 
   procedure SetStyle(Formulario:TForm);
+  function GetEscolaId:Integer;
+  function GetFuncionarioId:Integer;
+  function GetResponsavelId:Integer;
+  function UsuarioLogadoIsResponsavel:boolean;
+  function UsuarioLogadoIsFuncionario:boolean;
 
 
 implementation
@@ -27,6 +32,31 @@ begin
   {$ENDIF}
 end;
 
+function GetEscolaId:Integer;
+begin
+  Result:= DM.fEscolaId;
+end;
+
+
+function GetFuncionarioId:Integer;
+begin
+  Result:= DM.fFuncionarioId;
+end;
+
+function GetResponsavelId:Integer;
+begin
+  Result:= DM.fResponsavelId;
+end;
+
+function UsuarioLogadoIsResponsavel:boolean;
+begin
+  Result:= DM.fUsuarioLogadoIsResponsavel;
+end;
+
+function UsuarioLogadoIsFuncionario:boolean;
+begin
+  Result:= DM.fUsuarioLogadoIsFuncionario;
+end;
 
 
 

@@ -63,7 +63,7 @@ object SmMain: TSmMain
   end
   object ApplicationEvents: TApplicationEvents
     OnException = ApplicationEventsException
-    Left = 168
+    Left = 144
     Top = 152
   end
 end

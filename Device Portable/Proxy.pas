@@ -1,13 +1,13 @@
 //
 // Created by the DataSnap proxy generator.
-// 07/03/2016 18:50:16
+// 08/03/2016 12:43:39
 //
 
 unit Proxy;
 
 interface
 
-uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.FireDACJSONReflect, FireDAC.Comp.DataSet, Data.DBXJSONReflect;
+uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.FireDACJSONReflect, Data.DBXJSONReflect;
 
 type
 
@@ -68,16 +68,24 @@ type
   TSmMainClient = class(TDSAdminRestClient)
   private
     FDataModuleCreateCommand: TDSRestCommand;
+    FfdqLogErrorBeforePostCommand: TDSRestCommand;
+    FApplicationEventsExceptionCommand: TDSRestCommand;
+    FSalvarLogErrorCommand: TDSRestCommand;
+    FSetLogErrorCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
     procedure DataModuleCreate(Sender: TObject);
+    procedure fdqLogErrorBeforePost(DataSet: TDataSet);
+    procedure ApplicationEventsException(Sender: TObject; E: Exception);
+    function SalvarLogError(EscolaId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    procedure SetLogError(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer);
   end;
 
   TSmEscolaClient = class(TDSAdminRestClient)
   private
-    FfdqAgendaBeforeApplyUpdatesCommand: TDSRestCommand;
+    FfdqAgendaBeforePostCommand: TDSRestCommand;
     FLoginFuncionarioCommand: TDSRestCommand;
     FGetAlunosCommand: TDSRestCommand;
     FGetAlunosCommand_Cache: TDSRestCommand;
@@ -91,7 +99,7 @@ type
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
-    procedure fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
+    procedure fdqAgendaBeforePost(DataSet: TDataSet);
     function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
     function GetAlunos(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAlunos_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
@@ -99,8 +107,8 @@ type
     function GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetAgenda(EscolaId: Integer; FuncionarioId: Integer; AgendaId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAgenda_Cache(EscolaId: Integer; FuncionarioId: Integer; AgendaId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function SalvarAgenda(LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
-    procedure ApplyChangesAgenda(ADeltaList: TFDJSONDeltas);
+    function SalvarAgenda(EscolaId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    procedure ApplyChangesAgenda(EscolaId: Integer; FuncionarioId: Integer; ADeltaList: TFDJSONDeltas);
   end;
 
   TSmResponsavelClient = class(TDSAdminRestClient)
@@ -247,9 +255,41 @@ const
     (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
   );
 
-  TSmEscola_fdqAgendaBeforeApplyUpdates: array [0..0] of TDSRestParameterMetaData =
+  TSmMain_fdqLogErrorBeforePost: array [0..0] of TDSRestParameterMetaData =
   (
-    (Name: 'DataSet'; Direction: 1; DBXType: 37; TypeName: 'TFDDataSet')
+    (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
+  );
+
+  TSmMain_ApplicationEventsException: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject'),
+    (Name: 'E'; Direction: 1; DBXType: 37; TypeName: 'Exception')
+  );
+
+  TSmMain_SalvarLogError: array [0..3] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmMain_SetLogError: array [0..8] of TDSRestParameterMetaData =
+  (
+    (Name: 'MsgError'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Aplicacao'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'UnitNome'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Classe'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Metodo'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Data'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer')
+  );
+
+  TSmEscola_fdqAgendaBeforePost: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
   );
 
   TSmEscola_LoginFuncionario: array [0..2] of TDSRestParameterMetaData =
@@ -303,14 +343,18 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmEscola_SalvarAgenda: array [0..1] of TDSRestParameterMetaData =
+  TSmEscola_SalvarAgenda: array [0..3] of TDSRestParameterMetaData =
   (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
-  TSmEscola_ApplyChangesAgenda: array [0..0] of TDSRestParameterMetaData =
+  TSmEscola_ApplyChangesAgenda: array [0..2] of TDSRestParameterMetaData =
   (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'ADeltaList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDeltas')
   );
 
@@ -741,6 +785,106 @@ begin
   FDataModuleCreateCommand.Execute;
 end;
 
+procedure TSmMainClient.fdqLogErrorBeforePost(DataSet: TDataSet);
+begin
+  if FfdqLogErrorBeforePostCommand = nil then
+  begin
+    FfdqLogErrorBeforePostCommand := FConnection.CreateCommand;
+    FfdqLogErrorBeforePostCommand.RequestType := 'POST';
+    FfdqLogErrorBeforePostCommand.Text := 'TSmMain."fdqLogErrorBeforePost"';
+    FfdqLogErrorBeforePostCommand.Prepare(TSmMain_fdqLogErrorBeforePost);
+  end;
+  FfdqLogErrorBeforePostCommand.Parameters[0].Value.SetDBXReader(TDBXDataSetReader.Create(DataSet, FInstanceOwner), True);
+  FfdqLogErrorBeforePostCommand.Execute;
+end;
+
+procedure TSmMainClient.ApplicationEventsException(Sender: TObject; E: Exception);
+begin
+  if FApplicationEventsExceptionCommand = nil then
+  begin
+    FApplicationEventsExceptionCommand := FConnection.CreateCommand;
+    FApplicationEventsExceptionCommand.RequestType := 'POST';
+    FApplicationEventsExceptionCommand.Text := 'TSmMain."ApplicationEventsException"';
+    FApplicationEventsExceptionCommand.Prepare(TSmMain_ApplicationEventsException);
+  end;
+  if not Assigned(Sender) then
+    FApplicationEventsExceptionCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FApplicationEventsExceptionCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FApplicationEventsExceptionCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  if not Assigned(E) then
+    FApplicationEventsExceptionCommand.Parameters[1].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FApplicationEventsExceptionCommand.Parameters[1].ConnectionHandler).GetJSONMarshaler;
+    try
+      FApplicationEventsExceptionCommand.Parameters[1].Value.SetJSONValue(FMarshal.Marshal(E), True);
+      if FInstanceOwner then
+        E.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FApplicationEventsExceptionCommand.Execute;
+end;
+
+function TSmMainClient.SalvarLogError(EscolaId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+begin
+  if FSalvarLogErrorCommand = nil then
+  begin
+    FSalvarLogErrorCommand := FConnection.CreateCommand;
+    FSalvarLogErrorCommand.RequestType := 'POST';
+    FSalvarLogErrorCommand.Text := 'TSmMain."SalvarLogError"';
+    FSalvarLogErrorCommand.Prepare(TSmMain_SalvarLogError);
+  end;
+  FSalvarLogErrorCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarLogErrorCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  if not Assigned(LDataSetList) then
+    FSalvarLogErrorCommand.Parameters[2].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FSalvarLogErrorCommand.Parameters[2].ConnectionHandler).GetJSONMarshaler;
+    try
+      FSalvarLogErrorCommand.Parameters[2].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      if FInstanceOwner then
+        LDataSetList.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FSalvarLogErrorCommand.Execute(ARequestFilter);
+  Result := FSalvarLogErrorCommand.Parameters[3].Value.GetWideString;
+end;
+
+procedure TSmMainClient.SetLogError(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer);
+begin
+  if FSetLogErrorCommand = nil then
+  begin
+    FSetLogErrorCommand := FConnection.CreateCommand;
+    FSetLogErrorCommand.RequestType := 'GET';
+    FSetLogErrorCommand.Text := 'TSmMain.SetLogError';
+    FSetLogErrorCommand.Prepare(TSmMain_SetLogError);
+  end;
+  FSetLogErrorCommand.Parameters[0].Value.SetWideString(MsgError);
+  FSetLogErrorCommand.Parameters[1].Value.SetWideString(Aplicacao);
+  FSetLogErrorCommand.Parameters[2].Value.SetWideString(UnitNome);
+  FSetLogErrorCommand.Parameters[3].Value.SetWideString(Classe);
+  FSetLogErrorCommand.Parameters[4].Value.SetWideString(Metodo);
+  FSetLogErrorCommand.Parameters[5].Value.AsDateTime := Data;
+  FSetLogErrorCommand.Parameters[6].Value.SetInt32(EscolaId);
+  FSetLogErrorCommand.Parameters[7].Value.SetInt32(ResponsavelId);
+  FSetLogErrorCommand.Parameters[8].Value.SetInt32(FuncionarioId);
+  FSetLogErrorCommand.Execute;
+end;
+
 constructor TSmMainClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -754,32 +898,24 @@ end;
 destructor TSmMainClient.Destroy;
 begin
   FDataModuleCreateCommand.DisposeOf;
+  FfdqLogErrorBeforePostCommand.DisposeOf;
+  FApplicationEventsExceptionCommand.DisposeOf;
+  FSalvarLogErrorCommand.DisposeOf;
+  FSetLogErrorCommand.DisposeOf;
   inherited;
 end;
 
-procedure TSmEscolaClient.fdqAgendaBeforeApplyUpdates(DataSet: TFDDataSet);
+procedure TSmEscolaClient.fdqAgendaBeforePost(DataSet: TDataSet);
 begin
-  if FfdqAgendaBeforeApplyUpdatesCommand = nil then
+  if FfdqAgendaBeforePostCommand = nil then
   begin
-    FfdqAgendaBeforeApplyUpdatesCommand := FConnection.CreateCommand;
-    FfdqAgendaBeforeApplyUpdatesCommand.RequestType := 'POST';
-    FfdqAgendaBeforeApplyUpdatesCommand.Text := 'TSmEscola."fdqAgendaBeforeApplyUpdates"';
-    FfdqAgendaBeforeApplyUpdatesCommand.Prepare(TSmEscola_fdqAgendaBeforeApplyUpdates);
+    FfdqAgendaBeforePostCommand := FConnection.CreateCommand;
+    FfdqAgendaBeforePostCommand.RequestType := 'POST';
+    FfdqAgendaBeforePostCommand.Text := 'TSmEscola."fdqAgendaBeforePost"';
+    FfdqAgendaBeforePostCommand.Prepare(TSmEscola_fdqAgendaBeforePost);
   end;
-  if not Assigned(DataSet) then
-    FfdqAgendaBeforeApplyUpdatesCommand.Parameters[0].Value.SetNull
-  else
-  begin
-    FMarshal := TDSRestCommand(FfdqAgendaBeforeApplyUpdatesCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
-    try
-      FfdqAgendaBeforeApplyUpdatesCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(DataSet), True);
-      if FInstanceOwner then
-        DataSet.Free
-    finally
-      FreeAndNil(FMarshal)
-    end
-    end;
-  FfdqAgendaBeforeApplyUpdatesCommand.Execute;
+  FfdqAgendaBeforePostCommand.Parameters[0].Value.SetDBXReader(TDBXDataSetReader.Create(DataSet, FInstanceOwner), True);
+  FfdqAgendaBeforePostCommand.Execute;
 end;
 
 function TSmEscolaClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
@@ -925,7 +1061,7 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[3].Value.GetString);
 end;
 
-function TSmEscolaClient.SalvarAgenda(LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+function TSmEscolaClient.SalvarAgenda(EscolaId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarAgendaCommand = nil then
   begin
@@ -934,13 +1070,15 @@ begin
     FSalvarAgendaCommand.Text := 'TSmEscola."SalvarAgenda"';
     FSalvarAgendaCommand.Prepare(TSmEscola_SalvarAgenda);
   end;
+  FSalvarAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarAgendaCommand.Parameters[1].Value.SetInt32(FuncionarioId);
   if not Assigned(LDataSetList) then
-    FSalvarAgendaCommand.Parameters[0].Value.SetNull
+    FSalvarAgendaCommand.Parameters[2].Value.SetNull
   else
   begin
-    FMarshal := TDSRestCommand(FSalvarAgendaCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    FMarshal := TDSRestCommand(FSalvarAgendaCommand.Parameters[2].ConnectionHandler).GetJSONMarshaler;
     try
-      FSalvarAgendaCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      FSalvarAgendaCommand.Parameters[2].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
       if FInstanceOwner then
         LDataSetList.Free
     finally
@@ -948,10 +1086,10 @@ begin
     end
     end;
   FSalvarAgendaCommand.Execute(ARequestFilter);
-  Result := FSalvarAgendaCommand.Parameters[1].Value.GetWideString;
+  Result := FSalvarAgendaCommand.Parameters[3].Value.GetWideString;
 end;
 
-procedure TSmEscolaClient.ApplyChangesAgenda(ADeltaList: TFDJSONDeltas);
+procedure TSmEscolaClient.ApplyChangesAgenda(EscolaId: Integer; FuncionarioId: Integer; ADeltaList: TFDJSONDeltas);
 begin
   if FApplyChangesAgendaCommand = nil then
   begin
@@ -960,13 +1098,15 @@ begin
     FApplyChangesAgendaCommand.Text := 'TSmEscola."ApplyChangesAgenda"';
     FApplyChangesAgendaCommand.Prepare(TSmEscola_ApplyChangesAgenda);
   end;
+  FApplyChangesAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FApplyChangesAgendaCommand.Parameters[1].Value.SetInt32(FuncionarioId);
   if not Assigned(ADeltaList) then
-    FApplyChangesAgendaCommand.Parameters[0].Value.SetNull
+    FApplyChangesAgendaCommand.Parameters[2].Value.SetNull
   else
   begin
-    FMarshal := TDSRestCommand(FApplyChangesAgendaCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    FMarshal := TDSRestCommand(FApplyChangesAgendaCommand.Parameters[2].ConnectionHandler).GetJSONMarshaler;
     try
-      FApplyChangesAgendaCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(ADeltaList), True);
+      FApplyChangesAgendaCommand.Parameters[2].Value.SetJSONValue(FMarshal.Marshal(ADeltaList), True);
       if FInstanceOwner then
         ADeltaList.Free
     finally
@@ -988,7 +1128,7 @@ end;
 
 destructor TSmEscolaClient.Destroy;
 begin
-  FfdqAgendaBeforeApplyUpdatesCommand.DisposeOf;
+  FfdqAgendaBeforePostCommand.DisposeOf;
   FLoginFuncionarioCommand.DisposeOf;
   FGetAlunosCommand.DisposeOf;
   FGetAlunosCommand_Cache.DisposeOf;

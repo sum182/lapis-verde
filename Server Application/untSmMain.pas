@@ -8,7 +8,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Phys.MySQLDef,
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.Client,
-  FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts;
+  FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,
+  Data.FireDACJSONReflect;
 
 type
 {$METHODINFO ON}
@@ -27,9 +28,12 @@ type
   private
     { Private declarations }
   public
-    procedure SetLogError(MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
-                          Data:TDateTime;
-                          ResponsavelId:Integer=0;FuncionarioId:Integer=0
+    function SalvarLogError(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets):String;
+    procedure SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
+                           Data:TDateTime;
+                           EscolaId:Integer = 0;
+                           ResponsavelId:Integer=0;
+                           FuncionarioId:Integer=0
                           );
   end;
 
@@ -41,7 +45,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses smGeral, Vcl.Forms;
+uses smGeral, Vcl.Forms, smDBFireDac;
 
 {$R *.dfm}
 
@@ -69,9 +73,50 @@ begin
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 end;
 
-procedure TSmMain.SetLogError(MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
-                          Data:TDateTime;
-                          ResponsavelId:Integer=0;FuncionarioId:Integer=0);
+function TSmMain.SalvarLogError(EscolaId, FuncionarioId: Integer;
+  LDataSetList: TFDJSONDataSets): String;
+var
+  LDataSet: TFDDataSet;
+  Exceptions:string;
+begin
+  //Método para Salvar Logs de Erros
+  try
+    Result:=EmptyStr;
+    Exceptions:=EmptyStr;
+
+    try
+      //Pegando dados da tabela log_error
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'log_error');
+      CopyDataSetByRecord(LDataSet,fdqLogError,Exceptions);
+
+    except on E:Exception do
+      Exceptions:=  Exceptions + E.Message;
+    end;
+
+    if (Exceptions <> EmptyStr) then
+    begin
+      Result:= 'Erro ao salvar logs' + #13 + Exceptions;
+      SmMain.SetLogError(Exceptions,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'SalvarLogError',
+                         Now,
+                         EscolaId,
+                         0,
+                         FuncionarioId);
+    end;
+  finally
+    fdqLogError.Close;
+  end;
+
+end;
+
+procedure TSmMain.SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
+                               Data:TDateTime;
+                               EscolaId:Integer = 0;
+                               ResponsavelId:Integer=0;
+                               FuncionarioId:Integer=0);
 begin
   try
     fdqLogError.Active:=False;
@@ -84,8 +129,16 @@ begin
     fdqLogError.FieldByName('unit').AsString:= UnitNome;
     fdqLogError.FieldByName('class').AsString:= Classe;
     fdqLogError.FieldByName('metodo').AsString:= Metodo;
-    fdqLogError.FieldByName('responsavel_id').AsInteger:=ResponsavelId;
-    fdqLogError.FieldByName('funcionario_id').AsInteger:= FuncionarioId;
+
+    if EscolaId > 0 then
+      fdqLogError.FieldByName('escola_id').AsInteger:=EscolaId;
+
+    if ResponsavelId > 0 then
+      fdqLogError.FieldByName('responsavel_id').AsInteger:=ResponsavelId;
+
+    if FuncionarioId > 0 then
+      fdqLogError.FieldByName('funcionario_id').AsInteger:= FuncionarioId;
+
     fdqLogError.FieldByName('data').AsDateTime:= Data;
     fdqLogError.FieldByName('data_insert_server').AsDateTime:= Now;
     fdqLogError.Post;

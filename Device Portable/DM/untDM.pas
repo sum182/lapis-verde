@@ -1,4 +1,4 @@
-unit untDM;
+﻿unit untDM;
 
 interface
 
@@ -22,6 +22,8 @@ type
     RESTResponse1: TRESTResponse;
     FDConnectionDBEscola: TFDConnection;
     FDConnectionDBResponsavel: TFDConnection;
+    fdqLogError: TFDQuery;
+    fdqLogErrorSaveServer: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
@@ -33,7 +35,20 @@ type
   public
     fUsuarioLogadoIsResponsavel:boolean;
     fUsuarioLogadoIsFuncionario:boolean;
+
+    fEscolaId:Integer;
+    fResponsavelId:Integer;
+    fFuncionarioId:Integer;
     procedure ResetRESTConnection;
+    procedure SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
+                           Data:TDateTime;
+                           MsgUsuario = '';
+                           EscolaId:Integer = 0;
+                           ResponsavelId:Integer=0;
+                           FuncionarioId:Integer=0
+                          );
+    procedure SalvarLogError;
+
   end;
 
 var
@@ -46,7 +61,8 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses smGeralFMX, FMX.Dialogs;
+uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
+  untFuncoes;
 
 {$R *.dfm}
 
@@ -102,6 +118,15 @@ begin
   FDConnectionDBEscola.Close;
   FDConnectionDBResponsavel.Close;
   ConectarBases;
+
+  //Teste Temporario
+  fFuncionarioId:=16;
+  fEscolaId:=1;
+  fResponsavelId:=0;
+
+  fUsuarioLogadoIsFuncionario:=True;
+  fUsuarioLogadoIsResponsavel:=False;
+
 end;
 
 procedure TDM.ResetRESTConnection;
@@ -110,6 +135,63 @@ begin
   RESTRequest1.ResetToDefaults;
   RESTResponse1.ResetToDefaults;
   RESTClient1.BaseURL := BASE_URL;
+end;
+
+procedure TDM.SalvarLogError;
+var
+  LDataSetList  : TFDJSONDataSets;
+  MsgSalvar:string;
+begin
+  fdqLogErrorSaveServer.Active := False;
+
+  LDataSetList := TFDJSONDataSets.Create;
+  TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogErrorSaveServer);
+
+  try
+    MsgSalvar:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,GetFuncionarioId,LDataSetList);
+  except on E:Exception do
+    ShowMessage('Erro ao salvar LogError' + #13 + E.Message);
+  end;
+
+  if MsgSalvar <> EmptyStr then
+    ShowMessage('Erro ao Salvar LogError' + #13 +MsgSalvar);
+
+
+
+end;
+
+procedure TDM.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
+  Data: TDateTime; EscolaId, ResponsavelId, FuncionarioId: Integer);
+begin
+try
+    fdqLogError.Active:=False;
+    fdqLogError.Active:=True;
+
+    fdqLogError.Append;
+    fdqLogError.FieldByName('log_error_id').AsString:= GetGUID;
+    fdqLogError.FieldByName('msg_error').AsString:= MsgError;
+    fdqLogError.FieldByName('aplicacao').AsString:= Aplicacao;
+    fdqLogError.FieldByName('unit').AsString:= UnitNome;
+    fdqLogError.FieldByName('class').AsString:= Classe;
+    fdqLogError.FieldByName('metodo').AsString:= Metodo;
+
+    if EscolaId > 0 then
+      fdqLogError.FieldByName('escola_id').AsInteger:=EscolaId;
+
+    if ResponsavelId > 0 then
+      fdqLogError.FieldByName('responsavel_id').AsInteger:=ResponsavelId;
+
+    if FuncionarioId > 0 then
+      fdqLogError.FieldByName('funcionario_id').AsInteger:= FuncionarioId;
+
+    fdqLogError.FieldByName('data').AsDateTime:= Data;
+    fdqLogError.Post;
+
+    if Msg then
+
+  finally
+    fdqLogError.Active:=False;
+  end;
 end;
 
 end.

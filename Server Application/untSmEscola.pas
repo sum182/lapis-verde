@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect,
+  Vcl.AppEvnts;
 
 type
 {$METHODINFO ON}
@@ -20,8 +21,6 @@ type
     fdqAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
     dsAgenda: TDataSource;
-    procedure fdqAgendaNewRecord(DataSet: TDataSet);
-    procedure fdqAgendaAfterInsert(DataSet: TDataSet);
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
@@ -32,8 +31,8 @@ type
 
     //Metodos de Agenda
     function GetAgenda(EscolaId:Integer;FuncionarioId:Integer;AgendaId:Integer):TFDJSONDataSets;
-    function  SalvarAgenda(LDataSetList: TFDJSONDataSets):String;
-    procedure ApplyChangesAgenda(const ADeltaList: TFDJSONDeltas);
+    function SalvarAgenda(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets):String;
+    procedure ApplyChangesAgenda(EscolaId, FuncionarioId: Integer; const ADeltaList: TFDJSONDeltas);
   end;
 
 var
@@ -50,10 +49,13 @@ uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX;
 
 { TSmEscola }
 
-procedure TSmEscola.ApplyChangesAgenda(const ADeltaList: TFDJSONDeltas);
+procedure TSmEscola.ApplyChangesAgenda(EscolaId, FuncionarioId: Integer; const ADeltaList: TFDJSONDeltas);
 var
   LApply: IFDJSONDeltasApplyUpdates;
 begin
+  //Este método não será utilizado, o ideal é utitlizar o método SalvarAgenda
+
+  //Método para dar um apply nos deltas de um FdDataset
  // Create the apply object
   LApply := TFDJSONDeltasApplyUpdates.Create(ADeltaList);
 
@@ -72,70 +74,165 @@ begin
     raise Exception.Create(LApply.Errors.Strings.Text);
 end;
 
-procedure TSmEscola.fdqAgendaAfterInsert(DataSet: TDataSet);
-begin
-  fdqAgenda.FieldByName('data_insert_server').AsDateTime:=Now;
-end;
-
 procedure TSmEscola.fdqAgendaBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 end;
 
-procedure TSmEscola.fdqAgendaNewRecord(DataSet: TDataSet);
-begin
-  fdqAgenda.FieldByName('data_insert_server').AsDateTime:=Now;
-end;
-
 function TSmEscola.GetAgenda(EscolaId, FuncionarioId,
   AgendaId: Integer): TFDJSONDataSets;
 begin
-  fdqAgenda.Active := False;
-  fdqAgendaAluno.Active := False;
-  fdqAgendaTurma.Active := False;
+  //Método para retornar as Agendas
+  try
+    try
+      fdqAgenda.Active := False;
+      fdqAgendaAluno.Active := False;
+      fdqAgendaTurma.Active := False;
 
-  fdqAgenda.ParamByName('escola_id').AsInteger:= EscolaId;
-  //fdqAgenda.ParamByName('agenda_id').AsInteger:= AgendaId;
+      fdqAgenda.ParamByName('escola_id').AsInteger:= EscolaId;
+      //fdqAgenda.ParamByName('agenda_id').AsInteger:= AgendaId;
 
-  Result := TFDJSONDataSets.Create;
-  TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
-  TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
-  TFDJSONDataSetsWriter.ListAdd(Result,'agenda_turma',fdqAgendaTurma);
+      Result := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
+      TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
+      TFDJSONDataSetsWriter.ListAdd(Result,'agenda_turma',fdqAgendaTurma);
+
+    except on E:Exception do
+      SmMain.SetLogError(E.Message,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'GetAgenda',
+                         Now,
+                         EscolaId,
+                         0,
+                         FuncionarioId
+                         );
+
+
+    end;
+  finally
+      fdqAgenda.Active := False;
+      fdqAgendaAluno.Active := False;
+      fdqAgendaTurma.Active := False;
+
+  end;
 end;
 
 function TSmEscola.GetAlunos(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
 begin
+  //Método para retornar os Alunos
+  try
+    try
+      fdqAluno.Active := False;
+      fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+
+      Result := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
+    except on E:Exception do
+      SmMain.SetLogError(E.Message,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'GetAlunos',
+                         Now,
+                         EscolaId,
+                         0,
+                         FuncionarioId
+                         );
+
+
+    end;
+  finally
+    fdqAluno.Active := False;
+  end;
+
+
+
+  {Código Antigo
   fdqAluno.Active := False;
   fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
 
   Result := TFDJSONDataSets.Create;
-  TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
+  TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);}
 end;
 
 function TSmEscola.GetTurmas(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
 begin
+  //Método para retornar as Turmas
+  try
+    try
+      fdqTurma.Active := False;
+      fdqTurma.ParamByName('escola_id').AsInteger:= EscolaId;
+
+      Result := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqTurma);
+    except on E:Exception do
+      SmMain.SetLogError(E.Message,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'GetTurmas',
+                         Now,
+                         EscolaId,
+                         0,
+                         FuncionarioId
+                         );
+
+
+    end;
+  finally
+    fdqTurma.Active := False;
+  end;
+
+  {codigo antigo
   fdqTurma.Active := False;
   fdqTurma.ParamByName('escola_id').AsInteger:= EscolaId;
 
   Result := TFDJSONDataSets.Create;
-  TFDJSONDataSetsWriter.ListAdd(Result, fdqTurma);
+  TFDJSONDataSetsWriter.ListAdd(Result, fdqTurma); }
 end;
 
 function TSmEscola.LoginFuncionario(Login, Senha: string): Boolean;
 begin
+  //Método para retornar os Alunos
+  try
+    try
+      fdqLoginFuncionario.Close;
+      fdqLoginFuncionario.ParamByName('login').AsString := Login;
+      fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
+      fdqLoginFuncionario.Open;
+      Result:= not (fdqLoginFuncionario.IsEmpty);
+    except on E:Exception do
+      SmMain.SetLogError(E.Message,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'LoginFuncionario',
+                         Now);
+
+
+    end;
+  finally
+    fdqLoginFuncionario.Active := False;
+  end;
+
+
+  {COD ANTIGO
   fdqLoginFuncionario.Close;
   fdqLoginFuncionario.ParamByName('login').AsString := Login;
   fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
   fdqLoginFuncionario.Open;
-  Result:= not (fdqLoginFuncionario.IsEmpty);
+  Result:= not (fdqLoginFuncionario.IsEmpty);}
 end;
 
-function TSmEscola.SalvarAgenda(LDataSetList: TFDJSONDataSets): String;
+function TSmEscola.SalvarAgenda(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets): String;
 var
   LDataSet: TFDDataSet;
   Exceptions:string;
 begin
+  //Método para Salvar a Agenda
   try
     Result:=EmptyStr;
     Exceptions:=EmptyStr;
@@ -161,11 +258,14 @@ begin
     begin
       Result:= 'Erro ao salvar agenda' + #13 + Exceptions;
       SmMain.SetLogError(Exceptions,
-                         ExtractFileName(Application.Exename), 
+                         ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
                          'SalvarAgenda',
-                         Now);
+                         Now,
+                         EscolaId,
+                         0,
+                         FuncionarioId);
     end;
   finally
     fdqAgenda.Close;
