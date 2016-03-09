@@ -15,10 +15,12 @@ type
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,7 +52,7 @@ procedure TfrmAgendaEscolaNew.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
   DmEscola.SalvarDadosServer;
-  DM.SalvarDadosServer;
+  //DM.SalvarDadosServer;
 end;
 
 procedure TfrmAgendaEscolaNew.SpeedButton3Click(Sender: TObject);
@@ -59,6 +61,12 @@ begin
   Dm.FDConnectionDBEscola.ExecSQL('delete from agenda;');
   Dm.FDConnectionDBEscola.ExecSQL('delete from agenda_aluno;');
   Dm.FDConnectionDB.ExecSQL('delete from log_error;');
+end;
+
+procedure TfrmAgendaEscolaNew.SpeedButton4Click(Sender: TObject);
+begin
+  inherited;
+  DmEscola.GetAgenda(GetFuncionarioId,0);
 end;
 
 end.

@@ -63,6 +63,19 @@ object DmEscola: TDmEscola
       'order by a.data_insert_local')
     Left = 616
     Top = 104
+    object fdqAgendaAlunoSaveServeragenda_id: TStringField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 100
+    end
+    object fdqAgendaAlunoSaveServeraluno_id: TIntegerField
+      FieldName = 'aluno_id'
+      Origin = 'aluno_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
   end
   object fdqAgendaTurmaSaveServer: TFDQuery
     Connection = DM.FDConnectionDBEscola
@@ -74,5 +87,18 @@ object DmEscola: TDmEscola
       'order by a.data_insert_local')
     Left = 616
     Top = 154
+    object fdqAgendaTurmaSaveServeragenda_id: TStringField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 100
+    end
+    object fdqAgendaTurmaSaveServerturma_id: TIntegerField
+      FieldName = 'turma_id'
+      Origin = 'turma_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
   end
 end

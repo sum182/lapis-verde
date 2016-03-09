@@ -43,7 +43,7 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TfrmAgendaEscolaNew, frmAgendaEscolaNew);
+  //Application.CreateForm(TfrmAgendaEscolaNew, frmAgendaEscolaNew);
   Application.Run;
   Exit;
   // Fim do Teste

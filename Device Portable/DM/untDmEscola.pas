@@ -6,7 +6,7 @@ uses
   System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils;
 
 type
   TDmEscola = class(TDataModule)
@@ -19,6 +19,10 @@ type
     fdqAgendaSaveServer: TFDQuery;
     fdqAgendaAlunoSaveServer: TFDQuery;
     fdqAgendaTurmaSaveServer: TFDQuery;
+    fdqAgendaAlunoSaveServeragenda_id: TStringField;
+    fdqAgendaAlunoSaveServeraluno_id: TIntegerField;
+    fdqAgendaTurmaSaveServeragenda_id: TStringField;
+    fdqAgendaTurmaSaveServerturma_id: TIntegerField;
   private
     { Private declarations }
   public
@@ -160,7 +164,7 @@ begin
   //Método para retornar as Agendas
   try
     try
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,0);
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,IncDay(Now,-30),Now +1 );
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
@@ -275,6 +279,8 @@ begin
   //Método para salvar a agenda no server
   try
     try
+      //GetAgenda(GetFuncionarioId,0);
+      fdqAgendaSaveServer.Active := False;
       fdqAgendaSaveServer.Active := True;
 
       if fdqAgendaSaveServer.RecordCount <=0 then
@@ -290,7 +296,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurmaSaveServer);
 
 
-      MsgRetornoServer:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,GetFuncionarioId,LDataSetList);
+      MsgRetornoServer:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,GetFuncionarioId,Now-30,Now,LDataSetList);
 
       //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then

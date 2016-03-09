@@ -37,17 +37,45 @@ object SmEscola: TSmEscola
     BeforePost = fdqAgendaBeforePost
     Connection = SmMain.FDConnection
     SQL.Strings = (
-      'select * from agenda'
-      'where 1=1'
-      'and escola_id = :escola_id')
+      'select '
+      '  ag.*'
+      'from agenda ag'
+      'inner join agenda_aluno al on (ag.agenda_id = al.agenda_id) '
+      'inner join turma_aluno ta on (ta.aluno_id = al.aluno_id) '
+      'inner join turma t on (t.turma_id = ta.turma_id)'
+      
+        'inner join funcionario f on (f.funcionario_id = t.funcionario_id' +
+        ')'
+      'where t.funcionario_id = :funcionario_id'
+      'and ag.escola_id = :escola_id'
+      'and ag.data_insert_server between :dt_ini and :dt_fim'
+      'group by agenda_id')
     Left = 66
     Top = 168
     ParamData = <
+      item
+        Name = 'FUNCIONARIO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 16
+      end
       item
         Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = 1
+      end
+      item
+        Name = 'DT_INI'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Value = 42437d
+      end
+      item
+        Name = 'DT_FIM'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Value = 42439d
       end>
   end
   object fdqAgendaAluno: TFDQuery
@@ -55,9 +83,59 @@ object SmEscola: TSmEscola
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
-      'select * from agenda_aluno'#13#10#10)
+      'select '
+      '  al.*'
+      'from agenda ag'
+      'inner join agenda_aluno al on (ag.agenda_id = al.agenda_id) '
+      'inner join turma_aluno ta on (ta.aluno_id = al.aluno_id) '
+      'inner join turma t on (t.turma_id = ta.turma_id)'
+      
+        'inner join funcionario f on (f.funcionario_id = t.funcionario_id' +
+        ')'
+      'where t.funcionario_id = :funcionario_id'
+      'and ag.escola_id = :escola_id'
+      'and ag.data_insert_server between :dt_ini and :dt_fim'
+      'group by agenda_id')
     Left = 146
     Top = 168
+    ParamData = <
+      item
+        Name = 'FUNCIONARIO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 16
+      end
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        Name = 'DT_INI'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Value = '08/03/2016'
+      end
+      item
+        Name = 'DT_FIM'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Value = '10/03/2016'
+      end>
+    object fdqAgendaAlunoagenda_id: TStringField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 100
+    end
+    object fdqAgendaAlunoaluno_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'aluno_id'
+      Origin = 'aluno_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
   end
   object fdqTurmaAluno: TFDQuery
     Connection = SmMain.FDConnection
@@ -115,13 +193,82 @@ object SmEscola: TSmEscola
   object fdqAgendaTurma: TFDQuery
     Connection = SmMain.FDConnection
     SQL.Strings = (
-      'select * from agenda_turma '#13#10#10)
+      'select '
+      '  at.*'
+      'from agenda ag'
+      'inner join agenda_turma at on (ag.agenda_id = at.agenda_id) '
+      'inner join turma t on (t.turma_id = at.turma_id)'
+      
+        'inner join funcionario f on (f.funcionario_id = t.funcionario_id' +
+        ')'
+      'where t.funcionario_id = :funcionario_id'
+      'and ag.escola_id = :escola_id'
+      'and ag.data_insert_server between :dt_ini and :dt_fim'
+      'group by agenda_id'
+      '')
     Left = 234
     Top = 168
+    ParamData = <
+      item
+        Name = 'FUNCIONARIO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 16
+      end
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end
+      item
+        Name = 'DT_INI'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Value = 42437d
+      end
+      item
+        Name = 'DT_FIM'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Value = 42439d
+      end>
+    object fdqAgendaTurmaagenda_id: TStringField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 100
+    end
+    object fdqAgendaTurmaturma_id: TIntegerField
+      FieldName = 'turma_id'
+      Origin = 'turma_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
   end
-  object dsAgenda: TDataSource
-    DataSet = fdqAgenda
-    Left = 64
+  object fdqAgendaCheckInsert: TFDQuery
+    BeforePost = fdqAgendaBeforePost
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select * from agenda'#13#10#10
+      'where 1=1'#10
+      'and agenda_id = :agenda_id'#13#10#10
+      'and escola_id = :escola_id'#10)
+    Left = 66
     Top = 224
+    ParamData = <
+      item
+        Name = 'AGENDA_ID'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
   end
 end
