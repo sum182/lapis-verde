@@ -23,15 +23,27 @@ type
     fdqTurma: TFDQuery;
     fdqAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
-    fdqAgendaCheckInsert: TFDQuery;
     fdqAgendaAlunoagenda_id: TStringField;
     fdqAgendaAlunoaluno_id: TIntegerField;
     fdqAgendaTurmaagenda_id: TStringField;
     fdqAgendaTurmaturma_id: TIntegerField;
+    fdqAgendaID: TFDQuery;
+    fdqAgendaAlunoId: TFDQuery;
+    StringField1: TStringField;
+    IntegerField1: TIntegerField;
+    fdqAgendaTurmaId: TFDQuery;
+    StringField2: TStringField;
+    IntegerField2: TIntegerField;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
+    procedure fdqAgendaIDBeforePost(DataSet: TDataSet);
   private
     procedure OpenAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime);
+    procedure OpenAgendaId(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);
+    procedure CloseAgendaId;
     procedure SetParamsAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime);
+    procedure SetSQLAgendaId(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);
+
+
  {$METHODINFO ON}
 
   public
@@ -53,7 +65,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX;
+uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral;
 
 {$R *.dfm}
 
@@ -84,7 +96,22 @@ begin
     raise Exception.Create(LApply.Errors.Strings.Text);
 end;
 
+procedure TSmEscola.CloseAgendaId;
+begin
+  fdqAgendaId.Active := False;
+  fdqAgendaAlunoId.Active := False;
+  fdqAgendaTurmaId.Active := False;
+end;
+
 procedure TSmEscola.fdqAgendaBeforePost(DataSet: TDataSet);
+begin
+  if Dataset.State in [dsInsert]  then
+    Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
+
+  Dataset.FieldByName('enviado_server').AsString:= 'S';
+end;
+
+procedure TSmEscola.fdqAgendaIDBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
@@ -223,33 +250,43 @@ begin
   fdqAgendaTurma.Active := True;
 end;
 
+procedure TSmEscola.OpenAgendaId(EscolaId, FuncionarioId: Integer;KeyValues:String);
+begin
+  CloseAgendaId;
+
+  SetSQLAgendaId(EscolaId, FuncionarioId,KeyValues);
+
+  fdqAgendaId.Active := True;
+  fdqAgendaAlunoId.Active := True;
+  fdqAgendaTurmaId.Active := True;
+end;
+
 function TSmEscola.SalvarAgenda(EscolaId, FuncionarioId: Integer; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets): String;
 var
   LDataSet: TFDDataSet;
   Exceptions:string;
+  KeyValues: string;
 begin
   //Método para Salvar a Agenda
   try
     Result:=EmptyStr;
     Exceptions:=EmptyStr;
+    KeyValues:= EmptyStr;
 
     try
-      OpenAgenda(EscolaId, FuncionarioId, DtIni,DtFim);
-
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
-      //CopyDataSetByRecord(LDataSet,fdqAgenda,Exceptions);
-      CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+      OpenAgendaId(EscolaId,FuncionarioId,KeyValues);
+      CopyDataSet(LDataSet,fdqAgendaID,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_aluno
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
-      //CopyDataSetByRecord(LDataSet,fdqAgendaAluno,Exceptions);
-      CopyDataSet(LDataSet,fdqAgendaAluno,False,[coAppend,coEdit,coIndexesCopy]);
+      CopyDataSet(LDataSet,fdqAgendaAlunoId,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_turma
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
-      //CopyDataSetByRecord(LDataSet,fdqAgendaTurma,Exceptions);
-      CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
+      CopyDataSet(LDataSet,fdqAgendaTurmaId,False,[coAppend,coEdit]);
 
 
     except on E:Exception do
@@ -270,9 +307,7 @@ begin
                          FuncionarioId);
     end;
   finally
-    fdqAgenda.Close;
-    fdqAgendaAluno.Close;
-    fdqAgendaTurma.Close;
+    CloseAgendaId;
   end;
 end;
 
@@ -295,6 +330,25 @@ begin
   fdqAgendaTurma.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
   fdqAgendaTurma.ParamByName('dt_ini').AsDateTime:= DtIni;
   fdqAgendaTurma.ParamByName('dt_fim').AsDateTime:= DtFim;
+end;
+
+procedure TSmEscola.SetSQLAgendaId(EscolaId, FuncionarioId: Integer;
+  KeyValues: String);
+begin
+  fdqAgendaID.SQL.Clear;
+  fdqAgendaID.SQL.Add('select ag.*');
+  fdqAgendaID.SQL.Add('from agenda ag');
+  fdqAgendaID.SQL.Add('where agenda_id in (' + KeyValues + ')');
+
+  fdqAgendaAlunoID.SQL.Clear;
+  fdqAgendaAlunoID.SQL.Add('select al.*');
+  fdqAgendaAlunoID.SQL.Add('from agenda_aluno al');
+  fdqAgendaAlunoID.SQL.Add('where agenda_id in (' + KeyValues + ')');
+
+  fdqAgendaTurmaId.SQL.Clear;
+  fdqAgendaTurmaID.SQL.Add('select at.*');
+  fdqAgendaTurmaID.SQL.Add('from agenda_turma at');
+  fdqAgendaTurmaID.SQL.Add('where agenda_id in (' + KeyValues + ')');
 end;
 
 end.
