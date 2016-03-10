@@ -119,7 +119,7 @@ object DM: TDM
     Connection = FDConnectionDB
     SQL.Strings = (
       'select * from log_error l'
-      'where data_insert_server is null')
+      'where enviado_server is null')
     Left = 288
     Top = 288
   end

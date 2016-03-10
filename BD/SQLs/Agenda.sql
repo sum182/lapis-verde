@@ -3,8 +3,9 @@ SELECT * FROM agendadb.aluno;
 select * from agenda 
 
 select * from agenda_aluno 
+where agenda_id = 'A026AE69-D48A-41DC-AB42-880E908A614E'
 
-select  *from agenda_turma
+select  *from agenda_turma 
 
 select * from turma
 where funcionario_id = 16
@@ -17,6 +18,11 @@ select * from turma_aluno ta
 where ta.aluno_id = 19
 
 
+
+select 
+  al.*
+from agenda_aluno  al
+inner join agenda ag on (ag.agenda_id = al.agenda_id) 
 
 
 

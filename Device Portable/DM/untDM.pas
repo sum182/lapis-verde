@@ -152,6 +152,10 @@ begin
     try
       MsgRetornoServer := EmptyStr;
       fdqLogErrorSaveServer.Active := False;
+      fdqLogErrorSaveServer.Active := True;
+
+      if fdqLogErrorSaveServer.IsEmpty then
+        Exit;
 
       LDataSetList := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogErrorSaveServer);
@@ -163,7 +167,7 @@ begin
     end;
   finally
     if MsgRetornoServer = '' then
-      DataSetDelete(fdqLogError)
+      DataSetDelete(fdqLogErrorSaveServer)
     else
       DM.SetLogError( MsgRetornoServer,
                       GetApplicationName,

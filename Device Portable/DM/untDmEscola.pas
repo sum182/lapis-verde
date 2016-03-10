@@ -283,7 +283,7 @@ begin
       fdqAgendaSaveServer.Active := False;
       fdqAgendaSaveServer.Active := True;
 
-      if fdqAgendaSaveServer.RecordCount <=0 then
+      if fdqAgendaSaveServer.IsEmpty  then
         Exit;
 
       fdqAgendaSaveServer.Active := False;

@@ -21,6 +21,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -35,6 +36,14 @@ implementation
 {$R *.fmx}
 
 uses smGeralFMX, untDM, untDmEscola, untDMStyles, untFuncoes;
+
+procedure TfrmAgendaEscolaNew.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  self.DisposeOf;
+  self:= nil;
+end;
 
 procedure TfrmAgendaEscolaNew.FormCreate(Sender: TObject);
 begin
@@ -52,7 +61,7 @@ procedure TfrmAgendaEscolaNew.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
   DmEscola.SalvarDadosServer;
-  //DM.SalvarDadosServer;
+  DM.SalvarDadosServer;
 end;
 
 procedure TfrmAgendaEscolaNew.SpeedButton3Click(Sender: TObject);

@@ -14,6 +14,7 @@ uses
 type
 {$METHODINFO ON}
   TSmMain = class(TDataModule)
+ {$METHODINFO OFF}
     fdqAlunos: TFDQuery;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     FDWaitCursor: TFDGUIxWaitCursor;
@@ -22,11 +23,19 @@ type
     FDConnectionLocal: TFDConnection;
     fdqLogError: TFDQuery;
     ApplicationEvents: TApplicationEvents;
+
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
   private
-    { Private declarations }
+
+    procedure SetSQLLogError(EscolaId:Integer;FuncionarioId:Integer);overload;
+    procedure SetSQLLogError(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
+    procedure OpenLogError(EscolaId:Integer;FuncionarioId:Integer);overload;
+    procedure OpenLogError(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
+    procedure CloseLogError;
+
+  {$METHODINFO ON}
   public
     function SalvarLogError(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets):String;
     procedure SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
@@ -59,6 +68,11 @@ begin
               Now);
 end;
 
+procedure TSmMain.CloseLogError;
+begin
+  fdqLogError.Active := False;
+end;
+
 procedure TSmMain.DataModuleCreate(Sender: TObject);
 begin
   FDConnection.Close;
@@ -71,6 +85,25 @@ procedure TSmMain.fdqLogErrorBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
+
+  Dataset.FieldByName('enviado_server').AsString:= 'S';
+end;
+
+procedure TSmMain.OpenLogError(EscolaId, FuncionarioId: Integer);
+begin
+  CloseLogError;
+  SetSQLLogError(EscolaId, FuncionarioId);
+  fdqLogError.Active := True;
+end;
+
+procedure TSmMain.OpenLogError(EscolaId, FuncionarioId: Integer;
+  KeyValues: String);
+begin
+  CloseLogError;
+
+  SetSQLLogError(EscolaId, FuncionarioId,KeyValues);
+
+  fdqLogError.Active := True;
 end;
 
 function TSmMain.SalvarLogError(EscolaId, FuncionarioId: Integer;
@@ -78,17 +111,24 @@ function TSmMain.SalvarLogError(EscolaId, FuncionarioId: Integer;
 var
   LDataSet: TFDDataSet;
   Exceptions:string;
+  KeyValues: string;
 begin
   //Método para Salvar Logs de Erros
   try
-    Result:=EmptyStr;
-    Exceptions:=EmptyStr;
-
     try
-      //Pegando dados da tabela log_error
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'log_error');
-      CopyDataSetByRecord(LDataSet,fdqLogError,Exceptions);
+      Result:=EmptyStr;
 
+      Exceptions:=EmptyStr;
+
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'log_error');
+
+      if LDataSet.IsEmpty then
+        Exit;
+
+
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'log_error_id');
+      OpenLogError(EscolaId,FuncionarioId,KeyValues);
+      CopyDataSet(LDataSet,fdqLogError,False,[coAppend,coEdit]);
     except on E:Exception do
       Exceptions:=  Exceptions + E.Message;
     end;
@@ -146,6 +186,25 @@ begin
     fdqLogError.Active:=False;
   end;
 
+end;
+
+procedure TSmMain.SetSQLLogError(EscolaId, FuncionarioId: Integer);
+begin
+  fdqLogError.SQL.Clear;
+  fdqLogError.SQL.Add('select * from log_error ');
+  fdqLogError.SQL.Add('where l.log_error_id = :log_error_id');
+  fdqLogError.ParamByName('log_error_id').AsInteger := 0;
+end;
+
+procedure TSmMain.SetSQLLogError(EscolaId, FuncionarioId: Integer;
+  KeyValues: String);
+begin
+  if KeyValues = EmptyStr then
+    KeyValues:= QuoTedStr('0');
+
+  fdqLogError.SQL.Clear;
+  fdqLogError.SQL.Add('select * from log_error ');
+  fdqLogError.SQL.Add('where log_error_id in (' + KeyValues + ')');
 end;
 
 end.
