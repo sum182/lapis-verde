@@ -1,5 +1,6 @@
 inherited frmAgendaEscolaView: TfrmAgendaEscolaView
   Caption = 'frmBaseToolBar1'
+  Position = DesktopCenter
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
@@ -91,13 +92,13 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
                   98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  00C8494441545847EDD65D0AC2301046D1240A4236AD5B702FFE6C2C203E24F1
-                  9B76062495A2829D14E780849A87B9B418EB8C316B506B3DD0872F75718CD08D
-                  A280B1639473BE62D9F0F6B2307812534AD9F1F6B230BF8DB9580CC1FC36E66C
-                  3104F3DB98D3DFC4785E5FC27C3AE8F6E3957329A55B8CF11842B8F3575FF3DE
-                  7F768852CC704B7E84C74C045EBBB19E4726286AB8C74CF51726D0D1CF1924D0
-                  B18A28BDFF31810E8B7A0B3ADA28BD1734818E4914962D6FEB40C07394EE4BBE
-                  A0906E628C31B39C7B00531D010574FDBD790000000049454E44AE426082}
+                  00C8494441545847EDD64D0AC2301086E1240A6E7267BD8277F1E75ED9888B24
+                  7ED3CE80A45254B093E23C20A166312F2DC63A63CC1AD45A0FF4E14B5D1C2374
+                  A32860EC18E59CAF5836BCBD2C0C9EC4945276BCBD2CCC6F632E164330BF8D39
+                  5B0CC1FC36E6F437319ED797309F0EBAFD78E55C4AE916633C8610EEFCD5D7BC
+                  F79F1DA21433DC921FE1311381D76EACE791098A1AEE3153FD850974F4730609
+                  74AC224AEF7F4CA0C3A2DE828E364AEF054DA063128565CBDB3A10F01CA5FB92
+                  2F28A49B1863CC2CE71E52ED010570BC04900000000049454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
                   'p\ic_arrow_back_white_24dp\android\drawable-hdpi\ic_arrow_back_w' +
@@ -109,10 +110,10 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5CC5D6A671C218A
+                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5C85D6B671C218A
                   145712070A7D20A55924D2D0D4455563CE79C595EB2CB74F534ABB880C88398A
                   F20531472B7FE552FE156A6E1D4E5FF623FF3DD1A5189911733D46363B26C45C
-                  EE23F65C2362AE62A447CC8591886B5385100E601FFC4A8D3283E20000000049
+                  EE23F65C2362AE62A447CC8591886B5385100E164CFC028E199BF10000000049
                   454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -130,6 +131,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         Size.PlatformDefault = False
         StyleLookup = 'refreshtoolbutton'
         Text = 'SpeedButton1'
+        OnClick = SpeedButton1Click
       end
       object SpeedButton2: TSpeedButton
         Align = Right
@@ -147,11 +149,13 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
       HeaderAppearanceClassName = 'TListHeaderObjects'
       FooterAppearanceClassName = 'TListHeaderObjects'
+      ItemIndex = 0
       Align = Client
       Size.Width = 640.000000000000000000
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
+      ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
       ItemAppearanceObjects.ItemEditObjects.GlyphButton.Visible = False
       StyleLookup = 'listviewstyle'
     end

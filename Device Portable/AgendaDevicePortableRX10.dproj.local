@@ -18,9 +18,11 @@
     <Transaction>2016/03/02 16:48:12.000.362,C:\Projetos\Agenda\Device Portable\DM\untDMResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm</Transaction>
     <Transaction>2016/03/02 16:48:16.000.886,C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmResponsavel.dfm</Transaction>
     <Transaction>2016/03/02 16:48:21.000.694,C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmEscola.dfm</Transaction>
-    <Transaction>2016/03/11 11:14:37.775,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaSelect.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscola.fmx</Transaction>
-    <Transaction>2016/03/11 11:19:33.048,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaView.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgenda.fmx</Transaction>
-    <Transaction>2016/03/11 11:25:42.297,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaAdd.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaNew.fmx</Transaction>
+    <Transaction>2016/03/11 11:14:37.000.775,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaSelect.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscola.fmx</Transaction>
+    <Transaction>2016/03/11 11:19:33.000.048,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaView.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgenda.fmx</Transaction>
+    <Transaction>2016/03/11 11:25:42.000.297,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaAdd.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaNew.fmx</Transaction>
+    <Transaction>2016/03/11 12:26:32.000.615,C:\Projetos\Agenda\Device Portable\Unit3.fmx=C:\Projetos\Agenda\Device Portable\Testes\untTestesA.fmx</Transaction>
+    <Transaction>2016/03/11 12:30:44.000.771,C:\Projetos\Agenda\Device Portable\Unit3.fmx=C:\Projetos\Agenda\Device Portable\Testes\untTestesB.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>

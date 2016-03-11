@@ -30,7 +30,9 @@ uses
   untTesteString2 in 'Testes\untTesteString2.pas' {frmTesteString2},
   untAgendaEscolaSelect in 'Agenda\untAgendaEscolaSelect.pas' {frmAgendaEscolaSelect},
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
-  untAgendaEscolaAdd in 'Agenda\untAgendaEscolaAdd.pas' {frmAgendaEscolaAdd};
+  untAgendaEscolaAdd in 'Agenda\untAgendaEscolaAdd.pas' {frmAgendaEscolaAdd},
+  untTestesA in 'Testes\untTestesA.pas' {frmTesteA},
+  untTestesB in 'Testes\untTestesB.pas' {frmTesteB};
 
 {$R *.res}
 

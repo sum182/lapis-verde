@@ -23,6 +23,7 @@ type
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
 
   public
@@ -37,26 +38,32 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd;
+uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal;
 
 procedure TfrmAgendaEscolaView.btnVoltarClick(Sender: TObject);
 begin
+  fAllowCloseForm:=True;
+  Close;
   inherited;
-  frmAgendaEscolaView.Close;
-  frmAgendaEscolaView.DisposeOf;
-  frmAgendaEscolaView:=nil;
 end;
 
 procedure TfrmAgendaEscolaView.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
-  //DmEscola.OpenAgenda;
+  //self.muMainMenu := frmPrincipal.MultiView1;
 end;
 
 procedure TfrmAgendaEscolaView.FormShow(Sender: TObject);
 begin
   inherited;
+  DmEscola.OpenAgenda(AlunoId,TurmaId);
+end;
+
+procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  DmEscola.GetAgenda(GetFuncionarioId,0);
   DmEscola.OpenAgenda(AlunoId,TurmaId);
 end;
 

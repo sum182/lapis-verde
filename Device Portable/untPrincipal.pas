@@ -91,7 +91,7 @@ implementation
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untAgendaEscolaView, untMensagens, smGeralFMX,
-  untAgendaEscolaSelect, untAgendaEscolaAdd;
+  untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA;
 
 { TfrmPrincipal }
 
@@ -238,7 +238,11 @@ begin
 procedure TfrmPrincipal.imgMensagensClick(Sender: TObject);
 begin
   inherited;
-  AbrirMensagens;
+//  AbrirMensagens;
+  if not Assigned(frmTesteA) then
+    Application.CreateForm(TfrmTesteA, frmTesteA);
+
+  frmTesteA.Show;
 end;
 
 procedure TfrmPrincipal.imgAgendaClick(Sender: TObject);

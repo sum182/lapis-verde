@@ -3,6 +3,7 @@ object DmEscola: TDmEscola
   Height = 408
   Width = 718
   object fdqAluno: TFDQuery
+    Active = True
     Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
       'select * from aluno'
@@ -18,6 +19,7 @@ object DmEscola: TDmEscola
       end>
   end
   object fdqTurma: TFDQuery
+    Active = True
     Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
       'select * from turma'
@@ -37,22 +39,22 @@ object DmEscola: TDmEscola
     Top = 8
   end
   object fdqAgenda: TFDQuery
+    Active = True
     Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
       'select * from agenda'
       'order by data_insert_local')
-    Left = 96
+    Left = 120
     Top = 8
   end
   object fdqAgendaAluno: TFDQuery
-    MasterSource = dsAgenda
-    MasterFields = 'agenda_id'
+    Active = True
     Connection = DM.FDConnectionDBEscola
     FetchOptions.AssignedValues = [evCache]
     SQL.Strings = (
       'select * from agenda_aluno al'
       'where al.agenda_id = :agenda_id')
-    Left = 96
+    Left = 120
     Top = 56
     ParamData = <
       item
@@ -63,14 +65,13 @@ object DmEscola: TDmEscola
       end>
   end
   object fdqAgendaTurma: TFDQuery
-    MasterSource = dsAgenda
-    MasterFields = 'agenda_id'
+    Active = True
     Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
       'select * from agenda_turma at'
       'where at.agenda_id = :agenda_id'
       '')
-    Left = 96
+    Left = 120
     Top = 104
     ParamData = <
       item
@@ -137,11 +138,6 @@ object DmEscola: TDmEscola
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-  end
-  object dsAgenda: TDataSource
-    DataSet = fdqAgenda
-    Left = 168
-    Top = 8
   end
   object fdqTurmaAluno: TFDQuery
     MasterSource = dsTurmaAluno

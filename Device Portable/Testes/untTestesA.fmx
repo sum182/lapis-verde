@@ -1,0 +1,29 @@
+object frmTesteA: TfrmTesteA
+  Left = 0
+  Top = 0
+  Caption = 'Form3'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object SpeedButton1: TSpeedButton
+    Position.X = 72.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 65.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Abrir B'
+    OnClick = SpeedButton1Click
+  end
+  object SpeedButton2: TSpeedButton
+    Position.X = 232.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 97.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Fechar A'
+    OnClick = SpeedButton2Click
+  end
+end
