@@ -1,12 +1,11 @@
-inherited frmAgendaEscolaNew: TfrmAgendaEscolaNew
+inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
   Caption = 'frmBaseToolBar1'
-  OnClose = FormClose
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     inherited ToolBar1: TToolBar
       inherited lblTitulo: TLabel
-        Size.Width = 180.000000000000000000
-        Text = 'Criar Agenda'
+        Size.Width = 132.000000000000000000
+        Text = 'Agenda'
       end
       inherited layToolBarVoltar: TLayout
         inherited btnVoltar: TSpeedButton
@@ -89,13 +88,13 @@ inherited frmAgendaEscolaNew: TfrmAgendaEscolaNew
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
                   98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  00C8494441545847EDD65D0AC2301046D1240A4236AD5B702FFE6C2C203E24F1
-                  9B76062495A2829D14E780849A87B9B418EB8C316B506B3DD0872F75718CD08D
-                  A280B1639473BE62D9F0F6B2307812534AD9F1F6B230BF8DB9580CC1FC36E66C
-                  3104F3DB98D3DFC4785E5FC27C3AE8F6E3957329A55B8CF11842B8F3575FF3DE
-                  7F768852CC704B7E84C74C045EBBB19E4726286AB8C74CF51726D0D1CF1924D0
-                  B18A28BDFF31810E8B7A0B3ADA28BD1734818E4914962D6FEB40C07394EE4BBE
-                  A0906E628C31B39C7B00531D010574FDBD790000000049454E44AE426082}
+                  00C8494441545847EDD64D0AC2301086E1240AAE7266BD8277F1E75C59898B24
+                  7ED3CE80A45254B093E23C20A166312F2DC63A63CC1AD45A0FF4E14B5D1C2374
+                  A32860EC18E59CAF5836BCBD2C0C9EC4945276BCBD2CCC6F632E164330BF8D39
+                  5B0CC1FC36E6F437319ED797309F0EBAFD78E55C4AE916633C8610EEFCD5D7BC
+                  F79F1DA21433DC921FE1311381D76EACE791098A1AEE3153FD850974F4730609
+                  74AC224AEF7F4CA0C3A2DE828E364AEF054DA063128565CBDB3A10F01CA5FB92
+                  2F28A49B1863CC2CE71E52D50105C235449C0000000049454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
                   'p\ic_arrow_back_white_24dp\android\drawable-hdpi\ic_arrow_back_w' +
@@ -107,11 +106,11 @@ inherited frmAgendaEscolaNew: TfrmAgendaEscolaNew
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5CADD6A671C218A
-                  145712070A7D20A55924D2D0D4455563CE79C595EB2CB74F534ABB880C88398A
-                  F20531472B7FE552FE156A6E1D4E5FF623FF3DD1A5189911733D46363B26C45C
-                  EE23F65C2362AE62A447CC8591886B5385100EBB2EFC267B93DD8B0000000049
-                  454E44AE426082}
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E9DB80368EF3C218A
+                  149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
+                  942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
+                  721FB1E71A117315233D622E8C445C9B2A847000CC6AFBBA58317FFC00000000
+                  49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
                   'p\ic_arrow_back_white_24dp\android\drawable-mdpi\ic_arrow_back_w' +
@@ -120,64 +119,118 @@ inherited frmAgendaEscolaNew: TfrmAgendaEscolaNew
           end
         end
       end
-      object SpeedButton1: TSpeedButton
+      object btnAtualizar: TSpeedButton
         Align = Right
         Position.X = 592.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'addtoolbutton'
-        Text = 'Criar'
-        OnClick = SpeedButton1Click
-      end
-      object SpeedButton2: TSpeedButton
-        Align = Right
-        Position.X = 544.000000000000000000
-        Size.Width = 48.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
         StyleLookup = 'refreshtoolbutton'
-        Text = 'SpeedButton2'
-        OnClick = SpeedButton2Click
-      end
-      object SpeedButton3: TSpeedButton
-        Align = Right
-        Position.X = 496.000000000000000000
-        Size.Width = 48.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'trashtoolbutton'
-        Text = 'SpeedButton3'
-        OnClick = SpeedButton3Click
-      end
-      object SpeedButton4: TSpeedButton
-        Align = Right
-        Position.X = 423.000000000000000000
-        Size.Width = 73.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'Get'
-        OnClick = SpeedButton4Click
+        Text = 'btnAtualizar'
+        OnClick = btnAtualizarClick
       end
     end
-    object Memo1: TMemo
-      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-      DataDetectorTypes = []
+    object tbctrlPrincipal: TTabControl
       Align = Client
       Size.Width = 640.000000000000000000
-      Size.Height = 384.000000000000000000
+      Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
+      TabHeight = 49.000000000000000000
+      TabIndex = 1
       TabOrder = 1
-      Viewport.Width = 632.000000000000000000
-      Viewport.Height = 376.000000000000000000
+      TabPosition = PlatformDefault
+      object tbitTurma: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 320.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Turmas'
+        ExplicitSize.cx = 320.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object lstTurmas: TListView
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
+          OnItemClick = lstTurmasItemClick
+        end
+      end
+      object tbitAlunos: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 320.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Alunos'
+        ExplicitSize.cx = 320.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object lstAlunos: TListView
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
+          ItemAppearanceObjects.ItemEditObjects.GlyphButton.Visible = False
+          StyleLookup = 'listviewstyle'
+          OnItemClick = lstAlunosItemClick
+        end
+      end
     end
-    object ToolBar2: TToolBar
-      Align = Bottom
-      Position.Y = 432.000000000000000000
-      Size.Width = 640.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 2
+  end
+  object bsAlunos: TBindSourceDB
+    DataSet = DmEscola.fdqAluno
+    ScopeMappings = <>
+    Left = 48
+    Top = 200
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 52
+    Top = 261
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = bsAlunos
+      FieldName = 'nome'
+      Control = lstAlunos
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
     end
+    object LinkListControlToField2: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = bsTurmas
+      FieldName = 'nome'
+      Control = lstTurmas
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object bsTurmas: TBindSourceDB
+    DataSet = DmEscola.fdqTurma
+    ScopeMappings = <>
+    Left = 48
+    Top = 136
   end
 end

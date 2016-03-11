@@ -1,4 +1,4 @@
-unit untAgendaEscola;
+unit untAgendaEscolaSelect;
 
 interface
 
@@ -16,7 +16,7 @@ uses
   FireDAC.Stan.Async, FireDAC.DApt;
 
 type
-  TfrmAgendaEscola = class(TfrmBaseToolBar)
+  TfrmAgendaEscolaSelect = class(TfrmBaseToolBar)
     tbctrlPrincipal: TTabControl;
     tbitTurma: TTabItem;
     tbitAlunos: TTabItem;
@@ -32,29 +32,31 @@ type
     procedure FormCreate(Sender: TObject);
     procedure lstAlunosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure lstTurmasItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
   private
   public
     { Public declarations }
   end;
 
 var
-  frmAgendaEscola: TfrmAgendaEscola;
+  frmAgendaEscolaSelect: TfrmAgendaEscolaSelect;
 
 implementation
 
 {$R *.fmx}
 
-uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgenda,
+uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgendaEscolaView,
   untPrincipal;
 
-procedure TfrmAgendaEscola.btnAtualizarClick(Sender: TObject);
+procedure TfrmAgendaEscolaSelect.btnAtualizarClick(Sender: TObject);
 begin
   DmEscola.GetAlunos;
   DmEscola.GetTurmas;
   DmEscola.GetAgenda(0,0);
 end;
 
-procedure TfrmAgendaEscola.FormCreate(Sender: TObject);
+procedure TfrmAgendaEscolaSelect.FormCreate(Sender: TObject);
 begin
   inherited;
   tbctrlPrincipal.ActiveTab := tbitTurma;
@@ -64,16 +66,29 @@ end;
 
 
 
-procedure TfrmAgendaEscola.lstAlunosItemClick(const Sender: TObject;
+procedure TfrmAgendaEscolaSelect.lstAlunosItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   inherited;
   //frmPrincipal.OpenForm(TfrmAgenda);
-  if not Assigned(frmAgenda) then
-    Application.CreateForm(TfrmAgenda, frmAgenda);
+  if not Assigned(frmAgendaEscolaView) then
+    Application.CreateForm(TfrmAgendaEscolaView, frmAgendaEscolaView);
 
-  frmAgenda.Show;
+  frmAgendaEscolaView.AlunoId:= DmEscola.fdqAluno.FieldByName('aluno_id').AsInteger;
+  frmAgendaEscolaView.Show;
 
+
+end;
+
+procedure TfrmAgendaEscolaSelect.lstTurmasItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  inherited;
+  if not Assigned(frmAgendaEscolaView) then
+    Application.CreateForm(TfrmAgendaEscolaView, frmAgendaEscolaView);
+
+  frmAgendaEscolaView.TurmaId:= DmEscola.fdqTurma.FieldByName('turma_id').AsInteger;
+  frmAgendaEscolaView.Show;
 
 end;
 

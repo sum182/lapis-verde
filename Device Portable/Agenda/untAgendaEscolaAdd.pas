@@ -1,4 +1,4 @@
-unit untAgendaEscolaNew;
+unit untAgendaEscolaAdd;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   FMX.ScrollBox, FMX.Memo;
 
 type
-  TfrmAgendaEscolaNew = class(TfrmBaseToolBar)
+  TfrmAgendaEscolaAdd = class(TfrmBaseToolBar)
     Memo1: TMemo;
     ToolBar2: TToolBar;
     SpeedButton1: TSpeedButton;
@@ -21,15 +21,16 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    AlunoId:Integer;
+    TurmaId:Integer;
   end;
 
 var
-  frmAgendaEscolaNew: TfrmAgendaEscolaNew;
+  frmAgendaEscolaAdd: TfrmAgendaEscolaAdd;
 
 implementation
 
@@ -37,34 +38,35 @@ implementation
 
 uses smGeralFMX, untDM, untDmEscola, untDMStyles, untFuncoes;
 
-procedure TfrmAgendaEscolaNew.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TfrmAgendaEscolaAdd.btnVoltarClick(Sender: TObject);
 begin
   inherited;
-  self.DisposeOf;
-  self:= nil;
+  frmAgendaEscolaAdd.Close;
+  frmAgendaEscolaAdd.DisposeOf;
+  frmAgendaEscolaAdd:= nil;
+
 end;
 
-procedure TfrmAgendaEscolaNew.FormCreate(Sender: TObject);
+procedure TfrmAgendaEscolaAdd.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
 end;
 
-procedure TfrmAgendaEscolaNew.SpeedButton1Click(Sender: TObject);
+procedure TfrmAgendaEscolaAdd.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  DmEscola.CriarAgenda(Memo1.Text);
+  DmEscola.CriarAgenda(Memo1.Text,AlunoId,TurmaId);
 end;
 
-procedure TfrmAgendaEscolaNew.SpeedButton2Click(Sender: TObject);
+procedure TfrmAgendaEscolaAdd.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
   DmEscola.SalvarDadosServer;
   DM.SalvarDadosServer;
 end;
 
-procedure TfrmAgendaEscolaNew.SpeedButton3Click(Sender: TObject);
+procedure TfrmAgendaEscolaAdd.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
   Dm.FDConnectionDBEscola.ExecSQL('delete from agenda;');
@@ -72,7 +74,7 @@ begin
   Dm.FDConnectionDB.ExecSQL('delete from log_error;');
 end;
 
-procedure TfrmAgendaEscolaNew.SpeedButton4Click(Sender: TObject);
+procedure TfrmAgendaEscolaAdd.SpeedButton4Click(Sender: TObject);
 begin
   inherited;
   DmEscola.GetAgenda(GetFuncionarioId,0);

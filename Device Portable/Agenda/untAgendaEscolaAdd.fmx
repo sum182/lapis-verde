@@ -1,14 +1,15 @@
-inherited frmAgendaEscola: TfrmAgendaEscola
+inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
   Caption = 'frmBaseToolBar1'
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     inherited ToolBar1: TToolBar
       inherited lblTitulo: TLabel
-        Size.Width = 132.000000000000000000
-        Text = 'Agenda'
+        Size.Width = 180.000000000000000000
+        Text = 'Criar Agenda'
       end
       inherited layToolBarVoltar: TLayout
         inherited btnVoltar: TSpeedButton
+          OnClick = btnVoltarClick
           inherited imgVoltar: TImage
             MultiResBitmap.Height = 24
             MultiResBitmap.Width = 24
@@ -119,117 +120,64 @@ inherited frmAgendaEscola: TfrmAgendaEscola
           end
         end
       end
-      object btnAtualizar: TSpeedButton
+      object SpeedButton1: TSpeedButton
         Align = Right
         Position.X = 592.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'addtoolbutton'
+        Text = 'Criar'
+        OnClick = SpeedButton1Click
+      end
+      object SpeedButton2: TSpeedButton
+        Align = Right
+        Position.X = 544.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
         StyleLookup = 'refreshtoolbutton'
-        Text = 'btnAtualizar'
-        OnClick = btnAtualizarClick
+        Text = 'SpeedButton2'
+        OnClick = SpeedButton2Click
+      end
+      object SpeedButton3: TSpeedButton
+        Align = Right
+        Position.X = 496.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'trashtoolbutton'
+        Text = 'SpeedButton3'
+        OnClick = SpeedButton3Click
+      end
+      object SpeedButton4: TSpeedButton
+        Align = Right
+        Position.X = 423.000000000000000000
+        Size.Width = 73.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Get'
+        OnClick = SpeedButton4Click
       end
     end
-    object tbctrlPrincipal: TTabControl
+    object Memo1: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
       Align = Client
       Size.Width = 640.000000000000000000
-      Size.Height = 432.000000000000000000
+      Size.Height = 384.000000000000000000
       Size.PlatformDefault = False
-      TabHeight = 49.000000000000000000
-      TabIndex = 0
       TabOrder = 1
-      TabPosition = PlatformDefault
-      object tbitTurma: TTabItem
-        CustomIcon = <
-          item
-          end>
-        IsSelected = True
-        Size.Width = 320.000000000000000000
-        Size.Height = 49.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = ''
-        TabOrder = 0
-        Text = 'Turmas'
-        ExplicitSize.cx = 320.000000000000000000
-        ExplicitSize.cy = 49.000000000000000000
-        object lstTurmas: TListView
-          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
-          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
-          HeaderAppearanceClassName = 'TListHeaderObjects'
-          FooterAppearanceClassName = 'TListHeaderObjects'
-          Align = Client
-          Size.Width = 640.000000000000000000
-          Size.Height = 383.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 0
-          ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
-        end
-      end
-      object tbitAlunos: TTabItem
-        CustomIcon = <
-          item
-          end>
-        IsSelected = False
-        Size.Width = 320.000000000000000000
-        Size.Height = 49.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = ''
-        TabOrder = 0
-        Text = 'Alunos'
-        ExplicitSize.cx = 320.000000000000000000
-        ExplicitSize.cy = 49.000000000000000000
-        object lstAlunos: TListView
-          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
-          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
-          HeaderAppearanceClassName = 'TListHeaderObjects'
-          FooterAppearanceClassName = 'TListHeaderObjects'
-          Align = Client
-          Size.Width = 640.000000000000000000
-          Size.Height = 383.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 0
-          ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
-          ItemAppearanceObjects.ItemEditObjects.GlyphButton.Visible = False
-          StyleLookup = 'listviewstyle'
-          OnItemClick = lstAlunosItemClick
-        end
-      end
+      Viewport.Width = 632.000000000000000000
+      Viewport.Height = 376.000000000000000000
     end
-  end
-  object bsAlunos: TBindSourceDB
-    DataSet = DmEscola.fdqAluno
-    ScopeMappings = <>
-    Left = 48
-    Top = 200
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 52
-    Top = 261
-    object LinkListControlToField1: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = bsAlunos
-      FieldName = 'nome'
-      Control = lstAlunos
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
+    object ToolBar2: TToolBar
+      Align = Bottom
+      Position.Y = 432.000000000000000000
+      Size.Width = 640.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
     end
-    object LinkListControlToField2: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = bsTurmas
-      FieldName = 'nome'
-      Control = lstTurmas
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
-  end
-  object bsTurmas: TBindSourceDB
-    DataSet = DmEscola.fdqTurma
-    ScopeMappings = <>
-    Left = 48
-    Top = 136
   end
 end
