@@ -3,7 +3,6 @@ SELECT * FROM agendadb.aluno;
 select * from agenda 
 
 select * from agenda_aluno 
-where agenda_id = 'A026AE69-D48A-41DC-AB42-880E908A614E'
 
 select  *from agenda_turma 
 
@@ -18,48 +17,21 @@ select * from turma_aluno ta
 where ta.aluno_id = 19
 
 
-
-select 
-  al.*
-from agenda_aluno  al
-inner join agenda ag on (ag.agenda_id = al.agenda_id) 
-
-
-
-
-select * from agenda
-where 1=1
-and agenda_id = :agenda_id
-and escola_id = :escola_id
-
-
-
---agenda
-select 
-  ag.*,t.turma_id
-from agenda ag
-left outer  join agenda_aluno al on (ag.agenda_id = al.agenda_id) 
-left outer join turma_aluno ta on (ta.aluno_id = al.aluno_id) 
-left outer join turma t on (t.turma_id = ta.turma_id)
-left outer join funcionario f on (f.funcionario_id = t.funcionario_id)
-where f.funcionario_id = 16
-and ag.escola_id = 1
-group by agenda_id
-
+and ag.escola_id = :escola_id
+and ag.data_insert_server between :dt_ini and :dt_fim
 
 
 
 --agenda x aluno
 select 
-  al.*
+  ag.*
 from agenda ag
 inner join agenda_aluno al on (ag.agenda_id = al.agenda_id) 
-inner join turma_aluno ta on (ta.aluno_id = al.aluno_id) 
-inner join turma t on (t.turma_id = ta.turma_id)
-inner join funcionario f on (f.funcionario_id = t.funcionario_id)
-where t.funcionario_id = 16
+where 1=1
 and ag.escola_id = 1
-and ag.data_insert_server between :
+and al.aluno_id = 
+order by ag.data_insert_local 
+
 
 
 

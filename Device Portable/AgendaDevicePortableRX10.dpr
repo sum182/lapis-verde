@@ -24,13 +24,13 @@ uses
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
   smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
   smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas',
-  untAgenda in 'Agenda\untAgenda.pas' {frmAgenda},
+  untAgendaEscolaView in 'Agenda\untAgendaEscolaView.pas' {frmAgendaEscolaView},
   untMensagens in 'Mensagens\untMensagens.pas' {frmMensagens},
   untCriarConta in 'Usuario\untCriarConta.pas' {frmCriarConta},
   untTesteString2 in 'Testes\untTesteString2.pas' {frmTesteString2},
-  untAgendaEscola in 'Agenda\untAgendaEscola.pas' {frmAgendaEscola},
+  untAgendaEscolaSelect in 'Agenda\untAgendaEscolaSelect.pas' {frmAgendaEscolaSelect},
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
-  untAgendaEscolaNew in 'Agenda\untAgendaEscolaNew.pas' {frmAgendaEscolaNew};
+  untAgendaEscolaAdd in 'Agenda\untAgendaEscolaAdd.pas' {frmAgendaEscolaAdd};
 
 {$R *.res}
 

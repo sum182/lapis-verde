@@ -23,10 +23,14 @@ type
     fdqAgendaAlunoSaveServeraluno_id: TIntegerField;
     fdqAgendaTurmaSaveServeragenda_id: TStringField;
     fdqAgendaTurmaSaveServerturma_id: TIntegerField;
+    dsAgenda: TDataSource;
+    fdqTurmaAluno: TFDQuery;
+    dsTurmaAluno: TDataSource;
   private
+
     { Private declarations }
   public
-    procedure OpenAgenda;
+
     procedure OpenAlunos;
     procedure OpenTurmas;
 
@@ -35,8 +39,19 @@ type
     procedure GetTurmas;
 
     //Metodos para Agenda
+
+    procedure SetSQLAgenda(AlunoId:Integer;TurmaId:Integer);overload;
+    procedure SetSQLAgenda;overload;
+
+    procedure SetParamsAgenda(AlunoId:Integer;TurmaId:Integer);
+    procedure OpenAgenda(AlunoId:Integer;TurmaId:Integer);overload;
+    procedure OpenAgenda;overload;
+
+    procedure CloseAgenda;
+
+
     procedure GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
-    procedure CriarAgenda(Texto: string; FuncionarioId: Integer = 0; AlunoId: Integer = 0; TurmaId: Integer = 0);
+    procedure CriarAgenda(Texto:string;AlunoId:Integer=0;TurmaId:Integer=0);
     procedure SalvarAgenda;
     procedure AgendaApplyChanges;
 
@@ -108,7 +123,14 @@ begin
   end;
 end;
 
-procedure TDmEscola.CriarAgenda(Texto: string; FuncionarioId: Integer = 0; AlunoId: Integer = 0; TurmaId: Integer = 0);
+procedure TDmEscola.CloseAgenda;
+begin
+  fdqAgenda.Active := False;
+  fdqAgendaAluno.Active := False;
+  fdqAgendaTurma.Active := False;
+end;
+
+procedure TDmEscola.CriarAgenda(Texto:string;AlunoId:Integer=0;TurmaId:Integer=0);
 var
   Id:String;
 begin
@@ -136,10 +158,22 @@ begin
     fdqAgenda.FieldByName('escola_id').AsInteger:=GetEscolaId;
     fdqAgenda.Post;
 
-    fdqAgendaAluno.Append;
-    fdqAgendaAluno.FieldByName('agenda_id').AsString := Id;
-    fdqAgendaAluno.FieldByName('aluno_id').AsInteger := 19;
-    fdqAgendaAluno.Post;
+    if AlunoId > 0 then
+    begin
+      fdqAgendaAluno.Append;
+      fdqAgendaAluno.FieldByName('agenda_id').AsString := Id;
+      fdqAgendaAluno.FieldByName('aluno_id').AsInteger := AlunoId;
+      fdqAgendaAluno.Post;
+    end;
+
+    if TurmaId > 0 then
+    begin
+      fdqAgendaTurma.Append;
+      fdqAgendaTurma.FieldByName('agenda_id').AsString := Id;
+      fdqAgendaTurma.FieldByName('turma_id').AsInteger := TurmaId;
+      fdqAgendaTurma.Post;
+    end;
+
 
   except on E:Exception do
     DM.SetLogError( E.Message,
@@ -164,7 +198,8 @@ begin
   //Método para retornar as Agendas
   try
     try
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,IncDay(Now,-30),Now +1 );
+      OpenAgenda;
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,Now -30,Now +1 );
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
@@ -249,26 +284,44 @@ end;
 
 procedure TDmEscola.OpenAgenda;
 begin
-  fdqAgenda.Close;
-  fdqAgenda.Open;
+  CloseAgenda;
 
-  fdqAgendaAluno.Close;
-  fdqAgendaAluno.Open;
+  SetSQLAgenda;
 
-  fdqAgendaTurma.Close;
-  fdqAgendaTurma.Open;
+  fdqAgenda.Active := True;
+  fdqAgendaAluno.Active := True;
+  fdqAgendaTurma.Active := True;
+end;
+
+
+
+procedure TDmEscola.OpenAgenda(AlunoId, TurmaId: Integer);
+begin
+  CloseAgenda;
+
+  SetSQLAgenda(AlunoId,TurmaId);
+  SetParamsAgenda(AlunoId,TurmaId);
+
+  fdqAgenda.Active := True;
+  fdqAgendaAluno.Active := True;
+  fdqAgendaTurma.Active := True;
 end;
 
 procedure TDmEscola.OpenAlunos;
 begin
   fdqAluno.Close;
+  fdqAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
   fdqAluno.Open;
 end;
 
 procedure TDmEscola.OpenTurmas;
 begin
   fdqTurma.Close;
+  fdqTurma.ParamByName('escola_id').AsInteger:= GetEscolaId;
   fdqTurma.Open;
+
+  fdqTurmaAluno.Close;
+  fdqTurmaAluno.Open;
 end;
 
 procedure TDmEscola.SalvarAgenda;
@@ -328,6 +381,58 @@ procedure TDmEscola.SalvarDadosServer;
 begin
   //Método para salvar todos os dados da escola no server
   SalvarAgenda;
+end;
+
+
+
+
+procedure TDmEscola.SetParamsAgenda(AlunoId, TurmaId: Integer);
+begin
+  fdqAgenda.ParamByName('escola_id').AsInteger:= GetEscolaId;
+
+  if AlunoId > 0 then
+    fdqAgenda.ParamByName('aluno_id').AsInteger:= AlunoId;
+
+  if TurmaId > 0 then
+    fdqAgenda.ParamByName('turma_id').AsInteger:= TurmaId;
+end;
+
+procedure TDmEscola.SetSQLAgenda;
+begin
+  fdqAgenda.SQL.Clear;
+  fdqAgenda.SQL.Add('select');
+  fdqAgenda.SQL.Add('  ag.*');
+  fdqAgenda.SQL.Add('from agenda ag');
+end;
+
+procedure TDmEscola.SetSQLAgenda(AlunoId, TurmaId: Integer);
+begin
+  fdqAgenda.SQL.Clear;
+
+  if AlunoId > 0 then
+  begin
+    fdqAgenda.SQL.Add('select');
+    fdqAgenda.SQL.Add('  ag.*');
+    fdqAgenda.SQL.Add('from agenda ag');
+    fdqAgenda.SQL.Add('inner join agenda_aluno al on (ag.agenda_id = al.agenda_id)');
+    fdqAgenda.SQL.Add('where 1=1');
+    fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
+    fdqAgenda.SQL.Add('and al.aluno_id = :aluno_id');
+    fdqAgenda.SQL.Add('order by ag.data_insert_local');
+  end;
+
+
+  if TurmaId > 0 then
+  begin
+    fdqAgenda.SQL.Add('select');
+    fdqAgenda.SQL.Add('  ag.*');
+    fdqAgenda.SQL.Add('from agenda ag');
+    fdqAgenda.SQL.Add('inner join agenda_turma at on (ag.agenda_id = at.agenda_id)');
+    fdqAgenda.SQL.Add('where 1=1');
+    fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
+    fdqAgenda.SQL.Add('and at.turma_id = :turma_id');
+    fdqAgenda.SQL.Add('order by ag.data_insert_local');
+  end;
 end;
 
 end.

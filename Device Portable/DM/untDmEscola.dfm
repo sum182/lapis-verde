@@ -5,16 +5,32 @@ object DmEscola: TDmEscola
   object fdqAluno: TFDQuery
     Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
-      'select * from aluno')
+      'select * from aluno'
+      'where escola_id = :escola_id')
     Left = 24
     Top = 8
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
   object fdqTurma: TFDQuery
     Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
-      'select * from turma')
+      'select * from turma'
+      'where escola_id = :escola_id')
     Left = 24
     Top = 56
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
   object fdStanStorageBinLink: TFDStanStorageBinLink
     Left = 616
@@ -29,19 +45,40 @@ object DmEscola: TDmEscola
     Top = 8
   end
   object fdqAgendaAluno: TFDQuery
+    MasterSource = dsAgenda
+    MasterFields = 'agenda_id'
     Connection = DM.FDConnectionDBEscola
     FetchOptions.AssignedValues = [evCache]
     SQL.Strings = (
-      'select * from agenda_aluno'#13#10#10)
+      'select * from agenda_aluno al'
+      'where al.agenda_id = :agenda_id')
     Left = 96
     Top = 56
+    ParamData = <
+      item
+        Name = 'AGENDA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
   object fdqAgendaTurma: TFDQuery
+    MasterSource = dsAgenda
+    MasterFields = 'agenda_id'
     Connection = DM.FDConnectionDBEscola
     SQL.Strings = (
-      'select * from agenda_turma '#13#10#10)
+      'select * from agenda_turma at'
+      'where at.agenda_id = :agenda_id'
+      '')
     Left = 96
     Top = 104
+    ParamData = <
+      item
+        Name = 'AGENDA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
   object fdqAgendaSaveServer: TFDQuery
     Connection = DM.FDConnectionDBEscola
@@ -100,5 +137,34 @@ object DmEscola: TDmEscola
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
+  end
+  object dsAgenda: TDataSource
+    DataSet = fdqAgenda
+    Left = 168
+    Top = 8
+  end
+  object fdqTurmaAluno: TFDQuery
+    MasterSource = dsTurmaAluno
+    MasterFields = 'turma_id'
+    Connection = DM.FDConnectionDBEscola
+    SQL.Strings = (
+      #10'select '#10'  ta.*'
+      'from turma_aluno ta'#13#10#10
+      'where ta.turma_id = :turma_id'
+      '')
+    Left = 26
+    Top = 168
+    ParamData = <
+      item
+        Name = 'TURMA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsTurmaAluno: TDataSource
+    DataSet = fdqTurma
+    Left = 24
+    Top = 112
   end
 end

@@ -5,7 +5,7 @@
         <FrameworkType>FMX</FrameworkType>
         <MainSource>AgendaDevicePortableRX10.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1119</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -383,8 +383,8 @@
             <Form>frmBaseToolBar</Form>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas"/>
-        <DCCReference Include="Agenda\untAgenda.pas">
-            <Form>frmAgenda</Form>
+        <DCCReference Include="Agenda\untAgendaEscolaView.pas">
+            <Form>frmAgendaEscolaView</Form>
         </DCCReference>
         <DCCReference Include="Mensagens\untMensagens.pas">
             <Form>frmMensagens</Form>
@@ -395,12 +395,12 @@
         <DCCReference Include="Testes\untTesteString2.pas">
             <Form>frmTesteString2</Form>
         </DCCReference>
-        <DCCReference Include="Agenda\untAgendaEscola.pas">
-            <Form>frmAgendaEscola</Form>
+        <DCCReference Include="Agenda\untAgendaEscolaSelect.pas">
+            <Form>frmAgendaEscolaSelect</Form>
         </DCCReference>
         <DCCReference Include="C:\Componentes\sum182\D15\Units\smDBFireDac.pas"/>
-        <DCCReference Include="Agenda\untAgendaEscolaNew.pas">
-            <Form>frmAgendaEscolaNew</Form>
+        <DCCReference Include="Agenda\untAgendaEscolaAdd.pas">
+            <Form>frmAgendaEscolaAdd</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -429,14 +429,15 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="2">
-                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
+                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Release" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Debug" Class="Android_LauncherIcon72">
+                <DeployFile LocalName="Android\Release\classes.dex" Configuration="Release" Class="AndroidClassesDexFile">
                     <Platform Name="Android">
-                        <RemoteName>ic_launcher.png</RemoteName>
+                        <RemoteName>classes.dex</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -688,30 +689,44 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Debug\libAgendaDevicePortableRX10.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Release" Class="Android_LauncherIcon72">
+                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Debug" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Release\classes.dex" Configuration="Release" Class="AndroidClassesDexFile">
-                    <Platform Name="Android">
-                        <RemoteName>classes.dex</RemoteName>
-                        <Overwrite>true</Overwrite>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
                     </Platform>
-                </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -1065,27 +1080,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
