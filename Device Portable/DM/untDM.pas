@@ -29,8 +29,6 @@ type
     procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
     procedure ConectarBases;
     procedure ConectarDB;
-    procedure ConectarDBEscola;
-    procedure ConectarDBResponsavel;
 
   public
     fUsuarioLogadoIsResponsavel:boolean;
@@ -70,8 +68,6 @@ uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
 procedure TDM.ConectarBases;
 begin
   ConectarDB;
-  ConectarDBEscola;
-  ConectarDBResponsavel;
 end;
 
 procedure TDM.ConectarDB;
@@ -79,15 +75,6 @@ begin
   ConectarSQLite(FDConnectionDB,'db.s3db');
 end;
 
-procedure TDM.ConectarDBEscola;
-begin
-  ConectarSQLite(FDConnectionDBEscola,'dbEscola.s3db');
-end;
-
-procedure TDM.ConectarDBResponsavel;
-begin
-  ConectarSQLite(FDConnectionDBResponsavel,'dbResponsavel.s3db');
-end;
 
 procedure TDM.ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
 var
@@ -115,8 +102,6 @@ end;
 procedure TDM.DataModuleCreate(Sender: TObject);
 begin
   FDConnectionDB.Close;
-  FDConnectionDBEscola.Close;
-  FDConnectionDBResponsavel.Close;
   ConectarBases;
 
   //Teste Temporario

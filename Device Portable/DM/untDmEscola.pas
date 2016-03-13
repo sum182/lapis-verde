@@ -25,6 +25,10 @@ type
     fdqAgendaTurmaSaveServerturma_id: TIntegerField;
     fdqTurmaAluno: TFDQuery;
     dsTurmaAluno: TDataSource;
+    fdqAgendaAlunoagenda_id: TStringField;
+    fdqAgendaAlunoaluno_id: TIntegerField;
+    fdqAgendaTurmaagenda_id: TStringField;
+    fdqAgendaTurmaturma_id: TIntegerField;
   private
 
     { Private declarations }
@@ -42,11 +46,18 @@ type
     procedure SetSQLAgenda(AlunoId:Integer;TurmaId:Integer);overload;
     procedure SetSQLAgenda;overload;
     procedure SetSQLAgenda(KeyValues:String);overload;
+    procedure SetSQLAgendaAluno(KeyValues:String);overload;
+    procedure SetSQLAgendaTurma(KeyValues:String);overload;
 
     procedure SetParamsAgenda(AlunoId:Integer;TurmaId:Integer);
-    procedure OpenAgenda(KeyValues:String);overload;
+
+
     procedure OpenAgenda(AlunoId:Integer;TurmaId:Integer);overload;
     procedure OpenAgenda;overload;
+    procedure OpenAgenda(KeyValues:String);overload;
+    procedure OpenAgendaAluno(KeyValues:String);overload;
+    procedure OpenAgendaTurma(KeyValues:String);overload;
+
 
     procedure CloseAgenda;
 
@@ -216,10 +227,14 @@ begin
 
       //Pegando dados da agenda_aluno
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+      OpenAgendaAluno(KeyValues);
       CopyDataSet(LDataSet,fdqAgendaAluno,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_turma
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+      OpenAgendaTurma(KeyValues);
       CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
 
     except on E:Exception do
@@ -304,16 +319,25 @@ end;
 
 
 
+procedure TDmEscola.OpenAgendaAluno(KeyValues: String);
+begin
+  fdqAgendaAluno.Active := False;
+  SetSQLAgendaAluno(KeyValues);
+  fdqAgendaAluno.Active := True;
+end;
+
+procedure TDmEscola.OpenAgendaTurma(KeyValues: String);
+begin
+  fdqAgendaTurma.Active := False;
+  SetSQLAgendaTurma(KeyValues);
+  fdqAgendaTurma.Active := True;
+end;
+
 procedure TDmEscola.OpenAgenda(KeyValues: String);
 begin
   CloseAgenda;
-
   SetSQLAgenda(KeyValues);
-
   fdqAgenda.Active := True;
-  fdqAgendaAluno.Active := True;
-  fdqAgendaTurma.Active := True;
-
 end;
 
 procedure TDmEscola.OpenAgenda(AlunoId, TurmaId: Integer);
@@ -427,11 +451,23 @@ begin
   fdqAgenda.SQL.Add('select ag.*');
   fdqAgenda.SQL.Add('from agenda ag');
   fdqAgenda.SQL.Add('where agenda_id in (' + KeyValues + ')');
+end;
+
+procedure TDmEscola.SetSQLAgendaAluno(KeyValues: String);
+begin
+  if KeyValues = EmptyStr then
+    KeyValues:= QuoTedStr('0');
 
   fdqAgendaAluno.SQL.Clear;
   fdqAgendaAluno.SQL.Add('select al.*');
   fdqAgendaAluno.SQL.Add('from agenda_aluno al');
   fdqAgendaAluno.SQL.Add('where agenda_id in (' + KeyValues + ')');
+end;
+
+procedure TDmEscola.SetSQLAgendaTurma(KeyValues: String);
+begin
+  if KeyValues = EmptyStr then
+    KeyValues:= QuoTedStr('0');
 
   fdqAgendaTurma.SQL.Clear;
   fdqAgendaTurma.SQL.Add('select at.*');

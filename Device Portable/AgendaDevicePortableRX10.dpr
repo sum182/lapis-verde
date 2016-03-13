@@ -32,12 +32,29 @@ uses
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
   untAgendaEscolaAdd in 'Agenda\untAgendaEscolaAdd.pas' {frmAgendaEscolaAdd},
   untTestesA in 'Testes\untTestesA.pas' {frmTesteA},
-  untTestesB in 'Testes\untTestesB.pas' {frmTesteB};
+  untTestesB in 'Testes\untTestesB.pas' {frmTesteB},
+  untPrincipalTeste in 'untPrincipalTeste.pas' {frmPrincipalTeste};
 
 {$R *.res}
 
 begin
   //Modo Teste
+ { Application.Initialize;
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDmResponsavel, DmResponsavel);
+  Application.CreateForm(TDmEscola, DmEscola);
+  Application.CreateForm(TDMStyles, DMStyles);
+  Application.CreateForm(TModuloCliente, ModuloCliente);
+  Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
+  //Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
+  Application.Run;
+  Exit;
+  // Fim do Teste
+ }
+
+
+  //Modo Teste 2
   Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
@@ -45,10 +62,10 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  //Application.CreateForm(TfrmAgendaEscolaNew, frmAgendaEscolaNew);
   Application.Run;
   Exit;
   // Fim do Teste
+
 
 
    //Modo Correto

@@ -59,7 +59,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral;
+uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs;
 
 {$R *.dfm}
 

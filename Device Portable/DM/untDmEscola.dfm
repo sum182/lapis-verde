@@ -3,8 +3,7 @@ object DmEscola: TDmEscola
   Height = 408
   Width = 718
   object fdqAluno: TFDQuery
-    Active = True
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     SQL.Strings = (
       'select * from aluno'
       'where escola_id = :escola_id')
@@ -19,8 +18,7 @@ object DmEscola: TDmEscola
       end>
   end
   object fdqTurma: TFDQuery
-    Active = True
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     SQL.Strings = (
       'select * from turma'
       'where escola_id = :escola_id')
@@ -39,8 +37,7 @@ object DmEscola: TDmEscola
     Top = 8
   end
   object fdqAgenda: TFDQuery
-    Active = True
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     SQL.Strings = (
       'select * from agenda'
       'order by data_insert_local')
@@ -48,8 +45,7 @@ object DmEscola: TDmEscola
     Top = 8
   end
   object fdqAgendaAluno: TFDQuery
-    Active = True
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     FetchOptions.AssignedValues = [evCache]
     SQL.Strings = (
       'select * from agenda_aluno al'
@@ -63,10 +59,22 @@ object DmEscola: TDmEscola
         ParamType = ptInput
         Value = Null
       end>
+    object fdqAgendaAlunoagenda_id: TStringField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 100
+    end
+    object fdqAgendaAlunoaluno_id: TIntegerField
+      FieldName = 'aluno_id'
+      Origin = 'aluno_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
   end
   object fdqAgendaTurma: TFDQuery
-    Active = True
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     SQL.Strings = (
       'select * from agenda_turma at'
       'where at.agenda_id = :agenda_id'
@@ -80,9 +88,21 @@ object DmEscola: TDmEscola
         ParamType = ptInput
         Value = Null
       end>
+    object fdqAgendaTurmaagenda_id: TStringField
+      FieldName = 'agenda_id'
+      Origin = 'agenda_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 100
+    end
+    object fdqAgendaTurmaturma_id: TIntegerField
+      FieldName = 'turma_id'
+      Origin = 'turma_id'
+      Required = True
+    end
   end
   object fdqAgendaSaveServer: TFDQuery
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     SQL.Strings = (
       'select * from agenda a'
       'where a.enviado_server is null'
@@ -91,7 +111,7 @@ object DmEscola: TDmEscola
     Top = 56
   end
   object fdqAgendaAlunoSaveServer: TFDQuery
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     FetchOptions.AssignedValues = [evCache]
     SQL.Strings = (
       'select al.* '
@@ -116,7 +136,7 @@ object DmEscola: TDmEscola
     end
   end
   object fdqAgendaTurmaSaveServer: TFDQuery
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
     SQL.Strings = (
       'select  at.* '
       'from agenda_turma at'
@@ -142,7 +162,9 @@ object DmEscola: TDmEscola
   object fdqTurmaAluno: TFDQuery
     MasterSource = dsTurmaAluno
     MasterFields = 'turma_id'
-    Connection = DM.FDConnectionDBEscola
+    Connection = DM.FDConnectionDB
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       #10'select '#10'  ta.*'
       'from turma_aluno ta'#13#10#10

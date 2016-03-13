@@ -1,4 +1,4 @@
-unit untPrincipal;
+unit untPrincipalTeste;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   FMX.ListBox, FMX.Objects;
 
 type
-  TfrmPrincipal = class(TfrmBaseForAll)
+  TfrmPrincipalTeste = class(TfrmBaseForAll)
     layPrincipal: TLayout;
     MultiView1: TMultiView;
     lstMnuMain: TListBox;
@@ -29,16 +29,11 @@ type
     layToolBarMenu: TLayout;
     layMenu: TLayout;
     GridPanelLayout1: TGridPanelLayout;
-    imgAgenda: TImage;
-    lblAgenda: TLabel;
-    imgMensagens: TImage;
-    lblMensagens: TLabel;
     imgMenu: TImage;
-    lstGroupHeaderPrincipal: TListBoxGroupHeader;
     lstGroupFooter: TListBoxGroupFooter;
-    lstItemAgenda: TListBoxItem;
-    lstItemMensagem: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteClientesClick(Sender: TObject);
@@ -50,15 +45,17 @@ type
     procedure imgMenuClick(Sender: TObject);
     procedure lstItemTesteLoginClick(Sender: TObject);
     procedure lstItemAgendaClick(Sender: TObject);
-    procedure imgAgendaClick(Sender: TObject);
     procedure lstItemMensagemClick(Sender: TObject);
-    procedure imgMensagensClick(Sender: TObject);
     procedure lblAgendaClick(Sender: TObject);
     procedure lblMensagensClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -79,7 +76,7 @@ type
   end;
 
 var
-  frmPrincipal: TfrmPrincipal;
+  frmPrincipalTeste: TfrmPrincipalTeste;
 
 implementation
 
@@ -91,7 +88,7 @@ uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, 
 
 { TfrmPrincipal }
 
-procedure TfrmPrincipal.OpenForm(AFormClass: TComponentClass);
+procedure TfrmPrincipalTeste.OpenForm(AFormClass: TComponentClass);
 begin
   if Assigned(fActiveForm)then
   begin
@@ -133,7 +130,7 @@ begin
 end;
 
 
-procedure TfrmPrincipal.ShowMenuPrincipal;
+procedure TfrmPrincipalTeste.ShowMenuPrincipal;
 begin
   layPrincipal.Visible:=False;
   layMenu.Visible:=True;
@@ -143,35 +140,57 @@ begin
   fShowForm:=False;
 end;
 
-procedure TfrmPrincipal.AbrirAgenda;
+procedure TfrmPrincipalTeste.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+   OpenForm(TfrmAgendaEscolaView);
+end;
+
+procedure TfrmPrincipalTeste.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  OpenForm(TfrmAgendaEscolaAdd);
+end;
+
+procedure TfrmPrincipalTeste.SpeedButton3Click(Sender: TObject);
+begin
+  AbrirAgenda;
+end;
+
+procedure TfrmPrincipalTeste.SpeedButton4Click(Sender: TObject);
+begin
+  AbrirMensagens;
+end;
+
+procedure TfrmPrincipalTeste.AbrirAgenda;
 begin
   OpenForm(TfrmAgendaEscolaSelect);
 end;
 
-procedure TfrmPrincipal.AbrirMensagens;
+procedure TfrmPrincipalTeste.AbrirMensagens;
 begin
   OpenForm(TfrmMensagens);
 end;
 
-procedure TfrmPrincipal.BotaoVoltarOnClick(Sender: TObject);
+procedure TfrmPrincipalTeste.BotaoVoltarOnClick(Sender: TObject);
 begin
   ShowMenuPrincipal;
 end;
 
-procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmPrincipalTeste.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
   Application.Terminate;
 end;
 
-procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure TfrmPrincipalTeste.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
   if (IsSysOSAndroid) or (IsSysOSiOS)then
     CanClose := fAllowCloseForm;
 end;
 
-procedure TfrmPrincipal.FormCreate(Sender: TObject);
+procedure TfrmPrincipalTeste.FormCreate(Sender: TObject);
 begin
   inherited;
   fAllowCloseForm:= False;
@@ -181,7 +200,7 @@ begin
 end;
 
 
-procedure TfrmPrincipal.FormKeyUp(Sender: TObject; var Key: Word;
+procedure TfrmPrincipalTeste.FormKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
@@ -204,14 +223,14 @@ begin
       fAllowCloseForm:=True;
 end;
 
-procedure TfrmPrincipal.FormShow(Sender: TObject);
+procedure TfrmPrincipalTeste.FormShow(Sender: TObject);
 begin
   inherited;
   frmLogin.DisposeOf;
   frmLogin:= nil;
 end;
 
-procedure TfrmPrincipal.HideMenuPrincipal;
+procedure TfrmPrincipalTeste.HideMenuPrincipal;
 begin
   layPrincipal.Visible:=False;
   layMenu.Visible:=True;
@@ -219,85 +238,73 @@ begin
   MultiView1.HideMaster;
 end;
 
-procedure TfrmPrincipal.imgMensagensClick(Sender: TObject);
-begin
-  inherited;
-  AbrirMensagens;
-end;
-
-procedure TfrmPrincipal.imgAgendaClick(Sender: TObject);
-begin
-  inherited;
-  AbrirAgenda;
-end;
-
-procedure TfrmPrincipal.imgMenuClick(Sender: TObject);
+procedure TfrmPrincipalTeste.imgMenuClick(Sender: TObject);
 begin
   inherited;
   btnMenu.OnClick(self);
 end;
 
-procedure TfrmPrincipal.lblAgendaClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lblAgendaClick(Sender: TObject);
 begin
   inherited;
   AbrirAgenda;
 end;
 
-procedure TfrmPrincipal.lblMensagensClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lblMensagensClick(Sender: TObject);
 begin
   inherited;
   AbrirMensagens;
 end;
 
-procedure TfrmPrincipal.lstItemTesteFornecedoresClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemTesteFornecedoresClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmTesteFornecedores);
 end;
 
-procedure TfrmPrincipal.lstItemTesteProdutosClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemTesteProdutosClick(Sender: TObject);
 begin
   inherited;
    OpenForm(TfrmTesteProduto);
 end;
 
-procedure TfrmPrincipal.lstItemAgendaClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemAgendaClick(Sender: TObject);
 begin
   inherited;
   AbrirAgenda;
 end;
 
-procedure TfrmPrincipal.lstItemMensagemClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemMensagemClick(Sender: TObject);
 begin
   inherited;
   AbrirMensagens;
 end;
 
-procedure TfrmPrincipal.lstItemTesteClientesClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemTesteClientesClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmTesteClientes);
 end;
 
-procedure TfrmPrincipal.lstItemTesteStringClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemTesteStringClick(Sender: TObject);
 begin
   inherited;
     OpenForm(TfrmTesteString);
 end;
 
-procedure TfrmPrincipal.lstItemTesteJsonFdMemClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemTesteJsonFdMemClick(Sender: TObject);
 begin
   inherited;
     OpenForm(TfrmTesteJsonFdMem);
 end;
 
-procedure TfrmPrincipal.lstItemTesteJsonSQLiteClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemTesteJsonSQLiteClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmTesteJsonXSqLite);
 end;
 
-procedure TfrmPrincipal.lstItemTesteLoginClick(Sender: TObject);
+procedure TfrmPrincipalTeste.lstItemTesteLoginClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmLogin);

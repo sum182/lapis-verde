@@ -1,0 +1,340 @@
+object frmPrincipalTeste: TfrmPrincipalTeste
+  Left = 0
+  Top = 0
+  Caption = 'M'#243'dulo de Testes'
+  ClientHeight = 668
+  ClientWidth = 752
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnKeyUp = FormKeyUp
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object ToolBarPincipal: TToolBar
+    Size.Width = 752.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lblTitulo: TLabel
+      Align = Left
+      StyledSettings = [Family, Style, FontColor]
+      Margins.Left = 23.000000000000000000
+      Position.X = 69.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 20.000000000000000000
+      Text = 'M'#243'dulo de Teste de Aplica'#231#245'es'
+    end
+    object layToolBarMenu: TLayout
+      Align = Left
+      Size.Width = 46.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object btnMenu: TSpeedButton
+        Align = Client
+        Size.Width = 46.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+        object imgMenu: TImage
+          MultiResBitmap.Height = 24
+          MultiResBitmap.Width = 24
+          MultiResBitmap = <
+            item
+              Width = 24
+              Height = 24
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                002F49444154484BEDD1B10D00300C02419CFD7776AC880D285CE4AF797A04C4
+                CA7D7A78466A78EAB8D8C3C91FE06440BAA12D0C0AE43C56C80000000049454E
+                44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_menu\ic_menu_white_24dp\ic_menu_wh' +
+                'ite_24dp\android\drawable-mdpi\ic_menu_white_24dp.png'
+            end
+            item
+              Scale = 1.500000000000000000
+              Width = 36
+              Height = 36
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                0041494441545847EDD4310EC0200C0441C3FFFF9C2064D152255868A63997AE
+                36000E6BB9CB33E4F98B36E439F5DC32CA3D04D7D1A11D1D82AFE9D08E0E01D4
+                16F102C8C70C10567B8E900000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_menu\ic_menu_white_24dp\ic_menu_wh' +
+                'ite_24dp\android\drawable-hdpi\ic_menu_white_24dp.png'
+            end
+            item
+              Scale = 2.000000000000000000
+              Width = 48
+              Height = 48
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                0042494441546843EDD5B111C030080340F0FE3B272E687C1980F8F86FA45695
+                020060B0ACFC78B6AABF905BD5C3AABC960100B379E26E0600CCE689BB190000
+                40978817A5B30C16289261D40000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_menu\ic_menu_white_24dp\ic_menu_wh' +
+                'ite_24dp\android\drawable-xhdpi\ic_menu_white_24dp.png'
+            end
+            item
+              Scale = 3.000000000000000000
+              Width = 72
+              Height = 72
+              PNG = {
+                89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                006449444154785EEDD82112C030084541D2FBDFB98DC026BF93A9EAEC1AD0CF
+                410100000000BC367A6EDD53AFBF32A65E97AE9E2C0814081408140804000027
+                BC3B02A746205020502050201000009CF0EE089C1A8140814081408140000000
+                00001FA97A0033A10C22999313DE0000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_menu\ic_menu_white_24dp\ic_menu_wh' +
+                'ite_24dp\android\drawable-xxhdpi\ic_menu_white_24dp.png'
+            end
+            item
+              Scale = 4.000000000000000000
+              Width = 96
+              Height = 96
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                008249444154785EEDD9210E80401004C183FFFF19102711880B1D4895D9F52D
+                67000000000000000000BFB3CDFBD871992F37B6CB7C1FD9E72522404C809800
+                31016202C404000000008097D88417B3097F8C0031016202C404880910130000
+                0000005E62135ECC26FC3102C404880910132026404C00000000000000000080
+                A5C638018EF70C2EADB4F1020000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_menu\ic_menu_white_24dp\ic_menu_wh' +
+                'ite_24dp\android\drawable-xxxhdpi\ic_menu_white_24dp.png'
+            end>
+          Align = Client
+          Size.Width = 46.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          WrapMode = Center
+          OnClick = imgMenuClick
+        end
+      end
+    end
+  end
+  object layPrincipal: TLayout
+    Align = Client
+    Size.Width = 452.000000000000000000
+    Size.Height = 620.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+  end
+  object layMenu: TLayout
+    Align = Client
+    Size.Width = 452.000000000000000000
+    Size.Height = 620.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    object GridPanelLayout1: TGridPanelLayout
+      Align = Client
+      Size.Width = 452.000000000000000000
+      Size.Height = 620.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      ColumnCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          Control = SpeedButton3
+          Row = 0
+        end
+        item
+          Column = 1
+          Control = SpeedButton4
+          Row = 0
+        end>
+      RowCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          SizeStyle = Auto
+        end>
+      object SpeedButton3: TSpeedButton
+        Anchors = []
+        Position.X = 42.500000000000000000
+        Position.Y = 131.000000000000000000
+        Size.Width = 141.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'M'#243'dulo 1 - Testes'
+        OnClick = SpeedButton3Click
+      end
+      object SpeedButton4: TSpeedButton
+        Anchors = []
+        Position.X = 261.500000000000000000
+        Position.Y = 131.000000000000000000
+        Size.Width = 155.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'M'#243'dulo 2 - Testes'
+        OnClick = SpeedButton4Click
+      end
+    end
+  end
+  object MultiView1: TMultiView
+    DrawerOptions.TouchAreaSize = 40.000000000000000000
+    MasterButton = btnMenu
+    ClipChildren = True
+    ClipParent = True
+    Size.Width = 300.000000000000000000
+    Size.Height = 620.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'multiviewstyle'
+    TabOrder = 2
+    object lstMnuMain: TListBox
+      Align = Client
+      Size.Width = 299.000000000000000000
+      Size.Height = 620.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'transparentlistboxstyle'
+      TabOrder = 0
+      DisableFocusEffect = True
+      ItemHeight = 50.000000000000000000
+      DefaultItemStyles.ItemStyle = 'listboxitembottomdetail'
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      GroupingKind = Grouped
+      Viewport.Width = 299.000000000000000000
+      Viewport.Height = 620.000000000000000000
+      object lstGroupHeaderConfig: TListBoxGroupHeader
+        TextSettings.Font.Family = 'Segoe UI Semibold'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.Style = [fsBold]
+        StyledSettings = [FontColor, Other]
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Configura'#231#245'es'
+      end
+      object lstItemConta: TListBoxItem
+        StyledSettings = [Family, Size, Style, FontColor]
+        Position.Y = 50.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'listboxitembottomdetail'
+        TabOrder = 8
+        Text = 'Conta'
+      end
+      object lstItemPreferencias: TListBoxItem
+        Position.Y = 100.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'lstPreferenciasStyle1'
+        TabOrder = 9
+        Text = 'Prefer'#234'ncias'
+      end
+      object lstGroupHeaderTestes: TListBoxGroupHeader
+        TextSettings.Font.Family = 'Segoe UI Semibold'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.Style = [fsBold]
+        StyledSettings = [FontColor, Other]
+        Position.Y = 150.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Testes'
+      end
+      object lstItemTesteClientes: TListBoxItem
+        Position.Y = 200.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Text = 'Clientes'
+        OnClick = lstItemTesteClientesClick
+      end
+      object lstItemTesteFornecedores: TListBoxItem
+        Position.Y = 250.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Fornecedores'
+        OnClick = lstItemTesteFornecedoresClick
+      end
+      object lstItemTesteProdutos: TListBoxItem
+        Position.Y = 300.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Produtos'
+        OnClick = lstItemTesteProdutosClick
+      end
+      object lstItemTesteString: TListBoxItem
+        Position.Y = 350.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Text = 'String'
+        OnClick = lstItemTesteStringClick
+      end
+      object lstItemTesteJsonFdMem: TListBoxItem
+        Position.Y = 400.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Text = 'Json X FDMem'
+        OnClick = lstItemTesteJsonFdMemClick
+      end
+      object lstItemTesteJsonSQLite: TListBoxItem
+        Position.Y = 450.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Json X SQLite'
+        OnClick = lstItemTesteJsonSQLiteClick
+      end
+      object lstItemTesteLogin: TListBoxItem
+        Position.Y = 500.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Text = 'Login'
+        OnClick = lstItemTesteLoginClick
+      end
+      object lstGroupFooter: TListBoxGroupFooter
+        Position.Y = 550.000000000000000000
+        Size.Width = 299.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+      end
+    end
+  end
+end
