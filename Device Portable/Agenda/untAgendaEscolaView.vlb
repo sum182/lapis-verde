@@ -1,20 +1,20 @@
 ﻿[btnVoltar]
-Coordinates=155,310,59,51
+Coordinates=754,506,59,51
 
 [imgVoltar]
-Coordinates=84,310,61,51
+Coordinates=239,619,61,51
 
 [ToolBar1]
-Coordinates=179,251,58,33
+Coordinates=436,619,58,33
 
 [layBase]
-Coordinates=10,251,53,33
+Coordinates=520,619,53,33
 
 [lblTitulo]
-Coordinates=20,310,54,51
+Coordinates=498,506,54,51
 
 [layToolBarVoltar]
-Coordinates=73,251,96,33
+Coordinates=599,619,96,33
 
 [DmEscola.fdqAgenda]
 Coordinates=640,40,120,33
@@ -24,36 +24,68 @@ Visible=False
 Coordinates=273,53,82,33
 
 [lstAgenda]
-Coordinates=470,30,89,231
+Coordinates=310,30,89,231
 Visible=True
+LayerNames=Agenda
 
 [bsAgenda]
-Coordinates=640,40,105,87
+Coordinates=510,20,105,249
+LayerNames=Agenda
 
 [blAgenda]
 Coordinates=0,0,61,33
 
 [DM.RESTRequest1]
-Coordinates=428,350,107,87
+Coordinates=244,506,107,87
 
 [DmEscola.fdqTurma]
-Coordinates=309,324,114,51
+Coordinates=900,520,114,159
 
 [DM.RESTClient1]
-Coordinates=329,399,95,69
+Coordinates=377,506,95,69
 
 [DM.RESTResponse1]
-Coordinates=275,1,115,285
+Coordinates=820,180,116,285
 
 [SpeedButton1]
-Coordinates=428,280,84,51
+Coordinates=326,619,84,51
 
 [DmEscola.fdqAluno]
-Coordinates=80,1,112,51
+Coordinates=1390,180,112,231
+LayerNames=
 
 [DmEscola.fdqAgendaAluno]
-Coordinates=96,78,149,51
+Coordinates=1040,520,149,87
 
 [DmEscola.fdqAgendaTurma]
-Coordinates=88,1,152,51
+Coordinates=1215,520,152,87
+
+[Dm.fdqLogErrorSaveServer]
+Coordinates=578,506,150,51
+
+[SpeedButton2]
+Coordinates=129,619,84,51
+
+[DmEscola.fdqAgendaTurmaSaveServer]
+Coordinates=10,506,208,87
+
+[Dm.fdqLogError]
+Coordinates=10,619,93,51
+
+[DmEscola.dsTurmaAluno]
+Coordinates=506,327,139,33
+
+[DmEscola.fdqTurmaAluno]
+Coordinates=1393,520,143,87
+
+[DmEscola.fdqAgendaAlunoSaveServer]
+Coordinates=1562,520,206,87
+
+[DmEscola.fdqAgendaSaveServer]
+Coordinates=990,170,176,195
+
+[Module Settings]
+ModelLayerNames=Agenda
+ActiveLayerNames=Agenda
+EditingLayerName=Agenda
 

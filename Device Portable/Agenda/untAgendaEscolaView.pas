@@ -16,9 +16,9 @@ type
     lstAgenda: TListView;
     bsAgenda: TBindSourceDB;
     blAgenda: TBindingsList;
-    LinkListControlToField1: TLinkListControlToField;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
+    LinkListControlToField1: TLinkListControlToField;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -51,7 +51,6 @@ procedure TfrmAgendaEscolaView.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
-  //self.muMainMenu := frmPrincipal.MultiView1;
 end;
 
 procedure TfrmAgendaEscolaView.FormShow(Sender: TObject);
@@ -63,8 +62,10 @@ end;
 procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  DmEscola.GetAgenda(GetFuncionarioId,0);
+  DmEscola.GetAgenda;
   DmEscola.OpenAgenda(AlunoId,TurmaId);
+  DmEscola.SalvarDadosServer;
+  Dm.SalvarDadosServer;
 end;
 
 procedure TfrmAgendaEscolaView.SpeedButton2Click(Sender: TObject);

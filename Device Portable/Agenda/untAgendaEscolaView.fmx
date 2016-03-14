@@ -92,13 +92,13 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
                   98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  00C8494441545847EDD64D0AC2301086E1240A6E7267BD8277F1E75ED9888B24
+                  00C8494441545847EDD64D0AC2301086E1240AAE7266BD8277F1E75C59898B24
                   7ED3CE80A45254B093E23C20A166312F2DC63A63CC1AD45A0FF4E14B5D1C2374
                   A32860EC18E59CAF5836BCBD2C0C9EC4945276BCBD2CCC6F632E164330BF8D39
                   5B0CC1FC36E6F437319ED797309F0EBAFD78E55C4AE916633C8610EEFCD5D7BC
                   F79F1DA21433DC921FE1311381D76EACE791098A1AEE3153FD850974F4730609
                   74AC224AEF7F4CA0C3A2DE828E364AEF054DA063128565CBDB3A10F01CA5FB92
-                  2F28A49B1863CC2CE71E52ED010570BC04900000000049454E44AE426082}
+                  2F28A49B1863CC2CE71E52D50105C235449C0000000049454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
                   'p\ic_arrow_back_white_24dp\android\drawable-hdpi\ic_arrow_back_w' +
@@ -110,10 +110,10 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5C85D6B671C218A
+                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5C6DD6B671C218A
                   145712070A7D20A55924D2D0D4455563CE79C595EB2CB74F534ABB880C88398A
                   F20531472B7FE552FE156A6E1D4E5FF623FF3DD1A5189911733D46363B26C45C
-                  EE23F65C2362AE62A447CC8591886B5385100E164CFC028E199BF10000000049
+                  EE23F65C2362AE62A447CC8591886B5385100E715BFBDE00CD11F10000000049
                   454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -149,7 +149,8 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
       HeaderAppearanceClassName = 'TListHeaderObjects'
       FooterAppearanceClassName = 'TListHeaderObjects'
-      ItemIndex = 0
+      ItemIndex = 1
+      ScrollViewPos = 927.000000000000000000
       Align = Client
       Size.Width = 640.000000000000000000
       Size.Height = 432.000000000000000000
@@ -157,6 +158,8 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       TabOrder = 0
       ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
       ItemAppearanceObjects.ItemEditObjects.GlyphButton.Visible = False
+      ItemAppearanceObjects.HeaderObjects.Text.TextAlign = Center
+      ItemAppearanceObjects.HeaderObjects.Text.Align = Center
       StyleLookup = 'listviewstyle'
     end
   end
@@ -178,6 +181,8 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       Control = lstAgenda
       FillExpressions = <>
       FillHeaderExpressions = <>
+      FillBreakFieldName = 'data'
+      FillHeaderFieldName = 'data'
       FillBreakGroups = <>
     end
   end

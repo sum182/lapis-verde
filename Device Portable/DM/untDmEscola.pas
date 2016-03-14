@@ -62,7 +62,7 @@ type
     procedure CloseAgenda;
 
 
-    procedure GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
+    procedure GetAgenda;
     procedure CriarAgenda(Texto:string;AlunoId:Integer=0;TurmaId:Integer=0);
     procedure SalvarAgenda;
     procedure AgendaApplyChanges;
@@ -202,7 +202,7 @@ begin
   end;
 end;
 
-procedure TDmEscola.GetAgenda(FuncionarioId:Integer;AgendaId:Integer);
+procedure TDmEscola.GetAgenda;
 var
   LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
@@ -448,9 +448,12 @@ begin
     KeyValues:= QuoTedStr('0');
 
   fdqAgenda.SQL.Clear;
-  fdqAgenda.SQL.Add('select ag.*');
+  fdqAgenda.SQL.Add('select');
+  fdqAgenda.SQL.Add('  ag.*,');
+  fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
   fdqAgenda.SQL.Add('from agenda ag');
   fdqAgenda.SQL.Add('where agenda_id in (' + KeyValues + ')');
+  fdqAgenda.SQL.Add('order by ag.data_insert_local');
 end;
 
 procedure TDmEscola.SetSQLAgendaAluno(KeyValues: String);
@@ -479,9 +482,12 @@ procedure TDmEscola.SetSQLAgenda;
 begin
   fdqAgenda.SQL.Clear;
   fdqAgenda.SQL.Add('select');
-  fdqAgenda.SQL.Add('  ag.*');
+  fdqAgenda.SQL.Add('  ag.*,');
+  fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
   fdqAgenda.SQL.Add('from agenda ag');
+  fdqAgenda.SQL.Add('order by ag.data_insert_local');
 end;
+
 
 procedure TDmEscola.SetSQLAgenda(AlunoId, TurmaId: Integer);
 begin
@@ -491,7 +497,8 @@ begin
   begin
     fdqAgenda.SQL.Clear;
     fdqAgenda.SQL.Add('select');
-    fdqAgenda.SQL.Add('  ag.*');
+    fdqAgenda.SQL.Add('  ag.*,');
+    fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_aluno al on (ag.agenda_id = al.agenda_id)');
     fdqAgenda.SQL.Add('where 1=1');
@@ -505,7 +512,8 @@ begin
   begin
     fdqAgenda.SQL.Clear;
     fdqAgenda.SQL.Add('select');
-    fdqAgenda.SQL.Add('  ag.*');
+    fdqAgenda.SQL.Add('  ag.*,');
+    fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_turma at on (ag.agenda_id = at.agenda_id)');
     fdqAgenda.SQL.Add('where 1=1');

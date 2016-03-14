@@ -53,7 +53,9 @@ procedure TfrmAgendaEscolaSelect.btnAtualizarClick(Sender: TObject);
 begin
   DmEscola.GetAlunos;
   DmEscola.GetTurmas;
-  DmEscola.GetAgenda(0,0);
+  DmEscola.GetAgenda;
+  DmEscola.SalvarDadosServer;
+  Dm.SalvarDadosServer;
 end;
 
 procedure TfrmAgendaEscolaSelect.FormCreate(Sender: TObject);

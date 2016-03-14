@@ -1,4 +1,4 @@
-﻿unit untDM;
+﻿unit untDm;
 
 interface
 
@@ -11,7 +11,7 @@ uses
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,REST.Types;
 
 type
-  TDM = class(TDataModule)
+  TDm = class(TDataModule)
     FDConnectionDB: TFDConnection;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
@@ -51,7 +51,7 @@ type
   end;
 
 var
-  DM: TDM;
+  Dm: TDm;
 
 const
   BASE_URL: String = 'http://54.200.116.223:8080/datasnap/rest/TSrvServerMetodos';
@@ -65,18 +65,18 @@ uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
 
 {$R *.dfm}
 
-procedure TDM.ConectarBases;
+procedure TDm.ConectarBases;
 begin
   ConectarDB;
 end;
 
-procedure TDM.ConectarDB;
+procedure TDm.ConectarDB;
 begin
   ConectarSQLite(FDConnectionDB,'db.s3db');
 end;
 
 
-procedure TDM.ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
+procedure TDm.ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
 var
   DataBase:string;
 begin
@@ -99,7 +99,7 @@ begin
 
 end;
 
-procedure TDM.DataModuleCreate(Sender: TObject);
+procedure TDm.DataModuleCreate(Sender: TObject);
 begin
   FDConnectionDB.Close;
   ConectarBases;
@@ -114,7 +114,7 @@ begin
 
 end;
 
-procedure TDM.ResetRESTConnection;
+procedure TDm.ResetRESTConnection;
 begin
   RESTClient1.ResetToDefaults;
   RESTRequest1.ResetToDefaults;
@@ -122,12 +122,12 @@ begin
   RESTClient1.BaseURL := BASE_URL;
 end;
 
-procedure TDM.SalvarDadosServer;
+procedure TDm.SalvarDadosServer;
 begin
   SalvarLogError;
 end;
 
-procedure TDM.SalvarLogError;
+procedure TDm.SalvarLogError;
 var
   LDataSetList  : TFDJSONDataSets;
   MsgRetornoServer:string;
@@ -169,7 +169,7 @@ begin
   end;
 end;
 
-procedure TDM.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
+procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
   Data: TDateTime; MsgUsuario:String; EscolaId, ResponsavelId, FuncionarioId: Integer);
 begin
   try

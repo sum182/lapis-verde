@@ -1,4 +1,4 @@
-object DM: TDM
+object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 455

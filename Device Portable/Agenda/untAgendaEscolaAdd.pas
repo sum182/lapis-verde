@@ -49,7 +49,7 @@ begin
   inherited;
   DmEscola.CriarAgenda(Memo1.Text,AlunoId,TurmaId);
   DmEscola.SalvarDadosServer;
-  DM.SalvarDadosServer;
+  Dm.SalvarDadosServer;
   Memo1.Text:=EmptyStr;
   fAllowCloseForm:=True;
   Close;

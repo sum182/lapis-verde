@@ -4,7 +4,7 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   System.UITypes,
-  untDM in 'DM\untDM.pas' {DM: TDataModule},
+  untDm in 'DM\untDm.pas' {Dm: TDataModule},
   untDMStyles in 'DM\untDMStyles.pas' {DMStyles: TDataModule},
   untDmResponsavel in 'DM\untDmResponsavel.pas' {DmResponsavel: TDataModule},
   untDmEscola in 'DM\untDmEscola.pas' {DmEscola: TDataModule},
@@ -33,7 +33,8 @@ uses
   untAgendaEscolaAdd in 'Agenda\untAgendaEscolaAdd.pas' {frmAgendaEscolaAdd},
   untTestesA in 'Testes\untTestesA.pas' {frmTesteA},
   untTestesB in 'Testes\untTestesB.pas' {frmTesteB},
-  untPrincipalTeste in 'untPrincipalTeste.pas' {frmPrincipalTeste};
+  untPrincipalTeste in 'untPrincipalTeste.pas' {frmPrincipalTeste},
+  smTemplate in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.pas' {Form3};
 
 {$R *.res}
 
@@ -56,12 +57,13 @@ begin
 
   //Modo Teste 2
   Application.Initialize;
-  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDm, Dm);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TForm3, Form3);
   Application.Run;
   Exit;
   // Fim do Teste

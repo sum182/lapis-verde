@@ -3,10 +3,11 @@ object DmEscola: TDmEscola
   Height = 408
   Width = 718
   object fdqAluno: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select * from aluno'
-      'where escola_id = :escola_id')
+      'where escola_id = :escola_id'
+      'order by nome')
     Left = 24
     Top = 8
     ParamData = <
@@ -14,14 +15,15 @@ object DmEscola: TDmEscola
         Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 1
       end>
   end
   object fdqTurma: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select * from turma'
-      'where escola_id = :escola_id')
+      'where escola_id = :escola_id'
+      'order by nome')
     Left = 24
     Top = 56
     ParamData = <
@@ -29,7 +31,7 @@ object DmEscola: TDmEscola
         Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 1
       end>
   end
   object fdStanStorageBinLink: TFDStanStorageBinLink
@@ -37,15 +39,19 @@ object DmEscola: TDmEscola
     Top = 8
   end
   object fdqAgenda: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     SQL.Strings = (
-      'select * from agenda'
+      'select '
+      'ag.* ,'
+      'strftime("%d/%m/%Y",data_insert_local) as data'
+      'from agenda ag'
+      ''
       'order by data_insert_local')
     Left = 120
     Top = 8
   end
   object fdqAgendaAluno: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     FetchOptions.AssignedValues = [evCache]
     SQL.Strings = (
       'select * from agenda_aluno al'
@@ -74,7 +80,7 @@ object DmEscola: TDmEscola
     end
   end
   object fdqAgendaTurma: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select * from agenda_turma at'
       'where at.agenda_id = :agenda_id'
@@ -102,7 +108,7 @@ object DmEscola: TDmEscola
     end
   end
   object fdqAgendaSaveServer: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select * from agenda a'
       'where a.enviado_server is null'
@@ -111,7 +117,7 @@ object DmEscola: TDmEscola
     Top = 56
   end
   object fdqAgendaAlunoSaveServer: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     FetchOptions.AssignedValues = [evCache]
     SQL.Strings = (
       'select al.* '
@@ -136,7 +142,7 @@ object DmEscola: TDmEscola
     end
   end
   object fdqAgendaTurmaSaveServer: TFDQuery
-    Connection = DM.FDConnectionDB
+    Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select  at.* '
       'from agenda_turma at'
@@ -162,7 +168,8 @@ object DmEscola: TDmEscola
   object fdqTurmaAluno: TFDQuery
     MasterSource = dsTurmaAluno
     MasterFields = 'turma_id'
-    Connection = DM.FDConnectionDB
+    DetailFields = 'turma_id'
+    Connection = Dm.FDConnectionDB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -177,7 +184,8 @@ object DmEscola: TDmEscola
         Name = 'TURMA_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Size = 4
+        Value = 8
       end>
   end
   object dsTurmaAluno: TDataSource
