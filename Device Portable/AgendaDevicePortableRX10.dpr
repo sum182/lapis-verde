@@ -4,7 +4,7 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   System.UITypes,
-  untDm in 'DM\untDm.pas' {Dm: TDataModule},
+  untDM in 'DM\untDM.pas' {Dm: TDataModule},
   untDMStyles in 'DM\untDMStyles.pas' {DMStyles: TDataModule},
   untDmResponsavel in 'DM\untDmResponsavel.pas' {DmResponsavel: TDataModule},
   untDmEscola in 'DM\untDmEscola.pas' {DmEscola: TDataModule},
@@ -34,7 +34,7 @@ uses
   untTestesA in 'Testes\untTestesA.pas' {frmTesteA},
   untTestesB in 'Testes\untTestesB.pas' {frmTesteB},
   untPrincipalTeste in 'untPrincipalTeste.pas' {frmPrincipalTeste},
-  smTemplate in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.pas' {Form3};
+  smTemplate in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.pas' {frmTemplate};
 
 {$R *.res}
 
@@ -63,7 +63,6 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TForm3, Form3);
   Application.Run;
   Exit;
   // Fim do Teste

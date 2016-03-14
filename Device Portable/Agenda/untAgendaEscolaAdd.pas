@@ -15,11 +15,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
-    { Private declarations }
+    procedure SetTitulo;
   public
     AlunoId:Integer;
     TurmaId:Integer;
+    Titulo:String;
   end;
 
 var
@@ -42,6 +44,17 @@ procedure TfrmAgendaEscolaAdd.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
+end;
+
+procedure TfrmAgendaEscolaAdd.FormShow(Sender: TObject);
+begin
+  inherited;
+  SetTitulo;
+end;
+
+procedure TfrmAgendaEscolaAdd.SetTitulo;
+begin
+  lblTitulo.Text := Titulo + ' - Nova Agenda';
 end;
 
 procedure TfrmAgendaEscolaAdd.SpeedButton1Click(Sender: TObject);

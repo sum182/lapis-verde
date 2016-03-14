@@ -77,6 +77,7 @@ begin
     Application.CreateForm(TfrmAgendaEscolaView, frmAgendaEscolaView);
 
   frmAgendaEscolaView.AlunoId:= DmEscola.fdqAluno.FieldByName('aluno_id').AsInteger;
+  frmAgendaEscolaView.Titulo:= DmEscola.fdqAluno.FieldByName('nome').AsString;
   frmAgendaEscolaView.TurmaId:= 0;
   frmAgendaEscolaView.Show;
 
@@ -92,6 +93,7 @@ begin
 
   frmAgendaEscolaView.AlunoId:= 0;
   frmAgendaEscolaView.TurmaId:= DmEscola.fdqTurma.FieldByName('turma_id').AsInteger;
+  frmAgendaEscolaView.Titulo:= DmEscola.fdqTurma.FieldByName('nome').AsString;
   frmAgendaEscolaView.Show;
 
 end;

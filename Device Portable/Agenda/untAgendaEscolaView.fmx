@@ -149,17 +149,21 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
       HeaderAppearanceClassName = 'TListHeaderObjects'
       FooterAppearanceClassName = 'TListHeaderObjects'
-      ItemIndex = 1
-      ScrollViewPos = 927.000000000000000000
+      EditMode = True
       Align = Client
       Size.Width = 640.000000000000000000
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
+      ParentShowHint = False
+      ShowHint = False
+      ItemAppearance.ItemHeight = 100
       ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
       ItemAppearanceObjects.ItemEditObjects.GlyphButton.Visible = False
       ItemAppearanceObjects.HeaderObjects.Text.TextAlign = Center
       ItemAppearanceObjects.HeaderObjects.Text.Align = Center
+      ItemAppearanceObjects.FooterObjects.Text.Font.Family = 'Segoe UI Semibold'
+      ItemAppearanceObjects.FooterObjects.Text.Font.Style = [fsBold]
       StyleLookup = 'listviewstyle'
     end
   end

@@ -40,7 +40,7 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Android'">
-        <DeployFile Include="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortableRX10\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon72</DeployClass>
@@ -48,16 +48,6 @@
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Debug\libAgendaDevicePortableRX10.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortableRX10\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
-            <DeployClass>ProjectOutput</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="Android\Release\styles.xml" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\res\values\</RemoteDir>
@@ -91,15 +81,6 @@
             <RemoteName>splash_image_def.xml</RemoteName>
             <DeployClass>AndroidSplashImageDef</DeployClass>
             <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\BD\SQLite\dbEscola.s3db" Condition="'$(Config)'=='Release'">
-            <RemoteDir>AgendaDevicePortableRX10\assets\internal\</RemoteDir>
-            <RemoteName>dbEscola.s3db</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -231,15 +212,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="..\BD\SQLite\dbResponsavel.s3db" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortableRX10\assets\internal\</RemoteDir>
-            <RemoteName>dbResponsavel.s3db</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="Android\Debug\styles.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AgendaDevicePortableRX10\res\values\</RemoteDir>
             <RemoteName>styles.xml</RemoteName>
@@ -339,15 +311,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="..\BD\SQLite\dbResponsavel.s3db" Condition="'$(Config)'=='Release'">
-            <RemoteDir>AgendaDevicePortableRX10\assets\internal\</RemoteDir>
-            <RemoteName>dbResponsavel.s3db</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="..\Imagens\ico\Android\drawable-xhdpi-96 x 96\ic_launcher.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -384,14 +347,24 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="..\BD\SQLite\dbEscola.s3db" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortableRX10\assets\internal\</RemoteDir>
-            <RemoteName>dbEscola.s3db</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
+        <DeployFile Include="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortableRX10\res\drawable-hdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon72</DeployClass>
+            <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\libAgendaDevicePortableRX10.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortableRX10\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="Android\Release\classes.dex" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\classes\</RemoteDir>
@@ -406,15 +379,6 @@
             <RemoteDir>AgendaDevicePortableRX10\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
             <DeployClass>ProjectAndroidManifest</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortableRX10\res\drawable-hdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon72</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>

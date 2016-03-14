@@ -25,10 +25,12 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
   private
+    procedure SetTitulo;
 
   public
     AlunoId:Integer;
     TurmaId:Integer;
+    Titulo:String;
   end;
 
 var
@@ -57,6 +59,14 @@ procedure TfrmAgendaEscolaView.FormShow(Sender: TObject);
 begin
   inherited;
   DmEscola.OpenAgenda(AlunoId,TurmaId);
+  SetTitulo;
+  lstAgenda.ItemAppearanceObjects.ItemObjects.Detail.WordWrap:= True;
+  //lstAgenda.ItemAppearanceObjects.ItemObjects.Detail.Trimming:=1;
+end;
+
+procedure TfrmAgendaEscolaView.SetTitulo;
+begin
+  lblTitulo.Text := Titulo;
 end;
 
 procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);
@@ -76,6 +86,7 @@ begin
 
   frmAgendaEscolaAdd.AlunoId:= AlunoId;
   frmAgendaEscolaAdd.TurmaId:= TurmaId;
+  frmAgendaEscolaAdd.Titulo:= Titulo;
   frmAgendaEscolaAdd.Show;
 end;
 

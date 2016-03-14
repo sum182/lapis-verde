@@ -1,6 +1,7 @@
 inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
   Caption = 'frmBaseToolBar1'
   Position = DesktopCenter
+  OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     inherited ToolBar1: TToolBar
