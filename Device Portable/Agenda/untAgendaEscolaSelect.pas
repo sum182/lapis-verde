@@ -47,7 +47,7 @@ implementation
 {$R *.fmx}
 
 uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgendaEscolaView,
-  untPrincipal;
+  untPrincipal, untDMStyles;
 
 procedure TfrmAgendaEscolaSelect.btnAtualizarClick(Sender: TObject);
 begin

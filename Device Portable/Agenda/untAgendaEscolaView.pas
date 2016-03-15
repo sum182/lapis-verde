@@ -24,6 +24,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure lstAgendaUpdateObjects(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     procedure SetTitulo;
 
@@ -40,7 +42,8 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal;
+uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal,
+  untDMStyles;
 
 procedure TfrmAgendaEscolaView.btnVoltarClick(Sender: TObject);
 begin
@@ -62,6 +65,19 @@ begin
   SetTitulo;
   lstAgenda.ItemAppearanceObjects.ItemObjects.Detail.WordWrap:= True;
   //lstAgenda.ItemAppearanceObjects.ItemObjects.Detail.Trimming:=1;
+end;
+
+procedure TfrmAgendaEscolaView.lstAgendaUpdateObjects(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  // In order for text to be truncated properly, shorten text object
+//  AItem.Objects.TextObject.Width := AItem.Objects.TextObject.Width - (5 + AItem.Objects.AccessoryObject.Width);
+
+  AItem.Objects.TextObject.Height := Length(DmEscola.fdqAgenda.FieldByName('descricao').Text) * 25;
+  // Restore checked state when device is rotated.
+  // When listview is resized because of rotation, accessory properties will be reset to default values
+ // AItem.Objects.AccessoryObject.Visible := FChecked.Contains(AItem.Index);
+
 end;
 
 procedure TfrmAgendaEscolaView.SetTitulo;

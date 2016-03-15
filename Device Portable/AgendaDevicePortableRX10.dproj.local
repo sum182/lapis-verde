@@ -19,10 +19,9 @@
     <Transaction>2016/03/02 16:48:16.000.886,C:\Projetos\Agenda\Device Portable\DM\untDmfResponsavel.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmResponsavel.dfm</Transaction>
     <Transaction>2016/03/02 16:48:21.000.694,C:\Projetos\Agenda\Device Portable\DM\untDmsEscola.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmEscola.dfm</Transaction>
     <Transaction>2016/03/05 16:06:22.000.452,C:\Projetos\Agenda\Device Portable\Unit1.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaNew.fmx</Transaction>
-    <Transaction>2016/03/13 20:02:51.130,C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.fmx=C:\Projetos\Agenda\Device Portable\Unit3.fmx</Transaction>
-    <Transaction>2016/03/13 20:10:49.482,C:\Projetos\Agenda\Device Portable\DM\untDMv.pas=C:\Projetos\Agenda\Device Portable\DM\untDM.pas</Transaction>
-    <Transaction>2016/03/13 20:10:49.482,C:\Projetos\Agenda\Device Portable\DM\untDMv.dfm=C:\Projetos\Agenda\Device Portable\DM\untDM.dfm</Transaction>
-    <Transaction>2016/03/13 20:10:54.766,C:\Projetos\Agenda\Device Portable\DM\untDm.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMv.dfm</Transaction>
+    <Transaction>2016/03/13 20:02:51.000.130,C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.fmx=C:\Projetos\Agenda\Device Portable\Unit3.fmx</Transaction>
+    <Transaction>2016/03/13 20:10:49.000.482,C:\Projetos\Agenda\Device Portable\DM\untDMv.dfm=C:\Projetos\Agenda\Device Portable\DM\untDM.dfm</Transaction>
+    <Transaction>2016/03/13 20:10:54.000.766,C:\Projetos\Agenda\Device Portable\DM\untDm.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMv.dfm</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
