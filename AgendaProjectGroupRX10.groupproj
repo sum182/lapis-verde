@@ -24,6 +24,9 @@
         <Projects Include="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\mobile\VendasApp.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\WhatsAppMessengerLayout\Messenger.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -95,14 +98,23 @@
     <Target Name="VendasApp:Make">
         <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\mobile\VendasApp.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Messenger">
+        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj"/>
+    </Target>
+    <Target Name="Messenger:Clean">
+        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Messenger:Make">
+        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -9,6 +9,7 @@ object Dm: TDm
       'LockingMode=Normal'
       'OpenMode=ReadWrite'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 64
     Top = 32

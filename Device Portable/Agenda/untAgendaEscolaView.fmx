@@ -1,12 +1,10 @@
 inherited frmAgendaEscolaView: TfrmAgendaEscolaView
   Caption = 'frmBaseToolBar1'
   Position = DesktopCenter
-  StyleBook = DMStyles.styleAndroid
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     inherited ToolBar1: TToolBar
-      TabOrder = 1
       inherited lblTitulo: TLabel
         Size.Width = 132.000000000000000000
         Text = 'Agenda'
@@ -111,10 +109,10 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E1DB81368EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E5DB72B68EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A8470008297FB72CD7B88C000000000
+                  721FB1E71A117315233D622E8C445C9B2A84700093D3FB06226500B300000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -145,32 +143,272 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         OnClick = SpeedButton2Click
       end
     end
-    object lstAgenda: TListView
-      ItemAppearanceClassName = 'TCustomizeItemObjects'
-      ItemEditAppearanceClassName = 'TCustomizeItemObjects'
-      HeaderAppearanceClassName = 'TListHeaderObjects'
-      FooterAppearanceClassName = 'TListHeaderObjects'
-      OnUpdateObjects = lstAgendaUpdateObjects
+    object TabControl1: TTabControl
       Align = Client
       Size.Width = 640.000000000000000000
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 0
-      ParentShowHint = False
-      ShowHint = False
-      ItemAppearance.ItemHeight = 80
-      ItemAppearanceObjects.ItemObjects.Text.WordWrap = True
-      ItemAppearanceObjects.ItemObjects.Text.Trimming = None
-      ItemAppearanceObjects.ItemEditObjects.Text.WordWrap = True
-      ItemAppearanceObjects.HeaderObjects.Text.Font.Size = 14.000000000000000000
-      ItemAppearanceObjects.HeaderObjects.Text.Font.Style = [fsBold]
-      ItemAppearanceObjects.HeaderObjects.Text.TextAlign = Center
-      ItemAppearanceObjects.HeaderObjects.Text.WordWrap = True
-      ItemAppearanceObjects.HeaderObjects.Text.Align = Center
-      ItemAppearanceObjects.FooterObjects.Text.Font.Family = 'Segoe UI Semibold'
-      ItemAppearanceObjects.FooterObjects.Text.Font.Style = [fsBold]
-      StyleLookup = 'listviewstyle'
-      CanSwipeDelete = False
+      TabHeight = 49.000000000000000000
+      TabIndex = 0
+      TabOrder = 1
+      TabPosition = PlatformDefault
+      object TabItem1: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem1'
+        ExplicitSize.cx = 213.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object lstAgenda: TListView
+          ItemAppearanceClassName = 'TCustomizeItemObjects'
+          ItemEditAppearanceClassName = 'TCustomizeItemObjects'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          OnUpdateObjects = lstAgendaUpdateObjects
+          Transparent = True
+          ItemIndex = 1
+          ScrollViewPos = 30.000000000000000000
+          SideSpace = 6
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          ParentShowHint = False
+          ShowHint = False
+          ItemAppearance.ItemHeight = 90
+          ItemAppearanceObjects.ItemObjects.Text.WordWrap = True
+          ItemAppearanceObjects.ItemObjects.Text.Trimming = None
+          ItemAppearanceObjects.ItemObjects.Detail.WordWrap = True
+          ItemAppearanceObjects.ItemObjects.Detail.Visible = True
+          ItemAppearanceObjects.ItemEditObjects.Text.WordWrap = True
+          ItemAppearanceObjects.HeaderObjects.Text.Font.Size = 14.000000000000000000
+          ItemAppearanceObjects.HeaderObjects.Text.Font.Style = [fsBold]
+          ItemAppearanceObjects.HeaderObjects.Text.TextAlign = Center
+          ItemAppearanceObjects.HeaderObjects.Text.WordWrap = True
+          ItemAppearanceObjects.HeaderObjects.Text.Align = Center
+          ItemAppearanceObjects.FooterObjects.Text.Font.Family = 'Segoe UI Semibold'
+          ItemAppearanceObjects.FooterObjects.Text.Font.Style = [fsBold]
+          StyleLookup = 'listviewstyle'
+          CanSwipeDelete = False
+        end
+      end
+      object TabItem2: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem2'
+        ExplicitSize.cx = 213.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object ListView1: TListView
+          ItemAppearanceClassName = 'TListItemAppearance'
+          ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Transparent = True
+          SideSpace = 2
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 432.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          NativeOptions = [Styled]
+          object ToolBar2: TToolBar
+            Size.Width = 640.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object SpeedButton3: TSpeedButton
+              Align = Right
+              Position.X = 592.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'refreshtoolbutton'
+              Text = 'SpeedButton3'
+              OnClick = SpeedButton3Click
+            end
+          end
+        end
+      end
+      object TabItem3: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem3'
+        ExplicitSize.cx = 214.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object ListBox1: TListBox
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'listboxstyle'
+          TabOrder = 0
+          DisableFocusEffect = True
+          ItemIndex = 0
+          Items.Strings = (
+            '1'
+            '2'
+            '3'
+            '4'
+            '5'
+            'teste maria'
+            '6'
+            'Teste leo'
+            'Maria sevsye'
+            'Ggggg'
+            'Ggggg'
+            'Ggggg'
+            'Ggggg'
+            'Ggggg'
+            'carlos aaaaa'
+            'leo 1'
+            'maria 3'
+            'carlos 2'
+            'aaaaaaaa'
+            'Vbbv'
+            'teste aaa'
+            'dfasfdadsfa'
+            'aaaa'
+            'bbbb'
+            'sala 2'
+            'Ggggy'
+            'Hfggtgg'#10'Ghdg'#10'Ggtt'#10'Gffg'
+            'aaa'
+            'Fghh'
+            'Carlos3'
+            'Carlos 4'
+            'Chorei'
+            'Chorao'
+            'mmmm'
+            'sssssss'
+            'aaa'
+            'bbbbbbbb'
+            'cccccccccc'
+            'Potecaiu'
+            'teste 1jfddsifisa'
+            'a'#13#10'b'#13#10'c'#13#10'd'#13#10'e'#13#10'f'#13#10'g'
+            'zzz'
+            '1'#13#10'2'#13#10'3'#13#10'4'#13#10'5'#13#10'6'#13#10'7'#13#10'8'#13#10'9'#13#10'0'
+            'Ghh'
+            'Ftyh'
+            'Teste 3g leo'
+            'Teste 2'
+            '3'
+            'Bom dia meu amor....'
+            'Nome bonito'
+            'Oi meu amor'
+            'Tudo bem?'
+            'Adorei o final de semana!!! Obrigada pelo passeio no shopping.'
+            'Momo tem que aumentar o'
+            'Campo de espa'#231'o pra ver'
+            'A mensagem completa'
+            'A terceira mensagem que mandei'
+            'N'#227'o apareceu inteira.'
+            'Oi meu amor. Ja vi o limite do espaco'
+            'Vou corrigir'
+            'Legal momo'
+            'Que da hora, a gente tem'
+            'Um aplicativo nosso <3'
+            'Haaaa'
+            'E o L'#233'o?'
+            'E o Lulu?'
+            'Que chato temos nosso watsapp'
+            'Vhhh'
+            'Est'#227'o bem, L'#233'o ta com sono')
+          DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 635.000000000000000000
+          Viewport.Height = 383.000000000000000000
+        end
+      end
+      object TabItem4: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem4'
+        object ToolBar3: TToolBar
+          Size.Width = 640.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object SpeedButton4: TSpeedButton
+            Align = Right
+            Position.X = 592.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'refreshtoolbutton'
+            Text = 'SpeedButton3'
+            OnClick = SpeedButton4Click
+          end
+        end
+        object Layout1: TLayout
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 384.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object VSB: TVertScrollBox
+            Align = Client
+            Size.Width = 640.000000000000000000
+            Size.Height = 384.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 640.000000000000000000
+            Viewport.Height = 384.000000000000000000
+            object Panel1: TPanel
+              Position.X = 408.000000000000000000
+              Position.Y = 32.000000000000000000
+              Size.Width = 193.000000000000000000
+              Size.Height = 120.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'panelstyle'
+              TabOrder = 0
+              object ShadowEffect1: TShadowEffect
+                Distance = 3.000000000000000000
+                Direction = 45.000000000000000000
+                Softness = 0.200000002980232200
+                Opacity = 0.400000005960464400
+                ShadowColor = claBlack
+              end
+              object Text1: TText
+                Align = Client
+                Size.Width = 193.000000000000000000
+                Size.Height = 120.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Teste de texto'
+              end
+            end
+          end
+        end
+      end
     end
   end
   object bsAgenda: TBindSourceDB
@@ -184,11 +422,22 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
     OutputConverters = <>
     Left = 36
     Top = 141
-    object LinkListControlToField1: TLinkListControlToField
+    object LinkListControlToField2: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = bsAgenda
       FieldName = 'descricao'
       Control = lstAgenda
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakFieldName = 'data'
+      FillHeaderFieldName = 'data'
+      FillBreakGroups = <>
+    end
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = bsAgenda
+      FieldName = 'descricao'
+      Control = ListBox1
       FillExpressions = <>
       FillHeaderExpressions = <>
       FillBreakFieldName = 'data'

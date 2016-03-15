@@ -21,15 +21,12 @@ Coordinates=640,40,120,33
 Visible=False
 
 []
-Coordinates=273,53,82,33
-
-[lstAgenda]
-Coordinates=310,30,89,231
+Coordinates=680,390,123,33
 Visible=True
 LayerNames=Agenda
 
 [bsAgenda]
-Coordinates=510,20,105,249
+Coordinates=510,20,105,321
 LayerNames=Agenda
 
 [blAgenda]
@@ -39,7 +36,7 @@ Coordinates=0,0,61,33
 Coordinates=244,506,107,87
 
 [DmEscola.fdqTurma]
-Coordinates=900,520,114,159
+Coordinates=900,520,114,51
 
 [DM.RESTClient1]
 Coordinates=377,506,95,69
@@ -51,7 +48,7 @@ Coordinates=820,180,116,285
 Coordinates=326,619,84,51
 
 [DmEscola.fdqAluno]
-Coordinates=1390,180,112,231
+Coordinates=1390,180,112,51
 LayerNames=
 
 [DmEscola.fdqAgendaAluno]
@@ -76,16 +73,47 @@ Coordinates=10,619,93,51
 Coordinates=506,327,139,33
 
 [DmEscola.fdqTurmaAluno]
-Coordinates=1393,520,143,87
+Coordinates=1393,520,143,51
 
 [DmEscola.fdqAgendaAlunoSaveServer]
 Coordinates=1562,520,206,87
 
 [DmEscola.fdqAgendaSaveServer]
-Coordinates=990,170,176,195
+Coordinates=990,170,176,51
 
 [Module Settings]
 ModelLayerNames=Agenda
 ActiveLayerNames=Agenda
 EditingLayerName=Agenda
+
+[TabItem1]
+Coordinates=11,52,59,33
+
+[TabControl1]
+Coordinates=207,1,74,33
+
+[lstAgenda]
+Coordinates=360,20,89,195
+Visible=True
+LayerNames=Agenda
+
+[TabItem2]
+Coordinates=207,53,59,33
+
+[ListView1]
+Coordinates=89,34,89,141
+
+[ToolBar2]
+Coordinates=0,0,58,33
+
+[SpeedButton3]
+Coordinates=216,105,84,51
+
+[TabItem3]
+Coordinates=128,213,59,33
+
+[ListBox1]
+Coordinates=810,0,116,213
+Visible=True
+LayerNames=Agenda
 
