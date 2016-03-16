@@ -27,6 +27,12 @@
         <Projects Include="..\WhatsAppMessengerLayout\Messenger.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ToastsDemo\ToastsDemoRX10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemoRX10.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -107,14 +113,32 @@
     <Target Name="Messenger:Make">
         <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ToastsDemoRX10">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ToastsDemo\ToastsDemoRX10.dproj"/>
+    </Target>
+    <Target Name="ToastsDemoRX10:Clean">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ToastsDemo\ToastsDemoRX10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ToastsDemoRX10:Make">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ToastsDemo\ToastsDemoRX10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="VirtualKeyboardDemoRX10">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemoRX10.dproj"/>
+    </Target>
+    <Target Name="VirtualKeyboardDemoRX10:Clean">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemoRX10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VirtualKeyboardDemoRX10:Make">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemoRX10.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger;ToastsDemoRX10;VirtualKeyboardDemoRX10"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean;ToastsDemoRX10:Clean;VirtualKeyboardDemoRX10:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make;ToastsDemoRX10:Make;VirtualKeyboardDemoRX10:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

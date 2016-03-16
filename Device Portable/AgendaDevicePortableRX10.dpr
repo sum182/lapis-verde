@@ -40,7 +40,7 @@ uses
 
 begin
   //Modo Teste
- { Application.Initialize;
+  Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);
@@ -52,7 +52,7 @@ begin
   Application.Run;
   Exit;
   // Fim do Teste
- }
+
 
 
   //Modo Teste 2

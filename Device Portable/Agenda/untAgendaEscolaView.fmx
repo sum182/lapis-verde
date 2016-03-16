@@ -1,10 +1,15 @@
 inherited frmAgendaEscolaView: TfrmAgendaEscolaView
   Caption = 'frmBaseToolBar1'
+  ClientHeight = 606
+  ClientWidth = 628
   Position = DesktopCenter
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
+    Size.Width = 628.000000000000000000
+    Size.Height = 606.000000000000000000
     inherited ToolBar1: TToolBar
+      Size.Width = 628.000000000000000000
       inherited lblTitulo: TLabel
         Size.Width = 132.000000000000000000
         Text = 'Agenda'
@@ -109,10 +114,10 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E5DB72B68EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E1DB73368EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A84700093D3FB06226500B300000000
+                  721FB1E71A117315233D622E8C445C9B2A847000EEE2FAE25B5F28A900000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -124,7 +129,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       end
       object SpeedButton1: TSpeedButton
         Align = Right
-        Position.X = 544.000000000000000000
+        Position.X = 532.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -134,7 +139,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       end
       object SpeedButton2: TSpeedButton
         Align = Right
-        Position.X = 592.000000000000000000
+        Position.X = 580.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -145,19 +150,19 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
     end
     object TabControl1: TTabControl
       Align = Client
-      Size.Width = 640.000000000000000000
-      Size.Height = 432.000000000000000000
+      Size.Width = 628.000000000000000000
+      Size.Height = 558.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 0
+      TabIndex = 8
       TabOrder = 1
       TabPosition = PlatformDefault
       object TabItem1: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = True
-        Size.Width = 160.000000000000000000
+        IsSelected = False
+        Size.Width = 69.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -173,7 +178,6 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           OnUpdateObjects = lstAgendaUpdateObjects
           Transparent = True
           ItemIndex = 1
-          ScrollViewPos = 30.000000000000000000
           SideSpace = 6
           Align = Client
           Size.Width = 640.000000000000000000
@@ -204,7 +208,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           item
           end>
         IsSelected = False
-        Size.Width = 160.000000000000000000
+        Size.Width = 69.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -221,7 +225,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           SideSpace = 2
           Align = Client
           Size.Width = 640.000000000000000000
-          Size.Height = 432.000000000000000000
+          Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           NativeOptions = [Styled]
@@ -248,7 +252,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           item
           end>
         IsSelected = False
-        Size.Width = 160.000000000000000000
+        Size.Width = 69.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -347,12 +351,14 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           item
           end>
         IsSelected = False
-        Size.Width = 160.000000000000000000
+        Size.Width = 69.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
         Text = 'TabItem4'
+        ExplicitSize.cx = 160.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
         object ToolBar3: TToolBar
           Size.Width = 640.000000000000000000
           Size.Height = 48.000000000000000000
@@ -372,17 +378,17 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         object Layout1: TLayout
           Align = Client
           Size.Width = 640.000000000000000000
-          Size.Height = 384.000000000000000000
+          Size.Height = 335.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object VSB: TVertScrollBox
             Align = Client
             Size.Width = 640.000000000000000000
-            Size.Height = 384.000000000000000000
+            Size.Height = 335.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
             Viewport.Width = 640.000000000000000000
-            Viewport.Height = 384.000000000000000000
+            Viewport.Height = 335.000000000000000000
             object Panel1: TPanel
               Position.X = 408.000000000000000000
               Position.Y = 32.000000000000000000
@@ -409,19 +415,368 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
         end
       end
+      object TabItem5: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 69.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem5'
+        object Layout2: TLayout
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object ListBox2: TListBox
+            Align = Client
+            EnableDragHighlight = False
+            Margins.Left = 6.000000000000000000
+            Margins.Top = 6.000000000000000000
+            Margins.Right = 6.000000000000000000
+            Margins.Bottom = 6.000000000000000000
+            Size.Width = 628.000000000000000000
+            Size.Height = 371.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxstyle'
+            TabOrder = 1
+            DisableFocusEffect = True
+            Items.Strings = (
+              '10/03/2016'
+              '1'
+              '2'
+              '3'
+              '4'
+              '5'
+              'teste maria'
+              '6'
+              'Teste leo'
+              'Maria sevsye'
+              'Ggggg'
+              'Ggggg'
+              'Ggggg'
+              'Ggggg'
+              'Ggggg'
+              '11/03/2016'
+              'carlos aaaaa'
+              'leo 1'
+              'maria 3'
+              'carlos 2'
+              'aaaaaaaa'
+              'Vbbv'
+              'teste aaa'
+              'dfasfdadsfa'
+              'aaaa'
+              'bbbb'
+              'sala 2'
+              'Ggggy'
+              'Hfggtgg'#10'Ghdg'#10'Ggtt'#10'Gffg'
+              '13/03/2016'
+              'aaa'
+              'Fghh'
+              'Carlos3'
+              'Carlos 4'
+              'Chorei'
+              'Chorao'
+              'mmmm'
+              'sssssss'
+              'aaa'
+              'bbbbbbbb'
+              'cccccccccc'
+              'Potecaiu'
+              '14/03/2016'
+              'teste 1jfddsifisa'
+              'a'#13#10'b'#13#10'c'#13#10'd'#13#10'e'#13#10'f'#13#10'g'
+              'zzz'
+              '1'#13#10'2'#13#10'3'#13#10'4'#13#10'5'#13#10'6'#13#10'7'#13#10'8'#13#10'9'#13#10'0'
+              'Ghh'
+              'Ftyh'
+              'Teste 3g leo'
+              'Teste 2'
+              '3'
+              'Bom dia meu amor....'
+              'Nome bonito'
+              'Oi meu amor'
+              'Tudo bem?'
+              'Adorei o final de semana!!! Obrigada pelo passeio no shopping.'
+              'Momo tem que aumentar o'
+              'Campo de espa'#231'o pra ver'
+              'A mensagem completa'
+              'A terceira mensagem que mandei'
+              'N'#227'o apareceu inteira.'
+              'Oi meu amor. Ja vi o limite do espaco'
+              'Vou corrigir'
+              'Legal momo'
+              'Que da hora, a gente tem'
+              'Um aplicativo nosso <3'
+              'Haaaa'
+              'E o L'#233'o?'
+              'E o Lulu?'
+              'Que chato temos nosso watsapp'
+              'Vhhh'
+              'Est'#227'o bem, L'#233'o ta com sono')
+            DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+            DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
+            DefaultItemStyles.GroupFooterStyle = ''
+            GroupingKind = Grouped
+            Viewport.Width = 623.000000000000000000
+            Viewport.Height = 371.000000000000000000
+          end
+        end
+      end
+      object TabItem6: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 69.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem6'
+        object Layout3: TLayout
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 335.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object ListBox3: TListBox
+            Align = Client
+            EnableDragHighlight = False
+            Margins.Left = 6.000000000000000000
+            Margins.Top = 6.000000000000000000
+            Margins.Right = 6.000000000000000000
+            Margins.Bottom = 6.000000000000000000
+            Size.Width = 628.000000000000000000
+            Size.Height = 323.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxstyle'
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+            DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
+            DefaultItemStyles.GroupFooterStyle = ''
+            GroupingKind = Grouped
+            Viewport.Width = 628.000000000000000000
+            Viewport.Height = 323.000000000000000000
+          end
+        end
+        object ToolBar4: TToolBar
+          Size.Width = 640.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object SpeedButton5: TSpeedButton
+            Align = Right
+            Position.X = 592.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'refreshtoolbutton'
+            Text = 'SpeedButton3'
+            OnClick = SpeedButton5Click
+          end
+        end
+      end
+      object TabItem7: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 69.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem7'
+        object Layout4: TLayout
+          Align = Client
+          Size.Width = 628.000000000000000000
+          Size.Height = 461.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object ListBox4: TListBox
+            Align = Client
+            EnableDragHighlight = False
+            Margins.Left = 6.000000000000000000
+            Margins.Top = 6.000000000000000000
+            Margins.Right = 6.000000000000000000
+            Margins.Bottom = 6.000000000000000000
+            Size.Width = 616.000000000000000000
+            Size.Height = 449.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxstyle'
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+            DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
+            DefaultItemStyles.GroupFooterStyle = ''
+            GroupingKind = Grouped
+            Viewport.Width = 616.000000000000000000
+            Viewport.Height = 449.000000000000000000
+          end
+        end
+        object ToolBar5: TToolBar
+          Size.Width = 628.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object SpeedButton6: TSpeedButton
+            Align = Right
+            Position.X = 580.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'refreshtoolbutton'
+            Text = 'SpeedButton3'
+            OnClick = SpeedButton6Click
+          end
+        end
+      end
+      object TabItem8: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 69.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem8'
+        object Layout5: TLayout
+          Align = Client
+          Size.Width = 533.000000000000000000
+          Size.Height = 461.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object ListBox5: TListBox
+            Align = Client
+            EnableDragHighlight = False
+            Margins.Left = 6.000000000000000000
+            Margins.Top = 6.000000000000000000
+            Margins.Right = 6.000000000000000000
+            Margins.Bottom = 6.000000000000000000
+            Size.Width = 521.000000000000000000
+            Size.Height = 449.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxstyle'
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+            DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
+            DefaultItemStyles.GroupFooterStyle = ''
+            GroupingKind = Grouped
+            Viewport.Width = 521.000000000000000000
+            Viewport.Height = 449.000000000000000000
+          end
+        end
+        object ToolBar6: TToolBar
+          Size.Width = 533.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object SpeedButton7: TSpeedButton
+            Align = Right
+            Position.X = 485.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'refreshtoolbutton'
+            Text = 'SpeedButton3'
+            OnClick = SpeedButton7Click
+          end
+        end
+      end
+      object TabItem9: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 76.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem9'
+        object Layout6: TLayout
+          Align = Client
+          Size.Width = 628.000000000000000000
+          Size.Height = 461.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object ListBox6: TListBox
+            Align = Client
+            EnableDragHighlight = False
+            Margins.Left = 6.000000000000000000
+            Margins.Top = 6.000000000000000000
+            Margins.Right = 6.000000000000000000
+            Margins.Bottom = 6.000000000000000000
+            Size.Width = 616.000000000000000000
+            Size.Height = 449.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxstyle'
+            TabOrder = 1
+            DisableFocusEffect = True
+            Items.Strings = (
+              '10/03/2016'
+              '1'
+              '2'
+              '3'
+              '4'
+              '5'
+              'teste maria'
+              '6'
+              'Teste leo'
+              'Maria sevsye'
+              'Ggggg'
+              'Ggggg'
+              'Ggggg'
+              'Ggggg'
+              '')
+            DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+            DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
+            DefaultItemStyles.GroupFooterStyle = ''
+            GroupingKind = Grouped
+            Viewport.Width = 611.000000000000000000
+            Viewport.Height = 449.000000000000000000
+          end
+        end
+        object ToolBar7: TToolBar
+          Size.Width = 628.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object SpeedButton8: TSpeedButton
+            Align = Right
+            Position.X = 580.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'refreshtoolbutton'
+            Text = 'SpeedButton3'
+            OnClick = SpeedButton8Click
+          end
+        end
+      end
     end
   end
   object bsAgenda: TBindSourceDB
     DataSet = DmEscola.fdqAgenda
     ScopeMappings = <>
-    Left = 32
-    Top = 200
+    Left = 280
+    Top = 392
   end
   object blAgenda: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 36
-    Top = 141
+    Left = 172
+    Top = 405
     object LinkListControlToField2: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = bsAgenda
@@ -438,6 +793,19 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       DataSource = bsAgenda
       FieldName = 'descricao'
       Control = ListBox1
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakFieldName = 'data'
+      FillHeaderFieldName = 'data'
+      FillBreakGroups = <>
+    end
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = ListBox2
+      Track = True
+      FillDataSource = bsAgenda
+      FillDisplayFieldName = 'descricao'
+      AutoFill = True
       FillExpressions = <>
       FillHeaderExpressions = <>
       FillBreakFieldName = 'data'

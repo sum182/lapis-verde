@@ -1,0 +1,55 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 724
+  ClientWidth = 900
+  StyleBook = DMStyles.styleAndroid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object Panel1: TPanel
+    Position.X = 64.000000000000000000
+    Position.Y = 40.000000000000000000
+    Size.Width = 185.000000000000000000
+    Size.Height = 169.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'panelstyle'
+    TabOrder = 0
+  end
+  object CalloutPanel1: TCalloutPanel
+    Padding.Top = 11.000000000000000000
+    Position.X = 288.000000000000000000
+    Position.Y = 32.000000000000000000
+    TabOrder = 1
+    CalloutWidth = 23.000000000000000000
+    CalloutLength = 11.000000000000000000
+  end
+  object Expander1: TExpander
+    Position.X = 480.000000000000000000
+    Position.Y = 48.000000000000000000
+    ShowCheck = False
+    Text = 'Expander1'
+    TabOrder = 2
+    ContentSize = '175'
+  end
+  object PlotGrid1: TPlotGrid
+    Frequency = 5.000000000000000000
+    Marks = 25.000000000000000000
+    Position.X = 248.000000000000000000
+    Position.Y = 240.000000000000000000
+    Size.Width = 313.000000000000000000
+    Size.Height = 193.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object fgFlipView1: TfgFlipView
+    Images = <>
+    Position.X = 128.000000000000000000
+    Position.Y = 472.000000000000000000
+    Size.Width = 313.000000000000000000
+    Size.Height = 153.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+  end
+end
