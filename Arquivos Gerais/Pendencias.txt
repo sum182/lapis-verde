@@ -1,5 +1,8 @@
 --------------------------------------------------------------------------------------------
 Casa
+Copiar pasta
+Firemonkey do s para componentes
+
 Mapear
 S:\Desenvolvimento\Delphi\Estudos\Caderno
 Caderno de estudo delphi
@@ -23,6 +26,10 @@ FGX - Keyboard
 Login Auto
 Configuracoes
 
+Criar um log de atualizacoes
+escola_id
+processo
+dt
 
 --------------------------------------------------------------------------------------------
 

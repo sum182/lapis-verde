@@ -22,7 +22,7 @@ uses untDM, untDMStyles, System.SysUtils;
 procedure SetStyle(Formulario:TForm);
 begin
    {$IFDEF ANDROID}
-    Formulario.StyleBook := DMStyles.styleAndroid;
+    Formulario.StyleBook := DMStyles.styleAndroidNew;
   {$ENDIF}
 
   {$IFDEF IOS}

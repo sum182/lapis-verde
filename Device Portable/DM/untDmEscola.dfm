@@ -39,7 +39,6 @@ object DmEscola: TDmEscola
     Top = 8
   end
   object fdqAgenda: TFDQuery
-    Active = True
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select '
@@ -47,7 +46,7 @@ object DmEscola: TDmEscola
       'strftime("%d/%m/%Y",data_insert_local) as data'
       'from agenda ag'
       ''
-      'order by data_insert_local')
+      'order by data_insert_local desc')
     Left = 120
     Top = 8
   end
