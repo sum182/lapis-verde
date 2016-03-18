@@ -479,4 +479,20 @@ inherited frmLogin: TfrmLogin
       end
     end
   end
+  object fgVirtualKeyboard: TfgVirtualKeyboard
+    Buttons = <
+      item
+        Caption = 'Apple'
+      end
+      item
+        Caption = 'Orange'
+      end
+      item
+        Caption = 'Tomato'
+      end>
+    OnShow = fgVirtualKeyboardShow
+    OnHide = fgVirtualKeyboardHide
+    Left = 252
+    Top = 520
+  end
 end

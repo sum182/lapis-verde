@@ -6,12 +6,13 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   smFrmBaseToolBar, FMX.Objects, FMX.Controls.Presentation, FMX.Layouts,
-  FMX.ScrollBox, FMX.Memo;
+  FMX.ScrollBox, FMX.Memo, FGX.VirtualKeyboard;
 
 type
   TfrmAgendaEscolaAdd = class(TfrmBaseToolBar)
     Memo1: TMemo;
     SpeedButton1: TSpeedButton;
+    ToolBar2: TToolBar;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);

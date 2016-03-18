@@ -3,7 +3,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
   ClientHeight = 606
   ClientWidth = 628
   Position = DesktopCenter
-  StyleBook = DMStyles.styleAndroidTDevRocks
+  StyleBook = DMStyles.styleAndroidNew
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
@@ -156,7 +156,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       Size.Height = 558.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 1
       TabPosition = PlatformDefault
       object TabItem6: TTabItem
@@ -164,7 +164,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           item
           end>
         IsSelected = False
-        Size.Width = 209.000000000000000000
+        Size.Width = 157.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -202,8 +202,8 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         CustomIcon = <
           item
           end>
-        IsSelected = True
-        Size.Width = 209.000000000000000000
+        IsSelected = False
+        Size.Width = 157.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -275,7 +275,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           item
           end>
         IsSelected = False
-        Size.Width = 210.000000000000000000
+        Size.Width = 157.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -396,9 +396,56 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
         end
       end
+      object TabItem2: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 157.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem2'
+        object ListBox1: TListBox
+          Align = Client
+          Margins.Left = 6.000000000000000000
+          Margins.Top = 6.000000000000000000
+          Margins.Right = 6.000000000000000000
+          Margins.Bottom = 6.000000000000000000
+          Size.Width = 616.000000000000000000
+          Size.Height = 497.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'lstboxAgendaStyle1'
+          TabOrder = 1
+          DisableFocusEffect = True
+          Items.Strings = (
+            '10/03/2016'
+            '1'
+            '2'
+            '3'
+            '4'
+            '5'
+            'teste maria'
+            '6'
+            'Teste leo'
+            'Maria sevsye'
+            'Ggggg'
+            'Ggggg'
+            'Ggggg'
+            'Ggggg'
+            '')
+          DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+          DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
+          DefaultItemStyles.GroupFooterStyle = ''
+          GroupingKind = Grouped
+          Viewport.Width = 611.000000000000000000
+          Viewport.Height = 497.000000000000000000
+        end
+      end
     end
   end
-  object StyleBook1: TStyleBook
+  object StyleBook1: TStyleBook [1]
     Styles = <
       item
       end
@@ -33623,13 +33670,13 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
     Left = 304
     Top = 288
   end
-  object bsAgenda: TBindSourceDB
+  object bsAgenda: TBindSourceDB [2]
     DataSet = DmEscola.fdqAgenda
     ScopeMappings = <>
     Left = 280
     Top = 392
   end
-  object blAgenda: TBindingsList
+  object blAgenda: TBindingsList [3]
     Methods = <>
     OutputConverters = <>
     Left = 172

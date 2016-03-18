@@ -8,7 +8,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   smFrmBaseForAll,smGeralFMX, FMX.Effects, FMX.Objects,
   FMX.Controls.Presentation, FMX.Edit, FMX.Layouts, smCrypt, FMX.ListBox,
-  FMX.TabControl, FGX.ProgressDialog;
+  FMX.TabControl, FGX.ProgressDialog, FGX.VirtualKeyboard;
 
 type
   TfrmLogin = class(TfrmBaseForAll)
@@ -31,6 +31,7 @@ type
     Layout1: TLayout;
     btnCriarConta: TSpeedButton;
     Layout2: TLayout;
+    fgVirtualKeyboard: TfgVirtualKeyboard;
     procedure FormCreate(Sender: TObject);
     procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
@@ -41,13 +42,14 @@ type
     procedure btnLoginClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lblEsqueceuSenhaDblClick(Sender: TObject);
-    procedure lblCriarContaDblClick(Sender: TObject);
     procedure btnEsqueceuSenhaClick(Sender: TObject);
     procedure btnCriarContaClick(Sender: TObject);
     procedure edtUsuarioChange(Sender: TObject);
     procedure edtSenhaChange(Sender: TObject);
     procedure edtSenhaChangeTracking(Sender: TObject);
     procedure edtUsuarioChangeTracking(Sender: TObject);
+    procedure fgVirtualKeyboardHide(Sender: TObject; const Bounds: TRect);
+    procedure fgVirtualKeyboardShow(Sender: TObject; const Bounds: TRect);
   private
     FActivityDialogThread: TThread;
     fLoginOK:boolean;
@@ -72,7 +74,7 @@ implementation
 {$R *.fmx}
 
 uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
-  FMX.Platform, untFuncoes, untDMStyles, untCriarConta;
+  FMX.Platform, untFuncoes, untDMStyles, untCriarConta,smMensagensFMX;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
 begin
@@ -86,7 +88,7 @@ end;
 procedure TfrmLogin.btnEsqueceuSenhaClick(Sender: TObject);
 begin
   inherited;
-  ShowMessage('Esqueceu sua senha...');
+  MsgPoupUp('Esqueceu sua senha...');
 end;
 
 procedure TfrmLogin.btnLoginClick(Sender: TObject);
@@ -165,6 +167,23 @@ begin
 end;
 
 
+procedure TfrmLogin.fgVirtualKeyboardHide(Sender: TObject; const Bounds: TRect);
+begin
+  inherited;
+  layBase.Align := TAlignLayout.Client;
+end;
+
+procedure TfrmLogin.fgVirtualKeyboardShow(Sender: TObject; const Bounds: TRect);
+begin
+  inherited;
+  layBase.Align := TAlignLayout.Top;
+
+  if BorderStyle <> TFmxFormBorderStyle.None then
+    layBase.Height := Screen.Size.Height - Bounds.Height
+  else
+    layBase.Height := Screen.Size.Height - Bounds.Height - 20;
+end;
+
 procedure TfrmLogin.edtSenhaChange(Sender: TObject);
 begin
   inherited;
@@ -228,16 +247,10 @@ begin
   Result := Login;
 end;
 
-procedure TfrmLogin.lblCriarContaDblClick(Sender: TObject);
-begin
-  inherited;
-  ShowMessage('Criar Conta!');
-end;
-
 procedure TfrmLogin.lblEsqueceuSenhaDblClick(Sender: TObject);
 begin
   inherited;
-  ShowMessage('Esqueceu sua senha?');
+  MsgPoupUp('Esqueceu sua senha?');
 end;
 
 procedure TfrmLogin.Login;
@@ -275,7 +288,7 @@ begin
   except
   on E:Exception do
     begin
-      showmessage('Erro ao realizar o Login.');
+      MsgPoupUp('Erro ao realizar o Login.');
       fLoginOk:=False;
       Abort;
     end;
@@ -294,7 +307,7 @@ begin
   except
   on E:Exception do
     begin
-      showmessage('Erro ao realizar o Login.');
+      MsgPoupUp('Erro ao realizar o Login.');
       fLoginOk:=False;
       Abort;
     end;

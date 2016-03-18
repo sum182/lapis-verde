@@ -11,7 +11,7 @@ uses
   MultiDetailAppearanceU, FMX.ListView, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, FMX.TabControl, FMX.ListBox, FMX.Effects, FMX.Edit,
-  Data.DB;
+  Data.DB, FGX.VirtualKeyboard;
 
 type
   TfrmAgendaEscolaView = class(TfrmBaseToolBar)
@@ -42,6 +42,8 @@ type
     btnCalcular: TButton;
     lblResultado: TListBoxItem;
     StyleBook1: TStyleBook;
+    TabItem2: TTabItem;
+    ListBox1: TListBox;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -185,6 +187,7 @@ begin
       ListBoxItem.Text := DmEscola.fdqAgenda.FieldByName('descricao').AsString;
       ListBoxItem.TextSettings.WordWrap := True;
       ListBoxItem.Selectable:=False;
+            ListBoxItem.Selectable:=False;
      // ListBoxItem.StyleLookup := 'listboxitemnodetail';
 
       Tamanho := 25 * (Length(DmEscola.fdqAgenda.FieldByName('descricao')

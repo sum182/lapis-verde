@@ -107,7 +107,10 @@ Analisar dados do banco local quando tiver uma nova versao ou alteração do banco
 
 
 ----Server--------------------------------------------------------------------------------
+Criar rotina para validar conexao BD
+
 Criar DM para Criar Conta
+
 Criar DM para Agenda Escola
 Criar DM para Agenda Responsavel
 

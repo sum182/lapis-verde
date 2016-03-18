@@ -78,7 +78,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses untDM, untModuloCliente, Data.FireDACJSONReflect, smDBFireDac,
-  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms;
+  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX;
 
 {$R *.dfm}
 
@@ -200,6 +200,8 @@ begin
                     GetFuncionarioId
                   );
   end;
+
+   MsgPoupUp('Agenda criada com sucesso');
 end;
 
 procedure TDmEscola.GetAgenda;
