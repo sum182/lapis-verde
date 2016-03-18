@@ -38,6 +38,8 @@ dt
 
 ----Mobile--------------------------------------------------------------------------------
 
+ Verificar teclado virtual keyboard hide de todas as telas
+ 
 Analisar atualizacao de banco 
 
 try except server
