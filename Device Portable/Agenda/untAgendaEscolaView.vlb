@@ -1,108 +1,98 @@
 ﻿[DmEscola.fdqAgenda]
 Visible=False
-Coordinates=902,386,120,33
+Coordinates=902,386,138,36
 
 [DmEscola.fdqAgendaTurmaSaveServer]
-Coordinates=622,122,208,87
+Coordinates=622,122,242,102
 
 [Dm.RESTResponse1]
-Coordinates=10,10,116,285
+Coordinates=10,10,137,344
 
 [btnVoltar]
-Coordinates=68,459,59,51
+Coordinates=68,459,66,58
 
 [DmEscola.fdqTurma]
-Coordinates=622,397,114,51
-
-[Layout6]
-Coordinates=553,581,53,33
-
-[ToolBar7]
-Coordinates=484,581,58,33
-
-[TabItem6]
-Coordinates=58,581,59,33
+Coordinates=622,397,131,58
 
 [Dm.RESTClient1]
-Coordinates=622,474,95,69
+Coordinates=622,474,112,80
 
 [blAgenda]
-Coordinates=902,1,61,33
+Coordinates=902,1,69,36
 
 [DmEscola.fdqAgendaSaveServer]
-Coordinates=137,581,176,51
-
-[lstboxAgenda]
-Coordinates=156,122,116,213
+Coordinates=137,581,205,58
 
 [imgVoltar]
-Coordinates=77,363,61,51
-
-[TabControl1]
-Coordinates=902,56,74,33
+Coordinates=77,363,69,58
 
 [DmEscola.fdqAgendaAlunoSaveServer]
-Coordinates=346,276,206,87
+Coordinates=346,276,238,102
 
 [layBase]
-Coordinates=902,111,53,33
+Coordinates=902,111,60,36
 
 [DmEscola.fdqAgendaAluno]
-Coordinates=156,1,149,87
+Coordinates=156,1,171,102
 
 [SpeedButton1]
-Coordinates=137,459,84,51
-
-[SpeedButton8]
-Coordinates=622,650,84,51
+Coordinates=137,459,96,58
 
 [Dm.fdqLogErrorSaveServer]
-Coordinates=622,320,150,51
+Coordinates=622,320,173,58
 
 [ToolBar1]
-Coordinates=902,166,58,33
-
-[TabItem9]
-Coordinates=902,221,59,33
+Coordinates=902,166,67,36
 
 [lblTitulo]
-Coordinates=0,401,54,51
+Coordinates=0,401,60,58
 
 [Dm.RESTRequest1]
-Coordinates=346,555,107,87
-
-[Layout3]
-Coordinates=902,276,53,33
+Coordinates=346,555,127,102
 
 [SpeedButton2]
-Coordinates=414,695,84,51
+Coordinates=414,695,96,58
 
 [DmEscola.fdqAluno]
-Coordinates=236,459,112,51
+Coordinates=236,459,127,58
 
 [DmEscola.dsTurmaAluno]
-Coordinates=622,243,139,33
+Coordinates=622,243,160,36
 
 [Dm.fdqLogError]
-Coordinates=513,695,93,51
+Coordinates=513,695,106,58
 
 [layToolBarVoltar]
-Coordinates=902,331,96,33
+Coordinates=902,331,110,36
 
 [DmEscola.fdqTurmaAluno]
-Coordinates=622,573,143,51
+Coordinates=622,573,164,58
 
 [bsAgenda]
-Coordinates=1490,130,105,249
+Coordinates=1490,130,126,146
 
 [DmEscola.fdqAgendaTurma]
-Coordinates=622,1,152,87
+Coordinates=622,1,175,102
 
 []
-Coordinates=1120,160,116,213
+Coordinates=0,461,67,36
 Visible=True
 
-[ListBox2]
-Coordinates=1150,140,116,213
-Visible=True
+[fgVirtualKeyboard]
+Coordinates=166,122,117,36
+
+[lstboxAgenda]
+Coordinates=166,177,139,256
+
+[Layout6]
+Coordinates=902,441,60,36
+
+[tbItemListAgendaDev]
+Coordinates=902,56,69,36
+
+[tbCtrlAgenda]
+Coordinates=902,276,85,36
+
+[tbItemListAgenda]
+Coordinates=365,474,69,36
 

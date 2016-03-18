@@ -1,7 +1,5 @@
 inherited frmLogin: TfrmLogin
   Caption = 'Login Agenda'
-  ClientHeight = 579
-  ClientWidth = 320
   Position = DesktopCenter
   StyleBook = DMStyles.styleAndroid
   OnCreate = FormCreate
@@ -10,20 +8,20 @@ inherited frmLogin: TfrmLogin
   object VertScrollBox1: TVertScrollBox
     Align = Client
     Size.Width = 320.000000000000000000
-    Size.Height = 579.000000000000000000
+    Size.Height = 480.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     Viewport.Width = 320.000000000000000000
-    Viewport.Height = 579.000000000000000000
+    Viewport.Height = 480.000000000000000000
     object layBase: TLayout
       Align = Client
       Size.Width = 320.000000000000000000
-      Size.Height = 579.000000000000000000
+      Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       object layUsuario: TLayout
         Align = Top
-        Position.Y = 113.000000000000000000
+        Position.Y = 89.000000000000000000
         Size.Width = 320.000000000000000000
         Size.Height = 75.000000000000000000
         Size.PlatformDefault = False
@@ -192,7 +190,7 @@ inherited frmLogin: TfrmLogin
       end
       object laySenha: TLayout
         Align = Top
-        Position.Y = 188.000000000000000000
+        Position.Y = 164.000000000000000000
         Size.Width = 320.000000000000000000
         Size.Height = 75.000000000000000000
         Size.PlatformDefault = False
@@ -380,14 +378,14 @@ inherited frmLogin: TfrmLogin
       object lauCabecalho: TLayout
         Align = Top
         Size.Width = 320.000000000000000000
-        Size.Height = 113.000000000000000000
+        Size.Height = 89.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
         object Label1: TLabel
           Align = HorzCenter
           StyledSettings = [Size, FontColor]
           Size.Width = 320.000000000000000000
-          Size.Height = 113.000000000000000000
+          Size.Height = 89.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'labelstyle'
           TextSettings.Font.Family = 'Segoe UI Semibold'
@@ -398,7 +396,7 @@ inherited frmLogin: TfrmLogin
       end
       object layStatus: TLayout
         Align = Top
-        Position.Y = 337.000000000000000000
+        Position.Y = 313.000000000000000000
         Size.Width = 320.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -418,7 +416,7 @@ inherited frmLogin: TfrmLogin
       end
       object layBotoes: TLayout
         Align = Top
-        Position.Y = 263.000000000000000000
+        Position.Y = 239.000000000000000000
         Size.Width = 320.000000000000000000
         Size.Height = 74.000000000000000000
         Size.PlatformDefault = False
@@ -435,7 +433,7 @@ inherited frmLogin: TfrmLogin
       end
       object layContaUsuario: TLayout
         Align = Top
-        Position.Y = 425.000000000000000000
+        Position.Y = 361.000000000000000000
         Size.Width = 320.000000000000000000
         Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
@@ -453,7 +451,7 @@ inherited frmLogin: TfrmLogin
       end
       object Layout1: TLayout
         Align = Top
-        Position.Y = 485.000000000000000000
+        Position.Y = 421.000000000000000000
         Size.Width = 320.000000000000000000
         Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
@@ -468,14 +466,6 @@ inherited frmLogin: TfrmLogin
           TextSettings.FontColor = claBlue
           OnClick = btnCriarContaClick
         end
-      end
-      object Layout2: TLayout
-        Align = Top
-        Position.Y = 385.000000000000000000
-        Size.Width = 320.000000000000000000
-        Size.Height = 40.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 7
       end
     end
   end
@@ -493,6 +483,6 @@ inherited frmLogin: TfrmLogin
     OnShow = fgVirtualKeyboardShow
     OnHide = fgVirtualKeyboardHide
     Left = 252
-    Top = 520
+    Top = 368
   end
 end

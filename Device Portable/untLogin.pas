@@ -30,7 +30,6 @@ type
     btnEsqueceuSenha: TSpeedButton;
     Layout1: TLayout;
     btnCriarConta: TSpeedButton;
-    Layout2: TLayout;
     fgVirtualKeyboard: TfgVirtualKeyboard;
     procedure FormCreate(Sender: TObject);
     procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;

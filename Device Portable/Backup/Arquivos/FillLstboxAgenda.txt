@@ -1,0 +1,142 @@
+var
+  C: Char;
+  i: Integer;
+  Buffer: String;
+  ListBoxItem: TListBoxItem;
+  ListBoxGroupHeader: TListBoxGroupHeader;
+  ListBoxGroupFooter: TListBoxGroupFooter;
+
+  ListBoxHeader: TListBoxHeader;
+  DataHeader: string;
+  Tamanho: Double;
+   L: TText;
+begin
+
+  lstboxAgenda.BeginUpdate;
+  lstboxAgenda.Items.Clear;
+  DmEscola.fdqAgenda.First;
+
+  while not DmEscola.fdqAgenda.Eof do
+  begin
+
+    {codigo antigo do Header
+    ListBoxGroupHeader := TListBoxGroupHeader.Create(lstboxAgenda);
+    ListBoxGroupHeader.TextSettings.HorzAlign := TTextAlign.Center;
+    ListBoxGroupHeader.TextSettings.WordWrap := True;
+    DataHeader := DmEscola.fdqAgenda.FieldByName('data').AsString;
+    //ListBoxGroupHeader.Text := DataHeader;
+
+    L := TText.Create(self);
+    L.Parent := ListBoxGroupHeader;
+    L.Align := TAlignLayout.alClient;
+      // L.Text := 'A quick brown fox jumped over the yellow log running away from the pink dog and ran down the lane.';
+    L.Text := DataHeader;
+    lstboxAgenda.AddObject(ListBoxGroupHeader);
+    }
+
+    if not (DmEscola.fdqAgenda.Bof) then
+    begin
+      {ListBoxGroupHeader := TListBoxGroupHeader.Create(lstboxAgenda);
+      ListBoxGroupHeader.TextSettings.HorzAlign := TTextAlign.Center;
+      ListBoxGroupHeader.TextSettings.WordWrap := True;
+      lstboxAgenda.AddObject(ListBoxGroupHeader);}
+      SetListBoxAgendaGroupHeader;
+    end;
+
+
+    DataHeader := DmEscola.fdqAgenda.FieldByName('data').AsString;
+    //ListBoxGroupHeader.Text := DataHeader;
+
+
+     ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+     //ListBoxItem.Text := DataHeader;
+     //ListBoxItem.TextSettings.WordWrap := True;
+     //ListBoxItem.TextSettings.Font.Style :=  [TFontStyle.fsBold];
+     ListBoxItem.Selectable:=False;
+
+    L := TText.Create(self);
+    L.Parent := ListBoxItem;
+    L.Align := TAlignLayout.alClient;
+    L.HorzTextAlign := TTextAlign.Leading;
+    //L.color := TAlphaColors.Darkgreen;
+
+    L.color := TAlphaColors.Darkseagreen;
+    //L.Color:=  TColor($228B22);
+    L.TextSettings.Font.Style :=  [TFontStyle.fsBold];
+    L.Text := DataHeader;
+    L.Margins.Left := MargemEsquerda;
+
+   lstboxAgenda.AddObject(ListBoxItem);
+
+      {
+     L := TText.Create(self);
+     L.Parent := ListBoxItem;
+     L.Align := TAlignLayout.alTop;
+      // L.Text := 'A quick brown fox jumped over the yellow log running away from the pink dog and ran down the lane.';
+     L.Text := DataHeader;
+
+        }
+
+
+
+
+
+
+
+    while (DataHeader = (DmEscola.fdqAgenda.FieldByName('data').AsString)) and
+      not(DmEscola.fdqAgenda.Eof) do
+    begin
+      // StringOfChar returns a string with a specified number of repeating characters.
+
+      // Simply add item
+      // lstboxAgenda.Items.Add(Buffer);
+
+      // or, you can add items by creating an instance of TListBoxItem by yourself
+      ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+      ListBoxItem.Text := DmEscola.fdqAgenda.FieldByName('descricao').AsString;
+      ListBoxItem.TextSettings.WordWrap := True;
+      ListBoxItem.Selectable:=False;
+      ListBoxItem.Margins.Left:=MargemEsquerda;
+
+     // ListBoxItem.StyleLookup := 'listboxitemnodetail';
+
+      Tamanho := 25 * (Length(DmEscola.fdqAgenda.FieldByName('descricao')
+        .AsString) / 35);
+
+      Tamanho := Tamanho + (CountChar(DmEscola.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
+
+      if Tamanho < 25 then
+        Tamanho := 25;
+
+     { if DmEscola.fdqAgenda.FieldByName('agenda_id').AsString = 'AE5D7A84-3B0C-420F-B4ED-63336C775E3B'
+      then
+      begin
+        ShowMessage(DmEscola.fdqAgenda.FieldByName('descricao').AsString);
+         Tamanho := Tamanho + (CountChar(DmEscola.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
+      end; }
+
+      ListBoxItem.Height := Tamanho;
+
+      // (aNone=0, aMore=1, aDetail=2, aCheckmark=3)
+      // ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(I);
+      lstboxAgenda.AddObject(ListBoxItem);
+
+      DmEscola.fdqAgenda.Next;
+
+      ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+      ListBoxItem.Text := '';
+      ListBoxItem.Selectable:=False;
+      //ListBoxItem.StyleLookup := 'listboxitemnodetail';
+      lstboxAgenda.AddObject(ListBoxItem);
+
+
+    end;
+
+    {ListBoxGroupFooter := TListBoxGroupFooter.Create(lstboxAgenda);
+    ListBoxGroupFooter.TextSettings.HorzAlign := TTextAlign.Center;
+    ListBoxGroupFooter.TextSettings.WordWrap := True;
+    ListBoxGroupFooter.Selectable:=False;
+    lstboxAgenda.AddObject(ListBoxGroupFooter); }
+
+  end;
+  lstboxAgenda.EndUpdate;

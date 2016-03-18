@@ -34,7 +34,8 @@ uses
   untTestesA in 'Testes\untTestesA.pas' {frmTesteA},
   untTestesB in 'Testes\untTestesB.pas' {frmTesteB},
   untPrincipalTeste in 'untPrincipalTeste.pas' {frmPrincipalTeste},
-  smTemplate in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.pas' {frmTemplate};
+  smTemplate in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.pas' {frmTemplate},
+  untAgendaEscolaViewTestes in 'Testes\untAgendaEscolaViewTestes.pas' {frmAgendaEscolaViewTestes};
 
 {$R *.res}
 
@@ -47,6 +48,7 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
+  Application.CreateForm(TfrmAgendaEscolaViewTestes, frmAgendaEscolaViewTestes);
   //Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
   Application.Run;

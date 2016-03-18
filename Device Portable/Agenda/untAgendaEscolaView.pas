@@ -11,7 +11,7 @@ uses
   MultiDetailAppearanceU, FMX.ListView, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, FMX.TabControl, FMX.ListBox, FMX.Effects, FMX.Edit,
-  Data.DB, FGX.VirtualKeyboard;
+  Data.DB, FGX.VirtualKeyboard,FMX.TextLayout;
 
 type
   TfrmAgendaEscolaView = class(TfrmBaseToolBar)
@@ -19,43 +19,39 @@ type
     blAgenda: TBindingsList;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    TabControl1: TTabControl;
     LinkFillControlToField1: TLinkFillControlToField;
-    TabItem6: TTabItem;
-    Layout3: TLayout;
-    TabItem9: TTabItem;
-    Layout6: TLayout;
-    ToolBar7: TToolBar;
-    SpeedButton8: TSpeedButton;
-    lstboxAgenda: TListBox;
-    ListBox2: TListBox;
     LinkFillControlToField2: TLinkFillControlToField;
-    TabItem1: TTabItem;
-    lstMnuMain: TListBox;
-    lblTipoCombustivel: TListBoxItem;
-    cmbTipoCombustivel: TComboBox;
-    lbKMs: TListBoxItem;
-    edtKMs: TEdit;
-    lbLitros: TListBoxItem;
-    edtLitros: TEdit;
-    ListBoxItem2: TListBoxItem;
-    btnCalcular: TButton;
-    lblResultado: TListBoxItem;
-    StyleBook1: TStyleBook;
-    TabItem2: TTabItem;
+    tbCtrlAgenda: TTabControl;
+    tbItemListAgenda: TTabItem;
+    Layout6: TLayout;
+    lstboxAgenda: TListBox;
+    tbItemListAgendaDev: TTabItem;
     ListBox1: TListBox;
+    ListBoxItem1: TListBoxItem;
+    ListBoxGroupHeader1: TListBoxGroupHeader;
+    ListBoxItem2: TListBoxItem;
+    ListBoxItem3: TListBoxItem;
+    ListBoxItem4: TListBoxItem;
+    Text1: TText;
+    Text2: TText;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
-    procedure lstAgendaUpdateObjects(const Sender: TObject;
-      const AItem: TListViewItem);
-    procedure SpeedButton8Click(Sender: TObject);
   private
-    procedure SetTitulo;
+    MargemEsquerda:Integer;
 
-    Function CountChar(Texto: String; C: Char): Integer;
+    procedure SetTitulo;
+    procedure FillListBoxAgenda;
+    procedure SetListBoxAgendaGroupHeader;
+    procedure SetListBoxAgendaItemData(Data:String);
+    procedure SetListBoxAgendaItem(Descricao:String);
+    procedure SetListBoxAgendaFooter;
+    procedure SetListBoxItemProperty(ListBoxItem:TListBoxItem);
+    procedure SetListBoxItemHeight(ListBoxItem:TListBoxItem);
+    procedure SetValuesObjets;
+    function CountChar(Texto: String; C: Char): Integer;
 
   public
     AlunoId: Integer;
@@ -94,10 +90,39 @@ begin
 end;
 
 
+procedure TfrmAgendaEscolaView.FillListBoxAgenda;
+var
+  Data: string;
+begin
+  lstboxAgenda.BeginUpdate;
+  lstboxAgenda.Items.Clear;
+  DmEscola.fdqAgenda.First;
+
+  while not DmEscola.fdqAgenda.Eof do
+  begin
+    if not (DmEscola.fdqAgenda.Bof) then
+      SetListBoxAgendaGroupHeader;
+
+    Data := DmEscola.fdqAgenda.FieldByName('data').AsString;
+    SetListBoxAgendaItemData(Data);
+
+    while (Data = (DmEscola.fdqAgenda.FieldByName('data').AsString)) and
+      not(DmEscola.fdqAgenda.Eof) do
+    begin
+      SetListBoxAgendaItem(DmEscola.fdqAgenda.FieldByName('descricao').AsString);
+      DmEscola.fdqAgenda.Next;
+    end;
+  end;
+  lstboxAgenda.EndUpdate;
+end;
+
 procedure TfrmAgendaEscolaView.FormCreate(Sender: TObject);
 begin
   inherited;
- // SetStyle(Self);
+  SetStyle(Self);
+  SetValuesObjets;
+  tbCtrlAgenda.TabPosition:= TTabPosition.None;
+  tbCtrlAgenda.ActiveTab:= tbItemListAgenda;
 end;
 
 procedure TfrmAgendaEscolaView.FormShow(Sender: TObject);
@@ -105,36 +130,120 @@ begin
   inherited;
   DmEscola.OpenAgenda(AlunoId, TurmaId);
   SetTitulo;
+  FillListBoxAgenda;
 
-  // lstAgenda.ItemAppearanceObjects.ItemObjects.Detail.Trimming:=None;
 end;
 
-procedure TfrmAgendaEscolaView.lstAgendaUpdateObjects(const Sender: TObject;
-  const AItem: TListViewItem);
+
+procedure TfrmAgendaEscolaView.SetListBoxAgendaFooter;
 begin
-  // In order for text to be truncated properly, shorten text object
-  // AItem.Objects.TextObject.Width := AItem.Objects.TextObject.Width - (5 + AItem.Objects.AccessoryObject.Width);
-
-  // AItem.Objects.TextObject.Height := Length(DmEscola.fdqAgenda.FieldByName('descricao').Text) * 25;
-  // Restore checked state when device is rotated.
-  // When listview is resized because of rotation, accessory properties will be reset to default values
-  // AItem.Objects.AccessoryObject.Visible := FChecked.Contains(AItem.Index);
-
+//
 end;
 
+procedure TfrmAgendaEscolaView.SetListBoxAgendaGroupHeader;
+var
+  ListBoxGroupHeader: TListBoxGroupHeader;
+begin
+  ListBoxGroupHeader := TListBoxGroupHeader.Create(lstboxAgenda);
+  ListBoxGroupHeader.TextSettings.HorzAlign := TTextAlign.Center;
+  ListBoxGroupHeader.TextSettings.WordWrap := True;
+  lstboxAgenda.AddObject(ListBoxGroupHeader);
+end;
+
+procedure TfrmAgendaEscolaView.SetListBoxAgendaItem(Descricao:String);
+var
+  ListBoxItem: TListBoxItem;
+  HeightItem: Double;
+begin
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Text := Descricao;
+  SetListBoxItemHeight(ListBoxItem);
+  lstboxAgenda.AddObject(ListBoxItem);
+
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  SetListBoxItemProperty(ListBoxItem);
+  lstboxAgenda.AddObject(ListBoxItem);
+end;
+
+procedure TfrmAgendaEscolaView.SetListBoxAgendaItemData(Data:String);
+var
+  ListBoxItem: TListBoxItem;
+  Text: TText;
+begin
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  SetListBoxItemProperty(ListBoxItem);
+
+  Text := TText.Create(self);
+  Text.Parent := ListBoxItem;
+  Text.Align := TAlignLayout.alClient;
+  Text.HorzTextAlign := TTextAlign.Leading;
+  Text.color := TAlphaColors.Darkseagreen;
+  Text.TextSettings.Font.Style :=  [TFontStyle.fsBold];
+  Text.Text := Data;
+  Text.Margins.Left := MargemEsquerda;
+
+  lstboxAgenda.AddObject(ListBoxItem);
+end;
+
+procedure TfrmAgendaEscolaView.SetListBoxItemHeight(ListBoxItem: TListBoxItem);
+var
+  myLayout: TTextLayout;
+  i: integer;
+  aPoint: TPointF;
+  HeightItem:Integer;
+begin
+  myLayout := TTextLayoutManager.DefaultTextLayout.Create;
+  myLayout.BeginUpdate;
+
+  // Setting the layout MaxSize
+  aPoint.X := lstboxAgenda.Width;
+  aPoint.Y := lstboxAgenda.Height;
+
+  myLayout.MaxSize:= aPoint;
+  myLayout.Text:=ListBoxItem.Text;
+  myLayout.WordWrap:= True ;
+  myLayout.Font:=ListBoxItem.Font;
+  myLayout.HorizontalAlign:= ListBoxItem.TextSettings.HorzAlign;
+  myLayout.VerticalAlign:= ListBoxItem.TextSettings.VertAlign;
+  myLayout.Padding:=ListBoxItem.Padding;
+  myLayout.EndUpdate;
+
+  HeightItem:=  Trunc(myLayout.TextHeight) + 4;
+
+  if HeightItem < 25 then
+    HeightItem:= 25;
+
+  ListBoxItem.Height := HeightItem;
+end;
+
+procedure TfrmAgendaEscolaView.SetListBoxItemProperty(
+  ListBoxItem: TListBoxItem);
+begin
+  ListBoxItem.TextSettings.WordWrap := True;
+  ListBoxItem.Selectable:=False;
+  ListBoxItem.Margins.Left:=MargemEsquerda;
+end;
 
 procedure TfrmAgendaEscolaView.SetTitulo;
 begin
   lblTitulo.Text := Titulo;
 end;
 
+procedure TfrmAgendaEscolaView.SetValuesObjets;
+begin
+  MargemEsquerda:=8;
+end;
+
 procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
+  FillListBoxAgenda;
   DmEscola.GetAgenda;
   DmEscola.OpenAgenda(AlunoId, TurmaId);
   DmEscola.SalvarDadosServer;
   Dm.SalvarDadosServer;
+  FillListBoxAgenda;
 end;
 
 procedure TfrmAgendaEscolaView.SpeedButton2Click(Sender: TObject);
@@ -147,83 +256,7 @@ begin
   frmAgendaEscolaAdd.TurmaId := TurmaId;
   frmAgendaEscolaAdd.Titulo := Titulo;
   frmAgendaEscolaAdd.Show;
-end;
-
-procedure TfrmAgendaEscolaView.SpeedButton8Click(Sender: TObject);
-var
-  C: Char;
-  i: Integer;
-  Buffer: String;
-  ListBoxItem: TListBoxItem;
-  ListBoxGroupHeader: TListBoxGroupHeader;
-  DataHeader: string;
-  Tamanho: Double;
-begin
-
-  lstboxAgenda.BeginUpdate;
-  lstboxAgenda.Items.Clear;
-  DmEscola.fdqAgenda.First;
-
-  while not DmEscola.fdqAgenda.Eof do
-  begin
-    ListBoxGroupHeader := TListBoxGroupHeader.Create(lstboxAgenda);
-    ListBoxGroupHeader.TextSettings.HorzAlign := TTextAlign.Center;
-    ListBoxGroupHeader.TextSettings.WordWrap := True;
-
-    DataHeader := DmEscola.fdqAgenda.FieldByName('data').AsString;
-    ListBoxGroupHeader.Text := DataHeader;
-    lstboxAgenda.AddObject(ListBoxGroupHeader);
-
-    while (DataHeader = (DmEscola.fdqAgenda.FieldByName('data').AsString)) and
-      not(DmEscola.fdqAgenda.Eof) do
-    begin
-      // StringOfChar returns a string with a specified number of repeating characters.
-
-      // Simply add item
-      // lstboxAgenda.Items.Add(Buffer);
-
-      // or, you can add items by creating an instance of TListBoxItem by yourself
-      ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-      ListBoxItem.Text := DmEscola.fdqAgenda.FieldByName('descricao').AsString;
-      ListBoxItem.TextSettings.WordWrap := True;
-      ListBoxItem.Selectable:=False;
-            ListBoxItem.Selectable:=False;
-     // ListBoxItem.StyleLookup := 'listboxitemnodetail';
-
-      Tamanho := 25 * (Length(DmEscola.fdqAgenda.FieldByName('descricao')
-        .AsString) / 35);
-
-      Tamanho := Tamanho + (CountChar(DmEscola.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
-
-      if Tamanho < 25 then
-        Tamanho := 25;
-
-     { if DmEscola.fdqAgenda.FieldByName('agenda_id').AsString = 'AE5D7A84-3B0C-420F-B4ED-63336C775E3B'
-      then
-      begin
-        ShowMessage(DmEscola.fdqAgenda.FieldByName('descricao').AsString);
-         Tamanho := Tamanho + (CountChar(DmEscola.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
-      end; }
-
-      ListBoxItem.Height := Tamanho;
-
-      // (aNone=0, aMore=1, aDetail=2, aCheckmark=3)
-      // ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(I);
-      lstboxAgenda.AddObject(ListBoxItem);
-
-      DmEscola.fdqAgenda.Next;
-
-      ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-      ListBoxItem.Text := '';
-      ListBoxItem.Selectable:=False;
-      //ListBoxItem.StyleLookup := 'listboxitemnodetail';
-      lstboxAgenda.AddObject(ListBoxItem);
-
-
-    end;
-  end;
-  lstboxAgenda.EndUpdate;
-
+  FillListBoxAgenda;
 end;
 
 end.

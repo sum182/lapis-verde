@@ -11,10 +11,10 @@ uses
   MultiDetailAppearanceU, FMX.ListView, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, FMX.TabControl, FMX.ListBox, FMX.Effects, FMX.Edit,
-  Data.DB;
+  Data.DB, FGX.VirtualKeyboard;
 
 type
-  TfrmAgendaEscolaView = class(TfrmBaseToolBar)
+  TfrmAgendaEscolaViewTestes = class(TfrmBaseToolBar)
     bsAgenda: TBindSourceDB;
     blAgenda: TBindingsList;
     SpeedButton1: TSpeedButton;
@@ -62,6 +62,18 @@ type
     ToolBar7: TToolBar;
     SpeedButton8: TSpeedButton;
     ListBox6: TListBox;
+    TabItem10: TTabItem;
+    lstMnuMain: TListBox;
+    lblTipoCombustivel: TListBoxItem;
+    cmbTipoCombustivel: TComboBox;
+    lbKMs: TListBoxItem;
+    edtKMs: TEdit;
+    lbLitros: TListBoxItem;
+    edtLitros: TEdit;
+    ListBoxItem2: TListBoxItem;
+    btnCalcular: TButton;
+    lblResultado: TListBoxItem;
+    TabItem11: TTabItem;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -88,7 +100,7 @@ type
   end;
 
 var
-  frmAgendaEscolaView: TfrmAgendaEscolaView;
+  frmAgendaEscolaViewTestes: TfrmAgendaEscolaViewTestes;
 
 implementation
 
@@ -97,14 +109,14 @@ implementation
 uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal,
   untDMStyles;
 
-procedure TfrmAgendaEscolaView.btnVoltarClick(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.btnVoltarClick(Sender: TObject);
 begin
   fAllowCloseForm := True;
   Close;
   inherited;
 end;
 
-function TfrmAgendaEscolaView.CountChar(Texto: String; C: Char): Integer;
+function TfrmAgendaEscolaViewTestes.CountChar(Texto: String; C: Char): Integer;
 var
   i, vTot: Integer;
 begin
@@ -117,7 +129,7 @@ begin
   Result := vTot;
 end;
 
-procedure TfrmAgendaEscolaView.FillListCategory;
+procedure TfrmAgendaEscolaViewTestes.FillListCategory;
 var
   Item: TListBoxItem;
   LblTitle: TLabel;
@@ -185,13 +197,13 @@ begin
   ListBox4.EndUpdate;
 end;
 
-procedure TfrmAgendaEscolaView.FormCreate(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.FormCreate(Sender: TObject);
 begin
   inherited;
   // SetStyle(Self);
 end;
 
-procedure TfrmAgendaEscolaView.FormShow(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.FormShow(Sender: TObject);
 begin
   inherited;
   DmEscola.OpenAgenda(AlunoId, TurmaId);
@@ -201,7 +213,7 @@ begin
   // lstAgenda.ItemAppearanceObjects.ItemObjects.Detail.Trimming:=None;
 end;
 
-procedure TfrmAgendaEscolaView.lstAgendaUpdateObjects(const Sender: TObject;
+procedure TfrmAgendaEscolaViewTestes.lstAgendaUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   // In order for text to be truncated properly, shorten text object
@@ -214,7 +226,7 @@ begin
 
 end;
 
-procedure TfrmAgendaEscolaView.RefreshDataSet(DataSet: TDataSet);
+procedure TfrmAgendaEscolaViewTestes.RefreshDataSet(DataSet: TDataSet);
 begin
   if not DataSet.Active then
     DataSet.Open
@@ -226,12 +238,12 @@ begin
   FillListCategory;
 end;
 
-procedure TfrmAgendaEscolaView.SetTitulo;
+procedure TfrmAgendaEscolaViewTestes.SetTitulo;
 begin
   lblTitulo.Text := Titulo;
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
   DmEscola.GetAgenda;
@@ -240,7 +252,7 @@ begin
   Dm.SalvarDadosServer;
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton2Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
   if not Assigned(frmAgendaEscolaAdd) then
@@ -252,7 +264,7 @@ begin
   frmAgendaEscolaAdd.Show;
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton3Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton3Click(Sender: TObject);
 var
   LItem: TListViewItem;
   i: Integer;
@@ -304,7 +316,7 @@ begin
 
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton4Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton4Click(Sender: TObject);
 var
   // CR: TCalloutRectangle;
   CR: TPanel;
@@ -355,7 +367,7 @@ begin
 
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton5Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton5Click(Sender: TObject);
 var
   C: Char;
   i: Integer;
@@ -394,14 +406,14 @@ begin
   ListBox3.EndUpdate;
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton6Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton6Click(Sender: TObject);
 begin
   inherited;
   FillListCategory;
 
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton7Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton7Click(Sender: TObject);
 Var
   Item: TListBoxItem;
 begin
@@ -433,7 +445,7 @@ begin
 
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton8Click(Sender: TObject);
+procedure TfrmAgendaEscolaViewTestes.SpeedButton8Click(Sender: TObject);
 var
   C: Char;
   i: Integer;
