@@ -80,8 +80,6 @@ begin
   frmAgendaEscolaView.Titulo:= DmEscola.fdqAluno.FieldByName('nome').AsString;
   frmAgendaEscolaView.TurmaId:= 0;
   frmAgendaEscolaView.Show;
-
-
 end;
 
 procedure TfrmAgendaEscolaSelect.lstTurmasItemClick(const Sender: TObject;

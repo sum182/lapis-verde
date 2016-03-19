@@ -146,6 +146,15 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure edtNomeClick(Sender: TObject);
+    procedure edtSobrenomeClick(Sender: TObject);
+    procedure edtEmailClick(Sender: TObject);
+    procedure edtCriarSenhaClick(Sender: TObject);
+    procedure edtConfirmarSenhaClick(Sender: TObject);
+    procedure edtTelefoneClick(Sender: TObject);
+    procedure edtCPFClick(Sender: TObject);
+    procedure edtRGClick(Sender: TObject);
+    procedure cmbSexoClick(Sender: TObject);
   private
     fAllowCloseForm : Boolean;
     MsgCriarConta:String;
@@ -187,7 +196,7 @@ implementation
 {$R *.fmx}
 
 uses smGeralFMX, untFuncoes, untDMStyles, untDM, untModuloCliente, smCrypt,
-  untLogin,smMensagensFMX;
+  untLogin,smMensagensFMX, FMX.Platform;
 
 procedure TfrmCriarConta.btnProximaNomeClick(Sender: TObject);
 begin
@@ -209,6 +218,12 @@ begin
   inherited;
   SetVisibleLabelSexo;
   SetStateButtonsDadosPessoais;
+end;
+
+procedure TfrmCriarConta.cmbSexoClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
 end;
 
 procedure TfrmCriarConta.cmbSexoKeyDown(Sender: TObject; var Key: Word;
@@ -262,6 +277,12 @@ begin
   SetStateButtonsSenha;
 end;
 
+procedure TfrmCriarConta.edtConfirmarSenhaClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
+end;
+
 procedure TfrmCriarConta.edtConfirmarSenhaKeyDown(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
@@ -279,6 +300,12 @@ procedure TfrmCriarConta.edtCPFChangeTracking(Sender: TObject);
 begin
   inherited;
   SetStateButtonsDadosPessoais;
+end;
+
+procedure TfrmCriarConta.edtCPFClick(Sender: TObject);
+begin
+  inherited;
+ OnClickFields(Self);
 end;
 
 procedure TfrmCriarConta.edtCPFKeyDown(Sender: TObject; var Key: Word;
@@ -300,6 +327,12 @@ begin
   SetStateButtonsSenha;
 end;
 
+procedure TfrmCriarConta.edtCriarSenhaClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
+end;
+
 procedure TfrmCriarConta.edtCriarSenhaKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -317,6 +350,12 @@ procedure TfrmCriarConta.edtEmailChangeTracking(Sender: TObject);
 begin
   inherited;
   SetStateButtonsEmail;
+end;
+
+procedure TfrmCriarConta.edtEmailClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
 end;
 
 procedure TfrmCriarConta.edtEmailKeyDown(Sender: TObject; var Key: Word;
@@ -338,6 +377,12 @@ begin
   SetStateButtonsNome;
 end;
 
+procedure TfrmCriarConta.edtNomeClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
+end;
+
 procedure TfrmCriarConta.edtNomeKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -355,6 +400,12 @@ procedure TfrmCriarConta.edtRGChangeTracking(Sender: TObject);
 begin
   inherited;
   SetStateButtonsDadosPessoais;
+end;
+
+procedure TfrmCriarConta.edtRGClick(Sender: TObject);
+begin
+  inherited;
+ OnClickFields(Self);
 end;
 
 procedure TfrmCriarConta.edtRGKeyDown(Sender: TObject; var Key: Word;
@@ -376,6 +427,12 @@ begin
   SetStateButtonsNome;
 end;
 
+procedure TfrmCriarConta.edtSobrenomeClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
+end;
+
 procedure TfrmCriarConta.edtSobrenomeKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -393,6 +450,12 @@ procedure TfrmCriarConta.edtTelefoneChangeTracking(Sender: TObject);
 begin
   inherited;
   SetStateButtonsTelefone;
+end;
+
+procedure TfrmCriarConta.edtTelefoneClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
 end;
 
 procedure TfrmCriarConta.edtTelefoneKeyDown(Sender: TObject; var Key: Word;
@@ -421,7 +484,8 @@ procedure TfrmCriarConta.FormKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
-  if Key = vkHardwareBack then
+
+  if (Key = vkHardwareBack) and not (KeyboradShowing) then
   begin
     Key := 0;
 

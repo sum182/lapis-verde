@@ -1,9 +1,13 @@
 inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
   Caption = 'frmBaseToolBar1'
+  ClientHeight = 472
   Position = DesktopCenter
+  StyleBook = DMStyles.styleAndroidNew
+  OnCloseQuery = nil
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
+    Size.Height = 472.000000000000000000
     inherited ToolBar1: TToolBar
       inherited lblTitulo: TLabel
         Size.Width = 180.000000000000000000
@@ -109,10 +113,10 @@ inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB71B68EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E5DB72B68EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A847000DDA6FB4E84E6DD1C00000000
+                  721FB1E71A117315233D622E8C445C9B2A84700093D3FB06226500B300000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -124,34 +128,89 @@ inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
       end
       object SpeedButton1: TSpeedButton
         Align = Right
-        Position.X = 592.000000000000000000
+        Position.X = 272.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'donetoolbutton'
+        StyleLookup = 'playtoolbutton'
         Text = 'Criar'
         OnClick = SpeedButton1Click
       end
     end
-    object Memo1: TMemo
-      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-      DataDetectorTypes = []
-      Align = Client
-      Size.Width = 640.000000000000000000
-      Size.Height = 384.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 1
-      Viewport.Width = 632.000000000000000000
-      Viewport.Height = 376.000000000000000000
-    end
-    object ToolBar2: TToolBar
-      Align = Bottom
-      Position.Y = 432.000000000000000000
-      Size.Width = 640.000000000000000000
+    object ToolBarNome: TToolBar
+      Position.Y = 54.000000000000000000
+      Size.Width = 320.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'toolbarstyle'
+      TabOrder = 1
+      object lblNome: TLabel
+        Align = Left
+        Margins.Left = 15.000000000000000000
+        Position.X = 15.000000000000000000
+        Size.Width = 180.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'toollabel'
+        Text = 'Para: Sala 1'
+      end
+    end
+    object Layout1: TLayout
+      Align = Top
+      Position.Y = 48.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 6.000000000000000000
+      Size.PlatformDefault = False
       TabOrder = 2
     end
+    object layMemo: TLayout
+      Align = Client
+      Size.Width = 320.000000000000000000
+      Size.Height = 370.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object VertScrollBox1: TVertScrollBox
+        Align = Client
+        Size.Width = 320.000000000000000000
+        Size.Height = 370.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 320.000000000000000000
+        Viewport.Height = 370.000000000000000000
+        object memAgenda: TMemo
+          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+          DataDetectorTypes = []
+          OnChange = memAgendaChange
+          OnChangeTracking = memAgendaChangeTracking
+          Align = Client
+          Margins.Left = 6.000000000000000000
+          Margins.Top = 6.000000000000000000
+          Margins.Right = 6.000000000000000000
+          Margins.Bottom = 6.000000000000000000
+          Size.Width = 308.000000000000000000
+          Size.Height = 358.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'memostyle'
+          TabOrder = 0
+          OnClick = memAgendaClick
+          Viewport.Width = 300.000000000000000000
+          Viewport.Height = 350.000000000000000000
+          object lblAgenda: TLabel
+            Align = Top
+            Enabled = False
+            Size.Width = 300.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Escrever Agenda'
+          end
+        end
+      end
+    end
+  end
+  object fgVirtualKeyboard1: TfgVirtualKeyboard
+    Buttons = <>
+    OnShow = fgVirtualKeyboard1Show
+    OnHide = fgVirtualKeyboard1Hide
+    Left = 240
+    Top = 264
   end
 end

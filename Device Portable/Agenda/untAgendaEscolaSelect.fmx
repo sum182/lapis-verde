@@ -108,10 +108,10 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E5DB72B68EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E1DB73368EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A84700093D3FB06226500B300000000
+                  721FB1E71A117315233D622E8C445C9B2A847000EEE2FAE25B5F28A900000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -123,7 +123,7 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
       end
       object btnAtualizar: TSpeedButton
         Align = Right
-        Position.X = 592.000000000000000000
+        Position.X = 272.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -134,7 +134,7 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
     end
     object tbctrlPrincipal: TTabControl
       Align = Client
-      Size.Width = 640.000000000000000000
+      Size.Width = 320.000000000000000000
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
@@ -146,7 +146,7 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
           item
           end>
         IsSelected = False
-        Size.Width = 320.000000000000000000
+        Size.Width = 160.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -160,8 +160,8 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
           Align = Client
-          Size.Width = 640.000000000000000000
-          Size.Height = 383.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
@@ -174,7 +174,7 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
           item
           end>
         IsSelected = True
-        Size.Width = 320.000000000000000000
+        Size.Width = 160.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -188,7 +188,7 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
           Align = Client
-          Size.Width = 640.000000000000000000
+          Size.Width = 320.000000000000000000
           Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0

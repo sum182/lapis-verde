@@ -49,6 +49,8 @@ type
     procedure edtUsuarioChangeTracking(Sender: TObject);
     procedure fgVirtualKeyboardHide(Sender: TObject; const Bounds: TRect);
     procedure fgVirtualKeyboardShow(Sender: TObject; const Bounds: TRect);
+    procedure edtUsuarioClick(Sender: TObject);
+    procedure edtSenhaClick(Sender: TObject);
   private
     FActivityDialogThread: TThread;
     fLoginOK:boolean;
@@ -152,6 +154,12 @@ begin
   SetStateButtons;
 end;
 
+procedure TfrmLogin.edtUsuarioClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
+end;
+
 procedure TfrmLogin.edtUsuarioExit(Sender: TObject);
 begin
   inherited;
@@ -195,6 +203,12 @@ begin
   SetStateButtons;
 end;
 
+procedure TfrmLogin.edtSenhaClick(Sender: TObject);
+begin
+  inherited;
+  OnClickFields(Self);
+end;
+
 procedure TfrmLogin.edtSenhaExit(Sender: TObject);
 begin
   inherited;
@@ -222,6 +236,7 @@ begin
   lblErrorLogin.Visible := False;
   btnEsqueceuSenha.Visible:=False;
   SetStyle(Self);
+  fAllowCloseForm:= False;
 end;
 
 procedure TfrmLogin.FormShow(Sender: TObject);

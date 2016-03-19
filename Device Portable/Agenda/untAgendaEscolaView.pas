@@ -131,7 +131,6 @@ begin
   DmEscola.OpenAgenda(AlunoId, TurmaId);
   SetTitulo;
   FillListBoxAgenda;
-
 end;
 
 
@@ -156,12 +155,16 @@ var
   HeightItem: Double;
 begin
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.BeginUpdate;
   SetListBoxItemProperty(ListBoxItem);
   ListBoxItem.Text := Descricao;
   SetListBoxItemHeight(ListBoxItem);
+  ListBoxItem.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
 
+  //Linha em Branco
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.Text:= '----';
   SetListBoxItemProperty(ListBoxItem);
   lstboxAgenda.AddObject(ListBoxItem);
 end;
@@ -178,10 +181,14 @@ begin
   Text.Parent := ListBoxItem;
   Text.Align := TAlignLayout.alClient;
   Text.HorzTextAlign := TTextAlign.Leading;
-  Text.color := TAlphaColors.Darkseagreen;
+  //Text.color := TAlphaColors.Darkseagreen;
+  Text.color := TAlphaColors.Mediumseagreen;
+
   Text.TextSettings.Font.Style :=  [TFontStyle.fsBold];
+  Text.TextSettings.Font.Size :=  16;
   Text.Text := Data;
-  Text.Margins.Left := MargemEsquerda;
+  //Text.Margins.Left := MargemEsquerda;
+//  Text.Padding.Left := ;
 
   lstboxAgenda.AddObject(ListBoxItem);
 end;
@@ -192,6 +199,7 @@ var
   i: integer;
   aPoint: TPointF;
   HeightItem:Integer;
+  Multiplicador: Integer;
 begin
   myLayout := TTextLayoutManager.DefaultTextLayout.Create;
   myLayout.BeginUpdate;
@@ -209,10 +217,30 @@ begin
   myLayout.Padding:=ListBoxItem.Padding;
   myLayout.EndUpdate;
 
-  HeightItem:=  Trunc(myLayout.TextHeight) + 4;
+  //HeightItem:=  Trunc(myLayout.TextHeight) + 6;
+  HeightItem:=  Trunc(myLayout.Height);
 
   if HeightItem < 25 then
     HeightItem:= 25;
+
+
+  if HeightItem > 30 then
+    Multiplicador:= 10;
+
+  if HeightItem > 300 then
+    Multiplicador:= 15;
+
+ { if HeightItem > 400 then
+    Multiplicador:= 15;
+  }
+  if HeightItem > 500 then
+    Multiplicador:= 16;
+
+  if HeightItem > 30 then
+  begin
+    HeightItem:= HeightItem + Trunc((HeightItem  / 60) * Multiplicador);
+    HeightItem:= HeightItem + 18;
+  end;
 
   ListBoxItem.Height := HeightItem;
 end;
@@ -256,6 +284,8 @@ begin
   frmAgendaEscolaAdd.TurmaId := TurmaId;
   frmAgendaEscolaAdd.Titulo := Titulo;
   frmAgendaEscolaAdd.Show;
+  DmEscola.fdqAgenda.Close;
+  DmEscola.fdqAgenda.Open;
   FillListBoxAgenda;
 end;
 

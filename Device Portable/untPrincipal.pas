@@ -167,14 +167,14 @@ end;
 procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
-  if (IsSysOSAndroid) or (IsSysOSiOS)then
-    CanClose := fAllowCloseForm;
+  //if (IsSysOSAndroid) or (IsSysOSiOS)then
+  CanClose := fAllowCloseForm;
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   inherited;
-  fAllowCloseForm:= False;
+  fAllowCloseForm:= True;
   SetStyle(Self);
   fShowMenuPrincipal:=True;
   fShowForm:=False;

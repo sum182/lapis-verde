@@ -38,6 +38,7 @@ inherited frmLogin: TfrmLogin
           OnChange = edtUsuarioChange
           OnChangeTracking = edtUsuarioChangeTracking
           OnKeyDown = edtUsuarioKeyDown
+          OnClick = edtUsuarioClick
           OnExit = edtUsuarioExit
           object imgUsuario: TImage
             MultiResBitmap.Height = 24
@@ -208,6 +209,7 @@ inherited frmLogin: TfrmLogin
           OnChange = edtSenhaChange
           OnChangeTracking = edtSenhaChangeTracking
           OnKeyDown = edtSenhaKeyDown
+          OnClick = edtSenhaClick
           OnExit = edtSenhaExit
           object imgSenha: TImage
             MultiResBitmap.Height = 24
