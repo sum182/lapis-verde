@@ -1,17 +1,17 @@
 inherited frmAgendaEscolaView: TfrmAgendaEscolaView
   Caption = 'frmBaseToolBar1'
   ClientHeight = 606
-  ClientWidth = 628
+  ClientWidth = 513
   Position = DesktopCenter
   StyleBook = DMStyles.styleAndroidNew
   OnCloseQuery = nil
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
-    Size.Width = 628.000000000000000000
+    Size.Width = 513.000000000000000000
     Size.Height = 606.000000000000000000
     inherited ToolBar1: TToolBar
-      Size.Width = 628.000000000000000000
+      Size.Width = 513.000000000000000000
       StyleLookup = 'toolbarstyle'
       inherited lblTitulo: TLabel
         Size.Width = 132.000000000000000000
@@ -117,10 +117,10 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB47B68EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E9DB48368EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A84700022A5F99E151EF38B00000000
+                  721FB1E71A117315233D622E8C445C9B2A8470007DB4F97AD1EE613400000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -132,7 +132,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       end
       object SpeedButton1: TSpeedButton
         Align = Right
-        Position.X = 532.000000000000000000
+        Position.X = 417.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -140,20 +140,108 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         Text = 'SpeedButton1'
         OnClick = SpeedButton1Click
       end
-      object SpeedButton2: TSpeedButton
+      object btnAdd: TSpeedButton
         Align = Right
-        Position.X = 580.000000000000000000
+        Position.X = 465.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'addtoolbutton'
-        Text = 'Criar'
-        OnClick = SpeedButton2Click
+        OnClick = btnAddClick
+        object imgAdd: TImage
+          MultiResBitmap.Height = 24
+          MultiResBitmap.Width = 24
+          MultiResBitmap = <
+            item
+              Scale = 4.000000000000000000
+              Width = 96
+              Height = 96
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00C049444154785EEDDB210E80301000C1C2FFFF0C884A120C64533263AE7E73
+                EE3A00000000000000F8AD6DCE651C97F9BCB55DE67309FB9C44048809101320
+                26404C80980031016202C404880910132026404C80980031016202C404880910
+                132026404C809800B1D76F689EEE7656F7F6DD910D880910132026404C809800
+                310162FE07C46C404C80980031016202C404880910132026404C809800310162
+                02C404880910132026404C80980031016202C404880900000000000000009F18
+                E30482790C6E1974848C0000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_add\ic_add_white_24dp\android\draw' +
+                'able-xxxhdpi\ic_add_white_24dp.png'
+            end
+            item
+              Scale = 3.000000000000000000
+              Width = 72
+              Height = 72
+              PNG = {
+                89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                009249444154785EEDD9211280300C00C1C2FFFF0C881A0473020103BB26D537
+                51E900000000F89665CE476D87F93C590EF3F998754E2E0814040A0205818240
+                41A0205010280814040A020581824041A020501028DCBAD85D5D02DFE6CE65D2
+                060581824041A02050F02F166C5010280814040A020581824041A02050102808
+                14040A020581824041A02010000000C09F8CB103BA130C528878F0E200000000
+                49454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_add\ic_add_white_24dp\android\draw' +
+                'able-xxhdpi\ic_add_white_24dp.png'
+            end
+            item
+              Scale = 2.000000000000000000
+              Width = 48
+              Height = 48
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                005F494441546843EDD7310AC020104541CDFDEF9C48D82A9501C32738D3ACED
+                0385B5010041BDE672E750C75B1FEAB8D451F3B704A40948139026204D40DAF4
+                7EF2DC6DBE36BB3BB94269FBBC81B7FC07260948139026204D409A0000605FAD
+                5DD4A30C36ADEAB23F0000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_add\ic_add_white_24dp\android\draw' +
+                'able-xhdpi\ic_add_white_24dp.png'
+            end
+            item
+              Scale = 1.500000000000000000
+              Width = 36
+              Height = 36
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                0082494441545847EDD6610A80200C05E0AD8BD5D13C9A9DCC369DD09F1C4892
+                D5FB4094FAF360F09400E06FD8F66E29A54D365D2A3273B4F3332450905505FB
+                DC6DB17D1A08E441200F02799AC528BD722EBD2BFA7F2D47DA6579C5D85F9E5A
+                74B9EEEED52C4F8C4C8CBDEF7404791005EEB2E110C883409EE9027DEF910F00
+                EF42740027818CB15F746D500000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_add\ic_add_white_24dp\android\draw' +
+                'able-hdpi\ic_add_white_24dp.png'
+            end
+            item
+              Width = 24
+              Height = 24
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                004549444154484BEDD3B10A0020080450EDFFFFB924AEC0491D1C8A7B8B3A1D
+                820A91330163CA406DC380507B80A23AD54B39D4A0BDDA3728D94F6030A6F08A
+                42EF07D0F74416618A140879EE07EF0000000049454E44AE426082}
+              FileName = 
+                'C:\Projetos\Agenda\Imagens\ic_add\ic_add_white_24dp\android\draw' +
+                'able-mdpi\ic_add_white_24dp.png'
+            end>
+          Align = Client
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          WrapMode = Center
+          OnClick = imgAddClick
+        end
       end
     end
     object tbCtrlAgenda: TTabControl
       Align = Client
-      Size.Width = 628.000000000000000000
+      Size.Width = 513.000000000000000000
       Size.Height = 558.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
@@ -165,7 +253,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           item
           end>
         IsSelected = True
-        Size.Width = 314.000000000000000000
+        Size.Width = 256.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -175,7 +263,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         ExplicitSize.cy = 49.000000000000000000
         object Layout6: TLayout
           Align = Client
-          Size.Width = 628.000000000000000000
+          Size.Width = 513.000000000000000000
           Size.Height = 509.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -185,7 +273,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
             Margins.Top = 6.000000000000000000
             Margins.Right = 6.000000000000000000
             Margins.Bottom = 6.000000000000000000
-            Size.Width = 616.000000000000000000
+            Size.Width = 501.000000000000000000
             Size.Height = 497.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'lstboxAgendaStyle1'
@@ -211,7 +299,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
             DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
             DefaultItemStyles.GroupFooterStyle = ''
             GroupingKind = Grouped
-            Viewport.Width = 611.000000000000000000
+            Viewport.Width = 496.000000000000000000
             Viewport.Height = 497.000000000000000000
           end
         end
@@ -221,7 +309,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           item
           end>
         IsSelected = False
-        Size.Width = 314.000000000000000000
+        Size.Width = 257.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -231,23 +319,23 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         ExplicitSize.cy = 49.000000000000000000
         object ListBox1: TListBox
           Align = Client
-          Size.Width = 628.000000000000000000
-          Size.Height = 509.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           DisableFocusEffect = True
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 628.000000000000000000
-          Viewport.Height = 509.000000000000000000
+          Viewport.Width = 45.000000000000000000
+          Viewport.Height = 50.000000000000000000
           object ListBoxItem1: TListBoxItem
             TabOrder = 0
             Text = 'ListBoxItem1'
           end
           object ListBoxGroupHeader1: TListBoxGroupHeader
             Position.Y = 44.000000000000000000
-            Size.Width = 628.000000000000000000
+            Size.Width = 45.000000000000000000
             Size.Height = 30.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -258,7 +346,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
             object Text2: TText
               Align = Client
               Margins.Left = 8.000000000000000000
-              Size.Width = 620.000000000000000000
+              Size.Width = 37.000000000000000000
               Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
               Text = '10/10/2010'
@@ -273,13 +361,13 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
           object ListBoxItem4: TListBoxItem
             Position.Y = 162.000000000000000000
-            Size.Width = 628.000000000000000000
+            Size.Width = 45.000000000000000000
             Size.Height = 39.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 4
             object Text1: TText
               Align = Client
-              Size.Width = 628.000000000000000000
+              Size.Width = 45.000000000000000000
               Size.Height = 39.000000000000000000
               Size.PlatformDefault = False
               Text = 'Teste de mensagem'

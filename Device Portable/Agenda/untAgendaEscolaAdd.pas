@@ -11,7 +11,7 @@ uses
 type
   TfrmAgendaEscolaAdd = class(TfrmBaseToolBar)
     memAgenda: TMemo;
-    SpeedButton1: TSpeedButton;
+    btnEnviar: TSpeedButton;
     lblAgenda: TLabel;
     ToolBarNome: TToolBar;
     lblNome: TLabel;
@@ -19,8 +19,9 @@ type
     fgVirtualKeyboard1: TfgVirtualKeyboard;
     layMemo: TLayout;
     VertScrollBox1: TVertScrollBox;
+    imgEnviar: TImage;
     procedure FormCreate(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnEnviarClick(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure memAgendaChangeTracking(Sender: TObject);
@@ -28,6 +29,7 @@ type
     procedure memAgendaClick(Sender: TObject);
     procedure fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
     procedure fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
+    procedure imgEnviarClick(Sender: TObject);
   private
     procedure SetTitulo;
   public
@@ -83,6 +85,12 @@ begin
   SetTitulo;
 end;
 
+procedure TfrmAgendaEscolaAdd.imgEnviarClick(Sender: TObject);
+begin
+  inherited;
+  btnEnviar.OnClick(self);
+end;
+
 procedure TfrmAgendaEscolaAdd.memAgendaChange(Sender: TObject);
 begin
   inherited;
@@ -106,7 +114,7 @@ begin
   lblNome.Text := 'Para: ' + Titulo;
 end;
 
-procedure TfrmAgendaEscolaAdd.SpeedButton1Click(Sender: TObject);
+procedure TfrmAgendaEscolaAdd.btnEnviarClick(Sender: TObject);
 begin
   inherited;
   DmEscola.CriarAgenda(memAgenda.Text,AlunoId,TurmaId);

@@ -18,7 +18,7 @@ type
     bsAgenda: TBindSourceDB;
     blAgenda: TBindingsList;
     SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
+    btnAdd: TSpeedButton;
     LinkFillControlToField1: TLinkFillControlToField;
     LinkFillControlToField2: TLinkFillControlToField;
     tbCtrlAgenda: TTabControl;
@@ -34,11 +34,14 @@ type
     ListBoxItem4: TListBoxItem;
     Text1: TText;
     Text2: TText;
+    imgAdd: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
+    procedure btnAddClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure imgVoltarClick(Sender: TObject);
+    procedure imgAddClick(Sender: TObject);
   private
     MargemEsquerda:Integer;
 
@@ -67,7 +70,7 @@ implementation
 {$R *.fmx}
 
 uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal,
-  untDMStyles;
+  untDMStyles, smMensagensFMX;
 
 procedure TfrmAgendaEscolaView.btnVoltarClick(Sender: TObject);
 begin
@@ -133,6 +136,18 @@ begin
   FillListBoxAgenda;
 end;
 
+
+procedure TfrmAgendaEscolaView.imgAddClick(Sender: TObject);
+begin
+  inherited;
+  btnAdd.OnClick(self);
+end;
+
+procedure TfrmAgendaEscolaView.imgVoltarClick(Sender: TObject);
+begin
+  inherited;
+  btnVoltar.OnClick(self);
+end;
 
 procedure TfrmAgendaEscolaView.SetListBoxAgendaFooter;
 begin
@@ -200,6 +215,7 @@ var
   aPoint: TPointF;
   HeightItem:Integer;
   Multiplicador: Integer;
+  Soma:Integer;
 begin
   myLayout := TTextLayoutManager.DefaultTextLayout.Create;
   myLayout.BeginUpdate;
@@ -225,21 +241,39 @@ begin
 
 
   if HeightItem > 30 then
+  begin
     Multiplicador:= 10;
+    Soma:= 20;
+  end;
 
   if HeightItem > 300 then
-    Multiplicador:= 15;
+  begin
+    Multiplicador:= 22;
+    Soma:= 25;
+  end;
 
- { if HeightItem > 400 then
-    Multiplicador:= 15;
-  }
+  if HeightItem > 400 then
+  begin
+    Multiplicador:= 25;
+    Soma:= 30;
+  end;
+
   if HeightItem > 500 then
-    Multiplicador:= 16;
+  begin
+    Multiplicador:= 25;
+    Soma:= 30;
+  end;
+
+  if HeightItem > 700 then
+  begin
+    Multiplicador:= 26;
+    Soma:= 33;
+  end;
 
   if HeightItem > 30 then
   begin
-    HeightItem:= HeightItem + Trunc((HeightItem  / 60) * Multiplicador);
-    HeightItem:= HeightItem + 18;
+    HeightItem:= HeightItem + (Trunc((HeightItem  / 60) * Multiplicador));
+    HeightItem:= HeightItem + Soma;
   end;
 
   ListBoxItem.Height := HeightItem;
@@ -266,7 +300,6 @@ end;
 procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  FillListBoxAgenda;
   DmEscola.GetAgenda;
   DmEscola.OpenAgenda(AlunoId, TurmaId);
   DmEscola.SalvarDadosServer;
@@ -274,7 +307,7 @@ begin
   FillListBoxAgenda;
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton2Click(Sender: TObject);
+procedure TfrmAgendaEscolaView.btnAddClick(Sender: TObject);
 begin
   inherited;
   if not Assigned(frmAgendaEscolaAdd) then

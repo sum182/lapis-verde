@@ -50,9 +50,6 @@ Coordinates=0,401,60,58
 [Dm.RESTRequest1]
 Coordinates=346,555,127,102
 
-[SpeedButton2]
-Coordinates=414,695,96,58
-
 [DmEscola.fdqAluno]
 Coordinates=236,459,127,58
 
@@ -95,4 +92,7 @@ Coordinates=902,276,85,36
 
 [tbItemListAgenda]
 Coordinates=365,474,69,36
+
+[btnAdd]
+Coordinates=414,695,96,58
 
