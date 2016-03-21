@@ -382,13 +382,12 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 'afdsafa fdafas fdasffdafd'
                 'afdsafa fdafas fdasffdafd')
               TextSettings.WordWrap = True
-              Align = Client
               Size.Width = 513.000000000000000000
-              Size.Height = 159.000000000000000000
+              Size.Height = 27.000000000000000000
               Size.PlatformDefault = False
-              TabOrder = 1
+              TabOrder = 0
               Viewport.Width = 500.000000000000000000
-              Viewport.Height = 151.000000000000000000
+              Viewport.Height = 19.000000000000000000
             end
           end
         end
