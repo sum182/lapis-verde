@@ -11,7 +11,7 @@ uses
   MultiDetailAppearanceU, FMX.ListView, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, FMX.TabControl, FMX.ListBox, FMX.Effects, FMX.Edit,
-  Data.DB, FGX.VirtualKeyboard,FMX.TextLayout;
+  Data.DB, FGX.VirtualKeyboard,FMX.TextLayout, FMX.ScrollBox, FMX.Memo;
 
 type
   TfrmAgendaEscolaView = class(TfrmBaseToolBar)
@@ -32,9 +32,9 @@ type
     ListBoxItem2: TListBoxItem;
     ListBoxItem3: TListBoxItem;
     ListBoxItem4: TListBoxItem;
-    Text1: TText;
     Text2: TText;
     imgAdd: TImage;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -44,6 +44,8 @@ type
     procedure imgAddClick(Sender: TObject);
   private
     MargemEsquerda:Integer;
+    MargemDireita:Integer;
+
 
     procedure SetTitulo;
     procedure FillListBoxAgenda;
@@ -168,7 +170,10 @@ procedure TfrmAgendaEscolaView.SetListBoxAgendaItem(Descricao:String);
 var
   ListBoxItem: TListBoxItem;
   HeightItem: Double;
+  Text: TText;
+  Memo: TMemo;
 begin
+  {codigo ok
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   ListBoxItem.BeginUpdate;
   SetListBoxItemProperty(ListBoxItem);
@@ -176,10 +181,38 @@ begin
   SetListBoxItemHeight(ListBoxItem);
   ListBoxItem.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
+  }
+
+
+
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  SetListBoxItemProperty(ListBoxItem);
+
+  Memo := TMemo.Create(self);
+  Memo.Parent := ListBoxItem;
+  Memo.Enabled := False;
+  Memo.Align := TAlignLayout.alClient;
+  Memo.TextSettings.HorzAlign := TTextAlign.Leading;
+
+  //Memo.TextSettings.Font.Style :=  [TFontStyle.fsBold];
+  Memo.TextSettings.Font.Size :=  12;
+  Memo.Text := Descricao;
+  Memo.Margins.Right := MargemDireita;
+  Memo.TextSettings.WordWrap:=True;
+
+
+  ListBoxItem.Height:=  (Memo.Lines.Count * 25);
+
+  lstboxAgenda.AddObject(ListBoxItem);
+  //Text.Margins.Left := MargemEsquerda;
+//  Text.Padding.Left := ;
+
+
+
 
   //Linha em Branco
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-  ListBoxItem.Text:= '----';
+  ListBoxItem.Text:='';
   SetListBoxItemProperty(ListBoxItem);
   lstboxAgenda.AddObject(ListBoxItem);
 end;
@@ -295,6 +328,7 @@ end;
 procedure TfrmAgendaEscolaView.SetValuesObjets;
 begin
   MargemEsquerda:=8;
+  MargemDireita:=8;
 end;
 
 procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);

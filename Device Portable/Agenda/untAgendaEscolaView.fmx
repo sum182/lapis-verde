@@ -245,14 +245,14 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       Size.Height = 558.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 1
       TabPosition = PlatformDefault
       object tbItemListAgenda: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 256.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -308,7 +308,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 257.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -319,23 +319,23 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         ExplicitSize.cy = 49.000000000000000000
         object ListBox1: TListBox
           Align = Client
-          Size.Width = 50.000000000000000000
-          Size.Height = 50.000000000000000000
+          Size.Width = 513.000000000000000000
+          Size.Height = 509.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           DisableFocusEffect = True
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 45.000000000000000000
-          Viewport.Height = 50.000000000000000000
+          Viewport.Width = 513.000000000000000000
+          Viewport.Height = 509.000000000000000000
           object ListBoxItem1: TListBoxItem
             TabOrder = 0
             Text = 'ListBoxItem1'
           end
           object ListBoxGroupHeader1: TListBoxGroupHeader
             Position.Y = 44.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 513.000000000000000000
             Size.Height = 30.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -346,7 +346,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
             object Text2: TText
               Align = Client
               Margins.Left = 8.000000000000000000
-              Size.Width = 37.000000000000000000
+              Size.Width = 505.000000000000000000
               Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
               Text = '10/10/2010'
@@ -361,17 +361,34 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
           object ListBoxItem4: TListBoxItem
             Position.Y = 162.000000000000000000
-            Size.Width = 45.000000000000000000
-            Size.Height = 39.000000000000000000
+            Size.Width = 513.000000000000000000
+            Size.Height = 159.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 4
-            object Text1: TText
+            object Memo1: TMemo
+              Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+              DataDetectorTypes = []
+              Lines.Strings = (
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd'
+                'afdsafa fdafas fdasffdafd')
+              TextSettings.WordWrap = True
               Align = Client
-              Size.Width = 45.000000000000000000
-              Size.Height = 39.000000000000000000
+              Size.Width = 513.000000000000000000
+              Size.Height = 159.000000000000000000
               Size.PlatformDefault = False
-              Text = 'Teste de mensagem'
-              TextSettings.HorzAlign = Leading
+              TabOrder = 1
+              Viewport.Width = 500.000000000000000000
+              Viewport.Height = 151.000000000000000000
             end
           end
         end
