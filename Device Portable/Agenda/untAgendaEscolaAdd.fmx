@@ -1,14 +1,17 @@
 inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
   Caption = 'frmBaseToolBar1'
-  ClientHeight = 472
+  ClientHeight = 518
+  ClientWidth = 332
   Position = DesktopCenter
   StyleBook = DMStyles.styleAndroidNew
   OnCloseQuery = nil
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
-    Size.Height = 472.000000000000000000
+    Size.Width = 332.000000000000000000
+    Size.Height = 518.000000000000000000
     inherited ToolBar1: TToolBar
+      Size.Width = 332.000000000000000000
       inherited lblTitulo: TLabel
         Size.Width = 180.000000000000000000
         Text = 'Criar Agenda'
@@ -128,7 +131,7 @@ inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
       end
       object btnEnviar: TSpeedButton
         Align = Right
-        Position.X = 272.000000000000000000
+        Position.X = 284.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -298,9 +301,10 @@ inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
     end
     object ToolBarNome: TToolBar
       Position.Y = 54.000000000000000000
-      Size.Width = 320.000000000000000000
+      Size.Width = 332.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
+      StyleLookup = 'toolbarstyle'
       TabOrder = 1
       object lblNome: TLabel
         Align = Left
@@ -316,25 +320,25 @@ inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
     object Layout1: TLayout
       Align = Top
       Position.Y = 48.000000000000000000
-      Size.Width = 320.000000000000000000
+      Size.Width = 332.000000000000000000
       Size.Height = 6.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
     end
     object layMemo: TLayout
       Align = Client
-      Size.Width = 320.000000000000000000
-      Size.Height = 370.000000000000000000
+      Size.Width = 332.000000000000000000
+      Size.Height = 416.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
       object VertScrollBox1: TVertScrollBox
         Align = Client
-        Size.Width = 320.000000000000000000
-        Size.Height = 370.000000000000000000
+        Size.Width = 332.000000000000000000
+        Size.Height = 416.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Viewport.Width = 320.000000000000000000
-        Viewport.Height = 370.000000000000000000
+        Viewport.Width = 332.000000000000000000
+        Viewport.Height = 416.000000000000000000
         object memAgenda: TMemo
           Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
           DataDetectorTypes = []
@@ -346,18 +350,18 @@ inherited frmAgendaEscolaAdd: TfrmAgendaEscolaAdd
           Margins.Top = 6.000000000000000000
           Margins.Right = 6.000000000000000000
           Margins.Bottom = 6.000000000000000000
-          Size.Width = 308.000000000000000000
-          Size.Height = 358.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 404.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'memostyle'
           TabOrder = 0
           OnClick = memAgendaClick
-          Viewport.Width = 300.000000000000000000
-          Viewport.Height = 350.000000000000000000
+          Viewport.Width = 312.000000000000000000
+          Viewport.Height = 396.000000000000000000
           object lblAgenda: TLabel
             Align = Top
             Enabled = False
-            Size.Width = 300.000000000000000000
+            Size.Width = 312.000000000000000000
             Size.Height = 25.000000000000000000
             Size.PlatformDefault = False
             Text = 'Escrever Agenda'

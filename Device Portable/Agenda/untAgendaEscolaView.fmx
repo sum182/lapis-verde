@@ -245,14 +245,14 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
       Size.Height = 558.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 1
       TabPosition = PlatformDefault
       object tbItemListAgenda: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 256.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -308,7 +308,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 257.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -369,22 +369,14 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
               Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
               DataDetectorTypes = []
               Lines.Strings = (
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd'
-                'afdsafa fdafas fdasffdafd')
+                
+                  'fdasf fdsa 3432  43242  grfdg 324 34 2 gfd gfd  342 5 gfd gfdg d' +
+                  ' 453  ret gfdg dfg  fgd fgd fgdg')
               TextSettings.WordWrap = True
               Size.Width = 513.000000000000000000
               Size.Height = 27.000000000000000000
               Size.PlatformDefault = False
+              StyleLookup = 'memostyle'
               TabOrder = 0
               Viewport.Width = 500.000000000000000000
               Viewport.Height = 19.000000000000000000

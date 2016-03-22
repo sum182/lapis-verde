@@ -163,6 +163,7 @@ begin
   ListBoxGroupHeader := TListBoxGroupHeader.Create(lstboxAgenda);
   ListBoxGroupHeader.TextSettings.HorzAlign := TTextAlign.Center;
   ListBoxGroupHeader.TextSettings.WordWrap := True;
+  ListBoxGroupHeader.Height:=15;
   lstboxAgenda.AddObject(ListBoxGroupHeader);
 end;
 
@@ -188,11 +189,23 @@ begin
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   SetListBoxItemProperty(ListBoxItem);
 
-  Memo := TMemo.Create(self);
-  Memo.Parent := ListBoxItem;
+  Descricao := Wraptext(Descricao, Trunc((lstboxAgenda.Width -
+                                          (MargemEsquerda + MargemDireita ))  /9.3));
+
+  //if (Memo = nil) then
+    Memo := TMemo.Create(self);
+
+  Memo.BeginUpdate;
+  Memo.Text := EmptyStr;
+
+  //Memo.Parent := ListBoxItem;
+  ListBoxItem.Text:=Descricao;
   Memo.Enabled := False;
   Memo.Align := TAlignLayout.alClient;
   Memo.TextSettings.HorzAlign := TTextAlign.Leading;
+
+  Memo.Padding := ListBoxItem.Padding;
+  Memo.Margins := ListBoxItem.Margins;
 
   //Memo.TextSettings.Font.Style :=  [TFontStyle.fsBold];
   Memo.TextSettings.Font.Size :=  12;
@@ -201,19 +214,20 @@ begin
   Memo.TextSettings.WordWrap:=True;
 
 
-  ListBoxItem.Height:=  (Memo.Lines.Count * 25);
+  ListBoxItem.Height:=  (Memo.Lines.Count * 22);
 
   lstboxAgenda.AddObject(ListBoxItem);
   //Text.Margins.Left := MargemEsquerda;
 //  Text.Padding.Left := ;
 
-
+   Memo.EndUpdate;
 
 
   //Linha em Branco
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   ListBoxItem.Text:='';
   SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Height:= 12;
   lstboxAgenda.AddObject(ListBoxItem);
 end;
 
@@ -226,18 +240,16 @@ begin
   SetListBoxItemProperty(ListBoxItem);
 
   Text := TText.Create(self);
+  Text.BeginUpdate;
   Text.Parent := ListBoxItem;
   Text.Align := TAlignLayout.alClient;
   Text.HorzTextAlign := TTextAlign.Leading;
-  //Text.color := TAlphaColors.Darkseagreen;
   Text.color := TAlphaColors.Mediumseagreen;
 
   Text.TextSettings.Font.Style :=  [TFontStyle.fsBold];
   Text.TextSettings.Font.Size :=  16;
   Text.Text := Data;
-  //Text.Margins.Left := MargemEsquerda;
-//  Text.Padding.Left := ;
-
+  Text.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
 end;
 
