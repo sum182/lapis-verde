@@ -1,0 +1,56 @@
+   // Post if editing
+    if fdqAgenda.State in dsEditModes then
+      fdqAgenda.Post;
+
+    if fdqAgendaAluno.State in dsEditModes then
+      fdqAgendaAluno.Post;
+
+    if fdqAgendaTurma.State in dsEditModes then
+      fdqAgendaTurma.Post;
+
+    // Post if editing
+    fdqAgendaApply.Close;
+    fdqAgendaApply.Open;
+
+    fdqAgendaAlunoApply.Close;
+    fdqAgendaAlunoApply.Open;
+
+    fdqAgendaTurmaApply.Close;
+    fdqAgendaTurmaApply.Open;
+
+    fdmTempAgenda := TFDMemTable.Create(self);
+    fdmTempAgendaAluno := TFDMemTable.Create(self);
+    fdmTempAgendaTurma := TFDMemTable.Create(self);
+
+    fdmTempAgenda.CachedUpdates:=True;
+    fdmTempAgendaAluno.CachedUpdates:=True;
+    fdmTempAgendaTurma.CachedUpdates:=True;
+
+    fdmTempAgenda.FieldDefs.Assign(fdqAgendaApply.FieldDefs);
+    fdmTempAgenda.CloneCursor(fdqAgendaApply,True);
+
+    //fdmTempAgenda.AppendData(fdqAgendaApply);
+    //fdmTempAgendaAluno.AppendData(fdqAgendaAlunoApply);
+    //fdmTempAgendaTurma.AppendData(fdqAgendaTurmaApply);
+
+   // Create a delta list
+    Deltas := TFDJSONDeltas.Create;
+    // Add deltas
+    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda', fdmTempAgenda);
+    //TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_aluno', fdmTempAgendaAluno);
+    //TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_turma', fdmTempAgendaTurma);
+
+
+
+    try
+      ModuloCliente.SmEscolaClient.ApplyChangesAgenda(Deltas);
+    except on E:Exception do
+      ShowMessage('Erro no apply' + #13 + E.Message);
+    end;
+
+  finally
+
+    fdmTempAgenda.DisposeOf;
+    fdmTempAgendaAluno.DisposeOf;
+    fdmTempAgendaTurma.DisposeOf;
+  end;

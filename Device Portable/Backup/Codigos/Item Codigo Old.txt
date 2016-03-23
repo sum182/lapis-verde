@@ -1,0 +1,103 @@
+
+  {codigo ok
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.BeginUpdate;
+  SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Text := Descricao;
+  SetListBoxItemHeight(ListBoxItem);
+  ListBoxItem.EndUpdate;
+  lstboxAgenda.AddObject(ListBoxItem);
+  }
+
+
+
+
+
+  {memo Ok
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  SetListBoxItemProperty(ListBoxItem);
+
+
+  //if not Assigned(Memo) then
+    Memo := TMemo.Create(self);
+
+  Descricao := Wraptext(Descricao, Trunc((lstboxAgenda.Width -
+                                          (MargemEsquerda + MargemDireita ))  /9.3));
+
+
+
+
+
+  Memo.BeginUpdate;
+  Memo.Text := EmptyStr;
+
+  //Memo.Parent := ListBoxItem;
+  ListBoxItem.Text:=Descricao;
+  Memo.Enabled := False;
+  Memo.Align := TAlignLayout.alClient;
+  Memo.TextSettings.HorzAlign := TTextAlign.Leading;
+
+  Memo.Padding := ListBoxItem.Padding;
+  Memo.Margins := ListBoxItem.Margins;
+
+  //Memo.TextSettings.Font.Style :=  [TFontStyle.fsBold];
+  Memo.TextSettings.Font.Size :=  12;
+  Memo.Text := Descricao;
+  Memo.Margins.Right := MargemDireita;
+  Memo.TextSettings.WordWrap:=True;
+
+
+  ListBoxItem.Height:=  (Memo.Lines.Count * 22);
+
+  lstboxAgenda.AddObject(ListBoxItem);
+  //Text.Margins.Left := MargemEsquerda;
+//  Text.Padding.Left := ;
+
+   Memo.EndUpdate;
+
+
+  //Linha em Branco
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.Text:='';
+  SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Height:= 12;
+  lstboxAgenda.AddObject(ListBoxItem); }
+
+
+
+   {codigo perfeito
+
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  SetListBoxItemProperty(ListBoxItem);
+
+  Text := TText.Create(self);
+  Text.BeginUpdate;
+  Text.Text := Descricao;
+  //Text.Enabled := False;
+  Text.Align := TAlignLayout.alClient;
+  Text.TextSettings.HorzAlign := TTextAlign.Leading;
+  Text.TextSettings.VertAlign := TTextAlign.Leading;
+
+  Text.Width := lstboxAgenda.Width;
+  Text.Padding := ListBoxItem.Padding;
+  Text.Margins := ListBoxItem.Margins;
+  Text.TextSettings.Font.Size :=  14;
+
+  Text.TextSettings.WordWrap:=True;
+  Text.AutoSize:=True;
+
+  ListBoxItem.Height:=  (Text.Height);
+  Text.Parent := ListBoxItem;
+  lstboxAgenda.AddObject(ListBoxItem);
+
+
+  Text.EndUpdate;
+
+
+  //Linha em Branco
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.Text:='';
+  SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Height:= 12;
+  lstboxAgenda.AddObject(ListBoxItem);
+   }
