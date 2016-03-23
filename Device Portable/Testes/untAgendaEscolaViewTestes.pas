@@ -74,6 +74,9 @@ type
     btnCalcular: TButton;
     lblResultado: TListBoxItem;
     TabItem11: TTabItem;
+    TabItem12: TTabItem;
+    Label1: TLabel;
+    Text2: TText;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

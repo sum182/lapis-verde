@@ -35,6 +35,7 @@ type
     Text2: TText;
     imgAdd: TImage;
     Memo1: TMemo;
+    ListBoxItem5: TListBoxItem;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -52,12 +53,11 @@ type
     procedure SetListBoxAgendaGroupHeader;
     procedure SetListBoxAgendaItemData(Data:String);
     procedure SetListBoxAgendaItem(Descricao:String);
+    procedure SetListBoxAgendaItemLinhaBranco;
     procedure SetListBoxAgendaFooter;
     procedure SetListBoxItemProperty(ListBoxItem:TListBoxItem);
-    procedure SetListBoxItemHeight(ListBoxItem:TListBoxItem);
+    procedure SetTextProperty(Text:TText;ListBoxItem:TListBoxItem);
     procedure SetValuesObjets;
-    function CountChar(Texto: String; C: Char): Integer;
-
   public
     AlunoId: Integer;
     TurmaId: Integer;
@@ -79,19 +79,6 @@ begin
   fAllowCloseForm := True;
   Close;
   inherited;
-end;
-
-function TfrmAgendaEscolaView.CountChar(Texto: String; C: Char): Integer;
-var
-  i, vTot: Integer;
-begin
-  vTot := 0;
-  For i := 1 to Length(Texto) do
-  begin
-    If (Texto[i] = C) or (LowerCase(Texto[i]) = LowerCase(C)) then
-      vTot := vTot + 1;
-  end; // For
-  Result := vTot;
 end;
 
 
@@ -172,63 +159,22 @@ var
   ListBoxItem: TListBoxItem;
   HeightItem: Double;
   Text: TText;
-  Memo: TMemo;
 begin
-  {codigo ok
-  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-  ListBoxItem.BeginUpdate;
-  SetListBoxItemProperty(ListBoxItem);
-  ListBoxItem.Text := Descricao;
-  SetListBoxItemHeight(ListBoxItem);
-  ListBoxItem.EndUpdate;
-  lstboxAgenda.AddObject(ListBoxItem);
-  }
-
-
-
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   SetListBoxItemProperty(ListBoxItem);
 
-  Descricao := Wraptext(Descricao, Trunc((lstboxAgenda.Width -
-                                          (MargemEsquerda + MargemDireita ))  /9.3));
-
-  //if (Memo = nil) then
-    Memo := TMemo.Create(self);
-
-  Memo.BeginUpdate;
-  Memo.Text := EmptyStr;
-
-  //Memo.Parent := ListBoxItem;
-  ListBoxItem.Text:=Descricao;
-  Memo.Enabled := False;
-  Memo.Align := TAlignLayout.alClient;
-  Memo.TextSettings.HorzAlign := TTextAlign.Leading;
-
-  Memo.Padding := ListBoxItem.Padding;
-  Memo.Margins := ListBoxItem.Margins;
-
-  //Memo.TextSettings.Font.Style :=  [TFontStyle.fsBold];
-  Memo.TextSettings.Font.Size :=  12;
-  Memo.Text := Descricao;
-  Memo.Margins.Right := MargemDireita;
-  Memo.TextSettings.WordWrap:=True;
-
-
-  ListBoxItem.Height:=  (Memo.Lines.Count * 22);
-
+  Text := TText.Create(self);
+  Text.BeginUpdate;
+  Text.Text := Descricao;
+  SetTextProperty(Text,ListBoxItem);
+  Text.TextSettings.Font.Size :=  14;
+  Text.AutoSize:=True;
+  ListBoxItem.Height:=  (Text.Height)+ 4;
+  Text.Parent := ListBoxItem;
   lstboxAgenda.AddObject(ListBoxItem);
-  //Text.Margins.Left := MargemEsquerda;
-//  Text.Padding.Left := ;
+  Text.EndUpdate;
 
-   Memo.EndUpdate;
-
-
-  //Linha em Branco
-  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-  ListBoxItem.Text:='';
-  SetListBoxItemProperty(ListBoxItem);
-  ListBoxItem.Height:= 12;
-  lstboxAgenda.AddObject(ListBoxItem);
+  SetListBoxAgendaItemLinhaBranco;
 end;
 
 procedure TfrmAgendaEscolaView.SetListBoxAgendaItemData(Data:String);
@@ -236,16 +182,15 @@ var
   ListBoxItem: TListBoxItem;
   Text: TText;
 begin
+
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   SetListBoxItemProperty(ListBoxItem);
 
   Text := TText.Create(self);
   Text.BeginUpdate;
   Text.Parent := ListBoxItem;
-  Text.Align := TAlignLayout.alClient;
-  Text.HorzTextAlign := TTextAlign.Leading;
+  SetTextProperty(Text,ListBoxItem);
   Text.color := TAlphaColors.Mediumseagreen;
-
   Text.TextSettings.Font.Style :=  [TFontStyle.fsBold];
   Text.TextSettings.Font.Size :=  16;
   Text.Text := Data;
@@ -253,76 +198,20 @@ begin
   lstboxAgenda.AddObject(ListBoxItem);
 end;
 
-procedure TfrmAgendaEscolaView.SetListBoxItemHeight(ListBoxItem: TListBoxItem);
+procedure TfrmAgendaEscolaView.SetListBoxAgendaItemLinhaBranco;
 var
-  myLayout: TTextLayout;
-  i: integer;
-  aPoint: TPointF;
-  HeightItem:Integer;
-  Multiplicador: Integer;
-  Soma:Integer;
+  ListBoxItem: TListBoxItem;
 begin
-  myLayout := TTextLayoutManager.DefaultTextLayout.Create;
-  myLayout.BeginUpdate;
-
-  // Setting the layout MaxSize
-  aPoint.X := lstboxAgenda.Width;
-  aPoint.Y := lstboxAgenda.Height;
-
-  myLayout.MaxSize:= aPoint;
-  myLayout.Text:=ListBoxItem.Text;
-  myLayout.WordWrap:= True ;
-  myLayout.Font:=ListBoxItem.Font;
-  myLayout.HorizontalAlign:= ListBoxItem.TextSettings.HorzAlign;
-  myLayout.VerticalAlign:= ListBoxItem.TextSettings.VertAlign;
-  myLayout.Padding:=ListBoxItem.Padding;
-  myLayout.EndUpdate;
-
-  //HeightItem:=  Trunc(myLayout.TextHeight) + 6;
-  HeightItem:=  Trunc(myLayout.Height);
-
-  if HeightItem < 25 then
-    HeightItem:= 25;
-
-
-  if HeightItem > 30 then
-  begin
-    Multiplicador:= 10;
-    Soma:= 20;
-  end;
-
-  if HeightItem > 300 then
-  begin
-    Multiplicador:= 22;
-    Soma:= 25;
-  end;
-
-  if HeightItem > 400 then
-  begin
-    Multiplicador:= 25;
-    Soma:= 30;
-  end;
-
-  if HeightItem > 500 then
-  begin
-    Multiplicador:= 25;
-    Soma:= 30;
-  end;
-
-  if HeightItem > 700 then
-  begin
-    Multiplicador:= 26;
-    Soma:= 33;
-  end;
-
-  if HeightItem > 30 then
-  begin
-    HeightItem:= HeightItem + (Trunc((HeightItem  / 60) * Multiplicador));
-    HeightItem:= HeightItem + Soma;
-  end;
-
-  ListBoxItem.Height := HeightItem;
+  //Linha em Branco
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.BeginUpdate;
+  ListBoxItem.Text:='';
+  SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Height:= 12;
+  ListBoxItem.EndUpdate;
+  lstboxAgenda.AddObject(ListBoxItem);
 end;
+
 
 procedure TfrmAgendaEscolaView.SetListBoxItemProperty(
   ListBoxItem: TListBoxItem);
@@ -330,6 +219,20 @@ begin
   ListBoxItem.TextSettings.WordWrap := True;
   ListBoxItem.Selectable:=False;
   ListBoxItem.Margins.Left:=MargemEsquerda;
+  ListBoxItem.Margins.Right := MargemDireita;
+  ListBoxItem.Height:= 25;
+end;
+
+procedure TfrmAgendaEscolaView.SetTextProperty(Text: TText;ListBoxItem:TListBoxItem);
+begin
+  Text.Align := TAlignLayout.alClient;
+  Text.TextSettings.HorzAlign := TTextAlign.Leading;
+  Text.TextSettings.VertAlign := TTextAlign.Leading;
+
+  Text.Width := lstboxAgenda.Width;
+  Text.Padding := ListBoxItem.Padding;
+  Text.Margins := ListBoxItem.Margins;
+  Text.TextSettings.WordWrap:=True;
 end;
 
 procedure TfrmAgendaEscolaView.SetTitulo;
