@@ -35,9 +35,6 @@ Coordinates=902,111,60,36
 [DmEscola.fdqAgendaAluno]
 Coordinates=156,1,171,102
 
-[SpeedButton1]
-Coordinates=137,459,96,58
-
 [Dm.fdqLogErrorSaveServer]
 Coordinates=622,320,173,58
 
@@ -72,7 +69,7 @@ Coordinates=1490,130,126,146
 Coordinates=622,1,175,102
 
 []
-Coordinates=0,461,67,36
+Coordinates=137,459,96,58
 Visible=True
 
 [fgVirtualKeyboard]

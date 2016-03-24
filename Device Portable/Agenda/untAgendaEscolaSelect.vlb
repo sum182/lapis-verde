@@ -33,9 +33,6 @@ Coordinates=940,520,53,33
 [lblTitulo]
 Coordinates=870,520,54,51
 
-[btnAtualizar]
-Coordinates=701,520,73,51
-
 [FDStanStorageBinLink1]
 Coordinates=419,1,132,33
 
@@ -50,7 +47,7 @@ Visible=False
 Coordinates=419,111,95,33
 
 []
-Coordinates=419,56,91,36
+Coordinates=701,520,73,51
 
 [BindingsList1]
 Coordinates=136,1,82,33

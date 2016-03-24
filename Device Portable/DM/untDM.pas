@@ -47,6 +47,7 @@ type
                           );
     procedure SalvarLogError;
     procedure SalvarDadosServer;
+    procedure SyncronizarDadosServer;
 
   end;
 
@@ -61,7 +62,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
-  untFuncoes, smDBFireDac;
+  untFuncoes, smDBFireDac, smMensagensFMX;
 
 {$R *.dfm}
 
@@ -197,11 +198,24 @@ begin
     fdqLogError.Post;
 
     if MsgUsuario <> '' then
-      ShowMessage(MsgUsuario);
+      raise Exception.Create(MsgUsuario);
 
   finally
     fdqLogError.Active:=False;
   end;
+end;
+
+procedure TDm.SyncronizarDadosServer;
+begin
+
+  try
+    SalvarDadosServer;
+    smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer Erro:' + e.Message);
+  end;
+
+
 end;
 
 end.

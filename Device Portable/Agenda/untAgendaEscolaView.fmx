@@ -130,16 +130,6 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
         end
       end
-      object SpeedButton1: TSpeedButton
-        Align = Right
-        Position.X = 414.000000000000000000
-        Size.Width = 48.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'refreshtoolbutton'
-        Text = 'SpeedButton1'
-        OnClick = SpeedButton1Click
-      end
       object btnAdd: TSpeedButton
         Align = Right
         Position.X = 462.000000000000000000
@@ -319,23 +309,23 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         ExplicitSize.cy = 49.000000000000000000
         object ListBox1: TListBox
           Align = Client
-          Size.Width = 50.000000000000000000
-          Size.Height = 50.000000000000000000
+          Size.Width = 510.000000000000000000
+          Size.Height = 509.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           DisableFocusEffect = True
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 45.000000000000000000
-          Viewport.Height = 50.000000000000000000
+          Viewport.Width = 510.000000000000000000
+          Viewport.Height = 509.000000000000000000
           object ListBoxItem1: TListBoxItem
             TabOrder = 0
             Text = 'ListBoxItem1'
           end
           object ListBoxGroupHeader1: TListBoxGroupHeader
             Position.Y = 44.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 510.000000000000000000
             Size.Height = 30.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -346,7 +336,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
             object Text2: TText
               Align = Client
               Margins.Left = 8.000000000000000000
-              Size.Width = 37.000000000000000000
+              Size.Width = 502.000000000000000000
               Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
               Text = '10/10/2010'
@@ -361,7 +351,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
           object ListBoxItem4: TListBoxItem
             Position.Y = 162.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 510.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 4
@@ -384,7 +374,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
           object ListBoxItem5: TListBoxItem
             Position.Y = 217.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 510.000000000000000000
             Size.Height = 266.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 5

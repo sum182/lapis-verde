@@ -68,6 +68,7 @@ type
     procedure AgendaApplyChanges;
 
     procedure SalvarDadosServer;
+    procedure SyncronizarDadosServer;
   end;
 
 var
@@ -478,6 +479,40 @@ begin
   fdqAgendaTurma.SQL.Add('select at.*');
   fdqAgendaTurma.SQL.Add('from agenda_turma at');
   fdqAgendaTurma.SQL.Add('where agenda_id in (' + KeyValues + ')');
+end;
+
+procedure TDmEscola.SyncronizarDadosServer;
+begin
+  try
+    GetAlunos;
+    smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos Erro:' + e.Message);
+  end;
+
+  try
+    GetTurmas;
+    smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas Erro:' + e.Message);
+  end;
+
+
+  try
+    GetAgenda;
+    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
+  end;
+
+
+  try
+    SalvarDadosServer;
+    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer Erro:' + e.Message);
+  end;
+
 end;
 
 procedure TDmEscola.SetSQLAgenda;

@@ -17,7 +17,6 @@ type
   TfrmAgendaEscolaView = class(TfrmBaseToolBar)
     bsAgenda: TBindSourceDB;
     blAgenda: TBindingsList;
-    SpeedButton1: TSpeedButton;
     btnAdd: TSpeedButton;
     LinkFillControlToField1: TLinkFillControlToField;
     LinkFillControlToField2: TLinkFillControlToField;
@@ -40,7 +39,6 @@ type
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
     procedure imgVoltarClick(Sender: TObject);
     procedure imgAddClick(Sender: TObject);
   private
@@ -49,7 +47,7 @@ type
 
 
     procedure SetTitulo;
-    procedure FillListBoxAgenda;
+
     procedure SetListBoxAgendaGroupHeader;
     procedure SetListBoxAgendaItemData(Data:String);
     procedure SetListBoxAgendaItem(Descricao:String);
@@ -62,6 +60,7 @@ type
     AlunoId: Integer;
     TurmaId: Integer;
     Titulo: String;
+    procedure FillListBoxAgenda;
   end;
 
 var
@@ -88,6 +87,7 @@ var
 begin
   lstboxAgenda.BeginUpdate;
   lstboxAgenda.Items.Clear;
+  DmEscola.fdqAgenda.Refresh;
   DmEscola.fdqAgenda.First;
 
   while not DmEscola.fdqAgenda.Eof do
@@ -174,7 +174,15 @@ begin
   lstboxAgenda.AddObject(ListBoxItem);
   Text.EndUpdate;
 
-  SetListBoxAgendaItemLinhaBranco;
+  //SetListBoxAgendaItemLinhaBranco;
+
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.BeginUpdate;
+  ListBoxItem.Text:='';
+  SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Height:= 12;
+  ListBoxItem.EndUpdate;
+  lstboxAgenda.AddObject(ListBoxItem);
 end;
 
 procedure TfrmAgendaEscolaView.SetListBoxAgendaItemData(Data:String);
@@ -246,16 +254,6 @@ begin
   MargemDireita:=8;
 end;
 
-procedure TfrmAgendaEscolaView.SpeedButton1Click(Sender: TObject);
-begin
-  inherited;
-  DmEscola.GetAgenda;
-  DmEscola.OpenAgenda(AlunoId, TurmaId);
-  DmEscola.SalvarDadosServer;
-  Dm.SalvarDadosServer;
-  FillListBoxAgenda;
-end;
-
 procedure TfrmAgendaEscolaView.btnAddClick(Sender: TObject);
 begin
   inherited;
@@ -266,9 +264,6 @@ begin
   frmAgendaEscolaAdd.TurmaId := TurmaId;
   frmAgendaEscolaAdd.Titulo := Titulo;
   frmAgendaEscolaAdd.Show;
-  DmEscola.fdqAgenda.Close;
-  DmEscola.fdqAgenda.Open;
-  FillListBoxAgenda;
 end;
 
 end.

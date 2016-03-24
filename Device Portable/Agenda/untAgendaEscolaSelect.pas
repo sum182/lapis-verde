@@ -22,13 +22,11 @@ type
     tbitAlunos: TTabItem;
     lstTurmas: TListView;
     lstAlunos: TListView;
-    btnAtualizar: TSpeedButton;
     bsAlunos: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
     bsTurmas: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
-    procedure btnAtualizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure lstAlunosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
@@ -48,15 +46,6 @@ implementation
 
 uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgendaEscolaView,
   untPrincipal, untDMStyles;
-
-procedure TfrmAgendaEscolaSelect.btnAtualizarClick(Sender: TObject);
-begin
-  DmEscola.GetAlunos;
-  DmEscola.GetTurmas;
-  DmEscola.GetAgenda;
-  DmEscola.SalvarDadosServer;
-  Dm.SalvarDadosServer;
-end;
 
 procedure TfrmAgendaEscolaSelect.FormCreate(Sender: TObject);
 begin
