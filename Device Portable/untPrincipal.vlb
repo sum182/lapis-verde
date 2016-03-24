@@ -10,3 +10,9 @@ Visible=False
 [frmTesteJsonXSqLite.fdqAluno]
 Visible=False
 
+[DmEscola.fdqAluno]
+Visible=False
+
+[DmEscola.fdqTurma]
+Visible=False
+

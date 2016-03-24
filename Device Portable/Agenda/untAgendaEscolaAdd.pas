@@ -19,7 +19,7 @@ type
     VertScrollBox1: TVertScrollBox;
     imgEnviar: TImage;
     lblNome: TLabel;
-    ListBox1: TListBox;
+    lstBoxPara: TListBox;
     ListBoxItem1: TListBoxItem;
     layEspaco2: TLayout;
     procedure FormCreate(Sender: TObject);
@@ -49,7 +49,7 @@ implementation
 {$R *.fmx}
 
 uses smGeralFMX, untDM, untDmEscola, untDMStyles, untFuncoes, smMensagensFMX,
-  FMX.Forms, untAgendaEscolaView;
+  FMX.Forms, untAgendaView;
 
 procedure TfrmAgendaEscolaAdd.btnVoltarClick(Sender: TObject);
 begin
@@ -136,8 +136,8 @@ begin
   fAllowCloseForm:=True;
   Close;
 
-  if Assigned(frmAgendaEscolaView) then
-    frmAgendaEscolaView.FillListBoxAgenda;
+  if Assigned(frmAgendaView) then
+    frmAgendaView.FillListBoxAgenda;
 
 end;
 

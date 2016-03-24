@@ -12,7 +12,7 @@ inherited frmCriarConta: TfrmCriarConta
       Size.PlatformDefault = False
       StyleLookup = 'tabcontrolstyle'
       TabHeight = 49.000000000000000000
-      TabIndex = 4
+      TabIndex = 1
       TabOrder = 0
       TabPosition = PlatformDefault
       object tbItemNome: TTabItem
@@ -29,7 +29,7 @@ inherited frmCriarConta: TfrmCriarConta
         ExplicitSize.cx = 213.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBarNome: TToolBar
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -46,14 +46,13 @@ inherited frmCriarConta: TfrmCriarConta
         end
         object layRodapeNome: TLayout
           Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object btnProximaNome: TSpeedButton
             Align = Right
-            Position.X = 192.000000000000000000
+            Position.X = -78.000000000000000000
             Size.Width = 128.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
@@ -71,8 +70,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    FDFBF73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C02028081010056DD91B71C7062B0000000
+                    EDDBB73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C020280810100DB1D919C861DDC78000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -103,11 +102,11 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0094494441546843EDD2310E0221144551C65D39BA31130B9D256B4105F8D14F
-                    C202068797DCD310BAFB0801000000FB48293D4B290FBF6AB1F8CDE21BAD1139
-                    E7BB87F77446D880738CF1E5E13D46FC152366C1885930621623479CFC1C6DF1
-                    538FBDFE2AFB852CFE42FC113CFEEDC13DE287B2C82BF147B048DDF8CAFEFDCD
-                    837B1AF14D0DFE757F69C537355C361E0000404E081FB5201BBB8EF0DA820000
+                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C99A3003FCE827
+                    6101C5F2927B2684D97D84000000807DA4949EA594875FB558FC66F18DD6889C
+                    F3DDC37B3A236CC039C6F8F2F01E23FE8A11B360C42C18318B91234E7E8EB6F8
+                    A9C75E7F95FD42167F21FE081EFFF6E01EF14359E495F82358A46E7C65FFFEE6
+                    C13D8DF8A606FFBABFB4E29B1A2E1B0F00002027840F178E1B887C4A62E90000
                     000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -184,10 +183,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB88B7CE42494C6184D0
+                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB88A7CE46494C6184D0
                     95C8882079504267316D172D297DC3CCB6BAB0E542B989C8AEAA03628EA67C44
                     CC11CB7D4C883962B9DF7C46CC11CA8F27E53DE65D1D2657F38A0531D76F0FE1
-                    7EB44B3DC4CB576C537A5529271FFD9194BE1F21520000000049454E44AE4260
+                    7EB44B3DC4CB576C537A552927A4D99179BA87A4E60000000049454E44AE4260
                     82}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -219,12 +218,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B645D659738C5A9
+                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD649938C5A9
                     20D58D42F347DF0745DA66F1A698000000B08D5AEB345FBEED8BE3177D8D9883
                     EFDD4F4E7E1D9B425FC55F4A297B1F894BA1C437A150E29B5028F14D2894F84F
                     EDFCFBDFF4C5FBFD0B2D14BC1A9173BE32626B6A7E3762F091F8D4FCD3230E3E
                     129F9A1911829A572334E0E8D77D50F36384E2CF7EDC17B54F8A1F7D0B000080
-                    AFA47403119D1C4FC9311B060000000049454E44AE426082}
+                    AFA47403ED621C3A7426DED40000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
@@ -287,13 +286,12 @@ inherited frmCriarConta: TfrmCriarConta
         end
         object layPrincipalNome: TLayout
           Align = Client
-          Size.Width = 320.000000000000000000
-          Size.Height = 300.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object layNome: TLayout
             Align = Top
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -306,7 +304,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Nome'
@@ -319,7 +316,7 @@ inherited frmCriarConta: TfrmCriarConta
           object laySobrenome: TLayout
             Align = Top
             Position.Y = 73.000000000000000000
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -332,7 +329,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Sobrenome'
@@ -346,7 +342,7 @@ inherited frmCriarConta: TfrmCriarConta
         object layCabecalhoNome: TLayout
           Align = Top
           Position.Y = 48.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
@@ -356,7 +352,7 @@ inherited frmCriarConta: TfrmCriarConta
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 64.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -455,8 +451,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    EDDBB73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C020280810100DB1D919C861DDC78000000
+                    F5EBD73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C0202808101005F6C91813678F313000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -487,11 +483,11 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C99A3003FCE827
-                    6101C5F2927B2684D97D84000000807DA4949EA594875FB558FC66F18DD6889C
-                    F3DDC37B3A236CC039C6F8F2F01E23FE8A11B360C42C18318B91234E7E8EB6F8
-                    A9C75E7F95FD42167F21FE081EFFF6E01EF14359E495F82358A46E7C65FFFEE6
-                    C13D8DF8A606FFBABFB4E29B1A2E1B0F00002027840F178E1B887C4A62E90000
+                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C91A86801FFD24
+                    2CA0585E72CF8430BB8F10000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F00179ED1B55C63B743A0000
                     000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -568,10 +564,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB88A7CE46494C6184D0
+                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB8897CE4A494C6184D0
                     95C8882079504267316D172D297DC3CCB6BAB0E542B989C8AEAA03628EA67C44
                     CC11CB7D4C883962B9DF7C46CC11CA8F27E53DE65D1D2657F38A0531D76F0FE1
-                    7EB44B3DC4CB576C537A552927A4D99179BA87A4E60000000049454E44AE4260
+                    7EB44B3DC4CB576C537A55292729C4915E657C0A320000000049454E44AE4260
                     82}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -603,12 +599,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD649938C5A9
+                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B645D649B38C5A9
                     20D58D42F347DF0745DA66F1A698000000B08D5AEB345FBEED8BE3177D8D9883
                     EFDD4F4E7E1D9B425FC55F4A297B1F894BA1C437A150E29B5028F14D2894F84F
                     EDFCFBDFF4C5FBFD0B2D14BC1A9173BE32626B6A7E3762F091F8D4FCD3230E3E
                     129F9A1911829A572334E0E8D77D50F36384E2CF7EDC17B54F8A1F7D0B000080
-                    AFA47403ED621C3A7426DED40000000049454E44AE426082}
+                    AFA47403C9361C2519CA3DAC0000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
@@ -702,20 +698,19 @@ inherited frmCriarConta: TfrmCriarConta
         object layCabecalhoSenha: TLayout
           Align = Top
           Position.Y = 48.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
         end
         object layPrincipalSenha: TLayout
           Align = Client
-          Size.Width = 320.000000000000000000
-          Size.Height = 300.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object layCriarSenha: TLayout
             Align = Top
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -729,7 +724,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Criar Senha'
@@ -742,7 +736,7 @@ inherited frmCriarConta: TfrmCriarConta
           object layConfirmarSenha: TLayout
             Align = Top
             Position.Y = 73.000000000000000000
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -755,7 +749,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Confirmar Senha'
@@ -768,7 +761,7 @@ inherited frmCriarConta: TfrmCriarConta
           object layErrorSenha: TLayout
             Align = Top
             Position.Y = 146.000000000000000000
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 3
@@ -779,7 +772,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 15.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 13.000000000000000000
@@ -791,14 +783,13 @@ inherited frmCriarConta: TfrmCriarConta
         end
         object layRodapeSenha: TLayout
           Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object btnProximaSenha: TSpeedButton
             Align = Right
-            Position.X = 192.000000000000000000
+            Position.X = -78.000000000000000000
             Size.Width = 128.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
@@ -816,8 +807,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    EDDBB73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C020280810100DB1D919C861DDC78000000
+                    F5EBD73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C0202808101005F6C91813678F313000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -848,11 +839,11 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C99A3003FCE827
-                    6101C5F2927B2684D97D84000000807DA4949EA594875FB558FC66F18DD6889C
-                    F3DDC37B3A236CC039C6F8F2F01E23FE8A11B360C42C18318B91234E7E8EB6F8
-                    A9C75E7F95FD42167F21FE081EFFF6E01EF14359E495F82358A46E7C65FFFEE6
-                    C13D8DF8A606FFBABFB4E29B1A2E1B0F00002027840F178E1B887C4A62E90000
+                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C91A86801FFD24
+                    2CA0585E72CF8430BB8F10000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F00179ED1B55C63B743A0000
                     000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -929,10 +920,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB88A7CE46494C6184D0
+                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB8897CE4A494C6184D0
                     95C8882079504267316D172D297DC3CCB6BAB0E542B989C8AEAA03628EA67C44
                     CC11CB7D4C883962B9DF7C46CC11CA8F27E53DE65D1D2657F38A0531D76F0FE1
-                    7EB44B3DC4CB576C537A552927A4D99179BA87A4E60000000049454E44AE4260
+                    7EB44B3DC4CB576C537A55292729C4915E657C0A320000000049454E44AE4260
                     82}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -964,12 +955,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD649938C5A9
+                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B645D649B38C5A9
                     20D58D42F347DF0745DA66F1A698000000B08D5AEB345FBEED8BE3177D8D9883
                     EFDD4F4E7E1D9B425FC55F4A297B1F894BA1C437A150E29B5028F14D2894F84F
                     EDFCFBDFF4C5FBFD0B2D14BC1A9173BE32626B6A7E3762F091F8D4FCD3230E3E
                     129F9A1911829A572334E0E8D77D50F36384E2CF7EDC17B54F8A1F7D0B000080
-                    AFA47403ED621C3A7426DED40000000049454E44AE426082}
+                    AFA47403C9361C2519CA3DAC0000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
@@ -1031,7 +1022,7 @@ inherited frmCriarConta: TfrmCriarConta
           end
         end
         object ToolBarSenha: TToolBar
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -1063,20 +1054,19 @@ inherited frmCriarConta: TfrmCriarConta
         object layCabecalhoTelefone: TLayout
           Align = Top
           Position.Y = 48.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
         end
         object layPrincipalTelefone: TLayout
           Align = Client
-          Size.Width = 320.000000000000000000
-          Size.Height = 300.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object layTelefone: TLayout
             Align = Top
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -1089,7 +1079,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Celular'
@@ -1102,14 +1091,13 @@ inherited frmCriarConta: TfrmCriarConta
         end
         object layRodapeTelefone: TLayout
           Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object btnProximaTelefone: TSpeedButton
             Align = Right
-            Position.X = 192.000000000000000000
+            Position.X = -78.000000000000000000
             Size.Width = 128.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
@@ -1127,8 +1115,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    EDDBB73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C020280810100DB1D919C861DDC78000000
+                    F5EBD73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C0202808101005F6C91813678F313000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -1159,11 +1147,11 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C99A3003FCE827
-                    6101C5F2927B2684D97D84000000807DA4949EA594875FB558FC66F18DD6889C
-                    F3DDC37B3A236CC039C6F8F2F01E23FE8A11B360C42C18318B91234E7E8EB6F8
-                    A9C75E7F95FD42167F21FE081EFFF6E01EF14359E495F82358A46E7C65FFFEE6
-                    C13D8DF8A606FFBABFB4E29B1A2E1B0F00002027840F178E1B887C4A62E90000
+                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C91A86801FFD24
+                    2CA0585E72CF8430BB8F10000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F00179ED1B55C63B743A0000
                     000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -1240,10 +1228,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB88A7CE46494C6184D0
+                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB8897CE4A494C6184D0
                     95C8882079504267316D172D297DC3CCB6BAB0E542B989C8AEAA03628EA67C44
                     CC11CB7D4C883962B9DF7C46CC11CA8F27E53DE65D1D2657F38A0531D76F0FE1
-                    7EB44B3DC4CB576C537A552927A4D99179BA87A4E60000000049454E44AE4260
+                    7EB44B3DC4CB576C537A55292729C4915E657C0A320000000049454E44AE4260
                     82}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -1275,12 +1263,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD649938C5A9
+                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B645D649B38C5A9
                     20D58D42F347DF0745DA66F1A698000000B08D5AEB345FBEED8BE3177D8D9883
                     EFDD4F4E7E1D9B425FC55F4A297B1F894BA1C437A150E29B5028F14D2894F84F
                     EDFCFBDFF4C5FBFD0B2D14BC1A9173BE32626B6A7E3762F091F8D4FCD3230E3E
                     129F9A1911829A572334E0E8D77D50F36384E2CF7EDC17B54F8A1F7D0B000080
-                    AFA47403ED621C3A7426DED40000000049454E44AE426082}
+                    AFA47403C9361C2519CA3DAC0000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +
@@ -1342,7 +1330,7 @@ inherited frmCriarConta: TfrmCriarConta
           end
         end
         object ToolBarTelefone: TToolBar
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -1362,7 +1350,7 @@ inherited frmCriarConta: TfrmCriarConta
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 64.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -1521,8 +1509,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    F5EBD73F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C0202808101005F6C91813678F313000000
+                    E5CB973F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C020280810100E3AC916676505C84000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -1553,11 +1541,11 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C99A3003FCE827
-                    6101C5F2927B2684D97D84000000807DA4949EA594875FB558FC66F18DD6889C
-                    F3DDC37B3A236CC039C6F8F2F01E23FE8A11B360C42C18318B91234E7E8EB6F8
-                    A9C75E7F95FD42167F21FE081EFFF6E01EF14359E495F82358A46E7C65FFFEE6
-                    C13D8DF8A606FFBABFB4E29B1A2E1B0F00002027840F178E1B887C4A62E90000
+                    0094494441546843EDD2410EC220144551EAAEAC6ECCC48176C91A86801FFD24
+                    2CA0585E72CF8430BB8F10000000B08F94D2B394F2F0AB168BDF2CBED11A9173
+                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
+                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
+                    B8A711DFD4E05FF797567C53C365E3010000E484F00179ED1B55C63B743A0000
                     000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -1634,10 +1622,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB8897CE4A494C6184D0
+                    006B49444154484BEDD34B0A80300C04D0EA713C8F9FDB8887CE4E494C6184D0
                     95C8882079504267316D172D297DC3CCB6BAB0E542B989C8AEAA03628EA67C44
                     CC11CB7D4C883962B9DF7C46CC11CA8F27E53DE65D1D2657F38A0531D76F0FE1
-                    7EB44B3DC4CB576C537A55292729C4915E657C0A320000000049454E44AE4260
+                    7EB44B3DC4CB576C537A552927AEA09143163EB7430000000049454E44AE4260
                     82}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -1669,12 +1657,12 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
                     87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B64DD649938C5A9
+                    00A2494441546843EDD2410AC2301844E1E0A5AC0713DC487B645D649B38C5A9
                     20D58D42F347DF0745DA66F1A698000000B08D5AEB345FBEED8BE3177D8D9883
                     EFDD4F4E7E1D9B425FC55F4A297B1F894BA1C437A150E29B5028F14D2894F84F
                     EDFCFBDFF4C5FBFD0B2D14BC1A9173BE32626B6A7E3762F091F8D4FCD3230E3E
                     129F9A1911829A572334E0E8D77D50F36384E2CF7EDC17B54F8A1F7D0B000080
-                    AFA47403ED621C3A7426DED40000000049454E44AE426082}
+                    AFA47403C9361C2519CA3DAC0000000049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
                     '_white_24dp\ic_navigate_before_white_24dp\android\drawable-xhdpi' +

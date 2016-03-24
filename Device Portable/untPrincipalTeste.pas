@@ -83,8 +83,8 @@ implementation
 {$R *.fmx}
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
-  untFuncoes, untDMStyles, untDM, untAgendaEscolaView, untMensagens, smGeralFMX,
-  untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA;
+  untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
+  untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA, untAgendaView;
 
 { TfrmPrincipal }
 
@@ -143,7 +143,7 @@ end;
 procedure TfrmPrincipalTeste.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-   OpenForm(TfrmAgendaEscolaView);
+   OpenForm(TfrmAgendaView);
 end;
 
 procedure TfrmPrincipalTeste.SpeedButton2Click(Sender: TObject);

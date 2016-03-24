@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------
-Casa
+Atividades - Casa
 Copiar pasta
 Firemonkey do s para componentes
 
@@ -12,7 +12,7 @@ Atualizar atalhos VM
 
 
 --------------------------------------------------------------------------------------------
-Braspress
+Atividades - Braspress
 
 
 --------------------------------------------------------------------------------------------
@@ -20,9 +20,6 @@ Braspress
 
 --------------------------------------------------------------------------------------------
 Atividades Leonardo
-Divisão de Responsáveis
-FGX - Toad
-FGX - Keyboard
 Login Auto
 Configuracoes
 
@@ -37,7 +34,8 @@ dt
 
 
 ----Mobile--------------------------------------------------------------------------------
-
+Ajustar para do Add Agenda
+ 
  Verificar teclado virtual keyboard hide de todas as telas
  
 Analisar atualizacao de banco 
@@ -111,11 +109,6 @@ Analisar dados do banco local quando tiver uma nova versao ou alteração do banco
 ----Server--------------------------------------------------------------------------------
 Criar rotina para validar conexao BD
 
-Criar DM para Criar Conta
-
-Criar DM para Agenda Escola
-Criar DM para Agenda Responsavel
-
 
 testar login - uppercase
 testar validar email - uppercase
@@ -123,7 +116,6 @@ testar validar email - uppercase
 ini
 install clint mysql
 
-criar rotinas para log de erros
 tratar erros login
 
 
@@ -131,7 +123,6 @@ analisar senha responsavel
 nao pode ser vinculado a escola
 login face
 
-criar DM para agenda, criar conta/login, msg
 
 Analisar exceptions pelo   ApplicationEvents.Activate;
 

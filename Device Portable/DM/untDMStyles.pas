@@ -11,7 +11,6 @@ type
     styleWindows: TStyleBook;
     styleIOS: TStyleBook;
     styleAndroid: TStyleBook;
-    styleAndroidNew: TStyleBook;
   private
     { Private declarations }
   public

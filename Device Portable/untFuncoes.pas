@@ -16,22 +16,19 @@ Uses  FMX.Forms, Data.DB;
 
 implementation
 
-uses untDM, untDMStyles, System.SysUtils;
+uses untDM, untDMStyles, System.SysUtils, smGeralFMX;
 
 
 procedure SetStyle(Formulario:TForm);
 begin
-   {$IFDEF ANDROID}
-    Formulario.StyleBook := DMStyles.styleAndroidNew;
-  {$ENDIF}
+   if IsSysOSAndroid then
+    Formulario.StyleBook := DMStyles.styleAndroid;
 
-  {$IFDEF IOS}
+   if IsSysOSiOS then
     Formulario.StyleBook := DMStyles.styleIOS;
-  {$ENDIF}
 
-  {$IFDEF MSWINDOWS}
+   if IsSysOSWindows then
     Formulario.StyleBook := DMStyles.styleWindows;
-  {$ENDIF}
 end;
 
 function GetEscolaId:Integer;

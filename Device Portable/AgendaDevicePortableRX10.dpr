@@ -24,10 +24,8 @@ uses
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
   smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
   smGeralFMX in 'C:\Componentes\sum182\D15\Units\FMX\smGeralFMX.pas',
-
   smMensagensFMX in 'C:\Componentes\sum182\D15\Units\FMX\smMensagensFMX.pas',
-
-  untAgendaEscolaView in 'Agenda\untAgendaEscolaView.pas' {frmAgendaEscolaView},
+  untAgendaView in 'Agenda\untAgendaView.pas' {frmAgendaView},
   untMensagens in 'Mensagens\untMensagens.pas' {frmMensagens},
   untCriarConta in 'Usuario\untCriarConta.pas' {frmCriarConta},
   untTesteString2 in 'Testes\untTesteString2.pas' {frmTesteString2},

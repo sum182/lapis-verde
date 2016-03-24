@@ -1,4 +1,4 @@
-inherited frmAgendaEscolaView: TfrmAgendaEscolaView
+inherited frmAgendaView: TfrmAgendaView
   Caption = 'frmBaseToolBar1'
   ClientHeight = 606
   ClientWidth = 510
@@ -117,11 +117,11 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007449444154484BEDD04D0A8020140460E93841B7E9E73A764FE11DA4F4F582
-                  B185B48A4910FC20C459CC84AE6B8BAAFA18E38E2BD75D6E9F8610CE94D28498
-                  A328DF1073F4F25755CABF42CD63C05997FDC87F4F9415232B62AE3C2222871D
-                  0B62AEEA23F65C3362AE626444CC85118F6BD704E72EEF0EF932230D54A40000
-                  000049454E44AE426082}
+                  007549444154484BEDD04D0A8020140460E93841B7E9E73A764E17EF20A5AF17
+                  8C2DA4554C82E00721CE6226745D5B54D5C718775CB9EE72FB348470A69426C4
+                  1C45F98698A397BFAA52FE156A1E03CEBAEC47FE7BA2AC18591173E5111139EC
+                  581073551FB1E79A1173152323622E8C785CBB263877016A36F91A8BCB246A00
+                  00000049454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
                   'p\ic_arrow_back_white_24dp\android\drawable-mdpi\ic_arrow_back_w' +
@@ -309,23 +309,23 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
         ExplicitSize.cy = 49.000000000000000000
         object ListBox1: TListBox
           Align = Client
-          Size.Width = 510.000000000000000000
-          Size.Height = 509.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           DisableFocusEffect = True
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 510.000000000000000000
-          Viewport.Height = 509.000000000000000000
+          Viewport.Width = 45.000000000000000000
+          Viewport.Height = 50.000000000000000000
           object ListBoxItem1: TListBoxItem
             TabOrder = 0
             Text = 'ListBoxItem1'
           end
           object ListBoxGroupHeader1: TListBoxGroupHeader
             Position.Y = 44.000000000000000000
-            Size.Width = 510.000000000000000000
+            Size.Width = 45.000000000000000000
             Size.Height = 30.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -336,7 +336,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
             object Text2: TText
               Align = Client
               Margins.Left = 8.000000000000000000
-              Size.Width = 502.000000000000000000
+              Size.Width = 37.000000000000000000
               Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
               Text = '10/10/2010'
@@ -351,7 +351,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
           object ListBoxItem4: TListBoxItem
             Position.Y = 162.000000000000000000
-            Size.Width = 510.000000000000000000
+            Size.Width = 45.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 4
@@ -374,7 +374,7 @@ inherited frmAgendaEscolaView: TfrmAgendaEscolaView
           end
           object ListBoxItem5: TListBoxItem
             Position.Y = 217.000000000000000000
-            Size.Width = 510.000000000000000000
+            Size.Width = 45.000000000000000000
             Size.Height = 266.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 5

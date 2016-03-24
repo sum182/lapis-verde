@@ -1,4 +1,4 @@
-unit untAgendaEscolaView;
+unit untAgendaView;
 
 interface
 
@@ -14,7 +14,7 @@ uses
   Data.DB, FGX.VirtualKeyboard,FMX.TextLayout, FMX.ScrollBox, FMX.Memo;
 
 type
-  TfrmAgendaEscolaView = class(TfrmBaseToolBar)
+  TfrmAgendaView = class(TfrmBaseToolBar)
     bsAgenda: TBindSourceDB;
     blAgenda: TBindingsList;
     btnAdd: TSpeedButton;
@@ -44,10 +44,8 @@ type
   private
     MargemEsquerda:Integer;
     MargemDireita:Integer;
-
-
+    fActivityDialogThread: TThread;
     procedure SetTitulo;
-
     procedure SetListBoxAgendaGroupHeader;
     procedure SetListBoxAgendaItemData(Data:String);
     procedure SetListBoxAgendaItem(Descricao:String);
@@ -60,11 +58,14 @@ type
     AlunoId: Integer;
     TurmaId: Integer;
     Titulo: String;
+    DataSetAgenda: TDataSet;
     procedure FillListBoxAgenda;
+    procedure FillListBoxAgendaWait;
+
   end;
 
 var
-  frmAgendaEscolaView: TfrmAgendaEscolaView;
+  frmAgendaView: TfrmAgendaView;
 
 implementation
 
@@ -73,7 +74,7 @@ implementation
 uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal,
   untDMStyles, smMensagensFMX;
 
-procedure TfrmAgendaEscolaView.btnVoltarClick(Sender: TObject);
+procedure TfrmAgendaView.btnVoltarClick(Sender: TObject);
 begin
   fAllowCloseForm := True;
   Close;
@@ -81,34 +82,73 @@ begin
 end;
 
 
-procedure TfrmAgendaEscolaView.FillListBoxAgenda;
+procedure TfrmAgendaView.FillListBoxAgenda;
 var
   Data: string;
 begin
-  lstboxAgenda.BeginUpdate;
-  lstboxAgenda.Items.Clear;
-  DmEscola.fdqAgenda.Refresh;
-  DmEscola.fdqAgenda.First;
+  try
+    lstboxAgenda.BeginUpdate;
+    lstboxAgenda.Items.Clear;
+    DataSetAgenda.Refresh;
+    DataSetAgenda.DisableControls;
+    DataSetAgenda.First;
 
-  while not DmEscola.fdqAgenda.Eof do
-  begin
-    if not (DmEscola.fdqAgenda.Bof) then
-      SetListBoxAgendaGroupHeader;
-
-    Data := DmEscola.fdqAgenda.FieldByName('data').AsString;
-    SetListBoxAgendaItemData(Data);
-
-    while (Data = (DmEscola.fdqAgenda.FieldByName('data').AsString)) and
-      not(DmEscola.fdqAgenda.Eof) do
+    while not DataSetAgenda.Eof do
     begin
-      SetListBoxAgendaItem(DmEscola.fdqAgenda.FieldByName('descricao').AsString);
-      DmEscola.fdqAgenda.Next;
+      if not (DataSetAgenda.Bof) then
+        SetListBoxAgendaGroupHeader;
+
+      Data := DataSetAgenda.FieldByName('data').AsString;
+      SetListBoxAgendaItemData(Data);
+
+      while (Data = (DataSetAgenda.FieldByName('data').AsString)) and
+        not(DataSetAgenda.Eof) do
+      begin
+        SetListBoxAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);
+        DataSetAgenda.Next;
+      end;
     end;
+  finally
+    lstboxAgenda.EndUpdate;
+    DataSetAgenda.EnableControls;
   end;
-  lstboxAgenda.EndUpdate;
 end;
 
-procedure TfrmAgendaEscolaView.FormCreate(Sender: TObject);
+procedure TfrmAgendaView.FillListBoxAgendaWait;
+begin
+ //Este método não esta sendo utilizado, ao utilizar no show do form trava a app e fecha
+ if not DM.fgActivityDialog.IsShown then
+  begin
+    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+    begin
+      try
+        TThread.Synchronize(nil, procedure
+        begin
+          DM.fgActivityDialog.Message := 'Carregando Agenda';
+          DM.fgActivityDialog.Show;
+        end);
+
+        FillListBoxAgenda;
+
+        if TThread.CheckTerminated then
+          Exit;
+
+
+      finally
+        if not TThread.CheckTerminated then
+          TThread.Synchronize(nil, procedure
+          begin
+              DM.fgActivityDialog.Hide;
+              Application.ProcessMessages;
+          end);
+      end;
+    end);
+    FActivityDialogThread.FreeOnTerminate := False;
+    FActivityDialogThread.Start;
+  end;
+end;
+
+procedure TfrmAgendaView.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
@@ -117,33 +157,35 @@ begin
   tbCtrlAgenda.ActiveTab:= tbItemListAgenda;
 end;
 
-procedure TfrmAgendaEscolaView.FormShow(Sender: TObject);
+procedure TfrmAgendaView.FormShow(Sender: TObject);
 begin
   inherited;
-  DmEscola.OpenAgenda(AlunoId, TurmaId);
+  if UsuarioLogadoIsFuncionario then
+    DmEscola.OpenAgenda(AlunoId, TurmaId);
+
   SetTitulo;
   FillListBoxAgenda;
 end;
 
 
-procedure TfrmAgendaEscolaView.imgAddClick(Sender: TObject);
+procedure TfrmAgendaView.imgAddClick(Sender: TObject);
 begin
   inherited;
   btnAdd.OnClick(self);
 end;
 
-procedure TfrmAgendaEscolaView.imgVoltarClick(Sender: TObject);
+procedure TfrmAgendaView.imgVoltarClick(Sender: TObject);
 begin
   inherited;
   btnVoltar.OnClick(self);
 end;
 
-procedure TfrmAgendaEscolaView.SetListBoxAgendaFooter;
+procedure TfrmAgendaView.SetListBoxAgendaFooter;
 begin
 //
 end;
 
-procedure TfrmAgendaEscolaView.SetListBoxAgendaGroupHeader;
+procedure TfrmAgendaView.SetListBoxAgendaGroupHeader;
 var
   ListBoxGroupHeader: TListBoxGroupHeader;
 begin
@@ -154,7 +196,7 @@ begin
   lstboxAgenda.AddObject(ListBoxGroupHeader);
 end;
 
-procedure TfrmAgendaEscolaView.SetListBoxAgendaItem(Descricao:String);
+procedure TfrmAgendaView.SetListBoxAgendaItem(Descricao:String);
 var
   ListBoxItem: TListBoxItem;
   HeightItem: Double;
@@ -171,21 +213,14 @@ begin
   Text.AutoSize:=True;
   ListBoxItem.Height:=  (Text.Height)+ 4;
   Text.Parent := ListBoxItem;
-  lstboxAgenda.AddObject(ListBoxItem);
   Text.EndUpdate;
-
-  //SetListBoxAgendaItemLinhaBranco;
-
-  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-  ListBoxItem.BeginUpdate;
-  ListBoxItem.Text:='';
-  SetListBoxItemProperty(ListBoxItem);
-  ListBoxItem.Height:= 12;
-  ListBoxItem.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
+
+
+  SetListBoxAgendaItemLinhaBranco;
 end;
 
-procedure TfrmAgendaEscolaView.SetListBoxAgendaItemData(Data:String);
+procedure TfrmAgendaView.SetListBoxAgendaItemData(Data:String);
 var
   ListBoxItem: TListBoxItem;
   Text: TText;
@@ -206,7 +241,7 @@ begin
   lstboxAgenda.AddObject(ListBoxItem);
 end;
 
-procedure TfrmAgendaEscolaView.SetListBoxAgendaItemLinhaBranco;
+procedure TfrmAgendaView.SetListBoxAgendaItemLinhaBranco;
 var
   ListBoxItem: TListBoxItem;
 begin
@@ -221,7 +256,7 @@ begin
 end;
 
 
-procedure TfrmAgendaEscolaView.SetListBoxItemProperty(
+procedure TfrmAgendaView.SetListBoxItemProperty(
   ListBoxItem: TListBoxItem);
 begin
   ListBoxItem.TextSettings.WordWrap := True;
@@ -231,7 +266,7 @@ begin
   ListBoxItem.Height:= 25;
 end;
 
-procedure TfrmAgendaEscolaView.SetTextProperty(Text: TText;ListBoxItem:TListBoxItem);
+procedure TfrmAgendaView.SetTextProperty(Text: TText;ListBoxItem:TListBoxItem);
 begin
   Text.Align := TAlignLayout.alClient;
   Text.TextSettings.HorzAlign := TTextAlign.Leading;
@@ -243,18 +278,18 @@ begin
   Text.TextSettings.WordWrap:=True;
 end;
 
-procedure TfrmAgendaEscolaView.SetTitulo;
+procedure TfrmAgendaView.SetTitulo;
 begin
   lblTitulo.Text := Titulo;
 end;
 
-procedure TfrmAgendaEscolaView.SetValuesObjets;
+procedure TfrmAgendaView.SetValuesObjets;
 begin
   MargemEsquerda:=8;
   MargemDireita:=8;
 end;
 
-procedure TfrmAgendaEscolaView.btnAddClick(Sender: TObject);
+procedure TfrmAgendaView.btnAddClick(Sender: TObject);
 begin
   inherited;
   if not Assigned(frmAgendaEscolaAdd) then

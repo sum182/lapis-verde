@@ -44,8 +44,8 @@ implementation
 
 {$R *.fmx}
 
-uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgendaEscolaView,
-  untPrincipal, untDMStyles;
+uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgendaView,
+  untPrincipal, untDMStyles, untFuncoes;
 
 procedure TfrmAgendaEscolaSelect.FormCreate(Sender: TObject);
 begin
@@ -62,27 +62,28 @@ procedure TfrmAgendaEscolaSelect.lstAlunosItemClick(const Sender: TObject;
 begin
   inherited;
   //frmPrincipal.OpenForm(TfrmAgenda);
-  if not Assigned(frmAgendaEscolaView) then
-    Application.CreateForm(TfrmAgendaEscolaView, frmAgendaEscolaView);
+  if not Assigned(frmAgendaView) then
+    Application.CreateForm(TfrmAgendaView, frmAgendaView);
 
-  frmAgendaEscolaView.AlunoId:= DmEscola.fdqAluno.FieldByName('aluno_id').AsInteger;
-  frmAgendaEscolaView.Titulo:= DmEscola.fdqAluno.FieldByName('nome').AsString;
-  frmAgendaEscolaView.TurmaId:= 0;
-  frmAgendaEscolaView.Show;
+  frmAgendaView.AlunoId:= DmEscola.fdqAluno.FieldByName('aluno_id').AsInteger;
+  frmAgendaView.Titulo:= DmEscola.fdqAluno.FieldByName('nome').AsString;
+  frmAgendaView.DataSetAgenda:= DmEscola.fdqAgenda;
+  frmAgendaView.TurmaId:= 0;
+  frmAgendaView.Show;
 end;
 
 procedure TfrmAgendaEscolaSelect.lstTurmasItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   inherited;
-  if not Assigned(frmAgendaEscolaView) then
-    Application.CreateForm(TfrmAgendaEscolaView, frmAgendaEscolaView);
+  if not Assigned(frmAgendaView) then
+    Application.CreateForm(TfrmAgendaView, frmAgendaView);
 
-  frmAgendaEscolaView.AlunoId:= 0;
-  frmAgendaEscolaView.TurmaId:= DmEscola.fdqTurma.FieldByName('turma_id').AsInteger;
-  frmAgendaEscolaView.Titulo:= DmEscola.fdqTurma.FieldByName('nome').AsString;
-  frmAgendaEscolaView.Show;
-
+  frmAgendaView.AlunoId:= 0;
+  frmAgendaView.TurmaId:= DmEscola.fdqTurma.FieldByName('turma_id').AsInteger;
+  frmAgendaView.Titulo:= DmEscola.fdqTurma.FieldByName('nome').AsString;
+  frmAgendaView.DataSetAgenda:= DmEscola.fdqAgenda;
+  frmAgendaView.Show;
 end;
 
 end.
