@@ -8,7 +8,10 @@ object Dm: TDm
       'Database=C:\Projetos\Agenda\BD\SQLite\db.s3db'
       'LockingMode=Normal'
       'OpenMode=ReadWrite'
+      'CacheSize=90000'
       'DriverID=SQLite')
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
     LoginPrompt = False
     Left = 64
     Top = 32

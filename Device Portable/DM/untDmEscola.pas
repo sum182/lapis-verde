@@ -224,6 +224,7 @@ begin
         Exit;
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+      //ShowMessage(KeyValues);
       OpenAgenda(KeyValues);
 
       CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
@@ -341,6 +342,7 @@ begin
   CloseAgenda;
   SetSQLAgenda(KeyValues);
   fdqAgenda.Active := True;
+  //ShowMessage(IntTostr((fdqAgenda.RecordCount)));
 end;
 
 procedure TDmEscola.OpenAgenda(AlunoId, TurmaId: Integer);
@@ -457,6 +459,7 @@ begin
   fdqAgenda.SQL.Add('from agenda ag');
   fdqAgenda.SQL.Add('where agenda_id in (' + KeyValues + ')');
   fdqAgenda.SQL.Add('order by ag.data_insert_local desc');
+
 end;
 
 procedure TDmEscola.SetSQLAgendaAluno(KeyValues: String);
