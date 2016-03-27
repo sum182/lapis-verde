@@ -3,7 +3,6 @@ inherited frmAgendaEscolaViewTestes: TfrmAgendaEscolaViewTestes
   ClientHeight = 570
   ClientWidth = 628
   Position = DesktopCenter
-  StyleBook = DMStyles.styleAndroidNew
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
@@ -116,10 +115,10 @@ inherited frmAgendaEscolaViewTestes: TfrmAgendaEscolaViewTestes
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB55B68EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E9DB56368EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A847000B64BFA2E33397ABA00000000
+                  721FB1E71A117315233D622E8C445C9B2A8470001169FA0AAEA2060E00000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -331,7 +330,7 @@ inherited frmAgendaEscolaViewTestes: TfrmAgendaEscolaViewTestes
                 Distance = 3.000000000000000000
                 Direction = 45.000000000000000000
                 Softness = 0.200000002980232200
-                Opacity = 0.400000005960464500
+                Opacity = 0.400000005960464400
                 ShadowColor = claBlack
               end
               object Text1: TText

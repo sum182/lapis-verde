@@ -49,10 +49,10 @@ type
     procedure SetSQLAgendaAluno(KeyValues:String);overload;
     procedure SetSQLAgendaTurma(KeyValues:String);overload;
 
-    procedure SetParamsAgenda(AlunoId:Integer;TurmaId:Integer);
+    procedure SetParamsAgenda(AlunoId:Integer;TurmaId:Integer;Data:TDate);
 
 
-    procedure OpenAgenda(AlunoId:Integer;TurmaId:Integer);overload;
+    procedure OpenAgenda(AlunoId:Integer;TurmaId:Integer;Data:TDate);overload;
     procedure OpenAgenda;overload;
     procedure OpenAgenda(KeyValues:String);overload;
     procedure OpenAgendaAluno(KeyValues:String);overload;
@@ -345,12 +345,12 @@ begin
   //ShowMessage(IntTostr((fdqAgenda.RecordCount)));
 end;
 
-procedure TDmEscola.OpenAgenda(AlunoId, TurmaId: Integer);
+procedure TDmEscola.OpenAgenda(AlunoId, TurmaId: Integer;Data:TDate);
 begin
   CloseAgenda;
 
   SetSQLAgenda(AlunoId,TurmaId);
-  SetParamsAgenda(AlunoId,TurmaId);
+  SetParamsAgenda(AlunoId,TurmaId,Data);
 
   fdqAgenda.Active := True;
   fdqAgendaAluno.Active := True;
@@ -436,7 +436,7 @@ end;
 
 
 
-procedure TDmEscola.SetParamsAgenda(AlunoId, TurmaId: Integer);
+procedure TDmEscola.SetParamsAgenda(AlunoId, TurmaId: Integer;Data:TDate);
 begin
   fdqAgenda.ParamByName('escola_id').AsInteger:= GetEscolaId;
 
@@ -445,6 +445,8 @@ begin
 
   if TurmaId > 0 then
     fdqAgenda.ParamByName('turma_id').AsInteger:= TurmaId;
+
+  fdqAgenda.ParamByName('data').AsDate:= Data;
 end;
 
 procedure TDmEscola.SetSQLAgenda(KeyValues: String);
@@ -458,7 +460,7 @@ begin
   fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
   fdqAgenda.SQL.Add('from agenda ag');
   fdqAgenda.SQL.Add('where agenda_id in (' + KeyValues + ')');
-  fdqAgenda.SQL.Add('order by ag.data_insert_local desc');
+  fdqAgenda.SQL.Add('order by ag.data_insert_local');
 
 end;
 
@@ -525,7 +527,7 @@ begin
   fdqAgenda.SQL.Add('  ag.*,');
   fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
   fdqAgenda.SQL.Add('from agenda ag');
-  fdqAgenda.SQL.Add('order by ag.data_insert_local desc');
+  fdqAgenda.SQL.Add('order by ag.data_insert_local');
 end;
 
 
@@ -542,9 +544,10 @@ begin
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_aluno al on (ag.agenda_id = al.agenda_id)');
     fdqAgenda.SQL.Add('where 1=1');
+    fdqAgenda.SQL.Add('and date(ag.data_insert_local) = :data');
     fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
     fdqAgenda.SQL.Add('and al.aluno_id = :aluno_id');
-    fdqAgenda.SQL.Add('order by ag.data_insert_local desc');
+    fdqAgenda.SQL.Add('order by ag.data_insert_local ');
   end;
 
 
@@ -557,9 +560,10 @@ begin
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_turma at on (ag.agenda_id = at.agenda_id)');
     fdqAgenda.SQL.Add('where 1=1');
+    fdqAgenda.SQL.Add('and date(ag.data_insert_local) = :data');
     fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
     fdqAgenda.SQL.Add('and at.turma_id = :turma_id');
-    fdqAgenda.SQL.Add('order by ag.data_insert_local desc');
+    fdqAgenda.SQL.Add('order by ag.data_insert_local ');
   end;
 
   fdqAgendaAluno.SQL.Clear;

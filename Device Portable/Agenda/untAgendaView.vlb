@@ -69,7 +69,7 @@ Coordinates=1490,130,126,146
 Coordinates=622,1,175,102
 
 []
-Coordinates=137,459,96,58
+Coordinates=902,441,60,36
 Visible=True
 
 [fgVirtualKeyboard]
@@ -77,9 +77,6 @@ Coordinates=166,122,117,36
 
 [lstboxAgenda]
 Coordinates=166,177,139,256
-
-[Layout6]
-Coordinates=902,441,60,36
 
 [tbItemListAgendaDev]
 Coordinates=902,56,69,36

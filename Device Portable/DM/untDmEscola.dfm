@@ -46,9 +46,17 @@ object DmEscola: TDmEscola
       'strftime("%d/%m/%Y",data_insert_local) as data'
       'from agenda ag'
       ''
+      'where date(data_insert_local) = :data'
       'order by data_insert_local desc')
     Left = 120
     Top = 8
+    ParamData = <
+      item
+        Name = 'DATA'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = 42453d
+      end>
   end
   object fdqAgendaAluno: TFDQuery
     Connection = Dm.FDConnectionDB

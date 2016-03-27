@@ -209,7 +209,7 @@ end;
 procedure TfrmAgendaEscolaViewTestes.FormShow(Sender: TObject);
 begin
   inherited;
-  DmEscola.OpenAgenda(AlunoId, TurmaId);
+//  DmEscola.OpenAgenda(AlunoId, TurmaId);
   SetTitulo;
   lstAgenda.ItemAppearanceObjects.ItemObjects.Detail.WordWrap := True;
   Panel1.Visible := False;
@@ -250,7 +250,7 @@ procedure TfrmAgendaEscolaViewTestes.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
   DmEscola.GetAgenda;
-  DmEscola.OpenAgenda(AlunoId, TurmaId);
+//  DmEscola.OpenAgenda(AlunoId, TurmaId);
   DmEscola.SalvarDadosServer;
   Dm.SalvarDadosServer;
 end;

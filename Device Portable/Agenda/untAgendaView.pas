@@ -11,7 +11,8 @@ uses
   MultiDetailAppearanceU, FMX.ListView, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, FMX.TabControl, FMX.ListBox, FMX.Effects, FMX.Edit,
-  Data.DB, FGX.VirtualKeyboard,FMX.TextLayout, FMX.ScrollBox, FMX.Memo;
+  Data.DB, FGX.VirtualKeyboard,FMX.TextLayout, FMX.ScrollBox, FMX.Memo,
+  FMX.DateTimeCtrls, FMX.Calendar, FMX.ExtCtrls,DateUtils;
 
 type
   TfrmAgendaView = class(TfrmBaseToolBar)
@@ -22,7 +23,6 @@ type
     LinkFillControlToField2: TLinkFillControlToField;
     tbCtrlAgenda: TTabControl;
     tbItemListAgenda: TTabItem;
-    Layout6: TLayout;
     lstboxAgenda: TListBox;
     tbItemListAgendaDev: TTabItem;
     ListBox1: TListBox;
@@ -35,12 +35,22 @@ type
     imgAdd: TImage;
     Memo1: TMemo;
     ListBoxItem5: TListBoxItem;
+    layData: TLayout;
+    layCalendar: TLayout;
+    Calendar1: TCalendar;
+    SpeedButton3: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure imgVoltarClick(Sender: TObject);
     procedure imgAddClick(Sender: TObject);
+    procedure Calendar1DateSelected(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
   private
     MargemEsquerda:Integer;
     MargemDireita:Integer;
@@ -82,6 +92,23 @@ begin
 end;
 
 
+procedure TfrmAgendaView.Calendar1DateSelected(Sender: TObject);
+begin
+  inherited;
+//layData.Height := layData.Height - ListBoxItem8.Height;
+  layCalendar.Visible := False;
+
+  SpeedButton1.Text := Format('%s', [FormatDateTime('dddddd', Calendar1.Date)]);
+
+
+  if UsuarioLogadoIsFuncionario then
+    DmEscola.OpenAgenda(AlunoId, TurmaId,Calendar1.Date);
+
+  SetTitulo;
+  FillListBoxAgenda;
+
+end;
+
 procedure TfrmAgendaView.FillListBoxAgenda;
 var
   Data: string;
@@ -99,11 +126,14 @@ begin
         SetListBoxAgendaGroupHeader;
 
       Data := DataSetAgenda.FieldByName('data').AsString;
-      SetListBoxAgendaItemData(Data);
+      //SetListBoxAgendaItemData(Data);
 
       while (Data = (DataSetAgenda.FieldByName('data').AsString)) and
         not(DataSetAgenda.Eof) do
       begin
+        //Teste
+        SetListBoxAgendaGroupHeader;
+
         SetListBoxAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);
         DataSetAgenda.Next;
       end;
@@ -161,10 +191,15 @@ procedure TfrmAgendaView.FormShow(Sender: TObject);
 begin
   inherited;
   if UsuarioLogadoIsFuncionario then
-    DmEscola.OpenAgenda(AlunoId, TurmaId);
+    DmEscola.OpenAgenda(AlunoId, TurmaId,Calendar1.Date);
+
 
   SetTitulo;
-  FillListBoxAgenda;
+//  FillListBoxAgenda;
+
+  layCalendar.Visible:=False;
+  Calendar1.Date := Now;
+  Calendar1.OnDateSelected(self);
 end;
 
 
@@ -287,6 +322,30 @@ procedure TfrmAgendaView.SetValuesObjets;
 begin
   MargemEsquerda:=8;
   MargemDireita:=8;
+end;
+
+procedure TfrmAgendaView.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  layCalendar.Visible := not layCalendar.Visible;
+
+//layData.Height := layData.Height + ListBoxItem8.Height;
+end;
+
+procedure TfrmAgendaView.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+//  Calendar1.Date :=
+
+ Calendar1.Date :=  IncDay(Calendar1.date,1);
+ Calendar1DateSelected(self);
+end;
+
+procedure TfrmAgendaView.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+ Calendar1.Date :=  IncDay(Calendar1.date,-1);
+ Calendar1DateSelected(self);
 end;
 
 procedure TfrmAgendaView.btnAddClick(Sender: TObject);

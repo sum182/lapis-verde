@@ -1,13 +1,5 @@
 --------------------------------------------------------------------------------------------
-Atividades - Casa
-Copiar pasta
-Firemonkey do s para componentes
-
-Mapear
-S:\Desenvolvimento\Delphi\Estudos\Caderno
-Caderno de estudo delphi
-
-Atualizar atalhos VM
+Atividades Casa
 --------------------------------------------------------------------------------------------
 
 
