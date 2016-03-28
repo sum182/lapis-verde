@@ -122,22 +122,10 @@ begin
 
     while not DataSetAgenda.Eof do
     begin
-      if not (DataSetAgenda.Bof) then
         SetListBoxAgendaGroupHeader;
-
-      Data := DataSetAgenda.FieldByName('data').AsString;
-      //SetListBoxAgendaItemData(Data);
-
-      while (Data = (DataSetAgenda.FieldByName('data').AsString)) and
-        not(DataSetAgenda.Eof) do
-      begin
-        //Teste
-        SetListBoxAgendaGroupHeader;
-
         SetListBoxAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);
         DataSetAgenda.Next;
       end;
-    end;
   finally
     lstboxAgenda.EndUpdate;
     DataSetAgenda.EnableControls;
@@ -244,7 +232,7 @@ begin
   Text.BeginUpdate;
   Text.Text := Descricao;
   SetTextProperty(Text,ListBoxItem);
-  Text.TextSettings.Font.Size :=  14;
+  Text.TextSettings.Font.Size :=  16;
   Text.AutoSize:=True;
   ListBoxItem.Height:=  (Text.Height)+ 4;
   Text.Parent := ListBoxItem;

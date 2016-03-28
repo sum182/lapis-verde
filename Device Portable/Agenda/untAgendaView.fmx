@@ -329,6 +329,8 @@ inherited frmAgendaView: TfrmAgendaView
           end
           object SpeedButton1: TSpeedButton
             Align = Center
+            Margins.Left = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
             Size.Width = 345.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
