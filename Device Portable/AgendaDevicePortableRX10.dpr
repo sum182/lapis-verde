@@ -42,24 +42,23 @@ uses
 
 begin
   //Modo Teste
- { Application.Initialize;
+  Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
-  Application.CreateForm(TfrmAgendaEscolaViewTestes, frmAgendaEscolaViewTestes);
-  //Application.CreateForm(TfrmPrincipal, frmPrincipal);
+   //Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
   Application.Run;
   Exit;
   // Fim do Teste
 
- }
+
 
   //Modo Teste 2
-  Application.Initialize;
+ { Application.Initialize;
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);
@@ -80,5 +79,5 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.Run;
+  Application.Run;  }
 end.

@@ -34,6 +34,7 @@ type
     lstItemTesteLogin: TListBoxItem;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
+    SpeedButton1: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteClientesClick(Sender: TObject);
@@ -84,7 +85,8 @@ implementation
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
-  untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA, untAgendaView;
+  untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA, untAgendaView,
+  untDmEscola, untDmResponsavel;
 
 { TfrmPrincipal }
 
@@ -143,7 +145,8 @@ end;
 procedure TfrmPrincipalTeste.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-   OpenForm(TfrmAgendaView);
+  DmEscola.SyncronizarDadosServer;
+  Dm.SyncronizarDadosServer
 end;
 
 procedure TfrmPrincipalTeste.SpeedButton2Click(Sender: TObject);
@@ -186,14 +189,14 @@ end;
 procedure TfrmPrincipalTeste.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
-  if (IsSysOSAndroid) or (IsSysOSiOS)then
+  //if (IsSysOSAndroid) or (IsSysOSiOS)then
     CanClose := fAllowCloseForm;
 end;
 
 procedure TfrmPrincipalTeste.FormCreate(Sender: TObject);
 begin
   inherited;
-  fAllowCloseForm:= False;
+  fAllowCloseForm:= True;
   SetStyle(Self);
   fShowMenuPrincipal:=True;
   fShowForm:=False;

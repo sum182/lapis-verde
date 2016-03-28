@@ -27,12 +27,6 @@
         <Projects Include="..\WhatsAppMessengerLayout\Messenger.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\FuelApp\FuelApp.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemo.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -113,32 +107,14 @@
     <Target Name="Messenger:Make">
         <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Make"/>
     </Target>
-    <Target Name="FuelApp">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj"/>
-    </Target>
-    <Target Name="FuelApp:Clean">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="FuelApp:Make">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="VirtualKeyboardDemo">
-        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemo.dproj"/>
-    </Target>
-    <Target Name="VirtualKeyboardDemo:Clean">
-        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemo.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="VirtualKeyboardDemo:Make">
-        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\VirtualKeyboardDemo\VirtualKeyboardDemo.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger;FuelApp;VirtualKeyboardDemo"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean;FuelApp:Clean;VirtualKeyboardDemo:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make;FuelApp:Make;VirtualKeyboardDemo:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

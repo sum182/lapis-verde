@@ -217,8 +217,8 @@ var
 begin
   ListBoxGroupHeader := TListBoxGroupHeader.Create(lstboxAgenda);
   ListBoxGroupHeader.TextSettings.HorzAlign := TTextAlign.Center;
-  ListBoxGroupHeader.TextSettings.WordWrap := True;
-  ListBoxGroupHeader.Height:=15;
+  //ListBoxGroupHeader.TextSettings.WordWrap := True;
+  ListBoxGroupHeader.Height:=20;
   lstboxAgenda.AddObject(ListBoxGroupHeader);
 end;
 
@@ -237,13 +237,12 @@ begin
   SetTextProperty(Text,ListBoxItem);
   Text.TextSettings.Font.Size :=  16;
   Text.AutoSize:=True;
-  ListBoxItem.Height:=  (Text.Height)+ 4;
+  ListBoxItem.Height:=  (Text.Height)+ 2;
   Text.Parent := ListBoxItem;
   Text.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
 
-
-  SetListBoxAgendaItemLinhaBranco;
+  //SetListBoxAgendaItemLinhaBranco;
 end;
 
 procedure TfrmAgendaView.SetListBoxAgendaItemData(Data:String);
@@ -285,10 +284,13 @@ end;
 procedure TfrmAgendaView.SetListBoxItemProperty(
   ListBoxItem: TListBoxItem);
 begin
+  ListBoxItem.StyleLookup := 'listboxitemstyle';
   ListBoxItem.TextSettings.WordWrap := True;
   ListBoxItem.Selectable:=False;
   ListBoxItem.Margins.Left:=MargemEsquerda;
   ListBoxItem.Margins.Right := MargemDireita;
+  ListBoxItem.Margins.Top := 5;
+  ListBoxItem.Margins.Bottom := 5;
   ListBoxItem.Height:= 25;
 end;
 

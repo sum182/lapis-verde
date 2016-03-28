@@ -165,6 +165,11 @@ object frmPrincipalTeste: TfrmPrincipalTeste
           Column = 1
           Control = SpeedButton4
           Row = 0
+        end
+        item
+          Column = 0
+          Control = SpeedButton1
+          Row = 1
         end>
       RowCollection = <
         item
@@ -195,6 +200,16 @@ object frmPrincipalTeste: TfrmPrincipalTeste
         Size.PlatformDefault = False
         Text = 'M'#243'dulo 2 - Testes'
         OnClick = SpeedButton4Click
+      end
+      object SpeedButton1: TSpeedButton
+        Anchors = []
+        Position.X = 57.000000000000000000
+        Position.Y = 441.000000000000000000
+        Size.Width = 112.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Syncronizar'
+        OnClick = SpeedButton1Click
       end
     end
   end
