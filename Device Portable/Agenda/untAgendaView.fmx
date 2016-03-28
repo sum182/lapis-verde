@@ -251,6 +251,8 @@ inherited frmAgendaView: TfrmAgendaView
         ExplicitSize.cx = 76.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object lstboxAgenda: TListBox
+          Touch.GestureManager = GestureManager1
+          OnGesture = lstboxAgendaGesture
           Align = Client
           Margins.Left = 6.000000000000000000
           Margins.Top = 6.000000000000000000
@@ -505,5 +507,21 @@ inherited frmAgendaView: TfrmAgendaView
       FillHeaderFieldName = 'data'
       FillBreakGroups = <>
     end
+  end
+  object GestureManager1: TGestureManager
+    Sensitivity = 80.000000000000000000
+    Left = 280
+    Top = 472
+    GestureData = <
+      item
+        Control = lstboxAgenda
+        Collection = <
+          item
+            GestureID = sgiLeft
+          end
+          item
+            GestureID = sgiRight
+          end>
+      end>
   end
 end

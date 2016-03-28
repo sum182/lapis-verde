@@ -12,7 +12,7 @@ uses
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, FMX.TabControl, FMX.ListBox, FMX.Effects, FMX.Edit,
   Data.DB, FGX.VirtualKeyboard,FMX.TextLayout, FMX.ScrollBox, FMX.Memo,
-  FMX.DateTimeCtrls, FMX.Calendar, FMX.ExtCtrls,DateUtils;
+  FMX.DateTimeCtrls, FMX.Calendar, FMX.ExtCtrls,DateUtils, FMX.Gestures;
 
 type
   TfrmAgendaView = class(TfrmBaseToolBar)
@@ -44,6 +44,7 @@ type
     gbxCalendar: TGroupBox;
     btnCalendarDown: TSpeedButton;
     btnCalendarTop: TSpeedButton;
+    GestureManager1: TGestureManager;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -56,6 +57,8 @@ type
     procedure btnCalendarLeftClick(Sender: TObject);
     procedure btnCalendarDownClick(Sender: TObject);
     procedure btnCalendarTopClick(Sender: TObject);
+    procedure lstboxAgendaGesture(Sender: TObject;
+      const EventInfo: TGestureEventInfo; var Handled: Boolean);
   private
     MargemEsquerda:Integer;
     MargemDireita:Integer;
@@ -192,6 +195,20 @@ procedure TfrmAgendaView.imgVoltarClick(Sender: TObject);
 begin
   inherited;
   btnVoltar.OnClick(self);
+end;
+
+procedure TfrmAgendaView.lstboxAgendaGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+var
+  Gesto : string;
+begin
+  if GestureToIdent(EventInfo.GestureID, Gesto) then
+    begin
+      case EventInfo.GestureID of
+        sgiLeft : btnCalendarRight.OnClick(self);
+        sgiRight: btnCalendarLeft.OnClick(self);
+      end;
+    end;
 end;
 
 procedure TfrmAgendaView.RefreshForm;
