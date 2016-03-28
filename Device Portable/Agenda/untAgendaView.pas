@@ -37,20 +37,25 @@ type
     ListBoxItem5: TListBoxItem;
     layData: TLayout;
     layCalendar: TLayout;
-    Calendar1: TCalendar;
-    SpeedButton3: TSpeedButton;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
+    Calendar: TCalendar;
+    btnCalendarLeft: TSpeedButton;
+    btnCalendar: TSpeedButton;
+    btnCalendarRight: TSpeedButton;
+    gbxCalendar: TGroupBox;
+    btnCalendarDown: TSpeedButton;
+    btnCalendarTop: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure imgVoltarClick(Sender: TObject);
     procedure imgAddClick(Sender: TObject);
-    procedure Calendar1DateSelected(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
+    procedure CalendarDateSelected(Sender: TObject);
+    procedure btnCalendarClick(Sender: TObject);
+    procedure btnCalendarRightClick(Sender: TObject);
+    procedure btnCalendarLeftClick(Sender: TObject);
+    procedure btnCalendarDownClick(Sender: TObject);
+    procedure btnCalendarTopClick(Sender: TObject);
   private
     MargemEsquerda:Integer;
     MargemDireita:Integer;
@@ -63,7 +68,8 @@ type
     procedure SetListBoxAgendaFooter;
     procedure SetListBoxItemProperty(ListBoxItem:TListBoxItem);
     procedure SetTextProperty(Text:TText;ListBoxItem:TListBoxItem);
-    procedure SetValuesObjets;
+    procedure SetValuesObjects;
+    procedure SetStateObjects;
   public
     AlunoId: Integer;
     TurmaId: Integer;
@@ -71,6 +77,7 @@ type
     DataSetAgenda: TDataSet;
     procedure FillListBoxAgenda;
     procedure FillListBoxAgendaWait;
+    procedure RefreshForm;
 
   end;
 
@@ -92,21 +99,11 @@ begin
 end;
 
 
-procedure TfrmAgendaView.Calendar1DateSelected(Sender: TObject);
+procedure TfrmAgendaView.CalendarDateSelected(Sender: TObject);
 begin
   inherited;
-//layData.Height := layData.Height - ListBoxItem8.Height;
-  layCalendar.Visible := False;
-
-  SpeedButton1.Text := Format('%s', [FormatDateTime('dddddd', Calendar1.Date)]);
-
-
-  if UsuarioLogadoIsFuncionario then
-    DmEscola.OpenAgenda(AlunoId, TurmaId,Calendar1.Date);
-
-  SetTitulo;
-  FillListBoxAgenda;
-
+  RefreshForm;
+  layCalendar.Visible := not layCalendar.Visible;
 end;
 
 procedure TfrmAgendaView.FillListBoxAgenda;
@@ -122,8 +119,8 @@ begin
 
     while not DataSetAgenda.Eof do
     begin
-        SetListBoxAgendaGroupHeader;
         SetListBoxAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);
+        SetListBoxAgendaGroupHeader;
         DataSetAgenda.Next;
       end;
   finally
@@ -170,7 +167,7 @@ procedure TfrmAgendaView.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
-  SetValuesObjets;
+  SetValuesObjects;
   tbCtrlAgenda.TabPosition:= TTabPosition.None;
   tbCtrlAgenda.ActiveTab:= tbItemListAgenda;
 end;
@@ -178,16 +175,10 @@ end;
 procedure TfrmAgendaView.FormShow(Sender: TObject);
 begin
   inherited;
-  if UsuarioLogadoIsFuncionario then
-    DmEscola.OpenAgenda(AlunoId, TurmaId,Calendar1.Date);
-
-
-  SetTitulo;
-//  FillListBoxAgenda;
 
   layCalendar.Visible:=False;
-  Calendar1.Date := Now;
-  Calendar1.OnDateSelected(self);
+  Calendar.Date := Now;
+  RefreshForm;
 end;
 
 
@@ -201,6 +192,18 @@ procedure TfrmAgendaView.imgVoltarClick(Sender: TObject);
 begin
   inherited;
   btnVoltar.OnClick(self);
+end;
+
+procedure TfrmAgendaView.RefreshForm;
+begin
+  btnCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
+
+  if UsuarioLogadoIsFuncionario then
+    DmEscola.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
+
+  SetTitulo;
+  FillListBoxAgenda;
+  SetStateObjects;
 end;
 
 procedure TfrmAgendaView.SetListBoxAgendaFooter;
@@ -289,6 +292,12 @@ begin
   ListBoxItem.Height:= 25;
 end;
 
+procedure TfrmAgendaView.SetStateObjects;
+begin
+//  btnCalendarDown.Visible := not layCalendar.Visible;
+//  btnCalendarTop.Visible := layCalendar.Visible;
+end;
+
 procedure TfrmAgendaView.SetTextProperty(Text: TText;ListBoxItem:TListBoxItem);
 begin
   Text.Align := TAlignLayout.alClient;
@@ -306,34 +315,43 @@ begin
   lblTitulo.Text := Titulo;
 end;
 
-procedure TfrmAgendaView.SetValuesObjets;
+procedure TfrmAgendaView.SetValuesObjects;
 begin
   MargemEsquerda:=8;
   MargemDireita:=8;
 end;
 
-procedure TfrmAgendaView.SpeedButton1Click(Sender: TObject);
+procedure TfrmAgendaView.btnCalendarClick(Sender: TObject);
 begin
   inherited;
   layCalendar.Visible := not layCalendar.Visible;
-
-//layData.Height := layData.Height + ListBoxItem8.Height;
+  SetStateObjects;
 end;
 
-procedure TfrmAgendaView.SpeedButton2Click(Sender: TObject);
+procedure TfrmAgendaView.btnCalendarRightClick(Sender: TObject);
 begin
   inherited;
-//  Calendar1.Date :=
-
- Calendar1.Date :=  IncDay(Calendar1.date,1);
- Calendar1DateSelected(self);
+  Calendar.Date :=  IncDay(Calendar.date,1);
+  RefreshForm;
 end;
 
-procedure TfrmAgendaView.SpeedButton3Click(Sender: TObject);
+procedure TfrmAgendaView.btnCalendarTopClick(Sender: TObject);
 begin
   inherited;
- Calendar1.Date :=  IncDay(Calendar1.date,-1);
- Calendar1DateSelected(self);
+  btnCalendar.OnClick(self);
+end;
+
+procedure TfrmAgendaView.btnCalendarLeftClick(Sender: TObject);
+begin
+  inherited;
+  Calendar.Date :=  IncDay(Calendar.date,-1);
+  RefreshForm;
+end;
+
+procedure TfrmAgendaView.btnCalendarDownClick(Sender: TObject);
+begin
+  inherited;
+  btnCalendar.OnClick(self);
 end;
 
 procedure TfrmAgendaView.btnAddClick(Sender: TObject);
