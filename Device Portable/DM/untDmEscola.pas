@@ -63,7 +63,8 @@ type
 
 
     procedure GetAgenda;
-    procedure CriarAgenda(Texto:string;AlunoId:Integer=0;TurmaId:Integer=0);
+    procedure CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
+                          TurmaId:Integer=0);
     procedure SalvarAgenda;
     procedure AgendaApplyChanges;
 
@@ -143,7 +144,8 @@ begin
   fdqAgendaTurma.Active := False;
 end;
 
-procedure TDmEscola.CriarAgenda(Texto:string;AlunoId:Integer=0;TurmaId:Integer=0);
+procedure TDmEscola.CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
+                                TurmaId:Integer=0);
 var
   Id:String;
 begin
@@ -166,6 +168,7 @@ begin
     fdqAgenda.Append;
     fdqAgenda.FieldByName('agenda_id').AsString:= Id;
     fdqAgenda.FieldByName('descricao').AsString:=Texto;
+    fdqAgenda.FieldByName('data').AsDateTime:=Data;
     fdqAgenda.FieldByName('data_insert_local').AsDateTime:=Now;
     fdqAgenda.FieldByName('funcionario_id').AsInteger:=GetFuncionarioId;
     fdqAgenda.FieldByName('escola_id').AsInteger:=GetEscolaId;
@@ -457,7 +460,8 @@ begin
   fdqAgenda.SQL.Clear;
   fdqAgenda.SQL.Add('select');
   fdqAgenda.SQL.Add('  ag.*,');
-  fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
+  fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
+  fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
   fdqAgenda.SQL.Add('from agenda ag');
   fdqAgenda.SQL.Add('where agenda_id in (' + KeyValues + ')');
   fdqAgenda.SQL.Add('order by ag.data_insert_local');
@@ -525,7 +529,8 @@ begin
   fdqAgenda.SQL.Clear;
   fdqAgenda.SQL.Add('select');
   fdqAgenda.SQL.Add('  ag.*,');
-  fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
+  fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
+  fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
   fdqAgenda.SQL.Add('from agenda ag');
   fdqAgenda.SQL.Add('order by ag.data_insert_local');
 end;
@@ -540,11 +545,13 @@ begin
     fdqAgenda.SQL.Clear;
     fdqAgenda.SQL.Add('select');
     fdqAgenda.SQL.Add('  ag.*,');
-    fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
+    fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
+    fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
+
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_aluno al on (ag.agenda_id = al.agenda_id)');
     fdqAgenda.SQL.Add('where 1=1');
-    fdqAgenda.SQL.Add('and date(ag.data_insert_local) = :data');
+    fdqAgenda.SQL.Add('and data = :data');
     fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
     fdqAgenda.SQL.Add('and al.aluno_id = :aluno_id');
     fdqAgenda.SQL.Add('order by ag.data_insert_local ');
@@ -556,11 +563,12 @@ begin
     fdqAgenda.SQL.Clear;
     fdqAgenda.SQL.Add('select');
     fdqAgenda.SQL.Add('  ag.*,');
-    fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data');
+    fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
+    fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_turma at on (ag.agenda_id = at.agenda_id)');
     fdqAgenda.SQL.Add('where 1=1');
-    fdqAgenda.SQL.Add('and date(ag.data_insert_local) = :data');
+    fdqAgenda.SQL.Add('and data = :data');
     fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
     fdqAgenda.SQL.Add('and at.turma_id = :turma_id');
     fdqAgenda.SQL.Add('order by ag.data_insert_local ');

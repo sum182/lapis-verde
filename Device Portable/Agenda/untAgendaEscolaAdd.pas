@@ -22,6 +22,7 @@ type
     lstBoxPara: TListBox;
     ListBoxItem1: TListBoxItem;
     layEspaco2: TLayout;
+    lblData: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnEnviarClick(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
@@ -38,7 +39,8 @@ type
   public
     AlunoId:Integer;
     TurmaId:Integer;
-    Titulo:String;
+    OwnerAgenda:String;
+    Data:TDate;
   end;
 
 var
@@ -122,7 +124,8 @@ end;
 
 procedure TfrmAgendaEscolaAdd.SetTitulo;
 begin
-  lblNome.Text := 'Para: ' + Titulo;
+  lblNome.Text := 'Para: ' + OwnerAgenda;
+  lblData.Text := DateToStr(Data);
 end;
 
 procedure TfrmAgendaEscolaAdd.btnEnviarClick(Sender: TObject);
@@ -131,7 +134,7 @@ begin
   if (memAgenda.Text = EmptyStr) Then
     Exit;
 
-  DmEscola.CriarAgenda(memAgenda.Text,AlunoId,TurmaId);
+  DmEscola.CriarAgenda(memAgenda.Text,Data,AlunoId,TurmaId);
   memAgenda.Text:=EmptyStr;
   fAllowCloseForm:=True;
   Close;

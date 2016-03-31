@@ -76,7 +76,7 @@ type
   public
     AlunoId: Integer;
     TurmaId: Integer;
-    Titulo: String;
+    OwnerAgenda: String;
     DataSetAgenda: TDataSet;
     procedure FillListBoxAgenda;
     procedure FillListBoxAgendaWait;
@@ -214,6 +214,7 @@ end;
 procedure TfrmAgendaView.RefreshForm;
 begin
   btnCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
+  btnAdd.Enabled:= (Calendar.Date >= Date);
 
   if UsuarioLogadoIsFuncionario then
     DmEscola.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
@@ -254,7 +255,7 @@ begin
   SetTextProperty(Text,ListBoxItem);
   Text.TextSettings.Font.Size :=  16;
   Text.AutoSize:=True;
-  ListBoxItem.Height:=  (Text.Height)+ 2;
+  ListBoxItem.Height:=  (Text.Height)+ 4;
   Text.Parent := ListBoxItem;
   Text.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
@@ -303,6 +304,7 @@ procedure TfrmAgendaView.SetListBoxItemProperty(
 begin
   ListBoxItem.StyleLookup := 'listboxitemstyle';
   ListBoxItem.TextSettings.WordWrap := True;
+  ListBoxItem.TextSettings.VertAlign := TTextAlign.Center;
   ListBoxItem.Selectable:=False;
   ListBoxItem.Margins.Left:=MargemEsquerda;
   ListBoxItem.Margins.Right := MargemDireita;
@@ -331,7 +333,7 @@ end;
 
 procedure TfrmAgendaView.SetTitulo;
 begin
-  lblTitulo.Text := Titulo;
+  lblTitulo.Text := OwnerAgenda;
 end;
 
 procedure TfrmAgendaView.SetValuesObjects;
@@ -381,7 +383,8 @@ begin
 
   frmAgendaEscolaAdd.AlunoId := AlunoId;
   frmAgendaEscolaAdd.TurmaId := TurmaId;
-  frmAgendaEscolaAdd.Titulo := Titulo;
+  frmAgendaEscolaAdd.OwnerAgenda := OwnerAgenda;
+  frmAgendaEscolaAdd.Data := Calendar.Date;
   frmAgendaEscolaAdd.Show;
 end;
 

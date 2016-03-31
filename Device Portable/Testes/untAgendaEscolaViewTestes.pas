@@ -263,7 +263,7 @@ begin
 
   frmAgendaEscolaAdd.AlunoId := AlunoId;
   frmAgendaEscolaAdd.TurmaId := TurmaId;
-  frmAgendaEscolaAdd.Titulo := Titulo;
+  frmAgendaEscolaAdd.OwnerAgenda := Titulo;
   frmAgendaEscolaAdd.Show;
 end;
 

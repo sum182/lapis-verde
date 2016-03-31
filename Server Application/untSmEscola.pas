@@ -101,16 +101,12 @@ procedure TSmEscola.fdqAgendaBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
-
-  Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
 procedure TSmEscola.fdqAgendaIDBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
-
-  Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
 function TSmEscola.GetAgenda(EscolaId:Integer;FuncionarioId:Integer;
