@@ -126,4 +126,16 @@ object Dm: TDm
     Left = 288
     Top = 288
   end
+  object FDCreateDB: TFDConnection
+    Params.Strings = (
+      'Database=C:\Projetos\Agenda\BD\SQLite\db.s3db'
+      'LockingMode=Normal'
+      'CacheSize=90000'
+      'DriverID=SQLite')
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    LoginPrompt = False
+    Left = 336
+    Top = 152
+  end
 end

@@ -128,14 +128,14 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 1
       TabPosition = PlatformDefault
       object tbitTurma: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 160.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -150,8 +150,8 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
           Align = Client
-          Size.Width = 50.000000000000000000
-          Size.Height = 50.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
@@ -163,7 +163,7 @@ inherited frmAgendaEscolaSelect: TfrmAgendaEscolaSelect
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 160.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False

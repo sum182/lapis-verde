@@ -24,6 +24,7 @@ type
     FDConnectionDBResponsavel: TFDConnection;
     fdqLogError: TFDQuery;
     fdqLogErrorSaveServer: TFDQuery;
+    FDCreateDB: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
@@ -73,6 +74,8 @@ end;
 
 procedure TDm.ConectarDB;
 begin
+  ConectarSQLite(FDCreateDB,'db.s3db');
+  FDCreateDB.Close;
   ConectarSQLite(FDConnectionDB,'db.s3db');
 end;
 
@@ -103,6 +106,7 @@ end;
 procedure TDm.DataModuleCreate(Sender: TObject);
 begin
   FDConnectionDB.Close;
+  FDCreateDB.Close;
   ConectarBases;
 
   //Teste Temporario

@@ -18,11 +18,15 @@ type
     layMemo: TLayout;
     VertScrollBox1: TVertScrollBox;
     imgEnviar: TImage;
-    lblNome: TLabel;
-    lstBoxPara: TListBox;
+    lstboxCabecalho: TListBox;
     ListBoxItem1: TListBoxItem;
     layEspaco2: TLayout;
+    ListBoxItem2: TListBoxItem;
     lblData: TLabel;
+    Image1: TImage;
+    imgAluno: TImage;
+    imgTurma: TImage;
+    lblNome: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnEnviarClick(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
@@ -34,8 +38,9 @@ type
     procedure fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
     procedure imgEnviarClick(Sender: TObject);
   private
-    procedure SetTitulo;
+    procedure SetCabecalho;
     procedure SetEnabledFields;
+    procedure SetVisibleObjects;
   public
     AlunoId:Integer;
     TurmaId:Integer;
@@ -87,8 +92,10 @@ end;
 procedure TfrmAgendaEscolaAdd.FormShow(Sender: TObject);
 begin
   inherited;
-  SetTitulo;
+  SetCabecalho;
   SetEnabledFields;
+  SetVisibleObjects;
+
 end;
 
 procedure TfrmAgendaEscolaAdd.imgEnviarClick(Sender: TObject);
@@ -122,11 +129,24 @@ begin
   btnEnviar.Enabled:= not (memAgenda.Text = '');
 end;
 
-procedure TfrmAgendaEscolaAdd.SetTitulo;
+procedure TfrmAgendaEscolaAdd.SetVisibleObjects;
 begin
-  lblNome.Text := 'Para: ' + OwnerAgenda;
-  lblData.Text := DateToStr(Data);
+  lblNome.Visible:=False;
+  imgAluno.Visible := (AlunoId >= 1);
+  imgTurma.Visible := (TurmaId >= 1);
+  lblNome.Visible:=True;
 end;
+
+procedure TfrmAgendaEscolaAdd.SetCabecalho;
+begin
+  //lblNome.Text := 'Para: ' + OwnerAgenda;
+  //lblData.Text := 'Data: ' + DateToStr(Data);
+
+  lblNome.Text := OwnerAgenda;
+  lblData.Text := DateToStr(Data);
+
+end;
+
 
 procedure TfrmAgendaEscolaAdd.btnEnviarClick(Sender: TObject);
 begin

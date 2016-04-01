@@ -38,13 +38,14 @@ type
     layData: TLayout;
     layCalendar: TLayout;
     Calendar: TCalendar;
-    btnCalendarLeft: TSpeedButton;
     btnCalendar: TSpeedButton;
-    btnCalendarRight: TSpeedButton;
     gbxCalendar: TGroupBox;
-    btnCalendarDown: TSpeedButton;
-    btnCalendarTop: TSpeedButton;
     GestureManager1: TGestureManager;
+    imgCalendarLeft: TImage;
+    imgCalendarDown: TImage;
+    imgCalendarRight: TImage;
+    imgCalendarUp: TImage;
+    imgCalendar: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -59,6 +60,10 @@ type
     procedure btnCalendarTopClick(Sender: TObject);
     procedure lstboxAgendaGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
+    procedure imgCalendarLeftClick(Sender: TObject);
+    procedure imgCalendarRightClick(Sender: TObject);
+    procedure imgCalendarDownClick(Sender: TObject);
+    procedure imgCalendarUpClick(Sender: TObject);
   private
     MargemEsquerda:Integer;
     MargemDireita:Integer;
@@ -107,6 +112,7 @@ begin
   inherited;
   RefreshForm;
   layCalendar.Visible := not layCalendar.Visible;
+  SetStateObjects;
 end;
 
 procedure TfrmAgendaView.FillListBoxAgenda;
@@ -185,10 +191,36 @@ begin
 end;
 
 
+procedure TfrmAgendaView.imgCalendarRightClick(Sender: TObject);
+begin
+  inherited;
+  Calendar.Date :=  IncDay(Calendar.date,1);
+  RefreshForm;
+end;
+
+procedure TfrmAgendaView.imgCalendarUpClick(Sender: TObject);
+begin
+  inherited;
+ btnCalendar.OnClick(self);
+end;
+
+procedure TfrmAgendaView.imgCalendarDownClick(Sender: TObject);
+begin
+  inherited;
+  btnCalendar.OnClick(self);
+end;
+
 procedure TfrmAgendaView.imgAddClick(Sender: TObject);
 begin
   inherited;
   btnAdd.OnClick(self);
+end;
+
+procedure TfrmAgendaView.imgCalendarLeftClick(Sender: TObject);
+begin
+  inherited;
+  Calendar.Date :=  IncDay(Calendar.date,-1);
+  RefreshForm;
 end;
 
 procedure TfrmAgendaView.imgVoltarClick(Sender: TObject);
@@ -205,8 +237,8 @@ begin
   if GestureToIdent(EventInfo.GestureID, Gesto) then
     begin
       case EventInfo.GestureID of
-        sgiLeft : btnCalendarRight.OnClick(self);
-        sgiRight: btnCalendarLeft.OnClick(self);
+        sgiLeft : imgCalendarRight.OnClick(self);
+        sgiRight: imgCalendarLeft.OnClick(self);
       end;
     end;
 end;
@@ -315,8 +347,8 @@ end;
 
 procedure TfrmAgendaView.SetStateObjects;
 begin
-//  btnCalendarDown.Visible := not layCalendar.Visible;
-//  btnCalendarTop.Visible := layCalendar.Visible;
+  imgCalendarDown.Visible := not layCalendar.Visible;
+  imgCalendarUp.Visible := layCalendar.Visible;
 end;
 
 procedure TfrmAgendaView.SetTextProperty(Text: TText;ListBoxItem:TListBoxItem);
