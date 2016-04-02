@@ -83,6 +83,7 @@ begin
   frmAgendaView.AlunoId:= 0;
   frmAgendaView.TurmaId:= DmEscola.fdqTurma.FieldByName('turma_id').AsInteger;
   frmAgendaView.OwnerAgenda:= DmEscola.fdqTurma.FieldByName('nome').AsString;
+  frmAgendaView.NomeCompleto:= '';
   frmAgendaView.DataSetAgenda:= DmEscola.fdqAgenda;
   frmAgendaView.Show;
 end;

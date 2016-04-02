@@ -1,8 +1,8 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 455
-  Width = 510
+  Height = 547
+  Width = 692
   object FDConnectionDB: TFDConnection
     Params.Strings = (
       'Database=C:\Projetos\Agenda\BD\SQLite\db.s3db'
@@ -13,17 +13,17 @@ object Dm: TDm
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     LoginPrompt = False
-    Left = 64
-    Top = 32
+    Left = 56
+    Top = 16
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
-    Left = 64
-    Top = 96
+    Left = 240
+    Top = 16
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'FMX'
-    Left = 64
-    Top = 152
+    Left = 360
+    Top = 16
   end
   object ImageList1: TImageList
     Source = <
@@ -53,12 +53,12 @@ object Dm: TDm
             Name = 'ic_menu_white_24dp'
           end>
       end>
-    Left = 248
-    Top = 152
+    Left = 136
+    Top = 72
   end
   object fgActivityDialog: TfgActivityDialog
-    Left = 168
-    Top = 152
+    Left = 56
+    Top = 72
   end
   object RESTClient1: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
@@ -67,21 +67,21 @@ object Dm: TDm
     Params = <>
     HandleRedirects = True
     RaiseExceptionOn500 = False
-    Left = 80
-    Top = 288
+    Left = 592
+    Top = 24
   end
   object RESTRequest1: TRESTRequest
     Client = RESTClient1
     Params = <>
     Response = RESTResponse1
     SynchronizedEvents = False
-    Left = 80
-    Top = 384
+    Left = 592
+    Top = 120
   end
   object RESTResponse1: TRESTResponse
     ContentType = 'text/html'
-    Left = 80
-    Top = 336
+    Left = 592
+    Top = 72
   end
   object FDConnectionDBEscola: TFDConnection
     Params.Strings = (
@@ -90,8 +90,8 @@ object Dm: TDm
       'OpenMode=ReadWrite'
       'DriverID=SQLite')
     LoginPrompt = False
-    Left = 192
-    Top = 32
+    Left = 592
+    Top = 224
   end
   object FDConnectionDBResponsavel: TFDConnection
     Params.Strings = (
@@ -100,16 +100,16 @@ object Dm: TDm
       'OpenMode=ReadWrite'
       'DriverID=SQLite')
     LoginPrompt = False
-    Left = 328
-    Top = 32
+    Left = 592
+    Top = 168
   end
   object fdqLogError: TFDQuery
     Connection = FDConnectionDB
     SQL.Strings = (
       'select * from log_error l'
       'where l.log_error_id = :log_error_id')
-    Left = 176
-    Top = 288
+    Left = 56
+    Top = 128
     ParamData = <
       item
         Name = 'LOG_ERROR_ID'
@@ -123,8 +123,8 @@ object Dm: TDm
     SQL.Strings = (
       'select * from log_error l'
       'where enviado_server is null')
-    Left = 288
-    Top = 288
+    Left = 56
+    Top = 184
   end
   object FDCreateDB: TFDConnection
     Params.Strings = (
@@ -135,7 +135,7 @@ object Dm: TDm
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     LoginPrompt = False
-    Left = 336
-    Top = 152
+    Left = 136
+    Top = 16
   end
 end

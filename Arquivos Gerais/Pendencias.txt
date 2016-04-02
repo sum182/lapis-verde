@@ -1,3 +1,5 @@
+
+
 --------------------------------------------------------------------------------------------
 Atividades Casa
 --------------------------------------------------------------------------------------------
@@ -19,6 +21,8 @@ Criar um log de atualizacoes
 escola_id
 processo
 dt
+
+ao se logar como admin nao pega o id escola
 
 --------------------------------------------------------------------------------------------
 
@@ -122,6 +126,8 @@ login face
 
 Analisar exceptions pelo   ApplicationEvents.Activate;
 
+GetResponsaveis - Otimizar query para trazer dados somente do resposnavel ou funcionario
+Controle de Versão Server
 ------------------------------------------------------------------------------------------
 
 

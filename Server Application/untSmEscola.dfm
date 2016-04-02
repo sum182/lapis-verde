@@ -96,7 +96,7 @@ object SmEscola: TSmEscola
       'and ag.escola_id = :escola_id'
       'and ag.data_insert_server between :dt_ini and :dt_fim'
       'group by agenda_id')
-    Left = 154
+    Left = 146
     Top = 168
     ParamData = <
       item
@@ -140,18 +140,17 @@ object SmEscola: TSmEscola
   object fdqTurmaAluno: TFDQuery
     Connection = SmMain.FDConnection
     SQL.Strings = (
-      #10'select '#10'  ta.*'
-      'from turma_aluno ta'#13#10#10
-      'where ta.turma_id = :turma_id'
-      '')
-    Left = 570
-    Top = 40
+      'select '#10'ta.*'#10'from turma_aluno ta'#10
+      'inner join turma t on (t.turma_id = ta.turma_id )'#13#10#10
+      'where escola_id = :escola_id'#10)
+    Left = 250
+    Top = 104
     ParamData = <
       item
-        Name = 'TURMA_ID'
+        Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 2
       end>
   end
   object fdqTurma: TFDQuery
@@ -160,7 +159,7 @@ object SmEscola: TSmEscola
       'SELECT * FROM turma t'#13#10#10
       'where escola_id = :escola_id'
       'order by nome')
-    Left = 138
+    Left = 146
     Top = 104
     ParamData = <
       item
@@ -206,7 +205,7 @@ object SmEscola: TSmEscola
       'and ag.data_insert_server between :dt_ini and :dt_fim'
       'group by agenda_id'
       '')
-    Left = 258
+    Left = 250
     Top = 168
     ParamData = <
       item
@@ -246,5 +245,87 @@ object SmEscola: TSmEscola
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
+  end
+  object fdqResp: TFDQuery
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select * from responsavel r'
+      'where r.escola_id = :escola_id')
+    Left = 72
+    Top = 224
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftString
+        ParamType = ptInput
+        Value = '1'
+      end>
+  end
+  object fdqRespAluno: TFDQuery
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select ra.*'
+      'from responsavel_aluno ra'
+      
+        'inner join responsavel r on (r.responsavel_id = ra.responsavel_i' +
+        'd)'
+      'where r.escola_id = :escola_id')
+    Left = 160
+    Top = 224
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqRespTelefone: TFDQuery
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select rt.*'
+      'from responsavel_telefone rt'
+      
+        'inner join responsavel r on (r.responsavel_id = rt.responsavel_i' +
+        'd)'
+      'where r.escola_id = :escola_id')
+    Left = 256
+    Top = 224
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqRespTipo: TFDQuery
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select rt.*'#10'from responsavel_tipo rt'#10)
+    Left = 344
+    Top = 223
+  end
+  object fdqFunc: TFDQuery
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select * from funcionario f'#13#10#10
+      'where f.escola_id = :escola_id')
+    Left = 72
+    Top = 280
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqFuncTipo: TFDQuery
+    Connection = SmMain.FDConnection
+    SQL.Strings = (
+      'select ft.*'#10'from funcionario_tipo ft')
+    Left = 160
+    Top = 280
   end
 end

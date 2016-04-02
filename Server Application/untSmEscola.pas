@@ -27,6 +27,12 @@ type
     fdqAgendaAlunoaluno_id: TIntegerField;
     fdqAgendaTurmaagenda_id: TStringField;
     fdqAgendaTurmaturma_id: TIntegerField;
+    fdqResp: TFDQuery;
+    fdqRespAluno: TFDQuery;
+    fdqRespTelefone: TFDQuery;
+    fdqRespTipo: TFDQuery;
+    fdqFunc: TFDQuery;
+    fdqFuncTipo: TFDQuery;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     procedure fdqAgendaIDBeforePost(DataSet: TDataSet);
   private
@@ -44,6 +50,13 @@ type
     function LoginFuncionario(Login:string; Senha:string):Boolean;
     function GetAlunos(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
     function GetTurmas(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
+    function GetResponsaveis(EscolaId:Integer;
+                             FuncionarioId:Integer):TFDJSONDataSets;
+
+    function GetFuncionarios(EscolaId:Integer;
+                             FuncionarioId:Integer):TFDJSONDataSets;
+
+
 
     //Metodos de Agenda
     function GetAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime):TFDJSONDataSets;
@@ -172,16 +185,101 @@ begin
   end;
 end;
 
+function TSmEscola.GetFuncionarios(EscolaId,
+  FuncionarioId: Integer): TFDJSONDataSets;
+begin
+  //Método para retornar os Funcionarios
+  try
+    try
+      Result := TFDJSONDataSets.Create;
+
+      fdqFunc.Active := False;
+      fdqFunc.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFunc);
+
+      fdqFuncTipo.Active := False;
+      TFDJSONDataSetsWriter.ListAdd(Result,'funcionario_tipo',fdqFuncTipo);
+
+    except on E:Exception do
+      SmMain.SetLogError(E.Message,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'GetFuncionarios',
+                         Now,
+                         EscolaId,
+                         0,
+                         FuncionarioId
+                         );
+
+
+    end;
+  finally
+    fdqFunc.Active := False;
+    fdqFuncTipo.Active := False;
+  end;
+
+end;
+
+function TSmEscola.GetResponsaveis(EscolaId, FuncionarioId:Integer): TFDJSONDataSets;
+begin
+  //Método para retornar os Responsaveis
+  try
+    try
+      Result := TFDJSONDataSets.Create;
+
+      fdqResp.Active := False;
+      fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel',fdqResp);
+
+      fdqRespAluno.Active := False;
+      fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_aluno',fdqRespAluno);
+
+      fdqRespTelefone.Active := False;
+      fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);
+
+      fdqRespTipo.Active := False;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_tipo',fdqRespTipo);
+
+    except on E:Exception do
+      SmMain.SetLogError(E.Message,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'GetResponsaveis',
+                         Now,
+                         EscolaId,
+                         0,
+                         FuncionarioId
+                         );
+
+
+    end;
+  finally
+    fdqResp.Active := False;
+    fdqRespAluno.Active := False;
+    fdqRespTelefone.Active := False;
+  end;
+
+end;
+
 function TSmEscola.GetTurmas(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
 begin
   //Método para retornar as Turmas
   try
     try
+      Result := TFDJSONDataSets.Create;
+
       fdqTurma.Active := False;
       fdqTurma.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'turma',fdqTurma);
 
-      Result := TFDJSONDataSets.Create;
-      TFDJSONDataSetsWriter.ListAdd(Result, fdqTurma);
+      fdqTurmaAluno.Active := False;
+      fdqTurmaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
+
     except on E:Exception do
       SmMain.SetLogError(E.Message,
                          ExtractFileName(Application.Exename),
@@ -198,6 +296,7 @@ begin
     end;
   finally
     fdqTurma.Active := False;
+    fdqTurmaAluno.Active := False;
   end;
 end;
 

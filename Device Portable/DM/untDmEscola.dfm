@@ -1,9 +1,8 @@
 object DmEscola: TDmEscola
   OldCreateOrder = False
-  Height = 407
-  Width = 592
+  Height = 421
+  Width = 665
   object fdqAluno: TFDQuery
-    Active = True
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select a.*,'
@@ -13,7 +12,7 @@ object DmEscola: TDmEscola
       'from aluno a'
       'where escola_id = :escola_id'
       'order by nome')
-    Left = 24
+    Left = 32
     Top = 8
     ParamData = <
       item
@@ -24,14 +23,13 @@ object DmEscola: TDmEscola
       end>
   end
   object fdqTurma: TFDQuery
-    Active = True
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select * from turma'
       'where escola_id = :escola_id'
       'order by nome')
-    Left = 24
-    Top = 56
+    Left = 104
+    Top = 8
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -41,8 +39,8 @@ object DmEscola: TDmEscola
       end>
   end
   object fdStanStorageBinLink: TFDStanStorageBinLink
-    Left = 464
-    Top = 16
+    Left = 552
+    Top = 8
   end
   object fdqAgenda: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -54,8 +52,8 @@ object DmEscola: TDmEscola
       ''
       'where date(data_insert_local) = :data'
       'order by data_insert_local desc')
-    Left = 120
-    Top = 8
+    Left = 32
+    Top = 66
     ParamData = <
       item
         Name = 'DATA'
@@ -70,8 +68,8 @@ object DmEscola: TDmEscola
     SQL.Strings = (
       'select * from agenda_aluno al'
       'where al.agenda_id = :agenda_id')
-    Left = 120
-    Top = 56
+    Left = 104
+    Top = 66
     ParamData = <
       item
         Name = 'AGENDA_ID'
@@ -99,8 +97,8 @@ object DmEscola: TDmEscola
       'select * from agenda_turma at'
       'where at.agenda_id = :agenda_id'
       '')
-    Left = 120
-    Top = 104
+    Left = 192
+    Top = 66
     ParamData = <
       item
         Name = 'AGENDA_ID'
@@ -127,8 +125,8 @@ object DmEscola: TDmEscola
       'select * from agenda a'
       'where a.enviado_server is null'
       'order by data_insert_local')
-    Left = 464
-    Top = 64
+    Left = 552
+    Top = 66
   end
   object fdqAgendaAlunoSaveServer: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -139,8 +137,8 @@ object DmEscola: TDmEscola
       'inner join agenda a on (al.agenda_id = a.agenda_id)'
       'where a.enviado_server is null'
       'order by a.data_insert_local')
-    Left = 464
-    Top = 112
+    Left = 552
+    Top = 118
     object fdqAgendaAlunoSaveServeragenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
@@ -163,8 +161,8 @@ object DmEscola: TDmEscola
       'inner join agenda a on (at.agenda_id = a.agenda_id)'
       'where a.enviado_server is null'
       'order by a.data_insert_local')
-    Left = 464
-    Top = 162
+    Left = 552
+    Top = 168
     object fdqAgendaTurmaSaveServeragenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
@@ -187,24 +185,102 @@ object DmEscola: TDmEscola
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
-      #10'select '#10'  ta.*'
-      'from turma_aluno ta'#13#10#10
-      'where ta.turma_id = :turma_id'
-      '')
-    Left = 26
-    Top = 168
+      'select '#10'ta.*'#10'from turma_aluno ta'#10
+      'inner join turma t on (t.turma_id = ta.turma_id )'#13#10#10
+      'where escola_id = :escola_id'#10)
+    Left = 192
+    Top = 8
     ParamData = <
       item
-        Name = 'TURMA_ID'
-        DataType = ftInteger
+        Name = 'ESCOLA_ID'
         ParamType = ptInput
-        Size = 4
-        Value = 8
       end>
   end
   object dsTurmaAluno: TDataSource
     DataSet = fdqTurma
-    Left = 24
-    Top = 112
+    Left = 272
+    Top = 8
+  end
+  object fdqResp: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select * from responsavel r'
+      'where r.escola_id = :escola_id')
+    Left = 32
+    Top = 118
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftString
+        ParamType = ptInput
+        Value = '1'
+      end>
+  end
+  object fdqRespAluno: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select ra.*'
+      'from responsavel_aluno ra'
+      
+        'inner join responsavel r on (r.responsavel_id = ra.responsavel_i' +
+        'd)'
+      'where r.escola_id = :escola_id')
+    Left = 104
+    Top = 118
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqRespTelefone: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select rt.*'
+      'from responsavel_telefone rt'
+      
+        'inner join responsavel r on (r.responsavel_id = rt.responsavel_i' +
+        'd)'
+      'where r.escola_id = :escola_id')
+    Left = 192
+    Top = 118
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqRespTipo: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select rt.*'#10'from responsavel_tipo rt'#10)
+    Left = 272
+    Top = 118
+  end
+  object fdqFunc: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select * from funcionario f'#13#10#10
+      'where f.escola_id = :escola_id')
+    Left = 32
+    Top = 168
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqFuncTipo: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select ft.*'#10'from funcionario_tipo ft')
+    Left = 104
+    Top = 168
   end
 end

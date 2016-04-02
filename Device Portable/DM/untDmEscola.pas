@@ -29,6 +29,12 @@ type
     fdqAgendaAlunoaluno_id: TIntegerField;
     fdqAgendaTurmaagenda_id: TStringField;
     fdqAgendaTurmaturma_id: TIntegerField;
+    fdqResp: TFDQuery;
+    fdqRespAluno: TFDQuery;
+    fdqRespTelefone: TFDQuery;
+    fdqRespTipo: TFDQuery;
+    fdqFunc: TFDQuery;
+    fdqFuncTipo: TFDQuery;
   private
 
     { Private declarations }
@@ -36,10 +42,17 @@ type
 
     procedure OpenAlunos;
     procedure OpenTurmas;
-
+    procedure OpenTurmaAluno;overload;
+    procedure OpenTurmaAluno(TurmaId:Integer);overload;
+    procedure OpenResponsaveis;
+    procedure OpenFuncionarios;
+    procedure CloseResponsaveis;
+    procedure CloseFuncionarios;
 
     procedure GetAlunos;
     procedure GetTurmas;
+    procedure GetResponsaveis;
+    procedure GetFuncionarios;
 
     //Metodos para Agenda
 
@@ -58,9 +71,7 @@ type
     procedure OpenAgendaAluno(KeyValues:String);overload;
     procedure OpenAgendaTurma(KeyValues:String);overload;
 
-
     procedure CloseAgenda;
-
 
     procedure GetAgenda;
     procedure CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
@@ -144,6 +155,20 @@ begin
   fdqAgendaTurma.Active := False;
 end;
 
+procedure TDmEscola.CloseFuncionarios;
+begin
+  fdqFunc.Close;
+  fdqFuncTipo.Close;
+end;
+
+procedure TDmEscola.CloseResponsaveis;
+begin
+  fdqResp.Close;
+  fdqRespAluno.Close;
+  fdqRespTelefone.Close;
+  fdqRespTipo.Close;
+end;
+
 procedure TDmEscola.CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
                                 TurmaId:Integer=0);
 var
@@ -188,6 +213,19 @@ begin
       fdqAgendaTurma.FieldByName('agenda_id').AsString := Id;
       fdqAgendaTurma.FieldByName('turma_id').AsInteger := TurmaId;
       fdqAgendaTurma.Post;
+
+      OpenTurmaAluno(TurmaId);
+      fdqTurmaAluno.First;
+      while not (fdqTurmaAluno.Eof)do
+      begin
+        fdqAgendaAluno.Append;
+        fdqAgendaAluno.FieldByName('agenda_id').AsString := Id;
+        fdqAgendaAluno.FieldByName('aluno_id').AsInteger := fdqTurmaAluno.FieldByName('aluno_id').AsInteger;
+        fdqAgendaAluno.Post;
+        fdqTurmaAluno.Next;
+      end;
+
+
     end;
 
 
@@ -287,15 +325,94 @@ begin
   end;
 end;
 
+procedure TDmEscola.GetFuncionarios;
+var
+  LDataSetList  : TFDJSONDataSets;
+  LDataSet: TFDDataSet;
+begin
+  try
+    try
+      OpenFuncionarios;
+      LDataSetList := ModuloCliente.SmEscolaClient.GetFuncionarios(GetEscolaId,GetFuncionarioId);
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario');
+      CopyDataSet(LDataSet,fdqFunc);
+
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario_tipo');
+      CopyDataSet(LDataSet,fdqFuncTipo);
+
+    except on E:Exception do
+      DM.SetLogError( E.Message,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'GetFuncionarios',
+                      Now,
+                      'Erro na busca de Funcionarios' + #13 + E.Message,
+                      GetEscolaId,
+                      0,
+                      GetFuncionarioId
+                      );
+    end;
+  finally
+    CloseFuncionarios;
+  end;
+
+end;
+
+procedure TDmEscola.GetResponsaveis;
+var
+  LDataSetList  : TFDJSONDataSets;
+  LDataSet: TFDDataSet;
+begin
+  try
+    try
+      OpenResponsaveis;
+      LDataSetList := ModuloCliente.SmEscolaClient.GetResponsaveis(GetEscolaId,GetFuncionarioId);
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
+      CopyDataSet(LDataSet,fdqResp);
+
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_aluno');
+      CopyDataSet(LDataSet,fdqRespAluno);
+
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_telefone');
+      CopyDataSet(LDataSet,fdqRespTelefone);
+
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_tipo');
+      CopyDataSet(LDataSet,fdqRespTipo);
+
+    except on E:Exception do
+      DM.SetLogError( E.Message,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'GetResponsaveis',
+                      Now,
+                      'Erro na busca dos responsaveis' + #13 + E.Message,
+                      GetEscolaId,
+                      0,
+                      GetFuncionarioId
+                      );
+    end;
+  finally
+    CloseResponsaveis;
+  end;
+
+end;
+
 procedure TDmEscola.GetTurmas;
 var
   LDataSetList  : TFDJSONDataSets;
   LDataSet: TFDDataSet;
 begin
   try
+    OpenTurmas;
     LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(GetEscolaId,GetFuncionarioId);
-    LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+    LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma');
     CopyDataSet(LDataSet,fdqTurma);
+
+    LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma_aluno');
+    CopyDataSet(LDataSet,fdqTurmaAluno);
+
   except on E:Exception do
     DM.SetLogError( E.Message,
                     GetApplicationName,
@@ -367,14 +484,68 @@ begin
   fdqAluno.Open;
 end;
 
+procedure TDmEscola.OpenFuncionarios;
+begin
+  fdqFunc.Close;
+  fdqFunc.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqFunc.Open;
+
+  fdqFuncTipo.Close;
+  fdqFuncTipo.Open;
+end;
+
+procedure TDmEscola.OpenResponsaveis;
+begin
+  fdqResp.Close;
+  fdqResp.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqResp.Open;
+
+  fdqRespAluno.Close;
+  fdqRespAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqRespAluno.Open;
+
+  fdqRespTelefone.Close;
+  fdqRespTelefone.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqRespTelefone.Open;
+
+  fdqRespTipo.Close;
+  fdqRespTipo.Open;
+end;
+
+procedure TDmEscola.OpenTurmaAluno(TurmaId:Integer);
+begin
+  fdqTurmaAluno.Close;
+  fdqTurmaAluno.SQL.Clear;
+  fdqTurmaAluno.SQL.Add('select');
+  fdqTurmaAluno.SQL.Add('ta.*');
+  fdqTurmaAluno.SQL.Add('from turma_aluno ta');
+  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+  fdqTurmaAluno.SQL.Add('where t.escola_id = :escola_id');
+  fdqTurmaAluno.SQL.Add('and t.turma_id = :turma_id');
+  fdqTurmaAluno.ParamByName('turma_id').AsInteger:= TurmaId;
+  fdqTurmaAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqTurmaAluno.Open;
+end;
+
+procedure TDmEscola.OpenTurmaAluno;
+begin
+  fdqTurmaAluno.Close;
+  fdqTurmaAluno.SQL.Clear;
+  fdqTurmaAluno.SQL.Add('select');
+  fdqTurmaAluno.SQL.Add('ta.*');
+  fdqTurmaAluno.SQL.Add('from turma_aluno ta');
+  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+  fdqTurmaAluno.SQL.Add('where t.escola_id = :escola_id');
+  fdqTurmaAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqTurmaAluno.Open;
+end;
+
 procedure TDmEscola.OpenTurmas;
 begin
   fdqTurma.Close;
   fdqTurma.ParamByName('escola_id').AsInteger:= GetEscolaId;
   fdqTurma.Open;
-
-  fdqTurmaAluno.Close;
-  fdqTurmaAluno.Open;
+  OpenTurmaAluno;
 end;
 
 procedure TDmEscola.SalvarAgenda;
@@ -506,6 +677,19 @@ begin
     smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas Erro:' + e.Message);
   end;
 
+  try
+    GetResponsaveis;
+    smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis Erro:' + e.Message);
+  end;
+
+  try
+    GetFuncionarios;
+    smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios Erro:' + e.Message);
+  end;
 
   try
     GetAgenda;

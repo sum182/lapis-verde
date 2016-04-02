@@ -1,8 +1,8 @@
 object SmMain: TSmMain
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 317
-  Width = 423
+  Height = 429
+  Width = 636
   object fdqAlunos: TFDQuery
     Connection = FDConnection
     SQL.Strings = (
