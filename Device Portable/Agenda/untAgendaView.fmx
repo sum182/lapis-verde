@@ -1,17 +1,17 @@
 inherited frmAgendaView: TfrmAgendaView
   Caption = 'frmBaseToolBar1'
   ClientHeight = 559
-  ClientWidth = 403
+  ClientWidth = 386
   Position = DesktopCenter
   StyleBook = DMStyles.styleAndroid
   OnCloseQuery = nil
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
-    Size.Width = 403.000000000000000000
+    Size.Width = 386.000000000000000000
     Size.Height = 559.000000000000000000
     inherited ToolBar1: TToolBar
-      Size.Width = 403.000000000000000000
+      Size.Width = 386.000000000000000000
       StyleLookup = 'toolbarstyle'
       inherited lblTitulo: TLabel
         Size.Width = 132.000000000000000000
@@ -132,7 +132,7 @@ inherited frmAgendaView: TfrmAgendaView
       end
       object btnAdd: TSpeedButton
         Align = Right
-        Position.X = 355.000000000000000000
+        Position.X = 338.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -231,7 +231,7 @@ inherited frmAgendaView: TfrmAgendaView
     end
     object tbCtrlAgenda: TTabControl
       Align = Client
-      Size.Width = 403.000000000000000000
+      Size.Width = 386.000000000000000000
       Size.Height = 511.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
@@ -243,7 +243,7 @@ inherited frmAgendaView: TfrmAgendaView
           item
           end>
         IsSelected = True
-        Size.Width = 201.000000000000000000
+        Size.Width = 193.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -256,8 +256,8 @@ inherited frmAgendaView: TfrmAgendaView
           OnGesture = lstboxAgendaGesture
           Align = Client
           Margins.Top = 6.000000000000000000
-          Size.Width = 403.000000000000000000
-          Size.Height = 170.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 180.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'listboxstyle'
           TabOrder = 0
@@ -282,20 +282,20 @@ inherited frmAgendaView: TfrmAgendaView
           DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
           DefaultItemStyles.GroupFooterStyle = ''
           GroupingKind = Grouped
-          Viewport.Width = 398.000000000000000000
-          Viewport.Height = 170.000000000000000000
+          Viewport.Width = 381.000000000000000000
+          Viewport.Height = 180.000000000000000000
         end
         object layCalendar: TLayout
           Align = Top
-          Position.Y = 74.000000000000000000
-          Size.Width = 403.000000000000000000
+          Position.Y = 64.000000000000000000
+          Size.Width = 386.000000000000000000
           Size.Height = 212.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42461.000000000000000000
-            Size.Width = 403.000000000000000000
+            Date = 42462.000000000000000000
+            Size.Width = 386.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'calendarstyle'
@@ -309,557 +309,570 @@ inherited frmAgendaView: TfrmAgendaView
           Margins.Top = 4.000000000000000000
           Margins.Bottom = 4.000000000000000000
           Position.Y = 4.000000000000000000
-          Size.Width = 403.000000000000000000
-          Size.Height = 66.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          object gbxCalendar: TGroupBox
-            Align = Client
-            Size.Width = 403.000000000000000000
-            Size.Height = 66.000000000000000000
+          object lstboxData: TListBox
+            Align = Top
+            Size.Width = 386.000000000000000000
+            Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
-            object btnCalendar: TSpeedButton
-              Align = Center
-              StyledSettings = [Family, Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Size.Width = 291.000000000000000000
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 386.000000000000000000
+            Viewport.Height = 55.000000000000000000
+            object ListBoxItem6: TListBoxItem
+              Selectable = False
+              Size.Width = 386.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
-              Text = 'segunda-feira, 28 de mar'#231'o de 2016'
-              OnClick = btnCalendarClick
-              object imgCalendarUp: TImage
-                MultiResBitmap.Height = 24
-                MultiResBitmap.Width = 24
-                MultiResBitmap = <
-                  item
-                    Scale = 4.000000000000000000
-                    Width = 96
-                    Height = 96
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-                      38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      00D049444154785EEDD54B0A8350144441979E9D1B9A4E2081908FD1A76015BC
-                      81C37B7AE004000000000000000000000000007B98E7F99277FB64A45BFC3B23
-                      8C94E0EDFEC4082324747BBF64842D25703BBF65842D246CFB7EC5086B4AD076
-                      FD8911D69090EDB98811FE9180EDF817232C9170EDB70A23FC22C1DA6D5546F8
-                      4642B5D7268CF04E02B5D3A68CF04AC2B4CF1046789420ED3294112221DA6317
-                      E71E2101DA6157E71C2187F7FE4338D70839B8771FCA3946C8A1BDF790FC9801
-                      00000000000000000000000000800FA6E90A4AEC75F312499FB3000000004945
-                      4E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_whi' +
-                      'te_24dp\ic_arrow_drop_up_white_24dp\android\drawable-xxxhdpi\ic_' +
-                      'arrow_drop_up_white_24dp.png'
-                  end
-                  item
-                    Scale = 3.000000000000000000
-                    Width = 72
-                    Height = 72
-                    PNG = {
-                      89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
-                      47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      009E49444154785EEDD4CB0A83301445513FBD7F9E72B8162C943EAC0A49D682
-                      0C9CDDB3072E000000000000003090D6DA2D6FFD646B8DF320D2568254972722
-                      4542548F97E68E9400D5E1AD39236578EDFFCA5C9132B876FF648E48195A7B77
-                      193B5206D6CEBF8C1929C36ADF21C68A9441B5EB506344CA90DA738ABE236540
-                      ED38559F917278DD7F89BE22E5E0BAFB5263FDB80100000000000000F86859EE
-                      E733AD8C029BBE970000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_whi' +
-                      'te_24dp\ic_arrow_drop_up_white_24dp\android\drawable-xxhdpi\ic_a' +
-                      'rrow_drop_up_white_24dp.png'
-                  end
-                  item
-                    Scale = 2.000000000000000000
-                    Width = 48
-                    Height = 48
-                    PNG = {
-                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
-                      87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      006F494441546843EDD33B0AC0300C04511D3D375758D6290221E40796C23C70
-                      E1CAB3850300000000F04799B9E88C6B2F237ED36B8482DDBDD3638442DD7BA8
-                      F60805BAF354CD110A73DF25B54628C85DB7D418A110F73C32778402DCF1CA9C
-                      117AD8EF7FA2E6C70600000000A0AC8815DEB7AC6C29F5909F0000000049454E
-                      44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_whi' +
-                      'te_24dp\ic_arrow_drop_up_white_24dp\android\drawable-xhdpi\ic_ar' +
-                      'row_drop_up_white_24dp.png'
-                  end
-                  item
-                    Scale = 1.500000000000000000
-                    Width = 36
-                    Height = 36
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
-                      98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      0061494441545847EDD0410A80300C44D11EC5FB9FCA8B84E888032E44543071
-                      F11F84D24DF3E90000003F94999366BFF6524844CC9AF628C7ACE7A6354A8B8F
-                      31D612A5856731561AA54557315612A5057762ECD3283DFC24C64A7E0A0000E0
-                      AD31164CB70EFABF106EA00000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_whi' +
-                      'te_24dp\ic_arrow_drop_up_white_24dp\android\drawable-hdpi\ic_arr' +
-                      'ow_drop_up_white_24dp.png'
-                  end
-                  item
-                    Width = 24
-                    Height = 24
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
-                      F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      004249444154484BEDD1310A00200C43D11EDD9B4742EB20888B113AE4410797
-                      9FC130B366000C5E3DB52ABE684718CCEE4633C250F68EDE4618C8CED59F3F31
-                      B3362226A15A7293CA34B3A30000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_whi' +
-                      'te_24dp\ic_arrow_drop_up_white_24dp\android\drawable-mdpi\ic_arr' +
-                      'ow_drop_up_white_24dp.png'
-                  end>
-                Align = FitRight
-                Position.X = 262.000000000000000000
-                Size.Width = 41.000000000000000000
+              TabOrder = 0
+              object btnCalendar: TSpeedButton
+                Align = Center
+                StyledSettings = [Family, Style]
+                Margins.Left = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 285.000000000000000000
                 Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False
-                Visible = False
-                WrapMode = Center
-                OnClick = imgCalendarUpClick
+                TextSettings.HorzAlign = Trailing
+                OnClick = btnCalendarClick
+                object imgCalendar: TImage
+                  MultiResBitmap.Height = 24
+                  MultiResBitmap.Width = 24
+                  MultiResBitmap = <
+                    item
+                      Scale = 4.000000000000000000
+                      Width = 96
+                      Height = 96
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                        38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        023049444154785EEDDDD14E134118C5F1A2287AC393A09147203C8BE17D3488
+                        C647311A7D09025C105EC13B4005CF979D0BDD1DDBEE7499633BFF5F72327B51
+                        C8744F6777DA8B7606000000A0395B697C48F769FC971A7398C73ABF47698409
+                        0598518019059851801905985180D91405EC2BEF950BE546897DF59F59A4FFF8
+                        DA59A4FFF8788EE7CA3BE5A562F35CF9A8F427D852EE94636547A9EA99F255C9
+                        4DAAC57C56E29C5473A2E426D272622554B1A7C4D2CB4DA2E5C43979A18C5272
+                        137EADB83F40FB1FC53939EA0E975752C0411A317498C6A595BC92BF2BBBDD21
+                        7A628B3AEA665CB202AA6FB9D6C8E873535200D7FF094DF14E182BA000330A30
+                        A300330A30A300B39202D8864E881560460166146056723DBF559E7487599B7E
+                        8F88CFFEE719F5FC5901661460565200DBD009B102CC28C08C02CC28C0ACE486
+                        FA43D9EE0EB316FDCF55F7D1EBFEF77F610598951430AA61CCC70A30A300330A
+                        30A300330A302BD9D1FC541E7787599BBE4BB2BF0F601B3A212E416614604601
+                        6614604601661460565200DBD009B102CC28C08C02CC28C08C02CC28C0ACA400
+                        B6A1136205985180190598518019059851801905985180190598518019059851
+                        8059C9076BF1E5A44FBB43F454F9E2D6AB3462E8328D4B2B29E04B1A3114BF23
+                        F0E05E297C7DFD30BF94F86AFF2A3E28B949B49C374A35F1FB31DF94DC445ACC
+                        27A5FAC6244A8895D0F2E5282E3BF1CAB7EE0AE39E103FE974A65C2BB9896E52
+                        E2399E2A6F956AD77C000000009B6236FB0DA75A9CB934002CB7000000004945
+                        4E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_black_24d' +
+                        'p\android\drawable-xxxhdpi\ic_date_range_black_24dp.png'
+                    end
+                    item
+                      Scale = 3.000000000000000000
+                      Width = 72
+                      Height = 72
+                      PNG = {
+                        89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                        47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        019F49444154785EEDDBDB4AC34018C4F1AAA0E28DF71EDE50519F497C15C103
+                        78EC7B08827AE1693EBA4A918DB3850D66E3FF07C3E622B2CD3426DB964C0000
+                        68D6521A6BF848E34F35E7C8E975DEE534A2030519146450904141C6A205AD29
+                        07CA99F2A8C41DE42B5DE6F7E9235DE6F779512E9543258EA1173BCA8D323F71
+                        8BB955B695AA56956B2537618B89373A8EA99A3D253751CB894B4535A74A6E92
+                        9673A158A5CBF1076573B6391ACFCAC66CB35B6941AFCACA6C7354ECF197DEE6
+                        FBFEC039582C140D0A3228C8A02083820C0A3228C8285DDFBC29B9325B591FC5
+                        478B9C6A0BC57FABB42056D2C8A32083828CD26BCBBB92DBB7EBEF17BD6B0C6D
+                        FF6F9C4106051914645090414186BD8A278BDEC586A6F7BB582B4554C7BF9841
+                        4106051914645090414106051914645090414106051914645090414106051914
+                        6450904141060519A5DF35C7F356BD3D67F5478A1E45283D83A6691C93FB34FE
+                        AAB4A093348EC9711AAB5857A2F1F87D690CB952AA3E501776953B2537614B89
+                        72B6945EC485FA488987D19E94DC0B1862E2B59E2BFB4AF533070080219A4C3E
+                        01E1759849479A890C0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_black_24d' +
+                        'p\android\drawable-xxhdpi\ic_date_range_black_24dp.png'
+                    end
+                    item
+                      Scale = 2.000000000000000000
+                      Width = 48
+                      Height = 48
+                      PNG = {
+                        89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                        87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        0113494441546843ED99D90AC2301045AB3E8A0F7E84CBCFBB3D0B7E928AFAE8
+                        76A749209638A529CD74990387842A69AE66D2D2668A327046B6ADC2C7B68E98
+                        317C6A8D37B66D67D100D2940558C33DBC415AABC5F54AB8E3B11671C71FF000
+                        57308A25BC40FF6412D21CA2426C60684009773008B7659DE1DC74C5A1E53433
+                        DD5FB8004F3831DD56109C2B57C4752F5049D0EB80341A401AAE505FD00F98BA
+                        A869FFF7A9BC0B75022E806EA329E07EE537F43F2F7EB76C8D36FD794EAF6BA0
+                        130CBA069AA6760DA49E70145A03D26800693480341A401A0D208D069086BB61
+                        A307AA53D315E7EFC35DEE1F38D9B60D1C6D5B097A3B7385745F2E293DE65FC0
+                        28DC2BA63B0C0DDEA474CE2D8C9EBCA2F49F2CFB022B20B0056232D759000000
+                        0049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_black_24d' +
+                        'p\android\drawable-xhdpi\ic_date_range_black_24dp.png'
+                    end
+                    item
+                      Scale = 1.500000000000000000
+                      Width = 36
+                      Height = 36
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                        98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        0104494441545847ED974B0AC2301445A30E1D39565C88F8DB82B8107105EACE
+                        742EAE41B7204EFDDC4B128C35244D694B0BEFC021AF8F2679499B4295D0363A
+                        A68DF1362DC9DBC792D4B76BDAC6D09A82E6F0029FD0DD72C2EB145D78FD821C
+                        7BCA441EC6F001B303972DE718C11F7C3BB4827D1D560AE758EBF08BAFA08169
+                        EBE06F2E3965311A5790EFCBB9873B1DAA133CEAB0349670A14375809C2F086F
+                        B047337A730182E3B7FA1DE256734594B125351F24B520BE5B343B714A3E48E3
+                        1E59CFB42E5C8D5D51F694DDA0CD5D9930A4E443E37BE1339753669182624841
+                        31A4A018525011B6D07E49AB7603A3D4F55F768743988B1974FF5CCB94639EE1
+                        040A6D47A90FDD13A297CB150C380000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_black_24d' +
+                        'p\android\drawable-hdpi\ic_date_range_black_24dp.png'
+                    end
+                    item
+                      Width = 24
+                      Height = 24
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                        F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        007B49444154484B6318D6E03F14130278D53141699A01740B0281F8251023BB
+                        08E6425C180640EC5740EC0FE6E10030C329C12033E080114AC30048013500DC
+                        5CBAC701CD012C1CC90518FA073C88D05D44888F0146E3802018B58020187E16
+                        BC86D2B0E4462A060194E21A1D0400312575C20B20F605E26103181800064451
+                        5DB46FBFFC0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_black_24d' +
+                        'p\android\drawable-mdpi\ic_date_range_black_24dp.png'
+                    end>
+                  Align = Left
+                  Size.Width = 27.000000000000000000
+                  Size.Height = 48.000000000000000000
+                  Size.PlatformDefault = False
+                  Visible = False
+                  WrapMode = Center
+                end
+                object lblCalendar: TLabel
+                  Align = Center
+                  AutoSize = True
+                  StyledSettings = [Family, Style, FontColor]
+                  Margins.Left = 2.000000000000000000
+                  Size.Width = 231.000000000000000000
+                  Size.Height = 17.000000000000000000
+                  Size.PlatformDefault = False
+                  TextSettings.Font.Size = 14.000000000000000000
+                  TextSettings.WordWrap = False
+                  Text = 'segunda-feira, 28 de mar'#231'o de 2016'
+                end
+                object imgCalendarDown: TImage
+                  MultiResBitmap.Height = 24
+                  MultiResBitmap.Width = 24
+                  MultiResBitmap = <
+                    item
+                      Scale = 4.000000000000000000
+                      Width = 96
+                      Height = 96
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                        38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        00A649444154785EEDD1CB0A83401045C1F9F4FCB9C6C5808889A3CE0BBA0A7A
+                        DF9C9B0000000000000000000000000000000A7CBEB74C7ADB6F21CC384298F8
+                        D94C23848B9FCD3042D8F8D9C811C2C7CF468C20FE41CF11C4FFA1C708E25F68
+                        3982F8855A8C20FE4D354710FFA11A2388FFD29B11C4AFE4C908E257766704F1
+                        1B291941FCC6FE8D207E27672388DFD97E04F107D9C28B0F0000000000000000
+                        00000000C00029AD90828E94A496F9840000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
+                        '_black_24dp\android\drawable-xxxhdpi\ic_arrow_drop_down_black_24' +
+                        'dp.png'
+                    end
+                    item
+                      Scale = 3.000000000000000000
+                      Width = 72
+                      Height = 72
+                      PNG = {
+                        89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                        47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        008249444154785EEDD0C10AC2401044C1FD74FF5CCDA14144454DB2B03355D0
+                        E78637000000000000000068E872DF75F2B6CFA5CC8CB45C9C981169D9387166
+                        A4E5E3C41991CAC4892323958B1347442A1B27F6442A1F27FE89D4264EFC12A9
+                        5D9CF82652DB38F12952FB38F12A92384F1E2389F3C616461C00000000000000
+                        EA18E3060CF4E02F85DC69170000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
+                        '_black_24dp\android\drawable-xxhdpi\ic_arrow_drop_down_black_24d' +
+                        'p.png'
+                    end
+                    item
+                      Scale = 2.000000000000000000
+                      Width = 48
+                      Height = 48
+                      PNG = {
+                        89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                        87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        005F494441546843EDCF4B0A80301044C11CDD9BAB5934B850F11348025530DB
+                        E175010000005E5BF65B1B5DFDD5458B11DDE2E3CF88EEF1F165C430F1F166C4
+                        70F1F164C4B0F1713762F8F8381B314D7C1C474C171F357CDA78000000AE95B2
+                        01C73163A729FC63910000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
+                        '_black_24dp\android\drawable-xhdpi\ic_arrow_drop_down_black_24dp' +
+                        '.png'
+                    end
+                    item
+                      Scale = 1.500000000000000000
+                      Width = 36
+                      Height = 36
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                        98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        0053494441545847EDCEB10900201004C12FC5FEABB213F5833310440DD40F76
+                        E0C28335000080B8525B6E2B87F38F7FAF388DBA1A23BB514F626415F5344666
+                        515F62648CFA1A238A0A11231E1226060000746615D7F2381790FDD7B6000000
+                        0049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
+                        '_black_24dp\android\drawable-hdpi\ic_arrow_drop_down_black_24dp.' +
+                        'png'
+                    end
+                    item
+                      Width = 24
+                      Height = 24
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                        F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        003A49444154484B631805A360148C00D000C4FF0960901A8A003E4B28361C06
+                        B0594235C36100D912AA1B0E0320836966F8281805A3802CC0C000000F4818ED
+                        81673F1F0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
+                        '_black_24dp\android\drawable-mdpi\ic_arrow_drop_down_black_24dp.' +
+                        'png'
+                    end>
+                  Align = Right
+                  ClipChildren = True
+                  ClipParent = True
+                  Position.X = 247.000000000000000000
+                  Size.Width = 19.000000000000000000
+                  Size.Height = 48.000000000000000000
+                  Size.PlatformDefault = False
+                  WrapMode = Center
+                  OnClick = imgCalendarDownClick
+                end
+                object imgCalendarUp: TImage
+                  MultiResBitmap.Height = 24
+                  MultiResBitmap.Width = 24
+                  MultiResBitmap = <
+                    item
+                      Scale = 4.000000000000000000
+                      Width = 96
+                      Height = 96
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                        38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        00B149444154785EEDD3090A02310003C03EDD9F2BC206443CF6E8059D817C20
+                        21050000000000000000000000000006B96D618067F1F72D46E8ECB57C2374F6
+                        A9FCC4088DFD2A3F3142237BCA4F8C50D991F213235472A6FCC408175D293F31
+                        C24935CA4F8C7050CDF21323ECD4A2FCC4087FB42C3F31C2173DCA4F8CF0A667
+                        F989113623CA4F961F6164F9C9B223CC507EB2DC0833959F2C33C28CE527CB3D
+                        01000000000000000000000000000038AA9407C1EA8E94EF6612830000000049
+                        454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_bla' +
+                        'ck_24dp\ic_arrow_drop_up_black_24dp\android\drawable-xxxhdpi\ic_' +
+                        'arrow_drop_up_black_24dp.png'
+                    end
+                    item
+                      Scale = 3.000000000000000000
+                      Width = 72
+                      Height = 72
+                      PNG = {
+                        89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                        47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        008449444154785EEDD2090A83401444C1397A6EAE046C101149DC60FE54415F
+                        E0D10D000000000000006AF92C63C737CCB44CA48D751C9136F6E264C3473A8A
+                        930D1BE99738D97091FE89930D13E94C9CAC7CA42B71B2B291EE8893958B7467
+                        9CAC4CA427E264DD477A324ED66DA437E264DD457A334ED6ED93000000000000
+                        000038A7B519BBC3E02F92A7FCAB0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_bla' +
+                        'ck_24dp\ic_arrow_drop_up_black_24dp\android\drawable-xxhdpi\ic_a' +
+                        'rrow_drop_up_black_24dp.png'
+                    end
+                    item
+                      Scale = 2.000000000000000000
+                      Width = 48
+                      Height = 48
+                      PNG = {
+                        89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                        87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        005E494441546843EDD14B0A80301003D01EDD9B2B4207BA10F1079D91F720FB
+                        84340000007E6AE929692FBEF6941B31962F37E2A87C24FD88B3F291B423AE94
+                        8FA41B71A77C24CD8827E523D347BC291F9936E28BF291E94F000000402DAD6D
+                        309863A7C3985B5A0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_bla' +
+                        'ck_24dp\ic_arrow_drop_up_black_24dp\android\drawable-xhdpi\ic_ar' +
+                        'row_drop_up_black_24dp.png'
+                    end
+                    item
+                      Scale = 1.500000000000000000
+                      Width = 36
+                      Height = 36
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                        98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        0051494441545847EDD0C10900210C44D194B2FD5765272E42E62288BB82490E
+                        FFC1DC3F630000A0A6C757C20869BEF428C5745F6AD41C931AB58AD142A37631
+                        5A48D4D718ED6AD4DF182DE42900008023662F8C163817029176ED0000000049
+                        454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_bla' +
+                        'ck_24dp\ic_arrow_drop_up_black_24dp\android\drawable-hdpi\ic_arr' +
+                        'ow_drop_up_black_24dp.png'
+                    end
+                    item
+                      Width = 24
+                      Height = 24
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                        F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        003749444154484B631805A360140C3ED000C534012083FF4331D52D41369CEA
+                        9660331C8629B6049FE1304C359F8C8251300A062760600000678218ED31BCAA
+                        9E0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_arrow_drop_up\ic_arrow_drop_up_bla' +
+                        'ck_24dp\ic_arrow_drop_up_black_24dp\android\drawable-mdpi\ic_arr' +
+                        'ow_drop_up_black_24dp.png'
+                    end>
+                  Align = Right
+                  Position.X = 266.000000000000000000
+                  Size.Width = 19.000000000000000000
+                  Size.Height = 48.000000000000000000
+                  Size.PlatformDefault = False
+                  WrapMode = Center
+                  OnClick = imgCalendarUpClick
+                end
               end
-              object imgCalendarDown: TImage
-                MultiResBitmap.Height = 24
-                MultiResBitmap.Width = 24
-                MultiResBitmap = <
-                  item
-                    Scale = 4.000000000000000000
-                    Width = 96
-                    Height = 96
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-                      38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      00D049444154785EEDD05B8AC2001444C12CDD9D676C7B020AE2332F4C15DCFF
-                      DB6700000000000000000000000000000078661CC7D3F9F6EAF4FFE66FCBD0EE
-                      DD9563C49F647077EFC2B1E24F32BCFB3775CCF8930468874D1C3BFE2421DA63
-                      55E25F4B90765985F8F7244CFB2C4AFC4712A89D1621FE2B12AABD6625FE3B12
-                      ACDD6621FE2712AEFDBE22FE3712B01D3F22FE1C12B23DDF22FE9C12B45D5F22
-                      FE1212B67D1F127F4909DCCE7789BF86846EEF1BE2AF29C1DBFD42FC2D24BCF8
-                      000000000000000000000000006C6318FE00522375F30E8E4389000000004945
-                      4E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
-                      '_white_24dp\android\drawable-xxxhdpi\ic_arrow_drop_down_white_24' +
-                      'dp.png'
-                  end
-                  item
-                    Scale = 3.000000000000000000
-                    Width = 72
-                    Height = 72
-                    PNG = {
-                      89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
-                      47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      00A549444154785EEDD0D10AC2301045C17C7AFFBCBAAE0B0A45ACB685243390
-                      E7EC3D0D0000000000000080D9ACEBBADCDFD596E7F77D8883F3EE4BF415A7C4
-                      E179FFA9FA8C536240EE3845DF714A0CC93D871A234E8941B9EB1063C529312C
-                      F7FD65CC382506E6CE9F8C1DA7C4D0DCBBCB1C714A0CCEDD5F992B4E89E1B9FF
-                      A339E39408901D36CD1DA74488ECF1469C571124BB3C88B325C2880300000000
-                      0000C0505ABB01ECBFAD8C3040E7220000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
-                      '_white_24dp\android\drawable-xxhdpi\ic_arrow_drop_down_white_24d' +
-                      'p.png'
-                  end
-                  item
-                    Scale = 2.000000000000000000
-                    Width = 48
-                    Height = 48
-                    PNG = {
-                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
-                      87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      0072494441546843EDCE4B0A80301004D11C3D378FB6ED2C0409FE3013A807B3
-                      9DAE020000000000EE69ADD5F5BE52F7B7FFD2B0F75F19131F14E08E47C6C607
-                      85B8E7961CF14141EEBA24577C5098FBBA72C60705BAF354EEF8A050F71ECC11
-                      1F14ECEECD5CF141E1D3C60300000000BA4A5900551DAC6C05522C4A00000000
-                      49454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
-                      '_white_24dp\android\drawable-xhdpi\ic_arrow_drop_down_white_24dp' +
-                      '.png'
-                  end
-                  item
-                    Scale = 1.500000000000000000
-                    Width = 36
-                    Height = 36
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
-                      98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      0063494441545847EDCEB109C0300C44518DE2FDA7CA2242C981052E428821B1
-                      55FCD7B8B2EE1B0000405111D1DCFDB8DE29FD4FEB67BEA5C33351BFC6240DBC
-                      895A129334F414B5342669F02E6A4B4CD2F018B5352629402125629242CAC400
-                      008091D90969C60EFAD023FC690000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
-                      '_white_24dp\android\drawable-hdpi\ic_arrow_drop_down_white_24dp.' +
-                      'png'
-                  end
-                  item
-                    Width = 24
-                    Height = 24
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
-                      F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      004249444154484BEDCC310A00200C43D11EBD37AFC6DA4110845A17C9836CE1
-                      0B11FDCECCB4EF44E73D0701EF6CDDC50342DE5BD4C40382DE1D6AE301E16771
-                      22CA12699C677293ECB3372F0000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_arrow_drop_down\ic_arrow_drop_down' +
-                      '_white_24dp\android\drawable-mdpi\ic_arrow_drop_down_white_24dp.' +
-                      'png'
-                  end>
-                Align = FitRight
-                ClipChildren = True
-                ClipParent = True
-                Position.X = 250.000000000000000000
-                Size.Width = 41.000000000000000000
-                Size.Height = 47.999996185302730000
+              object btnCalendarRight: TSpeedButton
+                Align = Right
+                Position.X = 346.000000000000000000
+                Size.Width = 40.000000000000000000
+                Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False
-                WrapMode = Center
-                OnClick = imgCalendarDownClick
+                OnClick = btnCalendarRightClick
+                object imgCalendarRight: TImage
+                  MultiResBitmap.Height = 24
+                  MultiResBitmap.Width = 24
+                  MultiResBitmap = <
+                    item
+                      Scale = 4.000000000000000000
+                      Width = 96
+                      Height = 96
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                        38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        010349444154785EEDD4414A03411086D1317BF592F11E6AEE16BD5552033330
+                        8BC255BAAB22EF41D1FBEF875E00000000000000000026FBDC8E025F71B7ED8C
+                        30D977DC1EDF089365F1F733C26097B82CFCF18C30C8475C163C3B230CF01A77
+                        8DCB82676784018CD080111A3042034668C0080D18A10123346084068CD08011
+                        1A3042034668C0080D18A10123346084069E6E84D3F6FE172FDB4B81B7385F50
+                        11F10B895F688DFF139785CE4EFC0712BF90F885C42F247E21F10BADF17FE3B2
+                        D0D989FF40E21712BFD07B9CF845C42F247E21F10B895FEC1C9785CE4EFC41D6
+                        B059F0E3893FD85F23883F493682F8931D4710BFC81A5E7C0000000000000000
+                        E0892CCB1D90DED2CFC2495D1F0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_bla' +
+                        'ck_24dp\android\drawable-xxxhdpi\ic_chevron_right_black_24dp.png'
+                    end
+                    item
+                      Scale = 3.000000000000000000
+                      Width = 72
+                      Height = 72
+                      PNG = {
+                        89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                        47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        00CE49444154785EEDD3516A02311486D1A91BB02B50975ADB7556DD89BD8109
+                        949089F77130E7C04FDE3F6E160000000080DDFB5A47C735F65C2752E33B56E3
+                        88D4F889B571EAA68F748CFDC67A71EAA68F748A89F482480922258894205282
+                        480922258894205282480922258894B08B4887F5DDAB8FF5A551AEE716EB5D4D
+                        DDB45F4C9C81734C9C0DE20C883350E2DC63BD2875E20C26CE60E20C366D9C4B
+                        4C9C0D25CE23D68B5227CE60D3C6F98C89F34209D00B53367D9CAA17499CC6FF
+                        48E26C2861C40100000000DECAB2FC01FD270445F5E0ED440000000049454E44
+                        AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_bla' +
+                        'ck_24dp\android\drawable-xxhdpi\ic_chevron_right_black_24dp.png'
+                    end
+                    item
+                      Scale = 2.000000000000000000
+                      Width = 48
+                      Height = 48
+                      PNG = {
+                        89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                        87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        007A494441546843EDD2DD0980301843D1EA56FE2C26F8A08EAC03688AED06D6
+                        36700F84AF8F0934000000E033BBB2BD4F3F8772A7D88D58955CDE72C4A09C0A
+                        236A63442B18D10A46B4A2D8883EDDD2BA742D8D8AED179A14CAD710CB5F0AE5
+                        FF362B94AFC1BA7CB428B6E5B358D8B67C168BDB96070000F012C20313B1721E
+                        CF03089D0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_bla' +
+                        'ck_24dp\android\drawable-xhdpi\ic_chevron_right_black_24dp.png'
+                    end
+                    item
+                      Scale = 1.500000000000000000
+                      Width = 36
+                      Height = 36
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                        98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        0067494441545847EDD05D0A8020104561A9A0965DEDA99FDDD595F4517C68C0
+                        41CE0717E7F1600000D8D9B4F53BDBDBB527AD79D4A81D5A0E7211356BA74654
+                        8DDBA84B23AA66D16EED57D490DEEE98FC8E15624A882999343731590C701393
+                        C510373100D0A9105E890A3F02C49552DF0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_bla' +
+                        'ck_24dp\android\drawable-hdpi\ic_chevron_right_black_24dp.png'
+                    end
+                    item
+                      Width = 24
+                      Height = 24
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                        F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        005949444154484B631805A3806EA011881B204CEA035D20FE03C4FF81986696
+                        440031CD2D8904629A5B1205C434B7241A8889B684094A0F1A4092EB490543D7
+                        708A321A3394C6075E013128311C0462AABB7E148C024280810100F1B41C581A
+                        1C77820000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_bla' +
+                        'ck_24dp\android\drawable-mdpi\ic_chevron_right_black_24dp.png'
+                    end>
+                  Align = Right
+                  Enabled = False
+                  Size.Width = 40.000000000000000000
+                  Size.Height = 48.000000000000000000
+                  Size.PlatformDefault = False
+                  WrapMode = Center
+                  OnClick = imgCalendarRightClick
+                end
               end
-              object imgCalendar: TImage
-                MultiResBitmap.Height = 24
-                MultiResBitmap.Width = 24
-                MultiResBitmap = <
-                  item
-                    Scale = 4.000000000000000000
-                    Width = 96
-                    Height = 96
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-                      38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      02AC49444154785EEDDD4B6E1341148561B7794FD8022C0009D800883041621B
-                      3CE6EC032105215E1BC900B204840263C416188103EA702ABE83900EA1EBBA93
-                      83BBFF4F2A95BBA4C84E1D57F9764771CF000000004C4E13FD89D9937878A446
-                      E2A185FBF5CDA387090198118019019811801901981180D9CA356EDBB637D53D
-                      56DB50BBA2B2F97C191F2B9D36ECAAFBAAF65EEDD57C3EDF29E359E90034F197
-                      D46D6AC21F2C47A6274EE25EAA3D51108BFDC14AA900F4BC17D56DA9DDDE1F98
-                      38CDC7B6DE88F7D57EC4506FA9CF003DE133754C7ED0C46F684E9EC66195EA15
-                      A0ADE79ABA1D3DE9895E2359370AA06C47D7B5157D5A8EF49359010F99FCAE98
-                      93528C54C90470277A74DD8DBEB7CC16F44D615F8E431CA05D68A12DA81428BD
-                      6556C085E87188DE98D573930980FD7F40A93214C32100330230230033023023
-                      00B34C0094A1036205981180190198652EC6ED364D732E0E3BE2B2EC68C575FF
-                      BFAAFDFD5901660460960980327440AC003302302300330230CB9C07FC54A97B
-                      360E3BFE5507AF5A47AFFBCF1FC60A30CB045095308EC70A3023003302302300
-                      330230ABAE68741EF04BA5EE9938ECA8AD83D7CDFF701E40193A20B620330230
-                      23003302302300330230CB0440193A2056801901981180190198118019019855
-                      0730F6CBCDA78D15604600660460460066046046006604604600660460460066
-                      0460460066D517D6DAB65D3423BF4740D6DE297D716BB979018EF625FADE3201
-                      6C478FAE72578D2AD55B9096D90DB50FFC5DE04F9A93565DF9FAFACFCB917EAA
-                      5780E6FDA3BAB7CB231CF0A276F28BD4BB581FC4E5FE315B0AE3D67264DAF4EE
-                      7FA7B928B7302937F8A9922A4395F47775F7F4C46FD48EFD8F91312BDB8EDAF3
-                      ECE4172BEFE37A01E533E1911E96DB585DD50B19F5D7DBEB772D774B2AD54EF9
-                      C07D9DD976000000004CD96CF61B8AE3A765E7E9B10C0000000049454E44AE42
-                      6082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_white_24d' +
-                      'p\android\drawable-xxxhdpi\ic_date_range_white_24dp.png'
-                  end
-                  item
-                    Scale = 3.000000000000000000
-                    Width = 72
-                    Height = 72
-                    PNG = {
-                      89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
-                      47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      01FB49444154785EEDDB4F4AC3401805F0248255375EC01B1474259EA1780371
-                      2DE846AFE3BA78040FA17421FE39827BC1458368EA1BF3094A9ABC2FD64032BC
-                      1F0C5F9386B4F3CCCC844A12111191C14AADAE6C01F6F29714EC6527BAFEDCCC
-                      AAD450408402221410A180885601154531423B47BB417B0D2BC8373BA4C2DEEE
-                      8C7D4C85BDFD05DF354799A15EA08DEC1017F7528813EFA05C63F5DC2DF70C13
-                      827A40996459F65CEE69E60A08275D47BB45387BB66BD0D0977BF4651FEDCD76
-                      D5720D319CF024967082300AD0A753DB6CE49D838EACC6E4D86A23EF107B41D9
-                      2EB7E2803ECD310F6DD9662D574098A0DF7159AED96634D027DA7FEF1073AF76
-                      B1D18D22A18008054428204201110A88504084F746F103F75495303D375A7D80
-                      BBE63FFFB0AF2B88F006A43B69594E01110A88F0AE62C5B219BF6E1568BB6AF4
-                      EDF89F7405110A88504084022214104167F1A0ED2AD6379DAF624309A20B1A62
-                      8402221410A18008054428204201110A8850408402221410A180080544282042
-                      01110A8850408402221410E1FDD13E4FD3B4D573567DB7703E8AE0BD829EACC6
-                      E4D16A236F4057566332B5DAC835C470396EA0CD30CCC6B66BD0D0973BF4E500
-                      ED7F1EA8C3897294094EECBA2CFB2C848372E8092768F50F414CD661A23E430B
-                      0FD88DF1219B617FDF2194394AF8E34EF19D2FBDE18888880C59927C0299CA15
-                      48901EB83A0000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_white_24d' +
-                      'p\android\drawable-xxhdpi\ic_date_range_white_24dp.png'
-                  end
-                  item
-                    Scale = 2.000000000000000000
-                    Width = 48
-                    Height = 48
-                    PNG = {
-                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
-                      87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      0150494441546843ED98516E82401086011F9BA6F512AD37D01BB6B7A93E37E9
-                      B3BD81C63B586378B4E8BFEC5F22C51D1503233A5FB299DD21C0FC99995D4264
-                      18774E4C7B325BC0694E0C38ADC5A5CF4B683B8B09D0461480F21C645936C658
-                      BB5A75F05201DDB5E1630AE8DEE29D29C604E395970E126C18DCF802F38D9E7A
-                      F61E1DA06505334A9264EE3D65A40CBC6907EF600CEF7E5545CAC01237F7B954
-                      0559489181472E4B48023610D0E3521DC4723056A984CE3A50B4B073401B13A0
-                      8DB40BFDA2F10B81A15DA029DC69CC694E9D5DA81348026C1B6D03A907B2FDBA
-                      FB5F83C76AB4E9EB7FDC740F7482FBED81A6B9B807DA0EB82ED603DA98006D4C
-                      803626401B13A08D09D046FA1A4DF13DF7C0A52AF8300DFEDC9532F0457B0D7C
-                      D256086600AA0730538CA7DCA104E2F8811922030BEF2913CC00CA670633C203
-                      262E85DEDB1EEE9D181F980683370C238A761417CB88DF40F6D9000000004945
-                      4E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_white_24d' +
-                      'p\android\drawable-xhdpi\ic_date_range_white_24dp.png'
-                  end
-                  item
-                    Scale = 1.500000000000000000
-                    Width = 36
-                    Height = 36
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
-                      98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      012A494441545847ED97C10DC2300C45D35E39B10067D801418F70440C829800
-                      BA190C40B93100820910470ADFB50B859486A05610294FB2EC5889ED2475A528
-                      8F6B04A22BB902315500C4FC08DBB5A1E8BFC18D82D2341D4012C8A578E4048D
-                      6D90651934464C2281D917F713DA9D626207B2C375B7C4D508C87186EA866178
-                      600FA39D10264E9A2E86901C531E3DD00AC2C4B6988D5396CB779989BF2BA8AC
-                      CB96500B1EA93564C5666D4490219B2AC67744F9DE43054172AA277F01C5E4D0
-                      195A7C77BF21EC26A21D89D0B167D8FA4DD89C1005A56F8BA498C0D65F89D36D
-                      4FDD168B143BCFD66F87DC798EEF325F90095F90095F90095F90357833CDE52F
-                      DA38C83593B4777EF92E3B41F5F02E3BB287D1AE0C85ECA1C658B0A54DB0B73E
-                      24E606327A2DC6E3204ADD00B320665F1A5205A60000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_white_24d' +
-                      'p\android\drawable-hdpi\ic_date_range_white_24dp.png'
-                  end
-                  item
-                    Width = 24
-                    Height = 24
-                    PNG = {
-                      89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
-                      F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                      009949444154484BED948B0980300C05DB0EA1638943E8EED61DAA693DC522FE
-                      51A17850C293242FFDA04A970E90AB90B69A67888F111938E74A59CD7CA230DE
-                      06A4853CA9B5B20A3E053431E09B6BAD33E425C4C71A6372646C309FE80E32E4
-                      D4F7DD3B781C7F441EE469288FEABF3D22065A3C59E4A11DFF77B0CB6FB04B62
-                      06F2C25AE225A86D7C1C890CE42F5B4B82459E86E6D5A0D240A91EE71CD23D45
-                      921EDD0000000049454E44AE426082}
-                    FileName = 
-                      'C:\Projetos\Agenda\Imagens\ic_date_range\ic_date_range_white_24d' +
-                      'p\android\drawable-mdpi\ic_date_range_white_24dp.png'
-                  end>
+              object btnCalendarLeft: TSpeedButton
                 Align = Left
-                Size.Width = 41.000000000000000000
+                Size.Width = 40.000000000000000000
                 Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False
-                WrapMode = Center
+                OnClick = btnCalendarLeftClick
+                object imgCalendarLeft: TImage
+                  MultiResBitmap.Height = 24
+                  MultiResBitmap.Width = 24
+                  MultiResBitmap = <
+                    item
+                      Scale = 4.000000000000000000
+                      Width = 96
+                      Height = 96
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                        38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        00F549444154785EEDD4516AC2501086D1D067DD63DD8755F7D6765D754213F0
+                        41C40BB977463C0786843CFE1F64020000000000000000783197E548300FFFB7
+                        9C0883DD8E2FC260F7C65F4F84CE1E8DBF9E089D3C33FE7A873836D432FE77DC
+                        2E8E8D183F91F113193F91F113193F91F113193F91F113193F91F113193F91F1
+                        13193F91F113193F91F113BDF5F81FCB9337E717548008058850800805B444F8
+                        8913A103110A10A100110A688DB08F636322142042012214D012E1374E840E44
+                        2840840244284084025A227CC6D1C133118E7174F428C2571C03DC8B60FCC16E
+                        239CE60F8C374738FFBF0200000000000000008C304D570BA2D21411FEACB700
+                        00000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_black' +
+                        '_24dp\android\drawable-xxxhdpi\ic_chevron_left_black_24dp.png'
+                    end
+                    item
+                      Scale = 3.000000000000000000
+                      Width = 72
+                      Height = 72
+                      PNG = {
+                        89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                        47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        00BF49444154785EEDD94B0AC2401045D1E0025C81EED4DF3ED5B568051308DA
+                        9435F3D3E7C0234D0F2FF4280300000000C0DF394DA3610C739B26D293651C91
+                        9EB4E2CCEB3E521667DC39B68E75A9126713EB9238097112E224C44988931027
+                        214E429C8438097112E2247E3ACE6AFAF2619E58814805EF225D6222C55A71E6
+                        8914442AA844DAC6BA26528148052215BC8B748D89146BC599275210A9A012A9
+                        DB5FCFB32CD22E466845DAC75858463A8C17BC1A231D1F470000000080EF340C
+                        778C1A03BA2F99498A0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_black' +
+                        '_24dp\android\drawable-xxhdpi\ic_chevron_left_black_24dp.png'
+                    end
+                    item
+                      Scale = 2.000000000000000000
+                      Width = 48
+                      Height = 48
+                      PNG = {
+                        89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                        87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        0093494441546843EDD2410E82301484E1220B8EA4EE38161B834773E51DB885
+                        9C00A6B4242C3026185A1FFE5F32296535137000000048E61E63922F3EC4981B
+                        B12C3FA7514C582BFF52CECACFA37C2E94CF85F2B9507EAB533CFF9EE95F68B6
+                        36A2571891DABB1117C58C438FB82A6630E293329E7B7A2885524FB7A0523AE5
+                        39DD8C587E899B7F61911FD186470000007CC7B911022B6F7BDBD05BF2000000
+                        0049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_black' +
+                        '_24dp\android\drawable-xhdpi\ic_chevron_left_black_24dp.png'
+                    end
+                    item
+                      Scale = 1.500000000000000000
+                      Width = 36
+                      Height = 36
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                        98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        007A494441545847EDD53B0A80301444D1A8A09BB6105C919F05B8339D812704
+                        491189F252CC812190EA6AA1414444FE37D9AAC090D3E61E15C7700BD6612E9E
+                        312BD6632EAA8ED930C550D5313BF6594C6B67A9C64E37A9B73460AE14954B51
+                        B952516E3FD75B1C35F2E2ADAF9FE0C0F84DE239F34244448A847001C6103FC3
+                        ED77FBA90000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_black' +
+                        '_24dp\android\drawable-hdpi\ic_chevron_left_black_24dp.png'
+                    end
+                    item
+                      Width = 24
+                      Height = 24
+                      PNG = {
+                        89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                        F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        006749444154484B631805A360C0400314D304800CFE0FC4BF81580B24404D80
+                        6C780848809A00D9F05090003501B2E16120016A0298E17F809864C399A034B1
+                        80114A531D20FB221C24400B303C2D2198D198A13429E0001083221B44AF0109
+                        8C8251404BC0C00000F1E51C311A22C4DA0000000049454E44AE426082}
+                      FileName = 
+                        'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_black' +
+                        '_24dp\android\drawable-mdpi\ic_chevron_left_black_24dp.png'
+                    end>
+                  Align = Left
+                  Enabled = False
+                  Size.Width = 40.000000000000000000
+                  Size.Height = 48.000000000000000000
+                  Size.PlatformDefault = False
+                  WrapMode = Center
+                  OnClick = imgCalendarLeftClick
+                end
               end
-            end
-            object imgCalendarLeft: TImage
-              MultiResBitmap.Height = 24
-              MultiResBitmap.Width = 24
-              MultiResBitmap = <
-                item
-                  Scale = 4.000000000000000000
-                  Width = 96
-                  Height = 96
-                  PNG = {
-                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    015049444154785EEDD45B4AC3500045D1E2B7CE51E7E16B6EEAB09A7A42AF82
-                    F86AB1C941BA16949092FBB34FC8060000000000000000E03FD9ED768FF36FDC
-                    B2A611FF8D11D63407DF77FFC0086B9843EF7B7FC9084B9A03EF3BFFC8084B98
-                    C3EEFBFE6E9AA69B718C5348D383E36FB7DBA75C2EC751FE2A31C56F494CF15B
-                    1253FC96C414BF2531C56F494CF15B1253FC96C414BF2531C56F494CF15B1253
-                    FC96C414BF2531C56F494CF15B1253FC96C414BF2531CF3AFEC5B872CEF256FB
-                    04B525AA11DA12D5086D896A84B6443D6684E75C8C706A896A84B64435425BA2
-                    1AA12D518F1A619AA6AB719453495B23B4A5AD11DAD2D6086D697BCC082F4658
-                    40DA1AA12D6D8DD096B646684B5B23B4A5EDC123C4F538C62925ECAF23E4EDBF
-                    1D8FB38434FE7684C4BF1B8FB1A4B4FE3482F82B4BF3F71112FF7EFCCD9AD2FE
-                    31F11FC62D0000000000000000C00A369B57CE851C2D68198A3B000000004945
-                    4E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_white' +
-                    '_24dp\android\drawable-xxxhdpi\ic_chevron_left_white_24dp.png'
-                end
-                item
-                  Scale = 3.000000000000000000
-                  Width = 72
-                  Height = 72
-                  PNG = {
-                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
-                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00FF49444154785EEDD94D6EC2401005612B07E004E4A6E1E79E90A3D8A6466E
-                    902368B5770999FA240BD9CCE695CC8A4192244992244992FE97799ECFED8A5B
-                    AD459C3B23ADB5204B971F8CD4B4104B8F97FA8ED4022C1D5E1BC7F1324DD32E
-                    8EF785FD5BE2ECE3785FD86F9C0CFB8D9361BF7132EC374E86FDC6C9B0DF3819
-                    F61B27C37EE364D86F9C0CFB8D9361BF7132EC7FEB381FF1A9DFC48BE24FAC42
-                    072355E85045BA1AC948353A18A942872D913EE3789FE860A40A1D8C54A18391
-                    2A74A8227D1BC948353A18A942872D91FAFCEBF98E0E6924E27CC5B1BED1E229
-                    12710EF1B51A9A3C2211E7188FB5469B33714E712B499224499224497FD230DC
-                    007130A14623537CA30000000049454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_white' +
-                    '_24dp\android\drawable-xxhdpi\ic_chevron_left_white_24dp.png'
-                end
-                item
-                  Scale = 2.000000000000000000
-                  Width = 48
-                  Height = 48
-                  PNG = {
-                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
-                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00A1494441546843EDD2410AC2301844E1E0A5AC0713DC487B643D4012A73815
-                    A4BA5168FEE8FBA048DB2CDE1413000000B6516B9DE6CBB77D71FCA2AF1173F0
-                    BDFBC9C9AF6353E8ABF84B2965EF23712994F826144A7C130A25BE098512FFA9
-                    9D7FFF9BBE78BF7FA18582572372CE57466C4DCDEF460C3E129F9A7F7AC4C147
-                    E25333234250F36A84061CFDBA0F6A7E8C50FCD98FFBA2F649F1A36F010000F0
-                    95946EEAA51CCD2C4CC20C0000000049454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_white' +
-                    '_24dp\android\drawable-xhdpi\ic_chevron_left_white_24dp.png'
-                end
-                item
-                  Scale = 1.500000000000000000
-                  Width = 36
-                  Height = 36
-                  PNG = {
-                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
-                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    008D494441545847EDD5CB0A80201484612BA8970EEA95BABC9EDA84638BDA04
-                    5D8E8BF9204EE6C21F37391111F9588C71DC1F2E6D3126B38DDA035247E2BD9F
-                    301A6EFF0B079F63668C96DBFFC2C145C72C188A293E66C5782DA6E67C044115
-                    5F6D20E0724B21848EDB36D0A1A85BD0A1A85BD07189C2B0F9B9660838A27043
-                    3D3FDB42CB8898814B111179C6B90DE7BE4E56517ABC060000000049454E44AE
-                    426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_white' +
-                    '_24dp\android\drawable-hdpi\ic_chevron_left_white_24dp.png'
-                end
-                item
-                  Width = 24
-                  Height = 24
-                  PNG = {
-                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
-                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006A49444154484BEDD34B0A80300C04D0EA713C8F9FDB88F7D624A63042E84A
-                    6444903C28A1B398B68B9694BE61665B5DD872A1DC446457D5013147533E22E6
-                    88E53E26C41CB1DC6F3E23E608E5C793F21EF3AE0E93AB79C58298EBB787703F
-                    DAA51EE2E52BB629BDAA941302A89236AEEB96B00000000049454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_left\ic_chevron_left_white' +
-                    '_24dp\android\drawable-mdpi\ic_chevron_left_white_24dp.png'
-                end>
-              Align = Left
-              Size.Width = 41.000000000000000000
-              Size.Height = 66.000000000000000000
-              Size.PlatformDefault = False
-              WrapMode = Center
-              OnClick = imgCalendarLeftClick
-            end
-            object imgCalendarRight: TImage
-              MultiResBitmap.Height = 24
-              MultiResBitmap.Width = 24
-              MultiResBitmap = <
-                item
-                  Scale = 4.000000000000000000
-                  Width = 96
-                  Height = 96
-                  PNG = {
-                    89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-                    38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    012249444154785EEDD64B4AC4401486D1E85CDDA4BD0F1F7B5317958755A61A
-                    14B4C920A97B5BCE815064FAFDA1C8000000000000000000D0D3B22C4FF569AF
-                    F4344DD373897F66849E4AFC9716FE3B23F4F047FC33231CA9C47F6DA12F31C2
-                    11E6793EB5C05B18616F6580BB711CDF5AE02D8CB03723246084048C90801112
-                    3042024648C0080918210123246084048C908011123042024648C00809182181
-                    6B1CE1B69DFFC54D3BE9AD7CFDF7AEA020E207123F508BFFDEC26E21FE5EC40F
-                    247E20F103891F48FC402DFE470BBB85F87B113F90F8814ACC07F1839498E247
-                    2931C58F52628A1FA5C4143F52F9E3796C61B710FF0835ECDAF722F18F5403AF
-                    9D7F257E0F35F4DAFB07F17BAAC1D7EE5FC48F50C38B0F00000000000000005C
-                    9761F804E2401C346342C6D40000000049454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_whi' +
-                    'te_24dp\android\drawable-xxxhdpi\ic_chevron_right_white_24dp.png'
-                end
-                item
-                  Scale = 3.000000000000000000
-                  Width = 72
-                  Height = 72
-                  PNG = {
-                    89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
-                    47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    00F249444154785EEDD3DB0DC2300C46E1C2023001302A9739810ED20BBF892B
-                    05A9895F2B723E298AF2E823A703000000000000806D9BE7F96AC79FC88DE378
-                    539C0591728A73F730392219C5797890356D475280C3300CCFD4A2A8F9482722
-                    0514804811052052440188145100224514804811052052440188145100224514
-                    8048110520524401881451804D44DAFBBD553BBF91D366D8F6BCD29214B5F9C5
-                    3438714AA6693A13A7803815C4A9F0386F8F50429C0AE25410A7A2CD381AFC42
-                    9C020D6E71FAD4A0883815CDC639122760015287556DC7595888D4E307717216
-                    2475F922CE1A0B431C00000000000000FFA6EB3EE101A1B654297F5700000000
-                    49454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_whi' +
-                    'te_24dp\android\drawable-xxhdpi\ic_chevron_right_white_24dp.png'
-                end
-                item
-                  Scale = 2.000000000000000000
-                  Width = 48
-                  Height = 48
-                  PNG = {
-                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
-                    87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0094494441546843EDD24D0EC220144561EAAEAC6ECCC48176C93AE5C7873E12
-                    16502C3739DF84303B9710000000B08F94D2B394F2F0AB168BDF2CBED11A9173
-                    BE7B784F67840D38C7185F1EDE63C45F3162168C980523663172C4C9CFD1163F
-                    F5D8EBAFB25FC8E22FC41FC1E3DF1EDC237E288BBC127F048BD48DAFECDFDF3C
-                    B8A711DFD4E05FF797567C53C365E3010000E484F001C9271CBA3A4F92350000
-                    000049454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_whi' +
-                    'te_24dp\android\drawable-xhdpi\ic_chevron_right_white_24dp.png'
-                end
-                item
-                  Scale = 1.500000000000000000
-                  Width = 36
-                  Height = 36
-                  PNG = {
-                    89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
-                    98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    0081494441545847EDD0CB0A8020148461A9A01EBB7AA72E2FA736A6C78D6E02
-                    E148CCB71157F3730C11113562ADDDBCF76BFAEA42CC8E18A11B85801141476C
-                    C974A39C7333A2CE14231855E839EA4A31825105042C88BA634BF6396A48EFBF
-                    E0124DAED3048619538561C6546178EA26468480D8F1D28D1121A49B1822A2FF
-                    32E601BD144B9A0D30AA400000000049454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_whi' +
-                    'te_24dp\android\drawable-hdpi\ic_chevron_right_white_24dp.png'
-                end
-                item
-                  Width = 24
-                  Height = 24
-                  PNG = {
-                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
-                    F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    005149444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    070880168000CD2C89A0872591F4B0248A1E964493620913941E1C8054D79304
-                    86B4E1B4CF6820836966F82818050400030300C170923E0EDD0B400000000049
-                    454E44AE426082}
-                  FileName = 
-                    'C:\Projetos\Agenda\Imagens\ic_chevron_right\ic_chevron_right_whi' +
-                    'te_24dp\android\drawable-mdpi\ic_chevron_right_white_24dp.png'
-                end>
-              Align = Right
-              Position.X = 362.000000000000000000
-              Size.Width = 41.000000000000000000
-              Size.Height = 66.000000000000000000
-              Size.PlatformDefault = False
-              WrapMode = Center
-              OnClick = imgCalendarRightClick
             end
           end
         end
@@ -869,7 +882,7 @@ inherited frmAgendaView: TfrmAgendaView
           item
           end>
         IsSelected = False
-        Size.Width = 202.000000000000000000
+        Size.Width = 193.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -879,23 +892,23 @@ inherited frmAgendaView: TfrmAgendaView
         ExplicitSize.cy = 49.000000000000000000
         object ListBox1: TListBox
           Align = Client
-          Size.Width = 50.000000000000000000
-          Size.Height = 50.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 462.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           DisableFocusEffect = True
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 45.000000000000000000
-          Viewport.Height = 50.000000000000000000
+          Viewport.Width = 381.000000000000000000
+          Viewport.Height = 462.000000000000000000
           object ListBoxItem1: TListBoxItem
             TabOrder = 0
             Text = 'ListBoxItem1'
           end
           object ListBoxGroupHeader1: TListBoxGroupHeader
             Position.Y = 44.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 381.000000000000000000
             Size.Height = 30.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -906,7 +919,7 @@ inherited frmAgendaView: TfrmAgendaView
             object Text2: TText
               Align = Client
               Margins.Left = 8.000000000000000000
-              Size.Width = 37.000000000000000000
+              Size.Width = 373.000000000000000000
               Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
               Text = '10/10/2010'
@@ -921,7 +934,7 @@ inherited frmAgendaView: TfrmAgendaView
           end
           object ListBoxItem4: TListBoxItem
             Position.Y = 162.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 381.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 4
@@ -944,7 +957,7 @@ inherited frmAgendaView: TfrmAgendaView
           end
           object ListBoxItem5: TListBoxItem
             Position.Y = 217.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 381.000000000000000000
             Size.Height = 266.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 5
@@ -956,14 +969,14 @@ inherited frmAgendaView: TfrmAgendaView
   object bsAgenda: TBindSourceDB
     DataSet = DmEscola.fdqAgenda
     ScopeMappings = <>
-    Left = 280
-    Top = 392
+    Left = 104
+    Top = 424
   end
   object blAgenda: TBindingsList
     Methods = <>
     OutputConverters = <>
     Left = 172
-    Top = 405
+    Top = 421
     object LinkFillControlToField1: TLinkFillControlToField
       Category = 'Quick Bindings'
       Track = True
@@ -991,8 +1004,8 @@ inherited frmAgendaView: TfrmAgendaView
   end
   object GestureManager1: TGestureManager
     Sensitivity = 80.000000000000000000
-    Left = 280
-    Top = 472
+    Left = 264
+    Top = 424
     GestureData = <
       item
         Control = lstboxAgenda

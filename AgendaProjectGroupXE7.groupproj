@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B666703C-8E5F-4FA9-9E73-E6F953DD90AD}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Desktop\Agenda.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Criptografia\Criptografia.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Componentes\sum182\D15\Sum182.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Componentes\sum182\D15\Sum182D15.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Agenda">
+        <MSBuild Projects="Desktop\Agenda.dproj"/>
+    </Target>
+    <Target Name="Agenda:Clean">
+        <MSBuild Projects="Desktop\Agenda.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Agenda:Make">
+        <MSBuild Projects="Desktop\Agenda.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Criptografia">
+        <MSBuild Projects="Criptografia\Criptografia.dproj"/>
+    </Target>
+    <Target Name="Criptografia:Clean">
+        <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Criptografia:Make">
+        <MSBuild Projects="Criptografia\Criptografia.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Sum182">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj"/>
+    </Target>
+    <Target Name="Sum182:Clean">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Sum182:Make">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Sum182D15">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj"/>
+    </Target>
+    <Target Name="Sum182D15:Clean">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Sum182D15:Make">
+        <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Agenda;Criptografia;Sum182;Sum182D15"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Agenda:Clean;Criptografia:Clean;Sum182:Clean;Sum182D15:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Agenda:Make;Criptografia:Make;Sum182:Make;Sum182D15:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

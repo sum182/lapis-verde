@@ -45,6 +45,7 @@ type
     AlunoId:Integer;
     TurmaId:Integer;
     OwnerAgenda:String;
+    NomeCompleto: String;
     Data:TDate;
   end;
 
@@ -142,9 +143,12 @@ begin
   //lblNome.Text := 'Para: ' + OwnerAgenda;
   //lblData.Text := 'Data: ' + DateToStr(Data);
 
-  lblNome.Text := OwnerAgenda;
-  lblData.Text := DateToStr(Data);
+  if NomeCompleto <> EmptyStr then
+    lblNome.Text := NomeCompleto
+  else
+    lblNome.Text := OwnerAgenda;
 
+  lblData.Text := Format('%s', [FormatDateTime('dddddd', Data)]);
 end;
 
 

@@ -39,13 +39,17 @@ type
     layCalendar: TLayout;
     Calendar: TCalendar;
     btnCalendar: TSpeedButton;
-    gbxCalendar: TGroupBox;
     GestureManager1: TGestureManager;
     imgCalendarLeft: TImage;
     imgCalendarDown: TImage;
     imgCalendarRight: TImage;
     imgCalendarUp: TImage;
     imgCalendar: TImage;
+    lstboxData: TListBox;
+    ListBoxItem6: TListBoxItem;
+    btnCalendarLeft: TSpeedButton;
+    btnCalendarRight: TSpeedButton;
+    lblCalendar: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -82,10 +86,12 @@ type
     AlunoId: Integer;
     TurmaId: Integer;
     OwnerAgenda: String;
+    NomeCompleto: String;
     DataSetAgenda: TDataSet;
     procedure FillListBoxAgenda;
     procedure FillListBoxAgendaWait;
     procedure RefreshForm;
+    procedure SetSizeBtnCalendar;
 
   end;
 
@@ -194,8 +200,7 @@ end;
 procedure TfrmAgendaView.imgCalendarRightClick(Sender: TObject);
 begin
   inherited;
-  Calendar.Date :=  IncDay(Calendar.date,1);
-  RefreshForm;
+  btnCalendarRight.OnClick(self)
 end;
 
 procedure TfrmAgendaView.imgCalendarUpClick(Sender: TObject);
@@ -219,8 +224,7 @@ end;
 procedure TfrmAgendaView.imgCalendarLeftClick(Sender: TObject);
 begin
   inherited;
-  Calendar.Date :=  IncDay(Calendar.date,-1);
-  RefreshForm;
+  btnCalendarLeft.OnClick(self);
 end;
 
 procedure TfrmAgendaView.imgVoltarClick(Sender: TObject);
@@ -245,7 +249,7 @@ end;
 
 procedure TfrmAgendaView.RefreshForm;
 begin
-  btnCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
+  lblCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
   btnAdd.Enabled:= (Calendar.Date >= Date);
 
   if UsuarioLogadoIsFuncionario then
@@ -254,6 +258,7 @@ begin
   SetTitulo;
   FillListBoxAgenda;
   SetStateObjects;
+  SetSizeBtnCalendar;
 end;
 
 procedure TfrmAgendaView.SetListBoxAgendaFooter;
@@ -345,6 +350,13 @@ begin
   ListBoxItem.Height:= 25;
 end;
 
+procedure TfrmAgendaView.SetSizeBtnCalendar;
+begin
+  lblCalendar.AutoSize:=False;
+  lblCalendar.AutoSize:=True;
+  btnCalendar.Width:= lblCalendar.Width + imgCalendarDown.Width + lblCalendar.Margins.Left;
+end;
+
 procedure TfrmAgendaView.SetStateObjects;
 begin
   imgCalendarDown.Visible := not layCalendar.Visible;
@@ -416,6 +428,7 @@ begin
   frmAgendaEscolaAdd.AlunoId := AlunoId;
   frmAgendaEscolaAdd.TurmaId := TurmaId;
   frmAgendaEscolaAdd.OwnerAgenda := OwnerAgenda;
+  frmAgendaEscolaAdd.NomeCompleto := NomeCompleto;
   frmAgendaEscolaAdd.Data := Calendar.Date;
   frmAgendaEscolaAdd.Show;
 end;

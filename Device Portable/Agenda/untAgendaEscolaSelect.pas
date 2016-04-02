@@ -24,9 +24,9 @@ type
     lstAlunos: TListView;
     bsAlunos: TBindSourceDB;
     BindingsList1: TBindingsList;
-    LinkListControlToField1: TLinkListControlToField;
     bsTurmas: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
+    LinkListControlToField1: TLinkListControlToField;
     procedure FormCreate(Sender: TObject);
     procedure lstAlunosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
@@ -67,6 +67,7 @@ begin
 
   frmAgendaView.AlunoId:= DmEscola.fdqAluno.FieldByName('aluno_id').AsInteger;
   frmAgendaView.OwnerAgenda:= DmEscola.fdqAluno.FieldByName('nome').AsString;
+  frmAgendaView.NomeCompleto:= DmEscola.fdqAluno.FieldByName('nome_completo').AsString;
   frmAgendaView.DataSetAgenda:= DmEscola.fdqAgenda;
   frmAgendaView.TurmaId:= 0;
   frmAgendaView.Show;

@@ -20,6 +20,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
   inherited PaCoPadrao: TPageControl
     Width = 1073
     Height = 541
+    ActivePage = TaShCadastro
     ExplicitWidth = 1073
     ExplicitHeight = 541
     inherited TaShConsulta: TTabSheet
@@ -138,6 +139,10 @@ inherited frmCadastroAluno: TfrmCadastroAluno
         object cxTabSheet1: TcxTabSheet
           Caption = 'Dados Principais'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label3: TLabel
             Left = 32
             Top = 14
@@ -480,7 +485,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     Left = 952
     Top = 368
     Bitmap = {
-      494C01010B000C00940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -887,7 +892,7 @@ inherited frmCadastroAluno: TfrmCadastroAluno
     Left = 952
     Top = 416
     Bitmap = {
-      494C01010B000C00940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

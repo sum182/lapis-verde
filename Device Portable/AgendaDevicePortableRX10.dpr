@@ -42,7 +42,7 @@ uses
 
 begin
   //Modo Teste
-  Application.Initialize;
+ { Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);
@@ -53,12 +53,12 @@ begin
   Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
   Application.Run;
   Exit;
-  // Fim do Teste
+  }// Fim do Teste
 
 
 
   //Modo Teste 2
- { Application.Initialize;
+  Application.Initialize;
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);
@@ -72,7 +72,7 @@ begin
 
 
    //Modo Correto
-  Application.Initialize;
+  {Application.Initialize;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);

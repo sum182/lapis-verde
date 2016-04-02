@@ -1,11 +1,16 @@
 object DmEscola: TDmEscola
   OldCreateOrder = False
-  Height = 408
-  Width = 718
+  Height = 407
+  Width = 592
   object fdqAluno: TFDQuery
+    Active = True
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
-      'select * from aluno'
+      'select a.*,'
+      
+        '       coalesce(a.nome,'#39#39') || '#39' '#39' || coalesce(a.sobrenome,'#39#39') as' +
+        ' nome_completo '#10
+      'from aluno a'
       'where escola_id = :escola_id'
       'order by nome')
     Left = 24
@@ -19,6 +24,7 @@ object DmEscola: TDmEscola
       end>
   end
   object fdqTurma: TFDQuery
+    Active = True
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select * from turma'
@@ -35,8 +41,8 @@ object DmEscola: TDmEscola
       end>
   end
   object fdStanStorageBinLink: TFDStanStorageBinLink
-    Left = 616
-    Top = 8
+    Left = 464
+    Top = 16
   end
   object fdqAgenda: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -121,8 +127,8 @@ object DmEscola: TDmEscola
       'select * from agenda a'
       'where a.enviado_server is null'
       'order by data_insert_local')
-    Left = 616
-    Top = 56
+    Left = 464
+    Top = 64
   end
   object fdqAgendaAlunoSaveServer: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -133,8 +139,8 @@ object DmEscola: TDmEscola
       'inner join agenda a on (al.agenda_id = a.agenda_id)'
       'where a.enviado_server is null'
       'order by a.data_insert_local')
-    Left = 616
-    Top = 104
+    Left = 464
+    Top = 112
     object fdqAgendaAlunoSaveServeragenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
@@ -157,8 +163,8 @@ object DmEscola: TDmEscola
       'inner join agenda a on (at.agenda_id = a.agenda_id)'
       'where a.enviado_server is null'
       'order by a.data_insert_local')
-    Left = 616
-    Top = 154
+    Left = 464
+    Top = 162
     object fdqAgendaTurmaSaveServeragenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
