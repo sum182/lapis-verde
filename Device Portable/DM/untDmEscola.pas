@@ -714,8 +714,16 @@ begin
   fdqAgenda.SQL.Add('select');
   fdqAgenda.SQL.Add('  ag.*,');
   fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
-  fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
+  fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao,');
+  fdqAgenda.SQL.Add('  f.nome as funcionario_nome,');
+  fdqAgenda.SQL.Add('  ft.descricao as funcionario_tipo,');
+  fdqAgenda.SQL.Add('  r.nome as responsavel_nome,');
+  fdqAgenda.SQL.Add('  rt.descricao as responsavel_tipo');
   fdqAgenda.SQL.Add('from agenda ag');
+  fdqAgenda.SQL.Add('left outer join funcionario f on (f.funcionario_id = ag.funcionario_id)');
+  fdqAgenda.SQL.Add('left outer join funcionario_tipo ft on (ft.funcionario_tipo_id = f.funcionario_tipo_id)');
+  fdqAgenda.SQL.Add('left outer join responsavel r on (r.responsavel_id = ag.responsavel_id)');
+  fdqAgenda.SQL.Add('left outer join responsavel_tipo rt on (rt.responsavel_tipo_id = r.responsavel_tipo_id)');
   fdqAgenda.SQL.Add('order by ag.data_insert_local');
 end;
 
@@ -730,10 +738,18 @@ begin
     fdqAgenda.SQL.Add('select');
     fdqAgenda.SQL.Add('  ag.*,');
     fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
-    fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
-
+    fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao,');
+    fdqAgenda.SQL.Add('  f.nome as funcionario_nome,');
+    fdqAgenda.SQL.Add('  ft.descricao as funcionario_tipo,');
+    fdqAgenda.SQL.Add('  r.nome as responsavel_nome,');
+    fdqAgenda.SQL.Add('  rt.descricao as responsavel_tipo');
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_aluno al on (ag.agenda_id = al.agenda_id)');
+    fdqAgenda.SQL.Add('left outer join funcionario f on (f.funcionario_id = ag.funcionario_id)');
+    fdqAgenda.SQL.Add('left outer join funcionario_tipo ft on (ft.funcionario_tipo_id = f.funcionario_tipo_id)');
+    fdqAgenda.SQL.Add('left outer join responsavel r on (r.responsavel_id = ag.responsavel_id)');
+    fdqAgenda.SQL.Add('left outer join responsavel_tipo rt on (rt.responsavel_tipo_id = r.responsavel_tipo_id)');
+
     fdqAgenda.SQL.Add('where 1=1');
     fdqAgenda.SQL.Add('and data = :data');
     fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
@@ -748,9 +764,17 @@ begin
     fdqAgenda.SQL.Add('select');
     fdqAgenda.SQL.Add('  ag.*,');
     fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
-    fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
+    fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao,');
+    fdqAgenda.SQL.Add('  f.nome as funcionario_nome,');
+    fdqAgenda.SQL.Add('  ft.descricao as funcionario_tipo,');
+    fdqAgenda.SQL.Add('  r.nome as responsavel_nome,');
+    fdqAgenda.SQL.Add('  rt.descricao as responsavel_tipo');
     fdqAgenda.SQL.Add('from agenda ag');
     fdqAgenda.SQL.Add('inner join agenda_turma at on (ag.agenda_id = at.agenda_id)');
+    fdqAgenda.SQL.Add('left outer join funcionario f on (f.funcionario_id = ag.funcionario_id)');
+    fdqAgenda.SQL.Add('left outer join funcionario_tipo ft on (ft.funcionario_tipo_id = f.funcionario_tipo_id)');
+    fdqAgenda.SQL.Add('left outer join responsavel r on (r.responsavel_id = ag.responsavel_id)');
+    fdqAgenda.SQL.Add('left outer join responsavel_tipo rt on (rt.responsavel_tipo_id = r.responsavel_tipo_id)');
     fdqAgenda.SQL.Add('where 1=1');
     fdqAgenda.SQL.Add('and data = :data');
     fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');

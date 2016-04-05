@@ -45,13 +45,32 @@ object DmEscola: TDmEscola
   object fdqAgenda: TFDQuery
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
-      'select '
-      'ag.* ,'
-      'strftime("%d/%m/%Y",data_insert_local) as data'
-      'from agenda ag'
+      '  select'
+      '    ag.*,'
+      '    strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,'
+      '    strftime("%H:%M",data_insert_local) as hora_criacao,'
+      '    f.nome as funcionario_nome,'
+      '    ft.descricao as funcionario_tipo,'
+      '    r.nome as responsavel_nome,'
+      '    rt.descricao as responsavel_tipo    '
       ''
-      'where date(data_insert_local) = :data'
-      'order by data_insert_local desc')
+      '  from agenda ag'
+      
+        '  left outer join funcionario f on (f.funcionario_id = ag.funcio' +
+        'nario_id)'
+      
+        '  left outer join funcionario_tipo ft on (ft.funcionario_tipo_id' +
+        ' = f.funcionario_tipo_id)'
+      '  '
+      
+        '  left outer join responsavel r on (r.responsavel_id = ag.respon' +
+        'savel_id)'
+      
+        '  left outer join responsavel_tipo rt on (rt.responsavel_tipo_id' +
+        ' = r.responsavel_tipo_id)'
+      '  '
+      '  where date(data_insert_local) = :data'
+      '  order by ag.data_insert_local')
     Left = 32
     Top = 66
     ParamData = <

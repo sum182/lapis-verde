@@ -76,7 +76,8 @@ type
     procedure SetListBoxAgendaGroupHeader;
     procedure SetListBoxAgendaItemData(Data:String);
     procedure SetListBoxAgendaItem(Descricao:String);
-    procedure SetListBoxAgendaItemLinhaBranco;
+    procedure SetListBoxAgendaItemEnviadoPor;
+    procedure SetListBoxAgendaItemLinhaBranco(Tamanho:Integer);
     procedure SetListBoxAgendaFooter;
     procedure SetListBoxItemProperty(ListBoxItem:TListBoxItem);
     procedure SetTextProperty(Text:TText;ListBoxItem:TListBoxItem);
@@ -135,6 +136,7 @@ begin
     while not DataSetAgenda.Eof do
     begin
         SetListBoxAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);
+        SetListBoxAgendaItemEnviadoPor;
         SetListBoxAgendaGroupHeader;
         DataSetAgenda.Next;
       end;
@@ -273,7 +275,7 @@ begin
   ListBoxGroupHeader := TListBoxGroupHeader.Create(lstboxAgenda);
   ListBoxGroupHeader.TextSettings.HorzAlign := TTextAlign.Center;
   //ListBoxGroupHeader.TextSettings.WordWrap := True;
-  ListBoxGroupHeader.Height:=20;
+  ListBoxGroupHeader.Height:=5;
   lstboxAgenda.AddObject(ListBoxGroupHeader);
 end;
 
@@ -284,6 +286,7 @@ var
   Text: TText;
 begin
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  ListBoxItem.BeginUpdate;
   SetListBoxItemProperty(ListBoxItem);
 
   Text := TText.Create(self);
@@ -292,9 +295,13 @@ begin
   SetTextProperty(Text,ListBoxItem);
   Text.TextSettings.Font.Size :=  16;
   Text.AutoSize:=True;
-  ListBoxItem.Height:=  (Text.Height)+ 4;
+  ListBoxItem.Height:=  (Text.Height) + ( (Text.Height / 25) * 2);
   Text.Parent := ListBoxItem;
   Text.EndUpdate;
+  ListBoxItem.WordWrap := True;
+  //ListBoxItem.Text := Descricao;
+
+  ListBoxItem.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
 
   //SetListBoxAgendaItemLinhaBranco;
@@ -321,7 +328,46 @@ begin
   lstboxAgenda.AddObject(ListBoxItem);
 end;
 
-procedure TfrmAgendaView.SetListBoxAgendaItemLinhaBranco;
+procedure TfrmAgendaView.SetListBoxAgendaItemEnviadoPor;
+var
+  ListBoxItem: TListBoxItem;
+  Text: TText;
+  Funcionario:string;
+  FuncionarioTipo:string;
+  Responsavel:string;
+  ResponsavelTipo:string;
+  Texto:string;
+begin
+  Funcionario:= DataSetAgenda.FieldByName('funcionario_nome').AsString;
+  FuncionarioTipo:= DataSetAgenda.FieldByName('funcionario_tipo').AsString;
+  Responsavel:= DataSetAgenda.FieldByName('responsavel_nome').AsString;
+  ResponsavelTipo:= DataSetAgenda.FieldByName('responsavel_tipo').AsString;
+
+  if Funcionario <> EmptyStr then
+    Texto:=  FuncionarioTipo + ' ' + Funcionario;
+
+  if Responsavel <> EmptyStr then
+    Texto:=  Responsavel;
+
+  ListBoxItem := TListBoxItem.Create(lstboxAgenda);
+  SetListBoxItemProperty(ListBoxItem);
+
+  Text := TText.Create(self);
+  Text.BeginUpdate;
+  Text.Text := Texto;
+  SetTextProperty(Text,ListBoxItem);
+  Text.color := TAlphaColors.Mediumseagreen;
+  //Text.TextSettings.Font.Style :=  [TFontStyle.fsBold];
+  Text.TextSettings.Font.Size :=  14;
+
+  Text.AutoSize:=True;
+  ListBoxItem.Height:=  (Text.Height);
+  Text.Parent := ListBoxItem;
+  Text.EndUpdate;
+  lstboxAgenda.AddObject(ListBoxItem);
+end;
+
+procedure TfrmAgendaView.SetListBoxAgendaItemLinhaBranco(Tamanho:Integer);
 var
   ListBoxItem: TListBoxItem;
 begin
@@ -330,7 +376,7 @@ begin
   ListBoxItem.BeginUpdate;
   ListBoxItem.Text:='';
   SetListBoxItemProperty(ListBoxItem);
-  ListBoxItem.Height:= 12;
+  ListBoxItem.Height:= Tamanho;
   ListBoxItem.EndUpdate;
   lstboxAgenda.AddObject(ListBoxItem);
 end;
@@ -370,8 +416,8 @@ begin
   Text.TextSettings.VertAlign := TTextAlign.Leading;
 
   Text.Width := lstboxAgenda.Width;
-  Text.Padding := ListBoxItem.Padding;
-  Text.Margins := ListBoxItem.Margins;
+  Text.Padding := lstboxAgenda.Padding;
+  Text.Margins := lstboxAgenda.Margins;
   Text.TextSettings.WordWrap:=True;
 end;
 
