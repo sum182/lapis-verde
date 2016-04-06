@@ -62,6 +62,7 @@ type
     procedure fdqTurmaAlunoBeforeInsert(DataSet: TDataSet);
     procedure fdqTurmaAlunoBeforeDelete(DataSet: TDataSet);
     procedure fdqFuncionarioBeforeOpen(DataSet: TDataSet);
+    procedure AcDeleteExecute(Sender: TObject);
   private
     procedure ValidarCadastro;
     procedure OpenQuerys;
@@ -79,7 +80,7 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, untFuncoes, smDBFireDac, smGeral;
+uses untDM, untFuncoes, smDBFireDac, smGeral, smMensagens;
 
 procedure TfrmCadastroTurma.AcApplyUpdateExecute(Sender: TObject);
 begin
@@ -93,6 +94,17 @@ procedure TfrmCadastroTurma.AcCancelarExecute(Sender: TObject);
 begin
   fdqTurmaAluno.Cancel;
   fdqTurmaAluno.CancelUpdates;
+  inherited;
+end;
+
+procedure TfrmCadastroTurma.AcDeleteExecute(Sender: TObject);
+begin
+    if (CheckAgendaTurma(fdqCadturma_id.AsInteger)) then
+  begin
+    Msg('Não é possível excluir a Turma, pois a mesma tem Agenda(s) associada(s).',mtErro);
+    Abort;
+  end;
+
   inherited;
 end;
 

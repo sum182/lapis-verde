@@ -10,12 +10,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
   inherited ToBaCadastro: TToolBar
     Width = 1040
     ExplicitWidth = 1040
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 14
-    end
-    inherited btnLocalizarTodosRegistros: TToolButton
-      ExplicitWidth = 70
-    end
   end
   inherited PaCoPadrao: TPageControl
     Width = 1040
@@ -24,8 +18,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     ExplicitWidth = 1040
     ExplicitHeight = 638
     inherited TaShConsulta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1032
       ExplicitHeight = 610
       inherited grbxPesquisa: TGroupBox
@@ -34,18 +26,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
         inherited ToolBar1: TToolBar
           Width = 1022
           ExplicitWidth = 1022
-          inherited ToolButton3: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton4: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton5: TToolButton
-            ExplicitWidth = 24
-          end
-          inherited ToolButton6: TToolButton
-            ExplicitWidth = 24
-          end
         end
       end
       inherited grPesquisa: TsmDBGrid
@@ -96,8 +76,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
       end
     end
     inherited TaShCadastro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1032
       ExplicitHeight = 610
       object Label3: TLabel
@@ -201,8 +179,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
       end
     end
     inherited TaShRelatorio: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 1032
       ExplicitHeight = 610
     end
@@ -285,7 +261,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 536
     Bitmap = {
-      494C01010B000C00900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -692,7 +668,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 584
     Bitmap = {
-      494C01010B000C00900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

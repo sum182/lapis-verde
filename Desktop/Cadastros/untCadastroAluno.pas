@@ -87,6 +87,7 @@ type
     procedure grPesquisaDblClick(Sender: TObject);
     procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
     procedure BuProcessarClick(Sender: TObject);
+    procedure AcDeleteExecute(Sender: TObject);
   private
     procedure OpenQuerys;
     procedure SetStateButtonsResponsaveis;
@@ -102,13 +103,24 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, smGeral, untFuncoes, untPesquisaResponsavel, smDBFireDac;
+uses untDM, smGeral, untFuncoes, untPesquisaResponsavel, smDBFireDac, smMensagens;
 
 procedure TfrmCadastroAluno.AcCancelarExecute(Sender: TObject);
 begin
 
   fdqResponsaveis.Cancel;
   fdqResponsaveis.CancelUpdates;
+  inherited;
+end;
+
+procedure TfrmCadastroAluno.AcDeleteExecute(Sender: TObject);
+begin
+  if (CheckAgendaAluno(fdqCadaluno_id.AsInteger)) then
+  begin
+    MSG('Não é possível excluir o aluno, pois o mesmo tem Agenda(s) associada(s).',mtErro);
+    Abort;
+  end;
+
   inherited;
 end;
 
