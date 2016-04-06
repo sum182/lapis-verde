@@ -295,7 +295,7 @@ begin
   SetTextProperty(Text,ListBoxItem);
   Text.TextSettings.Font.Size :=  16;
   Text.AutoSize:=True;
-  ListBoxItem.Height:=  (Text.Height) + ( (Text.Height / 25) * 2);
+  ListBoxItem.Height:=  Trunc((Text.Height) + ( (Text.Height / 25) * 2))+3;
   Text.Parent := ListBoxItem;
   Text.EndUpdate;
   ListBoxItem.WordWrap := True;
