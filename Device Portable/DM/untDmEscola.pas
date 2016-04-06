@@ -73,14 +73,15 @@ type
 
     procedure CloseAgenda;
 
-    procedure GetAgenda;
+    procedure GetAgenda(DtIni,DtFim:TDateTime);
     procedure CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
                           TurmaId:Integer=0);
     procedure SalvarAgenda;
     procedure AgendaApplyChanges;
 
     procedure SalvarDadosServer;
-    procedure SyncronizarDadosServer;
+    procedure SyncronizarDadosServerGeral;
+    procedure SyncronizarDadosServerBasico;
   end;
 
 var
@@ -246,7 +247,7 @@ begin
    MsgPoupUp('Agenda criada com sucesso');
 end;
 
-procedure TDmEscola.GetAgenda;
+procedure TDmEscola.GetAgenda(DtIni,DtFim:TDateTime);
 var
   LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
@@ -256,7 +257,7 @@ begin
   try
     try
       KeyValues:= EmptyStr;
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,Now -30,Now +1 );
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,DtIni,DtFim );
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
@@ -661,7 +662,7 @@ begin
   fdqAgendaTurma.SQL.Add('where agenda_id in (' + KeyValues + ')');
 end;
 
-procedure TDmEscola.SyncronizarDadosServer;
+procedure TDmEscola.SyncronizarDadosServerGeral;
 begin
   try
     GetAlunos;
@@ -692,7 +693,26 @@ begin
   end;
 
   try
-    GetAgenda;
+    GetAgenda(Now - 30, Now + 1);
+    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
+  end;
+
+
+  try
+    SalvarDadosServer;
+    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer OK');
+  except on E:Exception do
+    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer Erro:' + e.Message);
+  end;
+
+end;
+
+procedure TDmEscola.SyncronizarDadosServerBasico;
+begin
+  try
+    GetAgenda(Now - 1, Now + 7);
     smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
   except on E:Exception do
     smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);

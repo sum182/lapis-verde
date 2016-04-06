@@ -46,19 +46,14 @@ object SmEscola: TSmEscola
       
         'inner join funcionario f on (f.funcionario_id = t.funcionario_id' +
         ')'
-      'where t.funcionario_id = :funcionario_id'
+      'where 1=1'
+      '-- where t.funcionario_id = :funcionario_id'
       'and ag.escola_id = :escola_id'
-      'and ag.data_insert_server between :dt_ini and :dt_fim'
+      'and ag.data between :dt_ini and :dt_fim'
       'group by agenda_id')
     Left = 66
     Top = 168
     ParamData = <
-      item
-        Name = 'FUNCIONARIO_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 16
-      end
       item
         Name = 'ESCOLA_ID'
         DataType = ftInteger
@@ -75,7 +70,7 @@ object SmEscola: TSmEscola
         Name = 'DT_FIM'
         DataType = ftDateTime
         ParamType = ptInput
-        Value = 42439d
+        Value = 42804d
       end>
   end
   object fdqAgendaAluno: TFDQuery

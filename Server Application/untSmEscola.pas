@@ -407,17 +407,17 @@ procedure TSmEscola.SetParamsAgenda(EscolaId, FuncionarioId: Integer; DtIni,
   DtFim: TDateTime);
 begin
   fdqAgenda.ParamByName('escola_id').AsInteger:= EscolaId;
-  fdqAgenda.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
+  //fdqAgenda.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
   fdqAgenda.ParamByName('dt_ini').AsDateTime:= DtIni;
   fdqAgenda.ParamByName('dt_fim').AsDateTime:= DtFim;
 
   fdqAgendaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
-  fdqAgendaAluno.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
+  //fdqAgendaAluno.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
   fdqAgendaAluno.ParamByName('dt_ini').AsDateTime:= DtIni;
   fdqAgendaAluno.ParamByName('dt_fim').AsDateTime:= DtFim;
 
   fdqAgendaTurma.ParamByName('escola_id').AsInteger:= EscolaId;
-  fdqAgendaTurma.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
+  //fdqAgendaTurma.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
   fdqAgendaTurma.ParamByName('dt_ini').AsDateTime:= DtIni;
   fdqAgendaTurma.ParamByName('dt_fim').AsDateTime:= DtFim;
 end;
@@ -432,9 +432,10 @@ begin
   fdqAgenda.SQL.Add('inner join turma_aluno ta on (ta.aluno_id = al.aluno_id)');
   fdqAgenda.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id)');
   fdqAgenda.SQL.Add('inner join funcionario f on (f.funcionario_id = t.funcionario_id)');
-  fdqAgenda.SQL.Add('where t.funcionario_id = :funcionario_id');
+  fdqAgenda.SQL.Add('where 1=1');
+  //fdqAgenda.SQL.Add('and t.funcionario_id = :funcionario_id');
   fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
-  fdqAgenda.SQL.Add('and ag.data_insert_server between :dt_ini and :dt_fim');
+  fdqAgenda.SQL.Add('and ag.data between :dt_ini and :dt_fim');
   fdqAgenda.SQL.Add('group by agenda_id');
 
   fdqAgendaAluno.SQL.Clear;
@@ -445,9 +446,10 @@ begin
   fdqAgendaAluno.SQL.Add('inner join turma_aluno ta on (ta.aluno_id = al.aluno_id)');
   fdqAgendaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id)');
   fdqAgendaAluno.SQL.Add('inner join funcionario f on (f.funcionario_id = t.funcionario_id)');
-  fdqAgendaAluno.SQL.Add('where t.funcionario_id = :funcionario_id');
+  fdqAgendaAluno.SQL.Add('where 1=1');
+  //fdqAgendaAluno.SQL.Add('and t.funcionario_id = :funcionario_id');
   fdqAgendaAluno.SQL.Add('and ag.escola_id = :escola_id');
-  fdqAgendaAluno.SQL.Add('and ag.data_insert_server between :dt_ini and :dt_fim');
+  fdqAgendaAluno.SQL.Add('and ag.data between :dt_ini and :dt_fim');
   fdqAgendaAluno.SQL.Add('group by agenda_id');
 
   fdqAgendaTurma.SQL.Clear;
@@ -457,9 +459,10 @@ begin
   fdqAgendaTurma.SQL.Add('inner join agenda_turma at on (ag.agenda_id = at.agenda_id)');
   fdqAgendaTurma.SQL.Add('inner join turma t on (t.turma_id = at.turma_id)');
   fdqAgendaTurma.SQL.Add('inner join funcionario f on (f.funcionario_id = t.funcionario_id)');
-  fdqAgendaTurma.SQL.Add('where t.funcionario_id = :funcionario_id');
+  fdqAgendaTurma.SQL.Add('where 1=1');
+  //fdqAgendaTurma.SQL.Add('and t.funcionario_id = :funcionario_id');
   fdqAgendaTurma.SQL.Add('and ag.escola_id = :escola_id');
-  fdqAgendaTurma.SQL.Add('and ag.data_insert_server between :dt_ini and :dt_fim');
+  fdqAgendaTurma.SQL.Add('and ag.data between :dt_ini and :dt_fim');
   fdqAgendaTurma.SQL.Add('group by agenda_id');
 end;
 procedure TSmEscola.SetSQLAgenda(EscolaId, FuncionarioId: Integer;

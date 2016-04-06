@@ -249,7 +249,7 @@ end;
 procedure TfrmAgendaEscolaViewTestes.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  DmEscola.GetAgenda;
+  DmEscola.GetAgenda(Now-30,Now+1);
 //  DmEscola.OpenAgenda(AlunoId, TurmaId);
   DmEscola.SalvarDadosServer;
   Dm.SalvarDadosServer;

@@ -171,6 +171,11 @@ object frmPrincipal: TfrmPrincipal
           Column = 0
           Control = SpeedButton1
           Row = 1
+        end
+        item
+          Column = 1
+          Control = SpeedButton2
+          Row = 1
         end>
       RowCollection = <
         item
@@ -782,13 +787,23 @@ object frmPrincipal: TfrmPrincipal
       end
       object SpeedButton1: TSpeedButton
         Anchors = []
-        Position.X = 29.500000000000000000
+        Position.X = 20.000000000000000000
         Position.Y = 345.000000000000000000
-        Size.Width = 112.000000000000000000
+        Size.Width = 131.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
-        Text = 'Syncronizar'
+        Text = 'Syncronizar Geral'
         OnClick = SpeedButton1Click
+      end
+      object SpeedButton2: TSpeedButton
+        Anchors = []
+        Position.X = 187.000000000000000000
+        Position.Y = 345.000000000000000000
+        Size.Width = 139.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Syncronizar B'#225'sico'
+        OnClick = SpeedButton2Click
       end
     end
   end
