@@ -82,6 +82,7 @@ type
     procedure SalvarDadosServer;
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
+    procedure TesteNetwork;
   end;
 
 var
@@ -92,7 +93,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses untDM, untModuloCliente, Data.FireDACJSONReflect, smDBFireDac,
-  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX;
+  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState;
 
 {$R *.dfm}
 
@@ -709,8 +710,31 @@ begin
 
 end;
 
+procedure TDmEscola.TesteNetwork;
+
+begin
+
+  try
+    if not smNetworkState.IsConnected then
+      MsgPoupUp('Not reachable')
+    else if smNetworkState.IsWifiConnected then
+      //Label1.Text := 'Reachable via WiFi'
+      MsgPoupUp('Reachable via WiFi')
+    else if smNetworkState.IsMobileConnected then
+      //Label1.Text := 'Reachable via WWAN';
+      MsgPoupUp('Reachable via WWAN');
+    //Label2.Text := NS.CurrentSSID;
+    MsgPoupUp(smNetworkState.CurrentSSID);
+  finally
+    //NS.Free;
+  end;
+  {$ENDIF}
+end;
+
 procedure TDmEscola.SyncronizarDadosServerBasico;
 begin
+  TesteNetwork;
+
   try
     GetAgenda(Now - 1, Now + 7);
     smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');

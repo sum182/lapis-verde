@@ -43,7 +43,6 @@ object DmEscola: TDmEscola
     Top = 8
   end
   object fdqAgenda: TFDQuery
-    Active = True
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
       '  select'

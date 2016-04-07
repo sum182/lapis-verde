@@ -27,6 +27,9 @@
         <Projects Include="..\WhatsAppMessengerLayout\Messenger.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -107,14 +110,23 @@
     <Target Name="Messenger:Make">
         <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Make"/>
     </Target>
+    <Target Name="PrNetworkState">
+        <MSBuild Projects="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj"/>
+    </Target>
+    <Target Name="PrNetworkState:Clean">
+        <MSBuild Projects="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PrNetworkState:Make">
+        <MSBuild Projects="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger;PrNetworkState"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean;PrNetworkState:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make;PrNetworkState:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -351,13 +351,13 @@ begin
 
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   SetListBoxItemProperty(ListBoxItem);
+  ListBoxItem.Height:= 15;
 
   Text := TText.Create(self);
   Text.BeginUpdate;
   Text.Text := Texto;
   SetTextProperty(Text,ListBoxItem);
   Text.color := TAlphaColors.Mediumseagreen;
-  //Text.TextSettings.Font.Style :=  [TFontStyle.fsBold];
   Text.TextSettings.Font.Size :=  14;
 
   Text.AutoSize:=True;
@@ -391,8 +391,8 @@ begin
   ListBoxItem.Selectable:=False;
   ListBoxItem.Margins.Left:=MargemEsquerda;
   ListBoxItem.Margins.Right := MargemDireita;
-  ListBoxItem.Margins.Top := 5;
-  ListBoxItem.Margins.Bottom := 5;
+  ListBoxItem.Margins.Top := 2;
+  ListBoxItem.Margins.Bottom := 2;
   ListBoxItem.Height:= 25;
 end;
 

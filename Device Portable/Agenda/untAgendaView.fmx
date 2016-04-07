@@ -235,14 +235,14 @@ inherited frmAgendaView: TfrmAgendaView
       Size.Height = 511.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 1
       TabPosition = PlatformDefault
       object tbItemListAgenda: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 193.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -294,7 +294,7 @@ inherited frmAgendaView: TfrmAgendaView
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42466.000000000000000000
+            Date = 42467.000000000000000000
             Size.Width = 386.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
@@ -881,7 +881,7 @@ inherited frmAgendaView: TfrmAgendaView
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 193.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -892,23 +892,23 @@ inherited frmAgendaView: TfrmAgendaView
         ExplicitSize.cy = 49.000000000000000000
         object ListBox1: TListBox
           Align = Client
-          Size.Width = 50.000000000000000000
-          Size.Height = 50.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 462.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           DisableFocusEffect = True
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 45.000000000000000000
-          Viewport.Height = 50.000000000000000000
+          Viewport.Width = 381.000000000000000000
+          Viewport.Height = 462.000000000000000000
           object ListBoxItem1: TListBoxItem
             TabOrder = 0
             Text = 'ListBoxItem1'
           end
           object ListBoxGroupHeader1: TListBoxGroupHeader
             Position.Y = 44.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 381.000000000000000000
             Size.Height = 30.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -919,7 +919,7 @@ inherited frmAgendaView: TfrmAgendaView
             object Text2: TText
               Align = Client
               Margins.Left = 8.000000000000000000
-              Size.Width = 37.000000000000000000
+              Size.Width = 373.000000000000000000
               Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
               Text = '10/10/2010'
@@ -934,7 +934,7 @@ inherited frmAgendaView: TfrmAgendaView
           end
           object ListBoxItem4: TListBoxItem
             Position.Y = 162.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 381.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 4
@@ -957,7 +957,7 @@ inherited frmAgendaView: TfrmAgendaView
           end
           object ListBoxItem5: TListBoxItem
             Position.Y = 217.000000000000000000
-            Size.Width = 45.000000000000000000
+            Size.Width = 381.000000000000000000
             Size.Height = 266.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 5
