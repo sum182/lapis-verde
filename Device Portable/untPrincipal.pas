@@ -92,7 +92,7 @@ implementation
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
   untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA, untDmEscola,
-  untDmResponsavel, smMensagensFMX;
+  untDmResponsavel, smMensagensFMX,smNetworkState;
 
 { TfrmPrincipal }
 
@@ -151,6 +151,9 @@ end;
 procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
   DmEscola.SyncronizarDadosServerGeral;
   Dm.SyncronizarDadosServer
 end;
@@ -158,6 +161,9 @@ end;
 procedure TfrmPrincipal.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
   DmEscola.SyncronizarDadosServerBasico;
   Dm.SyncronizarDadosServer
 end;

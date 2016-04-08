@@ -352,6 +352,7 @@ begin
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   SetListBoxItemProperty(ListBoxItem);
   ListBoxItem.Height:= 15;
+  ListBoxItem.Margins.Top := 0;
 
   Text := TText.Create(self);
   Text.BeginUpdate;

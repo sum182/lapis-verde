@@ -277,7 +277,7 @@ object DmEscola: TDmEscola
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
       'select rt.*'#10'from responsavel_tipo rt'#10)
-    Left = 272
+    Left = 280
     Top = 118
   end
   object fdqFunc: TFDQuery
@@ -301,5 +301,28 @@ object DmEscola: TDmEscola
       'select ft.*'#10'from funcionario_tipo ft')
     Left = 104
     Top = 168
+  end
+  object TimerSyncBasico: TTimer
+    Interval = 30000
+    OnTimer = TimerSyncBasicoTimer
+    Left = 32
+    Top = 216
+  end
+  object fdqAgendaCriar: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      '  select *'
+      '  from agenda ag'
+      '  where agenda_id = :agenda_id'
+      '')
+    Left = 280
+    Top = 66
+    ParamData = <
+      item
+        Name = 'AGENDA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end

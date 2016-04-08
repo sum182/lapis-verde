@@ -6,7 +6,8 @@ uses
   System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils,
+  FMX.Types;
 
 type
   TDmEscola = class(TDataModule)
@@ -35,6 +36,9 @@ type
     fdqRespTipo: TFDQuery;
     fdqFunc: TFDQuery;
     fdqFuncTipo: TFDQuery;
+    TimerSyncBasico: TTimer;
+    fdqAgendaCriar: TFDQuery;
+    procedure TimerSyncBasicoTimer(Sender: TObject);
   private
 
     { Private declarations }
@@ -82,7 +86,6 @@ type
     procedure SalvarDadosServer;
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
-    procedure TesteNetwork;
   end;
 
 var
@@ -175,14 +178,15 @@ procedure TDmEscola.CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
                                 TurmaId:Integer=0);
 var
   Id:String;
+  Thread: TThread;
 begin
   //Método para Criar a agenda localmente
   try
     if Texto = EmptyStr then
       Exit;
 
-    if fdqAgenda.State in [dsInactive] then
-      fdqAgenda.Open;
+    if fdqAgendaCriar.State in [dsInactive] then
+      fdqAgendaCriar.Open;
 
     if fdqAgendaAluno.State in [dsInactive] then
       fdqAgendaAluno.Open;
@@ -192,14 +196,14 @@ begin
 
 
     Id:= GetGUID;
-    fdqAgenda.Append;
-    fdqAgenda.FieldByName('agenda_id').AsString:= Id;
-    fdqAgenda.FieldByName('descricao').AsString:=Texto;
-    fdqAgenda.FieldByName('data').AsDateTime:=Data;
-    fdqAgenda.FieldByName('data_insert_local').AsDateTime:=Now;
-    fdqAgenda.FieldByName('funcionario_id').AsInteger:=GetFuncionarioId;
-    fdqAgenda.FieldByName('escola_id').AsInteger:=GetEscolaId;
-    fdqAgenda.Post;
+    fdqAgendaCriar.Append;
+    fdqAgendaCriar.FieldByName('agenda_id').AsString:= Id;
+    fdqAgendaCriar.FieldByName('descricao').AsString:=Texto;
+    fdqAgendaCriar.FieldByName('data').AsDateTime:=Data;
+    fdqAgendaCriar.FieldByName('data_insert_local').AsDateTime:=Now;
+    fdqAgendaCriar.FieldByName('funcionario_id').AsInteger:=GetFuncionarioId;
+    fdqAgendaCriar.FieldByName('escola_id').AsInteger:=GetEscolaId;
+    fdqAgendaCriar.Post;
 
     if AlunoId > 0 then
     begin
@@ -226,9 +230,20 @@ begin
         fdqAgendaAluno.Post;
         fdqTurmaAluno.Next;
       end;
-
-
     end;
+
+
+    Thread := TThread.CreateAnonymousThread(procedure
+    begin
+       //Salva a agenda no server
+       SalvarAgenda;
+        {TThread.Synchronize(TThread.CurrentThread, procedure
+        begin
+          //Salva a agenda no server
+          SalvarAgenda;
+        end); }
+    end);
+    Thread.Start;
 
 
   except on E:Exception do
@@ -559,6 +574,9 @@ begin
   try
     try
       //GetAgenda(GetFuncionarioId,0);
+      if not smNetworkState.IsConnected then
+        Exit;
+
       fdqAgendaSaveServer.Active := False;
       fdqAgendaSaveServer.Active := True;
 
@@ -601,6 +619,8 @@ begin
       fdqAgendaAlunoSaveServer.Active := False;
       fdqAgendaTurmaSaveServer.Active := False;
   end;
+
+  MsgPoupUp('Agenda salva com sucesso');
 end;
 
 procedure TDmEscola.SalvarDadosServer;
@@ -665,6 +685,9 @@ end;
 
 procedure TDmEscola.SyncronizarDadosServerGeral;
 begin
+  if not smNetworkState.IsConnected then
+    Exit;
+
   try
     GetAlunos;
     smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos OK');
@@ -710,30 +733,27 @@ begin
 
 end;
 
-procedure TDmEscola.TesteNetwork;
 
+procedure TDmEscola.TimerSyncBasicoTimer(Sender: TObject);
+var
+  Thread: TThread;
 begin
-
-  try
-    if not smNetworkState.IsConnected then
-      MsgPoupUp('Not reachable')
-    else if smNetworkState.IsWifiConnected then
-      //Label1.Text := 'Reachable via WiFi'
-      MsgPoupUp('Reachable via WiFi')
-    else if smNetworkState.IsMobileConnected then
-      //Label1.Text := 'Reachable via WWAN';
-      MsgPoupUp('Reachable via WWAN');
-    //Label2.Text := NS.CurrentSSID;
-    MsgPoupUp(smNetworkState.CurrentSSID);
-  finally
-    //NS.Free;
-  end;
-  {$ENDIF}
+  Thread := TThread.CreateAnonymousThread(procedure
+    begin
+      SyncronizarDadosServerBasico;
+      {
+        TThread.Synchronize(TThread.CurrentThread, procedure
+        begin
+          SyncronizarDadosServerBasico;
+        end);}
+    end);
+  Thread.Start;
 end;
 
 procedure TDmEscola.SyncronizarDadosServerBasico;
 begin
-  TesteNetwork;
+  if not smNetworkState.IsConnected then
+    Exit;
 
   try
     GetAgenda(Now - 1, Now + 7);

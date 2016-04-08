@@ -63,7 +63,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
-  untFuncoes, smDBFireDac, smMensagensFMX;
+  untFuncoes, smDBFireDac, smMensagensFMX,smNetworkState;
 
 {$R *.dfm}
 
@@ -211,6 +211,8 @@ end;
 
 procedure TDm.SyncronizarDadosServer;
 begin
+  if not smNetworkState.IsConnected then
+    Exit;
 
   try
     SalvarDadosServer;
