@@ -85,7 +85,7 @@ implementation
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
-  untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA, untAgendaView,
+  untAgendaSelect, untAgendaAdd, untTestesA, untAgendaView,
   untDmEscola, untDmResponsavel;
 
 { TfrmPrincipal }
@@ -152,7 +152,7 @@ end;
 procedure TfrmPrincipalTeste.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-  OpenForm(TfrmAgendaEscolaAdd);
+  OpenForm(TfrmAgendaAdd);
 end;
 
 procedure TfrmPrincipalTeste.SpeedButton3Click(Sender: TObject);
@@ -167,7 +167,7 @@ end;
 
 procedure TfrmPrincipalTeste.AbrirAgenda;
 begin
-  OpenForm(TfrmAgendaEscolaSelect);
+  OpenForm(TfrmAgendaSelect);
 end;
 
 procedure TfrmPrincipalTeste.AbrirMensagens;

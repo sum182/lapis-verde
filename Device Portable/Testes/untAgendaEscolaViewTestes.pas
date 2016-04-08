@@ -109,7 +109,7 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal,
+uses untFuncoes, untDmEscola, untDM, untAgendaAdd, untPrincipal,
   untDMStyles;
 
 procedure TfrmAgendaEscolaViewTestes.btnVoltarClick(Sender: TObject);
@@ -258,13 +258,13 @@ end;
 procedure TfrmAgendaEscolaViewTestes.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-  if not Assigned(frmAgendaEscolaAdd) then
-    Application.CreateForm(TfrmAgendaEscolaAdd, frmAgendaEscolaAdd);
+  if not Assigned(frmAgendaAdd) then
+    Application.CreateForm(TfrmAgendaAdd, frmAgendaAdd);
 
-  frmAgendaEscolaAdd.AlunoId := AlunoId;
-  frmAgendaEscolaAdd.TurmaId := TurmaId;
-  frmAgendaEscolaAdd.OwnerAgenda := Titulo;
-  frmAgendaEscolaAdd.Show;
+  frmAgendaAdd.AlunoId := AlunoId;
+  frmAgendaAdd.TurmaId := TurmaId;
+  frmAgendaAdd.OwnerAgenda := Titulo;
+  frmAgendaAdd.Show;
 end;
 
 procedure TfrmAgendaEscolaViewTestes.SpeedButton3Click(Sender: TObject);

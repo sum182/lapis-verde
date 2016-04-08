@@ -91,7 +91,7 @@ implementation
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
-  untAgendaEscolaSelect, untAgendaEscolaAdd, untTestesA, untDmEscola,
+  untAgendaSelect, untAgendaAdd, untTestesA, untDmEscola,
   untDmResponsavel, smMensagensFMX,smNetworkState;
 
 { TfrmPrincipal }
@@ -170,7 +170,7 @@ end;
 
 procedure TfrmPrincipal.AbrirAgenda;
 begin
-  OpenForm(TfrmAgendaEscolaSelect);
+  OpenForm(TfrmAgendaSelect);
 end;
 
 procedure TfrmPrincipal.AbrirMensagens;

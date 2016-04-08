@@ -38,7 +38,16 @@ type
     fdqFuncTipo: TFDQuery;
     TimerSyncBasico: TTimer;
     fdqAgendaCriar: TFDQuery;
+    fdqAgendaSync: TFDQuery;
+    fdqAgendaAlunoSync: TFDQuery;
+    StringField1: TStringField;
+    IntegerField1: TIntegerField;
+    fdqAgendaTurmaSync: TFDQuery;
+    StringField2: TStringField;
+    IntegerField2: TIntegerField;
+    TimerSyncGeral: TTimer;
     procedure TimerSyncBasicoTimer(Sender: TObject);
+    procedure TimerSyncGeralTimer(Sender: TObject);
   private
 
     { Private declarations }
@@ -60,22 +69,23 @@ type
 
     //Metodos para Agenda
 
-    procedure SetSQLAgenda(AlunoId:Integer;TurmaId:Integer);overload;
     procedure SetSQLAgenda;overload;
-    procedure SetSQLAgenda(KeyValues:String);overload;
-    procedure SetSQLAgendaAluno(KeyValues:String);overload;
-    procedure SetSQLAgendaTurma(KeyValues:String);overload;
+    procedure SetSQLAgenda(AlunoId:Integer;TurmaId:Integer);overload;
+    procedure SetSQLAgendaSync(KeyValues:String);overload;
+    procedure SetSQLAgendaAlunoSync(KeyValues:String);overload;
+    procedure SetSQLAgendaTurmaSync(KeyValues:String);overload;
 
     procedure SetParamsAgenda(AlunoId:Integer;TurmaId:Integer;Data:TDate);
 
-
-    procedure OpenAgenda(AlunoId:Integer;TurmaId:Integer;Data:TDate);overload;
     procedure OpenAgenda;overload;
-    procedure OpenAgenda(KeyValues:String);overload;
-    procedure OpenAgendaAluno(KeyValues:String);overload;
-    procedure OpenAgendaTurma(KeyValues:String);overload;
+    procedure OpenAgenda(AlunoId:Integer;TurmaId:Integer;Data:TDate);overload;
+    procedure OpenAgendaSync(KeyValues:String);
+    procedure OpenAgendaAlunoSync(KeyValues:String);
+    procedure OpenAgendaTurmaSync(KeyValues:String);
 
     procedure CloseAgenda;
+    procedure CloseAgendaSync;
+
 
     procedure GetAgenda(DtIni,DtFim:TDateTime);
     procedure CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
@@ -158,6 +168,13 @@ begin
   fdqAgenda.Active := False;
   fdqAgendaAluno.Active := False;
   fdqAgendaTurma.Active := False;
+end;
+
+procedure TDmEscola.CloseAgendaSync;
+begin
+  fdqAgendaSync.Active := False;
+  fdqAgendaAlunoSync.Active := False;
+  fdqAgendaTurmaSync.Active := False;
 end;
 
 procedure TDmEscola.CloseFuncionarios;
@@ -283,21 +300,21 @@ begin
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
       //ShowMessage(KeyValues);
-      OpenAgenda(KeyValues);
+      OpenAgendaSync(KeyValues);
 
-      CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
+      CopyDataSet(LDataSet,fdqAgendaSync,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_aluno
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      OpenAgendaAluno(KeyValues);
-      CopyDataSet(LDataSet,fdqAgendaAluno,False,[coAppend,coEdit]);
+      OpenAgendaAlunoSync(KeyValues);
+      CopyDataSet(LDataSet,fdqAgendaAlunoSync,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_turma
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      OpenAgendaTurma(KeyValues);
-      CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
+      OpenAgendaTurmaSync(KeyValues);
+      CopyDataSet(LDataSet,fdqAgendaTurmaSync,False,[coAppend,coEdit]);
 
     except on E:Exception do
       DM.SetLogError( E.Message,
@@ -460,26 +477,25 @@ end;
 
 
 
-procedure TDmEscola.OpenAgendaAluno(KeyValues: String);
+procedure TDmEscola.OpenAgendaAlunoSync(KeyValues: String);
 begin
-  fdqAgendaAluno.Active := False;
-  SetSQLAgendaAluno(KeyValues);
-  fdqAgendaAluno.Active := True;
+  fdqAgendaAlunoSync.Active := False;
+  SetSQLAgendaAlunoSync(KeyValues);
+  fdqAgendaAlunoSync.Active := True;
 end;
 
-procedure TDmEscola.OpenAgendaTurma(KeyValues: String);
+procedure TDmEscola.OpenAgendaTurmaSync(KeyValues: String);
 begin
-  fdqAgendaTurma.Active := False;
-  SetSQLAgendaTurma(KeyValues);
-  fdqAgendaTurma.Active := True;
+  fdqAgendaTurmaSync.Active := False;
+  SetSQLAgendaTurmaSync(KeyValues);
+  fdqAgendaTurmaSync.Active := True;
 end;
 
-procedure TDmEscola.OpenAgenda(KeyValues: String);
+procedure TDmEscola.OpenAgendaSync(KeyValues: String);
 begin
-  CloseAgenda;
-  SetSQLAgenda(KeyValues);
-  fdqAgenda.Active := True;
-  //ShowMessage(IntTostr((fdqAgenda.RecordCount)));
+  CloseAgendaSync;
+  SetSQLAgendaSync(KeyValues);
+  fdqAgendaSync.Active := True;
 end;
 
 procedure TDmEscola.OpenAgenda(AlunoId, TurmaId: Integer;Data:TDate);
@@ -645,42 +661,42 @@ begin
   fdqAgenda.ParamByName('data').AsDate:= Data;
 end;
 
-procedure TDmEscola.SetSQLAgenda(KeyValues: String);
+procedure TDmEscola.SetSQLAgendaSync(KeyValues: String);
 begin
   if KeyValues = EmptyStr then
     KeyValues:= QuoTedStr('0');
 
-  fdqAgenda.SQL.Clear;
-  fdqAgenda.SQL.Add('select');
-  fdqAgenda.SQL.Add('  ag.*,');
-  fdqAgenda.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
-  fdqAgenda.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
-  fdqAgenda.SQL.Add('from agenda ag');
-  fdqAgenda.SQL.Add('where agenda_id in (' + KeyValues + ')');
-  fdqAgenda.SQL.Add('order by ag.data_insert_local');
+  fdqAgendaSync.SQL.Clear;
+  fdqAgendaSync.SQL.Add('select');
+  fdqAgendaSync.SQL.Add('  ag.*,');
+  fdqAgendaSync.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
+  fdqAgendaSync.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
+  fdqAgendaSync.SQL.Add('from agenda ag');
+  fdqAgendaSync.SQL.Add('where agenda_id in (' + KeyValues + ')');
+  fdqAgendaSync.SQL.Add('order by ag.data_insert_local');
 
 end;
 
-procedure TDmEscola.SetSQLAgendaAluno(KeyValues: String);
+procedure TDmEscola.SetSQLAgendaAlunoSync(KeyValues: String);
 begin
   if KeyValues = EmptyStr then
     KeyValues:= QuoTedStr('0');
 
-  fdqAgendaAluno.SQL.Clear;
-  fdqAgendaAluno.SQL.Add('select al.*');
-  fdqAgendaAluno.SQL.Add('from agenda_aluno al');
-  fdqAgendaAluno.SQL.Add('where agenda_id in (' + KeyValues + ')');
+  fdqAgendaAlunoSync.SQL.Clear;
+  fdqAgendaAlunoSync.SQL.Add('select al.*');
+  fdqAgendaAlunoSync.SQL.Add('from agenda_aluno al');
+  fdqAgendaAlunoSync.SQL.Add('where agenda_id in (' + KeyValues + ')');
 end;
 
-procedure TDmEscola.SetSQLAgendaTurma(KeyValues: String);
+procedure TDmEscola.SetSQLAgendaTurmaSync(KeyValues: String);
 begin
   if KeyValues = EmptyStr then
     KeyValues:= QuoTedStr('0');
 
-  fdqAgendaTurma.SQL.Clear;
-  fdqAgendaTurma.SQL.Add('select at.*');
-  fdqAgendaTurma.SQL.Add('from agenda_turma at');
-  fdqAgendaTurma.SQL.Add('where agenda_id in (' + KeyValues + ')');
+  fdqAgendaTurmaSync.SQL.Clear;
+  fdqAgendaTurmaSync.SQL.Add('select at.*');
+  fdqAgendaTurmaSync.SQL.Add('from agenda_turma at');
+  fdqAgendaTurmaSync.SQL.Add('where agenda_id in (' + KeyValues + ')');
 end;
 
 procedure TDmEscola.SyncronizarDadosServerGeral;
@@ -741,11 +757,17 @@ begin
   Thread := TThread.CreateAnonymousThread(procedure
     begin
       SyncronizarDadosServerBasico;
-      {
-        TThread.Synchronize(TThread.CurrentThread, procedure
-        begin
-          SyncronizarDadosServerBasico;
-        end);}
+    end);
+  Thread.Start;
+end;
+
+procedure TDmEscola.TimerSyncGeralTimer(Sender: TObject);
+var
+  Thread: TThread;
+begin
+  Thread := TThread.CreateAnonymousThread(procedure
+    begin
+      SyncronizarDadosServerGeral;
     end);
   Thread.Start;
 end;
@@ -762,14 +784,12 @@ begin
     smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
   end;
 
-
   try
-    SalvarDadosServer;
-    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer OK');
+    SalvarAgenda;
+    smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda OK');
   except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer Erro:' + e.Message);
+    smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda Erro:' + e.Message);
   end;
-
 end;
 
 procedure TDmEscola.SetSQLAgenda;
@@ -855,7 +875,6 @@ begin
   fdqAgendaTurma.SQL.Add('select * from agenda_turma at');
   fdqAgendaTurma.SQL.Add('where at.agenda_id = :agenda_id');
   fdqAgendaTurma.ParamByName('agenda_id').AsInteger:=0;
-
 end;
 
 end.

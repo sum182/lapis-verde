@@ -1,4 +1,4 @@
-unit untAgendaEscolaSelect;
+unit untAgendaSelect;
 
 interface
 
@@ -16,7 +16,7 @@ uses
   FireDAC.Stan.Async, FireDAC.DApt;
 
 type
-  TfrmAgendaEscolaSelect = class(TfrmBaseToolBar)
+  TfrmAgendaSelect = class(TfrmBaseToolBar)
     tbctrlPrincipal: TTabControl;
     tbitTurma: TTabItem;
     tbitAlunos: TTabItem;
@@ -38,7 +38,7 @@ type
   end;
 
 var
-  frmAgendaEscolaSelect: TfrmAgendaEscolaSelect;
+  frmAgendaSelect: TfrmAgendaSelect;
 
 implementation
 
@@ -47,7 +47,7 @@ implementation
 uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgendaView,
   untPrincipal, untDMStyles, untFuncoes;
 
-procedure TfrmAgendaEscolaSelect.FormCreate(Sender: TObject);
+procedure TfrmAgendaSelect.FormCreate(Sender: TObject);
 begin
   inherited;
   tbctrlPrincipal.ActiveTab := tbitTurma;
@@ -57,7 +57,7 @@ end;
 
 
 
-procedure TfrmAgendaEscolaSelect.lstAlunosItemClick(const Sender: TObject;
+procedure TfrmAgendaSelect.lstAlunosItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   inherited;
@@ -73,7 +73,7 @@ begin
   frmAgendaView.Show;
 end;
 
-procedure TfrmAgendaEscolaSelect.lstTurmasItemClick(const Sender: TObject;
+procedure TfrmAgendaSelect.lstTurmasItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   inherited;

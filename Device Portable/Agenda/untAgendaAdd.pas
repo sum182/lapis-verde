@@ -1,4 +1,4 @@
-unit untAgendaEscolaAdd;
+unit untAgendaAdd;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   FMX.ScrollBox, FMX.Memo, FGX.VirtualKeyboard, FMX.ListBox;
 
 type
-  TfrmAgendaEscolaAdd = class(TfrmBaseToolBar)
+  TfrmAgendaAdd = class(TfrmBaseToolBar)
     memAgenda: TMemo;
     btnEnviar: TSpeedButton;
     lblAgenda: TLabel;
@@ -50,7 +50,7 @@ type
   end;
 
 var
-  frmAgendaEscolaAdd: TfrmAgendaEscolaAdd;
+  frmAgendaAdd: TfrmAgendaAdd;
 
 implementation
 
@@ -59,21 +59,21 @@ implementation
 uses smGeralFMX, untDM, untDmEscola, untDMStyles, untFuncoes, smMensagensFMX,
   FMX.Forms, untAgendaView;
 
-procedure TfrmAgendaEscolaAdd.btnVoltarClick(Sender: TObject);
+procedure TfrmAgendaAdd.btnVoltarClick(Sender: TObject);
 begin
   fAllowCloseForm:=True;
   Close;
   inherited;
 end;
 
-procedure TfrmAgendaEscolaAdd.fgVirtualKeyboard1Hide(Sender: TObject;
+procedure TfrmAgendaAdd.fgVirtualKeyboard1Hide(Sender: TObject;
   const Bounds: TRect);
 begin
   inherited;
   layBase.Align := TAlignLayout.Client;
 end;
 
-procedure TfrmAgendaEscolaAdd.fgVirtualKeyboard1Show(Sender: TObject;
+procedure TfrmAgendaAdd.fgVirtualKeyboard1Show(Sender: TObject;
   const Bounds: TRect);
 begin
   inherited;
@@ -84,53 +84,52 @@ begin
     layBase.Height := Screen.Size.Height - Bounds.Height - 20;
 end;
 
-procedure TfrmAgendaEscolaAdd.FormCreate(Sender: TObject);
+procedure TfrmAgendaAdd.FormCreate(Sender: TObject);
 begin
   inherited;
   SetStyle(Self);
 end;
 
-procedure TfrmAgendaEscolaAdd.FormShow(Sender: TObject);
+procedure TfrmAgendaAdd.FormShow(Sender: TObject);
 begin
   inherited;
   SetCabecalho;
   SetEnabledFields;
   SetVisibleObjects;
-
 end;
 
-procedure TfrmAgendaEscolaAdd.imgEnviarClick(Sender: TObject);
+procedure TfrmAgendaAdd.imgEnviarClick(Sender: TObject);
 begin
   inherited;
   btnEnviar.OnClick(self);
 end;
 
-procedure TfrmAgendaEscolaAdd.memAgendaChange(Sender: TObject);
+procedure TfrmAgendaAdd.memAgendaChange(Sender: TObject);
 begin
   inherited;
   SetEnabledFields;
 end;
 
-procedure TfrmAgendaEscolaAdd.memAgendaChangeTracking(Sender: TObject);
+procedure TfrmAgendaAdd.memAgendaChangeTracking(Sender: TObject);
 begin
   inherited;
   SetEnabledFields;
 end;
 
-procedure TfrmAgendaEscolaAdd.memAgendaClick(Sender: TObject);
+procedure TfrmAgendaAdd.memAgendaClick(Sender: TObject);
 begin
   inherited;
   OnClickFields(Self);
 end;
 
-procedure TfrmAgendaEscolaAdd.SetEnabledFields;
+procedure TfrmAgendaAdd.SetEnabledFields;
 begin
   lblAgenda.Visible:= (memAgenda.Text = '');
   imgEnviar.Enabled:= not (memAgenda.Text = '');
   btnEnviar.Enabled:= not (memAgenda.Text = '');
 end;
 
-procedure TfrmAgendaEscolaAdd.SetVisibleObjects;
+procedure TfrmAgendaAdd.SetVisibleObjects;
 begin
   lblNome.Visible:=False;
   imgAluno.Visible := (AlunoId >= 1);
@@ -138,7 +137,7 @@ begin
   lblNome.Visible:=True;
 end;
 
-procedure TfrmAgendaEscolaAdd.SetCabecalho;
+procedure TfrmAgendaAdd.SetCabecalho;
 begin
   //lblNome.Text := 'Para: ' + OwnerAgenda;
   //lblData.Text := 'Data: ' + DateToStr(Data);
@@ -152,7 +151,7 @@ begin
 end;
 
 
-procedure TfrmAgendaEscolaAdd.btnEnviarClick(Sender: TObject);
+procedure TfrmAgendaAdd.btnEnviarClick(Sender: TObject);
 begin
   inherited;
   if (memAgenda.Text = EmptyStr) Then
@@ -165,7 +164,6 @@ begin
 
   if Assigned(frmAgendaView) then
     frmAgendaView.FillListBoxAgenda;
-
 end;
 
 

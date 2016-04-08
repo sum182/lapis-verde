@@ -13,3 +13,9 @@ Visible=False
 [DmEscola.fdqAgenda]
 Visible=False
 
+[DmEscola.fdqAluno]
+Visible=False
+
+[DmEscola.fdqTurma]
+Visible=False
+

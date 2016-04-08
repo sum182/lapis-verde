@@ -138,4 +138,10 @@ object Dm: TDm
     Left = 136
     Top = 16
   end
+  object TimerSyncGeral: TTimer
+    Interval = 3600000
+    OnTimer = TimerSyncGeralTimer
+    Left = 592
+    Top = 288
+  end
 end

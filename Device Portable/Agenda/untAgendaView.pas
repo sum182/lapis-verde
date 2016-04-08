@@ -103,7 +103,7 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDmEscola, untDM, untAgendaEscolaAdd, untPrincipal,
+uses untFuncoes, untDmEscola, untDM, untAgendaAdd, untPrincipal,
   untDMStyles, smMensagensFMX;
 
 procedure TfrmAgendaView.btnVoltarClick(Sender: TObject);
@@ -469,15 +469,15 @@ end;
 procedure TfrmAgendaView.btnAddClick(Sender: TObject);
 begin
   inherited;
-  if not Assigned(frmAgendaEscolaAdd) then
-    Application.CreateForm(TfrmAgendaEscolaAdd, frmAgendaEscolaAdd);
+  if not Assigned(frmAgendaAdd) then
+    Application.CreateForm(TfrmAgendaAdd, frmAgendaAdd);
 
-  frmAgendaEscolaAdd.AlunoId := AlunoId;
-  frmAgendaEscolaAdd.TurmaId := TurmaId;
-  frmAgendaEscolaAdd.OwnerAgenda := OwnerAgenda;
-  frmAgendaEscolaAdd.NomeCompleto := NomeCompleto;
-  frmAgendaEscolaAdd.Data := Calendar.Date;
-  frmAgendaEscolaAdd.Show;
+  frmAgendaAdd.AlunoId := AlunoId;
+  frmAgendaAdd.TurmaId := TurmaId;
+  frmAgendaAdd.OwnerAgenda := OwnerAgenda;
+  frmAgendaAdd.NomeCompleto := NomeCompleto;
+  frmAgendaAdd.Data := Calendar.Date;
+  frmAgendaAdd.Show;
 end;
 
 end.

@@ -25,7 +25,9 @@ type
     fdqLogError: TFDQuery;
     fdqLogErrorSaveServer: TFDQuery;
     FDCreateDB: TFDConnection;
+    TimerSyncGeral: TTimer;
     procedure DataModuleCreate(Sender: TObject);
+    procedure TimerSyncGeralTimer(Sender: TObject);
   private
     procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
     procedure ConectarBases;
@@ -222,6 +224,17 @@ begin
   end;
 
 
+end;
+
+procedure TDm.TimerSyncGeralTimer(Sender: TObject);
+var
+  Thread: TThread;
+begin
+  Thread := TThread.CreateAnonymousThread(procedure
+    begin
+      SyncronizarDadosServer;
+    end);
+  Thread.Start;
 end;
 
 end.
