@@ -9,27 +9,6 @@
         <Projects Include="Server Application\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\RM Factory\Exemplo_REST\Client\Client.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\RM Factory\Exemplo_REST\Server.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\ServidorDataSnap\ServidorDataSnap.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\mobile\VendasApp.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\WhatsAppMessengerLayout\Messenger.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -56,77 +35,14 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Client">
-        <MSBuild Projects="..\RM Factory\Exemplo_REST\Client\Client.dproj"/>
-    </Target>
-    <Target Name="Client:Clean">
-        <MSBuild Projects="..\RM Factory\Exemplo_REST\Client\Client.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Client:Make">
-        <MSBuild Projects="..\RM Factory\Exemplo_REST\Client\Client.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="Server">
-        <MSBuild Projects="..\RM Factory\Exemplo_REST\Server.dproj"/>
-    </Target>
-    <Target Name="Server:Clean">
-        <MSBuild Projects="..\RM Factory\Exemplo_REST\Server.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Server:Make">
-        <MSBuild Projects="..\RM Factory\Exemplo_REST\Server.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="LocadoraDelphi">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj"/>
-    </Target>
-    <Target Name="LocadoraDelphi:Clean">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="LocadoraDelphi:Make">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\Parte X - Final\LocadoraDelphi.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ServidorDataSnap">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\ServidorDataSnap\ServidorDataSnap.dproj"/>
-    </Target>
-    <Target Name="ServidorDataSnap:Clean">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\ServidorDataSnap\ServidorDataSnap.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ServidorDataSnap:Make">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\tdevrocks-tutorial-criando-meu-app-step-by-step-2443cb865899\ServidorDataSnap\ServidorDataSnap.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="VendasApp">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\mobile\VendasApp.dproj"/>
-    </Target>
-    <Target Name="VendasApp:Clean">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\mobile\VendasApp.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="VendasApp:Make">
-        <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-5240cec93d5f\mobile\VendasApp.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="Messenger">
-        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj"/>
-    </Target>
-    <Target Name="Messenger:Clean">
-        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Messenger:Make">
-        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="PrNetworkState">
-        <MSBuild Projects="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj"/>
-    </Target>
-    <Target Name="PrNetworkState:Clean">
-        <MSBuild Projects="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="PrNetworkState:Make">
-        <MSBuild Projects="..\NetworkState\NetworkStateDemo\PrNetworkState.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Client;Server;LocadoraDelphi;ServidorDataSnap;VendasApp;Messenger;PrNetworkState"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Client:Clean;Server:Clean;LocadoraDelphi:Clean;ServidorDataSnap:Clean;VendasApp:Clean;Messenger:Clean;PrNetworkState:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Client:Make;Server:Make;LocadoraDelphi:Make;ServidorDataSnap:Make;VendasApp:Make;Messenger:Make;PrNetworkState:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

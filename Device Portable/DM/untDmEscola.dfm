@@ -1,7 +1,7 @@
 object DmEscola: TDmEscola
   OldCreateOrder = False
   Height = 421
-  Width = 925
+  Width = 903
   object fdqAluno: TFDQuery
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
@@ -424,7 +424,7 @@ object DmEscola: TDmEscola
   object TimerSyncGeral: TTimer
     Interval = 3600000
     OnTimer = TimerSyncGeralTimer
-    Left = 152
+    Left = 144
     Top = 312
   end
 end
