@@ -31,6 +31,10 @@ ao se logar como admin nao pega o id escola
 
 
 ----Mobile--------------------------------------------------------------------------------
+getagenda erro no agenda alunos qdo manda agenda pra turmar
+1 vez erro depois ok
+gerar versao server
+
 Analisar Fetch Options
 alterei o fdconection para mode = all
 

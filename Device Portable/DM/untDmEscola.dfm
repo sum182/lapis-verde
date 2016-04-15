@@ -143,6 +143,7 @@ object DmEscola: TDmEscola
     SQL.Strings = (
       'select * from agenda a'
       'where a.enviado_server is null'
+      'and a.data_insert_server is null'
       'order by data_insert_local')
     Left = 792
     Top = 82
@@ -155,6 +156,7 @@ object DmEscola: TDmEscola
       'from agenda_aluno al'
       'inner join agenda a on (al.agenda_id = a.agenda_id)'
       'where a.enviado_server is null'
+      'and a.data_insert_server is null'
       'order by a.data_insert_local')
     Left = 792
     Top = 134
@@ -179,6 +181,7 @@ object DmEscola: TDmEscola
       'from agenda_turma at'
       'inner join agenda a on (at.agenda_id = a.agenda_id)'
       'where a.enviado_server is null'
+      'and a.data_insert_server is null'
       'order by a.data_insert_local')
     Left = 792
     Top = 184
@@ -418,6 +421,7 @@ object DmEscola: TDmEscola
     object IntegerField2: TIntegerField
       FieldName = 'turma_id'
       Origin = 'turma_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
   end

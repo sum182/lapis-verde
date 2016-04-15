@@ -49,10 +49,10 @@ type
     procedure TimerSyncBasicoTimer(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
   private
-
-    { Private declarations }
+    SalvarAgendaInExecute:Boolean;
+    SyncServerBasicoInExecute:Boolean;
+    SyncServerGeralInExecute:Boolean;
   public
-
     procedure OpenAlunos;
     procedure OpenTurmas;
     procedure OpenTurmaAluno;overload;
@@ -593,6 +593,10 @@ begin
       if not smNetworkState.IsConnected then
         Exit;
 
+      if SalvarAgendaInExecute then
+        Exit;
+
+      SalvarAgendaInExecute:=True;
       fdqAgendaSaveServer.Active := False;
       fdqAgendaSaveServer.Active := True;
 
@@ -634,6 +638,7 @@ begin
       fdqAgendaSaveServer.Active := False;
       fdqAgendaAlunoSaveServer.Active := False;
       fdqAgendaTurmaSaveServer.Active := False;
+      SalvarAgendaInExecute:=False;
   end;
 
   MsgPoupUp('Agenda salva com sucesso');
@@ -701,52 +706,61 @@ end;
 
 procedure TDmEscola.SyncronizarDadosServerGeral;
 begin
-  if not smNetworkState.IsConnected then
-    Exit;
-
   try
-    GetAlunos;
-    smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos Erro:' + e.Message);
+    if SyncServerGeralInExecute then
+      Exit;
+
+    if not smNetworkState.IsConnected then
+      Exit;
+
+    SyncServerGeralInExecute:=True;
+
+
+    try
+      GetAlunos;
+      smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos Erro:' + e.Message);
+    end;
+
+    try
+      GetTurmas;
+      smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas Erro:' + e.Message);
+    end;
+
+    try
+      GetResponsaveis;
+      smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis Erro:' + e.Message);
+    end;
+
+    try
+      GetFuncionarios;
+      smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios Erro:' + e.Message);
+    end;
+
+    try
+      GetAgenda(Now - 30, Now + 1);
+      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
+    end;
+
+
+    try
+      SalvarDadosServer;
+      smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer Erro:' + e.Message);
+    end;
+  finally
+    SyncServerGeralInExecute:=False;
   end;
-
-  try
-    GetTurmas;
-    smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas Erro:' + e.Message);
-  end;
-
-  try
-    GetResponsaveis;
-    smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis Erro:' + e.Message);
-  end;
-
-  try
-    GetFuncionarios;
-    smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios Erro:' + e.Message);
-  end;
-
-  try
-    GetAgenda(Now - 30, Now + 1);
-    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
-  end;
-
-
-  try
-    SalvarDadosServer;
-    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer Erro:' + e.Message);
-  end;
-
 end;
 
 
@@ -774,22 +788,33 @@ end;
 
 procedure TDmEscola.SyncronizarDadosServerBasico;
 begin
-  if not smNetworkState.IsConnected then
-    Exit;
-
   try
-    GetAgenda(Now - 1, Now + 7);
-    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
+    if SyncServerBasicoInExecute then
+      Exit;
+
+    if not smNetworkState.IsConnected then
+      Exit;
+
+    SyncServerBasicoInExecute:=True;
+
+    try
+      GetAgenda(Now - 1, Now + 7);
+      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
+    end;
+
+    try
+      SalvarAgenda;
+      smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda Erro:' + e.Message);
+    end;
+
+  finally
+    SyncServerBasicoInExecute:=False;
   end;
 
-  try
-    SalvarAgenda;
-    smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda Erro:' + e.Message);
-  end;
 end;
 
 procedure TDmEscola.SetSQLAgenda;

@@ -29,6 +29,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
   private
+    SyncServerInExecute:Boolean;
     procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
     procedure ConectarBases;
     procedure ConectarDB;
@@ -213,17 +214,25 @@ end;
 
 procedure TDm.SyncronizarDadosServer;
 begin
-  if not smNetworkState.IsConnected then
-    Exit;
-
   try
-    SalvarDadosServer;
-    smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer OK');
-  except on E:Exception do
-    smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer Erro:' + e.Message);
+    if SyncServerInExecute then
+      Exit;
+
+    if not smNetworkState.IsConnected then
+      Exit;
+
+    SyncServerInExecute:=True;
+
+    try
+      SalvarDadosServer;
+      smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer Erro:' + e.Message);
+    end;
+
+  finally
+    SyncServerInExecute:=False;
   end;
-
-
 end;
 
 procedure TDm.TimerSyncGeralTimer(Sender: TObject);
