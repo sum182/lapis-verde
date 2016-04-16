@@ -450,7 +450,7 @@ begin
   //fdqAgendaAluno.SQL.Add('and t.funcionario_id = :funcionario_id');
   fdqAgendaAluno.SQL.Add('and ag.escola_id = :escola_id');
   fdqAgendaAluno.SQL.Add('and ag.data between :dt_ini and :dt_fim');
-  //fdqAgendaAluno.SQL.Add('group by agenda_id');
+  fdqAgendaAluno.SQL.Add('group by al.agenda_id,al.aluno_id');
 
   fdqAgendaTurma.SQL.Clear;
   fdqAgendaTurma.SQL.Add('select');
@@ -463,7 +463,7 @@ begin
   //fdqAgendaTurma.SQL.Add('and t.funcionario_id = :funcionario_id');
   fdqAgendaTurma.SQL.Add('and ag.escola_id = :escola_id');
   fdqAgendaTurma.SQL.Add('and ag.data between :dt_ini and :dt_fim');
-  //fdqAgendaTurma.SQL.Add('group by agenda_id');
+  fdqAgendaTurma.SQL.Add('group by at.agenda_id,at.turma_id');
 end;
 procedure TSmEscola.SetSQLAgenda(EscolaId, FuncionarioId: Integer;
   KeyValues: String);

@@ -1,7 +1,7 @@
 object DmEscola: TDmEscola
   OldCreateOrder = False
   Height = 421
-  Width = 903
+  Width = 680
   object fdqAluno: TFDQuery
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
@@ -39,8 +39,8 @@ object DmEscola: TDmEscola
       end>
   end
   object fdStanStorageBinLink: TFDStanStorageBinLink
-    Left = 792
-    Top = 24
+    Left = 576
+    Top = 32
   end
   object fdqAgenda: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -145,8 +145,8 @@ object DmEscola: TDmEscola
       'where a.enviado_server is null'
       'and a.data_insert_server is null'
       'order by data_insert_local')
-    Left = 792
-    Top = 82
+    Left = 576
+    Top = 90
   end
   object fdqAgendaAlunoSaveServer: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -158,8 +158,8 @@ object DmEscola: TDmEscola
       'where a.enviado_server is null'
       'and a.data_insert_server is null'
       'order by a.data_insert_local')
-    Left = 792
-    Top = 134
+    Left = 576
+    Top = 142
     object fdqAgendaAlunoSaveServeragenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
@@ -183,8 +183,8 @@ object DmEscola: TDmEscola
       'where a.enviado_server is null'
       'and a.data_insert_server is null'
       'order by a.data_insert_local')
-    Left = 792
-    Top = 184
+    Left = 576
+    Top = 192
     object fdqAgendaTurmaSaveServeragenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
@@ -357,8 +357,8 @@ object DmEscola: TDmEscola
       '  '
       '  where date(data_insert_local) = :data'
       '  order by ag.data_insert_local')
-    Left = 648
-    Top = 82
+    Left = 432
+    Top = 90
     ParamData = <
       item
         Name = 'DATA'
@@ -373,8 +373,8 @@ object DmEscola: TDmEscola
     SQL.Strings = (
       'select * from agenda_aluno al'
       'where al.agenda_id = :agenda_id')
-    Left = 648
-    Top = 130
+    Left = 432
+    Top = 138
     ParamData = <
       item
         Name = 'AGENDA_ID'
@@ -382,19 +382,6 @@ object DmEscola: TDmEscola
         ParamType = ptInput
         Value = Null
       end>
-    object StringField1: TStringField
-      FieldName = 'agenda_id'
-      Origin = 'agenda_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-      Size = 100
-    end
-    object IntegerField1: TIntegerField
-      FieldName = 'aluno_id'
-      Origin = 'aluno_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
   end
   object fdqAgendaTurmaSync: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -402,8 +389,8 @@ object DmEscola: TDmEscola
       'select * from agenda_turma at'
       'where at.agenda_id = :agenda_id'
       '')
-    Left = 648
-    Top = 186
+    Left = 432
+    Top = 194
     ParamData = <
       item
         Name = 'AGENDA_ID'
@@ -411,19 +398,6 @@ object DmEscola: TDmEscola
         ParamType = ptInput
         Value = Null
       end>
-    object StringField2: TStringField
-      FieldName = 'agenda_id'
-      Origin = 'agenda_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-      Size = 100
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'turma_id'
-      Origin = 'turma_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
   end
   object TimerSyncGeral: TTimer
     Interval = 3600000

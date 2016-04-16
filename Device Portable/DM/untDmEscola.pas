@@ -40,11 +40,7 @@ type
     fdqAgendaCriar: TFDQuery;
     fdqAgendaSync: TFDQuery;
     fdqAgendaAlunoSync: TFDQuery;
-    StringField1: TStringField;
-    IntegerField1: TIntegerField;
     fdqAgendaTurmaSync: TFDQuery;
-    StringField2: TStringField;
-    IntegerField2: TIntegerField;
     TimerSyncGeral: TTimer;
     procedure TimerSyncBasicoTimer(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
