@@ -405,4 +405,29 @@ object DmEscola: TDmEscola
     Left = 144
     Top = 312
   end
+  object fdqAgendaKeysInsert: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      '  select agenda_id'
+      '  from agenda ag'
+      '  where ag.data between :dt_ini and :dt_fim'
+      '  and ag.enviado_server ='#39'S'#39
+      '  and ag.data_insert_server is not null'
+      '  order by ag.data_insert_local')
+    Left = 432
+    Top = 250
+    ParamData = <
+      item
+        Name = 'DT_INI'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = 42477d
+      end
+      item
+        Name = 'DT_FIM'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = 42478d
+      end>
+  end
 end

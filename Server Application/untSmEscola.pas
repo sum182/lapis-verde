@@ -36,15 +36,13 @@ type
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     procedure fdqAgendaIDBeforePost(DataSet: TDataSet);
   private
-    procedure SetSQLAgenda;overload;
-    procedure SetSQLAgenda(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
-    procedure SetSQLAgendaDet;
-
+    procedure SetSQLAgenda(ListKeysInserts: TFDJSONDataSets = nil);overload;
+    procedure SetSQLAgenda(KeyValues:String);overload;
+    procedure SetSQLAgendaDet(KeyValues:String);
 
     procedure SetParamsAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime);
-    procedure SetParamsAgendaDet(KeyValues:String);
 
-    procedure OpenAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime);overload;
+    procedure OpenAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil);overload;
     procedure OpenAgenda(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
     procedure CloseAgenda;
 
@@ -133,8 +131,7 @@ begin
   //Método para retornar as Agendas
   try
     try
-
-      OpenAgenda(EscolaId, FuncionarioId, DtIni,DtFim);
+      OpenAgenda(EscolaId, FuncionarioId, DtIni,DtFim,ListKeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
@@ -332,18 +329,17 @@ begin
 end;
 
 procedure TSmEscola.OpenAgenda(EscolaId, FuncionarioId: Integer; DtIni,
-  DtFim: TDateTime);
+  DtFim: TDateTime;ListKeysInserts: TFDJSONDataSets = nil);
 var
   KeyValues:String;
 begin
   CloseAgenda;
-  SetSQLAgenda;
+  SetSQLAgenda(ListKeysInserts);
   SetParamsAgenda(EscolaId, FuncionarioId, DtIni, DtFim);
   fdqAgenda.Active := True;
 
   KeyValues:= GetKeyValuesDataSet(fdqAgenda,'agenda_id');
-  SetSQLAgendaDet;
-  SetParamsAgendaDet(KeyValues);
+  SetSQLAgendaDet(KeyValues);
 
   fdqAgendaAluno.Active := True;
   fdqAgendaTurma.Active := True;
@@ -353,7 +349,7 @@ procedure TSmEscola.OpenAgenda(EscolaId, FuncionarioId: Integer;KeyValues:String
 begin
   CloseAgenda;
 
-  SetSQLAgenda(EscolaId, FuncionarioId,KeyValues);
+  SetSQLAgenda(KeyValues);
 
   fdqAgenda.Active := True;
   fdqAgendaAluno.Active := True;
@@ -433,14 +429,17 @@ begin
   fdqAgendaTurma.ParamByName('dt_fim').AsDateTime:= DtFim;  }
 end;
 
-procedure TSmEscola.SetParamsAgendaDet(KeyValues: String);
-begin
-  fdqAgendaAluno.ParamByName('KeyValues').AsString:= KeyValues;
-  fdqAgendaTurma.ParamByName('KeyValues').AsString:= KeyValues;
-end;
 
-procedure TSmEscola.SetSQLAgenda;
+
+procedure TSmEscola.SetSQLAgenda(ListKeysInserts: TFDJSONDataSets = nil);
+var
+  LDataSet: TFDDataSet;
+  KeyValues: string;
 begin
+  LDataSet := TFDJSONDataSetsReader.GetListValue(ListKeysInserts,0);
+  KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+
+
   fdqAgenda.SQL.Clear;
   fdqAgenda.SQL.Add('select');
   fdqAgenda.SQL.Add('  ag.*');
@@ -453,8 +452,10 @@ begin
   //fdqAgenda.SQL.Add('and t.funcionario_id = :funcionario_id');
   fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
   fdqAgenda.SQL.Add('and ag.data between :dt_ini and :dt_fim');
+  fdqAgenda.SQL.Add('and ag.agenda_id not in (' + KeyValues + ')');
   fdqAgenda.SQL.Add('group by agenda_id');
   exit;
+
   {fdqAgendaAluno.SQL.Clear;
   fdqAgendaAluno.SQL.Add('select');
   fdqAgendaAluno.SQL.Add('  al.*');
@@ -493,12 +494,8 @@ begin
   fdqAgendaTurma.SQL.Add('where agenda_id in ( :KeyValues )');
 
 end;
-procedure TSmEscola.SetSQLAgenda(EscolaId, FuncionarioId: Integer;
-  KeyValues: String);
+procedure TSmEscola.SetSQLAgenda(KeyValues: String);
 begin
-  if KeyValues = EmptyStr then
-    KeyValues:= QuoTedStr('0');
-
   fdqAgenda.SQL.Clear;
   fdqAgenda.SQL.Add('select ag.*');
   fdqAgenda.SQL.Add('from agenda ag');
@@ -515,17 +512,18 @@ begin
   fdqAgendaTurma.SQL.Add('where agenda_id in (' + KeyValues + ')');
 end;
 
-procedure TSmEscola.SetSQLAgendaDet;
+
+procedure TSmEscola.SetSQLAgendaDet(KeyValues:String);
 begin
   fdqAgendaAluno.SQL.Clear;
   fdqAgendaAluno.SQL.Add('select al.*');
   fdqAgendaAluno.SQL.Add('from agenda_aluno al');
-  fdqAgendaAluno.SQL.Add('where agenda_id in ( :KeyValues )');
+  fdqAgendaAluno.SQL.Add('where agenda_id in (' + KeyValues + ')');
 
   fdqAgendaTurma.SQL.Clear;
   fdqAgendaTurma.SQL.Add('select at.*');
   fdqAgendaTurma.SQL.Add('from agenda_turma at');
-  fdqAgendaTurma.SQL.Add('where agenda_id in ( :KeyValues )');
+  fdqAgendaTurma.SQL.Add('where agenda_id in (' + KeyValues + ')');
 end;
 
 end.

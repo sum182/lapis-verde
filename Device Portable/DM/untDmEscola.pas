@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils,
-  FMX.Types;
+  FMX.Types, Data.FireDACJSONReflect;
 
 type
   TDmEscola = class(TDataModule)
@@ -42,6 +42,7 @@ type
     fdqAgendaAlunoSync: TFDQuery;
     fdqAgendaTurmaSync: TFDQuery;
     TimerSyncGeral: TTimer;
+    fdqAgendaKeysInsert: TFDQuery;
     procedure TimerSyncBasicoTimer(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
   private
@@ -77,6 +78,9 @@ type
     procedure OpenAgendaSync(KeyValues:String);
     procedure OpenAgendaAlunoSync(KeyValues:String);
     procedure OpenAgendaTurmaSync(KeyValues:String);
+    procedure OpenAgendaKeysInsert(DtIni,DtFim:TDateTime);
+    function GetListKeysInsert(DtIni,DtFim:TDateTime):TFDJSONDataSets;
+
 
     procedure CloseAgenda;
     procedure CloseAgendaSync;
@@ -100,7 +104,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses untDM, untModuloCliente, Data.FireDACJSONReflect, smDBFireDac,
+uses untDM, untModuloCliente, smDBFireDac,
   FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState;
 
 {$R *.dfm}
@@ -285,7 +289,13 @@ begin
   try
     try
       KeyValues:= EmptyStr;
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,GetFuncionarioId,DtIni,DtFim );
+
+      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,
+                                                             GetFuncionarioId,
+                                                             DtIni,
+                                                             DtFim,
+                                                             GetListKeysInsert(DtIni,DtFim)
+                                                             );
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
@@ -388,6 +398,17 @@ begin
 
 end;
 
+function TDmEscola.GetListKeysInsert(DtIni, DtFim: TDateTime): TFDJSONDataSets;
+begin
+  try
+    Result:= TFDJSONDataSets.Create;
+    OpenAgendaKeysInsert(DtIni,DtFim);
+    TFDJSONDataSetsWriter.ListAdd(Result,fdqAgendaKeysInsert);
+  finally
+    fdqAgendaKeysInsert.Close;
+  end;
+end;
+
 procedure TDmEscola.GetResponsaveis;
 var
   LDataSetList  : TFDJSONDataSets;
@@ -477,6 +498,14 @@ begin
   fdqAgendaAlunoSync.Active := False;
   SetSQLAgendaAlunoSync(KeyValues);
   fdqAgendaAlunoSync.Active := True;
+end;
+
+procedure TDmEscola.OpenAgendaKeysInsert(DtIni, DtFim: TDateTime);
+begin
+  fdqAgendaKeysInsert.Close;
+  fdqAgendaKeysInsert.ParamByName('dt_ini').AsDate := DtIni;
+  fdqAgendaKeysInsert.ParamByName('dt_fim').AsDate := DtFim;
+  fdqAgendaKeysInsert.Open;
 end;
 
 procedure TDmEscola.OpenAgendaTurmaSync(KeyValues: String);
