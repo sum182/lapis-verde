@@ -46,8 +46,7 @@ type
     procedure TimerSyncGeralTimer(Sender: TObject);
   private
     SalvarAgendaInExecute:Boolean;
-    SyncServerBasicoInExecute:Boolean;
-    SyncServerGeralInExecute:Boolean;
+    SyncServer:Boolean;
   public
     procedure OpenAlunos;
     procedure OpenTurmas;
@@ -703,13 +702,13 @@ end;
 procedure TDmEscola.SyncronizarDadosServerGeral;
 begin
   try
-    if SyncServerGeralInExecute then
+    if SyncServer then
       Exit;
 
     if not smNetworkState.IsConnected then
       Exit;
 
-    SyncServerGeralInExecute:=True;
+    SyncServer:=True;
 
 
     try
@@ -755,7 +754,7 @@ begin
       smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer Erro:' + e.Message);
     end;
   finally
-    SyncServerGeralInExecute:=False;
+    SyncServer:=False;
   end;
 end;
 
@@ -785,13 +784,13 @@ end;
 procedure TDmEscola.SyncronizarDadosServerBasico;
 begin
   try
-    if SyncServerBasicoInExecute then
+    if SyncServer then
       Exit;
 
     if not smNetworkState.IsConnected then
       Exit;
 
-    SyncServerBasicoInExecute:=True;
+    SyncServer:=True;
 
     try
       GetAgenda(Now - 1, Now + 7);
@@ -808,7 +807,7 @@ begin
     end;
 
   finally
-    SyncServerBasicoInExecute:=False;
+    SyncServer:=False;
   end;
 
 end;
