@@ -26,6 +26,6 @@
     <Transaction>2016/04/08 16:32:37.000.345,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaSelect.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaSelect.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
+		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_4_WVGA_Nexus_S"/>
 	</ActiveMobileDevice>
 </BorlandProject>
