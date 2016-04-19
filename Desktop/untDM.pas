@@ -55,6 +55,7 @@ type
     FDConnectionLocal: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
     procedure FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
+    procedure FDConnectionAfterConnect(Sender: TObject);
   private
     fIniDataBase: string;
     fIniUser_Name: string;
@@ -67,6 +68,7 @@ type
     procedure LerIni;
     procedure ConexaoBD;
     procedure OpenEscola;
+    procedure SetTimeZone;
   public
     fUsuarioAdminSistema: boolean;
 
@@ -145,6 +147,11 @@ begin
   end;
 end;
 
+procedure TDM.SetTimeZone;
+begin
+  FDConnection.ExecSQL('call sp_set_time_zone;');
+end;
+
 procedure TDM.ConexaoBD;
 begin
   try
@@ -172,6 +179,11 @@ begin
   LerIni;
   ConexaoBD;
   OpenEscola;
+end;
+
+procedure TDM.FDConnectionAfterConnect(Sender: TObject);
+begin
+  SetTimeZone;
 end;
 
 procedure TDM.FDConnectionError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);

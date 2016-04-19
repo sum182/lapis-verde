@@ -87,6 +87,8 @@ type
     btnAlunosExcluir: TcxButton;
     fdqAlunosresponsavel_id: TIntegerField;
     fdqAlunosaluno_id: TIntegerField;
+    fdqCadsenha: TStringField;
+    fdqCaddata_atualizacao: TDateTimeField;
     procedure AcNovoExecute(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -108,6 +110,7 @@ type
     procedure fdqAlunosAfterScroll(DataSet: TDataSet);
     procedure fdqAlunosBeforeDelete(DataSet: TDataSet);
     procedure BuProcessarClick(Sender: TObject);
+    procedure AcApplyUpdateExecute(Sender: TObject);
   private
     procedure OpenQuerys;
     procedure SetPgtCtrlDefaut;
@@ -124,6 +127,12 @@ implementation
 {$R *.dfm}
 
 uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno, smGeral;
+
+procedure TfrmCadastroResponsavel.AcApplyUpdateExecute(Sender: TObject);
+begin
+  fdqCad.FieldByName('data_atualizacao').AsDateTime := Now;
+  inherited;
+end;
 
 procedure TfrmCadastroResponsavel.AcCancelarExecute(Sender: TObject);
 begin

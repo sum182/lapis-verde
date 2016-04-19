@@ -32,6 +32,7 @@ object SmMain: TSmMain
       'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
     LoginPrompt = False
+    AfterConnect = FDConnectionAfterConnect
     Left = 42
     Top = 32
   end

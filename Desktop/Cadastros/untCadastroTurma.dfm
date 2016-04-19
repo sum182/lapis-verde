@@ -285,7 +285,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 536
     Bitmap = {
-      494C01010B000C009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -692,7 +692,7 @@ inherited frmCadastroTurma: TfrmCadastroTurma
     Left = 976
     Top = 584
     Bitmap = {
-      494C01010B000C009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1096,7 +1096,6 @@ inherited frmCadastroTurma: TfrmCadastroTurma
       000000000000}
   end
   inherited fdqCad: TFDQuery
-    Active = True
     AfterOpen = fdqCadAfterOpen
     OnNewRecord = fdqCadNewRecord
     CachedUpdates = True
@@ -1150,6 +1149,11 @@ inherited frmCadastroTurma: TfrmCadastroTurma
       DisplayLabel = 'Funcion'#225'rio'
       FieldName = 'funcionario_id'
       Origin = 'funcionario_id'
+    end
+    object fdqCaddata_atualizacao: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'data_atualizacao'
+      Origin = 'data_atualizacao'
     end
   end
   inherited dsCad: TDataSource

@@ -46,6 +46,7 @@ type
     fdqCadperiodo_tipo_id: TSmallintField;
     fdqCadescola_id: TIntegerField;
     fdqCadfuncionario_id: TIntegerField;
+    fdqCaddata_atualizacao: TDateTimeField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -85,6 +86,7 @@ uses untDM, untFuncoes, smDBFireDac, smGeral, smMensagens;
 procedure TfrmCadastroTurma.AcApplyUpdateExecute(Sender: TObject);
 begin
   Self.SetFocus;
+  fdqCad.FieldByName('data_atualizacao').AsDateTime := Now;
   SalvarCheckListBoxAlunos;
   ValidarCadastro;
   inherited;

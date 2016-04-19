@@ -27,6 +27,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
+    procedure FDConnectionAfterConnect(Sender: TObject);
   private
 
     procedure SetSQLLogError(EscolaId:Integer;FuncionarioId:Integer);overload;
@@ -34,6 +35,7 @@ type
     procedure OpenLogError(EscolaId:Integer;FuncionarioId:Integer);overload;
     procedure OpenLogError(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
     procedure CloseLogError;
+    procedure SetTimeZone;
 
   {$METHODINFO ON}
   public
@@ -79,6 +81,11 @@ begin
   FDConnection.Open;
 
   FDConnectionLocal.Close;
+end;
+
+procedure TSmMain.FDConnectionAfterConnect(Sender: TObject);
+begin
+  SetTimeZone;
 end;
 
 procedure TSmMain.fdqLogErrorBeforePost(DataSet: TDataSet);
@@ -205,6 +212,11 @@ begin
   fdqLogError.SQL.Clear;
   fdqLogError.SQL.Add('select * from log_error ');
   fdqLogError.SQL.Add('where log_error_id in (' + KeyValues + ')');
+end;
+
+procedure TSmMain.SetTimeZone;
+begin
+  FDConnection.ExecSQL('call sp_set_time_zone;');
 end;
 
 end.

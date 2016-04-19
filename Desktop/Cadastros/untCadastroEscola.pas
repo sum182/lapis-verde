@@ -80,6 +80,7 @@ type
     fdqTelefone: TFDQuery;
     fdqEndereco: TFDQuery;
     lblId: TLabel;
+    fdqCaddata_atualizacao: TDateTimeField;
     procedure FormShow(Sender: TObject);
     procedure grPesquisaDblClick(Sender: TObject);
     procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
@@ -117,10 +118,12 @@ uses untDM, smDB, smDBFireDac, untFuncoes;
 
 procedure TfrmCadastroEscola.AcApplyUpdateExecute(Sender: TObject);
 begin
+  fdqCad.FieldByName('data_atualizacao').AsDateTime := Now;
+
   if (fdqEndereco.State in [dsEdit,dsInsert,dsSetKey]) then
     fdqEndereco.Post;
 
- if fdqTelefone.State in [dsEdit,dsInsert,dsSetKey] then
+  if fdqTelefone.State in [dsEdit,dsInsert,dsSetKey] then
     fdqTelefone.Post;
 
  inherited;

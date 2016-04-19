@@ -67,6 +67,7 @@ type
     cxGridAlunosLevel1: TcxGridLevel;
     btnResponsaveisAdd: TcxButton;
     btnResponsaveisExcluir: TcxButton;
+    fdqCaddata_atualizacao: TDateTimeField;
     procedure FormShow(Sender: TObject);
     procedure fdqCadAfterOpen(DataSet: TDataSet);
     procedure fdqCadNewRecord(DataSet: TDataSet);
@@ -88,6 +89,7 @@ type
     procedure grPesquisaKeyPress(Sender: TObject; var Key: Char);
     procedure BuProcessarClick(Sender: TObject);
     procedure AcDeleteExecute(Sender: TObject);
+    procedure AcApplyUpdateExecute(Sender: TObject);
   private
     procedure OpenQuerys;
     procedure SetStateButtonsResponsaveis;
@@ -104,6 +106,12 @@ implementation
 {$R *.dfm}
 
 uses untDM, smGeral, untFuncoes, untPesquisaResponsavel, smDBFireDac, smMensagens;
+
+procedure TfrmCadastroAluno.AcApplyUpdateExecute(Sender: TObject);
+begin
+  fdqCad.FieldByName('data_atualizacao').AsDateTime := Now;
+  inherited;
+end;
 
 procedure TfrmCadastroAluno.AcCancelarExecute(Sender: TObject);
 begin

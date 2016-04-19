@@ -53,6 +53,7 @@ type
     fdqCadsenha: TStringField;
     Label10: TLabel;
     edtSenha: TcxTextEdit;
+    fdqCaddata_atualizacao: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure AcNovoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -83,6 +84,7 @@ uses untDM, untFuncoes, smCrypt,System.NetEncoding, smMensagens, smGeral;
 procedure TfrmCadastroFuncionario.AcApplyUpdateExecute(Sender: TObject);
 begin
   ValidarCadastro;
+  fdqCad.FieldByName('data_atualizacao').AsDateTime := Now;
   inherited;
 end;
 
