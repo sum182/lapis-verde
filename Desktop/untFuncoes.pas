@@ -89,44 +89,52 @@ begin
 end;
 
 function CheckAgendaAluno(idAluno: Integer): boolean;
-var quCheckAgenda: TFDQuery;
-    sSQL: string;
+var
+  fdqCheckAgenda: TFDQuery;
+  sSQL: string;
 begin
-  sSQL := 'select count(1) as Qtde ' +
-            'from agendadb.agenda_aluno aa ' +
-                 'inner join agendadb.agenda a on (a.agenda_id = aa.agenda_id) ' +
-           'where (aa.aluno_id = ' + IntToStr(idAluno) + ') ' +
-             'and (a.escola_id = ' + IntToStr(GetEscolaId) + ')';
+  try
+    sSQL := 'select count(1) as Qtde ' +
+              'from agendadb.agenda_aluno aa ' +
+                   'inner join agendadb.agenda a on (a.agenda_id = aa.agenda_id) ' +
+             'where (aa.aluno_id = ' + IntToStr(idAluno) + ') ' +
+               'and (a.escola_id = ' + IntToStr(GetEscolaId) + ')';
 
-  quCheckAgenda:= TFDQuery.Create(nil);
-  quCheckAgenda.Close;
-  quCheckAgenda.Connection := DM.FDConnection;
-  quCheckAgenda.SQL.Add(sSQL);
-  quCheckAgenda.Open();
-  Result := quCheckAgenda.FieldByName('Qtde').AsInteger > 0;
-  quCheckAgenda.Close;
-  FreeAndNil(quCheckAgenda);
+    fdqCheckAgenda:= TFDQuery.Create(nil);
+    fdqCheckAgenda.Close;
+    fdqCheckAgenda.Connection := DM.FDConnection;
+    fdqCheckAgenda.SQL.Add(sSQL);
+    fdqCheckAgenda.Open;
+    Result := fdqCheckAgenda.FieldByName('Qtde').AsInteger > 0;
+    fdqCheckAgenda.Close;
+  finally
+    FreeAndNil(fdqCheckAgenda);
+  end;
 end;
 
 
 function CheckAgendaTurma(idTurma: Integer): boolean;
-var quCheckAgenda: TFDQuery;
-    sSQL: string;
+var
+  fdqCheckAgenda: TFDQuery;
+  sSQL: string;
 begin
-  sSQL := 'select count(1) as Qtde ' +
-            'from agendadb.agenda_turma au ' +
-                 'inner join agendadb.agenda a on (a.agenda_id = au.agenda_id) ' +
-           'where (au.turma_id = ' + IntToStr(idTurma) + ') ' +
-             'and (a.escola_id = ' + IntToStr(GetEscolaId) + ')';
+  try
+    sSQL := 'select count(1) as Qtde ' +
+              'from agendadb.agenda_turma au ' +
+                   'inner join agendadb.agenda a on (a.agenda_id = au.agenda_id) ' +
+             'where (au.turma_id = ' + IntToStr(idTurma) + ') ' +
+               'and (a.escola_id = ' + IntToStr(GetEscolaId) + ')';
 
-  quCheckAgenda := TFDQuery.Create(nil);
-  quCheckAgenda.Close;
-  quCheckAgenda.Connection := DM.FDConnection;
-  quCheckAgenda.SQL.Clear;
-  quCheckAgenda.SQL.Add(sSQL);
-  quCheckAgenda.Open();
-  Result := quCheckAgenda.FieldByName('Qtde').AsInteger > 0;
-  FreeAndNil(quCheckAgenda);
+    fdqCheckAgenda := TFDQuery.Create(nil);
+    fdqCheckAgenda.Close;
+    fdqCheckAgenda.Connection := DM.FDConnection;
+    fdqCheckAgenda.SQL.Clear;
+    fdqCheckAgenda.SQL.Add(sSQL);
+    fdqCheckAgenda.Open();
+    Result := fdqCheckAgenda.FieldByName('Qtde').AsInteger > 0;
+  finally
+    FreeAndNil(fdqCheckAgenda);
+  end;
 end;
 
 

@@ -117,7 +117,7 @@ procedure TfrmCadastroAluno.AcDeleteExecute(Sender: TObject);
 begin
   if (CheckAgendaAluno(fdqCadaluno_id.AsInteger)) then
   begin
-    MSG('Não é possível excluir o aluno, pois o mesmo tem Agenda(s) associada(s).',mtErro);
+    Msg('Não é possível excluir o aluno, pois o mesmo tem Agenda(s) associada(s).',mtErro);
     Abort;
   end;
 
