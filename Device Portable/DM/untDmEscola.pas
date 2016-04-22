@@ -105,7 +105,8 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses untDM, untModuloCliente, smDBFireDac,
-  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState;
+  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState,
+  untDmGetServer;
 
 {$R *.dfm}
 
@@ -271,7 +272,7 @@ begin
                     Now,
                     'Erro ao Criar Agenda' + #13 + E.Message,
                     GetEscolaId,
-                    0,
+                    GetResponsavelId,
                     GetFuncionarioId
                   );
   end;
@@ -330,7 +331,7 @@ begin
                       Now,
                       'Erro na busca da agenda' + #13 + E.Message,
                       GetEscolaId,
-                      0,
+                      GetResponsavelId,
                       GetFuncionarioId
                     );
     end;
@@ -346,9 +347,23 @@ var
   LDataSet: TFDDataSet;
 begin
   try
+    DmGetServer.OpenTabelaAtualizacao;
+    if DmGetServer.fdqTabelaAtualizacao.FindKey(['aluno']) Then
+      if not(
+           DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime <
+           DmGetServer.fdqTabelaAtualizacao.FieldByName('data').AsDateTime)
+      then
+        Exit;
+
+
     LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(GetEscolaId,GetFuncionarioId);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqAluno);
+
+    DmGetServer.fdqTabelaAtualizacao.Edit;
+    DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime := Now;
+    DmGetServer.fdqTabelaAtualizacao.Post;
+
   except on E:Exception do
     DM.SetLogError( E.Message,
                     GetApplicationName,
@@ -358,7 +373,7 @@ begin
                     Now,
                     'Erro na busca de alunos' + #13 + E.Message,
                     GetEscolaId,
-                    0,
+                    GetResponsavelId,
                     GetFuncionarioId
                     );
   end;
@@ -388,7 +403,7 @@ begin
                       Now,
                       'Erro na busca de Funcionarios' + #13 + E.Message,
                       GetEscolaId,
-                      0,
+                      GetResponsavelId,
                       GetFuncionarioId
                       );
     end;
@@ -439,7 +454,7 @@ begin
                       Now,
                       'Erro na busca dos responsaveis' + #13 + E.Message,
                       GetEscolaId,
-                      0,
+                      GetResponsavelId,
                       GetFuncionarioId
                       );
     end;
@@ -449,12 +464,22 @@ begin
 
 end;
 
+
 procedure TDmEscola.GetTurmas;
 var
   LDataSetList  : TFDJSONDataSets;
   LDataSet: TFDDataSet;
 begin
   try
+    DmGetServer.OpenTabelaAtualizacao;
+    if DmGetServer.fdqTabelaAtualizacao.FindKey(['turma']) Then
+      if not(
+           DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime <
+           DmGetServer.fdqTabelaAtualizacao.FieldByName('data').AsDateTime)
+      then
+        Exit;
+
+
     OpenTurmas;
     LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(GetEscolaId,GetFuncionarioId);
     LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma');
@@ -462,6 +487,11 @@ begin
 
     LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma_aluno');
     CopyDataSet(LDataSet,fdqTurmaAluno);
+
+    DmGetServer.fdqTabelaAtualizacao.Edit;
+    DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime := Now;
+    DmGetServer.fdqTabelaAtualizacao.Post;
+
 
   except on E:Exception do
     DM.SetLogError( E.Message,
@@ -472,7 +502,7 @@ begin
                     Now,
                     'Erro na busca das turmas' + #13 + E.Message,
                     GetEscolaId,
-                    0,
+                    GetResponsavelId,
                     GetFuncionarioId
                     );
   end;
@@ -656,7 +686,7 @@ begin
                       Now,
                       'Erro ao Salvar Agenda' + #13 + MsgRetornoServer,
                       GetEscolaId,
-                      0,
+                      GetResponsavelId,
                       GetFuncionarioId
                     );
       fdqAgendaSaveServer.Active := False;
@@ -738,6 +768,13 @@ begin
       Exit;
 
     SyncServer:=True;
+
+    try
+      DmGetServer.GetTabelaAtualizacao;
+      smMensagensFMX.MsgPoupUp('DmGetServer.GetTabelaAtualizacao OK');
+    except on E:Exception do
+      smMensagensFMX.MsgPoupUp('DmGetServer.GetTabelaAtualizacao Erro:' + e.Message);
+    end;
 
 
     try

@@ -65,6 +65,7 @@ type
     function GetAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil):TFDJSONDataSets;
     function SalvarAgenda(EscolaId, FuncionarioId: Integer; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
     procedure ApplyChangesAgenda(EscolaId, FuncionarioId: Integer; const ADeltaList: TFDJSONDeltas);
+
   end;
 
 var
@@ -163,10 +164,10 @@ begin
   //Método para retornar os Alunos
   try
     try
+      Result := TFDJSONDataSets.Create;
+
       fdqAluno.Active := False;
       fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
-
-      Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
     except on E:Exception do
       SmMain.SetLogError(E.Message,

@@ -36,7 +36,9 @@ uses
   untTestesB in 'Testes\untTestesB.pas' {frmTesteB},
   untPrincipalTeste in 'untPrincipalTeste.pas' {frmPrincipalTeste},
   smTemplate in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.pas' {frmTemplate},
-  untAgendaEscolaViewTestes in 'Testes\untAgendaEscolaViewTestes.pas' {frmAgendaEscolaViewTestes};
+  untAgendaEscolaViewTestes in 'Testes\untAgendaEscolaViewTestes.pas' {frmAgendaEscolaViewTestes},
+  untDmGetServer in 'DM\untDmGetServer.pas' {DmGetServer: TDataModule},
+  untDmSaveServer in 'DM\untDmSaveServer.pas' {DmSaveServer: TDataModule};
 
 {$R *.res}
 
@@ -63,6 +65,8 @@ begin
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmEscola, DmEscola);
   Application.CreateForm(TDMStyles, DMStyles);
+  Application.CreateForm(TDmGetServer, DmGetServer);
+  Application.CreateForm(TDmSaveServer, DmSaveServer);
   Application.CreateForm(TModuloCliente, ModuloCliente);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Run;

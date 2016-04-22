@@ -53,7 +53,7 @@ object SmMain: TSmMain
       'select * from log_error l'
       'where l.log_error_id = :log_error_id')
     Left = 40
-    Top = 256
+    Top = 216
     ParamData = <
       item
         Name = 'LOG_ERROR_ID'
@@ -64,7 +64,23 @@ object SmMain: TSmMain
   end
   object ApplicationEvents: TApplicationEvents
     OnException = ApplicationEventsException
-    Left = 144
+    Left = 136
     Top = 152
+  end
+  object fdqTabelaAtualizacao: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT * FROM tabela_atualizacao'
+      'where ((escola_id = :escola_id) or (escola_id = 0))'
+      '')
+    Left = 48
+    Top = 304
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
   end
 end

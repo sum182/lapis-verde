@@ -28,12 +28,22 @@ ao se logar como admin nao pega o id escola
 --------------------------------------------------------------------------------------------
 
 ----Atividades Gerais --------------------------------------------------------------------
+senha VM Leo
 checklist desenvolvimento
 padrao de programacao
+criar uma vm zerada so com win7 + fontes e projetos
 ------------------------------------------------------------------------------------------
 
 
 ----Mobile--------------------------------------------------------------------------------
+DmGetServer
+DmSaveServer
+
+untLib VCL
+untLib FMX
+untResoruceString
+
+
 mobile listar somente ativos
 alunos
 turmas
@@ -127,6 +137,7 @@ Analisar dados do banco local quando tiver uma nova versao ou alteração do banco
 
 
 ----Server--------------------------------------------------------------------------------
+LogRequest
 Criar rotina para validar conexao BD
 
 
