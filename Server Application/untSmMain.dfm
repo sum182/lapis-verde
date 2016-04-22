@@ -67,10 +67,10 @@ object SmMain: TSmMain
     Left = 136
     Top = 152
   end
-  object fdqTabelaAtualizacao: TFDQuery
+  object fdqProcessoAtualizacao: TFDQuery
     Connection = FDConnection
     SQL.Strings = (
-      'SELECT * FROM tabela_atualizacao'
+      'SELECT * FROM processo_atualizacao'
       'where ((escola_id = :escola_id) or (escola_id = 0))'
       '')
     Left = 48
@@ -82,5 +82,12 @@ object SmMain: TSmMain
         ParamType = ptInput
         Value = 1
       end>
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT * FROM periodo_tipo;')
+    Left = 152
+    Top = 304
   end
 end

@@ -39,6 +39,10 @@ criar uma vm zerada so com win7 + fontes e projetos
 DmGetServer
 DmSaveServer
 
+Criar metodo before conect rest
+
+renomear modolicnte para restcliet
+
 untLib VCL
 untLib FMX
 untResoruceString

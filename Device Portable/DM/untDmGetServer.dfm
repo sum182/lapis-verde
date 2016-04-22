@@ -6,14 +6,12 @@ object DmGetServer: TDmGetServer
     Left = 194
     Top = 24
   end
-  object fdqTabelaAtualizacao: TFDQuery
-    IndexFieldNames = 'tabela'
+  object fdqProcessoAtualizacao: TFDQuery
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
-      'SELECT * FROM tabela_atualizacao'
-      'where ((escola_id = :escola_id) or (escola_id = 0))'
-      '')
-    Left = 32
+      'SELECT * FROM processo_atualizacao'
+      'where ((escola_id = :escola_id) or (escola_id = 0))')
+    Left = 56
     Top = 24
     ParamData = <
       item

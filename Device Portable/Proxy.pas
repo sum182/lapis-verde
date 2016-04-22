@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 22/04/2016 12:08:55
+// 22/04/2016 15:12:56
 //
 
 unit Proxy;
@@ -73,8 +73,8 @@ type
     FFDConnectionAfterConnectCommand: TDSRestCommand;
     FSalvarLogErrorCommand: TDSRestCommand;
     FSetLogErrorCommand: TDSRestCommand;
-    FGetTabelaAtualizacaoCommand: TDSRestCommand;
-    FGetTabelaAtualizacaoCommand_Cache: TDSRestCommand;
+    FGetProcessoAtualizacaoCommand: TDSRestCommand;
+    FGetProcessoAtualizacaoCommand_Cache: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -85,8 +85,8 @@ type
     procedure FDConnectionAfterConnect(Sender: TObject);
     function SalvarLogError(EscolaId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     procedure SetLogError(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer);
-    function GetTabelaAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetTabelaAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetProcessoAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetProcessoAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
   TSmEscolaClient = class(TDSAdminRestClient)
@@ -106,8 +106,6 @@ type
     FGetAgendaCommand_Cache: TDSRestCommand;
     FSalvarAgendaCommand: TDSRestCommand;
     FApplyChangesAgendaCommand: TDSRestCommand;
-    FGetTabelaAtualizacaoCommand: TDSRestCommand;
-    FGetTabelaAtualizacaoCommand_Cache: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -127,8 +125,6 @@ type
     function GetAgenda_Cache(EscolaId: Integer; FuncionarioId: Integer; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function SalvarAgenda(EscolaId: Integer; FuncionarioId: Integer; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     procedure ApplyChangesAgenda(EscolaId: Integer; FuncionarioId: Integer; ADeltaList: TFDJSONDeltas);
-    function GetTabelaAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetTabelaAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
   TSmResponsavelClient = class(TDSAdminRestClient)
@@ -312,7 +308,7 @@ const
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer')
   );
 
-  TSmMain_GetTabelaAtualizacao: array [0..3] of TDSRestParameterMetaData =
+  TSmMain_GetProcessoAtualizacao: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
@@ -320,7 +316,7 @@ const
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
-  TSmMain_GetTabelaAtualizacao_Cache: array [0..3] of TDSRestParameterMetaData =
+  TSmMain_GetProcessoAtualizacao_Cache: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
@@ -436,22 +432,6 @@ const
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'ADeltaList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDeltas')
-  );
-
-  TSmEscola_GetTabelaAtualizacao: array [0..3] of TDSRestParameterMetaData =
-  (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
-  );
-
-  TSmEscola_GetTabelaAtualizacao_Cache: array [0..3] of TDSRestParameterMetaData =
-  (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
   TSmResponsavel_LoginResponsavel: array [0..2] of TDSRestParameterMetaData =
@@ -1006,26 +986,26 @@ begin
   FSetLogErrorCommand.Execute;
 end;
 
-function TSmMainClient.GetTabelaAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetProcessoAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
 begin
-  if FGetTabelaAtualizacaoCommand = nil then
+  if FGetProcessoAtualizacaoCommand = nil then
   begin
-    FGetTabelaAtualizacaoCommand := FConnection.CreateCommand;
-    FGetTabelaAtualizacaoCommand.RequestType := 'GET';
-    FGetTabelaAtualizacaoCommand.Text := 'TSmMain.GetTabelaAtualizacao';
-    FGetTabelaAtualizacaoCommand.Prepare(TSmMain_GetTabelaAtualizacao);
+    FGetProcessoAtualizacaoCommand := FConnection.CreateCommand;
+    FGetProcessoAtualizacaoCommand.RequestType := 'GET';
+    FGetProcessoAtualizacaoCommand.Text := 'TSmMain.GetProcessoAtualizacao';
+    FGetProcessoAtualizacaoCommand.Prepare(TSmMain_GetProcessoAtualizacao);
   end;
-  FGetTabelaAtualizacaoCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FGetTabelaAtualizacaoCommand.Parameters[1].Value.SetInt32(ResponsavelId);
-  FGetTabelaAtualizacaoCommand.Parameters[2].Value.SetInt32(FuncionarioId);
-  FGetTabelaAtualizacaoCommand.Execute(ARequestFilter);
-  if not FGetTabelaAtualizacaoCommand.Parameters[3].Value.IsNull then
+  FGetProcessoAtualizacaoCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetProcessoAtualizacaoCommand.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetProcessoAtualizacaoCommand.Parameters[2].Value.SetInt32(FuncionarioId);
+  FGetProcessoAtualizacaoCommand.Execute(ARequestFilter);
+  if not FGetProcessoAtualizacaoCommand.Parameters[3].Value.IsNull then
   begin
-    FUnMarshal := TDSRestCommand(FGetTabelaAtualizacaoCommand.Parameters[3].ConnectionHandler).GetJSONUnMarshaler;
+    FUnMarshal := TDSRestCommand(FGetProcessoAtualizacaoCommand.Parameters[3].ConnectionHandler).GetJSONUnMarshaler;
     try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetTabelaAtualizacaoCommand.Parameters[3].Value.GetJSONValue(True)));
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetProcessoAtualizacaoCommand.Parameters[3].Value.GetJSONValue(True)));
       if FInstanceOwner then
-        FGetTabelaAtualizacaoCommand.FreeOnExecute(Result);
+        FGetProcessoAtualizacaoCommand.FreeOnExecute(Result);
     finally
       FreeAndNil(FUnMarshal)
     end
@@ -1034,20 +1014,20 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetTabelaAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetProcessoAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
-  if FGetTabelaAtualizacaoCommand_Cache = nil then
+  if FGetProcessoAtualizacaoCommand_Cache = nil then
   begin
-    FGetTabelaAtualizacaoCommand_Cache := FConnection.CreateCommand;
-    FGetTabelaAtualizacaoCommand_Cache.RequestType := 'GET';
-    FGetTabelaAtualizacaoCommand_Cache.Text := 'TSmMain.GetTabelaAtualizacao';
-    FGetTabelaAtualizacaoCommand_Cache.Prepare(TSmMain_GetTabelaAtualizacao_Cache);
+    FGetProcessoAtualizacaoCommand_Cache := FConnection.CreateCommand;
+    FGetProcessoAtualizacaoCommand_Cache.RequestType := 'GET';
+    FGetProcessoAtualizacaoCommand_Cache.Text := 'TSmMain.GetProcessoAtualizacao';
+    FGetProcessoAtualizacaoCommand_Cache.Prepare(TSmMain_GetProcessoAtualizacao_Cache);
   end;
-  FGetTabelaAtualizacaoCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
-  FGetTabelaAtualizacaoCommand_Cache.Parameters[1].Value.SetInt32(ResponsavelId);
-  FGetTabelaAtualizacaoCommand_Cache.Parameters[2].Value.SetInt32(FuncionarioId);
-  FGetTabelaAtualizacaoCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetTabelaAtualizacaoCommand_Cache.Parameters[3].Value.GetString);
+  FGetProcessoAtualizacaoCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetProcessoAtualizacaoCommand_Cache.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetProcessoAtualizacaoCommand_Cache.Parameters[2].Value.SetInt32(FuncionarioId);
+  FGetProcessoAtualizacaoCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetProcessoAtualizacaoCommand_Cache.Parameters[3].Value.GetString);
 end;
 
 constructor TSmMainClient.Create(ARestConnection: TDSRestConnection);
@@ -1068,8 +1048,8 @@ begin
   FFDConnectionAfterConnectCommand.DisposeOf;
   FSalvarLogErrorCommand.DisposeOf;
   FSetLogErrorCommand.DisposeOf;
-  FGetTabelaAtualizacaoCommand.DisposeOf;
-  FGetTabelaAtualizacaoCommand_Cache.DisposeOf;
+  FGetProcessoAtualizacaoCommand.DisposeOf;
+  FGetProcessoAtualizacaoCommand_Cache.DisposeOf;
   inherited;
 end;
 
@@ -1411,50 +1391,6 @@ begin
   FApplyChangesAgendaCommand.Execute;
 end;
 
-function TSmEscolaClient.GetTabelaAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
-begin
-  if FGetTabelaAtualizacaoCommand = nil then
-  begin
-    FGetTabelaAtualizacaoCommand := FConnection.CreateCommand;
-    FGetTabelaAtualizacaoCommand.RequestType := 'GET';
-    FGetTabelaAtualizacaoCommand.Text := 'TSmEscola.GetTabelaAtualizacao';
-    FGetTabelaAtualizacaoCommand.Prepare(TSmEscola_GetTabelaAtualizacao);
-  end;
-  FGetTabelaAtualizacaoCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FGetTabelaAtualizacaoCommand.Parameters[1].Value.SetInt32(ResponsavelId);
-  FGetTabelaAtualizacaoCommand.Parameters[2].Value.SetInt32(FuncionarioId);
-  FGetTabelaAtualizacaoCommand.Execute(ARequestFilter);
-  if not FGetTabelaAtualizacaoCommand.Parameters[3].Value.IsNull then
-  begin
-    FUnMarshal := TDSRestCommand(FGetTabelaAtualizacaoCommand.Parameters[3].ConnectionHandler).GetJSONUnMarshaler;
-    try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetTabelaAtualizacaoCommand.Parameters[3].Value.GetJSONValue(True)));
-      if FInstanceOwner then
-        FGetTabelaAtualizacaoCommand.FreeOnExecute(Result);
-    finally
-      FreeAndNil(FUnMarshal)
-    end
-  end
-  else
-    Result := nil;
-end;
-
-function TSmEscolaClient.GetTabelaAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
-begin
-  if FGetTabelaAtualizacaoCommand_Cache = nil then
-  begin
-    FGetTabelaAtualizacaoCommand_Cache := FConnection.CreateCommand;
-    FGetTabelaAtualizacaoCommand_Cache.RequestType := 'GET';
-    FGetTabelaAtualizacaoCommand_Cache.Text := 'TSmEscola.GetTabelaAtualizacao';
-    FGetTabelaAtualizacaoCommand_Cache.Prepare(TSmEscola_GetTabelaAtualizacao_Cache);
-  end;
-  FGetTabelaAtualizacaoCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
-  FGetTabelaAtualizacaoCommand_Cache.Parameters[1].Value.SetInt32(ResponsavelId);
-  FGetTabelaAtualizacaoCommand_Cache.Parameters[2].Value.SetInt32(FuncionarioId);
-  FGetTabelaAtualizacaoCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetTabelaAtualizacaoCommand_Cache.Parameters[3].Value.GetString);
-end;
-
 constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -1482,8 +1418,6 @@ begin
   FGetAgendaCommand_Cache.DisposeOf;
   FSalvarAgendaCommand.DisposeOf;
   FApplyChangesAgendaCommand.DisposeOf;
-  FGetTabelaAtualizacaoCommand.DisposeOf;
-  FGetTabelaAtualizacaoCommand_Cache.DisposeOf;
   inherited;
 end;
 

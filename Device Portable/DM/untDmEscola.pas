@@ -55,6 +55,7 @@ type
     procedure OpenTurmaAluno(TurmaId:Integer);overload;
     procedure OpenResponsaveis;
     procedure OpenFuncionarios;
+
     procedure CloseResponsaveis;
     procedure CloseFuncionarios;
 
@@ -95,6 +96,8 @@ type
     procedure SalvarDadosServer;
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
+
+
   end;
 
 var
@@ -347,22 +350,15 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-    DmGetServer.OpenTabelaAtualizacao;
-    if DmGetServer.fdqTabelaAtualizacao.FindKey(['aluno']) Then
-      if not(
-           DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime <
-           DmGetServer.fdqTabelaAtualizacao.FieldByName('data').AsDateTime)
-      then
-        Exit;
+   if not Dm.ProcessHasUpdate('aluno') then
+     Exit;
 
 
     LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(GetEscolaId,GetFuncionarioId);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqAluno);
 
-    DmGetServer.fdqTabelaAtualizacao.Edit;
-    DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime := Now;
-    DmGetServer.fdqTabelaAtualizacao.Post;
+    DM.ProcessSaveUpdate('aluno');
 
   except on E:Exception do
     DM.SetLogError( E.Message,
@@ -386,6 +382,9 @@ var
 begin
   try
     try
+      if not Dm.ProcessHasUpdate('funcionario') then
+       Exit;
+
       OpenFuncionarios;
       LDataSetList := ModuloCliente.SmEscolaClient.GetFuncionarios(GetEscolaId,GetFuncionarioId);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario');
@@ -394,6 +393,7 @@ begin
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario_tipo');
       CopyDataSet(LDataSet,fdqFuncTipo);
 
+      DM.ProcessSaveUpdate('funcionario');
     except on E:Exception do
       DM.SetLogError( E.Message,
                       GetApplicationName,
@@ -431,6 +431,9 @@ var
 begin
   try
     try
+      if not Dm.ProcessHasUpdate('responsavel') then
+       Exit;
+
       OpenResponsaveis;
       LDataSetList := ModuloCliente.SmEscolaClient.GetResponsaveis(GetEscolaId,GetFuncionarioId);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
@@ -445,6 +448,8 @@ begin
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_tipo');
       CopyDataSet(LDataSet,fdqRespTipo);
 
+
+      DM.ProcessSaveUpdate('responsavel');
     except on E:Exception do
       DM.SetLogError( E.Message,
                       GetApplicationName,
@@ -471,13 +476,8 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-    DmGetServer.OpenTabelaAtualizacao;
-    if DmGetServer.fdqTabelaAtualizacao.FindKey(['turma']) Then
-      if not(
-           DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime <
-           DmGetServer.fdqTabelaAtualizacao.FieldByName('data').AsDateTime)
-      then
-        Exit;
+   if not Dm.ProcessHasUpdate('turma') then
+     Exit;
 
 
     OpenTurmas;
@@ -488,11 +488,7 @@ begin
     LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma_aluno');
     CopyDataSet(LDataSet,fdqTurmaAluno);
 
-    DmGetServer.fdqTabelaAtualizacao.Edit;
-    DmGetServer.fdqTabelaAtualizacao.FieldByName('data_local').AsDateTime := Now;
-    DmGetServer.fdqTabelaAtualizacao.Post;
-
-
+    DM.ProcessSaveUpdate('turma');
   except on E:Exception do
     DM.SetLogError( E.Message,
                     GetApplicationName,
@@ -770,7 +766,7 @@ begin
     SyncServer:=True;
 
     try
-      DmGetServer.GetTabelaAtualizacao;
+      DmGetServer.GetProcessoAtualizacao;
       smMensagensFMX.MsgPoupUp('DmGetServer.GetTabelaAtualizacao OK');
     except on E:Exception do
       smMensagensFMX.MsgPoupUp('DmGetServer.GetTabelaAtualizacao Erro:' + e.Message);
@@ -823,6 +819,8 @@ begin
     SyncServer:=False;
   end;
 end;
+
+
 
 
 procedure TDmEscola.TimerSyncBasicoTimer(Sender: TObject);

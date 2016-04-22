@@ -23,7 +23,8 @@ type
     FDConnectionLocal: TFDConnection;
     fdqLogError: TFDQuery;
     ApplicationEvents: TApplicationEvents;
-    fdqTabelaAtualizacao: TFDQuery;
+    fdqProcessoAtualizacao: TFDQuery;
+    FDQuery1: TFDQuery;
 
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
@@ -48,7 +49,7 @@ type
                            FuncionarioId:Integer=0
                           );
 
-   function GetTabelaAtualizacao(EscolaId:Integer;
+   function GetProcessoAtualizacao(EscolaId:Integer;
                                  ResponsavelId:Integer=0;
                                  FuncionarioId:Integer=0):TFDJSONDataSets;
 
@@ -103,7 +104,7 @@ begin
   Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
-function TSmMain.GetTabelaAtualizacao(EscolaId, ResponsavelId,
+function TSmMain.GetProcessoAtualizacao(EscolaId, ResponsavelId,
   FuncionarioId: Integer): TFDJSONDataSets;
 begin
   //Método para retornar as Atualizações das Tabelas
@@ -111,9 +112,9 @@ begin
     try
       Result := TFDJSONDataSets.Create;
 
-      fdqTabelaAtualizacao.Active := False;
-      fdqTabelaAtualizacao.ParamByName('escola_id').AsInteger:= EscolaId;
-      TFDJSONDataSetsWriter.ListAdd(Result,fdqTabelaAtualizacao);
+      fdqProcessoAtualizacao.Active := False;
+      fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,fdqProcessoAtualizacao);
 
     except on E:Exception do
       SmMain.SetLogError(E.Message,
@@ -130,7 +131,7 @@ begin
 
     end;
   finally
-    fdqTabelaAtualizacao.Active := False;
+    fdqProcessoAtualizacao.Active := False;
   end;
 
 end;

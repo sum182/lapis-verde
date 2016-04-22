@@ -12,11 +12,11 @@ uses
 type
   TDmGetServer = class(TDataModule)
     fdStanStorageBinLink: TFDStanStorageBinLink;
-    fdqTabelaAtualizacao: TFDQuery;
+    fdqProcessoAtualizacao: TFDQuery;
   private
   public
-    procedure OpenTabelaAtualizacao;
-    procedure GetTabelaAtualizacao;
+    procedure OpenProcessoAtualizacao;
+    procedure GetProcessoAtualizacao;
   end;
 
 var
@@ -33,16 +33,16 @@ uses untDM, untModuloCliente, smDBFireDac,
 
 { TDmGetServer }
 
-procedure TDmGetServer.GetTabelaAtualizacao;
+procedure TDmGetServer.GetProcessoAtualizacao;
 var
   LDataSetList  : TFDJSONDataSets;
   LDataSet: TFDDataSet;
 begin
   try
-    OpenTabelaAtualizacao;
-    LDataSetList := ModuloCliente.SmMainClient.GetTabelaAtualizacao(GetEscolaId,GetResponsavelId,GetFuncionarioId);
+    OpenProcessoAtualizacao;
+    LDataSetList := ModuloCliente.SmMainClient.GetProcessoAtualizacao(GetEscolaId,GetResponsavelId,GetFuncionarioId);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
-    CopyDataSet(LDataSet,fdqTabelaAtualizacao,False,[coAppend,coEdit]);
+    CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit]);
   except on E:Exception do
     DM.SetLogError( E.Message,
                     GetApplicationName,
@@ -58,11 +58,11 @@ begin
   end;
 end;
 
-procedure TDmGetServer.OpenTabelaAtualizacao;
+procedure TDmGetServer.OpenProcessoAtualizacao;
 begin
-  fdqTabelaAtualizacao.Close;
-  fdqTabelaAtualizacao.ParamByName('escola_id').AsInteger:= GetEscolaId;
-  fdqTabelaAtualizacao.Open;
+  fdqProcessoAtualizacao.Close;
+  fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqProcessoAtualizacao.Open;
 end;
 
 end.

@@ -144,4 +144,21 @@ object Dm: TDm
     Left = 592
     Top = 288
   end
+  object fdqProcessoAtualizacao: TFDQuery
+    IndexFieldNames = 'processo'
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'SELECT * FROM processo_atualizacao'
+      'where ((escola_id = :escola_id) or (escola_id = 0))'
+      '')
+    Left = 56
+    Top = 280
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
 end

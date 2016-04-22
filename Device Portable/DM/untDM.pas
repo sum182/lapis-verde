@@ -26,6 +26,7 @@ type
     fdqLogErrorSaveServer: TFDQuery;
     FDCreateDB: TFDConnection;
     TimerSyncGeral: TTimer;
+    fdqProcessoAtualizacao: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
   private
@@ -52,6 +53,10 @@ type
     procedure SalvarLogError;
     procedure SalvarDadosServer;
     procedure SyncronizarDadosServer;
+
+    procedure OpenProcessoAtualizacao;
+    function ProcessHasUpdate(Process:string):Boolean;
+    procedure ProcessSaveUpdate(Process:string);
 
   end;
 
@@ -120,6 +125,42 @@ begin
   fUsuarioLogadoIsFuncionario:=True;
   fUsuarioLogadoIsResponsavel:=False;
 
+end;
+
+procedure TDm.OpenProcessoAtualizacao;
+begin
+  fdqProcessoAtualizacao.Close;
+  fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqProcessoAtualizacao.Open;
+end;
+
+function TDm.ProcessHasUpdate(Process: string): Boolean;
+begin
+  Result:=True;
+  OpenProcessoAtualizacao;
+
+  fdqProcessoAtualizacao.IndexFieldNames:='processo';
+  if not fdqProcessoAtualizacao.FindKey([Process]) Then
+    Exit;
+
+  Result:= (
+             fdqProcessoAtualizacao.FieldByName('data_local').AsDateTime <
+             fdqProcessoAtualizacao.FieldByName('data').AsDateTime
+            );
+
+end;
+
+procedure TDm.ProcessSaveUpdate(Process: string);
+begin
+ OpenProcessoAtualizacao;
+
+  fdqProcessoAtualizacao.IndexFieldNames:='processo';
+  if not fdqProcessoAtualizacao.FindKey([Process]) Then
+    Exit;
+
+  fdqProcessoAtualizacao.Edit;
+  fdqProcessoAtualizacao.FieldByName('data_local').AsDateTime := Now;
+  fdqProcessoAtualizacao.Post;
 end;
 
 procedure TDm.ResetRESTConnection;
