@@ -802,6 +802,64 @@ begin
     end;
 
     try
+      DmGetServer.GetEscola;
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.GetEscola OK');
+    except on E:Exception do
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.GetEscola Erro:' + e.Message);
+    end;
+
+
+    try
+      DmGetServer.PeriodoTipo;
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.PeriodoTipo OK');
+    except on E:Exception do
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.PeriodoTipo Erro:' + e.Message);
+    end;
+
+    try
+      DmGetServer.ResponsavelTipo;
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.ResponsavelTipo OK');
+    except on E:Exception do
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.ResponsavelTipo Erro:' + e.Message);
+    end;
+
+
+    try
+      DmGetServer.FuncionarioTipo;
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.FuncionarioTipo OK');
+    except on E:Exception do
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.FuncionarioTipo Erro:' + e.Message);
+    end;
+
+
+    try
+      DmGetServer.TelefoneTipo;
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.TelefoneTipo OK');
+    except on E:Exception do
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.TelefoneTipo Erro:' + e.Message);
+    end;
+
+
+    try
+      DmGetServer.AgendaTipo;
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.AgendaTipo OK');
+    except on E:Exception do
+      if IsModoTeste then
+        smMensagensFMX.MsgPoupUp('DmGetServer.AgendaTipo Erro:' + e.Message);
+    end;
+
+    try
       GetAgenda(Now - 30, Now + 1);
       smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
     except on E:Exception do

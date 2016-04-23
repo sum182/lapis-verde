@@ -34,8 +34,9 @@ type
     procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
     procedure ConectarBases;
     procedure ConectarDB;
-
+    procedure SetModoTeste;
   public
+    IsModoTeste:Boolean;
     fUsuarioLogadoIsResponsavel:boolean;
     fUsuarioLogadoIsFuncionario:boolean;
 
@@ -117,11 +118,7 @@ begin
   FDCreateDB.Close;
   ConectarBases;
 
-  //Teste Temporario
-  fFuncionarioId:=16;
-  fEscolaId:=1;
-  fResponsavelId:=0;
-
+  SetModoTeste;
   fUsuarioLogadoIsFuncionario:=True;
   fUsuarioLogadoIsResponsavel:=False;
 
@@ -251,6 +248,14 @@ begin
   finally
     fdqLogError.Active:=False;
   end;
+end;
+
+procedure TDm.SetModoTeste;
+begin
+  IsModoTeste:=True;
+  fFuncionarioId:=16;
+  fEscolaId:=1;
+  fResponsavelId:=0;
 end;
 
 procedure TDm.SyncronizarDadosServer;

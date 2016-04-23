@@ -24,13 +24,8 @@
     <Transaction>2016/03/13 20:10:54.000.766,C:\Projetos\Agenda\Device Portable\DM\untDm.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMv.dfm</Transaction>
     <Transaction>2016/04/08 16:25:38.000.930,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaAdd.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaAdd.fmx</Transaction>
     <Transaction>2016/04/08 16:32:37.000.345,C:\Projetos\Agenda\Device Portable\Agenda\untAgendaSelect.fmx=C:\Projetos\Agenda\Device Portable\Agenda\untAgendaEscolaSelect.fmx</Transaction>
-    <Transaction>2016/04/22 11:02:37.000.775,C:\Projetos\Agenda\Device Portable\DM\untDMGetServer.dfm=C:\Projetos\Agenda\Device Portable\Unit1.dfm</Transaction>
-    <Transaction>2016/04/22 11:02:58.000.150,C:\Projetos\Agenda\Device Portable\DM\untDmnGetServer.dfm=C:\Projetos\Agenda\Device Portable\DM\untDMGetServer.dfm</Transaction>
-    <Transaction>2016/04/22 11:02:58.000.150,C:\Projetos\Agenda\Device Portable\DM\untDmnGetServer.pas=C:\Projetos\Agenda\Device Portable\DM\untDMGetServer.pas</Transaction>
-    <Transaction>2016/04/22 11:03:02.000.839,C:\Projetos\Agenda\Device Portable\DM\untDmGetServer.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmnGetServer.dfm</Transaction>
-    <Transaction>2016/04/22 11:03:36.000.006,C:\Projetos\Agenda\Device Portable\DM\untDmSaveServer.dfm=C:\Projetos\Agenda\Device Portable\Unit1.dfm</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_Nexus_4_by_Google"/>
+		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
 	</ActiveMobileDevice>
 </BorlandProject>

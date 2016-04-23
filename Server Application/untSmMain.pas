@@ -53,6 +53,14 @@ type
                                  ResponsavelId:Integer=0;
                                  FuncionarioId:Integer=0):TFDJSONDataSets;
 
+   function GetDataSet( EscolaId:Integer;
+                        Nome: String;
+                        ResponsavelId:Integer=0;
+                        FuncionarioId:Integer=0;
+                        UtilizaParamEscolaId:Boolean=True;
+                        Condicoes: String=''
+                       ):TFDJSONDataSets;
+
 
   end;
 
@@ -102,6 +110,56 @@ begin
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 
   Dataset.FieldByName('enviado_server').AsString:= 'S';
+end;
+
+function TSmMain.GetDataSet(EscolaId: Integer; Nome: String; ResponsavelId,
+  FuncionarioId: Integer; UtilizaParamEscolaId:Boolean;
+  Condicoes: String): TFDJSONDataSets;
+var
+  fdqDataSet: TFDQuery;
+begin
+  //Método para Genérico para retonar um Dataset
+  try
+    try
+      if Nome = '' then
+       raise Exception.Create('GetDataSet: Nome não definido');
+
+      Result := TFDJSONDataSets.Create;
+      fdqDataSet := TFDQuery.Create(self);
+      fdqDataSet.Connection:=SmMain.FDConnection;
+
+      fdqDataSet.Active := False;
+
+      fdqDataSet.SQL.Clear;
+      fdqDataSet.SQL.Add('select * from ' + Nome);
+      fdqDataSet.SQL.Add('where 1 = 1');
+
+      if UtilizaParamEscolaId then
+        fdqDataSet.SQL.Add('and escola_id = ' + IntToStr(EscolaId));
+
+      if Condicoes <> EmptyStr then
+        fdqDataSet.SQL.Add(Condicoes);
+
+      TFDJSONDataSetsWriter.ListAdd(Result,fdqDataSet);
+
+    except on E:Exception do
+      SmMain.SetLogError(E.Message,
+                         ExtractFileName(Application.Exename),
+                         UnitName,
+                         ClassName,
+                         'GetDataSet:' + Nome,
+                         Now,
+                         EscolaId,
+                         ResponsavelId,
+                         FuncionarioId
+                         );
+
+
+    end;
+  finally
+    fdqDataSet.Active := False;
+  end;
+
 end;
 
 function TSmMain.GetProcessoAtualizacao(EscolaId, ResponsavelId,

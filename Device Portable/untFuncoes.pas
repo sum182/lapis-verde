@@ -8,6 +8,7 @@ Uses  FMX.Forms, Data.DB;
   function GetEscolaId:Integer;
   function GetFuncionarioId:Integer;
   function GetResponsavelId:Integer;
+  function IsModoTeste:Boolean;
   function UsuarioLogadoIsResponsavel:boolean;
   function UsuarioLogadoIsFuncionario:boolean;
   function GetApplicationName:string;
@@ -77,5 +78,9 @@ begin
   end;
 end;
 
+function IsModoTeste:Boolean;
+begin
+  Result:=Dm.IsModoTeste;
+end;
 
 end.

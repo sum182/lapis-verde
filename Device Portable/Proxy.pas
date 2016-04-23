@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 22/04/2016 15:12:56
+// 23/04/2016 00:26:58
 //
 
 unit Proxy;
@@ -75,6 +75,8 @@ type
     FSetLogErrorCommand: TDSRestCommand;
     FGetProcessoAtualizacaoCommand: TDSRestCommand;
     FGetProcessoAtualizacaoCommand_Cache: TDSRestCommand;
+    FGetDataSetCommand: TDSRestCommand;
+    FGetDataSetCommand_Cache: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -87,6 +89,8 @@ type
     procedure SetLogError(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer);
     function GetProcessoAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetProcessoAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetDataSet(EscolaId: Integer; Nome: string; ResponsavelId: Integer; FuncionarioId: Integer; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetDataSet_Cache(EscolaId: Integer; Nome: string; ResponsavelId: Integer; FuncionarioId: Integer; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
   TSmEscolaClient = class(TDSAdminRestClient)
@@ -321,6 +325,28 @@ const
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmMain_GetDataSet: array [0..6] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'Nome'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'UtilizaParamEscolaId'; Direction: 1; DBXType: 4; TypeName: 'Boolean'),
+    (Name: 'Condicoes'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSmMain_GetDataSet_Cache: array [0..6] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'Nome'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'UtilizaParamEscolaId'; Direction: 1; DBXType: 4; TypeName: 'Boolean'),
+    (Name: 'Condicoes'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
@@ -1030,6 +1056,56 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetProcessoAtualizacaoCommand_Cache.Parameters[3].Value.GetString);
 end;
 
+function TSmMainClient.GetDataSet(EscolaId: Integer; Nome: string; ResponsavelId: Integer; FuncionarioId: Integer; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string): TFDJSONDataSets;
+begin
+  if FGetDataSetCommand = nil then
+  begin
+    FGetDataSetCommand := FConnection.CreateCommand;
+    FGetDataSetCommand.RequestType := 'GET';
+    FGetDataSetCommand.Text := 'TSmMain.GetDataSet';
+    FGetDataSetCommand.Prepare(TSmMain_GetDataSet);
+  end;
+  FGetDataSetCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetDataSetCommand.Parameters[1].Value.SetWideString(Nome);
+  FGetDataSetCommand.Parameters[2].Value.SetInt32(ResponsavelId);
+  FGetDataSetCommand.Parameters[3].Value.SetInt32(FuncionarioId);
+  FGetDataSetCommand.Parameters[4].Value.SetBoolean(UtilizaParamEscolaId);
+  FGetDataSetCommand.Parameters[5].Value.SetWideString(Condicoes);
+  FGetDataSetCommand.Execute(ARequestFilter);
+  if not FGetDataSetCommand.Parameters[6].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetDataSetCommand.Parameters[6].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetDataSetCommand.Parameters[6].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetDataSetCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSmMainClient.GetDataSet_Cache(EscolaId: Integer; Nome: string; ResponsavelId: Integer; FuncionarioId: Integer; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FGetDataSetCommand_Cache = nil then
+  begin
+    FGetDataSetCommand_Cache := FConnection.CreateCommand;
+    FGetDataSetCommand_Cache.RequestType := 'GET';
+    FGetDataSetCommand_Cache.Text := 'TSmMain.GetDataSet';
+    FGetDataSetCommand_Cache.Prepare(TSmMain_GetDataSet_Cache);
+  end;
+  FGetDataSetCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetDataSetCommand_Cache.Parameters[1].Value.SetWideString(Nome);
+  FGetDataSetCommand_Cache.Parameters[2].Value.SetInt32(ResponsavelId);
+  FGetDataSetCommand_Cache.Parameters[3].Value.SetInt32(FuncionarioId);
+  FGetDataSetCommand_Cache.Parameters[4].Value.SetBoolean(UtilizaParamEscolaId);
+  FGetDataSetCommand_Cache.Parameters[5].Value.SetWideString(Condicoes);
+  FGetDataSetCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetDataSetCommand_Cache.Parameters[6].Value.GetString);
+end;
+
 constructor TSmMainClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -1050,6 +1126,8 @@ begin
   FSetLogErrorCommand.DisposeOf;
   FGetProcessoAtualizacaoCommand.DisposeOf;
   FGetProcessoAtualizacaoCommand_Cache.DisposeOf;
+  FGetDataSetCommand.DisposeOf;
+  FGetDataSetCommand_Cache.DisposeOf;
   inherited;
 end;
 
