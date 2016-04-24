@@ -154,8 +154,7 @@ begin
   if not smNetworkState.ValidarConexao then
     Exit;
 
-  DmEscola.SyncronizarDadosServerGeral;
-  Dm.SyncronizarDadosServer
+  Dm.SyncronizarDadosServerGeral;
 end;
 
 procedure TfrmPrincipal.SpeedButton2Click(Sender: TObject);
@@ -164,8 +163,7 @@ begin
   if not smNetworkState.ValidarConexao then
     Exit;
 
-  DmEscola.SyncronizarDadosServerBasico;
-  Dm.SyncronizarDadosServer
+  Dm.SyncronizarDadosServerBasico;
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;

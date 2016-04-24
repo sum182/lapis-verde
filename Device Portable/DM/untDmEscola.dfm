@@ -39,8 +39,8 @@ object DmEscola: TDmEscola
       end>
   end
   object fdStanStorageBinLink: TFDStanStorageBinLink
-    Left = 576
-    Top = 32
+    Left = 376
+    Top = 16
   end
   object fdqAgenda: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -135,67 +135,6 @@ object DmEscola: TDmEscola
     object fdqAgendaTurmaturma_id: TIntegerField
       FieldName = 'turma_id'
       Origin = 'turma_id'
-      Required = True
-    end
-  end
-  object fdqAgendaSaveServer: TFDQuery
-    Connection = Dm.FDConnectionDB
-    SQL.Strings = (
-      'select * from agenda a'
-      'where a.enviado_server is null'
-      'and a.data_insert_server is null'
-      'order by data_insert_local')
-    Left = 576
-    Top = 90
-  end
-  object fdqAgendaAlunoSaveServer: TFDQuery
-    Connection = Dm.FDConnectionDB
-    FetchOptions.AssignedValues = [evCache]
-    SQL.Strings = (
-      'select al.* '
-      'from agenda_aluno al'
-      'inner join agenda a on (al.agenda_id = a.agenda_id)'
-      'where a.enviado_server is null'
-      'and a.data_insert_server is null'
-      'order by a.data_insert_local')
-    Left = 576
-    Top = 142
-    object fdqAgendaAlunoSaveServeragenda_id: TStringField
-      FieldName = 'agenda_id'
-      Origin = 'agenda_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-      Size = 100
-    end
-    object fdqAgendaAlunoSaveServeraluno_id: TIntegerField
-      FieldName = 'aluno_id'
-      Origin = 'aluno_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-  end
-  object fdqAgendaTurmaSaveServer: TFDQuery
-    Connection = Dm.FDConnectionDB
-    SQL.Strings = (
-      'select  at.* '
-      'from agenda_turma at'
-      'inner join agenda a on (at.agenda_id = a.agenda_id)'
-      'where a.enviado_server is null'
-      'and a.data_insert_server is null'
-      'order by a.data_insert_local')
-    Left = 576
-    Top = 192
-    object fdqAgendaTurmaSaveServeragenda_id: TStringField
-      FieldName = 'agenda_id'
-      Origin = 'agenda_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-      Size = 100
-    end
-    object fdqAgendaTurmaSaveServerturma_id: TIntegerField
-      FieldName = 'turma_id'
-      Origin = 'turma_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
   end
@@ -306,8 +245,8 @@ object DmEscola: TDmEscola
     Top = 168
   end
   object TimerSyncBasico: TTimer
+    Enabled = False
     Interval = 60000
-    OnTimer = TimerSyncBasicoTimer
     Left = 56
     Top = 312
   end
@@ -328,106 +267,10 @@ object DmEscola: TDmEscola
         Value = Null
       end>
   end
-  object fdqAgendaSync: TFDQuery
-    Connection = Dm.FDConnectionDB
-    SQL.Strings = (
-      '  select'
-      '    ag.*,'
-      '    strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,'
-      '    strftime("%H:%M",data_insert_local) as hora_criacao,'
-      '    f.nome as funcionario_nome,'
-      '    ft.descricao as funcionario_tipo,'
-      '    r.nome as responsavel_nome,'
-      '    rt.descricao as responsavel_tipo    '
-      ''
-      '  from agenda ag'
-      
-        '  left outer join funcionario f on (f.funcionario_id = ag.funcio' +
-        'nario_id)'
-      
-        '  left outer join funcionario_tipo ft on (ft.funcionario_tipo_id' +
-        ' = f.funcionario_tipo_id)'
-      '  '
-      
-        '  left outer join responsavel r on (r.responsavel_id = ag.respon' +
-        'savel_id)'
-      
-        '  left outer join responsavel_tipo rt on (rt.responsavel_tipo_id' +
-        ' = r.responsavel_tipo_id)'
-      '  '
-      '  where date(data_insert_local) = :data'
-      '  order by ag.data_insert_local')
-    Left = 432
-    Top = 90
-    ParamData = <
-      item
-        Name = 'DATA'
-        DataType = ftDate
-        ParamType = ptInput
-        Value = 42453d
-      end>
-  end
-  object fdqAgendaAlunoSync: TFDQuery
-    Connection = Dm.FDConnectionDB
-    FetchOptions.AssignedValues = [evCache]
-    SQL.Strings = (
-      'select * from agenda_aluno al'
-      'where al.agenda_id = :agenda_id')
-    Left = 432
-    Top = 138
-    ParamData = <
-      item
-        Name = 'AGENDA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
-  end
-  object fdqAgendaTurmaSync: TFDQuery
-    Connection = Dm.FDConnectionDB
-    SQL.Strings = (
-      'select * from agenda_turma at'
-      'where at.agenda_id = :agenda_id'
-      '')
-    Left = 432
-    Top = 194
-    ParamData = <
-      item
-        Name = 'AGENDA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
-  end
   object TimerSyncGeral: TTimer
+    Enabled = False
     Interval = 3600000
-    OnTimer = TimerSyncGeralTimer
     Left = 144
     Top = 312
-  end
-  object fdqAgendaKeysInsert: TFDQuery
-    Connection = Dm.FDConnectionDB
-    SQL.Strings = (
-      '  select agenda_id'
-      '  from agenda ag'
-      '  where ag.data between :dt_ini and :dt_fim'
-      '  and ag.enviado_server ='#39'S'#39
-      '  and ag.data_insert_server is not null'
-      '  order by ag.data_insert_local')
-    Left = 432
-    Top = 250
-    ParamData = <
-      item
-        Name = 'DT_INI'
-        DataType = ftDate
-        ParamType = ptInput
-        Value = 42477d
-      end
-      item
-        Name = 'DT_FIM'
-        DataType = ftDate
-        ParamType = ptInput
-        Value = 42478d
-      end>
   end
 end

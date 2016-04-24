@@ -118,14 +118,6 @@ object Dm: TDm
         Value = Null
       end>
   end
-  object fdqLogErrorSaveServer: TFDQuery
-    Connection = FDConnectionDB
-    SQL.Strings = (
-      'select * from log_error l'
-      'where enviado_server is null')
-    Left = 56
-    Top = 184
-  end
   object FDCreateDB: TFDConnection
     Params.Strings = (
       'Database=C:\Projetos\Agenda\BD\SQLite\db.s3db'
@@ -137,12 +129,6 @@ object Dm: TDm
     LoginPrompt = False
     Left = 136
     Top = 16
-  end
-  object TimerSyncGeral: TTimer
-    Interval = 3600000
-    OnTimer = TimerSyncGeralTimer
-    Left = 592
-    Top = 288
   end
   object fdqProcessoAtualizacao: TFDQuery
     IndexFieldNames = 'processo'
@@ -160,5 +146,17 @@ object Dm: TDm
         ParamType = ptInput
         Value = 1
       end>
+  end
+  object TimerSyncBasico: TTimer
+    Interval = 60000
+    OnTimer = TimerSyncBasicoTimer
+    Left = 184
+    Top = 280
+  end
+  object TimerSyncGeral: TTimer
+    Interval = 3600000
+    OnTimer = TimerSyncGeralTimer
+    Left = 272
+    Top = 280
   end
 end

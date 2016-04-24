@@ -111,12 +111,14 @@ object webModulo: TwebModulo
   object DSServerClassMain: TDSServerClass
     OnGetClass = DSServerClassMainGetClass
     Server = DSServer1
+    LifeCycle = 'Server'
     Left = 432
     Top = 144
   end
   object DSServerClassEscola: TDSServerClass
     OnGetClass = DSServerClassEscolaGetClass
     Server = DSServer1
+    LifeCycle = 'Server'
     Left = 432
     Top = 192
   end

@@ -110,7 +110,7 @@ implementation
 {$R *.fmx}
 
 uses untFuncoes, untDmEscola, untDM, untAgendaAdd, untPrincipal,
-  untDMStyles;
+  untDMStyles, untDmGetServer;
 
 procedure TfrmAgendaEscolaViewTestes.btnVoltarClick(Sender: TObject);
 begin
@@ -249,10 +249,8 @@ end;
 procedure TfrmAgendaEscolaViewTestes.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  DmEscola.GetAgenda(Now-30,Now+1);
+  DmGetServer.GetAgenda(Now-30,Now+1);
 //  DmEscola.OpenAgenda(AlunoId, TurmaId);
-  DmEscola.SalvarDadosServer;
-  Dm.SalvarDadosServer;
 end;
 
 procedure TfrmAgendaEscolaViewTestes.SpeedButton2Click(Sender: TObject);

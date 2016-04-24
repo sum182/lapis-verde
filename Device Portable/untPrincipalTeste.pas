@@ -145,8 +145,7 @@ end;
 procedure TfrmPrincipalTeste.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  DmEscola.SyncronizarDadosServerGeral;
-  Dm.SyncronizarDadosServer
+  Dm.SyncronizarDadosServerGeral;
 end;
 
 procedure TfrmPrincipalTeste.SpeedButton2Click(Sender: TObject);

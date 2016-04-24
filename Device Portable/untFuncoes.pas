@@ -13,11 +13,12 @@ Uses  FMX.Forms, Data.DB;
   function UsuarioLogadoIsFuncionario:boolean;
   function GetApplicationName:string;
   procedure SetFlagEnviado(DataSet:TDataset;Campo:String ='enviado_server');
+  procedure MsgPoupUpTeste(Mensagem:String);
 
 
 implementation
 
-uses untDM, untDMStyles, System.SysUtils, smGeralFMX;
+uses untDM, untDMStyles, System.SysUtils, smGeralFMX, smMensagensFMX;
 
 
 procedure SetStyle(Formulario:TForm);
@@ -83,4 +84,14 @@ begin
   Result:=Dm.IsModoTeste;
 end;
 
+procedure MsgPoupUpTeste(Mensagem:String);
+begin
+  if not IsModoTeste then
+    Exit;
+
+  if IsSysOSWindows then
+    Exit;
+
+  smMensagensFMX.MsgPoupUp(Mensagem);
+end;
 end.

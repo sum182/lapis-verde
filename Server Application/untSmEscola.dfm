@@ -294,13 +294,6 @@ object SmEscola: TSmEscola
         Value = 1
       end>
   end
-  object fdqRespTipo: TFDQuery
-    Connection = SmMain.FDConnection
-    SQL.Strings = (
-      'select rt.*'#10'from responsavel_tipo rt'#10)
-    Left = 344
-    Top = 223
-  end
   object fdqFunc: TFDQuery
     Connection = SmMain.FDConnection
     SQL.Strings = (
@@ -315,12 +308,5 @@ object SmEscola: TSmEscola
         ParamType = ptInput
         Value = 1
       end>
-  end
-  object fdqFuncTipo: TFDQuery
-    Connection = SmMain.FDConnection
-    SQL.Strings = (
-      'select ft.*'#10'from funcionario_tipo ft')
-    Left = 160
-    Top = 280
   end
 end

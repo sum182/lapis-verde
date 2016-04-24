@@ -1,20 +1,11 @@
 ﻿[fdqAgendaTurmaturma_id]
 Coordinates=585,1,143,33
 
-[fdqAgendaTurmaSaveServeragenda_id]
-Coordinates=585,53,206,33
-
 [dsTurmaAluno]
 Coordinates=131,376,87,33
 
 [fdqAgenda]
 Coordinates=376,10,91,213
-
-[fdqAgendaSaveServer]
-Coordinates=242,10,124,195
-
-[fdqAgendaAlunoSaveServer]
-Coordinates=583,10,153,87
 
 [fdqAgendaAluno]
 Coordinates=220,305,97,87
@@ -28,17 +19,8 @@ Coordinates=170,402,93,51
 [fdqAgendaAlunoaluno_id]
 Coordinates=585,105,139,33
 
-[fdqAgendaTurmaSaveServer]
-Coordinates=327,305,155,87
-
-[fdqAgendaAlunoSaveServeragenda_id]
-Coordinates=585,157,204,33
-
 [fdqTurmaAluno]
 Coordinates=10,305,91,87
-
-[fdqAgendaAlunoSaveServeraluno_id]
-Coordinates=585,209,195,33
 
 [fdStanStorageBinLink]
 Coordinates=585,261,122,33
@@ -51,9 +33,6 @@ Coordinates=585,365,150,33
 
 [fdqAgendaTurma]
 Coordinates=111,305,99,87
-
-[fdqAgendaTurmaSaveServerturma_id]
-Coordinates=829,1,199,33
 
 [Dm.RESTRequest1]
 Coordinates=492,305,107,87
@@ -69,4 +48,7 @@ Coordinates=609,305,95,69
 
 [Dm.RESTResponse1]
 Coordinates=10,10,116,285
+
+[]
+Coordinates=327,305,155,87
 

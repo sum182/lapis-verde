@@ -3,7 +3,7 @@ unit untSmEscola;
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect,
@@ -30,9 +30,7 @@ type
     fdqResp: TFDQuery;
     fdqRespAluno: TFDQuery;
     fdqRespTelefone: TFDQuery;
-    fdqRespTipo: TFDQuery;
     fdqFunc: TFDQuery;
-    fdqFuncTipo: TFDQuery;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     procedure fdqAgendaIDBeforePost(DataSet: TDataSet);
   private
@@ -76,7 +74,8 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs;
+uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,
+  System.SysUtils;
 
 {$R *.dfm}
 
@@ -200,9 +199,6 @@ begin
       fdqFunc.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFunc);
 
-      fdqFuncTipo.Active := False;
-      TFDJSONDataSetsWriter.ListAdd(Result,'funcionario_tipo',fdqFuncTipo);
-
     except on E:Exception do
       SmMain.SetLogError(E.Message,
                          ExtractFileName(Application.Exename),
@@ -219,7 +215,6 @@ begin
     end;
   finally
     fdqFunc.Active := False;
-    fdqFuncTipo.Active := False;
   end;
 
 end;
@@ -243,10 +238,7 @@ begin
       fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);
 
-      fdqRespTipo.Active := False;
-      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_tipo',fdqRespTipo);
-
-    except on E:Exception do
+     except on E:Exception do
       SmMain.SetLogError(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
@@ -414,10 +406,14 @@ end;
 procedure TSmEscola.SetParamsAgenda(EscolaId, FuncionarioId: Integer; DtIni,
   DtFim: TDateTime);
 begin
+   DtIni:= StrToDate(FormatDateTime('dd/mm/yyyy',DtIni));
+   DtFim:= StrToDate(FormatDateTime('dd/mm/yyyy',DtFim));
+
+
   fdqAgenda.ParamByName('escola_id').AsInteger:= EscolaId;
   //fdqAgenda.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
-  fdqAgenda.ParamByName('dt_ini').AsDateTime:= DtIni;
-  fdqAgenda.ParamByName('dt_fim').AsDateTime:= DtFim;
+  fdqAgenda.ParamByName('dt_ini').AsDate:= DtIni;
+  fdqAgenda.ParamByName('dt_fim').AsDate:= DtFim;
 
  { fdqAgendaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
   //fdqAgendaAluno.ParamByName('funcionario_id').AsInteger:= FuncionarioId;

@@ -23,14 +23,15 @@ type
     FDConnectionDBEscola: TFDConnection;
     FDConnectionDBResponsavel: TFDConnection;
     fdqLogError: TFDQuery;
-    fdqLogErrorSaveServer: TFDQuery;
     FDCreateDB: TFDConnection;
-    TimerSyncGeral: TTimer;
     fdqProcessoAtualizacao: TFDQuery;
+    TimerSyncBasico: TTimer;
+    TimerSyncGeral: TTimer;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
+    procedure TimerSyncBasicoTimer(Sender: TObject);
   private
-    SyncServerInExecute:Boolean;
+    SyncServer:Boolean;
     procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
     procedure ConectarBases;
     procedure ConectarDB;
@@ -51,13 +52,12 @@ type
                            ResponsavelId:Integer=0;
                            FuncionarioId:Integer=0
                           );
-    procedure SalvarLogError;
-    procedure SalvarDadosServer;
-    procedure SyncronizarDadosServer;
-
     procedure OpenProcessoAtualizacao;
     function ProcessHasUpdate(Process:string):Boolean;
     procedure ProcessSaveUpdate(Process:string);
+
+    procedure SyncronizarDadosServerGeral;
+    procedure SyncronizarDadosServerBasico;
 
   end;
 
@@ -72,7 +72,8 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
-  untFuncoes, smDBFireDac, smMensagensFMX,smNetworkState;
+  untFuncoes, smDBFireDac, smMensagensFMX,smNetworkState, untDmGetServer,
+  untDmEscola, untDmSaveServer;
 
 {$R *.dfm}
 
@@ -168,52 +169,7 @@ begin
   RESTClient1.BaseURL := BASE_URL;
 end;
 
-procedure TDm.SalvarDadosServer;
-begin
-  SalvarLogError;
-end;
 
-procedure TDm.SalvarLogError;
-var
-  LDataSetList  : TFDJSONDataSets;
-  MsgRetornoServer:string;
-begin
-  //Método para Salvar os Logs de Erro no Server
-  try
-    try
-      MsgRetornoServer := EmptyStr;
-      fdqLogErrorSaveServer.Active := False;
-      fdqLogErrorSaveServer.Active := True;
-
-      if fdqLogErrorSaveServer.IsEmpty then
-        Exit;
-
-      LDataSetList := TFDJSONDataSets.Create;
-      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogErrorSaveServer);
-
-      MsgRetornoServer:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,GetFuncionarioId,LDataSetList);
-
-    except on E:Exception do
-      MsgRetornoServer := MsgRetornoServer + E.Message;
-    end;
-  finally
-    if MsgRetornoServer = '' then
-      DataSetDelete(fdqLogErrorSaveServer)
-    else
-      DM.SetLogError( MsgRetornoServer,
-                      GetApplicationName,
-                      UnitName,
-                      ClassName,
-                      'SalvarLogError',
-                      Now,
-                      'Erro ao Salvar LogError' + #13 + MsgRetornoServer,
-                      GetEscolaId,
-                      0,
-                      GetFuncionarioId
-                    );
-    fdqLogErrorSaveServer.Active := False;
-  end;
-end;
 
 procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
   Data: TDateTime; MsgUsuario:String; EscolaId, ResponsavelId, FuncionarioId: Integer);
@@ -243,7 +199,7 @@ begin
     fdqLogError.Post;
 
     if MsgUsuario <> '' then
-      raise Exception.Create(MsgUsuario);
+      ShowMessage(MsgUsuario);
 
   finally
     fdqLogError.Active:=False;
@@ -258,27 +214,75 @@ begin
   fResponsavelId:=0;
 end;
 
-procedure TDm.SyncronizarDadosServer;
+procedure TDm.SyncronizarDadosServerGeral;
 begin
   try
-    if SyncServerInExecute then
+    if SyncServer then
       Exit;
 
     if not smNetworkState.IsConnected then
       Exit;
 
-    SyncServerInExecute:=True;
+    SyncServer:=True;
 
     try
-      SalvarDadosServer;
-      smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer OK');
+      DmGetServer.GetDadosServerGeral;
+      MsgPoupUpTeste('DmGetServer.GetDadosServerGeral OK');
     except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DM.SalvarDadosServer Erro:' + e.Message);
+      MsgPoupUp('DmGetServer.GetDadosServerGeral Erro:' + e.Message);
+    end;
+
+    try
+      DmSaveServer.SaveDadosServerGeral;
+      MsgPoupUpTeste('DM.SalvarDadosServer OK');
+    except on E:Exception do
+      MsgPoupUp('DM.SalvarDadosServer Erro:' + e.Message);
     end;
 
   finally
-    SyncServerInExecute:=False;
+    SyncServer:=False;
   end;
+end;
+
+procedure TDm.SyncronizarDadosServerBasico;
+begin
+  try
+    if SyncServer then
+      Exit;
+
+    if not smNetworkState.IsConnected then
+      Exit;
+
+    SyncServer:=True;
+
+    try
+      DmGetServer.GetServerBasico;
+      MsgPoupUpTeste('DmGetServer.GetServerBasico OK');
+    except on E:Exception do
+      MsgPoupUp('DmGetServer.GetServerBasico' + e.Message);
+    end;
+
+    try
+      DmSaveServer.SaveServerBasico;
+      MsgPoupUpTeste('DmSaveServer.SaveServerBasico OK');
+    except on E:Exception do
+      MsgPoupUp('DmSaveServer.SaveServerBasico Erro:' + e.Message);
+    end;
+
+  finally
+    SyncServer:=False;
+  end;
+end;
+
+procedure TDm.TimerSyncBasicoTimer(Sender: TObject);
+var
+  Thread: TThread;
+begin
+  Thread := TThread.CreateAnonymousThread(procedure
+    begin
+      SyncronizarDadosServerBasico;
+    end);
+  Thread.Start;
 end;
 
 procedure TDm.TimerSyncGeralTimer(Sender: TObject);
@@ -287,7 +291,7 @@ var
 begin
   Thread := TThread.CreateAnonymousThread(procedure
     begin
-      SyncronizarDadosServer;
+      SyncronizarDadosServerGeral;
     end);
   Thread.Start;
 end;

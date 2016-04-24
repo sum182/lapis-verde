@@ -43,7 +43,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses smGeralFMX;
+uses smGeralFMX, untFuncoes;
 
 {$R *.dfm}
 
@@ -55,7 +55,7 @@ end;
 
 procedure TModuloCliente.DataModuleCreate(Sender: TObject);
 begin
-  if not IsSysOSWindows then
+//  if not IsSysOSWindows then
     DSRestConnection1.Host := DSRestConnectionAWS.Host;
 end;
 

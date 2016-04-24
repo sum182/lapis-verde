@@ -17,13 +17,6 @@ type
     fdqAgenda: TFDQuery;
     fdqAgendaAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
-    fdqAgendaSaveServer: TFDQuery;
-    fdqAgendaAlunoSaveServer: TFDQuery;
-    fdqAgendaTurmaSaveServer: TFDQuery;
-    fdqAgendaAlunoSaveServeragenda_id: TStringField;
-    fdqAgendaAlunoSaveServeraluno_id: TIntegerField;
-    fdqAgendaTurmaSaveServeragenda_id: TStringField;
-    fdqAgendaTurmaSaveServerturma_id: TIntegerField;
     fdqTurmaAluno: TFDQuery;
     dsTurmaAluno: TDataSource;
     fdqAgendaAlunoagenda_id: TStringField;
@@ -38,16 +31,8 @@ type
     fdqFuncTipo: TFDQuery;
     TimerSyncBasico: TTimer;
     fdqAgendaCriar: TFDQuery;
-    fdqAgendaSync: TFDQuery;
-    fdqAgendaAlunoSync: TFDQuery;
-    fdqAgendaTurmaSync: TFDQuery;
     TimerSyncGeral: TTimer;
-    fdqAgendaKeysInsert: TFDQuery;
-    procedure TimerSyncBasicoTimer(Sender: TObject);
-    procedure TimerSyncGeralTimer(Sender: TObject);
   private
-    SalvarAgendaInExecute:Boolean;
-    SyncServer:Boolean;
   public
     procedure OpenAlunos;
     procedure OpenTurmas;
@@ -55,47 +40,18 @@ type
     procedure OpenTurmaAluno(TurmaId:Integer);overload;
     procedure OpenResponsaveis;
     procedure OpenFuncionarios;
-
     procedure CloseResponsaveis;
     procedure CloseFuncionarios;
 
-    procedure GetAlunos;
-    procedure GetTurmas;
-    procedure GetResponsaveis;
-    procedure GetFuncionarios;
-
     //Metodos para Agenda
-
     procedure SetSQLAgenda;overload;
     procedure SetSQLAgenda(AlunoId:Integer;TurmaId:Integer);overload;
-    procedure SetSQLAgendaSync(KeyValues:String);overload;
-    procedure SetSQLAgendaAlunoSync(KeyValues:String);overload;
-    procedure SetSQLAgendaTurmaSync(KeyValues:String);overload;
-
     procedure SetParamsAgenda(AlunoId:Integer;TurmaId:Integer;Data:TDate);
-
     procedure OpenAgenda;overload;
     procedure OpenAgenda(AlunoId:Integer;TurmaId:Integer;Data:TDate);overload;
-    procedure OpenAgendaSync(KeyValues:String);
-    procedure OpenAgendaAlunoSync(KeyValues:String);
-    procedure OpenAgendaTurmaSync(KeyValues:String);
-    procedure OpenAgendaKeysInsert(DtIni,DtFim:TDateTime);
-    function GetListKeysInsert(DtIni,DtFim:TDateTime):TFDJSONDataSets;
-
-
     procedure CloseAgenda;
-    procedure CloseAgendaSync;
-
-
-    procedure GetAgenda(DtIni,DtFim:TDateTime);
     procedure CriarAgenda(Texto:string;Data:TDate;AlunoId:Integer=0;
                           TurmaId:Integer=0);
-    procedure SalvarAgenda;
-    procedure AgendaApplyChanges;
-
-    procedure SalvarDadosServer;
-    procedure SyncronizarDadosServerGeral;
-    procedure SyncronizarDadosServerBasico;
 
 
   end;
@@ -109,62 +65,12 @@ implementation
 
 uses untDM, untModuloCliente, smDBFireDac,
   FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState,
-  untDmGetServer;
+  untDmGetServer, untDmSaveServer;
 
 {$R *.dfm}
 
 { TDmEscola }
 
-procedure TDmEscola.AgendaApplyChanges;
-var
-  Deltas:TFDJSONDeltas;
-  fdmTempAgenda : TFDMemTable;
-  fdmTempAgendaAluno : TFDMemTable;
-  fdmTempAgendaTurma : TFDMemTable;
-begin
-   //Não utilizar este metodo, usar o salvar
-   try
-    // Post if editing
-    if fdqAgenda.State in dsEditModes then
-      fdqAgenda.Post;
-
-    if fdqAgendaAluno.State in dsEditModes then
-      fdqAgendaAluno.Post;
-
-    if fdqAgendaTurma.State in dsEditModes then
-      fdqAgendaTurma.Post;
-
-
-    fdmTempAgenda := TFDMemTable.Create(self);
-    fdmTempAgendaAluno := TFDMemTable.Create(self);
-    fdmTempAgendaTurma := TFDMemTable.Create(self);
-
-    fdmTempAgenda.Data := fdqAgenda.Delta;
-    fdmTempAgendaAluno.Data := fdqAgendaAluno.Delta;
-    fdmTempAgendaTurma.Data := fdqAgendaTurma.Delta;
-
-    // Create a delta list
-    Deltas := TFDJSONDeltas.Create;
-    // Add deltas
-    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda', fdmTempAgenda);
-    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_aluno', fdmTempAgendaAluno);
-    TFDJSONDeltasWriter.ListAdd(Deltas, 'agenda_turma', fdmTempAgendaTurma);
-
-
-
-    try
-      ModuloCliente.SmEscolaClient.ApplyChangesAgenda(GetEscolaId,GetFuncionarioId,Deltas);
-    except on E:Exception do
-      ShowMessage('Erro no apply' + #13 + E.Message);
-    end;
-
-  finally
-
-    fdmTempAgenda.DisposeOf;
-    fdmTempAgendaAluno.DisposeOf;
-    fdmTempAgendaTurma.DisposeOf;
-  end;
-end;
 
 procedure TDmEscola.CloseAgenda;
 begin
@@ -173,12 +79,6 @@ begin
   fdqAgendaTurma.Active := False;
 end;
 
-procedure TDmEscola.CloseAgendaSync;
-begin
-  fdqAgendaSync.Active := False;
-  fdqAgendaAlunoSync.Active := False;
-  fdqAgendaTurmaSync.Active := False;
-end;
 
 procedure TDmEscola.CloseFuncionarios;
 begin
@@ -255,13 +155,7 @@ begin
 
     Thread := TThread.CreateAnonymousThread(procedure
     begin
-       //Salva a agenda no server
-       SalvarAgenda;
-        {TThread.Synchronize(TThread.CurrentThread, procedure
-        begin
-          //Salva a agenda no server
-          SalvarAgenda;
-        end); }
+      DmSaveServer.SaveAgenda;
     end);
     Thread.Start;
 
@@ -283,228 +177,6 @@ begin
    MsgPoupUp('Agenda criada com sucesso');
 end;
 
-procedure TDmEscola.GetAgenda(DtIni,DtFim:TDateTime);
-var
-  LDataSetList: TFDJSONDataSets;
-  LDataSet: TFDDataSet;
-  KeyValues: string;
-begin
-  //Método para retornar as Agendas
-  try
-    try
-      KeyValues:= EmptyStr;
-
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,
-                                                             GetFuncionarioId,
-                                                             DtIni,
-                                                             DtFim,
-                                                             GetListKeysInsert(DtIni,DtFim)
-                                                             );
-
-      //Pegando dados da agenda
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
-
-     if LDataSet.IsEmpty then
-        Exit;
-
-      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      //ShowMessage(KeyValues);
-      OpenAgendaSync(KeyValues);
-
-      CopyDataSet(LDataSet,fdqAgendaSync,False,[coAppend,coEdit]);
-
-      //Pegando dados da agenda_aluno
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
-      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      OpenAgendaAlunoSync(KeyValues);
-      CopyDataSet(LDataSet,fdqAgendaAlunoSync,False,[coAppend,coEdit]);
-
-      //Pegando dados da agenda_turma
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
-      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      OpenAgendaTurmaSync(KeyValues);
-      CopyDataSet(LDataSet,fdqAgendaTurmaSync,False,[coAppend,coEdit]);
-
-    except on E:Exception do
-      DM.SetLogError( E.Message,
-                      GetApplicationName,
-                      UnitName,
-                      ClassName,
-                      'GetAgenda',
-                      Now,
-                      'Erro na busca da agenda' + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
-                    );
-    end;
-  finally
-  end;
-end;
-
-
-
-procedure TDmEscola.GetAlunos;
-var
-  LDataSetList  : TFDJSONDataSets;
-  LDataSet: TFDDataSet;
-begin
-  try
-   if not Dm.ProcessHasUpdate('aluno') then
-     Exit;
-
-
-    LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(GetEscolaId,GetFuncionarioId);
-    LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
-    CopyDataSet(LDataSet,fdqAluno);
-
-    DM.ProcessSaveUpdate('aluno');
-
-  except on E:Exception do
-    DM.SetLogError( E.Message,
-                    GetApplicationName,
-                    UnitName,
-                    ClassName,
-                    'GetAlunos',
-                    Now,
-                    'Erro na busca de alunos' + #13 + E.Message,
-                    GetEscolaId,
-                    GetResponsavelId,
-                    GetFuncionarioId
-                    );
-  end;
-end;
-
-procedure TDmEscola.GetFuncionarios;
-var
-  LDataSetList  : TFDJSONDataSets;
-  LDataSet: TFDDataSet;
-begin
-  try
-    try
-      if not Dm.ProcessHasUpdate('funcionario') then
-       Exit;
-
-      OpenFuncionarios;
-      LDataSetList := ModuloCliente.SmEscolaClient.GetFuncionarios(GetEscolaId,GetFuncionarioId);
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario');
-      CopyDataSet(LDataSet,fdqFunc);
-
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario_tipo');
-      CopyDataSet(LDataSet,fdqFuncTipo);
-
-      DM.ProcessSaveUpdate('funcionario');
-    except on E:Exception do
-      DM.SetLogError( E.Message,
-                      GetApplicationName,
-                      UnitName,
-                      ClassName,
-                      'GetFuncionarios',
-                      Now,
-                      'Erro na busca de Funcionarios' + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
-                      );
-    end;
-  finally
-    CloseFuncionarios;
-  end;
-
-end;
-
-function TDmEscola.GetListKeysInsert(DtIni, DtFim: TDateTime): TFDJSONDataSets;
-begin
-  try
-    Result:= TFDJSONDataSets.Create;
-    OpenAgendaKeysInsert(DtIni,DtFim);
-    TFDJSONDataSetsWriter.ListAdd(Result,fdqAgendaKeysInsert);
-  finally
-    fdqAgendaKeysInsert.Close;
-  end;
-end;
-
-procedure TDmEscola.GetResponsaveis;
-var
-  LDataSetList  : TFDJSONDataSets;
-  LDataSet: TFDDataSet;
-begin
-  try
-    try
-      if not Dm.ProcessHasUpdate('responsavel') then
-       Exit;
-
-      OpenResponsaveis;
-      LDataSetList := ModuloCliente.SmEscolaClient.GetResponsaveis(GetEscolaId,GetFuncionarioId);
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
-      CopyDataSet(LDataSet,fdqResp);
-
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_aluno');
-      CopyDataSet(LDataSet,fdqRespAluno);
-
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_telefone');
-      CopyDataSet(LDataSet,fdqRespTelefone);
-
-      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_tipo');
-      CopyDataSet(LDataSet,fdqRespTipo);
-
-
-      DM.ProcessSaveUpdate('responsavel');
-    except on E:Exception do
-      DM.SetLogError( E.Message,
-                      GetApplicationName,
-                      UnitName,
-                      ClassName,
-                      'GetResponsaveis',
-                      Now,
-                      'Erro na busca dos responsaveis' + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
-                      );
-    end;
-  finally
-    CloseResponsaveis;
-  end;
-
-end;
-
-
-procedure TDmEscola.GetTurmas;
-var
-  LDataSetList  : TFDJSONDataSets;
-  LDataSet: TFDDataSet;
-begin
-  try
-   if not Dm.ProcessHasUpdate('turma') then
-     Exit;
-
-
-    OpenTurmas;
-    LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(GetEscolaId,GetFuncionarioId);
-    LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma');
-    CopyDataSet(LDataSet,fdqTurma);
-
-    LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma_aluno');
-    CopyDataSet(LDataSet,fdqTurmaAluno);
-
-    DM.ProcessSaveUpdate('turma');
-  except on E:Exception do
-    DM.SetLogError( E.Message,
-                    GetApplicationName,
-                    UnitName,
-                    ClassName,
-                    'GetTurmas',
-                    Now,
-                    'Erro na busca das turmas' + #13 + E.Message,
-                    GetEscolaId,
-                    GetResponsavelId,
-                    GetFuncionarioId
-                    );
-  end;
-
-
-end;
 
 procedure TDmEscola.OpenAgenda;
 begin
@@ -519,34 +191,6 @@ end;
 
 
 
-procedure TDmEscola.OpenAgendaAlunoSync(KeyValues: String);
-begin
-  fdqAgendaAlunoSync.Active := False;
-  SetSQLAgendaAlunoSync(KeyValues);
-  fdqAgendaAlunoSync.Active := True;
-end;
-
-procedure TDmEscola.OpenAgendaKeysInsert(DtIni, DtFim: TDateTime);
-begin
-  fdqAgendaKeysInsert.Close;
-  fdqAgendaKeysInsert.ParamByName('dt_ini').AsDate := DtIni;
-  fdqAgendaKeysInsert.ParamByName('dt_fim').AsDate := DtFim;
-  fdqAgendaKeysInsert.Open;
-end;
-
-procedure TDmEscola.OpenAgendaTurmaSync(KeyValues: String);
-begin
-  fdqAgendaTurmaSync.Active := False;
-  SetSQLAgendaTurmaSync(KeyValues);
-  fdqAgendaTurmaSync.Active := True;
-end;
-
-procedure TDmEscola.OpenAgendaSync(KeyValues: String);
-begin
-  CloseAgendaSync;
-  SetSQLAgendaSync(KeyValues);
-  fdqAgendaSync.Active := True;
-end;
 
 procedure TDmEscola.OpenAgenda(AlunoId, TurmaId: Integer;Data:TDate);
 begin
@@ -631,75 +275,6 @@ begin
   OpenTurmaAluno;
 end;
 
-procedure TDmEscola.SalvarAgenda;
-var
-  LDataSetList  : TFDJSONDataSets;
-  MsgRetornoServer:string;
-begin
-  //Método para salvar a agenda no server
-  try
-    try
-      //GetAgenda(GetFuncionarioId,0);
-      if not smNetworkState.IsConnected then
-        Exit;
-
-      if SalvarAgendaInExecute then
-        Exit;
-
-      SalvarAgendaInExecute:=True;
-      fdqAgendaSaveServer.Active := False;
-      fdqAgendaSaveServer.Active := True;
-
-      if fdqAgendaSaveServer.IsEmpty  then
-        Exit;
-
-      fdqAgendaSaveServer.Active := False;
-      fdqAgendaAlunoSaveServer.Active := False;
-      fdqAgendaTurmaSaveServer.Active := False;
-
-      LDataSetList := TFDJSONDataSets.Create;
-      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda',fdqAgendaSaveServer);
-      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_aluno',fdqAgendaAlunoSaveServer);
-      TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurmaSaveServer);
-
-
-      MsgRetornoServer:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,GetFuncionarioId,Now-30,Now,LDataSetList);
-
-      //Flagando registros como enviado
-      if MsgRetornoServer = EmptyStr then
-        SetFlagEnviado(fdqAgendaSaveServer);
-
-    except on E:Exception do
-      MsgRetornoServer := MsgRetornoServer + E.Message;
-    end;
-  finally
-    if MsgRetornoServer <> EmptyStr then
-      DM.SetLogError( MsgRetornoServer,
-                      GetApplicationName,
-                      UnitName,
-                      ClassName,
-                      'SalvarAgenda',
-                      Now,
-                      'Erro ao Salvar Agenda' + #13 + MsgRetornoServer,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
-                    );
-      fdqAgendaSaveServer.Active := False;
-      fdqAgendaAlunoSaveServer.Active := False;
-      fdqAgendaTurmaSaveServer.Active := False;
-      SalvarAgendaInExecute:=False;
-  end;
-
-  MsgPoupUp('Agenda salva com sucesso');
-end;
-
-procedure TDmEscola.SalvarDadosServer;
-begin
-  //Método para salvar todos os dados da escola no server
-  SalvarAgenda;
-end;
-
 
 
 
@@ -714,224 +289,6 @@ begin
     fdqAgenda.ParamByName('turma_id').AsInteger:= TurmaId;
 
   fdqAgenda.ParamByName('data').AsDate:= Data;
-end;
-
-procedure TDmEscola.SetSQLAgendaSync(KeyValues: String);
-begin
-  if KeyValues = EmptyStr then
-    KeyValues:= QuoTedStr('0');
-
-  fdqAgendaSync.SQL.Clear;
-  fdqAgendaSync.SQL.Add('select');
-  fdqAgendaSync.SQL.Add('  ag.*,');
-  fdqAgendaSync.SQL.Add('  strftime("%d/%m/%Y",ag.data_insert_local) as data_criacao,');
-  fdqAgendaSync.SQL.Add('  strftime("%H:%M",data_insert_local) as hora_criacao');
-  fdqAgendaSync.SQL.Add('from agenda ag');
-  fdqAgendaSync.SQL.Add('where agenda_id in (' + KeyValues + ')');
-  fdqAgendaSync.SQL.Add('order by ag.data_insert_local');
-
-end;
-
-procedure TDmEscola.SetSQLAgendaAlunoSync(KeyValues: String);
-begin
-  if KeyValues = EmptyStr then
-    KeyValues:= QuoTedStr('0');
-
-  fdqAgendaAlunoSync.SQL.Clear;
-  fdqAgendaAlunoSync.SQL.Add('select al.*');
-  fdqAgendaAlunoSync.SQL.Add('from agenda_aluno al');
-  fdqAgendaAlunoSync.SQL.Add('where agenda_id in (' + KeyValues + ')');
-end;
-
-procedure TDmEscola.SetSQLAgendaTurmaSync(KeyValues: String);
-begin
-  if KeyValues = EmptyStr then
-    KeyValues:= QuoTedStr('0');
-
-  fdqAgendaTurmaSync.SQL.Clear;
-  fdqAgendaTurmaSync.SQL.Add('select at.*');
-  fdqAgendaTurmaSync.SQL.Add('from agenda_turma at');
-  fdqAgendaTurmaSync.SQL.Add('where agenda_id in (' + KeyValues + ')');
-end;
-
-procedure TDmEscola.SyncronizarDadosServerGeral;
-begin
-  try
-    if SyncServer then
-      Exit;
-
-    if not smNetworkState.IsConnected then
-      Exit;
-
-    SyncServer:=True;
-
-    try
-      DmGetServer.GetProcessoAtualizacao;
-      smMensagensFMX.MsgPoupUp('DmGetServer.GetTabelaAtualizacao OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmGetServer.GetTabelaAtualizacao Erro:' + e.Message);
-    end;
-
-
-    try
-      GetAlunos;
-      smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.GetAlunos Erro:' + e.Message);
-    end;
-
-    try
-      GetTurmas;
-      smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.GetTurmas Erro:' + e.Message);
-    end;
-
-    try
-      GetResponsaveis;
-      smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.GetResponsaveis Erro:' + e.Message);
-    end;
-
-    try
-      GetFuncionarios;
-      smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.GetFuncionarios Erro:' + e.Message);
-    end;
-
-    try
-      DmGetServer.GetEscola;
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.GetEscola OK');
-    except on E:Exception do
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.GetEscola Erro:' + e.Message);
-    end;
-
-
-    try
-      DmGetServer.PeriodoTipo;
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.PeriodoTipo OK');
-    except on E:Exception do
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.PeriodoTipo Erro:' + e.Message);
-    end;
-
-    try
-      DmGetServer.ResponsavelTipo;
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.ResponsavelTipo OK');
-    except on E:Exception do
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.ResponsavelTipo Erro:' + e.Message);
-    end;
-
-
-    try
-      DmGetServer.FuncionarioTipo;
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.FuncionarioTipo OK');
-    except on E:Exception do
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.FuncionarioTipo Erro:' + e.Message);
-    end;
-
-
-    try
-      DmGetServer.TelefoneTipo;
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.TelefoneTipo OK');
-    except on E:Exception do
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.TelefoneTipo Erro:' + e.Message);
-    end;
-
-
-    try
-      DmGetServer.AgendaTipo;
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.AgendaTipo OK');
-    except on E:Exception do
-      if IsModoTeste then
-        smMensagensFMX.MsgPoupUp('DmGetServer.AgendaTipo Erro:' + e.Message);
-    end;
-
-    try
-      GetAgenda(Now - 30, Now + 1);
-      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
-    end;
-
-
-    try
-      SalvarDadosServer;
-      smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.SalvarDadosServer Erro:' + e.Message);
-    end;
-  finally
-    SyncServer:=False;
-  end;
-end;
-
-
-
-
-procedure TDmEscola.TimerSyncBasicoTimer(Sender: TObject);
-var
-  Thread: TThread;
-begin
-  Thread := TThread.CreateAnonymousThread(procedure
-    begin
-      SyncronizarDadosServerBasico;
-    end);
-  Thread.Start;
-end;
-
-procedure TDmEscola.TimerSyncGeralTimer(Sender: TObject);
-var
-  Thread: TThread;
-begin
-  Thread := TThread.CreateAnonymousThread(procedure
-    begin
-      SyncronizarDadosServerGeral;
-    end);
-  Thread.Start;
-end;
-
-procedure TDmEscola.SyncronizarDadosServerBasico;
-begin
-  try
-    if SyncServer then
-      Exit;
-
-    if not smNetworkState.IsConnected then
-      Exit;
-
-    SyncServer:=True;
-
-    try
-      GetAgenda(Now - 1, Now + 7);
-      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.GetAgenda Erro:' + e.Message);
-    end;
-
-    try
-      SalvarAgenda;
-      smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda OK');
-    except on E:Exception do
-      smMensagensFMX.MsgPoupUp('DmEscola.SalvarAgenda Erro:' + e.Message);
-    end;
-
-  finally
-    SyncServer:=False;
-  end;
-
 end;
 
 procedure TDmEscola.SetSQLAgenda;
@@ -1020,14 +377,3 @@ begin
 end;
 
 end.
-
-
-
-
-
-
-
-
-
-
-
