@@ -38,7 +38,8 @@ uses
   smTemplate in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smTemplate.pas' {frmTemplate},
   untAgendaEscolaViewTestes in 'Testes\untAgendaEscolaViewTestes.pas' {frmAgendaEscolaViewTestes},
   untDmGetServer in 'DM\untDmGetServer.pas' {DmGetServer: TDataModule},
-  untDmSaveServer in 'DM\untDmSaveServer.pas' {DmSaveServer: TDataModule};
+  untDmSaveServer in 'DM\untDmSaveServer.pas' {DmSaveServer: TDataModule},
+  untLib in '..\Lib\untLib.pas';
 
 {$R *.res}
 

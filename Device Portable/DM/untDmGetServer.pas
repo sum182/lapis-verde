@@ -163,7 +163,7 @@ begin
       if not Dm.ProcessHasUpdate('funcionario') then
        Exit;
 
-      LDataSetList := ModuloCliente.SmEscolaClient.GetFuncionarios(GetEscolaId,GetFuncionarioId);
+      LDataSetList := ModuloCliente.SmMainClient.GetFuncionarios(GetEscolaId,GetFuncionarioId);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario');
       CopyDataSet(LDataSet,fdqFunc);
 
@@ -213,7 +213,7 @@ begin
      Exit;
 
 
-    LDataSetList := ModuloCliente.SmEscolaClient.GetAlunos(GetEscolaId,GetFuncionarioId);
+    LDataSetList := ModuloCliente.SmMainClient.GetAlunos(GetEscolaId,GetFuncionarioId);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqAluno);
 
@@ -512,7 +512,7 @@ begin
        Exit;
 
       //OpenResponsaveis;
-      LDataSetList := ModuloCliente.SmEscolaClient.GetResponsaveis(GetEscolaId,GetFuncionarioId);
+      LDataSetList := ModuloCliente.SmMainClient.GetResponsaveis(GetEscolaId,GetFuncionarioId);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
       CopyDataSet(LDataSet,fdqResp);
 
@@ -571,7 +571,7 @@ begin
      Exit;
 
     OpenTurmas;
-    LDataSetList := ModuloCliente.SmEscolaClient.GetTurmas(GetEscolaId,GetFuncionarioId);
+    LDataSetList := ModuloCliente.SmMainClient.GetTurmas(GetEscolaId,GetFuncionarioId);
     LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma');
     CopyDataSet(LDataSet,fdqTurma);
 
