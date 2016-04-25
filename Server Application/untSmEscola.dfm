@@ -51,8 +51,8 @@ object SmEscola: TSmEscola
       'and ag.escola_id = :escola_id'
       'and ag.data between :dt_ini and :dt_fim'
       'group by agenda_id')
-    Left = 66
-    Top = 168
+    Left = 378
+    Top = 336
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -91,8 +91,8 @@ object SmEscola: TSmEscola
       'and ag.escola_id = :escola_id'
       'and ag.data_insert_server between :dt_ini and :dt_fim'
       'group by agenda_id')
-    Left = 146
-    Top = 168
+    Left = 458
+    Top = 336
     ParamData = <
       item
         Name = 'FUNCIONARIO_ID'
@@ -200,8 +200,8 @@ object SmEscola: TSmEscola
       'and ag.data_insert_server between :dt_ini and :dt_fim'
       'group by agenda_id'
       '')
-    Left = 250
-    Top = 168
+    Left = 562
+    Top = 336
     ParamData = <
       item
         Name = 'FUNCIONARIO_ID'

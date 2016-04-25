@@ -14,8 +14,6 @@ uses
 type
 {$METHODINFO ON}
   TSmMain = class(TDataModule)
- {$METHODINFO OFF}
-    fdqAlunos: TFDQuery;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     FDWaitCursor: TFDGUIxWaitCursor;
     FDStanStorageBinLink1: TFDStanStorageBinLink;
@@ -24,8 +22,15 @@ type
     fdqLogError: TFDQuery;
     ApplicationEvents: TApplicationEvents;
     fdqProcessoAtualizacao: TFDQuery;
-    FDQuery1: TFDQuery;
     fdqLogServerRequest: TFDQuery;
+    fdqLoginFuncionario: TFDQuery;
+    fdqTurmaAluno: TFDQuery;
+    fdqTurma: TFDQuery;
+    fdqAluno: TFDQuery;
+    fdqResp: TFDQuery;
+    fdqRespAluno: TFDQuery;
+    fdqRespTelefone: TFDQuery;
+    fdqFunc: TFDQuery;
 
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
@@ -53,19 +58,29 @@ type
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
    {$METHODINFO ON}
 
+    function LoginFuncionario(Login:string; Senha:string):Boolean;
+    function GetAlunos(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
+    function GetTurmas(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
+    function GetResponsaveis(EscolaId:Integer;
+                             FuncionarioId:Integer):TFDJSONDataSets;
+
+    function GetFuncionarios(EscolaId:Integer;
+                             FuncionarioId:Integer):TFDJSONDataSets;
+
+
     function SalvarLogError(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets):String;
 
-   function GetProcessoAtualizacao(EscolaId:Integer;
+    function GetProcessoAtualizacao(EscolaId:Integer;
                                  ResponsavelId:Integer=0;
                                  FuncionarioId:Integer=0):TFDJSONDataSets;
 
-   function GetDataSet( EscolaId:Integer;
-                        Nome: String;
-                        ResponsavelId:Integer=0;
-                        FuncionarioId:Integer=0;
-                        UtilizaParamEscolaId:Boolean=True;
-                        Condicoes: String=''
-                       ):TFDJSONDataSets;
+    function GetDataSet( EscolaId:Integer;
+                         Nome: String;
+                         ResponsavelId:Integer=0;
+                         FuncionarioId:Integer=0;
+                         UtilizaParamEscolaId:Boolean=True;
+                         Condicoes: String=''
+                        ):TFDJSONDataSets;
 
 
   end;
@@ -118,17 +133,60 @@ begin
   Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
+function TSmMain.GetAlunos(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para retornar os Alunos
+  try
+    try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest(UnitName,
+                                           ClassName,
+                                           'GetAlunos',
+                                           EscolaId,
+                                           0,
+                                           FuncionarioId);
+
+      Result := TFDJSONDataSets.Create;
+
+      fdqAluno.Active := False;
+      fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
+    fdqAluno.Active := False;
+    LogServerRequest.Free;
+  end;
+end;
+
 function TSmMain.GetDataSet(EscolaId: Integer; Nome: String; ResponsavelId,
   FuncionarioId: Integer; UtilizaParamEscolaId:Boolean;
   Condicoes: String): TFDJSONDataSets;
 var
   fdqDataSet: TFDQuery;
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para Genérico para retonar um Dataset
   try
     try
       if Nome = '' then
        raise Exception.Create('GetDataSet: Nome não definido');
+
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'GetDataSet:' + Nome,
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
+
 
       Result := TFDJSONDataSets.Create;
       fdqDataSet := TFDQuery.Create(self);
@@ -147,56 +205,202 @@ begin
         fdqDataSet.SQL.Add(Condicoes);
 
       TFDJSONDataSetsWriter.ListAdd(Result,fdqDataSet);
-
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
-      SmMain.SetLogErrorOld(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'GetDataSet:' + Nome,
-                         Now,
-                         EscolaId,
-                         ResponsavelId,
-                         FuncionarioId
-                         );
-
-
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
     end;
   finally
     fdqDataSet.Active := False;
+    LogServerRequest.Free;
   end;
 
 end;
 
+function TSmMain.GetFuncionarios(EscolaId,
+  FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para retornar os Funcionarios
+  try
+    try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'GetFuncionarios',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
+      Result := TFDJSONDataSets.Create;
+
+      fdqFunc.Active := False;
+      fdqFunc.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFunc);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
+    fdqFunc.Active := False;
+    LogServerRequest.Free;
+  end;
+end;
+
+
 function TSmMain.GetProcessoAtualizacao(EscolaId, ResponsavelId,
   FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar as Atualizações das Tabelas
   try
     try
       Result := TFDJSONDataSets.Create;
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'GetProcessoAtualizacao',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
 
       fdqProcessoAtualizacao.Active := False;
       fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,fdqProcessoAtualizacao);
-
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
-      SmMain.SetLogErrorOld(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'GetTabelaAtualizacao',
-                         Now,
-                         EscolaId,
-                         ResponsavelId,
-                         FuncionarioId
-                         );
-
-
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
     end;
   finally
     fdqProcessoAtualizacao.Active := False;
+    LogServerRequest.Free;
   end;
+
+end;
+
+function TSmMain.GetResponsaveis(EscolaId,
+  FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para retornar os Responsaveis
+  try
+    try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest(UnitName,
+                                           ClassName,
+                                           'GetResponsaveis',
+                                           EscolaId,
+                                           0,
+                                           FuncionarioId);
+
+      Result := TFDJSONDataSets.Create;
+
+      fdqResp.Active := False;
+      fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel',fdqResp);
+
+      fdqRespAluno.Active := False;
+      fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_aluno',fdqRespAluno);
+
+      fdqRespTelefone.Active := False;
+      fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+     except on E:Exception do
+       begin
+         LogServerRequest.SetError(E.Message);
+         SmMain.SaveLogError(LogServerRequest);
+       end;
+    end;
+  finally
+    fdqResp.Active := False;
+    fdqRespAluno.Active := False;
+    fdqRespTelefone.Active := False;
+    LogServerRequest.Free;
+  end;
+
+end;
+function TSmMain.GetTurmas(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para retornar as Turmas
+  try
+    try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'GetTurmas',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
+
+      Result := TFDJSONDataSets.Create;
+
+      fdqTurma.Active := False;
+      fdqTurma.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'turma',fdqTurma);
+
+      fdqTurmaAluno.Active := False;
+      fdqTurmaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
+    fdqTurma.Active := False;
+    fdqTurmaAluno.Active := False;
+    LogServerRequest.Free;
+  end;
+end;
+
+function TSmMain.LoginFuncionario(Login, Senha: string): Boolean;
+var
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para retornar os Alunos
+  try
+    try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'LoginFuncionario',
+                                            0,
+                                            0,
+                                            0);
+
+      fdqLoginFuncionario.Close;
+      fdqLoginFuncionario.ParamByName('login').AsString := Login;
+      fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
+      fdqLoginFuncionario.Open;
+      Result:= not (fdqLoginFuncionario.IsEmpty);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
+    fdqLoginFuncionario.Active := False;
+    LogServerRequest.Free;
+  end;
+
 
 end;
 
@@ -223,10 +427,19 @@ var
   LDataSet: TFDDataSet;
   Exceptions:string;
   KeyValues: string;
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para Salvar Logs de Erros
   try
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'SalvarLogError',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
+
       Result:=EmptyStr;
 
       Exceptions:=EmptyStr;
@@ -240,6 +453,7 @@ begin
       KeyValues:= GetKeyValuesDataSet(LDataSet,'log_error_id');
       OpenLogError(EscolaId,FuncionarioId,KeyValues);
       CopyDataSet(LDataSet,fdqLogError,False,[coAppend,coEdit]);
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       Exceptions:=  Exceptions + E.Message;
     end;
@@ -247,18 +461,12 @@ begin
     if (Exceptions <> EmptyStr) then
     begin
       Result:= 'Erro ao Salvar logs' + #13 + Exceptions;
-      SmMain.SetLogErrorOld(Exceptions,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'SalvarLogError',
-                         Now,
-                         EscolaId,
-                         0,
-                         FuncionarioId);
+      LogServerRequest.SetError(Exceptions);
+      SmMain.SaveLogError(LogServerRequest);
     end;
   finally
     fdqLogError.Close;
+    LogServerRequest.Free;
   end;
 
 end;

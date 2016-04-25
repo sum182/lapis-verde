@@ -62,7 +62,6 @@ type
     //Metodos de Agenda
     function GetAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil):TFDJSONDataSets;
     function SalvarAgenda(EscolaId, FuncionarioId: Integer; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
-    procedure ApplyChangesAgenda(EscolaId, FuncionarioId: Integer; const ADeltaList: TFDJSONDeltas);
 
   end;
 
@@ -81,30 +80,6 @@ uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,
 
 { TSmEscola }
 
-procedure TSmEscola.ApplyChangesAgenda(EscolaId, FuncionarioId: Integer; const ADeltaList: TFDJSONDeltas);
-var
-  LApply: IFDJSONDeltasApplyUpdates;
-begin
-  //Este método não será utilizado, o ideal é utitlizar o método SalvarAgenda
-
-  //Método para dar um apply nos deltas de um FdDataset
- // Create the apply object
-  LApply := TFDJSONDeltasApplyUpdates.Create(ADeltaList);
-
-  // Apply the agenda delta
-  LApply.ApplyUpdates('agenda', fdqAgenda.Command);
-
-  if LApply.Errors.Count = 0 then
-  begin
-    // If no errors, apply the detalhes delta
-    LApply.ApplyUpdates('agenda_aluno', fdqAgendaAluno.Command);
-    LApply.ApplyUpdates('agenda_turma', fdqAgendaAluno.Command);
-  end;
-
-  if LApply.Errors.Count > 0 then
-   // Raise an exception if any errors.
-    raise Exception.Create(LApply.Errors.Strings.Text);
-end;
 
 procedure TSmEscola.CloseAgenda;
 begin
@@ -134,8 +109,7 @@ begin
   try
     try
       LogServerRequest:=TLogServerRequest.Create;
-      LogServerRequest.SetLogServerRequest( ExtractFileName(Application.Exename),
-                                            UnitName,
+      LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'GetAgenda',
                                             EscolaId,
@@ -150,8 +124,7 @@ begin
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       begin
-        LogServerRequest.DataError:=Now;
-        LogServerRequest.MsgError:= E.Message;
+        LogServerRequest.SetError(E.Message);
         SmMain.SaveLogError(LogServerRequest);
       end;
     end;
@@ -164,71 +137,87 @@ begin
 end;
 
 function TSmEscola.GetAlunos(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Alunos
   try
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest(UnitName,
+                                           ClassName,
+                                           'GetAlunos',
+                                           EscolaId,
+                                           0,
+                                           FuncionarioId);
+
       Result := TFDJSONDataSets.Create;
 
       fdqAluno.Active := False;
       fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
-      SmMain.SetLogErrorOld(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'GetAlunos',
-                         Now,
-                         EscolaId,
-                         0,
-                         FuncionarioId
-                         );
-
-
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
     end;
   finally
     fdqAluno.Active := False;
+    LogServerRequest.Free;
   end;
 end;
 
 function TSmEscola.GetFuncionarios(EscolaId,
   FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Funcionarios
   try
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'GetFuncionarios',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
       Result := TFDJSONDataSets.Create;
 
       fdqFunc.Active := False;
       fdqFunc.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFunc);
-
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
-      SmMain.SetLogErrorOld(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'GetFuncionarios',
-                         Now,
-                         EscolaId,
-                         0,
-                         FuncionarioId
-                         );
-
-
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
     end;
   finally
     fdqFunc.Active := False;
+    LogServerRequest.Free;
   end;
 
 end;
 
 function TSmEscola.GetResponsaveis(EscolaId, FuncionarioId:Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Responsaveis
   try
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest(UnitName,
+                                           ClassName,
+                                           'GetResponsaveis',
+                                           EscolaId,
+                                           0,
+                                           FuncionarioId);
+
       Result := TFDJSONDataSets.Create;
 
       fdqResp.Active := False;
@@ -242,34 +231,37 @@ begin
       fdqRespTelefone.Active := False;
       fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);
-
+      SmMain.SaveLogServerRequest(LogServerRequest);
      except on E:Exception do
-      SmMain.SetLogErrorOld(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'GetResponsaveis',
-                         Now,
-                         EscolaId,
-                         0,
-                         FuncionarioId
-                         );
-
-
+       begin
+         LogServerRequest.SetError(E.Message);
+         SmMain.SaveLogError(LogServerRequest);
+       end;
     end;
   finally
     fdqResp.Active := False;
     fdqRespAluno.Active := False;
     fdqRespTelefone.Active := False;
+    LogServerRequest.Free;
   end;
 
 end;
 
 function TSmEscola.GetTurmas(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar as Turmas
   try
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'GetTurmas',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
+
       Result := TFDJSONDataSets.Create;
 
       fdqTurma.Active := False;
@@ -279,49 +271,50 @@ begin
       fdqTurmaAluno.Active := False;
       fdqTurmaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
-
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
-      SmMain.SetLogErrorOld(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'GetTurmas',
-                         Now,
-                         EscolaId,
-                         0,
-                         FuncionarioId
-                         );
-
-
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
     end;
   finally
     fdqTurma.Active := False;
     fdqTurmaAluno.Active := False;
+    LogServerRequest.Free;
   end;
 end;
 
 function TSmEscola.LoginFuncionario(Login, Senha: string): Boolean;
+var
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Alunos
   try
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'LoginFuncionario',
+                                            0,
+                                            0,
+                                            0);
+
       fdqLoginFuncionario.Close;
       fdqLoginFuncionario.ParamByName('login').AsString := Login;
       fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
       fdqLoginFuncionario.Open;
       Result:= not (fdqLoginFuncionario.IsEmpty);
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
-      SmMain.SetLogErrorOld(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'LoginFuncionario',
-                         Now);
-
-
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
     end;
   finally
     fdqLoginFuncionario.Active := False;
+    LogServerRequest.Free;
   end;
 
 end;
@@ -359,6 +352,7 @@ var
   LDataSet: TFDDataSet;
   Exceptions:string;
   KeyValues: string;
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para Salvar a Agenda
   try
@@ -367,6 +361,14 @@ begin
     KeyValues:= EmptyStr;
 
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'SalvarAgenda',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
+
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
 
@@ -385,7 +387,7 @@ begin
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
       CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
 
-
+       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       Exceptions:=  Exceptions + E.Message;
     end;
@@ -393,18 +395,12 @@ begin
     if (Exceptions <> EmptyStr) then
     begin
       Result:= 'Erro ao salvar agenda' + #13 + Exceptions;
-      SmMain.SetLogErrorOld(Exceptions,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'SalvarAgenda',
-                         Now,
-                         EscolaId,
-                         0,
-                         FuncionarioId);
+      LogServerRequest.SetError(Exceptions);
+      SmMain.SaveLogError(LogServerRequest);
     end;
   finally
     CloseAgenda;
+    LogServerRequest.Free;
   end;
 end;
 
