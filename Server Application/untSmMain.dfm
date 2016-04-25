@@ -90,4 +90,19 @@ object SmMain: TSmMain
     Left = 152
     Top = 304
   end
+  object fdqLogServerRequest: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'select * from log_server_request l'
+      'where l.log_server_request_id = :log_server_request_id')
+    Left = 128
+    Top = 216
+    ParamData = <
+      item
+        Name = 'LOG_SERVER_REQUEST_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
 end

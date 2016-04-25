@@ -16,7 +16,8 @@ uses
   untSmResponsavel in 'untSmResponsavel.pas' {SmResponsavel: TDataModule},
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
   smGeral in 'C:\Componentes\sum182\D15\Units\smGeral.pas',
-  untResourceString in '..\Lib\untResourceString.pas';
+  untResourceString in '..\Lib\untResourceString.pas',
+  untLib in 'Lib\untLib.pas';
 
 {$R *.res}
 

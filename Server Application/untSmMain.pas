@@ -1,4 +1,4 @@
-unit untSmMain;
+ï»¿unit untSmMain;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,
-  Data.FireDACJSONReflect;
+  Data.FireDACJSONReflect,untLib;
 
 type
 {$METHODINFO ON}
@@ -25,6 +25,7 @@ type
     ApplicationEvents: TApplicationEvents;
     fdqProcessoAtualizacao: TFDQuery;
     FDQuery1: TFDQuery;
+    fdqLogServerRequest: TFDQuery;
 
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
@@ -38,16 +39,21 @@ type
     procedure OpenLogError(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
     procedure CloseLogError;
     procedure SetTimeZone;
-
   {$METHODINFO ON}
   public
-    function SalvarLogError(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets):String;
-    procedure SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
+    {$METHODINFO OFF}
+    procedure SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                            Data:TDateTime;
                            EscolaId:Integer = 0;
                            ResponsavelId:Integer=0;
                            FuncionarioId:Integer=0
-                          );
+                          );overload;
+
+    procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
+    procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
+   {$METHODINFO ON}
+
+    function SalvarLogError(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets):String;
 
    function GetProcessoAtualizacao(EscolaId:Integer;
                                  ResponsavelId:Integer=0;
@@ -78,7 +84,7 @@ uses smGeral, Vcl.Forms, smDBFireDac;
 
 procedure TSmMain.ApplicationEventsException(Sender: TObject; E: Exception);
 begin
-  SetLogError(E.Message,
+  SetLogErrorOld(E.Message,
               ExtractFileName(Application.Exename),
               UnitName,
               ClassName,
@@ -118,11 +124,11 @@ function TSmMain.GetDataSet(EscolaId: Integer; Nome: String; ResponsavelId,
 var
   fdqDataSet: TFDQuery;
 begin
-  //Método para Genérico para retonar um Dataset
+  //MÃ©todo para GenÃ©rico para retonar um Dataset
   try
     try
       if Nome = '' then
-       raise Exception.Create('GetDataSet: Nome não definido');
+       raise Exception.Create('GetDataSet: Nome nÃ£o definido');
 
       Result := TFDJSONDataSets.Create;
       fdqDataSet := TFDQuery.Create(self);
@@ -143,7 +149,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(Result,fdqDataSet);
 
     except on E:Exception do
-      SmMain.SetLogError(E.Message,
+      SmMain.SetLogErrorOld(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -165,7 +171,7 @@ end;
 function TSmMain.GetProcessoAtualizacao(EscolaId, ResponsavelId,
   FuncionarioId: Integer): TFDJSONDataSets;
 begin
-  //Método para retornar as Atualizações das Tabelas
+  //MÃ©todo para retornar as AtualizaÃ§Ãµes das Tabelas
   try
     try
       Result := TFDJSONDataSets.Create;
@@ -175,7 +181,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(Result,fdqProcessoAtualizacao);
 
     except on E:Exception do
-      SmMain.SetLogError(E.Message,
+      SmMain.SetLogErrorOld(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -218,7 +224,7 @@ var
   Exceptions:string;
   KeyValues: string;
 begin
-  //Método para Salvar Logs de Erros
+  //MÃ©todo para Salvar Logs de Erros
   try
     try
       Result:=EmptyStr;
@@ -241,7 +247,7 @@ begin
     if (Exceptions <> EmptyStr) then
     begin
       Result:= 'Erro ao Salvar logs' + #13 + Exceptions;
-      SmMain.SetLogError(Exceptions,
+      SmMain.SetLogErrorOld(Exceptions,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -257,7 +263,7 @@ begin
 
 end;
 
-procedure TSmMain.SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
+procedure TSmMain.SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                                Data:TDateTime;
                                EscolaId:Integer = 0;
                                ResponsavelId:Integer=0;
@@ -293,12 +299,83 @@ begin
 
 end;
 
+procedure TSmMain.SaveLogServerRequest(LogServerRequest: TLogServerRequest);
+begin
+  try
+    LogServerRequest.SetDataFim;
+
+    fdqLogServerRequest.Active:=False;
+    fdqLogServerRequest.Active:=True;
+
+    fdqLogServerRequest.Append;
+    fdqLogServerRequest.FieldByName('log_server_request_id').AsString:= smGeral.GetGUID;
+    fdqLogServerRequest.FieldByName('aplicacao').AsString:= LogServerRequest.Aplicacao;
+    fdqLogServerRequest.FieldByName('unit').AsString:= LogServerRequest.UnitNome;
+    fdqLogServerRequest.FieldByName('class').AsString:= LogServerRequest.Classe;
+    fdqLogServerRequest.FieldByName('metodo').AsString:= LogServerRequest.Metodo;
+
+    if LogServerRequest.EscolaId > 0 then
+      fdqLogServerRequest.FieldByName('escola_id').AsInteger:=LogServerRequest.EscolaId;
+
+    if LogServerRequest.ResponsavelId > 0 then
+      fdqLogServerRequest.FieldByName('responsavel_id').AsInteger:=LogServerRequest.ResponsavelId;
+
+    if LogServerRequest.FuncionarioId > 0 then
+      fdqLogServerRequest.FieldByName('funcionario_id').AsInteger:= LogServerRequest.FuncionarioId;
+
+    fdqLogServerRequest.FieldByName('data_ini').AsDateTime:= LogServerRequest.DataIni;
+    fdqLogServerRequest.FieldByName('data_fim').AsDateTime:= LogServerRequest.DataFim;
+
+    fdqLogServerRequest.FieldByName('msg_error').AsString:= LogServerRequest.MsgError;
+
+    if LogServerRequest.DataError > 0 then
+      fdqLogServerRequest.FieldByName('data_error').AsDateTime:= LogServerRequest.DataError;
+
+    fdqLogServerRequest.FieldByName('data_insert_server').AsDateTime:= Now;
+    fdqLogServerRequest.Post;
+  finally
+    fdqLogServerRequest.Active:=False;
+  end;
+end;
+
 procedure TSmMain.SetSQLLogError(EscolaId, FuncionarioId: Integer);
 begin
   fdqLogError.SQL.Clear;
   fdqLogError.SQL.Add('select * from log_error ');
   fdqLogError.SQL.Add('where l.log_error_id = :log_error_id');
   fdqLogError.ParamByName('log_error_id').AsInteger := 0;
+end;
+
+procedure TSmMain.SaveLogError(LogServerRequest: TLogServerRequest);
+begin
+  try
+    fdqLogError.Active:=False;
+    fdqLogError.Active:=True;
+
+    fdqLogError.Append;
+    fdqLogError.FieldByName('log_error_id').AsString:= smGeral.GetGUID;
+    fdqLogError.FieldByName('msg_error').AsString:= LogServerRequest.MsgError;
+    fdqLogError.FieldByName('aplicacao').AsString:= LogServerRequest.Aplicacao;
+    fdqLogError.FieldByName('unit').AsString:= LogServerRequest.UnitNome;
+    fdqLogError.FieldByName('class').AsString:= LogServerRequest.Classe;
+    fdqLogError.FieldByName('metodo').AsString:= LogServerRequest.Metodo;
+
+    if LogServerRequest.EscolaId > 0 then
+      fdqLogError.FieldByName('escola_id').AsInteger:=LogServerRequest.EscolaId;
+
+    if LogServerRequest.ResponsavelId > 0 then
+      fdqLogError.FieldByName('responsavel_id').AsInteger:=LogServerRequest.ResponsavelId;
+
+    if LogServerRequest.FuncionarioId > 0 then
+      fdqLogError.FieldByName('funcionario_id').AsInteger:= LogServerRequest.FuncionarioId;
+
+    fdqLogError.FieldByName('data').AsDateTime:= LogServerRequest.DataError;
+    fdqLogError.FieldByName('data_insert_server').AsDateTime:= Now;
+    fdqLogError.Post;
+  finally
+    fdqLogError.Active:=False;
+  end;
+
 end;
 
 procedure TSmMain.SetSQLLogError(EscolaId, FuncionarioId: Integer;

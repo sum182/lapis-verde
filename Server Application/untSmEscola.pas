@@ -75,7 +75,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,
-  System.SysUtils;
+  System.SysUtils, untLib;
 
 {$R *.dfm}
 
@@ -127,34 +127,39 @@ end;
 
 function TSmEscola.GetAgenda(EscolaId:Integer;FuncionarioId:Integer;
    DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil): TFDJSONDataSets;
+var
+  LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar as Agendas
   try
     try
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( ExtractFileName(Application.Exename),
+                                            UnitName,
+                                            ClassName,
+                                            'GetAgenda',
+                                            EscolaId,
+                                            0,
+                                            FuncionarioId);
+
       OpenAgenda(EscolaId, FuncionarioId, DtIni,DtFim,ListKeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_turma',fdqAgendaTurma);
-
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
-      SmMain.SetLogError(E.Message,
-                         ExtractFileName(Application.Exename),
-                         UnitName,
-                         ClassName,
-                         'GetAgenda',
-                         Now,
-                         EscolaId,
-                         0,
-                         FuncionarioId
-                         );
-
-
+      begin
+        LogServerRequest.DataError:=Now;
+        LogServerRequest.MsgError:= E.Message;
+        SmMain.SaveLogError(LogServerRequest);
+      end;
     end;
   finally
     fdqAgenda.Active := False;
     fdqAgendaAluno.Active := False;
     fdqAgendaTurma.Active := False;
+    LogServerRequest.Free;
   end;
 end;
 
@@ -169,7 +174,7 @@ begin
       fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
     except on E:Exception do
-      SmMain.SetLogError(E.Message,
+      SmMain.SetLogErrorOld(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -200,7 +205,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFunc);
 
     except on E:Exception do
-      SmMain.SetLogError(E.Message,
+      SmMain.SetLogErrorOld(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -239,7 +244,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);
 
      except on E:Exception do
-      SmMain.SetLogError(E.Message,
+      SmMain.SetLogErrorOld(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -276,7 +281,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
 
     except on E:Exception do
-      SmMain.SetLogError(E.Message,
+      SmMain.SetLogErrorOld(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -306,7 +311,7 @@ begin
       fdqLoginFuncionario.Open;
       Result:= not (fdqLoginFuncionario.IsEmpty);
     except on E:Exception do
-      SmMain.SetLogError(E.Message,
+      SmMain.SetLogErrorOld(E.Message,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,
@@ -388,7 +393,7 @@ begin
     if (Exceptions <> EmptyStr) then
     begin
       Result:= 'Erro ao salvar agenda' + #13 + Exceptions;
-      SmMain.SetLogError(Exceptions,
+      SmMain.SetLogErrorOld(Exceptions,
                          ExtractFileName(Application.Exename),
                          UnitName,
                          ClassName,

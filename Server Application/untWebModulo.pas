@@ -8,7 +8,7 @@ uses
   Web.WebFileDispatcher, Web.HTTPProd,
   DataSnap.DSAuth,
   Datasnap.DSProxyJavaScript, IPPeerServer, Datasnap.DSMetadata, Datasnap.DSServerMetadata, Datasnap.DSClientMetadata,
-  Datasnap.DSCommonServer, Datasnap.DSHTTP;
+  Datasnap.DSCommonServer, Datasnap.DSHTTP,untLib;
 
 type
   TwebModulo = class(TWebModule)
