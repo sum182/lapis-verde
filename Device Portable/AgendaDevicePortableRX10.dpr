@@ -39,7 +39,7 @@ uses
   untAgendaEscolaViewTestes in 'Testes\untAgendaEscolaViewTestes.pas' {frmAgendaEscolaViewTestes},
   untDmGetServer in 'DM\untDmGetServer.pas' {DmGetServer: TDataModule},
   untDmSaveServer in 'DM\untDmSaveServer.pas' {DmSaveServer: TDataModule},
-  untLib in '..\Lib\untLib.pas';
+  untLibServer in '..\Lib\untLibServer.pas';
 
 {$R *.res}
 

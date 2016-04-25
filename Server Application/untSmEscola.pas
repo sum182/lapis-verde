@@ -74,7 +74,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,
-  System.SysUtils, untLib;
+  System.SysUtils, untLibServer;
 
 {$R *.dfm}
 
