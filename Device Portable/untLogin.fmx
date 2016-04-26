@@ -2,7 +2,6 @@ inherited frmLogin: TfrmLogin
   Caption = 'Login Agenda'
   Position = DesktopCenter
   StyleBook = DMStyles.styleAndroid
-  OnCreate = FormCreate
   OnShow = FormShow
   DesignerMasterStyle = 3
   object VertScrollBox1: TVertScrollBox

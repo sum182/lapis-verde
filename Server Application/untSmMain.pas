@@ -8,8 +8,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Phys.MySQLDef,
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.Client,
-  FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,
-  Data.FireDACJSONReflect,untLibServer;
+  FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,untLibServer,
+  Data.FireDACJSONReflect;
 
 type
 {$METHODINFO ON}
@@ -23,7 +23,6 @@ type
     ApplicationEvents: TApplicationEvents;
     fdqProcessoAtualizacao: TFDQuery;
     fdqLogServerRequest: TFDQuery;
-    fdqLoginFuncionario: TFDQuery;
     fdqTurmaAluno: TFDQuery;
     fdqTurma: TFDQuery;
     fdqAluno: TFDQuery;
@@ -57,22 +56,35 @@ type
     procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
    {$METHODINFO ON}
+    function GetAlunos(EscolaId:Integer;
+                       ResponsavelId:Integer=0;
+                       FuncionarioId:Integer=0
+                      ):TFDJSONDataSets;
 
-    function LoginFuncionario(Login:string; Senha:string):Boolean;
-    function GetAlunos(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
-    function GetTurmas(EscolaId:Integer;FuncionarioId:Integer):TFDJSONDataSets;
+    function GetTurmas(EscolaId:Integer;
+                       ResponsavelId:Integer=0;
+                       FuncionarioId:Integer=0
+                      ):TFDJSONDataSets;
+
     function GetResponsaveis(EscolaId:Integer;
-                             FuncionarioId:Integer):TFDJSONDataSets;
+                             ResponsavelId:Integer=0;
+                             FuncionarioId:Integer=0
+                             ):TFDJSONDataSets;
 
-    function GetFuncionarios(EscolaId:Integer;
-                             FuncionarioId:Integer):TFDJSONDataSets;
+    function GetFuncionarios( EscolaId:Integer;
+                              ResponsavelId:Integer=0;
+                              FuncionarioId:Integer=0
+                             ):TFDJSONDataSets;
 
 
-    function SalvarLogError(EscolaId, FuncionarioId: Integer; LDataSetList: TFDJSONDataSets):String;
+    function SalvarLogError(EscolaId:Integer;
+                            ResponsavelId:Integer=0;
+                            FuncionarioId:Integer=0;
+                            LDataSetList: TFDJSONDataSets = nil ):String;
 
     function GetProcessoAtualizacao(EscolaId:Integer;
-                                 ResponsavelId:Integer=0;
-                                 FuncionarioId:Integer=0):TFDJSONDataSets;
+                                    ResponsavelId:Integer=0;
+                                    FuncionarioId:Integer=0):TFDJSONDataSets;
 
     function GetDataSet( EscolaId:Integer;
                          Nome: String;
@@ -133,7 +145,10 @@ begin
   Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
-function TSmMain.GetAlunos(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
+function TSmMain.GetAlunos(EscolaId:Integer;
+                           ResponsavelId:Integer=0;
+                           FuncionarioId:Integer=0
+                           ):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -219,8 +234,10 @@ begin
 
 end;
 
-function TSmMain.GetFuncionarios(EscolaId,
-  FuncionarioId: Integer): TFDJSONDataSets;
+function TSmMain.GetFuncionarios(EscolaId:Integer;
+                                 ResponsavelId:Integer=0;
+                                 FuncionarioId:Integer=0
+                                ):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -287,8 +304,10 @@ begin
 
 end;
 
-function TSmMain.GetResponsaveis(EscolaId,
-  FuncionarioId: Integer): TFDJSONDataSets;
+function TSmMain.GetResponsaveis(EscolaId:Integer;
+                                 ResponsavelId:Integer=0;
+                                 FuncionarioId:Integer=0
+                                 ):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -331,7 +350,10 @@ begin
   end;
 
 end;
-function TSmMain.GetTurmas(EscolaId, FuncionarioId: Integer): TFDJSONDataSets;
+function TSmMain.GetTurmas(EscolaId:Integer;
+                           ResponsavelId:Integer=0;
+                           FuncionarioId:Integer=0
+                      ):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -369,40 +391,7 @@ begin
   end;
 end;
 
-function TSmMain.LoginFuncionario(Login, Senha: string): Boolean;
-var
-  LogServerRequest:TLogServerRequest;
-begin
-  //Método para retornar os Alunos
-  try
-    try
-      LogServerRequest:=TLogServerRequest.Create;
-      LogServerRequest.SetLogServerRequest( UnitName,
-                                            ClassName,
-                                            'LoginFuncionario',
-                                            0,
-                                            0,
-                                            0);
 
-      fdqLoginFuncionario.Close;
-      fdqLoginFuncionario.ParamByName('login').AsString := Login;
-      fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
-      fdqLoginFuncionario.Open;
-      Result:= not (fdqLoginFuncionario.IsEmpty);
-      SmMain.SaveLogServerRequest(LogServerRequest);
-    except on E:Exception do
-      begin
-        LogServerRequest.SetError(E.Message);
-        SmMain.SaveLogError(LogServerRequest);
-      end;
-    end;
-  finally
-    fdqLoginFuncionario.Active := False;
-    LogServerRequest.Free;
-  end;
-
-
-end;
 
 procedure TSmMain.OpenLogError(EscolaId, FuncionarioId: Integer);
 begin
@@ -421,8 +410,10 @@ begin
   fdqLogError.Active := True;
 end;
 
-function TSmMain.SalvarLogError(EscolaId, FuncionarioId: Integer;
-  LDataSetList: TFDJSONDataSets): String;
+function TSmMain.SalvarLogError(EscolaId:Integer;
+                            ResponsavelId:Integer=0;
+                            FuncionarioId:Integer=0;
+                            LDataSetList: TFDJSONDataSets=nil):String;
 var
   LDataSet: TFDDataSet;
   Exceptions:string;
