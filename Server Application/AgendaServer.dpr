@@ -17,8 +17,8 @@ uses
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
   smGeral in 'C:\Componentes\sum182\D15\Units\smGeral.pas',
   untResourceString in '..\Lib\untResourceString.pas',
-  untLibServer in '..\Lib\untLibServer.pas';
-
+  untLibServer in '..\Lib\untLibServer.pas',
+  untLibGeral in '..\Lib\untLibGeral.pas';
 {$R *.res}
 
 begin

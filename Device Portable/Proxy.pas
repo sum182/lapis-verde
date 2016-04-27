@@ -1,13 +1,13 @@
 //
 // Created by the DataSnap proxy generator.
-// 26/04/2016 12:51:00
+// 27/04/2016 12:43:58
 //
 
 unit Proxy;
 
 interface
 
-uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.FireDACJSONReflect, untLibServer, Data.DBXJSONReflect;
+uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.FireDACJSONReflect, untLibServer, untLibGeral, Data.DBXJSONReflect;
 
 type
 
@@ -98,15 +98,15 @@ type
     procedure SetLogErrorOld(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer);
     procedure SaveLogError(LogServerRequest: TLogServerRequest);
     procedure SaveLogServerRequest(LogServerRequest: TLogServerRequest);
-    function GetAlunos(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetAlunos_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetTurmas(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetResponsaveis(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetResponsaveis_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetFuncionarios(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetFuncionarios_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function SalvarLogError(EscolaId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    function GetAlunos(EscolaId: Integer; Usuario: TUsuario; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAlunos_Cache(EscolaId: Integer; Usuario: TUsuario; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetTurmas(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetTurmas_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetResponsaveis(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetResponsaveis_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetFuncionarios(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetFuncionarios_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function SalvarLogError(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     function GetProcessoAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetProcessoAtualizacao_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetDataSet(EscolaId: Integer; Nome: string; ResponsavelId: Integer; FuncionarioId: Integer; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): TFDJSONDataSets;
@@ -319,62 +319,69 @@ const
   TSmMain_GetAlunos: array [0..2] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'Usuario'; Direction: 1; DBXType: 37; TypeName: 'TUsuario'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
   TSmMain_GetAlunos_Cache: array [0..2] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'Usuario'; Direction: 1; DBXType: 37; TypeName: 'TUsuario'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmMain_GetTurmas: array [0..2] of TDSRestParameterMetaData =
+  TSmMain_GetTurmas: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
-  TSmMain_GetTurmas_Cache: array [0..2] of TDSRestParameterMetaData =
+  TSmMain_GetTurmas_Cache: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmMain_GetResponsaveis: array [0..2] of TDSRestParameterMetaData =
+  TSmMain_GetResponsaveis: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
-  TSmMain_GetResponsaveis_Cache: array [0..2] of TDSRestParameterMetaData =
+  TSmMain_GetResponsaveis_Cache: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmMain_GetFuncionarios: array [0..2] of TDSRestParameterMetaData =
+  TSmMain_GetFuncionarios: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
-  TSmMain_GetFuncionarios_Cache: array [0..2] of TDSRestParameterMetaData =
+  TSmMain_GetFuncionarios_Cache: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmMain_SalvarLogError: array [0..3] of TDSRestParameterMetaData =
+  TSmMain_SalvarLogError: array [0..4] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'ResponsavelId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'FuncionarioId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
@@ -1039,17 +1046,29 @@ begin
   FSaveLogServerRequestCommand.Execute;
 end;
 
-function TSmMainClient.GetAlunos(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetAlunos(EscolaId: Integer; Usuario: TUsuario; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetAlunosCommand = nil then
   begin
     FGetAlunosCommand := FConnection.CreateCommand;
-    FGetAlunosCommand.RequestType := 'GET';
-    FGetAlunosCommand.Text := 'TSmMain.GetAlunos';
+    FGetAlunosCommand.RequestType := 'POST';
+    FGetAlunosCommand.Text := 'TSmMain."GetAlunos"';
     FGetAlunosCommand.Prepare(TSmMain_GetAlunos);
   end;
   FGetAlunosCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FGetAlunosCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  if not Assigned(Usuario) then
+    FGetAlunosCommand.Parameters[1].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FGetAlunosCommand.Parameters[1].ConnectionHandler).GetJSONMarshaler;
+    try
+      FGetAlunosCommand.Parameters[1].Value.SetJSONValue(FMarshal.Marshal(Usuario), True);
+      if FInstanceOwner then
+        Usuario.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
   FGetAlunosCommand.Execute(ARequestFilter);
   if not FGetAlunosCommand.Parameters[2].Value.IsNull then
   begin
@@ -1066,22 +1085,34 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetAlunos_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetAlunos_Cache(EscolaId: Integer; Usuario: TUsuario; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetAlunosCommand_Cache = nil then
   begin
     FGetAlunosCommand_Cache := FConnection.CreateCommand;
-    FGetAlunosCommand_Cache.RequestType := 'GET';
-    FGetAlunosCommand_Cache.Text := 'TSmMain.GetAlunos';
+    FGetAlunosCommand_Cache.RequestType := 'POST';
+    FGetAlunosCommand_Cache.Text := 'TSmMain."GetAlunos"';
     FGetAlunosCommand_Cache.Prepare(TSmMain_GetAlunos_Cache);
   end;
   FGetAlunosCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
-  FGetAlunosCommand_Cache.Parameters[1].Value.SetInt32(FuncionarioId);
+  if not Assigned(Usuario) then
+    FGetAlunosCommand_Cache.Parameters[1].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FGetAlunosCommand_Cache.Parameters[1].ConnectionHandler).GetJSONMarshaler;
+    try
+      FGetAlunosCommand_Cache.Parameters[1].Value.SetJSONValue(FMarshal.Marshal(Usuario), True);
+      if FInstanceOwner then
+        Usuario.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
   FGetAlunosCommand_Cache.ExecuteCache(ARequestFilter);
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAlunosCommand_Cache.Parameters[2].Value.GetString);
 end;
 
-function TSmMainClient.GetTurmas(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetTurmas(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetTurmasCommand = nil then
   begin
@@ -1091,13 +1122,14 @@ begin
     FGetTurmasCommand.Prepare(TSmMain_GetTurmas);
   end;
   FGetTurmasCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FGetTurmasCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetTurmasCommand.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetTurmasCommand.Parameters[2].Value.SetInt32(FuncionarioId);
   FGetTurmasCommand.Execute(ARequestFilter);
-  if not FGetTurmasCommand.Parameters[2].Value.IsNull then
+  if not FGetTurmasCommand.Parameters[3].Value.IsNull then
   begin
-    FUnMarshal := TDSRestCommand(FGetTurmasCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    FUnMarshal := TDSRestCommand(FGetTurmasCommand.Parameters[3].ConnectionHandler).GetJSONUnMarshaler;
     try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetTurmasCommand.Parameters[2].Value.GetJSONValue(True)));
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetTurmasCommand.Parameters[3].Value.GetJSONValue(True)));
       if FInstanceOwner then
         FGetTurmasCommand.FreeOnExecute(Result);
     finally
@@ -1108,7 +1140,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetTurmas_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetTurmas_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetTurmasCommand_Cache = nil then
   begin
@@ -1118,12 +1150,13 @@ begin
     FGetTurmasCommand_Cache.Prepare(TSmMain_GetTurmas_Cache);
   end;
   FGetTurmasCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
-  FGetTurmasCommand_Cache.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetTurmasCommand_Cache.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetTurmasCommand_Cache.Parameters[2].Value.SetInt32(FuncionarioId);
   FGetTurmasCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetTurmasCommand_Cache.Parameters[2].Value.GetString);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetTurmasCommand_Cache.Parameters[3].Value.GetString);
 end;
 
-function TSmMainClient.GetResponsaveis(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetResponsaveis(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetResponsaveisCommand = nil then
   begin
@@ -1133,13 +1166,14 @@ begin
     FGetResponsaveisCommand.Prepare(TSmMain_GetResponsaveis);
   end;
   FGetResponsaveisCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FGetResponsaveisCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetResponsaveisCommand.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetResponsaveisCommand.Parameters[2].Value.SetInt32(FuncionarioId);
   FGetResponsaveisCommand.Execute(ARequestFilter);
-  if not FGetResponsaveisCommand.Parameters[2].Value.IsNull then
+  if not FGetResponsaveisCommand.Parameters[3].Value.IsNull then
   begin
-    FUnMarshal := TDSRestCommand(FGetResponsaveisCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    FUnMarshal := TDSRestCommand(FGetResponsaveisCommand.Parameters[3].ConnectionHandler).GetJSONUnMarshaler;
     try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetResponsaveisCommand.Parameters[2].Value.GetJSONValue(True)));
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetResponsaveisCommand.Parameters[3].Value.GetJSONValue(True)));
       if FInstanceOwner then
         FGetResponsaveisCommand.FreeOnExecute(Result);
     finally
@@ -1150,7 +1184,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetResponsaveis_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetResponsaveis_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetResponsaveisCommand_Cache = nil then
   begin
@@ -1160,12 +1194,13 @@ begin
     FGetResponsaveisCommand_Cache.Prepare(TSmMain_GetResponsaveis_Cache);
   end;
   FGetResponsaveisCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
-  FGetResponsaveisCommand_Cache.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetResponsaveisCommand_Cache.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetResponsaveisCommand_Cache.Parameters[2].Value.SetInt32(FuncionarioId);
   FGetResponsaveisCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetResponsaveisCommand_Cache.Parameters[2].Value.GetString);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetResponsaveisCommand_Cache.Parameters[3].Value.GetString);
 end;
 
-function TSmMainClient.GetFuncionarios(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetFuncionarios(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetFuncionariosCommand = nil then
   begin
@@ -1175,13 +1210,14 @@ begin
     FGetFuncionariosCommand.Prepare(TSmMain_GetFuncionarios);
   end;
   FGetFuncionariosCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FGetFuncionariosCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetFuncionariosCommand.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetFuncionariosCommand.Parameters[2].Value.SetInt32(FuncionarioId);
   FGetFuncionariosCommand.Execute(ARequestFilter);
-  if not FGetFuncionariosCommand.Parameters[2].Value.IsNull then
+  if not FGetFuncionariosCommand.Parameters[3].Value.IsNull then
   begin
-    FUnMarshal := TDSRestCommand(FGetFuncionariosCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    FUnMarshal := TDSRestCommand(FGetFuncionariosCommand.Parameters[3].ConnectionHandler).GetJSONUnMarshaler;
     try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetFuncionariosCommand.Parameters[2].Value.GetJSONValue(True)));
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetFuncionariosCommand.Parameters[3].Value.GetJSONValue(True)));
       if FInstanceOwner then
         FGetFuncionariosCommand.FreeOnExecute(Result);
     finally
@@ -1192,7 +1228,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetFuncionarios_Cache(EscolaId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetFuncionarios_Cache(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetFuncionariosCommand_Cache = nil then
   begin
@@ -1202,12 +1238,13 @@ begin
     FGetFuncionariosCommand_Cache.Prepare(TSmMain_GetFuncionarios_Cache);
   end;
   FGetFuncionariosCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
-  FGetFuncionariosCommand_Cache.Parameters[1].Value.SetInt32(FuncionarioId);
+  FGetFuncionariosCommand_Cache.Parameters[1].Value.SetInt32(ResponsavelId);
+  FGetFuncionariosCommand_Cache.Parameters[2].Value.SetInt32(FuncionarioId);
   FGetFuncionariosCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetFuncionariosCommand_Cache.Parameters[2].Value.GetString);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetFuncionariosCommand_Cache.Parameters[3].Value.GetString);
 end;
 
-function TSmMainClient.SalvarLogError(EscolaId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+function TSmMainClient.SalvarLogError(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarLogErrorCommand = nil then
   begin
@@ -1217,14 +1254,15 @@ begin
     FSalvarLogErrorCommand.Prepare(TSmMain_SalvarLogError);
   end;
   FSalvarLogErrorCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FSalvarLogErrorCommand.Parameters[1].Value.SetInt32(FuncionarioId);
+  FSalvarLogErrorCommand.Parameters[1].Value.SetInt32(ResponsavelId);
+  FSalvarLogErrorCommand.Parameters[2].Value.SetInt32(FuncionarioId);
   if not Assigned(LDataSetList) then
-    FSalvarLogErrorCommand.Parameters[2].Value.SetNull
+    FSalvarLogErrorCommand.Parameters[3].Value.SetNull
   else
   begin
-    FMarshal := TDSRestCommand(FSalvarLogErrorCommand.Parameters[2].ConnectionHandler).GetJSONMarshaler;
+    FMarshal := TDSRestCommand(FSalvarLogErrorCommand.Parameters[3].ConnectionHandler).GetJSONMarshaler;
     try
-      FSalvarLogErrorCommand.Parameters[2].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      FSalvarLogErrorCommand.Parameters[3].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
       if FInstanceOwner then
         LDataSetList.Free
     finally
@@ -1232,7 +1270,7 @@ begin
     end
     end;
   FSalvarLogErrorCommand.Execute(ARequestFilter);
-  Result := FSalvarLogErrorCommand.Parameters[3].Value.GetWideString;
+  Result := FSalvarLogErrorCommand.Parameters[4].Value.GetWideString;
 end;
 
 function TSmMainClient.GetProcessoAtualizacao(EscolaId: Integer; ResponsavelId: Integer; FuncionarioId: Integer; const ARequestFilter: string): TFDJSONDataSets;

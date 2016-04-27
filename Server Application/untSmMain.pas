@@ -9,7 +9,7 @@ uses
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,untLibServer,
-  Data.FireDACJSONReflect;
+  Data.FireDACJSONReflect, untLibGeral;
 
 type
 {$METHODINFO ON}
@@ -57,8 +57,7 @@ type
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
    {$METHODINFO ON}
     function GetAlunos(EscolaId:Integer;
-                       ResponsavelId:Integer=0;
-                       FuncionarioId:Integer=0
+                       Usuario:TUsuario
                       ):TFDJSONDataSets;
 
     function GetTurmas(EscolaId:Integer;
@@ -145,10 +144,7 @@ begin
   Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
-function TSmMain.GetAlunos(EscolaId:Integer;
-                           ResponsavelId:Integer=0;
-                           FuncionarioId:Integer=0
-                           ):TFDJSONDataSets;
+function TSmMain.GetAlunos(EscolaId:Integer;Usuario:TUsuario):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -161,7 +157,7 @@ begin
                                            'GetAlunos',
                                            EscolaId,
                                            0,
-                                           FuncionarioId);
+                                           Usuario.Id);
 
       Result := TFDJSONDataSets.Create;
 

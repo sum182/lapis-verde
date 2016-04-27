@@ -122,7 +122,7 @@ begin
       LDataSetList := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogError);
 
-      MsgRetornoServer:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,GetFuncionarioId,LDataSetList);
+      MsgRetornoServer:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,GetResponsavelId,GetFuncionarioId,LDataSetList);
 
     except on E:Exception do
       MsgRetornoServer := MsgRetornoServer + E.Message;

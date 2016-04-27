@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
-  IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,REST.Types;
+  IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,REST.Types,untLibGeral;
 
 type
   TDm = class(TDataModule)
@@ -37,6 +37,7 @@ type
     procedure ConectarDB;
     procedure SetModoTeste;
   public
+    Usuario:TUsuario;
     IsModoTeste:Boolean;
     fUsuarioLogadoIsResponsavel:boolean;
     fUsuarioLogadoIsFuncionario:boolean;
@@ -119,10 +120,14 @@ begin
   FDCreateDB.Close;
   ConectarBases;
 
+  Usuario:= TUsuario.Create;
+
   SetModoTeste;
+
+  //mudar este por tipo de usuario
   fUsuarioLogadoIsFuncionario:=True;
   fUsuarioLogadoIsResponsavel:=False;
-
+  //
 end;
 
 procedure TDm.OpenProcessoAtualizacao;
@@ -212,6 +217,9 @@ begin
   fFuncionarioId:=16;
   fEscolaId:=1;
   fResponsavelId:=0;
+
+  Usuario.Tipo:=Funcionario;
+  Usuario.Id:= 16;
 end;
 
 procedure TDm.SyncronizarDadosServerGeral;
