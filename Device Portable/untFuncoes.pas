@@ -5,7 +5,6 @@ interface
 Uses  FMX.Forms, Data.DB, untLibGeral;
 
   procedure SetStyle(Formulario:TForm);
-  function GetUsuario:TUsuario;
   function GetEscolaId:Integer;
   function GetFuncionarioId:Integer;
   function GetResponsavelId:Integer;
@@ -37,16 +36,6 @@ end;
 function GetEscolaId:Integer;
 begin
   Result:= DM.fEscolaId;
-end;
-
-function GetUsuario:TUsuario;
-var
-  UserNew:TUsuario;
-begin
-  UserNew:=TUsuario.Create;
-  UserNew.Tipo:=Dm.Usuario.Tipo;
-  UserNew.Id:=Dm.Usuario.Id;
-  Result:= UserNew;
 end;
 
 function GetFuncionarioId:Integer;

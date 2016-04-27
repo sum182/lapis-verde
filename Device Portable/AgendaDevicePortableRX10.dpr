@@ -40,7 +40,8 @@ uses
   untDmGetServer in 'DM\untDmGetServer.pas' {DmGetServer: TDataModule},
   untDmSaveServer in 'DM\untDmSaveServer.pas' {DmSaveServer: TDataModule},
   untLibServer in '..\Lib\untLibServer.pas',
-  untLibGeral in '..\Lib\untLibGeral.pas';
+  untLibGeral in '..\Lib\untLibGeral.pas' {$R *.res},
+  untTypes in '..\Lib\untTypes.pas';
 
 {$R *.res}
 

@@ -2,7 +2,7 @@ unit untLibServer;
 
 interface
 
-Uses  FMX.Forms, Data.DB;
+Uses  FMX.Forms, Data.DB, untLibGeral;
 
   Type
     TLogServerRequest = class
@@ -12,8 +12,7 @@ Uses  FMX.Forms, Data.DB;
       Classe:String;
       Metodo:String;
       EscolaId:Integer;
-      ResponsavelId:Integer;
-      FuncionarioId:Integer;
+      Usuario:TUsuario;
       DataIni:TDateTime;
       DataFim:TDateTime;
       MsgError:String;
@@ -21,9 +20,8 @@ Uses  FMX.Forms, Data.DB;
 
       constructor Create;
       procedure SetLogServerRequest( UnitNome,Classe,Metodo:String;
-                                     EscolaId:Integer = 0;
-                                     ResponsavelId:Integer=0;
-                                     FuncionarioId:Integer=0
+                                     EscolaId:Integer;
+                                     Usuario:TUsuario
                                     );
       procedure SetDataFim;
       procedure SetError(MsgError:String);
@@ -55,17 +53,16 @@ begin
   DataError:= Now;
 end;
 
+
 procedure TLogServerRequest.SetLogServerRequest(UnitNome, Classe,
-  Metodo: String; EscolaId, ResponsavelId,
-  FuncionarioId: Integer);
+  Metodo: String; EscolaId: Integer; Usuario: TUsuario);
 begin
   self.Aplicacao:=ExtractFileName(Application.Exename);
   self.UnitNome:=UnitNome;
   self.Classe:=Classe;
   self.Metodo:=Metodo;
   self.EscolaId:=EscolaId;
-  self.ResponsavelId:=ResponsavelId;
-  self.FuncionarioId:=FuncionarioId;
+  self.Usuario:=Usuario;
 end;
 
 end.

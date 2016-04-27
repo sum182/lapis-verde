@@ -74,7 +74,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurma);
 
 
-      MsgRetornoServer:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,GetFuncionarioId,Now-30,Now,LDataSetList);
+      MsgRetornoServer:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
 
       //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then
@@ -122,7 +122,7 @@ begin
       LDataSetList := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogError);
 
-      MsgRetornoServer:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,GetResponsavelId,GetFuncionarioId,LDataSetList);
+      MsgRetornoServer:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
 
     except on E:Exception do
       MsgRetornoServer := MsgRetornoServer + E.Message;

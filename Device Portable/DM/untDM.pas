@@ -8,8 +8,7 @@ uses
   FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
-  IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,REST.Types,untLibGeral;
-
+  IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,REST.Types,untLibGeral,untTypes;
 type
   TDm = class(TDataModule)
     FDConnectionDB: TFDConnection;
@@ -37,7 +36,6 @@ type
     procedure ConectarDB;
     procedure SetModoTeste;
   public
-    Usuario:TUsuario;
     IsModoTeste:Boolean;
     fUsuarioLogadoIsResponsavel:boolean;
     fUsuarioLogadoIsFuncionario:boolean;
@@ -64,6 +62,7 @@ type
 
 var
   Dm: TDm;
+  Usuario:TUsuario;
 
 const
   BASE_URL: String = 'http://54.200.116.223:8080/datasnap/rest/TSrvServerMetodos';
@@ -140,6 +139,7 @@ end;
 function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
   Result:=True;
+  exit;
   OpenProcessoAtualizacao;
 
   fdqProcessoAtualizacao.IndexFieldNames:='processo';

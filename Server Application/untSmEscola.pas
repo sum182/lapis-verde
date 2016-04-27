@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect,
-  Vcl.AppEvnts;
+  Vcl.AppEvnts, untLibGeral, System.JSON;
 
 type
 
@@ -38,10 +38,10 @@ type
     procedure SetSQLAgenda(KeyValues:String);overload;
     procedure SetSQLAgendaDet(KeyValues:String);
 
-    procedure SetParamsAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime);
+    procedure SetParamsAgenda(EscolaId:Integer;DtIni,DtFim:TDateTime);
 
-    procedure OpenAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil);overload;
-    procedure OpenAgenda(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
+    procedure OpenAgenda(EscolaId:Integer;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil);overload;
+    procedure OpenAgenda(EscolaId:Integer;KeyValues:String);overload;
     procedure CloseAgenda;
 
 
@@ -51,8 +51,8 @@ type
     function LoginFuncionario(Login:string; Senha:string):Boolean;
 
     //Metodos de Agenda
-    function GetAgenda(EscolaId:Integer;FuncionarioId:Integer;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil):TFDJSONDataSets;
-    function SalvarAgenda(EscolaId, FuncionarioId: Integer; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
+    function GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil):TFDJSONDataSets;
+    function SalvarAgenda(EscolaId:Integer; pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
 
   end;
 
@@ -91,7 +91,7 @@ begin
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 end;
 
-function TSmEscola.GetAgenda(EscolaId:Integer;FuncionarioId:Integer;
+function TSmEscola.GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;
    DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
@@ -99,15 +99,15 @@ begin
   //Método para retornar as Agendas
   try
     try
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'GetAgenda',
                                             EscolaId,
-                                            0,
-                                            FuncionarioId);
+                                            Usuario);
 
-      OpenAgenda(EscolaId, FuncionarioId, DtIni,DtFim,ListKeysInserts);
+      OpenAgenda(EscolaId,DtIni,DtFim,ListKeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
@@ -139,8 +139,7 @@ begin
                                             ClassName,
                                             'LoginFuncionario',
                                             0,
-                                            0,
-                                            0);
+                                            Usuario);
 
       fdqLoginFuncionario.Close;
       fdqLoginFuncionario.ParamByName('login').AsString := Login;
@@ -161,16 +160,15 @@ begin
 
 end;
 
-procedure TSmEscola.OpenAgenda(EscolaId, FuncionarioId: Integer; DtIni,
+procedure TSmEscola.OpenAgenda(EscolaId:Integer; DtIni,
   DtFim: TDateTime;ListKeysInserts: TFDJSONDataSets = nil);
 var
   KeyValues:String;
 begin
   CloseAgenda;
   SetSQLAgenda(ListKeysInserts);
-  SetParamsAgenda(EscolaId, FuncionarioId, DtIni, DtFim);
+  SetParamsAgenda(EscolaId,DtIni, DtFim);
   fdqAgenda.Active := True;
-
   KeyValues:= GetKeyValuesDataSet(fdqAgenda,'agenda_id');
   SetSQLAgendaDet(KeyValues);
 
@@ -178,7 +176,7 @@ begin
   fdqAgendaTurma.Active := True;
 end;
 
-procedure TSmEscola.OpenAgenda(EscolaId, FuncionarioId: Integer;KeyValues:String);
+procedure TSmEscola.OpenAgenda(EscolaId:Integer;KeyValues:String);
 begin
   CloseAgenda;
 
@@ -189,7 +187,7 @@ begin
   fdqAgendaTurma.Active := True;
 end;
 
-function TSmEscola.SalvarAgenda(EscolaId, FuncionarioId: Integer; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets): String;
+function TSmEscola.SalvarAgenda(EscolaId:Integer;pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets): String;
 var
   LDataSet: TFDDataSet;
   Exceptions:string;
@@ -203,13 +201,13 @@ begin
     KeyValues:= EmptyStr;
 
     try
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'SalvarAgenda',
                                             EscolaId,
-                                            0,
-                                            FuncionarioId);
+                                            Usuario);
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
@@ -218,7 +216,7 @@ begin
         Exit;
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      OpenAgenda(EscolaId,FuncionarioId,KeyValues);
+      OpenAgenda(EscolaId,KeyValues);
       CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_aluno
@@ -246,7 +244,7 @@ begin
   end;
 end;
 
-procedure TSmEscola.SetParamsAgenda(EscolaId, FuncionarioId: Integer; DtIni,
+procedure TSmEscola.SetParamsAgenda(EscolaId:Integer;DtIni,
   DtFim: TDateTime);
 begin
    DtIni:= StrToDate(FormatDateTime('dd/mm/yyyy',DtIni));

@@ -18,7 +18,9 @@ uses
   smGeral in 'C:\Componentes\sum182\D15\Units\smGeral.pas',
   untResourceString in '..\Lib\untResourceString.pas',
   untLibServer in '..\Lib\untLibServer.pas',
-  untLibGeral in '..\Lib\untLibGeral.pas';
+  untLibGeral in '..\Lib\untLibGeral.pas' {$R *.res},
+  untTypes in '..\Lib\untTypes.pas';
+
 {$R *.res}
 
 begin

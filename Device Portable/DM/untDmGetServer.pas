@@ -76,7 +76,7 @@ implementation
 
 uses untDM, untModuloCliente, smDBFireDac,
   FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState,
-  untLibGeral;
+  untLibGeral, Data.DBXJSONReflect, System.JSON;
 
 {$R *.dfm}
 
@@ -101,7 +101,7 @@ begin
       KeyValues:= EmptyStr;
 
       LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,
-                                                             GetFuncionarioId,
+                                                             Usuario.Marshal,
                                                              DtIni,
                                                              DtFim,
                                                              GetAgendaListKeysInsert(DtIni,DtFim)
@@ -164,7 +164,7 @@ begin
       if not Dm.ProcessHasUpdate('funcionario') then
        Exit;
 
-      LDataSetList := ModuloCliente.SmMainClient.GetFuncionarios(GetEscolaId,GetResponsavelId,GetFuncionarioId);
+      LDataSetList := ModuloCliente.SmMainClient.GetFuncionarios(GetEscolaId,Usuario.Marshal);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario');
       CopyDataSet(LDataSet,fdqFunc);
 
@@ -210,10 +210,10 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-    //if not Dm.ProcessHasUpdate('aluno') then
-     //Exit;
+    if not Dm.ProcessHasUpdate('aluno') then
+     Exit;
 
-    LDataSetList := ModuloCliente.SmMainClient.GetAlunos(GetEscolaId,GetUsuario);
+    LDataSetList := ModuloCliente.SmMainClient.GetAlunos(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqAluno);
 
@@ -355,8 +355,7 @@ begin
 
       LDataSetList := ModuloCliente.SmMainClient.GetDataSet(GetEscolaId,
                                                             Nome,
-                                                            GetResponsavelId,
-                                                            GetFuncionarioId,
+                                                            Usuario.Marshal,
                                                             UtilizaParamEscolaId,
                                                             Condicoes);
 
@@ -394,7 +393,7 @@ var
 begin
   try
     OpenProcessoAtualizacao;
-    LDataSetList := ModuloCliente.SmMainClient.GetProcessoAtualizacao(GetEscolaId,GetResponsavelId,GetFuncionarioId);
+    LDataSetList := ModuloCliente.SmMainClient.GetProcessoAtualizacao(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit]);
   except on E:Exception do
@@ -512,7 +511,7 @@ begin
        Exit;
 
       //OpenResponsaveis;
-      LDataSetList := ModuloCliente.SmMainClient.GetResponsaveis(GetEscolaId,GetResponsavelId,GetFuncionarioId);
+      LDataSetList := ModuloCliente.SmMainClient.GetResponsaveis(GetEscolaId,Usuario.Marshal);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
       CopyDataSet(LDataSet,fdqResp);
 
@@ -571,7 +570,7 @@ begin
      Exit;
 
     OpenTurmas;
-    LDataSetList := ModuloCliente.SmMainClient.GetTurmas(GetEscolaId,GetResponsavelId,GetFuncionarioId);
+    LDataSetList := ModuloCliente.SmMainClient.GetTurmas(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma');
     CopyDataSet(LDataSet,fdqTurma);
 

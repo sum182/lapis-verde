@@ -9,7 +9,7 @@ uses
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,untLibServer,
-  Data.FireDACJSONReflect, untLibGeral;
+  Data.FireDACJSONReflect, untLibGeral, System.JSON, untTypes;
 
 type
 {$METHODINFO ON}
@@ -37,10 +37,10 @@ type
     procedure FDConnectionAfterConnect(Sender: TObject);
   private
 
-    procedure SetSQLLogError(EscolaId:Integer;FuncionarioId:Integer);overload;
-    procedure SetSQLLogError(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
-    procedure OpenLogError(EscolaId:Integer;FuncionarioId:Integer);overload;
-    procedure OpenLogError(EscolaId:Integer;FuncionarioId:Integer;KeyValues:String);overload;
+    procedure SetSQLLogError(EscolaId:Integer);overload;
+    procedure SetSQLLogError(EscolaId:Integer;KeyValues:String);overload;
+    procedure OpenLogError(EscolaId:Integer);overload;
+    procedure OpenLogError(EscolaId:Integer;KeyValues:String);overload;
     procedure CloseLogError;
     procedure SetTimeZone;
   {$METHODINFO ON}
@@ -48,47 +48,27 @@ type
     {$METHODINFO OFF}
     procedure SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                            Data:TDateTime;
-                           EscolaId:Integer = 0;
-                           ResponsavelId:Integer=0;
-                           FuncionarioId:Integer=0
+                           EscolaId:Integer = 0
                           );overload;
 
     procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
    {$METHODINFO ON}
-    function GetAlunos(EscolaId:Integer;
-                       Usuario:TUsuario
-                      ):TFDJSONDataSets;
-
-    function GetTurmas(EscolaId:Integer;
-                       ResponsavelId:Integer=0;
-                       FuncionarioId:Integer=0
-                      ):TFDJSONDataSets;
-
-    function GetResponsaveis(EscolaId:Integer;
-                             ResponsavelId:Integer=0;
-                             FuncionarioId:Integer=0
-                             ):TFDJSONDataSets;
-
-    function GetFuncionarios( EscolaId:Integer;
-                              ResponsavelId:Integer=0;
-                              FuncionarioId:Integer=0
-                             ):TFDJSONDataSets;
+    function GetAlunos(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetTurmas(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetResponsaveis(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetFuncionarios(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 
 
     function SalvarLogError(EscolaId:Integer;
-                            ResponsavelId:Integer=0;
-                            FuncionarioId:Integer=0;
+                            pUsuario:TJSONValue;
                             LDataSetList: TFDJSONDataSets = nil ):String;
 
-    function GetProcessoAtualizacao(EscolaId:Integer;
-                                    ResponsavelId:Integer=0;
-                                    FuncionarioId:Integer=0):TFDJSONDataSets;
+    function GetProcessoAtualizacao(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 
     function GetDataSet( EscolaId:Integer;
                          Nome: String;
-                         ResponsavelId:Integer=0;
-                         FuncionarioId:Integer=0;
+                         pUsuario:TJSONValue;
                          UtilizaParamEscolaId:Boolean=True;
                          Condicoes: String=''
                         ):TFDJSONDataSets;
@@ -98,13 +78,15 @@ type
 
 var
   SmMain: TSmMain;
+  Usuario:TUsuario;
 {$METHODINFO OFF}
 
 implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses smGeral, Vcl.Forms, smDBFireDac;
+uses smGeral, Vcl.Forms, smDBFireDac, Data.DBXJSONReflect,
+  System.Rtti;
 
 {$R *.dfm}
 
@@ -129,6 +111,7 @@ begin
   FDConnection.Open;
 
   FDConnectionLocal.Close;
+  Usuario:=TUsuario.Create;
 end;
 
 procedure TSmMain.FDConnectionAfterConnect(Sender: TObject);
@@ -144,20 +127,20 @@ begin
   Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
-function TSmMain.GetAlunos(EscolaId:Integer;Usuario:TUsuario):TFDJSONDataSets;
+function TSmMain.GetAlunos(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Alunos
   try
     try
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest(UnitName,
                                            ClassName,
                                            'GetAlunos',
                                            EscolaId,
-                                           0,
-                                           Usuario.Id);
+                                           Usuario);
 
       Result := TFDJSONDataSets.Create;
 
@@ -177,9 +160,10 @@ begin
   end;
 end;
 
-function TSmMain.GetDataSet(EscolaId: Integer; Nome: String; ResponsavelId,
-  FuncionarioId: Integer; UtilizaParamEscolaId:Boolean;
-  Condicoes: String): TFDJSONDataSets;
+function TSmMain.GetDataSet(EscolaId: Integer; Nome: String;
+                            pUsuario:TJSONValue;
+                            UtilizaParamEscolaId:Boolean;
+                            Condicoes: String): TFDJSONDataSets;
 var
   fdqDataSet: TFDQuery;
   LogServerRequest:TLogServerRequest;
@@ -190,13 +174,13 @@ begin
       if Nome = '' then
        raise Exception.Create('GetDataSet: Nome não definido');
 
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'GetDataSet:' + Nome,
                                             EscolaId,
-                                            0,
-                                            FuncionarioId);
+                                            Usuario);
 
 
       Result := TFDJSONDataSets.Create;
@@ -230,23 +214,20 @@ begin
 
 end;
 
-function TSmMain.GetFuncionarios(EscolaId:Integer;
-                                 ResponsavelId:Integer=0;
-                                 FuncionarioId:Integer=0
-                                ):TFDJSONDataSets;
+function TSmMain.GetFuncionarios(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Funcionarios
   try
     try
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'GetFuncionarios',
                                             EscolaId,
-                                            0,
-                                            FuncionarioId);
+                                            Usuario);
       Result := TFDJSONDataSets.Create;
 
       fdqFunc.Active := False;
@@ -266,8 +247,7 @@ begin
 end;
 
 
-function TSmMain.GetProcessoAtualizacao(EscolaId, ResponsavelId,
-  FuncionarioId: Integer): TFDJSONDataSets;
+function TSmMain.GetProcessoAtualizacao(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -275,13 +255,13 @@ begin
   try
     try
       Result := TFDJSONDataSets.Create;
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'GetProcessoAtualizacao',
                                             EscolaId,
-                                            0,
-                                            FuncionarioId);
+                                            Usuario);
 
       fdqProcessoAtualizacao.Active := False;
       fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= EscolaId;
@@ -300,23 +280,20 @@ begin
 
 end;
 
-function TSmMain.GetResponsaveis(EscolaId:Integer;
-                                 ResponsavelId:Integer=0;
-                                 FuncionarioId:Integer=0
-                                 ):TFDJSONDataSets;
+function TSmMain.GetResponsaveis(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Responsaveis
   try
     try
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest(UnitName,
                                            ClassName,
                                            'GetResponsaveis',
                                            EscolaId,
-                                           0,
-                                           FuncionarioId);
+                                           Usuario);
 
       Result := TFDJSONDataSets.Create;
 
@@ -346,23 +323,20 @@ begin
   end;
 
 end;
-function TSmMain.GetTurmas(EscolaId:Integer;
-                           ResponsavelId:Integer=0;
-                           FuncionarioId:Integer=0
-                      ):TFDJSONDataSets;
+function TSmMain.GetTurmas(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar as Turmas
   try
     try
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'GetTurmas',
                                             EscolaId,
-                                            0,
-                                            FuncionarioId);
+                                            Usuario);
 
       Result := TFDJSONDataSets.Create;
 
@@ -389,27 +363,26 @@ end;
 
 
 
-procedure TSmMain.OpenLogError(EscolaId, FuncionarioId: Integer);
+procedure TSmMain.OpenLogError(EscolaId: Integer);
 begin
   CloseLogError;
-  SetSQLLogError(EscolaId, FuncionarioId);
+  SetSQLLogError(EscolaId);
   fdqLogError.Active := True;
 end;
 
-procedure TSmMain.OpenLogError(EscolaId, FuncionarioId: Integer;
+procedure TSmMain.OpenLogError(EscolaId: Integer;
   KeyValues: String);
 begin
   CloseLogError;
 
-  SetSQLLogError(EscolaId, FuncionarioId,KeyValues);
+  SetSQLLogError(EscolaId,KeyValues);
 
   fdqLogError.Active := True;
 end;
 
 function TSmMain.SalvarLogError(EscolaId:Integer;
-                            ResponsavelId:Integer=0;
-                            FuncionarioId:Integer=0;
-                            LDataSetList: TFDJSONDataSets=nil):String;
+                                pUsuario:TJSONValue;
+                                LDataSetList: TFDJSONDataSets=nil):String;
 var
   LDataSet: TFDDataSet;
   Exceptions:string;
@@ -419,13 +392,13 @@ begin
   //Método para Salvar Logs de Erros
   try
     try
+      Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
                                             'SalvarLogError',
                                             EscolaId,
-                                            0,
-                                            FuncionarioId);
+                                            Usuario);
 
       Result:=EmptyStr;
 
@@ -438,7 +411,7 @@ begin
 
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'log_error_id');
-      OpenLogError(EscolaId,FuncionarioId,KeyValues);
+      OpenLogError(EscolaId,KeyValues);
       CopyDataSet(LDataSet,fdqLogError,False,[coAppend,coEdit]);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
@@ -460,9 +433,7 @@ end;
 
 procedure TSmMain.SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                                Data:TDateTime;
-                               EscolaId:Integer = 0;
-                               ResponsavelId:Integer=0;
-                               FuncionarioId:Integer=0);
+                               EscolaId:Integer = 0);
 begin
   try
     fdqLogError.Active:=False;
@@ -479,11 +450,11 @@ begin
     if EscolaId > 0 then
       fdqLogError.FieldByName('escola_id').AsInteger:=EscolaId;
 
-    if ResponsavelId > 0 then
-      fdqLogError.FieldByName('responsavel_id').AsInteger:=ResponsavelId;
+    if Usuario.Tipo = Responsavel then
+      fdqLogError.FieldByName('responsavel_id').AsInteger:=Usuario.Id;
 
-    if FuncionarioId > 0 then
-      fdqLogError.FieldByName('funcionario_id').AsInteger:= FuncionarioId;
+    if Usuario.Tipo = Funcionario then
+      fdqLogError.FieldByName('funcionario_id').AsInteger:= Usuario.Id;
 
     fdqLogError.FieldByName('data').AsDateTime:= Data;
     fdqLogError.FieldByName('data_insert_server').AsDateTime:= Now;
@@ -512,11 +483,11 @@ begin
     if LogServerRequest.EscolaId > 0 then
       fdqLogServerRequest.FieldByName('escola_id').AsInteger:=LogServerRequest.EscolaId;
 
-    if LogServerRequest.ResponsavelId > 0 then
-      fdqLogServerRequest.FieldByName('responsavel_id').AsInteger:=LogServerRequest.ResponsavelId;
+    if LogServerRequest.Usuario.Tipo = Responsavel then
+      fdqLogServerRequest.FieldByName('responsavel_id').AsInteger:=LogServerRequest.Usuario.Id;
 
-    if LogServerRequest.FuncionarioId > 0 then
-      fdqLogServerRequest.FieldByName('funcionario_id').AsInteger:= LogServerRequest.FuncionarioId;
+    if LogServerRequest.Usuario.Tipo = Funcionario then
+      fdqLogServerRequest.FieldByName('funcionario_id').AsInteger:= LogServerRequest.Usuario.Id;
 
     fdqLogServerRequest.FieldByName('data_ini').AsDateTime:= LogServerRequest.DataIni;
     fdqLogServerRequest.FieldByName('data_fim').AsDateTime:= LogServerRequest.DataFim;
@@ -533,7 +504,7 @@ begin
   end;
 end;
 
-procedure TSmMain.SetSQLLogError(EscolaId, FuncionarioId: Integer);
+procedure TSmMain.SetSQLLogError(EscolaId:Integer);
 begin
   fdqLogError.SQL.Clear;
   fdqLogError.SQL.Add('select * from log_error ');
@@ -558,11 +529,11 @@ begin
     if LogServerRequest.EscolaId > 0 then
       fdqLogError.FieldByName('escola_id').AsInteger:=LogServerRequest.EscolaId;
 
-    if LogServerRequest.ResponsavelId > 0 then
-      fdqLogError.FieldByName('responsavel_id').AsInteger:=LogServerRequest.ResponsavelId;
+    if LogServerRequest.Usuario.Tipo = Responsavel then
+      fdqLogError.FieldByName('responsavel_id').AsInteger:=LogServerRequest.Usuario.Id;
 
-    if LogServerRequest.FuncionarioId > 0 then
-      fdqLogError.FieldByName('funcionario_id').AsInteger:= LogServerRequest.FuncionarioId;
+    if LogServerRequest.Usuario.Tipo = Funcionario then
+      fdqLogError.FieldByName('funcionario_id').AsInteger:= LogServerRequest.Usuario.Id;
 
     fdqLogError.FieldByName('data').AsDateTime:= LogServerRequest.DataError;
     fdqLogError.FieldByName('data_insert_server').AsDateTime:= Now;
@@ -573,8 +544,7 @@ begin
 
 end;
 
-procedure TSmMain.SetSQLLogError(EscolaId, FuncionarioId: Integer;
-  KeyValues: String);
+procedure TSmMain.SetSQLLogError(EscolaId:Integer;KeyValues: String);
 begin
   if KeyValues = EmptyStr then
     KeyValues:= QuoTedStr('0');
