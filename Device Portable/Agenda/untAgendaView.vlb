@@ -90,3 +90,6 @@ Coordinates=365,474,69,36
 [btnAdd]
 Coordinates=414,695,96,58
 
+[DmAgenda.fdqAgenda]
+Visible=False
+

@@ -103,7 +103,7 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDmEscola, untDM, untAgendaAdd, untPrincipal,
+uses untFuncoes, untDmAgenda, untDM, untAgendaAdd, untPrincipal,
   untDMStyles, smMensagensFMX;
 
 procedure TfrmAgendaView.btnVoltarClick(Sender: TObject);
@@ -255,7 +255,7 @@ begin
   btnAdd.Enabled:= (Calendar.Date >= Date);
 
   if UsuarioLogadoIsFuncionario then
-    DmEscola.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
+    DmAgenda.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
 
   SetTitulo;
   FillListBoxAgenda;

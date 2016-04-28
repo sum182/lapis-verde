@@ -56,7 +56,7 @@ implementation
 
 {$R *.fmx}
 
-uses smGeralFMX, untDM, untDmEscola, untDMStyles, untFuncoes, smMensagensFMX,
+uses smGeralFMX, untDM, untDmAgenda, untDMStyles, untFuncoes, smMensagensFMX,
   FMX.Forms, untAgendaView;
 
 procedure TfrmAgendaAdd.btnVoltarClick(Sender: TObject);
@@ -157,7 +157,7 @@ begin
   if (memAgenda.Text = EmptyStr) Then
     Exit;
 
-  DmEscola.CriarAgenda(memAgenda.Text,Data,AlunoId,TurmaId);
+  DmAgenda.CriarAgenda(memAgenda.Text,Data,AlunoId,TurmaId);
   memAgenda.Text:=EmptyStr;
   fAllowCloseForm:=True;
   Close;

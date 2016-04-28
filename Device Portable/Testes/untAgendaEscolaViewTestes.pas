@@ -109,7 +109,7 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDmEscola, untDM, untAgendaAdd, untPrincipal,
+uses untFuncoes, untDmAgenda, untDM, untAgendaAdd, untPrincipal,
   untDMStyles, untDmGetServer;
 
 procedure TfrmAgendaEscolaViewTestes.btnVoltarClick(Sender: TObject);
@@ -149,7 +149,7 @@ begin
   // Animator1.StartAnimate('Loading');
   // Animator1.Repaint;
   // Animator1.Visible := True;
-  with DmEscola.fdqAgenda do
+  with DmAgenda.fdqAgenda do
   begin
     First;
     while not Eof do
@@ -188,7 +188,7 @@ begin
       LblDescription.VertTextAlign := TTextAlign.taLeading;
       LblDescription.Font.Family := 'Lucida Console';
       LblDescription.Font.Style := [];
-      LblDescription.Text := DmEscola.fdqAgenda.FieldByName
+      LblDescription.Text := DmAgenda.fdqAgenda.FieldByName
         ('descricao').AsString;
       // Animator1.Repaint;
       Next;
@@ -325,8 +325,8 @@ var
   TmpImg: TImage;
   Shadow: TShadowEffect;
 begin
-  DmEscola.fdqAgenda.First;
-  while not(DmEscola.fdqAgenda.Eof) do
+  DmAgenda.fdqAgenda.First;
+  while not(DmAgenda.fdqAgenda.Eof) do
   begin
     // CR := TCalloutRectangle.Create(Self);
     CR := TPanel.Create(self);
@@ -345,7 +345,7 @@ begin
     L.Parent := CR;
     L.Align := TAlignLayout.alClient;
     // L.Text := 'A quick brown fox jumped over the yellow log running away from the pink dog and ran down the lane.';
-    L.Text := DmEscola.fdqAgenda.FieldByName('descricao').AsString;
+    L.Text := DmAgenda.fdqAgenda.FieldByName('descricao').AsString;
 
     L.Font.Size := 14;
     L.Font.Size := 12;
@@ -363,7 +363,7 @@ begin
       TmpImg.Align := TAlignLayout.alLeft;
       //TmpImg.Bitmap.Assign(Image1.Bitmap);
       TmpImg.Width := 75; }
-    DmEscola.fdqAgenda.Next;
+    DmAgenda.fdqAgenda.Next;
   end;
 
 end;
@@ -426,22 +426,22 @@ begin
   try
 
     Item := TListBoxItem.Create(ListBox5);
-    DmEscola.fdqAgenda.First;
-    while not DmEscola.fdqAgenda.Eof do
+    DmAgenda.fdqAgenda.First;
+    while not DmAgenda.fdqAgenda.Eof do
     begin
       // create and format listbox to show bottomdetail
       Item := TListBoxItem.Create(ListBox5);
       Item.StyleLookup := 'listboxitembottomdetail';
       // draw address to text part and postcode to bottom detail of Listbox item
-      Item.Text := (DmEscola.fdqAgenda.FieldByName('data').AsString);
-      Item.ItemData.Detail := (DmEscola.fdqAgenda.FieldByName('descricao')
+      Item.Text := (DmAgenda.fdqAgenda.FieldByName('data').AsString);
+      Item.ItemData.Detail := (DmAgenda.fdqAgenda.FieldByName('descricao')
         .AsString);;
       ListBox5.AddObject(Item);
-      DmEscola.fdqAgenda.Next;
+      DmAgenda.fdqAgenda.Next;
     end;
   finally
     ListBox5.EndUpdate;
-    DmEscola.fdqAgenda.Close;
+    DmAgenda.fdqAgenda.Close;
   end;
 
 end;
@@ -459,17 +459,17 @@ begin
 
   ListBox6.BeginUpdate;
   ListBox6.Items.Clear;
-  DmEscola.fdqAgenda.First;
+  DmAgenda.fdqAgenda.First;
 
-  while not DmEscola.fdqAgenda.Eof do
+  while not DmAgenda.fdqAgenda.Eof do
   begin
     ListBoxGroupHeader := TListBoxGroupHeader.Create(ListBox6);
-    DataHeader := DmEscola.fdqAgenda.FieldByName('data').AsString;
+    DataHeader := DmAgenda.fdqAgenda.FieldByName('data').AsString;
     ListBoxGroupHeader.Text := DataHeader;
     ListBox6.AddObject(ListBoxGroupHeader);
 
-    while (DataHeader = (DmEscola.fdqAgenda.FieldByName('data').AsString)) and
-      not(DmEscola.fdqAgenda.Eof) do
+    while (DataHeader = (DmAgenda.fdqAgenda.FieldByName('data').AsString)) and
+      not(DmAgenda.fdqAgenda.Eof) do
     begin
       // StringOfChar returns a string with a specified number of repeating characters.
 
@@ -478,23 +478,23 @@ begin
 
       // or, you can add items by creating an instance of TListBoxItem by yourself
       ListBoxItem := TListBoxItem.Create(ListBox6);
-      ListBoxItem.Text := DmEscola.fdqAgenda.FieldByName('descricao').AsString;
+      ListBoxItem.Text := DmAgenda.fdqAgenda.FieldByName('descricao').AsString;
       ListBoxItem.TextSettings.WordWrap := True;
 
 
-      Tamanho := 25 * (Length(DmEscola.fdqAgenda.FieldByName('descricao')
+      Tamanho := 25 * (Length(DmAgenda.fdqAgenda.FieldByName('descricao')
         .AsString) / 35);
 
-      Tamanho := Tamanho + (CountChar(DmEscola.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
+      Tamanho := Tamanho + (CountChar(DmAgenda.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
 
       if Tamanho < 25 then
         Tamanho := 25;
 
-     { if DmEscola.fdqAgenda.FieldByName('agenda_id').AsString = 'AE5D7A84-3B0C-420F-B4ED-63336C775E3B'
+     { if DmAgenda.fdqAgenda.FieldByName('agenda_id').AsString = 'AE5D7A84-3B0C-420F-B4ED-63336C775E3B'
       then
       begin
-        ShowMessage(DmEscola.fdqAgenda.FieldByName('descricao').AsString);
-         Tamanho := Tamanho + (CountChar(DmEscola.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
+        ShowMessage(DmAgenda.fdqAgenda.FieldByName('descricao').AsString);
+         Tamanho := Tamanho + (CountChar(DmAgenda.fdqAgenda.FieldByName('descricao').AsString,'#') * 12.5);
       end; }
 
       ListBoxItem.Height := Tamanho;
@@ -502,7 +502,7 @@ begin
       // (aNone=0, aMore=1, aDetail=2, aCheckmark=3)
       // ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(I);
       ListBox6.AddObject(ListBoxItem);
-      DmEscola.fdqAgenda.Next;
+      DmAgenda.fdqAgenda.Next;
 
       ListBoxItem := TListBoxItem.Create(ListBox6);
       ListBoxItem.Text := '';

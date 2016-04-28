@@ -86,7 +86,7 @@ implementation
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
   untAgendaSelect, untAgendaAdd, untTestesA, untAgendaView,
-  untDmEscola, untDmResponsavel;
+  untDmAgenda, untDmResponsavel;
 
 { TfrmPrincipal }
 

@@ -293,7 +293,7 @@ inherited frmAgendaView: TfrmAgendaView
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42468.000000000000000000
+            Date = 42488.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
@@ -966,7 +966,7 @@ inherited frmAgendaView: TfrmAgendaView
     end
   end
   object bsAgenda: TBindSourceDB
-    DataSet = DmEscola.fdqAgenda
+    DataSet = DmAgenda.fdqAgenda
     ScopeMappings = <>
     Left = 104
     Top = 424

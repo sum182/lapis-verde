@@ -7,7 +7,7 @@ uses
   untDM in 'DM\untDM.pas' {Dm: TDataModule},
   untDMStyles in 'DM\untDMStyles.pas' {DMStyles: TDataModule},
   untDmResponsavel in 'DM\untDmResponsavel.pas' {DmResponsavel: TDataModule},
-  untDmEscola in 'DM\untDmEscola.pas' {DmEscola: TDataModule},
+  untDmAgenda in 'DM\untDmAgenda.pas' {DmAgenda: TDataModule},
   untPrincipal in 'untPrincipal.pas' {frmPrincipal},
   untModuloCliente in 'untModuloCliente.pas' {ModuloCliente: TDataModule},
   untTesteClientes in 'Testes\untTesteClientes.pas' {frmTesteClientes},
@@ -66,7 +66,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
-  Application.CreateForm(TDmEscola, DmEscola);
+  Application.CreateForm(TDmAgenda, DmAgenda);
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TDmGetServer, DmGetServer);
   Application.CreateForm(TDmSaveServer, DmSaveServer);

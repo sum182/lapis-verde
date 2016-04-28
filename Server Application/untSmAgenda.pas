@@ -23,10 +23,8 @@ type
     fdqAgendaAlunoaluno_id: TIntegerField;
     fdqAgendaTurmaagenda_id: TStringField;
     fdqAgendaTurmaturma_id: TIntegerField;
-  private
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
-    procedure fdqAgendaIDBeforePost(DataSet: TDataSet);
-
+  private
     procedure SetSQLAgenda(ListKeysInserts: TFDJSONDataSets = nil);overload;
     procedure SetSQLAgenda(KeyValues:String);overload;
     procedure SetSQLAgendaDet(KeyValues:String);
@@ -75,11 +73,6 @@ begin
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 end;
 
-procedure TSmAgenda.fdqAgendaIDBeforePost(DataSet: TDataSet);
-begin
-  if Dataset.State in [dsInsert]  then
-    Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
-end;
 
 function TSmAgenda.GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;
    DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil): TFDJSONDataSets;

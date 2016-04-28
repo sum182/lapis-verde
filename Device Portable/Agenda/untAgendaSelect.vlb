@@ -134,11 +134,14 @@ Coordinates=500,420,116,285
 [Dm.fdqLogError]
 Coordinates=103,383,93,51
 
-[frmAgendaView.bsAgenda]
-Coordinates=687,403,144,69
-
 [Module Settings]
 ModelLayerNames=NewLayer0
 ActiveLayerNames=NewLayer0
 EditingLayerName=NewLayer0
+
+[Dm.fdqAluno]
+Visible=False
+
+[Dm.fdqTurma]
+Visible=False
 

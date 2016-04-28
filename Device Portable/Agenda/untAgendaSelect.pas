@@ -44,15 +44,15 @@ implementation
 
 {$R *.fmx}
 
-uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDMEscola, untAgendaView,
+uses untModuloCliente, Data.FireDACJSONReflect, untDM, untDmAgenda, untAgendaView,
   untPrincipal, untDMStyles, untFuncoes;
 
 procedure TfrmAgendaSelect.FormCreate(Sender: TObject);
 begin
   inherited;
   tbctrlPrincipal.ActiveTab := tbitTurma;
-  DmEscola.OpenAlunos;
-  DmEscola.OpenTurmas;
+  Dm.OpenAlunos;
+  Dm.OpenTurmas;
 end;
 
 
@@ -65,10 +65,10 @@ begin
   if not Assigned(frmAgendaView) then
     Application.CreateForm(TfrmAgendaView, frmAgendaView);
 
-  frmAgendaView.AlunoId:= DmEscola.fdqAluno.FieldByName('aluno_id').AsInteger;
-  frmAgendaView.OwnerAgenda:= DmEscola.fdqAluno.FieldByName('nome').AsString;
-  frmAgendaView.NomeCompleto:= DmEscola.fdqAluno.FieldByName('nome_completo').AsString;
-  frmAgendaView.DataSetAgenda:= DmEscola.fdqAgenda;
+  frmAgendaView.AlunoId:= Dm.fdqAluno.FieldByName('aluno_id').AsInteger;
+  frmAgendaView.OwnerAgenda:= Dm.fdqAluno.FieldByName('nome').AsString;
+  frmAgendaView.NomeCompleto:= Dm.fdqAluno.FieldByName('nome_completo').AsString;
+  frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
   frmAgendaView.TurmaId:= 0;
   frmAgendaView.Show;
 end;
@@ -81,10 +81,10 @@ begin
     Application.CreateForm(TfrmAgendaView, frmAgendaView);
 
   frmAgendaView.AlunoId:= 0;
-  frmAgendaView.TurmaId:= DmEscola.fdqTurma.FieldByName('turma_id').AsInteger;
-  frmAgendaView.OwnerAgenda:= DmEscola.fdqTurma.FieldByName('nome').AsString;
+  frmAgendaView.TurmaId:= Dm.fdqTurma.FieldByName('turma_id').AsInteger;
+  frmAgendaView.OwnerAgenda:= Dm.fdqTurma.FieldByName('nome').AsString;
   frmAgendaView.NomeCompleto:= '';
-  frmAgendaView.DataSetAgenda:= DmEscola.fdqAgenda;
+  frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
   frmAgendaView.Show;
 end;
 
