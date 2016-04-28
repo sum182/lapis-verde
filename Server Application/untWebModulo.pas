@@ -8,7 +8,7 @@ uses
   Web.WebFileDispatcher, Web.HTTPProd,
   DataSnap.DSAuth,
   Datasnap.DSProxyJavaScript, IPPeerServer, Datasnap.DSMetadata, Datasnap.DSServerMetadata, Datasnap.DSClientMetadata,
-  Datasnap.DSCommonServer, Datasnap.DSHTTP;
+  Datasnap.DSCommonServer, Datasnap.DSHTTP, untSmAgenda;
 
 type
   TwebModulo = class(TWebModule)
@@ -24,6 +24,7 @@ type
     DSServerClassMain: TDSServerClass;
     DSServerClassEscola: TDSServerClass;
     DSServerClassResponsavel: TDSServerClass;
+    DSServerClassAgenda: TDSServerClass;
     procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
@@ -43,6 +44,8 @@ type
     procedure DSServerClassEscolaGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure DSServerClassResponsavelGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure DSServerClassAgendaGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
   private
     { Private declarations }
@@ -67,6 +70,12 @@ procedure TwebModulo.DSServerClass1GetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := untServerMetodos.TSrvServerMetodos;
+end;
+
+procedure TwebModulo.DSServerClassAgendaGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := untSmAgenda.TSmAgenda;
 end;
 
 procedure TwebModulo.DSServerClassEscolaGetClass(DSServerClass: TDSServerClass;

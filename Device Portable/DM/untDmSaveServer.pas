@@ -74,7 +74,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurma);
 
 
-      MsgRetornoServer:= ModuloCliente.SmEscolaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
+      MsgRetornoServer:= ModuloCliente.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
 
       //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then

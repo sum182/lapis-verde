@@ -16,13 +16,18 @@ type
     FSrvServerMetodosClient: TSrvServerMetodosClient;
     FSmTesteClient: TSmTesteClient;
     FSmMainClient: TSmMainClient;
+
+    FSmAgendaClient: TSmAgendaClient;
+
     FSmEscolaClient: TSmEscolaClient;
     FSmResponsavelClient: TSmResponsavelClient;
+
     function GetSrvServerMetodosClient: TSrvServerMetodosClient;
     function GetSmTesteClient: TSmTesteClient;
     function GetSmMainClient: TSmMainClient;
     function GetSmEscolaClient: TSmEscolaClient;
     function GetSmResponsavelClient: TSmResponsavelClient;
+    function GetSmAgendaClient: TSmAgendaClient;
     { Private declarations }
   public
     constructor Create(AOwner: TComponent); override;
@@ -31,6 +36,9 @@ type
     property SrvServerMetodosClient: TSrvServerMetodosClient read GetSrvServerMetodosClient write FSrvServerMetodosClient;
     property SmTesteClient: TSmTesteClient read GetSmTesteClient write FSmTesteClient;
     property SmMainClient: TSmMainClient read GetSmMainClient write FSmMainClient;
+
+    property SmAgendaClient: TSmAgendaClient read GetSmAgendaClient write FSmAgendaClient;
+
     property SmEscolaClient: TSmEscolaClient read GetSmEscolaClient write FSmEscolaClient;
     property SmResponsavelClient: TSmResponsavelClient read GetSmResponsavelClient write FSmResponsavelClient;
 
@@ -87,6 +95,13 @@ begin
     FSmMainClient:= TSmMainClient.Create(DSRestConnection1, FInstanceOwner);
   Result := FSmMainClient;
 end;
+function TModuloCliente.GetSmAgendaClient: TSmAgendaClient;
+begin
+  if FSmAgendaClient = nil then
+    FSmAgendaClient:= TSmAgendaClient.Create(DSRestConnection1, FInstanceOwner);
+  Result := FSmAgendaClient;
+end;
+
 function TModuloCliente.GetSmEscolaClient: TSmEscolaClient;
 begin
   if FSmEscolaClient = nil then

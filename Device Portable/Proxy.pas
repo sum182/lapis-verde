@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 27/04/2016 17:52:01
+// 28/04/2016 12:59:33
 //
 
 unit Proxy;
@@ -115,22 +115,12 @@ type
 
   TSmEscolaClient = class(TDSAdminRestClient)
   private
-    FfdqAgendaBeforePostCommand: TDSRestCommand;
-    FfdqAgendaIDBeforePostCommand: TDSRestCommand;
     FLoginFuncionarioCommand: TDSRestCommand;
-    FGetAgendaCommand: TDSRestCommand;
-    FGetAgendaCommand_Cache: TDSRestCommand;
-    FSalvarAgendaCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
-    procedure fdqAgendaBeforePost(DataSet: TDataSet);
-    procedure fdqAgendaIDBeforePost(DataSet: TDataSet);
     function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
-    function GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
   end;
 
   TSmResponsavelClient = class(TDSAdminRestClient)
@@ -147,6 +137,20 @@ type
     function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
     function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
     function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
+  end;
+
+  TSmAgendaClient = class(TDSAdminRestClient)
+  private
+    FGetAgendaCommand: TDSRestCommand;
+    FGetAgendaCommand_Cache: TDSRestCommand;
+    FSalvarAgendaCommand: TDSRestCommand;
+  public
+    constructor Create(ARestConnection: TDSRestConnection); overload;
+    constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
   end;
 
   IDSRestCachedTFDJSONDataSets = interface(IDSRestCachedObject<TFDJSONDataSets>)
@@ -412,51 +416,11 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmEscola_fdqAgendaBeforePost: array [0..0] of TDSRestParameterMetaData =
-  (
-    (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
-  );
-
-  TSmEscola_fdqAgendaIDBeforePost: array [0..0] of TDSRestParameterMetaData =
-  (
-    (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
-  );
-
   TSmEscola_LoginFuncionario: array [0..2] of TDSRestParameterMetaData =
   (
     (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
-  );
-
-  TSmEscola_GetAgenda: array [0..5] of TDSRestParameterMetaData =
-  (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
-    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
-    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
-    (Name: 'ListKeysInserts'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
-    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
-  );
-
-  TSmEscola_GetAgenda_Cache: array [0..5] of TDSRestParameterMetaData =
-  (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
-    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
-    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
-    (Name: 'ListKeysInserts'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
-    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
-  );
-
-  TSmEscola_SalvarAgenda: array [0..5] of TDSRestParameterMetaData =
-  (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
-    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
-    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
-    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
-    (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
-    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
   TSmResponsavel_LoginResponsavel: array [0..2] of TDSRestParameterMetaData =
@@ -488,6 +452,36 @@ const
     (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'RG'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Sexo'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmAgenda_GetAgenda: array [0..5] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'ListKeysInserts'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSmAgenda_GetAgenda_Cache: array [0..5] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'ListKeysInserts'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmAgenda_SalvarAgenda: array [0..5] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
@@ -1352,32 +1346,6 @@ begin
   inherited;
 end;
 
-procedure TSmEscolaClient.fdqAgendaBeforePost(DataSet: TDataSet);
-begin
-  if FfdqAgendaBeforePostCommand = nil then
-  begin
-    FfdqAgendaBeforePostCommand := FConnection.CreateCommand;
-    FfdqAgendaBeforePostCommand.RequestType := 'POST';
-    FfdqAgendaBeforePostCommand.Text := 'TSmEscola."fdqAgendaBeforePost"';
-    FfdqAgendaBeforePostCommand.Prepare(TSmEscola_fdqAgendaBeforePost);
-  end;
-  FfdqAgendaBeforePostCommand.Parameters[0].Value.SetDBXReader(TDBXDataSetReader.Create(DataSet, FInstanceOwner), True);
-  FfdqAgendaBeforePostCommand.Execute;
-end;
-
-procedure TSmEscolaClient.fdqAgendaIDBeforePost(DataSet: TDataSet);
-begin
-  if FfdqAgendaIDBeforePostCommand = nil then
-  begin
-    FfdqAgendaIDBeforePostCommand := FConnection.CreateCommand;
-    FfdqAgendaIDBeforePostCommand.RequestType := 'POST';
-    FfdqAgendaIDBeforePostCommand.Text := 'TSmEscola."fdqAgendaIDBeforePost"';
-    FfdqAgendaIDBeforePostCommand.Prepare(TSmEscola_fdqAgendaIDBeforePost);
-  end;
-  FfdqAgendaIDBeforePostCommand.Parameters[0].Value.SetDBXReader(TDBXDataSetReader.Create(DataSet, FInstanceOwner), True);
-  FfdqAgendaIDBeforePostCommand.Execute;
-end;
-
 function TSmEscolaClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
 begin
   if FLoginFuncionarioCommand = nil then
@@ -1393,108 +1361,6 @@ begin
   Result := FLoginFuncionarioCommand.Parameters[2].Value.GetBoolean;
 end;
 
-function TSmEscolaClient.GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string): TFDJSONDataSets;
-begin
-  if FGetAgendaCommand = nil then
-  begin
-    FGetAgendaCommand := FConnection.CreateCommand;
-    FGetAgendaCommand.RequestType := 'POST';
-    FGetAgendaCommand.Text := 'TSmEscola."GetAgenda"';
-    FGetAgendaCommand.Prepare(TSmEscola_GetAgenda);
-  end;
-  FGetAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FGetAgendaCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
-  FGetAgendaCommand.Parameters[2].Value.AsDateTime := DtIni;
-  FGetAgendaCommand.Parameters[3].Value.AsDateTime := DtFim;
-  if not Assigned(ListKeysInserts) then
-    FGetAgendaCommand.Parameters[4].Value.SetNull
-  else
-  begin
-    FMarshal := TDSRestCommand(FGetAgendaCommand.Parameters[4].ConnectionHandler).GetJSONMarshaler;
-    try
-      FGetAgendaCommand.Parameters[4].Value.SetJSONValue(FMarshal.Marshal(ListKeysInserts), True);
-      if FInstanceOwner then
-        ListKeysInserts.Free
-    finally
-      FreeAndNil(FMarshal)
-    end
-    end;
-  FGetAgendaCommand.Execute(ARequestFilter);
-  if not FGetAgendaCommand.Parameters[5].Value.IsNull then
-  begin
-    FUnMarshal := TDSRestCommand(FGetAgendaCommand.Parameters[5].ConnectionHandler).GetJSONUnMarshaler;
-    try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAgendaCommand.Parameters[5].Value.GetJSONValue(True)));
-      if FInstanceOwner then
-        FGetAgendaCommand.FreeOnExecute(Result);
-    finally
-      FreeAndNil(FUnMarshal)
-    end
-  end
-  else
-    Result := nil;
-end;
-
-function TSmEscolaClient.GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
-begin
-  if FGetAgendaCommand_Cache = nil then
-  begin
-    FGetAgendaCommand_Cache := FConnection.CreateCommand;
-    FGetAgendaCommand_Cache.RequestType := 'POST';
-    FGetAgendaCommand_Cache.Text := 'TSmEscola."GetAgenda"';
-    FGetAgendaCommand_Cache.Prepare(TSmEscola_GetAgenda_Cache);
-  end;
-  FGetAgendaCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
-  FGetAgendaCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
-  FGetAgendaCommand_Cache.Parameters[2].Value.AsDateTime := DtIni;
-  FGetAgendaCommand_Cache.Parameters[3].Value.AsDateTime := DtFim;
-  if not Assigned(ListKeysInserts) then
-    FGetAgendaCommand_Cache.Parameters[4].Value.SetNull
-  else
-  begin
-    FMarshal := TDSRestCommand(FGetAgendaCommand_Cache.Parameters[4].ConnectionHandler).GetJSONMarshaler;
-    try
-      FGetAgendaCommand_Cache.Parameters[4].Value.SetJSONValue(FMarshal.Marshal(ListKeysInserts), True);
-      if FInstanceOwner then
-        ListKeysInserts.Free
-    finally
-      FreeAndNil(FMarshal)
-    end
-    end;
-  FGetAgendaCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[5].Value.GetString);
-end;
-
-function TSmEscolaClient.SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
-begin
-  if FSalvarAgendaCommand = nil then
-  begin
-    FSalvarAgendaCommand := FConnection.CreateCommand;
-    FSalvarAgendaCommand.RequestType := 'POST';
-    FSalvarAgendaCommand.Text := 'TSmEscola."SalvarAgenda"';
-    FSalvarAgendaCommand.Prepare(TSmEscola_SalvarAgenda);
-  end;
-  FSalvarAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
-  FSalvarAgendaCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
-  FSalvarAgendaCommand.Parameters[2].Value.AsDateTime := DtIni;
-  FSalvarAgendaCommand.Parameters[3].Value.AsDateTime := DtFim;
-  if not Assigned(LDataSetList) then
-    FSalvarAgendaCommand.Parameters[4].Value.SetNull
-  else
-  begin
-    FMarshal := TDSRestCommand(FSalvarAgendaCommand.Parameters[4].ConnectionHandler).GetJSONMarshaler;
-    try
-      FSalvarAgendaCommand.Parameters[4].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
-      if FInstanceOwner then
-        LDataSetList.Free
-    finally
-      FreeAndNil(FMarshal)
-    end
-    end;
-  FSalvarAgendaCommand.Execute(ARequestFilter);
-  Result := FSalvarAgendaCommand.Parameters[5].Value.GetWideString;
-end;
-
 constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -1507,12 +1373,7 @@ end;
 
 destructor TSmEscolaClient.Destroy;
 begin
-  FfdqAgendaBeforePostCommand.DisposeOf;
-  FfdqAgendaIDBeforePostCommand.DisposeOf;
   FLoginFuncionarioCommand.DisposeOf;
-  FGetAgendaCommand.DisposeOf;
-  FGetAgendaCommand_Cache.DisposeOf;
-  FSalvarAgendaCommand.DisposeOf;
   inherited;
 end;
 
@@ -1596,6 +1457,126 @@ begin
   FValidarEmailExistenteResponsavelCommand.DisposeOf;
   FValidarCPFExistenteResponsavelCommand.DisposeOf;
   FCriarUsuarioResponsavelCommand.DisposeOf;
+  inherited;
+end;
+
+function TSmAgendaClient.GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string): TFDJSONDataSets;
+begin
+  if FGetAgendaCommand = nil then
+  begin
+    FGetAgendaCommand := FConnection.CreateCommand;
+    FGetAgendaCommand.RequestType := 'POST';
+    FGetAgendaCommand.Text := 'TSmAgenda."GetAgenda"';
+    FGetAgendaCommand.Prepare(TSmAgenda_GetAgenda);
+  end;
+  FGetAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FGetAgendaCommand.Parameters[2].Value.AsDateTime := DtIni;
+  FGetAgendaCommand.Parameters[3].Value.AsDateTime := DtFim;
+  if not Assigned(ListKeysInserts) then
+    FGetAgendaCommand.Parameters[4].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FGetAgendaCommand.Parameters[4].ConnectionHandler).GetJSONMarshaler;
+    try
+      FGetAgendaCommand.Parameters[4].Value.SetJSONValue(FMarshal.Marshal(ListKeysInserts), True);
+      if FInstanceOwner then
+        ListKeysInserts.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FGetAgendaCommand.Execute(ARequestFilter);
+  if not FGetAgendaCommand.Parameters[5].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetAgendaCommand.Parameters[5].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAgendaCommand.Parameters[5].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetAgendaCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSmAgendaClient.GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FGetAgendaCommand_Cache = nil then
+  begin
+    FGetAgendaCommand_Cache := FConnection.CreateCommand;
+    FGetAgendaCommand_Cache.RequestType := 'POST';
+    FGetAgendaCommand_Cache.Text := 'TSmAgenda."GetAgenda"';
+    FGetAgendaCommand_Cache.Prepare(TSmAgenda_GetAgenda_Cache);
+  end;
+  FGetAgendaCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FGetAgendaCommand_Cache.Parameters[2].Value.AsDateTime := DtIni;
+  FGetAgendaCommand_Cache.Parameters[3].Value.AsDateTime := DtFim;
+  if not Assigned(ListKeysInserts) then
+    FGetAgendaCommand_Cache.Parameters[4].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FGetAgendaCommand_Cache.Parameters[4].ConnectionHandler).GetJSONMarshaler;
+    try
+      FGetAgendaCommand_Cache.Parameters[4].Value.SetJSONValue(FMarshal.Marshal(ListKeysInserts), True);
+      if FInstanceOwner then
+        ListKeysInserts.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FGetAgendaCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[5].Value.GetString);
+end;
+
+function TSmAgendaClient.SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+begin
+  if FSalvarAgendaCommand = nil then
+  begin
+    FSalvarAgendaCommand := FConnection.CreateCommand;
+    FSalvarAgendaCommand.RequestType := 'POST';
+    FSalvarAgendaCommand.Text := 'TSmAgenda."SalvarAgenda"';
+    FSalvarAgendaCommand.Prepare(TSmAgenda_SalvarAgenda);
+  end;
+  FSalvarAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarAgendaCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FSalvarAgendaCommand.Parameters[2].Value.AsDateTime := DtIni;
+  FSalvarAgendaCommand.Parameters[3].Value.AsDateTime := DtFim;
+  if not Assigned(LDataSetList) then
+    FSalvarAgendaCommand.Parameters[4].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FSalvarAgendaCommand.Parameters[4].ConnectionHandler).GetJSONMarshaler;
+    try
+      FSalvarAgendaCommand.Parameters[4].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      if FInstanceOwner then
+        LDataSetList.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FSalvarAgendaCommand.Execute(ARequestFilter);
+  Result := FSalvarAgendaCommand.Parameters[5].Value.GetWideString;
+end;
+
+constructor TSmAgendaClient.Create(ARestConnection: TDSRestConnection);
+begin
+  inherited Create(ARestConnection);
+end;
+
+constructor TSmAgendaClient.Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ARestConnection, AInstanceOwner);
+end;
+
+destructor TSmAgendaClient.Destroy;
+begin
+  FGetAgendaCommand.DisposeOf;
+  FGetAgendaCommand_Cache.DisposeOf;
+  FSalvarAgendaCommand.DisposeOf;
   inherited;
 end;
 

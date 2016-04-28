@@ -100,7 +100,7 @@ begin
     try
       KeyValues:= EmptyStr;
 
-      LDataSetList := ModuloCliente.SmEscolaClient.GetAgenda(GetEscolaId,
+     LDataSetList := ModuloCliente.SmAgendaClient.GetAgenda(GetEscolaId,
                                                              Usuario.Marshal,
                                                              DtIni,
                                                              DtFim,

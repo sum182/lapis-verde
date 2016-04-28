@@ -12,10 +12,12 @@ uses
   untWebModulo in 'untWebModulo.pas' {webModulo: TWebModule},
   untSmTeste in 'untSmTeste.pas' {SmTeste: TDataModule},
   untSmMain in 'untSmMain.pas' {SmMain: TDataModule},
+  untSmAgenda in 'untSmAgenda.pas' {SmAgenda: TDataModule},
   untSmEscola in 'untSmEscola.pas' {SmEscola: TDataModule},
   untSmResponsavel in 'untSmResponsavel.pas' {SmResponsavel: TDataModule},
   smDBFireDac in 'C:\Componentes\sum182\D15\Units\smDBFireDac.pas',
   smGeral in 'C:\Componentes\sum182\D15\Units\smGeral.pas',
+
   untResourceString in '..\Lib\untResourceString.pas',
   untLibServer in '..\Lib\untLibServer.pas',
   untLibGeral in '..\Lib\untLibGeral.pas' {$R *.res},
