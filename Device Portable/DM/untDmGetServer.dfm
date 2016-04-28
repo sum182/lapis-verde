@@ -3,7 +3,7 @@ object DmGetServer: TDmGetServer
   Height = 427
   Width = 610
   object fdStanStorageBinLink: TFDStanStorageBinLink
-    Left = 194
+    Left = 533
     Top = 24
   end
   object fdqProcessoAtualizacao: TFDQuery
@@ -11,8 +11,8 @@ object DmGetServer: TDmGetServer
     SQL.Strings = (
       'SELECT * FROM processo_atualizacao'
       'where ((escola_id = :escola_id) or (escola_id = 0))')
-    Left = 56
-    Top = 24
+    Left = 48
+    Top = 183
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -31,8 +31,8 @@ object DmGetServer: TDmGetServer
       'from aluno a'
       'where escola_id = :escola_id'
       'order by nome')
-    Left = 56
-    Top = 88
+    Left = 48
+    Top = 9
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -47,8 +47,8 @@ object DmGetServer: TDmGetServer
       'select * from turma'
       'where escola_id = :escola_id'
       'order by nome')
-    Left = 136
-    Top = 88
+    Left = 123
+    Top = 9
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -67,8 +67,8 @@ object DmGetServer: TDmGetServer
       'select '#10'ta.*'#10'from turma_aluno ta'#10
       'inner join turma t on (t.turma_id = ta.turma_id )'#13#10#10
       'where escola_id = :escola_id'#10)
-    Left = 224
-    Top = 88
+    Left = 211
+    Top = 9
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -80,8 +80,8 @@ object DmGetServer: TDmGetServer
     SQL.Strings = (
       'select * from responsavel r'
       'where r.escola_id = :escola_id')
-    Left = 56
-    Top = 166
+    Left = 48
+    Top = 65
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -99,8 +99,8 @@ object DmGetServer: TDmGetServer
         'inner join responsavel r on (r.responsavel_id = ra.responsavel_i' +
         'd)'
       'where r.escola_id = :escola_id')
-    Left = 128
-    Top = 166
+    Left = 123
+    Top = 65
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -118,8 +118,8 @@ object DmGetServer: TDmGetServer
         'inner join responsavel r on (r.responsavel_id = rt.responsavel_i' +
         'd)'
       'where r.escola_id = :escola_id')
-    Left = 216
-    Top = 166
+    Left = 211
+    Top = 65
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -133,8 +133,8 @@ object DmGetServer: TDmGetServer
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
       'where f.escola_id = :escola_id')
-    Left = 56
-    Top = 224
+    Left = 314
+    Top = 65
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -172,8 +172,8 @@ object DmGetServer: TDmGetServer
       '  '
       '  where date(data_insert_local) = :data'
       '  order by ag.data_insert_local')
-    Left = 56
-    Top = 282
+    Left = 48
+    Top = 127
     ParamData = <
       item
         Name = 'DATA'
@@ -188,8 +188,8 @@ object DmGetServer: TDmGetServer
     SQL.Strings = (
       'select * from agenda_aluno al'
       'where al.agenda_id = :agenda_id')
-    Left = 160
-    Top = 274
+    Left = 123
+    Top = 127
     ParamData = <
       item
         Name = 'AGENDA_ID'
@@ -204,8 +204,8 @@ object DmGetServer: TDmGetServer
       'select * from agenda_turma at'
       'where at.agenda_id = :agenda_id'
       '')
-    Left = 288
-    Top = 274
+    Left = 211
+    Top = 127
     ParamData = <
       item
         Name = 'AGENDA_ID'
@@ -223,8 +223,8 @@ object DmGetServer: TDmGetServer
       '  and ag.enviado_server ='#39'S'#39
       '  and ag.data_insert_server is not null'
       '  order by ag.data_insert_local')
-    Left = 432
-    Top = 250
+    Left = 314
+    Top = 127
     ParamData = <
       item
         Name = 'DT_INI'

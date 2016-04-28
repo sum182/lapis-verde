@@ -7,8 +7,8 @@ object DmSaveServer: TDmSaveServer
     SQL.Strings = (
       'select * from log_error l'
       'where enviado_server is null')
-    Left = 288
-    Top = 30
+    Left = 48
+    Top = 86
   end
   object fdqAgenda: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -17,8 +17,8 @@ object DmSaveServer: TDmSaveServer
       'where a.enviado_server is null'
       'and a.data_insert_server is null'
       'order by data_insert_local')
-    Left = 200
-    Top = 34
+    Left = 48
+    Top = 26
   end
   object fdqAgendaAluno: TFDQuery
     Connection = Dm.FDConnectionDB
@@ -30,8 +30,8 @@ object DmSaveServer: TDmSaveServer
       'where a.enviado_server is null'
       'and a.data_insert_server is null'
       'order by a.data_insert_local')
-    Left = 200
-    Top = 86
+    Left = 136
+    Top = 26
     object fdqAgendaAlunoagenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'
@@ -55,8 +55,8 @@ object DmSaveServer: TDmSaveServer
       'where a.enviado_server is null'
       'and a.data_insert_server is null'
       'order by a.data_insert_local')
-    Left = 200
-    Top = 136
+    Left = 224
+    Top = 26
     object fdqAgendaTurmaagenda_id: TStringField
       FieldName = 'agenda_id'
       Origin = 'agenda_id'

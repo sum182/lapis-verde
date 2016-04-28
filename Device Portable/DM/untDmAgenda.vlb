@@ -1,26 +1,17 @@
 ﻿[fdqAgendaTurmaturma_id]
 Coordinates=585,1,143,33
 
-[dsTurmaAluno]
-Coordinates=131,376,87,33
-
 [fdqAgenda]
 Coordinates=376,10,91,213
 
 [fdqAgendaAluno]
 Coordinates=220,305,97,87
 
-[fdqTurma]
-Coordinates=477,10,96,159
-
 [Dm.fdqLogError]
 Coordinates=170,402,93,51
 
 [fdqAgendaAlunoaluno_id]
 Coordinates=585,105,139,33
-
-[fdqTurmaAluno]
-Coordinates=10,305,91,87
 
 [fdStanStorageBinLink]
 Coordinates=585,261,122,33
@@ -37,9 +28,6 @@ Coordinates=111,305,99,87
 [Dm.RESTRequest1]
 Coordinates=492,305,107,87
 
-[fdqAluno]
-Coordinates=136,10,96,231
-
 [Dm.fdqLogErrorSaveServer]
 Coordinates=10,402,150,51
 
@@ -50,5 +38,5 @@ Coordinates=609,305,95,69
 Coordinates=10,10,116,285
 
 []
-Coordinates=327,305,155,87
+Coordinates=10,305,91,87
 

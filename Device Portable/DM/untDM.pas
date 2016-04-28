@@ -14,18 +14,24 @@ type
     FDConnectionDB: TFDConnection;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
-    ImageList1: TImageList;
     fgActivityDialog: TfgActivityDialog;
     RESTClient1: TRESTClient;
     RESTRequest1: TRESTRequest;
     RESTResponse1: TRESTResponse;
-    FDConnectionDBEscola: TFDConnection;
-    FDConnectionDBResponsavel: TFDConnection;
     fdqLogError: TFDQuery;
     FDCreateDB: TFDConnection;
     fdqProcessoAtualizacao: TFDQuery;
     TimerSyncBasico: TTimer;
     TimerSyncGeral: TTimer;
+    fdqAluno: TFDQuery;
+    fdqTurma: TFDQuery;
+    fdqTurmaAluno: TFDQuery;
+    fdqResp: TFDQuery;
+    fdqRespAluno: TFDQuery;
+    fdqRespTelefone: TFDQuery;
+    fdqRespTipo: TFDQuery;
+    fdqFunc: TFDQuery;
+    fdqFuncTipo: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -43,6 +49,16 @@ type
     fEscolaId:Integer;
     fResponsavelId:Integer;
     fFuncionarioId:Integer;
+
+    procedure OpenAlunos;
+    procedure OpenTurmas;
+    procedure OpenTurmaAluno;overload;
+    procedure OpenTurmaAluno(TurmaId:Integer);overload;
+    procedure OpenResponsaveis;
+    procedure OpenFuncionarios;
+    procedure CloseResponsaveis;
+    procedure CloseFuncionarios;
+
     procedure ResetRESTConnection;
     procedure SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                            Data:TDateTime;
@@ -73,9 +89,23 @@ implementation
 
 uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
   untFuncoes, smDBFireDac, smMensagensFMX,smNetworkState, untDmGetServer,
-  untDmEscola, untDmSaveServer;
+  untDmSaveServer;
 
 {$R *.dfm}
+
+procedure TDm.CloseFuncionarios;
+begin
+  fdqFunc.Close;
+  fdqFuncTipo.Close;
+end;
+
+procedure TDm.CloseResponsaveis;
+begin
+  fdqResp.Close;
+  fdqRespAluno.Close;
+  fdqRespTelefone.Close;
+  fdqRespTipo.Close;
+end;
 
 procedure TDm.ConectarBases;
 begin
@@ -129,11 +159,82 @@ begin
   //
 end;
 
+procedure TDm.OpenAlunos;
+begin
+  fdqAluno.Close;
+  fdqAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqAluno.Open;
+end;
+
+procedure TDm.OpenFuncionarios;
+begin
+  fdqFunc.Close;
+  fdqFunc.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqFunc.Open;
+
+  fdqFuncTipo.Close;
+  fdqFuncTipo.Open;
+end;
+
 procedure TDm.OpenProcessoAtualizacao;
 begin
   fdqProcessoAtualizacao.Close;
   fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= GetEscolaId;
   fdqProcessoAtualizacao.Open;
+end;
+
+procedure TDm.OpenResponsaveis;
+begin
+  fdqResp.Close;
+  fdqResp.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqResp.Open;
+
+  fdqRespAluno.Close;
+  fdqRespAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqRespAluno.Open;
+
+  fdqRespTelefone.Close;
+  fdqRespTelefone.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqRespTelefone.Open;
+
+  fdqRespTipo.Close;
+  fdqRespTipo.Open;
+end;
+
+procedure TDm.OpenTurmaAluno;
+begin
+  fdqTurmaAluno.Close;
+  fdqTurmaAluno.SQL.Clear;
+  fdqTurmaAluno.SQL.Add('select');
+  fdqTurmaAluno.SQL.Add('ta.*');
+  fdqTurmaAluno.SQL.Add('from turma_aluno ta');
+  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+  fdqTurmaAluno.SQL.Add('where t.escola_id = :escola_id');
+  fdqTurmaAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqTurmaAluno.Open;
+end;
+
+procedure TDm.OpenTurmaAluno(TurmaId: Integer);
+begin
+  fdqTurmaAluno.Close;
+  fdqTurmaAluno.SQL.Clear;
+  fdqTurmaAluno.SQL.Add('select');
+  fdqTurmaAluno.SQL.Add('ta.*');
+  fdqTurmaAluno.SQL.Add('from turma_aluno ta');
+  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+  fdqTurmaAluno.SQL.Add('where t.escola_id = :escola_id');
+  fdqTurmaAluno.SQL.Add('and t.turma_id = :turma_id');
+  fdqTurmaAluno.ParamByName('turma_id').AsInteger:= TurmaId;
+  fdqTurmaAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqTurmaAluno.Open;
+end;
+
+procedure TDm.OpenTurmas;
+begin
+  fdqTurma.Close;
+  fdqTurma.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqTurma.Open;
+  OpenTurmaAluno;
 end;
 
 function TDm.ProcessHasUpdate(Process: string): Boolean;
