@@ -132,6 +132,7 @@ object SmMain: TSmMain
       'FROM aluno a'
       'where 1=1'#10' '#10
       'and escola_id = :escola_id'#10
+      'and ativo = '#39'S'#39
       'order by nome_completo'#10)
     Left = 50
     Top = 96
@@ -147,7 +148,8 @@ object SmMain: TSmMain
     Connection = FDConnection
     SQL.Strings = (
       'select * from responsavel r'
-      'where r.escola_id = :escola_id')
+      'where r.escola_id = :escola_id'
+      'and ativo = '#39'S'#39)
     Left = 56
     Top = 176
     ParamData = <
@@ -200,7 +202,10 @@ object SmMain: TSmMain
     Connection = FDConnection
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
-      'where f.escola_id = :escola_id')
+      ''
+      'where f.escola_id = :escola_id'
+      ''
+      'and ativo = '#39'S'#39)
     Left = 64
     Top = 248
     ParamData = <

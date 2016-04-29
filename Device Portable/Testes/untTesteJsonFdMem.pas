@@ -40,7 +40,7 @@ implementation
 
 {$R *.fmx}
 
-uses Proxy, untModuloCliente, untFuncoes;
+uses Proxy, untRestClient, untFuncoes;
 
 procedure TfrmTesteJsonFdMem.FormCreate(Sender: TObject);
 begin
@@ -57,7 +57,7 @@ begin
   ListView1.Visible:=False;
   ListView2.Visible:=True;
 
-  ClientRest:= TSmTesteClient.Create(ModuloCliente.DSRestConnection1);
+  ClientRest:= TSmTesteClient.Create(RestClient.DSRestConnection1);
   RetClient:= ClientRest.GetAlunosTeste;
   Assert(TFDJSONDataSetsReader.GetListCount(RetClient) = 1);
 
@@ -88,7 +88,7 @@ begin
 
 
   //Efetua o download da tabela TITULOS vinda do Servidor DataSnap
-  LDataSetList := ModuloCliente.SmTesteClient.GetAlunosTeste;
+  LDataSetList := RestClient.SmTesteClient.GetAlunosTeste;
 
   //Prepara o MemoryTable temporário
   fdmAlunos.Active := False;

@@ -9,7 +9,7 @@ uses
   untDmResponsavel in 'DM\untDmResponsavel.pas' {DmResponsavel: TDataModule},
   untDmAgenda in 'DM\untDmAgenda.pas' {DmAgenda: TDataModule},
   untPrincipal in 'untPrincipal.pas' {frmPrincipal},
-  untModuloCliente in 'untModuloCliente.pas' {ModuloCliente: TDataModule},
+  untRestClient in 'untRestClient.pas' {RestClient: TDataModule},
   untTesteClientes in 'Testes\untTesteClientes.pas' {frmTesteClientes},
   untTesteFornecedores in 'Testes\untTesteFornecedores.pas' {frmTesteFornecedores},
   untTesteProduto in 'Testes\untTesteProduto.pas' {frmTesteProduto},
@@ -70,7 +70,7 @@ begin
   Application.CreateForm(TDMStyles, DMStyles);
   Application.CreateForm(TDmGetServer, DmGetServer);
   Application.CreateForm(TDmSaveServer, DmSaveServer);
-  Application.CreateForm(TModuloCliente, ModuloCliente);
+  Application.CreateForm(TRestClient, RestClient);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Run;
   Exit;

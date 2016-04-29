@@ -38,7 +38,7 @@ implementation
 
 {$R *.fmx}
 
-uses Proxy, untModuloCliente, untDM, untFuncoes;
+uses Proxy, untRestClient, untDM, untFuncoes;
 
 procedure TfrmTesteJsonXSqLite.FormCreate(Sender: TObject);
 begin
@@ -55,7 +55,7 @@ begin
     procedure (const AResult: TModalResult)
     begin
       //Efetua o download da tabela TITULOS vinda do Servidor DataSnap
-      LDataSetList := ModuloCliente.SmTesteClient.GetAlunosTeste;
+      LDataSetList := RestClient.SmTesteClient.GetAlunosTeste;
 
       //Prepara o MemoryTable temporário
       fdmAlunos.Active := False;

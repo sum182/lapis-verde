@@ -1,4 +1,4 @@
-object ModuloCliente: TModuloCliente
+object RestClient: TRestClient
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 271

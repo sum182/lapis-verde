@@ -89,9 +89,11 @@ object SmResponsavel: TSmResponsavel
       'where 1=1'#10#10
       'and (r.cpf = :login) or (Upper(r.email) = Upper(:login)) '#13#10#10
       ''
+      ''
       'and r.senha = :senha'#13#10#10
       ''
       ''
+      'and ativo = '#39'S'#39
       ''
       ''
       '')

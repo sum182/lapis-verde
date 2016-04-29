@@ -6,7 +6,7 @@ Uses Data.DB;
 
   Type
     //Tipos de Usuário
-    TUsuarioTipo = (Funcionario,Responsavel);
+    TUsuarioTipo = (NaoDefinido,Funcionario,Responsavel);
 
 
 implementation

@@ -36,7 +36,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses untDM, untFuncoes, untModuloCliente, smDBFireDac,smNetworkState,
+uses untDM, untFuncoes, untRestClient, smDBFireDac,smNetworkState,
   smMensagensFMX;
 
 {$R *.dfm}
@@ -74,7 +74,7 @@ begin
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurma);
 
 
-      MsgRetornoServer:= ModuloCliente.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
+      MsgRetornoServer:= RestClient.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
 
       //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then
@@ -122,7 +122,7 @@ begin
       LDataSetList := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogError);
 
-      MsgRetornoServer:= ModuloCliente.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
+      MsgRetornoServer:= RestClient.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
 
     except on E:Exception do
       MsgRetornoServer := MsgRetornoServer + E.Message;

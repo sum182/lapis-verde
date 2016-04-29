@@ -27,7 +27,7 @@ implementation
 
 {$R *.fmx}
 
-uses untModuloCliente, untFuncoes;
+uses untRestClient, untFuncoes;
 
 procedure TfrmTesteString.FormCreate(Sender: TObject);
 begin
@@ -38,7 +38,7 @@ end;
 procedure TfrmTesteString.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  Edit1.Text := ModuloCliente.SmTesteClient.ReverseString(Edit1.Text);
+  Edit1.Text := RestClient.SmTesteClient.ReverseString(Edit1.Text);
 end;
 
 end.

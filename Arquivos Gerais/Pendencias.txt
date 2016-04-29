@@ -18,11 +18,6 @@ Atividades Leonardo
 Login Auto
 Configuracoes
 
-Criar um log de atualizacoes
-escola_id
-processo
-dt
-
 ao se logar como admin nao pega o id escola
 
 --------------------------------------------------------------------------------------------
@@ -36,15 +31,9 @@ criar uma vm zerada so com win7 + fontes e projetos
 
 
 ----Mobile--------------------------------------------------------------------------------
-DmGetServer
-DmSaveServer
-
 Criar metodo before conect rest
-
 renomear modolicnte para restcliet
 
-untLib VCL
-untLib FMX
 untResoruceString
 
 
@@ -56,13 +45,7 @@ funcionarios
 
 atualizacao de bd
 
-arrumar hr server bd
 
-
-
-getagenda erro no agenda alunos qdo manda agenda pra turmar
-1 vez erro depois ok
-gerar versao server
 
 Analisar Fetch Options
 alterei o fdconection para mode = all
@@ -108,18 +91,12 @@ http://www.tdevrocks.com.br/2014/09/21/tutorial-criando-meu-app-step-by-step-par
 
 
 **Geral
-Criar uma rotina que seta campos como internet ativa
-e as rotinas verificam estas variaveis antes
-
 Configuracoes de usuario
 cad usuario nao vinculado a escola
 Splash
 Tratar excecoes rest/json
 voltar nativo do android tem q fazer o msm do botao voltar e nao fechar a app
 ao voltar a um form aberto reabrilo e manter da msm forma ao inves de dar um dispose
-Setar o estilo de todas as telas
-
-voltar minimizar teclado - analisar (wagner)
 
 
 **Rest/Json

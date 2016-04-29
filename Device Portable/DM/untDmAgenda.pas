@@ -42,7 +42,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses untDM, untModuloCliente, smDBFireDac,
+uses untDM, untRestClient, smDBFireDac,
   FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState,
   untDmGetServer, untDmSaveServer;
 

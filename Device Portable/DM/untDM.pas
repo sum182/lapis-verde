@@ -87,7 +87,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untModuloCliente,
+uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untRestClient,
   untFuncoes, smDBFireDac, smMensagensFMX,smNetworkState, untDmGetServer,
   untDmSaveServer;
 

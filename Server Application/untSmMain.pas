@@ -30,13 +30,11 @@ type
     fdqRespAluno: TFDQuery;
     fdqRespTelefone: TFDQuery;
     fdqFunc: TFDQuery;
-
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure FDConnectionAfterConnect(Sender: TObject);
   private
-
     procedure SetSQLLogError(EscolaId:Integer);overload;
     procedure SetSQLLogError(EscolaId:Integer;KeyValues:String);overload;
     procedure OpenLogError(EscolaId:Integer);overload;
@@ -111,7 +109,9 @@ begin
   FDConnection.Open;
 
   FDConnectionLocal.Close;
-  Usuario:=TUsuario.Create;
+
+  if not Assigned(Usuario) then
+    Usuario:=TUsuario.Create;
 end;
 
 procedure TSmMain.FDConnectionAfterConnect(Sender: TObject);

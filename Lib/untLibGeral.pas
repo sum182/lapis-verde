@@ -12,6 +12,7 @@ Uses Data.DB,untTypes, System.JSON, Data.DBXJSONReflect;
       Id:Integer;
       Tipo:TUsuarioTipo;
 
+      constructor Create;
       function Marshal:TJSONValue;
       function UnMarshal(oObjetoJSON:TJSONValue):TUsuario;
     end;
@@ -22,6 +23,12 @@ implementation
 uses System.SysUtils, smGeralFMX, System.Variants, System.Rtti;
 
 { TUsuario }
+
+constructor TUsuario.Create;
+begin
+  inherited Create;
+  Tipo:= NaoDefinido;
+end;
 
 function TUsuario.Marshal: TJSONValue;
 var

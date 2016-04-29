@@ -10,8 +10,13 @@ object SmEscola: TSmEscola
         ','#39#39')) as nome_completo '
       'FROM funcionario f'
       'where 1=1'#13#10#10
+      ''
       'and (f.cpf = :login) or (f.email = :login) '#13#10#10
+      ''
       'and f.senha = :senha'#13#10#10
+      ''
+      'and ativo = '#39'S'#39
+      ''
       ''
       ''
       ''

@@ -44,15 +44,14 @@ function TSmEscola.LoginFuncionario(Login, Senha: string): Boolean;
 var
   LogServerRequest:TLogServerRequest;
 begin
-  //Método para retornar os Alunos
+  //Método para Login de Funcionarios
   try
     try
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
-                                            'LoginFuncionario',
-                                            0,
-                                            Usuario);
+                                            'LoginFuncionario'
+                                           );
 
       fdqLoginFuncionario.Close;
       fdqLoginFuncionario.ParamByName('login').AsString := Login;

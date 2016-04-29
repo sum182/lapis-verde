@@ -74,7 +74,7 @@ implementation
 
 {$R *.fmx}
 
-uses untDM, Proxy, untModuloCliente, untPrincipal, FMX.VirtualKeyboard,
+uses untDM, Proxy, untRestClient, untPrincipal, FMX.VirtualKeyboard,
   FMX.Platform, untFuncoes, untDMStyles, untCriarConta,smMensagensFMX;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
@@ -294,7 +294,7 @@ function TfrmLogin.LoginFuncionario: boolean;
 begin
   try
     try
-      Result := ModuloCliente.SmEscolaClient.LoginFuncionario
+      Result := RestClient.SmEscolaClient.LoginFuncionario
       (fLogin, fSenha) ;
     finally
        //
@@ -313,7 +313,7 @@ function TfrmLogin.LoginResponsavel: boolean;
 begin
   try
     try
-       Result := ModuloCliente.SmResponsavelClient.LoginResponsavel
+       Result := RestClient.SmResponsavelClient.LoginResponsavel
     (fLogin, fSenha);
     finally
        //

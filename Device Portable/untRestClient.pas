@@ -1,4 +1,4 @@
-unit untModuloCliente;
+unit untRestClient;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Proxy, IPPeerClient, Datasnap.DSClientRest;
 
 type
-  TModuloCliente = class(TDataModule)
+  TRestClient = class(TDataModule)
     DSRestConnection1: TDSRestConnection;
     DSRestConnectionLocal: TDSRestConnection;
     DSRestConnectionAWS: TDSRestConnection;
@@ -45,7 +45,7 @@ type
 end;
 
 var
-  ModuloCliente: TModuloCliente;
+  RestClient: TRestClient;
 
 implementation
 
@@ -55,19 +55,19 @@ uses smGeralFMX, untFuncoes;
 
 {$R *.dfm}
 
-constructor TModuloCliente.Create(AOwner: TComponent);
+constructor TRestClient.Create(AOwner: TComponent);
 begin
   inherited;
   FInstanceOwner := True;
 end;
 
-procedure TModuloCliente.DataModuleCreate(Sender: TObject);
+procedure TRestClient.DataModuleCreate(Sender: TObject);
 begin
   if not IsSysOSWindows then
     DSRestConnection1.Host := DSRestConnectionAWS.Host;
 end;
 
-destructor TModuloCliente.Destroy;
+destructor TRestClient.Destroy;
 begin
   FSrvServerMetodosClient.Free;
   FSmTesteClient.Free;
@@ -77,38 +77,38 @@ begin
   inherited;
 end;
 
-function TModuloCliente.GetSrvServerMetodosClient: TSrvServerMetodosClient;
+function TRestClient.GetSrvServerMetodosClient: TSrvServerMetodosClient;
 begin
   if FSrvServerMetodosClient = nil then
     FSrvServerMetodosClient:= TSrvServerMetodosClient.Create(DSRestConnection1, FInstanceOwner);
   Result := FSrvServerMetodosClient;
 end;
-function TModuloCliente.GetSmTesteClient: TSmTesteClient;
+function TRestClient.GetSmTesteClient: TSmTesteClient;
 begin
   if FSmTesteClient = nil then
     FSmTesteClient:= TSmTesteClient.Create(DSRestConnection1, FInstanceOwner);
   Result := FSmTesteClient;
 end;
-function TModuloCliente.GetSmMainClient: TSmMainClient;
+function TRestClient.GetSmMainClient: TSmMainClient;
 begin
   if FSmMainClient = nil then
     FSmMainClient:= TSmMainClient.Create(DSRestConnection1, FInstanceOwner);
   Result := FSmMainClient;
 end;
-function TModuloCliente.GetSmAgendaClient: TSmAgendaClient;
+function TRestClient.GetSmAgendaClient: TSmAgendaClient;
 begin
   if FSmAgendaClient = nil then
     FSmAgendaClient:= TSmAgendaClient.Create(DSRestConnection1, FInstanceOwner);
   Result := FSmAgendaClient;
 end;
 
-function TModuloCliente.GetSmEscolaClient: TSmEscolaClient;
+function TRestClient.GetSmEscolaClient: TSmEscolaClient;
 begin
   if FSmEscolaClient = nil then
     FSmEscolaClient:= TSmEscolaClient.Create(DSRestConnection1, FInstanceOwner);
   Result := FSmEscolaClient;
 end;
-function TModuloCliente.GetSmResponsavelClient: TSmResponsavelClient;
+function TRestClient.GetSmResponsavelClient: TSmResponsavelClient;
 begin
   if FSmResponsavelClient = nil then
     FSmResponsavelClient:= TSmResponsavelClient.Create(DSRestConnection1, FInstanceOwner);

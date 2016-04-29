@@ -20,8 +20,8 @@ Uses  FMX.Forms, Data.DB, untLibGeral;
 
       constructor Create;
       procedure SetLogServerRequest( UnitNome,Classe,Metodo:String;
-                                     EscolaId:Integer;
-                                     Usuario:TUsuario
+                                     EscolaId:Integer = 0;
+                                     Usuario:TUsuario = nil
                                     );
       procedure SetDataFim;
       procedure SetError(MsgError:String);
@@ -31,7 +31,13 @@ Uses  FMX.Forms, Data.DB, untLibGeral;
 
 implementation
 
-uses System.SysUtils, smGeralFMX, smMensagensFMX, System.Variants, Vcl.Forms;
+uses System.SysUtils, smGeralFMX, smMensagensFMX, System.Variants
+
+     {$IF DEFINED(MSWINDOWS)}
+     , Vcl.Forms
+     {$ENDIF}
+
+     ;
 
 { TLogServer }
 
@@ -57,11 +63,18 @@ end;
 procedure TLogServerRequest.SetLogServerRequest(UnitNome, Classe,
   Metodo: String; EscolaId: Integer; Usuario: TUsuario);
 begin
+  {$IF DEFINED(MSWINDOWS)}
   self.Aplicacao:=ExtractFileName(Application.Exename);
+  {$ENDIF}
+
   self.UnitNome:=UnitNome;
   self.Classe:=Classe;
   self.Metodo:=Metodo;
   self.EscolaId:=EscolaId;
+
+  if not Assigned(Usuario)then
+    Usuario:= TUsuario.Create;
+
   self.Usuario:=Usuario;
 end;
 
