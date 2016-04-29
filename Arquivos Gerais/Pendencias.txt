@@ -9,7 +9,6 @@ copiar pasta networkstate de projetos
 --------------------------------------------------------------------------------------------
 Atividades - Braspress
 
-
 --------------------------------------------------------------------------------------------
 
 
@@ -32,28 +31,18 @@ criar uma vm zerada so com win7 + fontes e projetos
 
 ----Mobile--------------------------------------------------------------------------------
 Criar metodo before conect rest
-renomear modolicnte para restcliet
 
-untResoruceString
-
-
-mobile listar somente ativos
-alunos
-turmas
-funcionarios
-
+lista somente turmas ativas
 
 atualizacao de bd
-
 
 
 Analisar Fetch Options
 alterei o fdconection para mode = all
 
-
 Ajustar para do Add Agenda
  
- Verificar teclado virtual keyboard hide de todas as telas
+Verificar teclado virtual keyboard hide de todas as telas
  
 Analisar atualizacao de banco 
 
