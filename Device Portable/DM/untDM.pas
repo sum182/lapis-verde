@@ -1,14 +1,19 @@
-﻿unit untDm;
+﻿unit untDM;
 
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
-  FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS,
-  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,System.IOUtils,
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
+  FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
+  FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, FireDAC.Comp.UI, Data.DB,
+  FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
-  IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,REST.Types,untLibGeral,untTypes;
+  IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
+  REST.Types, untLibGeral, untTypes;
+
 type
   TDm = class(TDataModule)
     FDConnectionDB: TFDConnection;
@@ -36,40 +41,36 @@ type
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
   private
-    SyncServer:Boolean;
-    procedure ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
+    SyncServer: Boolean;
+    procedure ConectarSQLite(FDConnection: TFDConnection; DataBaseName: String);
     procedure ConectarBases;
     procedure ConectarDB;
     procedure SetModoTeste;
   public
-    IsModoTeste:Boolean;
-    fUsuarioLogadoIsResponsavel:boolean;
-    fUsuarioLogadoIsFuncionario:boolean;
+    IsModoTeste: Boolean;
+    fUsuarioLogadoIsResponsavel: Boolean;
+    fUsuarioLogadoIsFuncionario: Boolean;
 
-    fEscolaId:Integer;
-    fResponsavelId:Integer;
-    fFuncionarioId:Integer;
+    fEscolaId: Integer;
+    fResponsavelId: Integer;
+    fFuncionarioId: Integer;
 
     procedure OpenAlunos;
     procedure OpenTurmas;
-    procedure OpenTurmaAluno;overload;
-    procedure OpenTurmaAluno(TurmaId:Integer);overload;
+    procedure OpenTurmaAluno; overload;
+    procedure OpenTurmaAluno(TurmaId: Integer); overload;
     procedure OpenResponsaveis;
     procedure OpenFuncionarios;
     procedure CloseResponsaveis;
     procedure CloseFuncionarios;
 
     procedure ResetRESTConnection;
-    procedure SetLogError( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
-                           Data:TDateTime;
-                           MsgUsuario:String = '';
-                           EscolaId:Integer = 0;
-                           ResponsavelId:Integer=0;
-                           FuncionarioId:Integer=0
-                          );
+    procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
+      Data: TDateTime; MsgUsuario: String = ''; EscolaId: Integer = 0;
+      ResponsavelId: Integer = 0; FuncionarioId: Integer = 0);
     procedure OpenProcessoAtualizacao;
-    function ProcessHasUpdate(Process:string):Boolean;
-    procedure ProcessSaveUpdate(Process:string);
+    function ProcessHasUpdate(Process: string): Boolean;
+    procedure ProcessSaveUpdate(Process: string);
 
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
@@ -78,22 +79,21 @@ type
 
 var
   Dm: TDm;
-  Usuario:TUsuario;
+  Usuario: TUsuario;
 
 const
-  BASE_URL: String = 'http://54.200.116.223:8080/datasnap/rest/TSrvServerMetodos';
+  BASE_URL: String =
+    'http://54.200.116.223:8080/datasnap/rest/TSrvServerMetodos';
 
 implementation
 
-{%CLASSGROUP 'FMX.Controls.TControl'}
+{ %CLASSGROUP 'FMX.Controls.TControl' }
 
 uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untRestClient,
-  untFuncoes, smDBFireDac, smMensagensFMX,smNetworkState, untDmGetServer,
+  untFuncoes, smDBFireDac, smMensagensFMX, smNetworkState, untDmGetServer,
   untDmSaveServer;
 
 {$R *.dfm}
-
-
 
 procedure TDm.CloseFuncionarios;
 begin
@@ -116,15 +116,14 @@ end;
 
 procedure TDm.ConectarDB;
 begin
-  ConectarSQLite(FDCreateDB,'db.s3db');
+  ConectarSQLite(FDCreateDB, 'db.s3db');
   FDCreateDB.Close;
-  ConectarSQLite(FDConnectionDB,'db.s3db');
+  ConectarSQLite(FDConnectionDB, 'db.s3db');
 end;
 
-
-procedure TDm.ConectarSQLite(FDConnection: TFDConnection;DataBaseName:String);
+procedure TDm.ConectarSQLite(FDConnection: TFDConnection; DataBaseName: String);
 var
-  DataBase:string;
+  DataBase: string;
 begin
 
   try
@@ -133,14 +132,14 @@ begin
     if smGeralFMX.IsSysOSAndroid or (smGeralFMX.IsSysOSiOS) then
     begin
       DataBase := TPath.GetDocumentsPath + PathDelim + DataBaseName;
-      FDConnection.Params.Values['Database']:= DataBase;
+      FDConnection.Params.Values['Database'] := DataBase;
     end;
 
     FDConnection.Open;
   except
-   on E: Exception do
-        ShowMessage('Erro ao conectar ao banco de dados local!' + #13 +
-          E.Message);
+    on E: Exception do
+      ShowMessage('Erro ao conectar ao banco de dados local!' + #13 +
+        E.Message);
   end;
 
 end;
@@ -151,27 +150,27 @@ begin
   FDCreateDB.Close;
   ConectarBases;
 
-  Usuario:= TUsuario.Create;
+  Usuario := TUsuario.Create;
 
   SetModoTeste;
 
-  //mudar este por tipo de usuario
-  fUsuarioLogadoIsFuncionario:=True;
-  fUsuarioLogadoIsResponsavel:=False;
+  // mudar este por tipo de usuario
+  fUsuarioLogadoIsFuncionario := True;
+  fUsuarioLogadoIsResponsavel := False;
   //
 end;
 
 procedure TDm.OpenAlunos;
 begin
   fdqAluno.Close;
-  fdqAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqAluno.ParamByName('escola_id').AsInteger := GetEscolaId;
   fdqAluno.Open;
 end;
 
 procedure TDm.OpenFuncionarios;
 begin
   fdqFunc.Close;
-  fdqFunc.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqFunc.ParamByName('escola_id').AsInteger := GetEscolaId;
   fdqFunc.Open;
 
   fdqFuncTipo.Close;
@@ -181,22 +180,22 @@ end;
 procedure TDm.OpenProcessoAtualizacao;
 begin
   fdqProcessoAtualizacao.Close;
-  fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger := GetEscolaId;
   fdqProcessoAtualizacao.Open;
 end;
 
 procedure TDm.OpenResponsaveis;
 begin
   fdqResp.Close;
-  fdqResp.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqResp.ParamByName('escola_id').AsInteger := GetEscolaId;
   fdqResp.Open;
 
   fdqRespAluno.Close;
-  fdqRespAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqRespAluno.ParamByName('escola_id').AsInteger := GetEscolaId;
   fdqRespAluno.Open;
 
   fdqRespTelefone.Close;
-  fdqRespTelefone.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqRespTelefone.ParamByName('escola_id').AsInteger := GetEscolaId;
   fdqRespTelefone.Open;
 
   fdqRespTipo.Close;
@@ -210,10 +209,13 @@ begin
   fdqTurmaAluno.SQL.Add('select');
   fdqTurmaAluno.SQL.Add('ta.*');
   fdqTurmaAluno.SQL.Add('from turma_aluno ta');
-  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+
+  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
   fdqTurmaAluno.SQL.Add('where t.escola_id = :escola_id');
-  fdqTurmaAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
-  fdqTurmaAluno.Open;
+
+  fdqTurmaAluno.ParamByName('escola_id').AsInteger := GetEscolaId;
+
+  fdqTurmaAluno.Open;
 end;
 
 procedure TDm.OpenTurmaAluno(TurmaId: Integer);
@@ -223,18 +225,23 @@ begin
   fdqTurmaAluno.SQL.Add('select');
   fdqTurmaAluno.SQL.Add('ta.*');
   fdqTurmaAluno.SQL.Add('from turma_aluno ta');
-  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+
+  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
   fdqTurmaAluno.SQL.Add('where t.escola_id = :escola_id');
-  fdqTurmaAluno.SQL.Add('and t.turma_id = :turma_id');
-  fdqTurmaAluno.ParamByName('turma_id').AsInteger:= TurmaId;
-  fdqTurmaAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
-  fdqTurmaAluno.Open;
+
+  fdqTurmaAluno.SQL.Add('and t.turma_id = :turma_id');
+
+  fdqTurmaAluno.ParamByName('turma_id').AsInteger := TurmaId;
+
+  fdqTurmaAluno.ParamByName('escola_id').AsInteger := GetEscolaId;
+
+  fdqTurmaAluno.Open;
 end;
 
 procedure TDm.OpenTurmas;
 begin
   fdqTurma.Close;
-  fdqTurma.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqTurma.ParamByName('escola_id').AsInteger := GetEscolaId;
   fdqTurma.Open;
   OpenTurmaAluno;
 end;
@@ -243,22 +250,20 @@ function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
   OpenProcessoAtualizacao;
 
-  fdqProcessoAtualizacao.IndexFieldNames:='processo';
+  fdqProcessoAtualizacao.IndexFieldNames := 'processo';
   if not fdqProcessoAtualizacao.FindKey([Process]) Then
     Exit;
 
-  Result:= (
-             fdqProcessoAtualizacao.FieldByName('data_local').AsDateTime <
-             fdqProcessoAtualizacao.FieldByName('data').AsDateTime
-            );
+  Result := (fdqProcessoAtualizacao.FieldByName('data_local').AsDateTime <
+    fdqProcessoAtualizacao.FieldByName('data').AsDateTime);
 
 end;
 
 procedure TDm.ProcessSaveUpdate(Process: string);
 begin
- OpenProcessoAtualizacao;
+  OpenProcessoAtualizacao;
 
-  fdqProcessoAtualizacao.IndexFieldNames:='processo';
+  fdqProcessoAtualizacao.IndexFieldNames := 'processo';
   if not fdqProcessoAtualizacao.FindKey([Process]) Then
     Exit;
 
@@ -275,52 +280,51 @@ begin
   RESTClient1.BaseURL := BASE_URL;
 end;
 
-
-
 procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
-  Data: TDateTime; MsgUsuario:String; EscolaId, ResponsavelId, FuncionarioId: Integer);
+  Data: TDateTime; MsgUsuario: String; EscolaId, ResponsavelId,
+  FuncionarioId: Integer);
 begin
   try
-    fdqLogError.Active:=False;
-    fdqLogError.Active:=True;
+    fdqLogError.Active := False;
+    fdqLogError.Active := True;
 
     fdqLogError.Append;
-    fdqLogError.FieldByName('log_error_id').AsString:= GetGUID;
-    fdqLogError.FieldByName('msg_error').AsString:= MsgError;
-    fdqLogError.FieldByName('aplicacao').AsString:= Aplicacao;
-    fdqLogError.FieldByName('unit').AsString:= UnitNome;
-    fdqLogError.FieldByName('class').AsString:= Classe;
-    fdqLogError.FieldByName('metodo').AsString:= Metodo;
+    fdqLogError.FieldByName('log_error_id').AsString := GetGUID;
+    fdqLogError.FieldByName('msg_error').AsString := MsgError;
+    fdqLogError.FieldByName('aplicacao').AsString := Aplicacao;
+    fdqLogError.FieldByName('unit').AsString := UnitNome;
+    fdqLogError.FieldByName('class').AsString := Classe;
+    fdqLogError.FieldByName('metodo').AsString := Metodo;
 
     if EscolaId > 0 then
-      fdqLogError.FieldByName('escola_id').AsInteger:=EscolaId;
+      fdqLogError.FieldByName('escola_id').AsInteger := EscolaId;
 
     if ResponsavelId > 0 then
-      fdqLogError.FieldByName('responsavel_id').AsInteger:=ResponsavelId;
+      fdqLogError.FieldByName('responsavel_id').AsInteger := ResponsavelId;
 
     if FuncionarioId > 0 then
-      fdqLogError.FieldByName('funcionario_id').AsInteger:= FuncionarioId;
+      fdqLogError.FieldByName('funcionario_id').AsInteger := FuncionarioId;
 
-    fdqLogError.FieldByName('data').AsDateTime:= Data;
+    fdqLogError.FieldByName('data').AsDateTime := Data;
     fdqLogError.Post;
 
     if MsgUsuario <> '' then
       ShowMessage(MsgUsuario);
 
   finally
-    fdqLogError.Active:=False;
+    fdqLogError.Active := False;
   end;
 end;
 
 procedure TDm.SetModoTeste;
 begin
-  IsModoTeste:=True;
-  fFuncionarioId:=16;
-  fEscolaId:=1;
-  fResponsavelId:=0;
+  IsModoTeste := True;
+  fFuncionarioId := 16;
+  fEscolaId := 1;
+  fResponsavelId := 0;
 
-  Usuario.Tipo:=Funcionario;
-  Usuario.Id:= 16;
+  Usuario.Tipo := Funcionario;
+  Usuario.Id := 16;
 end;
 
 procedure TDm.SyncronizarDadosServerGeral;
@@ -332,24 +336,26 @@ begin
     if not smNetworkState.IsConnected then
       Exit;
 
-    SyncServer:=True;
+    SyncServer := True;
 
     try
       DmGetServer.GetDadosServerGeral;
       MsgPoupUpTeste('DmGetServer.GetDadosServerGeral OK');
-    except on E:Exception do
-      MsgPoupUp('DmGetServer.GetDadosServerGeral Erro:' + e.Message);
+    except
+      on E: Exception do
+        MsgPoupUp('DmGetServer.GetDadosServerGeral Erro:' + E.Message);
     end;
 
     try
       DmSaveServer.SaveDadosServerGeral;
       MsgPoupUpTeste('DM.SalvarDadosServer OK');
-    except on E:Exception do
-      MsgPoupUp('DM.SalvarDadosServer Erro:' + e.Message);
+    except
+      on E: Exception do
+        MsgPoupUp('DM.SalvarDadosServer Erro:' + E.Message);
     end;
 
   finally
-    SyncServer:=False;
+    SyncServer := False;
   end;
 end;
 
@@ -362,24 +368,26 @@ begin
     if not smNetworkState.IsConnected then
       Exit;
 
-    SyncServer:=True;
+    SyncServer := True;
 
     try
       DmGetServer.GetServerBasico;
       MsgPoupUpTeste('DmGetServer.GetServerBasico OK');
-    except on E:Exception do
-      MsgPoupUp('DmGetServer.GetServerBasico' + e.Message);
+    except
+      on E: Exception do
+        MsgPoupUp('DmGetServer.GetServerBasico' + E.Message);
     end;
 
     try
       DmSaveServer.SaveServerBasico;
       MsgPoupUpTeste('DmSaveServer.SaveServerBasico OK');
-    except on E:Exception do
-      MsgPoupUp('DmSaveServer.SaveServerBasico Erro:' + e.Message);
+    except
+      on E: Exception do
+        MsgPoupUp('DmSaveServer.SaveServerBasico Erro:' + E.Message);
     end;
 
   finally
-    SyncServer:=False;
+    SyncServer := False;
   end;
 end;
 
@@ -387,7 +395,8 @@ procedure TDm.TimerSyncBasicoTimer(Sender: TObject);
 var
   Thread: TThread;
 begin
-  Thread := TThread.CreateAnonymousThread(procedure
+  Thread := TThread.CreateAnonymousThread(
+    procedure
     begin
       SyncronizarDadosServerBasico;
     end);
@@ -398,7 +407,8 @@ procedure TDm.TimerSyncGeralTimer(Sender: TObject);
 var
   Thread: TThread;
 begin
-  Thread := TThread.CreateAnonymousThread(procedure
+  Thread := TThread.CreateAnonymousThread(
+    procedure
     begin
       SyncronizarDadosServerGeral;
     end);
