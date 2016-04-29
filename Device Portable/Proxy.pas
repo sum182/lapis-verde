@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 28/04/2016 12:59:33
+// 29/04/2016 11:34:49
 //
 
 unit Proxy;
@@ -141,6 +141,7 @@ type
 
   TSmAgendaClient = class(TDSAdminRestClient)
   private
+    FfdqAgendaBeforePostCommand: TDSRestCommand;
     FGetAgendaCommand: TDSRestCommand;
     FGetAgendaCommand_Cache: TDSRestCommand;
     FSalvarAgendaCommand: TDSRestCommand;
@@ -148,6 +149,7 @@ type
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
+    procedure fdqAgendaBeforePost(DataSet: TDataSet);
     function GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
@@ -453,6 +455,11 @@ const
     (Name: 'RG'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Sexo'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmAgenda_fdqAgendaBeforePost: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
   );
 
   TSmAgenda_GetAgenda: array [0..5] of TDSRestParameterMetaData =
@@ -1460,6 +1467,19 @@ begin
   inherited;
 end;
 
+procedure TSmAgendaClient.fdqAgendaBeforePost(DataSet: TDataSet);
+begin
+  if FfdqAgendaBeforePostCommand = nil then
+  begin
+    FfdqAgendaBeforePostCommand := FConnection.CreateCommand;
+    FfdqAgendaBeforePostCommand.RequestType := 'POST';
+    FfdqAgendaBeforePostCommand.Text := 'TSmAgenda."fdqAgendaBeforePost"';
+    FfdqAgendaBeforePostCommand.Prepare(TSmAgenda_fdqAgendaBeforePost);
+  end;
+  FfdqAgendaBeforePostCommand.Parameters[0].Value.SetDBXReader(TDBXDataSetReader.Create(DataSet, FInstanceOwner), True);
+  FfdqAgendaBeforePostCommand.Execute;
+end;
+
 function TSmAgendaClient.GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetAgendaCommand = nil then
@@ -1574,6 +1594,7 @@ end;
 
 destructor TSmAgendaClient.Destroy;
 begin
+  FfdqAgendaBeforePostCommand.DisposeOf;
   FGetAgendaCommand.DisposeOf;
   FGetAgendaCommand_Cache.DisposeOf;
   FSalvarAgendaCommand.DisposeOf;

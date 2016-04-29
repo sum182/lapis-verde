@@ -4,8 +4,10 @@ object RestClient: TRestClient
   Height = 271
   Width = 415
   object DSRestConnection1: TDSRestConnection
-    Host = 'localhost'
+    Host = '54.200.116.223'
     Port = 8080
+    UserName = 'lapisverde_us_2017'
+    Password = 'lapisverde_pw_2017'
     LoginPrompt = False
     PreserveSessionID = False
     Left = 56
@@ -15,6 +17,8 @@ object RestClient: TRestClient
   object DSRestConnectionLocal: TDSRestConnection
     Host = 'localhost'
     Port = 8080
+    UserName = 'lapisverde_us_2017'
+    Password = 'lapisverde_pw_2017'
     LoginPrompt = False
     Left = 56
     Top = 96
@@ -23,6 +27,8 @@ object RestClient: TRestClient
   object DSRestConnectionAWS: TDSRestConnection
     Host = '54.200.116.223'
     Port = 8080
+    UserName = 'lapisverde_us_2017'
+    Password = 'lapisverde_pw_2017'
     LoginPrompt = False
     Left = 56
     Top = 160

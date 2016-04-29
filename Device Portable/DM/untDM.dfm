@@ -97,12 +97,14 @@ object Dm: TDm
       end>
   end
   object TimerSyncBasico: TTimer
+    Enabled = False
     Interval = 60000
     OnTimer = TimerSyncBasicoTimer
     Left = 648
     Top = 216
   end
   object TimerSyncGeral: TTimer
+    Enabled = False
     Interval = 3600000
     OnTimer = TimerSyncGeralTimer
     Left = 648

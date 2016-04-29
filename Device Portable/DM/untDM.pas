@@ -93,6 +93,8 @@ uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untRestClient,
 
 {$R *.dfm}
 
+
+
 procedure TDm.CloseFuncionarios;
 begin
   fdqFunc.Close;
@@ -239,8 +241,6 @@ end;
 
 function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
-  Result:=True;
-  exit;
   OpenProcessoAtualizacao;
 
   fdqProcessoAtualizacao.IndexFieldNames:='processo';
