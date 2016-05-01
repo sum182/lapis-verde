@@ -74,6 +74,7 @@ begin
   FSmMainClient.Free;
   FSmEscolaClient.Free;
   FSmResponsavelClient.Free;
+  FSmAgendaClient.Free;
   inherited;
 end;
 

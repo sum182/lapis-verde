@@ -209,6 +209,7 @@ begin
     end;
   finally
     fdqDataSet.Active := False;
+    fdqDataSet.Free;
     LogServerRequest.Free;
   end;
 

@@ -44,7 +44,7 @@ begin
         Result := Marshal.Marshal(self);
       finally
         //Liberando o serializador
-        Marshal.Free;
+        Marshal.DisposeOf;
       end;
     end
     else
@@ -70,7 +70,7 @@ begin
     Result := TUsuario(UnMarshal.Unmarshal(oObjetoJSON));
   finally
     //Libera o Objeto da memoria
-    UnMarshal.Free;
+    UnMarshal.DisposeOf;
   end;
 end;
 
