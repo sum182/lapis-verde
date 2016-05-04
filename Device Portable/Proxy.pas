@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 01/05/2016 17:32:13
+// 04/05/2016 07:11:48
 //
 
 unit Proxy;
@@ -144,6 +144,8 @@ type
     FfdqAgendaBeforePostCommand: TDSRestCommand;
     FGetAgendaCommand: TDSRestCommand;
     FGetAgendaCommand_Cache: TDSRestCommand;
+    FGetAgendaTesteCommand: TDSRestCommand;
+    FGetAgendaTesteCommand_Cache: TDSRestCommand;
     FSalvarAgendaCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
@@ -152,6 +154,8 @@ type
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     function GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
   end;
 
@@ -479,6 +483,24 @@ const
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'ListKeysInserts'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmAgenda_GetAgendaTeste: array [0..4] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSmAgenda_GetAgendaTeste_Cache: array [0..4] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
@@ -1552,6 +1574,52 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[5].Value.GetString);
 end;
 
+function TSmAgendaClient.GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string): TFDJSONDataSets;
+begin
+  if FGetAgendaTesteCommand = nil then
+  begin
+    FGetAgendaTesteCommand := FConnection.CreateCommand;
+    FGetAgendaTesteCommand.RequestType := 'POST';
+    FGetAgendaTesteCommand.Text := 'TSmAgenda."GetAgendaTeste"';
+    FGetAgendaTesteCommand.Prepare(TSmAgenda_GetAgendaTeste);
+  end;
+  FGetAgendaTesteCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaTesteCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FGetAgendaTesteCommand.Parameters[2].Value.AsDateTime := DtIni;
+  FGetAgendaTesteCommand.Parameters[3].Value.AsDateTime := DtFim;
+  FGetAgendaTesteCommand.Execute(ARequestFilter);
+  if not FGetAgendaTesteCommand.Parameters[4].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetAgendaTesteCommand.Parameters[4].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAgendaTesteCommand.Parameters[4].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetAgendaTesteCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSmAgendaClient.GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FGetAgendaTesteCommand_Cache = nil then
+  begin
+    FGetAgendaTesteCommand_Cache := FConnection.CreateCommand;
+    FGetAgendaTesteCommand_Cache.RequestType := 'POST';
+    FGetAgendaTesteCommand_Cache.Text := 'TSmAgenda."GetAgendaTeste"';
+    FGetAgendaTesteCommand_Cache.Prepare(TSmAgenda_GetAgendaTeste_Cache);
+  end;
+  FGetAgendaTesteCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaTesteCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FGetAgendaTesteCommand_Cache.Parameters[2].Value.AsDateTime := DtIni;
+  FGetAgendaTesteCommand_Cache.Parameters[3].Value.AsDateTime := DtFim;
+  FGetAgendaTesteCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaTesteCommand_Cache.Parameters[4].Value.GetString);
+end;
+
 function TSmAgendaClient.SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarAgendaCommand = nil then
@@ -1597,6 +1665,8 @@ begin
   FfdqAgendaBeforePostCommand.DisposeOf;
   FGetAgendaCommand.DisposeOf;
   FGetAgendaCommand_Cache.DisposeOf;
+  FGetAgendaTesteCommand.DisposeOf;
+  FGetAgendaTesteCommand_Cache.DisposeOf;
   FSalvarAgendaCommand.DisposeOf;
   inherited;
 end;

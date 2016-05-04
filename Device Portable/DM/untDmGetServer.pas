@@ -47,6 +47,7 @@ type
     procedure GetResponsaveis;
     procedure GetFuncionarios;
     procedure GetAgenda(DtIni,DtFim:TDateTime);
+    procedure GetAgendaTeste(DtIni,DtFim:TDateTime);
 
     //Agenda
     procedure OpenAgendaKeysInsert(DtIni,DtFim:TDateTime);
@@ -94,17 +95,23 @@ var
   LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
   KeyValues: string;
+  ListKeysInsert:TFDJSONDataSets;
 begin
   //Método para retornar as Agendas
   try
     try
+      MsgPoupUpTeste('Inicio DmGetServer.GetAgenda');
       KeyValues:= EmptyStr;
 
-     LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
+      ListKeysInsert:= TFDJSONDataSets.Create;
+      ListKeysInsert:= GetAgendaListKeysInsert(DtIni,DtFim);
+
+      LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
                                                              Usuario.Marshal,
                                                              DtIni,
                                                              DtFim,
-                                                             GetAgendaListKeysInsert(DtIni,DtFim)
+                                                             //GetAgendaListKeysInsert(DtIni,DtFim)
+                                                             ListKeysInsert
                                                              );
 
       //Pegando dados da agenda
@@ -147,6 +154,68 @@ begin
   finally
   end;
 
+end;
+
+procedure TDmGetServer.GetAgendaTeste(DtIni, DtFim: TDateTime);
+var
+  LDataSetList: TFDJSONDataSets;
+  LDataSet: TFDDataSet;
+  KeyValues: string;
+  UsusarioJonsValue: TJSONValue;
+begin
+  //Método para retornar as Agendas
+  try
+    try
+      MsgPoupUpTeste('Inicio DmGetServer.GetAgendaTeste');
+      KeyValues:= EmptyStr;
+      UsusarioJonsValue:= Usuario.MarshalValue;
+
+      LDataSetList := RestClient.SmAgendaClient.GetAgendaTeste(GetEscolaId,
+                                                                 UsusarioJonsValue,
+                                                                 DtIni,
+                                                                 DtFim
+                                                                 );
+
+      //Pegando dados da agenda
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
+
+     if LDataSet.IsEmpty then
+        Exit;
+
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+      //ShowMessage(KeyValues);
+      OpenAgenda(KeyValues);
+
+      CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
+
+      //Pegando dados da agenda_aluno
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_aluno');
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+      OpenAgendaAluno(KeyValues);
+      CopyDataSet(LDataSet,fdqAgendaAluno,False,[coAppend,coEdit]);
+
+      //Pegando dados da agenda_turma
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
+      OpenAgendaTurma(KeyValues);
+      CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
+
+    except on E:Exception do
+      DM.SetLogError( E.Message,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'GetAgenda',
+                      Now,
+                      'Erro na busca da agenda' + #13 + E.Message,
+                      GetEscolaId,
+                      GetResponsavelId,
+                      GetFuncionarioId
+                    );
+    end;
+  finally
+    //ListKeysInsert.DisposeOf;
+  end;
 end;
 
 procedure TDmGetServer.GetAgendaTipo;
@@ -210,8 +279,8 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-    if not Dm.ProcessHasUpdate('aluno') then
-     Exit;
+    //if not Dm.ProcessHasUpdate('aluno') then
+    // Exit;
 
     LDataSetList := RestClient.SmMainClient.GetAlunos(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
@@ -548,7 +617,7 @@ end;
 procedure TDmGetServer.GetServerBasico;
 begin
   try
-    GetAgenda(Now - 1, Now + 7);
+    GetAgendaTeste(Now - 1, Now + 7);
     MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('TDmGetServer.GetAgenda Erro:' + e.Message);
@@ -566,8 +635,8 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-   if not Dm.ProcessHasUpdate('turma') then
-     Exit;
+   //if not Dm.ProcessHasUpdate('turma') then
+    // Exit;
 
     OpenTurmas;
     LDataSetList := RestClient.SmMainClient.GetTurmas(GetEscolaId,Usuario.Marshal);

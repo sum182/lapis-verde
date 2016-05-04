@@ -8,13 +8,18 @@ Uses Data.DB,untTypes, System.JSON, Data.DBXJSONReflect;
   Type
 
     TUsuario = class
+  private
+    function GetMarshalValue: TJSONValue;
     public
       Id:Integer;
       Tipo:TUsuarioTipo;
+      FMarshalValue: TJSONValue;
 
       constructor Create;
       function Marshal:TJSONValue;
       function UnMarshal(oObjetoJSON:TJSONValue):TUsuario;
+
+       property MarshalValue: TJSONValue read GetMarshalValue write FMarshalValue;
     end;
 
 
@@ -28,6 +33,13 @@ constructor TUsuario.Create;
 begin
   inherited Create;
   Tipo:= NaoDefinido;
+end;
+
+function TUsuario.GetMarshalValue: TJSONValue;
+begin
+  if FMarshalValue = nil then
+    FMarshalValue := self.Marshal;
+  Result:=FMarshalValue;
 end;
 
 function TUsuario.Marshal: TJSONValue;

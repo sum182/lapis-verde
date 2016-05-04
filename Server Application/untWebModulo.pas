@@ -21,11 +21,11 @@ type
     DSProxyGenerator1: TDSProxyGenerator;
     DSServerMetaDataProvider1: TDSServerMetaDataProvider;
     DSServerClassTeste: TDSServerClass;
-    DSServerClassMain: TDSServerClass;
     DSServerClassEscola: TDSServerClass;
     DSServerClassResponsavel: TDSServerClass;
-    DSServerClassAgenda: TDSServerClass;
     DSAuthenticationManager1: TDSAuthenticationManager;
+    DSServerClassMain: TDSServerClass;
+    DSServerClassAgenda: TDSServerClass;
     procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
@@ -40,17 +40,17 @@ type
     procedure WebModuleCreate(Sender: TObject);
     procedure DSServerClassTesteGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
-    procedure DSServerClassMainGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
     procedure DSServerClassEscolaGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure DSServerClassResponsavelGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
-    procedure DSServerClassAgendaGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
     procedure DSAuthenticationManager1UserAuthenticate(Sender: TObject;
       const Protocol, Context, User, Password: string; var valid: Boolean;
       UserRoles: TStrings);
+    procedure DSServerClassMainGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure DSServerClassAgendaGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;

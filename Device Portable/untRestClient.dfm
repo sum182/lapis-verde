@@ -9,6 +9,7 @@ object RestClient: TRestClient
     UserName = 'lapisverde_us_2017'
     Password = 'lapisverde_pw_2017'
     LoginPrompt = False
+    PreserveSessionID = False
     Left = 56
     Top = 40
     UniqueId = '{4F60CF93-9F71-4D79-9871-2DBBE4BC6725}'
@@ -19,6 +20,7 @@ object RestClient: TRestClient
     UserName = 'lapisverde_us_2017'
     Password = 'lapisverde_pw_2017'
     LoginPrompt = False
+    PreserveSessionID = False
     Left = 56
     Top = 96
     UniqueId = '{4F60CF93-9F71-4D79-9871-2DBBE4BC6725}'
@@ -29,6 +31,7 @@ object RestClient: TRestClient
     UserName = 'lapisverde_us_2017'
     Password = 'lapisverde_pw_2017'
     LoginPrompt = False
+    PreserveSessionID = False
     Left = 56
     Top = 160
     UniqueId = '{4F60CF93-9F71-4D79-9871-2DBBE4BC6725}'

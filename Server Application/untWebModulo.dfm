@@ -109,12 +109,6 @@ object webModulo: TwebModulo
     Left = 432
     Top = 88
   end
-  object DSServerClassMain: TDSServerClass
-    OnGetClass = DSServerClassMainGetClass
-    Server = DSServer1
-    Left = 432
-    Top = 144
-  end
   object DSServerClassEscola: TDSServerClass
     OnGetClass = DSServerClassEscolaGetClass
     Server = DSServer1
@@ -127,16 +121,22 @@ object webModulo: TwebModulo
     Left = 432
     Top = 312
   end
-  object DSServerClassAgenda: TDSServerClass
-    OnGetClass = DSServerClassAgendaGetClass
-    Server = DSServer1
-    Left = 432
-    Top = 192
-  end
   object DSAuthenticationManager1: TDSAuthenticationManager
     OnUserAuthenticate = DSAuthenticationManager1UserAuthenticate
     Roles = <>
     Left = 236
     Top = 75
+  end
+  object DSServerClassMain: TDSServerClass
+    OnGetClass = DSServerClassMainGetClass
+    Server = DSServer1
+    Left = 432
+    Top = 144
+  end
+  object DSServerClassAgenda: TDSServerClass
+    OnGetClass = DSServerClassAgendaGetClass
+    Server = DSServer1
+    Left = 432
+    Top = 200
   end
 end
