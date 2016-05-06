@@ -217,7 +217,7 @@ object DmGetServer: TDmGetServer
   object fdqAgendaKeysInsert: TFDQuery
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
-      '  select agenda_id'
+      '  select *'
       '  from agenda ag'
       '  where ag.data between :dt_ini and :dt_fim'
       '  and ag.enviado_server ='#39'S'#39

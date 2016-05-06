@@ -96,18 +96,32 @@ var
   LDataSet: TFDDataSet;
   KeyValues: string;
   ListKeysInsert:TFDJSONDataSets;
+  UsuarioJSONValue: TJSONValue;
 begin
   //Método para retornar as Agendas
   try
     try
-      MsgPoupUpTeste('Inicio DmGetServer.GetAgenda');
+      //MsgPoupUpTeste('Inicio DmGetServer.GetAgenda');
       KeyValues:= EmptyStr;
 
+      //LDataSetList := TFDJSONDataSets.Create;
+     // TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogError);
+
       ListKeysInsert:= TFDJSONDataSets.Create;
-      ListKeysInsert:= GetAgendaListKeysInsert(DtIni,DtFim);
+      //ListKeysInsert:= GetAgendaListKeysInsert(DtIni,DtFim);
+      OpenAgendaKeysInsert(DtIni,DtFim);
+      TFDJSONDataSetsWriter.ListAdd(ListKeysInsert,fdqAgendaKeysInsert);
+
+      {ListKeysInsert:= TFDJSONDataSets.Create;
+      DmSaveServer.fdqLogError.Active := False;
+      TFDJSONDataSetsWriter.ListAdd(ListKeysInsert,DmSaveServer.fdqLogError); }
+
+
+      UsuarioJSONValue:= Usuario.MarshalValue;
+
 
       LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
-                                                             Usuario.Marshal,
+                                                             UsuarioJSONValue,
                                                              DtIni,
                                                              DtFim,
                                                              //GetAgendaListKeysInsert(DtIni,DtFim)
@@ -161,17 +175,17 @@ var
   LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
   KeyValues: string;
-  UsusarioJonsValue: TJSONValue;
+  UsuarioJSONValue: TJSONValue;
 begin
   //Método para retornar as Agendas
   try
     try
-      MsgPoupUpTeste('Inicio DmGetServer.GetAgendaTeste');
+      //MsgPoupUpTeste('Inicio DmGetServer.GetAgendaTeste');
       KeyValues:= EmptyStr;
-      UsusarioJonsValue:= Usuario.MarshalValue;
+      UsuarioJSONValue:= Usuario.MarshalValue;
 
       LDataSetList := RestClient.SmAgendaClient.GetAgendaTeste(GetEscolaId,
-                                                                 UsusarioJonsValue,
+                                                                 UsuarioJSONValue,
                                                                  DtIni,
                                                                  DtFim
                                                                  );
@@ -207,7 +221,7 @@ begin
                       ClassName,
                       'GetAgenda',
                       Now,
-                      'Erro na busca da agenda' + #13 + E.Message,
+                      '**Erro na busca da agenda Teste' + #13 + E.Message,
                       GetEscolaId,
                       GetResponsavelId,
                       GetFuncionarioId
@@ -262,11 +276,16 @@ end;
 
 function TDmGetServer.GetAgendaListKeysInsert(DtIni,
   DtFim: TDateTime): TFDJSONDataSets;
+var
+  fdMem: TFDMemTable;
 begin
   try
+    fdMem:= TFDMemTable.Create(self);
     Result:= TFDJSONDataSets.Create;
     OpenAgendaKeysInsert(DtIni,DtFim);
-    TFDJSONDataSetsWriter.ListAdd(Result,fdqAgendaKeysInsert);
+     fdMem.AppendData(fdqAgendaKeysInsert);
+    //CopyDataSet(fdqAgendaKeysInsert,fdMem);
+    TFDJSONDataSetsWriter.ListAdd(Result,fdMem);
   finally
     fdqAgendaKeysInsert.Close;
   end;
@@ -617,11 +636,38 @@ end;
 procedure TDmGetServer.GetServerBasico;
 begin
   try
-    GetAgendaTeste(Now - 1, Now + 7);
+    GetAgenda(Now - 1, Now + 7);
     MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('TDmGetServer.GetAgenda Erro:' + e.Message);
   end;
+
+  try
+    GetAgendaTeste(Now - 1, Now + 7);
+    MsgPoupUpTeste('DmGetServer.GetAgendaTeste OK');
+  except on E:Exception do
+    MsgPoupUp('TDmGetServer.GetAgendaTeste Erro:' + e.Message);
+  end;
+
+
+  try
+    GetAlunos;;
+    MsgPoupUpTeste('DmGetServer.GetAlunos OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
+  end;
+
+
+
+  try
+    RestClient.SmTesteClient.GetAlunosTeste;
+    MsgPoupUpTeste('SmTesteClient.GetAlunosTeste OK');
+  except on E:Exception do
+    MsgPoupUp('SmTesteClient.GetAlunosTeste Erro:' + e.Message);
+  end;
+
+
+
 end;
 
 procedure TDmGetServer.GetTelefoneTipo;

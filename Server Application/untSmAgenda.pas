@@ -44,7 +44,7 @@ type
  {$METHODINFO ON}
   public
     //Metodos de Agenda
-    function GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil):TFDJSONDataSets;
+    function GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets):TFDJSONDataSets;
 
 
     function GetAgendaTeste(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime):TFDJSONDataSets;
@@ -84,7 +84,7 @@ end;
 
 
 function TSmAgenda.GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;
-   DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil): TFDJSONDataSets;
+   DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -99,7 +99,8 @@ begin
                                             EscolaId,
                                             Usuario);
 
-      OpenAgenda(EscolaId,DtIni,DtFim,ListKeysInserts);
+      //OpenAgenda(EscolaId,DtIni,DtFim,ListKeysInserts);
+      OpenAgendaTeste(EscolaId,DtIni,DtFim);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
@@ -112,9 +113,9 @@ begin
       end;
     end;
   finally
-    fdqAgenda.Active := False;
-    fdqAgendaAluno.Active := False;
-    fdqAgendaTurma.Active := False;
+    //fdqAgenda.Active := False;
+    //fdqAgendaAluno.Active := False;
+    //fdqAgendaTurma.Active := False;
     LogServerRequest.Free;
   end;
 end;
