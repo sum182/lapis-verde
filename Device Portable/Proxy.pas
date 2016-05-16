@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 04/05/2016 07:11:48
+// 16/05/2016 15:29:34
 //
 
 unit Proxy;
@@ -65,6 +65,32 @@ type
     function GetAlunosTeste_Cache(const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
+  TSmEscolaClient = class(TDSAdminRestClient)
+  private
+    FLoginFuncionarioCommand: TDSRestCommand;
+  public
+    constructor Create(ARestConnection: TDSRestConnection); overload;
+    constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
+  end;
+
+  TSmResponsavelClient = class(TDSAdminRestClient)
+  private
+    FLoginResponsavelCommand: TDSRestCommand;
+    FValidarEmailExistenteResponsavelCommand: TDSRestCommand;
+    FValidarCPFExistenteResponsavelCommand: TDSRestCommand;
+    FCriarUsuarioResponsavelCommand: TDSRestCommand;
+  public
+    constructor Create(ARestConnection: TDSRestConnection); overload;
+    constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
+    function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
+    function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
+    function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
+  end;
+
   TSmMainClient = class(TDSAdminRestClient)
   private
     FDataModuleCreateCommand: TDSRestCommand;
@@ -113,32 +139,6 @@ type
     function GetDataSet_Cache(EscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
-  TSmEscolaClient = class(TDSAdminRestClient)
-  private
-    FLoginFuncionarioCommand: TDSRestCommand;
-  public
-    constructor Create(ARestConnection: TDSRestConnection); overload;
-    constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
-    destructor Destroy; override;
-    function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
-  end;
-
-  TSmResponsavelClient = class(TDSAdminRestClient)
-  private
-    FLoginResponsavelCommand: TDSRestCommand;
-    FValidarEmailExistenteResponsavelCommand: TDSRestCommand;
-    FValidarCPFExistenteResponsavelCommand: TDSRestCommand;
-    FCriarUsuarioResponsavelCommand: TDSRestCommand;
-  public
-    constructor Create(ARestConnection: TDSRestConnection); overload;
-    constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
-    destructor Destroy; override;
-    function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
-    function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
-    function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
-    function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
-  end;
-
   TSmAgendaClient = class(TDSAdminRestClient)
   private
     FfdqAgendaBeforePostCommand: TDSRestCommand;
@@ -154,8 +154,8 @@ type
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     function GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; ListKeysInserts: TFDJSONDataSets; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
   end;
 
@@ -280,6 +280,45 @@ const
   TSmTeste_GetAlunosTeste_Cache: array [0..0] of TDSRestParameterMetaData =
   (
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmEscola_LoginFuncionario: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSmResponsavel_LoginResponsavel: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSmResponsavel_ValidarEmailExistenteResponsavel: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Email'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSmResponsavel_ValidarCPFExistenteResponsavel: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TSmResponsavel_CriarUsuarioResponsavel: array [0..8] of TDSRestParameterMetaData =
+  (
+    (Name: 'Nome'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'SobreNome'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Email'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Telefone'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'RG'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Sexo'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
   TSmMain_DataModuleCreate: array [0..0] of TDSRestParameterMetaData =
@@ -422,45 +461,6 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmEscola_LoginFuncionario: array [0..2] of TDSRestParameterMetaData =
-  (
-    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
-  );
-
-  TSmResponsavel_LoginResponsavel: array [0..2] of TDSRestParameterMetaData =
-  (
-    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
-  );
-
-  TSmResponsavel_ValidarEmailExistenteResponsavel: array [0..1] of TDSRestParameterMetaData =
-  (
-    (Name: 'Email'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
-  );
-
-  TSmResponsavel_ValidarCPFExistenteResponsavel: array [0..1] of TDSRestParameterMetaData =
-  (
-    (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
-  );
-
-  TSmResponsavel_CriarUsuarioResponsavel: array [0..8] of TDSRestParameterMetaData =
-  (
-    (Name: 'Nome'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'SobreNome'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'Email'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'Telefone'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'RG'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: 'Sexo'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
-  );
-
   TSmAgenda_fdqAgendaBeforePost: array [0..0] of TDSRestParameterMetaData =
   (
     (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
@@ -486,21 +486,23 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
-  TSmAgenda_GetAgendaTeste: array [0..4] of TDSRestParameterMetaData =
+  TSmAgenda_GetAgendaTeste: array [0..5] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'KeysInserts'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
-  TSmAgenda_GetAgendaTeste_Cache: array [0..4] of TDSRestParameterMetaData =
+  TSmAgenda_GetAgendaTeste_Cache: array [0..5] of TDSRestParameterMetaData =
   (
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
+    (Name: 'KeysInserts'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
@@ -881,6 +883,120 @@ begin
   FReverseStringCommand.DisposeOf;
   FGetAlunosTesteCommand.DisposeOf;
   FGetAlunosTesteCommand_Cache.DisposeOf;
+  inherited;
+end;
+
+function TSmEscolaClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
+begin
+  if FLoginFuncionarioCommand = nil then
+  begin
+    FLoginFuncionarioCommand := FConnection.CreateCommand;
+    FLoginFuncionarioCommand.RequestType := 'GET';
+    FLoginFuncionarioCommand.Text := 'TSmEscola.LoginFuncionario';
+    FLoginFuncionarioCommand.Prepare(TSmEscola_LoginFuncionario);
+  end;
+  FLoginFuncionarioCommand.Parameters[0].Value.SetWideString(Login);
+  FLoginFuncionarioCommand.Parameters[1].Value.SetWideString(Senha);
+  FLoginFuncionarioCommand.Execute(ARequestFilter);
+  Result := FLoginFuncionarioCommand.Parameters[2].Value.GetBoolean;
+end;
+
+constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection);
+begin
+  inherited Create(ARestConnection);
+end;
+
+constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ARestConnection, AInstanceOwner);
+end;
+
+destructor TSmEscolaClient.Destroy;
+begin
+  FLoginFuncionarioCommand.DisposeOf;
+  inherited;
+end;
+
+function TSmResponsavelClient.LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string): Boolean;
+begin
+  if FLoginResponsavelCommand = nil then
+  begin
+    FLoginResponsavelCommand := FConnection.CreateCommand;
+    FLoginResponsavelCommand.RequestType := 'GET';
+    FLoginResponsavelCommand.Text := 'TSmResponsavel.LoginResponsavel';
+    FLoginResponsavelCommand.Prepare(TSmResponsavel_LoginResponsavel);
+  end;
+  FLoginResponsavelCommand.Parameters[0].Value.SetWideString(Login);
+  FLoginResponsavelCommand.Parameters[1].Value.SetWideString(Senha);
+  FLoginResponsavelCommand.Execute(ARequestFilter);
+  Result := FLoginResponsavelCommand.Parameters[2].Value.GetBoolean;
+end;
+
+function TSmResponsavelClient.ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string): Boolean;
+begin
+  if FValidarEmailExistenteResponsavelCommand = nil then
+  begin
+    FValidarEmailExistenteResponsavelCommand := FConnection.CreateCommand;
+    FValidarEmailExistenteResponsavelCommand.RequestType := 'GET';
+    FValidarEmailExistenteResponsavelCommand.Text := 'TSmResponsavel.ValidarEmailExistenteResponsavel';
+    FValidarEmailExistenteResponsavelCommand.Prepare(TSmResponsavel_ValidarEmailExistenteResponsavel);
+  end;
+  FValidarEmailExistenteResponsavelCommand.Parameters[0].Value.SetWideString(Email);
+  FValidarEmailExistenteResponsavelCommand.Execute(ARequestFilter);
+  Result := FValidarEmailExistenteResponsavelCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TSmResponsavelClient.ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string): Boolean;
+begin
+  if FValidarCPFExistenteResponsavelCommand = nil then
+  begin
+    FValidarCPFExistenteResponsavelCommand := FConnection.CreateCommand;
+    FValidarCPFExistenteResponsavelCommand.RequestType := 'GET';
+    FValidarCPFExistenteResponsavelCommand.Text := 'TSmResponsavel.ValidarCPFExistenteResponsavel';
+    FValidarCPFExistenteResponsavelCommand.Prepare(TSmResponsavel_ValidarCPFExistenteResponsavel);
+  end;
+  FValidarCPFExistenteResponsavelCommand.Parameters[0].Value.SetWideString(CPF);
+  FValidarCPFExistenteResponsavelCommand.Execute(ARequestFilter);
+  Result := FValidarCPFExistenteResponsavelCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TSmResponsavelClient.CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string): string;
+begin
+  if FCriarUsuarioResponsavelCommand = nil then
+  begin
+    FCriarUsuarioResponsavelCommand := FConnection.CreateCommand;
+    FCriarUsuarioResponsavelCommand.RequestType := 'GET';
+    FCriarUsuarioResponsavelCommand.Text := 'TSmResponsavel.CriarUsuarioResponsavel';
+    FCriarUsuarioResponsavelCommand.Prepare(TSmResponsavel_CriarUsuarioResponsavel);
+  end;
+  FCriarUsuarioResponsavelCommand.Parameters[0].Value.SetWideString(Nome);
+  FCriarUsuarioResponsavelCommand.Parameters[1].Value.SetWideString(SobreNome);
+  FCriarUsuarioResponsavelCommand.Parameters[2].Value.SetWideString(Email);
+  FCriarUsuarioResponsavelCommand.Parameters[3].Value.SetWideString(Senha);
+  FCriarUsuarioResponsavelCommand.Parameters[4].Value.SetWideString(Telefone);
+  FCriarUsuarioResponsavelCommand.Parameters[5].Value.SetWideString(CPF);
+  FCriarUsuarioResponsavelCommand.Parameters[6].Value.SetWideString(RG);
+  FCriarUsuarioResponsavelCommand.Parameters[7].Value.SetWideString(Sexo);
+  FCriarUsuarioResponsavelCommand.Execute(ARequestFilter);
+  Result := FCriarUsuarioResponsavelCommand.Parameters[8].Value.GetWideString;
+end;
+
+constructor TSmResponsavelClient.Create(ARestConnection: TDSRestConnection);
+begin
+  inherited Create(ARestConnection);
+end;
+
+constructor TSmResponsavelClient.Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ARestConnection, AInstanceOwner);
+end;
+
+destructor TSmResponsavelClient.Destroy;
+begin
+  FLoginResponsavelCommand.DisposeOf;
+  FValidarEmailExistenteResponsavelCommand.DisposeOf;
+  FValidarCPFExistenteResponsavelCommand.DisposeOf;
+  FCriarUsuarioResponsavelCommand.DisposeOf;
   inherited;
 end;
 
@@ -1375,120 +1491,6 @@ begin
   inherited;
 end;
 
-function TSmEscolaClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
-begin
-  if FLoginFuncionarioCommand = nil then
-  begin
-    FLoginFuncionarioCommand := FConnection.CreateCommand;
-    FLoginFuncionarioCommand.RequestType := 'GET';
-    FLoginFuncionarioCommand.Text := 'TSmEscola.LoginFuncionario';
-    FLoginFuncionarioCommand.Prepare(TSmEscola_LoginFuncionario);
-  end;
-  FLoginFuncionarioCommand.Parameters[0].Value.SetWideString(Login);
-  FLoginFuncionarioCommand.Parameters[1].Value.SetWideString(Senha);
-  FLoginFuncionarioCommand.Execute(ARequestFilter);
-  Result := FLoginFuncionarioCommand.Parameters[2].Value.GetBoolean;
-end;
-
-constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection);
-begin
-  inherited Create(ARestConnection);
-end;
-
-constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean);
-begin
-  inherited Create(ARestConnection, AInstanceOwner);
-end;
-
-destructor TSmEscolaClient.Destroy;
-begin
-  FLoginFuncionarioCommand.DisposeOf;
-  inherited;
-end;
-
-function TSmResponsavelClient.LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string): Boolean;
-begin
-  if FLoginResponsavelCommand = nil then
-  begin
-    FLoginResponsavelCommand := FConnection.CreateCommand;
-    FLoginResponsavelCommand.RequestType := 'GET';
-    FLoginResponsavelCommand.Text := 'TSmResponsavel.LoginResponsavel';
-    FLoginResponsavelCommand.Prepare(TSmResponsavel_LoginResponsavel);
-  end;
-  FLoginResponsavelCommand.Parameters[0].Value.SetWideString(Login);
-  FLoginResponsavelCommand.Parameters[1].Value.SetWideString(Senha);
-  FLoginResponsavelCommand.Execute(ARequestFilter);
-  Result := FLoginResponsavelCommand.Parameters[2].Value.GetBoolean;
-end;
-
-function TSmResponsavelClient.ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string): Boolean;
-begin
-  if FValidarEmailExistenteResponsavelCommand = nil then
-  begin
-    FValidarEmailExistenteResponsavelCommand := FConnection.CreateCommand;
-    FValidarEmailExistenteResponsavelCommand.RequestType := 'GET';
-    FValidarEmailExistenteResponsavelCommand.Text := 'TSmResponsavel.ValidarEmailExistenteResponsavel';
-    FValidarEmailExistenteResponsavelCommand.Prepare(TSmResponsavel_ValidarEmailExistenteResponsavel);
-  end;
-  FValidarEmailExistenteResponsavelCommand.Parameters[0].Value.SetWideString(Email);
-  FValidarEmailExistenteResponsavelCommand.Execute(ARequestFilter);
-  Result := FValidarEmailExistenteResponsavelCommand.Parameters[1].Value.GetBoolean;
-end;
-
-function TSmResponsavelClient.ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string): Boolean;
-begin
-  if FValidarCPFExistenteResponsavelCommand = nil then
-  begin
-    FValidarCPFExistenteResponsavelCommand := FConnection.CreateCommand;
-    FValidarCPFExistenteResponsavelCommand.RequestType := 'GET';
-    FValidarCPFExistenteResponsavelCommand.Text := 'TSmResponsavel.ValidarCPFExistenteResponsavel';
-    FValidarCPFExistenteResponsavelCommand.Prepare(TSmResponsavel_ValidarCPFExistenteResponsavel);
-  end;
-  FValidarCPFExistenteResponsavelCommand.Parameters[0].Value.SetWideString(CPF);
-  FValidarCPFExistenteResponsavelCommand.Execute(ARequestFilter);
-  Result := FValidarCPFExistenteResponsavelCommand.Parameters[1].Value.GetBoolean;
-end;
-
-function TSmResponsavelClient.CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string): string;
-begin
-  if FCriarUsuarioResponsavelCommand = nil then
-  begin
-    FCriarUsuarioResponsavelCommand := FConnection.CreateCommand;
-    FCriarUsuarioResponsavelCommand.RequestType := 'GET';
-    FCriarUsuarioResponsavelCommand.Text := 'TSmResponsavel.CriarUsuarioResponsavel';
-    FCriarUsuarioResponsavelCommand.Prepare(TSmResponsavel_CriarUsuarioResponsavel);
-  end;
-  FCriarUsuarioResponsavelCommand.Parameters[0].Value.SetWideString(Nome);
-  FCriarUsuarioResponsavelCommand.Parameters[1].Value.SetWideString(SobreNome);
-  FCriarUsuarioResponsavelCommand.Parameters[2].Value.SetWideString(Email);
-  FCriarUsuarioResponsavelCommand.Parameters[3].Value.SetWideString(Senha);
-  FCriarUsuarioResponsavelCommand.Parameters[4].Value.SetWideString(Telefone);
-  FCriarUsuarioResponsavelCommand.Parameters[5].Value.SetWideString(CPF);
-  FCriarUsuarioResponsavelCommand.Parameters[6].Value.SetWideString(RG);
-  FCriarUsuarioResponsavelCommand.Parameters[7].Value.SetWideString(Sexo);
-  FCriarUsuarioResponsavelCommand.Execute(ARequestFilter);
-  Result := FCriarUsuarioResponsavelCommand.Parameters[8].Value.GetWideString;
-end;
-
-constructor TSmResponsavelClient.Create(ARestConnection: TDSRestConnection);
-begin
-  inherited Create(ARestConnection);
-end;
-
-constructor TSmResponsavelClient.Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean);
-begin
-  inherited Create(ARestConnection, AInstanceOwner);
-end;
-
-destructor TSmResponsavelClient.Destroy;
-begin
-  FLoginResponsavelCommand.DisposeOf;
-  FValidarEmailExistenteResponsavelCommand.DisposeOf;
-  FValidarCPFExistenteResponsavelCommand.DisposeOf;
-  FCriarUsuarioResponsavelCommand.DisposeOf;
-  inherited;
-end;
-
 procedure TSmAgendaClient.fdqAgendaBeforePost(DataSet: TDataSet);
 begin
   if FfdqAgendaBeforePostCommand = nil then
@@ -1574,7 +1576,7 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[5].Value.GetString);
 end;
 
-function TSmAgendaClient.GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string): TFDJSONDataSets;
+function TSmAgendaClient.GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetAgendaTesteCommand = nil then
   begin
@@ -1587,12 +1589,13 @@ begin
   FGetAgendaTesteCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAgendaTesteCommand.Parameters[2].Value.AsDateTime := DtIni;
   FGetAgendaTesteCommand.Parameters[3].Value.AsDateTime := DtFim;
+  FGetAgendaTesteCommand.Parameters[4].Value.SetWideString(KeysInserts);
   FGetAgendaTesteCommand.Execute(ARequestFilter);
-  if not FGetAgendaTesteCommand.Parameters[4].Value.IsNull then
+  if not FGetAgendaTesteCommand.Parameters[5].Value.IsNull then
   begin
-    FUnMarshal := TDSRestCommand(FGetAgendaTesteCommand.Parameters[4].ConnectionHandler).GetJSONUnMarshaler;
+    FUnMarshal := TDSRestCommand(FGetAgendaTesteCommand.Parameters[5].ConnectionHandler).GetJSONUnMarshaler;
     try
-      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAgendaTesteCommand.Parameters[4].Value.GetJSONValue(True)));
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetAgendaTesteCommand.Parameters[5].Value.GetJSONValue(True)));
       if FInstanceOwner then
         FGetAgendaTesteCommand.FreeOnExecute(Result);
     finally
@@ -1603,7 +1606,7 @@ begin
     Result := nil;
 end;
 
-function TSmAgendaClient.GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmAgendaClient.GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetAgendaTesteCommand_Cache = nil then
   begin
@@ -1616,8 +1619,9 @@ begin
   FGetAgendaTesteCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAgendaTesteCommand_Cache.Parameters[2].Value.AsDateTime := DtIni;
   FGetAgendaTesteCommand_Cache.Parameters[3].Value.AsDateTime := DtFim;
+  FGetAgendaTesteCommand_Cache.Parameters[4].Value.SetWideString(KeysInserts);
   FGetAgendaTesteCommand_Cache.ExecuteCache(ARequestFilter);
-  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaTesteCommand_Cache.Parameters[4].Value.GetString);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaTesteCommand_Cache.Parameters[5].Value.GetString);
 end;
 
 function TSmAgendaClient.SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;

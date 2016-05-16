@@ -3,11 +3,11 @@ unit untSmAgenda;
 interface
 
 uses
-  System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  System.Classes, System.SysUtils, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect,
-  Vcl.AppEvnts, untLibGeral, System.JSON;
+  Vcl.AppEvnts, untLibGeral, System.JSON, DSSupportClasses;
 
 type
 
@@ -43,14 +43,9 @@ type
 
  {$METHODINFO ON}
   public
-    //Metodos de Agenda
     function GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets):TFDJSONDataSets;
-
-
-    function GetAgendaTeste(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime):TFDJSONDataSets;
-
+    function GetAgendaTeste(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String):TFDJSONDataSets;
     function SalvarAgenda(EscolaId:Integer; pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
-
   end;
 
 var
@@ -61,8 +56,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,
-  System.SysUtils, untLibServer;
+uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,untLibServer;
 
 {$R *.dfm}
 
@@ -123,13 +117,15 @@ end;
 
 
 function TSmAgenda.GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue;
-  DtIni, DtFim: TDateTime): TFDJSONDataSets;
+  DtIni, DtFim: TDateTime;KeysInserts: String): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
+  KeysInsertsStr: string;
 begin
   //Método para retornar as Agendas
   try
     try
+      KeysInsertsStr:= TDSSupportZLib.ZDecompressString(KeysInserts);
       Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
@@ -157,6 +153,7 @@ begin
     LogServerRequest.Free;
   end;
 end;
+
 
 
 

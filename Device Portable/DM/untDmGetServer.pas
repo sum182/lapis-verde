@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils,
-  FMX.Types, Data.FireDACJSONReflect;
+  FMX.Types, Data.FireDACJSONReflect, DSSupportClasses;
 
 type
   TDmGetServer = class(TDataModule)
@@ -77,7 +77,7 @@ implementation
 
 uses untDM, untRestClient, smDBFireDac,
   FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState,
-  untLibGeral, Data.DBXJSONReflect, System.JSON;
+  untLibGeral, Data.DBXJSONReflect, System.JSON, System.ZLib;
 
 {$R *.dfm}
 
@@ -176,6 +176,7 @@ var
   LDataSet: TFDDataSet;
   KeyValues: string;
   UsuarioJSONValue: TJSONValue;
+  KeysInserts:String;
 begin
   //Método para retornar as Agendas
   try
@@ -184,10 +185,20 @@ begin
       KeyValues:= EmptyStr;
       UsuarioJSONValue:= Usuario.MarshalValue;
 
+      OpenAgendaKeysInsert(DtIni,DtFim);
+      KeysInserts:= GetKeyValuesDataSet(fdqAgendaKeysInsert,'agenda_id');
+      KeysInserts:= DSSupportClasses.TDSSupportZLib.ZCompressStringTeste(KeysInserts);
+      //KeysInserts:= utf8encode(KeysInserts);
+
+     // KeysInserts := TEncoding.UTF8.GetString(DSSupportClasses.TDSSupportZLib.ZCompressString(KeysInserts));
+
+
+
       LDataSetList := RestClient.SmAgendaClient.GetAgendaTeste(GetEscolaId,
                                                                  UsuarioJSONValue,
                                                                  DtIni,
-                                                                 DtFim
+                                                                 DtFim,
+                                                                 KeysInserts
                                                                  );
 
       //Pegando dados da agenda
