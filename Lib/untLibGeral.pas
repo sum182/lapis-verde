@@ -19,7 +19,8 @@ Uses Data.DB,untTypes, System.JSON, Data.DBXJSONReflect;
       function Marshal:TJSONValue;
       function UnMarshal(oObjetoJSON:TJSONValue):TUsuario;
 
-       property MarshalValue: TJSONValue read GetMarshalValue write FMarshalValue;
+      //Não utilizar esta propriedade esta dando acess violation
+      property MarshalValue: TJSONValue read GetMarshalValue write FMarshalValue;
     end;
 
 

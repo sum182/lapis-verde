@@ -125,12 +125,12 @@ begin
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
-                                            'GetAgenda',
+                                            'GetAgendaTeste',
                                             EscolaId,
                                             Usuario);
 
-      //OpenAgendaTeste(EscolaId,DtIni,DtFim);
-      OpenAgenda(EscolaId,DtIni,DtFim,KeysInserts);
+      OpenAgendaTeste(EscolaId,DtIni,DtFim);
+      //OpenAgenda(EscolaId,DtIni,DtFim,KeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);

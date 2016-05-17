@@ -52,6 +52,7 @@ type
     //Agenda
     procedure OpenAgendaKeysInsert(DtIni,DtFim:TDateTime);
     function GetAgendaListKeysInsert(DtIni,DtFim:TDateTime):TFDJSONDataSets;
+    function GetAgendaKeysInsert(DtIni,DtFim:TDateTime):String;
 
     procedure OpenAgenda(KeyValues:String);
     procedure OpenAgendaAluno(KeyValues:String);
@@ -63,9 +64,6 @@ type
 
     procedure GetDadosServerGeral;
     procedure GetServerBasico;
-
-
-
   end;
 
 var
@@ -95,26 +93,18 @@ var
   LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
   KeyValues: string;
-  KeysInserts: string;
-  UsuarioJSONValue: TJSONValue;
 begin
   //Método para retornar as Agendas
   try
     try
-      //MsgPoupUpTeste('Inicio DmGetServer.GetAgenda');
       KeyValues:= EmptyStr;
-
       OpenAgendaKeysInsert(DtIni,DtFim);
-      KeysInserts:= GetKeyValuesDataSet(fdqAgendaKeysInsert,'agenda_id');
-
-      UsuarioJSONValue:= Usuario.MarshalValue;
-
 
       LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
-                                                             UsuarioJSONValue,
+                                                             Usuario.Marshal,
                                                              DtIni,
                                                              DtFim,
-                                                             KeysInserts
+                                                             GetAgendaKeysInsert(DtIni,DtFim)
                                                              );
 
       //Pegando dados da agenda
@@ -124,9 +114,7 @@ begin
         Exit;
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      //ShowMessage(KeyValues);
       OpenAgenda(KeyValues);
-
       CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_aluno
@@ -159,6 +147,12 @@ begin
 
 end;
 
+function TDmGetServer.GetAgendaKeysInsert(DtIni, DtFim: TDateTime): String;
+begin
+  OpenAgendaKeysInsert(DtIni,DtFim);
+  Result:= GetKeyValuesDataSet(fdqAgendaKeysInsert,'agenda_id');
+end;
+
 procedure TDmGetServer.GetAgendaTeste(DtIni, DtFim: TDateTime);
 var
   LDataSetList: TFDJSONDataSets;
@@ -178,7 +172,7 @@ begin
       KeysInserts:= GetKeyValuesDataSet(fdqAgendaKeysInsert,'agenda_id');
 
       LDataSetList := RestClient.SmAgendaClient.GetAgendaTeste(GetEscolaId,
-                                                                 UsuarioJSONValue,
+                                                                 Usuario.Marshal,
                                                                  DtIni,
                                                                  DtFim,
                                                                  KeysInserts
@@ -270,20 +264,13 @@ end;
 
 function TDmGetServer.GetAgendaListKeysInsert(DtIni,
   DtFim: TDateTime): TFDJSONDataSets;
-var
-  fdMem: TFDMemTable;
 begin
   try
-    fdMem:= TFDMemTable.Create(self);
     Result:= TFDJSONDataSets.Create;
     OpenAgendaKeysInsert(DtIni,DtFim);
-     fdMem.AppendData(fdqAgendaKeysInsert);
-    //CopyDataSet(fdqAgendaKeysInsert,fdMem);
-    TFDJSONDataSetsWriter.ListAdd(Result,fdMem);
+    TFDJSONDataSetsWriter.ListAdd(Result,fdqAgendaKeysInsert);
   finally
-    fdqAgendaKeysInsert.Close;
   end;
-
 end;
 
 procedure TDmGetServer.GetAlunos;
@@ -292,6 +279,7 @@ var
   LDataSet: TFDDataSet;
 begin
   try
+    //teste
     //if not Dm.ProcessHasUpdate('aluno') then
     // Exit;
 
@@ -675,6 +663,7 @@ var
   LDataSet: TFDDataSet;
 begin
   try
+    //teste
    //if not Dm.ProcessHasUpdate('turma') then
     // Exit;
 
