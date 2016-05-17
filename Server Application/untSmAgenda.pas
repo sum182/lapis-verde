@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect,
-  Vcl.AppEvnts, untLibGeral, System.JSON, DSSupportClasses;
+  Vcl.AppEvnts, untLibGeral, System.JSON;
 
 type
 
@@ -25,13 +25,13 @@ type
     fdqAgendaTurmaturma_id: TIntegerField;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
   private
-    procedure SetSQLAgenda(ListKeysInserts: TFDJSONDataSets = nil);overload;
-    procedure SetSQLAgenda(KeyValues:String);overload;
+    procedure SetSQLAgenda(KeysInserts: String = '');overload;
+    procedure SetSQLAgendaByKey(KeyValues:String);overload;
     procedure SetSQLAgendaDet(KeyValues:String);
 
     procedure SetParamsAgenda(EscolaId:Integer;DtIni,DtFim:TDateTime);
 
-    procedure OpenAgenda(EscolaId:Integer;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets = nil);overload;
+    procedure OpenAgenda(EscolaId:Integer;DtIni,DtFim:TDateTime;KeysInserts: String = '');overload;
     procedure OpenAgenda(EscolaId:Integer;KeyValues:String);overload;
     procedure CloseAgenda;
 
@@ -43,8 +43,8 @@ type
 
  {$METHODINFO ON}
   public
-    function GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets):TFDJSONDataSets;
-    function GetAgendaTeste(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String):TFDJSONDataSets;
+    function GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
+    function GetAgendaTeste(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
     function SalvarAgenda(EscolaId:Integer; pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
   end;
 
@@ -78,10 +78,11 @@ end;
 
 
 function TSmAgenda.GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;
-   DtIni,DtFim:TDateTime;ListKeysInserts: TFDJSONDataSets): TFDJSONDataSets;
+   DtIni,DtFim:TDateTime;KeysInserts: String = ''): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
+
   //Método para retornar as Agendas
   try
     try
@@ -93,8 +94,7 @@ begin
                                             EscolaId,
                                             Usuario);
 
-      //OpenAgenda(EscolaId,DtIni,DtFim,ListKeysInserts);
-      OpenAgendaTeste(EscolaId,DtIni,DtFim);
+      OpenAgenda(EscolaId,DtIni,DtFim,KeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
@@ -107,9 +107,6 @@ begin
       end;
     end;
   finally
-    //fdqAgenda.Active := False;
-    //fdqAgendaAluno.Active := False;
-    //fdqAgendaTurma.Active := False;
     LogServerRequest.Free;
   end;
 end;
@@ -117,15 +114,13 @@ end;
 
 
 function TSmAgenda.GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue;
-  DtIni, DtFim: TDateTime;KeysInserts: String): TFDJSONDataSets;
+  DtIni, DtFim: TDateTime;KeysInserts: String = '' ): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
-  KeysInsertsStr: string;
 begin
   //Método para retornar as Agendas
   try
     try
-      KeysInsertsStr:= TDSSupportZLib.ZDecompressString(KeysInserts);
       Usuario:= Usuario.UnMarshal(pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
@@ -134,7 +129,8 @@ begin
                                             EscolaId,
                                             Usuario);
 
-      OpenAgendaTeste(EscolaId,DtIni,DtFim);
+      //OpenAgendaTeste(EscolaId,DtIni,DtFim);
+      OpenAgenda(EscolaId,DtIni,DtFim,KeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
@@ -158,12 +154,12 @@ end;
 
 
 procedure TSmAgenda.OpenAgenda(EscolaId:Integer; DtIni,
-  DtFim: TDateTime;ListKeysInserts: TFDJSONDataSets = nil);
+  DtFim: TDateTime;KeysInserts: String = '');
 var
   KeyValues:String;
 begin
   CloseAgenda;
-  SetSQLAgenda(ListKeysInserts);
+  SetSQLAgenda(KeysInserts);
   SetParamsAgenda(EscolaId,DtIni, DtFim);
   fdqAgenda.Active := True;
   KeyValues:= GetKeyValuesDataSet(fdqAgenda,'agenda_id');
@@ -177,7 +173,7 @@ procedure TSmAgenda.OpenAgenda(EscolaId:Integer;KeyValues:String);
 begin
   CloseAgenda;
 
-  SetSQLAgenda(KeyValues);
+  SetSQLAgendaByKey(KeyValues);
 
   fdqAgenda.Active := True;
   fdqAgendaAluno.Active := True;
@@ -282,19 +278,8 @@ end;
 
 
 
-procedure TSmAgenda.SetSQLAgenda(ListKeysInserts: TFDJSONDataSets = nil);
-var
-  LDataSet: TFDDataSet;
-  KeyValues: string;
+procedure TSmAgenda.SetSQLAgenda(KeysInserts: String = '');
 begin
-
-  if ListKeysInserts <> nil then
-  begin
-    LDataSet := TFDJSONDataSetsReader.GetListValue(ListKeysInserts,0);
-    KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-  end;
-
-
   fdqAgenda.SQL.Clear;
   fdqAgenda.SQL.Add('select');
   fdqAgenda.SQL.Add('  ag.*');
@@ -308,51 +293,12 @@ begin
   fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
   fdqAgenda.SQL.Add('and ag.data between :dt_ini and :dt_fim');
 
-  if ListKeysInserts <> nil then
-    fdqAgenda.SQL.Add('and ag.agenda_id not in (' + KeyValues + ')');
+  if KeysInserts <> '' then
+    fdqAgenda.SQL.Add('and ag.agenda_id not in (' + KeysInserts + ')');
 
   fdqAgenda.SQL.Add('group by agenda_id');
-  exit;
-
-  {fdqAgendaAluno.SQL.Clear;
-  fdqAgendaAluno.SQL.Add('select');
-  fdqAgendaAluno.SQL.Add('  al.*');
-  fdqAgendaAluno.SQL.Add('from agenda ag');
-  fdqAgendaAluno.SQL.Add('inner join agenda_aluno al on (ag.agenda_id = al.agenda_id)');
-  fdqAgendaAluno.SQL.Add('inner join turma_aluno ta on (ta.aluno_id = al.aluno_id)');
-  fdqAgendaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id)');
-  fdqAgendaAluno.SQL.Add('inner join funcionario f on (f.funcionario_id = t.funcionario_id)');
-  fdqAgendaAluno.SQL.Add('where 1=1');
-  //fdqAgendaAluno.SQL.Add('and t.funcionario_id = :funcionario_id');
-  fdqAgendaAluno.SQL.Add('and ag.escola_id = :escola_id');
-  fdqAgendaAluno.SQL.Add('and ag.data between :dt_ini and :dt_fim');
-  fdqAgendaAluno.SQL.Add('group by al.agenda_id,al.aluno_id');
-
-  fdqAgendaTurma.SQL.Clear;
-  fdqAgendaTurma.SQL.Add('select');
-  fdqAgendaTurma.SQL.Add('  at.*');
-  fdqAgendaTurma.SQL.Add('from agenda ag');
-  fdqAgendaTurma.SQL.Add('inner join agenda_turma at on (ag.agenda_id = at.agenda_id)');
-  fdqAgendaTurma.SQL.Add('inner join turma t on (t.turma_id = at.turma_id)');
-  fdqAgendaTurma.SQL.Add('inner join funcionario f on (f.funcionario_id = t.funcionario_id)');
-  fdqAgendaTurma.SQL.Add('where 1=1');
-  //fdqAgendaTurma.SQL.Add('and t.funcionario_id = :funcionario_id');
-  fdqAgendaTurma.SQL.Add('and ag.escola_id = :escola_id');
-  fdqAgendaTurma.SQL.Add('and ag.data between :dt_ini and :dt_fim');
-  fdqAgendaTurma.SQL.Add('group by at.agenda_id,at.turma_id'); }
-
-  fdqAgendaAluno.SQL.Clear;
-  fdqAgendaAluno.SQL.Add('select al.*');
-  fdqAgendaAluno.SQL.Add('from agenda_aluno al');
-  fdqAgendaAluno.SQL.Add('where agenda_id in ( :KeyValues )');
-
-  fdqAgendaTurma.SQL.Clear;
-  fdqAgendaTurma.SQL.Add('select at.*');
-  fdqAgendaTurma.SQL.Add('from agenda_turma at');
-  fdqAgendaTurma.SQL.Add('where agenda_id in ( :KeyValues )');
-
 end;
-procedure TSmAgenda.SetSQLAgenda(KeyValues: String);
+procedure TSmAgenda.SetSQLAgendaByKey(KeyValues: String);
 begin
   fdqAgenda.SQL.Clear;
   fdqAgenda.SQL.Add('select ag.*');

@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils,
-  FMX.Types, Data.FireDACJSONReflect, DSSupportClasses;
+  FMX.Types, Data.FireDACJSONReflect;
 
 type
   TDmGetServer = class(TDataModule)
@@ -95,7 +95,7 @@ var
   LDataSetList: TFDJSONDataSets;
   LDataSet: TFDDataSet;
   KeyValues: string;
-  ListKeysInsert:TFDJSONDataSets;
+  KeysInserts: string;
   UsuarioJSONValue: TJSONValue;
 begin
   //Método para retornar as Agendas
@@ -104,18 +104,8 @@ begin
       //MsgPoupUpTeste('Inicio DmGetServer.GetAgenda');
       KeyValues:= EmptyStr;
 
-      //LDataSetList := TFDJSONDataSets.Create;
-     // TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogError);
-
-      ListKeysInsert:= TFDJSONDataSets.Create;
-      //ListKeysInsert:= GetAgendaListKeysInsert(DtIni,DtFim);
       OpenAgendaKeysInsert(DtIni,DtFim);
-      TFDJSONDataSetsWriter.ListAdd(ListKeysInsert,fdqAgendaKeysInsert);
-
-      {ListKeysInsert:= TFDJSONDataSets.Create;
-      DmSaveServer.fdqLogError.Active := False;
-      TFDJSONDataSetsWriter.ListAdd(ListKeysInsert,DmSaveServer.fdqLogError); }
-
+      KeysInserts:= GetKeyValuesDataSet(fdqAgendaKeysInsert,'agenda_id');
 
       UsuarioJSONValue:= Usuario.MarshalValue;
 
@@ -124,8 +114,7 @@ begin
                                                              UsuarioJSONValue,
                                                              DtIni,
                                                              DtFim,
-                                                             //GetAgendaListKeysInsert(DtIni,DtFim)
-                                                             ListKeysInsert
+                                                             KeysInserts
                                                              );
 
       //Pegando dados da agenda
@@ -187,12 +176,6 @@ begin
 
       OpenAgendaKeysInsert(DtIni,DtFim);
       KeysInserts:= GetKeyValuesDataSet(fdqAgendaKeysInsert,'agenda_id');
-      KeysInserts:= DSSupportClasses.TDSSupportZLib.ZCompressStringTeste(KeysInserts);
-      //KeysInserts:= utf8encode(KeysInserts);
-
-     // KeysInserts := TEncoding.UTF8.GetString(DSSupportClasses.TDSSupportZLib.ZCompressString(KeysInserts));
-
-
 
       LDataSetList := RestClient.SmAgendaClient.GetAgendaTeste(GetEscolaId,
                                                                  UsuarioJSONValue,

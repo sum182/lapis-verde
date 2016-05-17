@@ -41,8 +41,7 @@ uses
   untDmSaveServer in 'DM\untDmSaveServer.pas' {DmSaveServer: TDataModule},
   untLibGeral in '..\Lib\untLibGeral.pas',
   untLibServer in '..\Lib\untLibServer.pas',
-  untTypes in '..\Lib\untTypes.pas',
-  DSSupportClasses in 'C:\Componentes\sum182\D15\Units\DSSupportClasses.pas';
+  untTypes in '..\Lib\untTypes.pas';
 
 {$R *.res}
 
