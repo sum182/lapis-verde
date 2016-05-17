@@ -448,6 +448,10 @@
         <DCCReference Include="..\Lib\untLibGeral.pas"/>
         <DCCReference Include="..\Lib\untLibServer.pas"/>
         <DCCReference Include="..\Lib\untTypes.pas"/>
+        <DCCReference Include="Testes\untTesteGeralApp.pas">
+            <Form>frmTesteGeralApp</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -590,15 +594,15 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
-                    <Platform Name="Android">
-                        <RemoteName>classes.dex</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="..\Imagens\ico\Android\drawable-xxhdpi-144 x 144\ic_launcher.png" Configuration="Release" Class="Android_LauncherIcon144">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteName>classes.dex</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -719,12 +723,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Release\classes.dex" Configuration="Release" Class="AndroidClassesDexFile">
-                    <Platform Name="Android">
-                        <RemoteName>classes.dex</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
                     <Platform Name="Android">
                         <Overwrite>true</Overwrite>
@@ -733,6 +731,12 @@
                 <DeployFile LocalName="Android\Debug\libAgendaDevicePortableRX10.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Release\classes.dex" Configuration="Release" Class="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteName>classes.dex</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

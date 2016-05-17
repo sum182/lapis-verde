@@ -371,19 +371,19 @@ begin
     SyncServer := True;
 
     try
-      DmGetServer.GetServerBasico;
-      MsgPoupUpTeste('DmGetServer.GetServerBasico OK');
+      DmGetServer.GetDadosServerBasico;
+      MsgPoupUpTeste('DmGetServer.GetDadosServerBasico OK');
     except
       on E: Exception do
-        MsgPoupUp('DmGetServer.GetServerBasico' + E.Message);
+        MsgPoupUp('DmGetServer.GetDadosServerBasico' + E.Message);
     end;
 
     try
-      DmSaveServer.SaveServerBasico;
-      MsgPoupUpTeste('DmSaveServer.SaveServerBasico OK');
+      DmSaveServer.SaveDadosServerBasico;
+      MsgPoupUpTeste('DmSaveServer.SaveDadosServerBasico OK');
     except
       on E: Exception do
-        MsgPoupUp('DmSaveServer.SaveServerBasico Erro:' + E.Message);
+        MsgPoupUp('DmSaveServer.SaveDadosServerBasico Erro:' + E.Message);
     end;
 
   finally

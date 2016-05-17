@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.MultiView, FMX.Layouts,smFrmBaseForAll,
-  FMX.ListBox, FMX.Objects, untDmGetServer;
+  FMX.ListBox, FMX.Objects, untDmGetServer, untTesteGeralApp;
 
 type
   TfrmPrincipal = class(TfrmBaseForAll)
@@ -14,7 +14,7 @@ type
     MultiView1: TMultiView;
     lstMnuMain: TListBox;
     lstGroupHeaderTestes: TListBoxGroupHeader;
-    lstItemTesteClientes: TListBoxItem;
+    lstItemTesteGeralApp: TListBoxItem;
     lstGroupHeaderConfig: TListBoxGroupHeader;
     lstItemConta: TListBoxItem;
     lstItemPreferencias: TListBoxItem;
@@ -47,7 +47,7 @@ type
     SpeedButton6: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure lstItemTesteClientesClick(Sender: TObject);
+    procedure lstItemTesteGeralAppClick(Sender: TObject);
     procedure lstItemTesteProdutosClick(Sender: TObject);
     procedure lstItemTesteStringClick(Sender: TObject);
     procedure lstItemTesteJsonFdMemClick(Sender: TObject);
@@ -350,10 +350,10 @@ begin
   AbrirMensagens;
 end;
 
-procedure TfrmPrincipal.lstItemTesteClientesClick(Sender: TObject);
+procedure TfrmPrincipal.lstItemTesteGeralAppClick(Sender: TObject);
 begin
   inherited;
-  OpenForm(TfrmTesteClientes);
+  OpenForm(TfrmTesteGeralApp);
 end;
 
 procedure TfrmPrincipal.lstItemTesteStringClick(Sender: TObject);

@@ -60,7 +60,7 @@ end;
 
 function GetApplicationName:string;
 begin
-  Result:= 'Agenda Bee';
+  Result:= 'Lápis Verde';
 end;
 
 procedure SetFlagEnviado(DataSet:TDataset;Campo:String ='enviado_server');

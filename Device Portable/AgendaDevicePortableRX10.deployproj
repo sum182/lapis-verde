@@ -203,19 +203,19 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>AgendaDevicePortableRX10\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <DeployClass>AndroidClassesDexFile</DeployClass>
+        <DeployFile Include="..\Imagens\ico\Android\drawable-xxhdpi-144 x 144\ic_launcher.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortableRX10\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon144</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="..\Imagens\ico\Android\drawable-xxhdpi-144 x 144\ic_launcher.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>AgendaDevicePortableRX10\res\drawable-xxhdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon144</DeployClass>
+        <DeployFile Include="Android\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AgendaDevicePortableRX10\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -374,15 +374,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Release\classes.dex" Condition="'$(Config)'=='Release'">
-            <RemoteDir>AgendaDevicePortableRX10\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <DeployClass>AndroidClassesDexFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="Android\Release\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
             <RemoteDir>AgendaDevicePortableRX10\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
@@ -401,6 +392,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
             <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="Android\Release\classes.dex" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AgendaDevicePortableRX10\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSSimulator'">

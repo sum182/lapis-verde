@@ -27,7 +27,7 @@
     <Transaction>2016/04/28 17:45:54.000.547,C:\Projetos\Agenda\Device Portable\DM\untDmAgenda.dfm=C:\Projetos\Agenda\Device Portable\DM\untDmEscola.dfm</Transaction>
     <Transaction>2016/04/29 07:36:05.000.403,C:\Projetos\Agenda\Device Portable\untModuloCliente.dfm=C:\Projetos\Agenda\Device Portable\untRestClient.dfm</Transaction>
     <Transaction>2016/05/04 07:21:00.000.390,C:\Projetos\Agenda\Device Portable\DM\untDMNew.dfm=C:\Projetos\Agenda\Device Portable\Unit1.dfm</Transaction>
-    <Transaction>2016/05/04 07:21:00.000.390,C:\Projetos\Agenda\Device Portable\DM\untDMNew.pas=C:\Projetos\Agenda\Device Portable\Unit1.pas</Transaction>
+    <Transaction>2016/05/17 17:07:52.000.983,C:\Projetos\Agenda\Device Portable\Unit1.fmx=C:\Projetos\Agenda\Device Portable\Testes\untTesteGeralApp.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>

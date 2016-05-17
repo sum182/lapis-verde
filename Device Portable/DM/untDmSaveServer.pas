@@ -26,7 +26,7 @@ type
 
 
     procedure SaveDadosServerGeral;
-    procedure SaveServerBasico;
+    procedure SaveDadosServerBasico;
   end;
 
 var
@@ -165,7 +165,7 @@ begin
 
 end;
 
-procedure TDmSaveServer.SaveServerBasico;
+procedure TDmSaveServer.SaveDadosServerBasico;
 begin
   try
     SaveAgenda;

@@ -63,7 +63,7 @@ type
     procedure CloseAgenda;
 
     procedure GetDadosServerGeral;
-    procedure GetServerBasico;
+    procedure GetDadosServerBasico;
   end;
 
 var
@@ -98,7 +98,6 @@ begin
   try
     try
       KeyValues:= EmptyStr;
-      OpenAgendaKeysInsert(DtIni,DtFim);
 
       LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
                                                              Usuario.Marshal,
@@ -110,7 +109,7 @@ begin
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
 
-     if LDataSet.IsEmpty then
+      if LDataSet.IsEmpty then
         Exit;
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
@@ -615,40 +614,21 @@ begin
   GetDataSet('responsavel_tipo',False);
 end;
 
-procedure TDmGetServer.GetServerBasico;
+procedure TDmGetServer.GetDadosServerBasico;
 begin
   try
     GetAgenda(Now - 1, Now + 7);
     MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
-    MsgPoupUp('TDmGetServer.GetAgenda Erro:' + e.Message);
+    MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);
   end;
 
   try
-    GetAgendaTeste(Now - 1, Now + 7);
-    MsgPoupUpTeste('DmGetServer.GetAgendaTeste OK');
-  except on E:Exception do
-    MsgPoupUp('TDmGetServer.GetAgendaTeste Erro:' + e.Message);
-  end;
-
-
-  try
-    GetAlunos;;
+    GetAlunos;
     MsgPoupUpTeste('DmGetServer.GetAlunos OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
   end;
-
-
-
-  try
-    RestClient.SmTesteClient.GetAlunosTeste;
-    MsgPoupUpTeste('SmTesteClient.GetAlunosTeste OK');
-  except on E:Exception do
-    MsgPoupUp('SmTesteClient.GetAlunosTeste Erro:' + e.Message);
-  end;
-
-
 
 end;
 
