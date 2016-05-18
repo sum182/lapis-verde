@@ -103,7 +103,6 @@ object Dm: TDm
     Top = 216
   end
   object TimerSyncGeral: TTimer
-    Enabled = False
     Interval = 3600000
     OnTimer = TimerSyncGeralTimer
     Left = 648

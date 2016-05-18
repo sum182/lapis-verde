@@ -129,6 +129,7 @@ begin
       CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
 
     except on E:Exception do
+    begin
       DM.SetLogError( E.Message,
                       GetApplicationName,
                       UnitName,
@@ -140,6 +141,8 @@ begin
                       GetResponsavelId,
                       GetFuncionarioId
                     );
+      Raise;
+    end;
     end;
   finally
   end;
@@ -202,6 +205,7 @@ begin
       CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
 
     except on E:Exception do
+    begin
       DM.SetLogError( E.Message,
                       GetApplicationName,
                       UnitName,
@@ -213,6 +217,8 @@ begin
                       GetResponsavelId,
                       GetFuncionarioId
                     );
+       Raise;
+    end;
     end;
   finally
     //ListKeysInsert.DisposeOf;
@@ -240,6 +246,7 @@ begin
 
       DM.ProcessSaveUpdate('funcionario');
     except on E:Exception do
+    begin
       DM.SetLogError( E.Message,
                       GetApplicationName,
                       UnitName,
@@ -251,6 +258,8 @@ begin
                       GetResponsavelId,
                       GetFuncionarioId
                       );
+       Raise;
+    end;
     end;
   finally
   end;
@@ -289,6 +298,7 @@ begin
     DM.ProcessSaveUpdate('aluno');
 
   except on E:Exception do
+  begin
     DM.SetLogError( E.Message,
                     GetApplicationName,
                     UnitName,
@@ -300,6 +310,8 @@ begin
                     GetResponsavelId,
                     GetFuncionarioId
                     );
+     Raise;
+  end;
   end;
 
 end;
@@ -423,15 +435,18 @@ begin
 
 
       LDataSetList := RestClient.SmMainClient.GetDataSet(GetEscolaId,
-                                                            Nome,
-                                                            Usuario.Marshal,
-                                                            UtilizaParamEscolaId,
-                                                            Condicoes);
+                                                              Nome,
+                                                              Usuario.Marshal,
+                                                              UtilizaParamEscolaId,
+                                                              Condicoes);
+
+
 
       LDataSetServer := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
       CopyDataSet(LDataSetServer,fdqDataSet,False,[coAppend,coEdit]);
       DM.ProcessSaveUpdate(Nome);
     except on E:Exception do
+    begin
       DM.SetLogError( E.Message,
                       GetApplicationName,
                       UnitName,
@@ -443,6 +458,8 @@ begin
                       GetResponsavelId,
                       GetFuncionarioId
                       );
+       Raise;
+    end;
     end;
   finally
     fdqDataSet.DisposeOf;
@@ -466,6 +483,7 @@ begin
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit]);
   except on E:Exception do
+  begin
     DM.SetLogError( E.Message,
                     GetApplicationName,
                     UnitName,
@@ -477,6 +495,8 @@ begin
                     GetResponsavelId,
                     GetFuncionarioId
                     );
+    Raise;
+  end;
   end;
 end;
 
@@ -592,6 +612,7 @@ begin
 
       DM.ProcessSaveUpdate('responsavel');
     except on E:Exception do
+    begin
       DM.SetLogError( E.Message,
                       GetApplicationName,
                       UnitName,
@@ -603,6 +624,8 @@ begin
                       GetResponsavelId,
                       GetFuncionarioId
                       );
+       Raise;
+    end;
     end;
   finally
     //CloseResponsaveis;
@@ -657,6 +680,7 @@ begin
 
     DM.ProcessSaveUpdate('turma');
   except on E:Exception do
+  begin
     DM.SetLogError( E.Message,
                     GetApplicationName,
                     UnitName,
@@ -668,6 +692,8 @@ begin
                     GetResponsavelId,
                     GetFuncionarioId
                     );
+    Raise;
+  end;
   end;
 end;
 

@@ -9,6 +9,8 @@ Uses  FMX.Forms, Data.DB, untLibGeral;
   function GetFuncionarioId:Integer;
   function GetResponsavelId:Integer;
   function IsModoTeste:Boolean;
+  function IsTesteApp:Boolean;
+
   function UsuarioLogadoIsResponsavel:boolean;
   function UsuarioLogadoIsFuncionario:boolean;
   function GetApplicationName:string;
@@ -82,6 +84,12 @@ function IsModoTeste:Boolean;
 begin
   Result:=Dm.IsModoTeste;
 end;
+
+function IsTesteApp:Boolean;
+begin
+  Result:=Dm.IsTesteApp;
+end;
+
 
 procedure MsgPoupUpTeste(Mensagem:String);
 begin

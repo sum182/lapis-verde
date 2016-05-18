@@ -12,7 +12,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes;
+  REST.Types, untLibGeral, untTypes, Vcl.ExtCtrls;
 
 type
   TDm = class(TDataModule)
@@ -48,6 +48,8 @@ type
     procedure SetModoTeste;
   public
     IsModoTeste: Boolean;
+    IsTesteApp: Boolean;
+
     fUsuarioLogadoIsResponsavel: Boolean;
     fUsuarioLogadoIsFuncionario: Boolean;
 
@@ -248,6 +250,13 @@ end;
 
 function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
+
+  if IsTesteApp then
+  begin
+    Result:=True;
+    Exit;
+  end;
+
   OpenProcessoAtualizacao;
 
   fdqProcessoAtualizacao.IndexFieldNames := 'processo';
@@ -308,7 +317,7 @@ begin
     fdqLogError.FieldByName('data').AsDateTime := Data;
     fdqLogError.Post;
 
-    if MsgUsuario <> '' then
+    if (MsgUsuario <> '') and not(IsTesteApp) then
       ShowMessage(MsgUsuario);
 
   finally
@@ -395,6 +404,9 @@ procedure TDm.TimerSyncBasicoTimer(Sender: TObject);
 var
   Thread: TThread;
 begin
+  if IsTesteApp then
+    Exit;
+
   Thread := TThread.CreateAnonymousThread(
     procedure
     begin
@@ -407,6 +419,9 @@ procedure TDm.TimerSyncGeralTimer(Sender: TObject);
 var
   Thread: TThread;
 begin
+  if IsTesteApp then
+    Exit;
+
   Thread := TThread.CreateAnonymousThread(
     procedure
     begin

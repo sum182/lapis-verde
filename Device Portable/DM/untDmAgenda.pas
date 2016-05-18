@@ -127,6 +127,7 @@ begin
 
 
   except on E:Exception do
+  begin
     DM.SetLogError( E.Message,
                     GetApplicationName,
                     UnitName,
@@ -138,6 +139,8 @@ begin
                     GetResponsavelId,
                     GetFuncionarioId
                   );
+    Raise;
+  end;
   end;
 
    MsgPoupUp('Agenda criada com sucesso');

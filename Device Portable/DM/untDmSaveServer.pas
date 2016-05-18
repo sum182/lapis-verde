@@ -81,7 +81,12 @@ begin
         SetFlagEnviado(fdqAgenda);
 
     except on E:Exception do
+    begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
+
+      if (IsTesteApp or IsModoTeste) then
+        Raise;
+    end;
     end;
   finally
     if MsgRetornoServer <> EmptyStr then
@@ -125,7 +130,12 @@ begin
       MsgRetornoServer:= RestClient.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
 
     except on E:Exception do
+    begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
+
+      if (IsTesteApp or IsModoTeste) then
+        Raise;
+    end;
     end;
   finally
     if MsgRetornoServer = '' then

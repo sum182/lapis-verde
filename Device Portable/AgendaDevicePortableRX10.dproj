@@ -6,7 +6,7 @@
         <MainSource>AgendaDevicePortableRX10.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
         <TargetedPlatforms>1119</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -478,9 +478,9 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="2">
-                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Debug" Class="Android_LauncherIcon72">
+                <DeployFile LocalName="Android\Release\classes.dex" Configuration="Release" Class="AndroidClassesDexFile">
                     <Platform Name="Android">
-                        <RemoteName>ic_launcher.png</RemoteName>
+                        <RemoteName>classes.dex</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -600,6 +600,11 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Android\Debug\splash_image_def.xml" Configuration="Debug" Class="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
                     <Platform Name="Android">
                         <RemoteName>classes.dex</RemoteName>
@@ -607,11 +612,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Android\Debug\styles.xml" Configuration="Debug" Class="AndroidSplashStyles">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Android\Debug\splash_image_def.xml" Configuration="Debug" Class="AndroidSplashImageDef">
                     <Platform Name="Android">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -734,18 +734,33 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Release\classes.dex" Configuration="Release" Class="AndroidClassesDexFile">
+                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Debug" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
-                        <RemoteName>classes.dex</RemoteName>
+                        <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -1099,27 +1114,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>

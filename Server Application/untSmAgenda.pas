@@ -143,9 +143,6 @@ begin
       end;
     end;
   finally
-    fdqAgenda.Active := False;
-    fdqAgendaAluno.Active := False;
-    fdqAgendaTurma.Active := False;
     LogServerRequest.Free;
   end;
 end;

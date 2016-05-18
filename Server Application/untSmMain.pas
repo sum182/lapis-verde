@@ -155,7 +155,6 @@ begin
       end;
     end;
   finally
-    fdqAluno.Active := False;
     LogServerRequest.Free;
   end;
 end;
@@ -208,8 +207,6 @@ begin
       end;
     end;
   finally
-    fdqDataSet.Active := False;
-    fdqDataSet.Free;
     LogServerRequest.Free;
   end;
 
@@ -242,7 +239,6 @@ begin
       end;
     end;
   finally
-    fdqFunc.Active := False;
     LogServerRequest.Free;
   end;
 end;
@@ -275,7 +271,6 @@ begin
       end;
     end;
   finally
-    fdqProcessoAtualizacao.Active := False;
     LogServerRequest.Free;
   end;
 
@@ -317,9 +312,6 @@ begin
        end;
     end;
   finally
-    fdqResp.Active := False;
-    fdqRespAluno.Active := False;
-    fdqRespTelefone.Active := False;
     LogServerRequest.Free;
   end;
 
@@ -356,8 +348,6 @@ begin
       end;
     end;
   finally
-    fdqTurma.Active := False;
-    fdqTurmaAluno.Active := False;
     LogServerRequest.Free;
   end;
 end;

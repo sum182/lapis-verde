@@ -13,9 +13,6 @@ Coordinates=832,10,54,51
 [imgVoltar]
 Coordinates=513,298,61,51
 
-[Layout1]
-Coordinates=157,434,53,33
-
 [layBase]
 Coordinates=87,434,53,33
 
@@ -77,4 +74,7 @@ Coordinates=136,131,82,33
 [lstTeste]
 Coordinates=10,10,89,231
 Visible=True
+
+[LayTestar]
+Coordinates=157,434,53,33
 
