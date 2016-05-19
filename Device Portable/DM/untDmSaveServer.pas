@@ -73,6 +73,8 @@ begin
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_aluno',fdqAgendaAluno);
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'agenda_turma',fdqAgendaTurma);
 
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
 
       MsgRetornoServer:= RestClient.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
 
@@ -126,6 +128,9 @@ begin
 
       LDataSetList := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(LDataSetList,'log_error',fdqLogError);
+
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
 
       MsgRetornoServer:= RestClient.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
 

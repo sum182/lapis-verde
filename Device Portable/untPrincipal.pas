@@ -39,8 +39,6 @@ type
     lstItemAgenda: TListBoxItem;
     lstItemMensagem: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);
@@ -61,8 +59,6 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -146,24 +142,6 @@ begin
   MultiView1.HideMaster;
   fShowMenuPrincipal:=True;
   fShowForm:=False;
-end;
-
-procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
-begin
-  inherited;
-  if not smNetworkState.ValidarConexao then
-    Exit;
-
-  Dm.SyncronizarDadosServerGeral;
-end;
-
-procedure TfrmPrincipal.SpeedButton2Click(Sender: TObject);
-begin
-  inherited;
-  if not smNetworkState.ValidarConexao then
-    Exit;
-
-  Dm.SyncronizarDadosServerBasico;
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;

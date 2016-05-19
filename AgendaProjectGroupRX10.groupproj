@@ -9,6 +9,9 @@
         <Projects Include="Server Application\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\WhatsAppMessengerLayout\Messenger.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Messenger">
+        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj"/>
+    </Target>
+    <Target Name="Messenger:Clean">
+        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Messenger:Make">
+        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Messenger"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Messenger:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Messenger:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

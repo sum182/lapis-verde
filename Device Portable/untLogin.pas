@@ -294,6 +294,9 @@ function TfrmLogin.LoginFuncionario: boolean;
 begin
   try
     try
+      if not ValidacoesRestClientBeforeExecute(True) then
+        Exit;
+
       Result := RestClient.SmEscolaClient.LoginFuncionario
       (fLogin, fSenha) ;
     finally
@@ -313,6 +316,9 @@ function TfrmLogin.LoginResponsavel: boolean;
 begin
   try
     try
+       if not ValidacoesRestClientBeforeExecute(True) then
+         Exit;
+
        Result := RestClient.SmResponsavelClient.LoginResponsavel
     (fLogin, fSenha);
     finally

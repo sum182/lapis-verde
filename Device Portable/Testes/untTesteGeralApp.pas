@@ -14,12 +14,13 @@ uses
   untFuncoes,
   smDBFireDac, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
-  Data.Bind.DBScope, untDmSaveServer, System.Classes, untDM;
+  Data.Bind.DBScope, untDmSaveServer, System.Classes, untDM,smNetworkState,
+  FMX.TabControl;
 
 type
   TfrmTesteGeralApp = class(TfrmBaseToolBar)
     LayTestar: TLayout;
-    btnTestar: TSpeedButton;
+    btnTesteGeral: TSpeedButton;
     lstTeste: TListView;
     fdmTeste: TFDMemTable;
     fdmTesteDescricao: TStringField;
@@ -32,7 +33,22 @@ type
     Layout1: TLayout;
     lblMetodosErro: TLabel;
     lblMetodosErroValor: TLabel;
-    procedure btnTestarClick(Sender: TObject);
+    TabControl1: TTabControl;
+    TabItem1: TTabItem;
+    TabItem2: TTabItem;
+    Layout2: TLayout;
+    btnMetodosSyncGeral: TSpeedButton;
+    Layout3: TLayout;
+    btnMetodosSyncBasico: TSpeedButton;
+    Layout4: TLayout;
+    btnMetodosGetAlunos: TSpeedButton;
+    Layout5: TLayout;
+    btnMetodosGetAgenda: TSpeedButton;
+    procedure btnTesteGeralClick(Sender: TObject);
+    procedure btnMetodosSyncGeralClick(Sender: TObject);
+    procedure btnMetodosSyncBasicoClick(Sender: TObject);
+    procedure btnMetodosGetAlunosClick(Sender: TObject);
+    procedure btnMetodosGetAgendaClick(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -56,7 +72,16 @@ implementation
 
 {$R *.fmx}
 
-procedure TfrmTesteGeralApp.btnTestarClick(Sender: TObject);
+procedure TfrmTesteGeralApp.btnMetodosSyncGeralClick(Sender: TObject);
+begin
+  inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
+  Dm.SyncronizarDadosServerGeral;
+end;
+
+procedure TfrmTesteGeralApp.btnTesteGeralClick(Sender: TObject);
 begin
   inherited;
 
@@ -305,6 +330,41 @@ procedure TfrmTesteGeralApp.SetLogTesteOk(Metodo: String);
 begin
   SetLogTeste(Metodo + ' OK');
   Inc(MetodosOK);
+end;
+
+procedure TfrmTesteGeralApp.btnMetodosGetAgendaClick(Sender: TObject);
+begin
+  inherited;
+  try
+    DmGetServer.GetAgenda(Now - 1, Now + 7);
+    MsgPoupUpTeste('DmGetServer.GetAgenda OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);
+  end;
+end;
+
+procedure TfrmTesteGeralApp.btnMetodosGetAlunosClick(Sender: TObject);
+begin
+  inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
+  try
+    DmGetServer.GetAlunos;
+    MsgPoupUpTeste('DmGetServer.GetAlunos OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
+  end;
+
+end;
+
+procedure TfrmTesteGeralApp.btnMetodosSyncBasicoClick(Sender: TObject);
+begin
+  inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
+  Dm.SyncronizarDadosServerBasico;
 end;
 
 procedure TfrmTesteGeralApp.TesteMetodosDmGetServer;

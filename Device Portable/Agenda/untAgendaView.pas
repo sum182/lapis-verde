@@ -50,6 +50,9 @@ type
     btnCalendarLeft: TSpeedButton;
     btnCalendarRight: TSpeedButton;
     lblCalendar: TLabel;
+    TabItem1: TTabItem;
+    SpeedButton1: TSpeedButton;
+    VertScrollBox1: TVertScrollBox;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -68,6 +71,7 @@ type
     procedure imgCalendarRightClick(Sender: TObject);
     procedure imgCalendarDownClick(Sender: TObject);
     procedure imgCalendarUpClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     MargemEsquerda:Integer;
     MargemDireita:Integer;
@@ -89,6 +93,9 @@ type
     OwnerAgenda: String;
     NomeCompleto: String;
     DataSetAgenda: TDataSet;
+    procedure FillListAgenda;
+    procedure SetListAgendaItem(Descricao:String);
+
     procedure FillListBoxAgenda;
     procedure FillListBoxAgendaWait;
     procedure RefreshForm;
@@ -120,6 +127,37 @@ begin
   RefreshForm;
   layCalendar.Visible := not layCalendar.Visible;
   SetStateObjects;
+end;
+
+procedure TfrmAgendaView.FillListAgenda;
+var
+  Data: string;
+begin
+  try
+    Text3.DisposeOf;
+
+    VertScrollBox1.BeginUpdate;
+    //lstboxAgenda.Items.Clear;
+    DataSetAgenda.Refresh;
+    DataSetAgenda.DisableControls;
+    DataSetAgenda.First;
+
+    while not DataSetAgenda.Eof do
+    begin
+        //SetListBoxAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);
+
+
+
+        SetListAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);;
+        //SetListBoxAgendaItemEnviadoPor;
+        //SetListBoxAgendaGroupHeader;
+        DataSetAgenda.Next;
+      end;
+  finally
+    VertScrollBox1.EndUpdate;
+    DataSetAgenda.EnableControls;
+  end;
+
 end;
 
 procedure TfrmAgendaView.FillListBoxAgenda;
@@ -185,7 +223,7 @@ begin
   inherited;
   SetStyle(Self);
   SetValuesObjects;
-  tbCtrlAgenda.TabPosition:= TTabPosition.None;
+  //tbCtrlAgenda.TabPosition:= TTabPosition.None;
   tbCtrlAgenda.ActiveTab:= tbItemListAgenda;
 end;
 
@@ -261,6 +299,34 @@ begin
   FillListBoxAgenda;
   SetStateObjects;
   SetSizeBtnCalendar;
+end;
+
+procedure TfrmAgendaView.SetListAgendaItem(Descricao: String);
+var
+  HeightItem: Double;
+  Text: TText;
+
+  Layout:TLayout;
+begin
+
+  Text := TText.Create(self);
+  Text.BeginUpdate;
+  Text.Text := Descricao;
+  SetTextProperty(Text,nil);
+  Text.TextSettings.Font.Size :=  16;
+  Text.AutoSize:=True;
+  //ListBoxItem.Height:=  Trunc((Text.Height) + ( (Text.Height / 25) * 2))+3;
+  Text.Parent := VertScrollBox1;
+  Text.EndUpdate;
+  //ListBoxItem.Text := Descricao;
+
+  Layout:=TLayout.Create(self);
+  Layout.Align := TAlignLayout.Top;
+  Layout.Height:=15;
+  Layout.Parent:= VertScrollBox1;
+  //lstboxAgenda.AddObject(ListBoxItem);
+
+  //SetListBoxAgendaItemLinhaBranco;
 end;
 
 procedure TfrmAgendaView.SetListBoxAgendaFooter;
@@ -412,7 +478,8 @@ end;
 
 procedure TfrmAgendaView.SetTextProperty(Text: TText;ListBoxItem:TListBoxItem);
 begin
-  Text.Align := TAlignLayout.alClient;
+  //Text.Align := TAlignLayout.alClient;
+  Text.Align := TAlignLayout.alTop;
   Text.TextSettings.HorzAlign := TTextAlign.Leading;
   Text.TextSettings.VertAlign := TTextAlign.Leading;
 
@@ -431,6 +498,12 @@ procedure TfrmAgendaView.SetValuesObjects;
 begin
   MargemEsquerda:=8;
   MargemDireita:=8;
+end;
+
+procedure TfrmAgendaView.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  FillListAgenda;
 end;
 
 procedure TfrmAgendaView.btnCalendarClick(Sender: TObject);

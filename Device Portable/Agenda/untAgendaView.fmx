@@ -228,6 +228,11 @@ inherited frmAgendaView: TfrmAgendaView
           OnClick = imgAddClick
         end
       end
+      object SpeedButton1: TSpeedButton
+        Position.X = 160.000000000000000000
+        Text = 'teste'
+        OnClick = SpeedButton1Click
+      end
     end
     object tbCtrlAgenda: TTabControl
       Align = Client
@@ -235,7 +240,7 @@ inherited frmAgendaView: TfrmAgendaView
       Size.Height = 511.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 2
       TabOrder = 1
       TabPosition = PlatformDefault
       object tbItemListAgenda: TTabItem
@@ -243,7 +248,7 @@ inherited frmAgendaView: TfrmAgendaView
           item
           end>
         IsSelected = False
-        Size.Width = 193.000000000000000000
+        Size.Width = 128.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -256,7 +261,8 @@ inherited frmAgendaView: TfrmAgendaView
           OnGesture = lstboxAgendaGesture
           Align = Client
           Margins.Top = 6.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 180.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'listboxstyle'
           TabOrder = 0
@@ -281,20 +287,20 @@ inherited frmAgendaView: TfrmAgendaView
           DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
           DefaultItemStyles.GroupFooterStyle = ''
           GroupingKind = Grouped
-          Viewport.Width = 45.000000000000000000
-          Viewport.Height = 0.000000000000000000
+          Viewport.Width = 381.000000000000000000
+          Viewport.Height = 180.000000000000000000
         end
         object layCalendar: TLayout
           Align = Top
           Position.Y = 64.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 386.000000000000000000
           Size.Height = 212.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42488.000000000000000000
-            Size.Width = 50.000000000000000000
+            Date = 42509.000000000000000000
+            Size.Width = 386.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'calendarstyle'
@@ -308,13 +314,13 @@ inherited frmAgendaView: TfrmAgendaView
           Margins.Top = 4.000000000000000000
           Margins.Bottom = 4.000000000000000000
           Position.Y = 4.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 386.000000000000000000
           Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object lstboxData: TListBox
             Align = Top
-            Size.Width = 50.000000000000000000
+            Size.Width = 386.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -322,11 +328,11 @@ inherited frmAgendaView: TfrmAgendaView
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
-            Viewport.Width = 50.000000000000000000
+            Viewport.Width = 386.000000000000000000
             Viewport.Height = 55.000000000000000000
             object ListBoxItem6: TListBoxItem
               Selectable = False
-              Size.Width = 50.000000000000000000
+              Size.Width = 386.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 0
@@ -666,7 +672,7 @@ inherited frmAgendaView: TfrmAgendaView
               end
               object btnCalendarRight: TSpeedButton
                 Align = Right
-                Position.X = 10.000000000000000000
+                Position.X = 346.000000000000000000
                 Size.Width = 40.000000000000000000
                 Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False
@@ -880,8 +886,8 @@ inherited frmAgendaView: TfrmAgendaView
         CustomIcon = <
           item
           end>
-        IsSelected = True
-        Size.Width = 193.000000000000000000
+        IsSelected = False
+        Size.Width = 128.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -961,6 +967,29 @@ inherited frmAgendaView: TfrmAgendaView
             Size.PlatformDefault = False
             TabOrder = 5
           end
+        end
+      end
+      object TabItem1: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 130.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem1'
+        ExplicitSize.cx = 130.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object VertScrollBox1: TVertScrollBox
+          Align = Client
+          Size.Width = 386.000000000000000000
+          Size.Height = 462.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Viewport.Width = 386.000000000000000000
+          Viewport.Height = 462.000000000000000000
         end
       end
     end

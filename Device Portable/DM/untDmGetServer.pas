@@ -99,7 +99,7 @@ begin
     try
       KeyValues:= EmptyStr;
 
-      if Not ValidacoesRestClientBeforeExecute then
+      if not ValidacoesRestClientBeforeExecute then
         Exit;
 
       LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
@@ -176,6 +176,9 @@ begin
       OpenAgendaKeysInsert(DtIni,DtFim);
       KeysInserts:= GetKeyValuesDataSet(fdqAgendaKeysInsert,'agenda_id');
 
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
       LDataSetList := RestClient.SmAgendaClient.GetAgendaTeste(GetEscolaId,
                                                                  Usuario.Marshal,
                                                                  DtIni,
@@ -243,6 +246,9 @@ begin
       if not Dm.ProcessHasUpdate('funcionario') then
        Exit;
 
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
       LDataSetList := RestClient.SmMainClient.GetFuncionarios(GetEscolaId,Usuario.Marshal);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario');
       CopyDataSet(LDataSet,fdqFunc);
@@ -290,9 +296,11 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-    //teste
-    //if not Dm.ProcessHasUpdate('aluno') then
-    // Exit;
+    if not Dm.ProcessHasUpdate('aluno') then
+      Exit;
+
+    if not ValidacoesRestClientBeforeExecute then
+      Exit;
 
     LDataSetList := RestClient.SmMainClient.GetAlunos(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
@@ -437,6 +445,9 @@ begin
         fdqDataSet.SQL.Add(Condicoes);
 
 
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
       LDataSetList := RestClient.SmMainClient.GetDataSet(GetEscolaId,
                                                               Nome,
                                                               Usuario.Marshal,
@@ -482,6 +493,9 @@ var
 begin
   try
     OpenProcessoAtualizacao;
+    if not ValidacoesRestClientBeforeExecute then
+      Exit;
+
     LDataSetList := RestClient.SmMainClient.GetProcessoAtualizacao(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit]);
@@ -603,6 +617,9 @@ begin
        Exit;
 
       //OpenResponsaveis;
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
       LDataSetList := RestClient.SmMainClient.GetResponsaveis(GetEscolaId,Usuario.Marshal);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
       CopyDataSet(LDataSet,fdqResp);
@@ -674,6 +691,9 @@ begin
     // Exit;
 
     OpenTurmas;
+    if not ValidacoesRestClientBeforeExecute then
+      Exit;
+
     LDataSetList := RestClient.SmMainClient.GetTurmas(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'turma');
     CopyDataSet(LDataSet,fdqTurma);

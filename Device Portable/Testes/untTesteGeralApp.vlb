@@ -1,7 +1,4 @@
-﻿[btnTestar]
-Coordinates=10,298,61,51
-
-[btnVoltar]
+﻿[btnVoltar]
 Coordinates=276,298,59,51
 
 [layToolBarVoltar]
@@ -77,4 +74,7 @@ Visible=True
 
 [LayTestar]
 Coordinates=157,434,53,33
+
+[btnTesteGeral]
+Coordinates=10,298,61,51
 

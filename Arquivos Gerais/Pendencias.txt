@@ -30,8 +30,6 @@ criar uma vm zerada so com win7 + fontes e projetos
 
 
 ----Mobile--------------------------------------------------------------------------------
-Criar metodo before conect rest
-
 lista somente turmas ativas
 
 atualizacao de bd

@@ -4,10 +4,9 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
   DesignerMasterStyle = 3
   inherited layBase: TLayout
     inherited ToolBar1: TToolBar
-      TabOrder = 1
       inherited lblTitulo: TLabel
         Size.Width = 188.000000000000000000
-        Text = 'Teste Geral App'
+        Text = 'Teste Aplica'#231#227'o'
       end
       inherited layToolBarVoltar: TLayout
         inherited btnVoltar: TSpeedButton
@@ -21,10 +20,10 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5CC5D6A671C218A
+                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5C85D6B671C218A
                   145712070A7D20A55924D2D0D4455563CE79C595EB2CB74F534ABB880C88398A
                   F20531472B7FE552FE156A6E1D4E5FF623FF3DD1A5189911733D46363B26C45C
-                  EE23F65C2362AE62A447CC8591886B5385100E601FFC4A8D3283E20000000049
+                  EE23F65C2362AE62A447CC8591886B5385100E164CFC028E199BF10000000049
                   454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -38,13 +37,13 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
                   98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  00C7494441545847EDD65D0AC2301046D1240A9255EB16DC8B3F2B0BE24312BF
-                  69674052292AD849710E48A879984B8BB1CE18B306B5D6037DF85217C708DD28
-                  0A183B4639E72B960D6F2F0B832731A5941D6F2F0BF3DB988BC510CC6F63CE16
-                  4330BF8D39FD4D8CE7F525CCA7836E3F5E399752BAC5188F21843B7FF535EFFD
-                  678728C50CB7E44778CC44E0B51BEB796482A2867BCC547F61021DFD9C41021D
-                  AB88D2FB1F13E8B0A8B7A0A38DD27B4113E8984461D9F2B60E043C47E9BEE40B
-                  0AE926C61833CBB90753350105DD7B058B0000000049454E44AE426082}
+                  00C8494441545847EDD64D0AC2301086E1240A2E7268BD8277F1E76059888B24
+                  7ED3CE80A45254B093E23C20A166312F2DC63A63CC1AD45A0FF4E14B5D1C2374
+                  A32860EC18E59CAF5836BCBD2C0C9EC4945276BCBD2CCC6F632E164330BF8D39
+                  5B0CC1FC36E6F437319ED797309F0EBAFD78E55C4AE916633C8610EEFCD5D7BC
+                  F79F1DA21433DC921FE1311381D76EACE791098A1AEE3153FD850974F4730609
+                  74AC224AEF7F4CA0C3A2DE828E364AEF054DA063128565CBDB3A10F01CA5FB92
+                  2F28A49B1863CC2CE71E53050105C6FE2B5B0000000049454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
                   'p\ic_arrow_back_white_24dp\android\drawable-hdpi\ic_arrow_back_w' +
@@ -122,95 +121,203 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         end
       end
     end
-    object LayTestar: TLayout
-      Align = Top
-      Position.Y = 48.000000000000000000
-      Size.Width = 320.000000000000000000
-      Size.Height = 60.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 7
-      object btnTestar: TSpeedButton
-        Align = Center
-        Size.Width = 124.000000000000000000
-        Size.Height = 38.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'buttonstyle'
-        Text = 'Testar App'
-        TextSettings.FontColor = claBlue
-        OnClick = btnTestarClick
-      end
-    end
-    object lstTeste: TListView
-      ItemAppearanceClassName = 'TMultiDetailItemAppearance'
-      ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
-      HeaderAppearanceClassName = 'TListHeaderObjects'
-      FooterAppearanceClassName = 'TListHeaderObjects'
-      ItemSpaces.Left = 8.000000000000000000
-      ItemSpaces.Right = 2.000000000000000000
+    object TabControl1: TTabControl
       Align = Client
       Size.Width = 320.000000000000000000
-      Size.Height = 298.000000000000000000
+      Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 0
-      ItemAppearance.ItemHeight = 70
-      ItemAppearance.ItemEditHeight = 70
-      ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
-      CanSwipeDelete = False
-    end
-    object layMetodosOK: TLayout
-      Align = Top
-      Position.Y = 108.000000000000000000
-      Size.Width = 320.000000000000000000
-      Size.Height = 37.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 9
-      object lblMetodosOK: TLabel
-        AutoSize = True
-        Position.X = 16.000000000000000000
-        Position.Y = 8.000000000000000000
-        Size.Width = 109.000000000000000000
-        Size.Height = 22.000000000000000000
+      TabHeight = 49.000000000000000000
+      TabIndex = 1
+      TabOrder = 6
+      TabPosition = PlatformDefault
+      object TabItem1: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
-        TextSettings.WordWrap = False
-        Text = 'M'#233'todos OK:'
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Teste Geral'
+        ExplicitSize.cx = 160.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object layMetodosOK: TLayout
+          Align = Top
+          Size.Width = 320.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object lblMetodosOK: TLabel
+            AutoSize = True
+            Position.X = 16.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 109.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.WordWrap = False
+            Text = 'M'#233'todos OK:'
+          end
+          object lblMetodosOKValor: TLabel
+            AutoSize = True
+            Position.X = 126.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 16.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.WordWrap = False
+            Text = '0'
+          end
+        end
+        object Layout1: TLayout
+          Align = Top
+          Position.Y = 37.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object lblMetodosErro: TLabel
+            AutoSize = True
+            Position.X = 16.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 118.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.WordWrap = False
+            Text = 'M'#233'todos Erro:'
+          end
+          object lblMetodosErroValor: TLabel
+            AutoSize = True
+            Position.X = 137.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 16.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.WordWrap = False
+            Text = '0'
+          end
+        end
+        object LayTestar: TLayout
+          Align = Top
+          Position.Y = 74.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object btnTesteGeral: TSpeedButton
+            Align = Center
+            Size.Width = 124.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Executar'
+            TextSettings.FontColor = claBlue
+            OnClick = btnTesteGeralClick
+          end
+        end
+        object lstTeste: TListView
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          ItemSpaces.Left = 8.000000000000000000
+          ItemSpaces.Right = 2.000000000000000000
+          Align = Client
+          Size.Width = 320.000000000000000000
+          Size.Height = 249.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          ItemAppearance.ItemHeight = 70
+          ItemAppearance.ItemEditHeight = 70
+          ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
+          CanSwipeDelete = False
+        end
       end
-      object lblMetodosOKValor: TLabel
-        AutoSize = True
-        Position.X = 126.000000000000000000
-        Position.Y = 8.000000000000000000
-        Size.Width = 16.000000000000000000
-        Size.Height = 22.000000000000000000
+      object TabItem2: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 160.000000000000000000
+        Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
-        TextSettings.WordWrap = False
-        Text = '0'
-      end
-    end
-    object Layout1: TLayout
-      Align = Top
-      Position.Y = 145.000000000000000000
-      Size.Width = 320.000000000000000000
-      Size.Height = 37.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 8
-      object lblMetodosErro: TLabel
-        AutoSize = True
-        Position.X = 16.000000000000000000
-        Position.Y = 8.000000000000000000
-        Size.Width = 118.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.WordWrap = False
-        Text = 'M'#233'todos Erro:'
-      end
-      object lblMetodosErroValor: TLabel
-        AutoSize = True
-        Position.X = 137.000000000000000000
-        Position.Y = 8.000000000000000000
-        Size.Width = 16.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.WordWrap = False
-        Text = '0'
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'M'#233'todos'
+        ExplicitSize.cx = 160.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object Layout2: TLayout
+          Align = Top
+          Size.Width = 320.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 5
+          object btnMetodosSyncGeral: TSpeedButton
+            Align = Center
+            Size.Width = 191.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Syncronizar Geral'
+            TextSettings.FontColor = claBlue
+            OnClick = btnMetodosSyncGeralClick
+          end
+        end
+        object Layout3: TLayout
+          Align = Top
+          Position.Y = 60.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object btnMetodosSyncBasico: TSpeedButton
+            Align = Center
+            Size.Width = 191.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Syncronizar B'#225'sico'
+            TextSettings.FontColor = claBlue
+            OnClick = btnMetodosSyncBasicoClick
+          end
+        end
+        object Layout4: TLayout
+          Align = Top
+          Position.Y = 120.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object btnMetodosGetAlunos: TSpeedButton
+            Align = Center
+            Size.Width = 191.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'GetAlunos'
+            TextSettings.FontColor = claBlue
+            OnClick = btnMetodosGetAlunosClick
+          end
+        end
+        object Layout5: TLayout
+          Align = Top
+          Position.Y = 180.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object btnMetodosGetAgenda: TSpeedButton
+            Align = Center
+            Size.Width = 191.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'GetAgenda'
+            TextSettings.FontColor = claBlue
+            OnClick = btnMetodosGetAgendaClick
+          end
+        end
       end
     end
   end

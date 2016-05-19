@@ -176,7 +176,7 @@ type
     procedure SetStateButtonsSenha;
     procedure SetStateButtonsTelefone;
     procedure SetStateButtonsDadosPessoais;
-    procedure SetNotVisibleObjects;
+    procedure SetnotVisibleObjects;
     procedure ValidarEmail;
     function ValidarSenha:Boolean;
     function ValidarCPF:Boolean;
@@ -244,6 +244,9 @@ begin
   end;
 
   try
+    if not ValidacoesRestClientBeforeExecute(True) then
+      Exit;
+
     MsgCriarConta:= RestClient.SmResponsavelClient.CriarUsuarioResponsavel(fNome,fSobreNome,fEmail,fSenha,fTelefone,fCPF,fRG,fSexo);
   except on E:Exception do
     begin
@@ -514,7 +517,7 @@ begin
   SetStateButtonsSenha;
   SetStateButtonsTelefone;
   SetStateButtonsDadosPessoais;
-  SetNotVisibleObjects;
+  SetnotVisibleObjects;
 end;
 
 procedure TfrmCriarConta.imgFinalizarClick(Sender: TObject);
@@ -602,7 +605,7 @@ begin
   fSexo:= Copy(cmbSexo.Selected.Text,0,1);
 end;
 
-procedure TfrmCriarConta.SetNotVisibleObjects;
+procedure TfrmCriarConta.SetnotVisibleObjects;
 begin
   lblErrorEmail.Visible:=False;
   lblErrorSenhas.Visible:=False;
@@ -664,6 +667,9 @@ end;
 function TfrmCriarConta.ValidarCPF: Boolean;
 begin
   try
+    if not ValidacoesRestClientBeforeExecute(True) then
+      Exit;
+
     if not RestClient.SmResponsavelClient.ValidarCPFExistenteResponsavel(edtCPF.Text) then
     begin
       fCPFOk:= False;
@@ -693,6 +699,9 @@ begin
   end;
 
   try
+    if not ValidacoesRestClientBeforeExecute(True) then
+      Exit;
+
     if not RestClient.SmResponsavelClient.ValidarEmailExistenteResponsavel(edtEmail.Text) then
     begin
       fEmailOk:= False;

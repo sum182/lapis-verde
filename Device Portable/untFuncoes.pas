@@ -28,13 +28,14 @@ uses untDM, untDMStyles, System.SysUtils, smGeralFMX, smMensagensFMX;
 procedure SetStyle(Formulario:TForm);
 begin
    if IsSysOSAndroid then
-    Formulario.StyleBook := DMStyles.styleAndroid;
+     Formulario.StyleBook := DMStyles.styleAndroid;
 
    if IsSysOSiOS then
-    Formulario.StyleBook := DMStyles.styleIOS;
+     Formulario.StyleBook := DMStyles.styleIOS;
 
    if IsSysOSWindows then
-    Formulario.StyleBook := DMStyles.styleWindows;
+     Formulario.StyleBook := DMStyles.styleWindows;
+
 end;
 
 function GetEscolaId:Integer;
