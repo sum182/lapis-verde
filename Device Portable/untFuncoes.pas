@@ -2,7 +2,7 @@ unit untFuncoes;
 
 interface
 
-Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState;
+Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString;
 
   procedure SetStyle(Formulario:TForm);
   function GetEscolaId:Integer;
@@ -17,7 +17,7 @@ Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState;
   procedure SetFlagEnviado(DataSet:TDataset;Campo:String ='enviado_server');
   procedure MsgPoupUpTeste(Mensagem:String);
 
-  function ValidacoesRestClientBeforeExecute:Boolean;
+  function ValidacoesRestClientBeforeExecute(ExceptionCreate:Boolean = False):Boolean;
 
 
 implementation
@@ -104,11 +104,16 @@ begin
   smMensagensFMX.MsgPoupUp(Mensagem);
 end;
 
-function ValidacoesRestClientBeforeExecute:Boolean;
+function ValidacoesRestClientBeforeExecute(ExceptionCreate:Boolean = False):Boolean;
 begin
   Result:= True;
 
   if not smNetworkState.IsConnected then
+  begin
     Result:= False;
+
+    if ExceptionCreate then
+      raise Exception.Create(rs_erro_conexao_internet);
+  end;
 end;
 end.
