@@ -2,7 +2,7 @@ unit untFuncoes;
 
 interface
 
-Uses  FMX.Forms, Data.DB, untLibGeral;
+Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState;
 
   procedure SetStyle(Formulario:TForm);
   function GetEscolaId:Integer;
@@ -16,6 +16,8 @@ Uses  FMX.Forms, Data.DB, untLibGeral;
   function GetApplicationName:string;
   procedure SetFlagEnviado(DataSet:TDataset;Campo:String ='enviado_server');
   procedure MsgPoupUpTeste(Mensagem:String);
+
+  function ValidacoesRestClientBeforeExecute:Boolean;
 
 
 implementation
@@ -100,5 +102,13 @@ begin
     Exit;
 
   smMensagensFMX.MsgPoupUp(Mensagem);
+end;
+
+function ValidacoesRestClientBeforeExecute:Boolean;
+begin
+  Result:= True;
+
+  if not smNetworkState.IsConnected then
+    Result:= False;
 end;
 end.

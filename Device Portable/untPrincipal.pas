@@ -41,10 +41,6 @@ type
     lstItemTesteLogin: TListBoxItem;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
-    SpeedButton6: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);
@@ -67,10 +63,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
-    procedure SpeedButton5Click(Sender: TObject);
-    procedure SpeedButton6Click(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -172,52 +164,6 @@ begin
     Exit;
 
   Dm.SyncronizarDadosServerBasico;
-end;
-
-procedure TfrmPrincipal.SpeedButton3Click(Sender: TObject);
-begin
-  inherited;
-  try
-    DmGetServer.GetAlunos;
-    MsgPoupUpTeste('DmGetServer.GetAlunos OK');
-  except on E:Exception do
-    MsgPoupUp('TDmGetServer.GetAlunos Erro:' + e.Message);
-  end;
-
-end;
-
-procedure TfrmPrincipal.SpeedButton4Click(Sender: TObject);
-begin
-  inherited;
-  try
-    DmGetServer.GetTurmas;
-    MsgPoupUpTeste('DmGetServer.GetTurmas OK');
-  except on E:Exception do
-    MsgPoupUp('TDmGetServer.GetTurmas Erro:' + e.Message);
-  end;
-end;
-
-procedure TfrmPrincipal.SpeedButton5Click(Sender: TObject);
-begin
-  inherited;
-  try
-    DmGetServer.GetAgenda(Now - 1, Now + 7);
-    MsgPoupUpTeste('DmGetServer.GetAgenda OK');
-  except on E:Exception do
-    MsgPoupUp('TDmGetServer.GetAgenda Erro:' + e.Message);
-  end;
-end;
-
-procedure TfrmPrincipal.SpeedButton6Click(Sender: TObject);
-begin
-  inherited;
-  try
-    DmGetServer.GetAgendaTeste(Now - 1, Now + 7);
-    MsgPoupUpTeste('DmGetServer.GetAgendaTeste OK');
-  except on E:Exception do
-    MsgPoupUp('TDmGetServer.GetAgendaTeste Erro:' + e.Message);
-  end;
-
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;

@@ -99,6 +99,9 @@ begin
     try
       KeyValues:= EmptyStr;
 
+      if Not ValidacoesRestClientBeforeExecute then
+        Exit;
+
       LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
                                                              Usuario.Marshal,
                                                              DtIni,

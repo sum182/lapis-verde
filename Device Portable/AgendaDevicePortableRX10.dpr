@@ -42,7 +42,8 @@ uses
   untLibGeral in '..\Lib\untLibGeral.pas',
   untLibServer in '..\Lib\untLibServer.pas',
   untTypes in '..\Lib\untTypes.pas',
-  untTesteGeralApp in 'Testes\untTesteGeralApp.pas' {frmTesteGeralApp};
+  untTesteGeralApp in 'Testes\untTesteGeralApp.pas' {frmTesteGeralApp},
+  untResourceString in '..\Lib\untResourceString.pas';
 
 {$R *.res}
 

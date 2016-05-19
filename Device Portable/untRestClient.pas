@@ -3,7 +3,8 @@ unit untRestClient;
 interface
 
 uses
-  System.SysUtils, System.Classes, Proxy, IPPeerClient, Datasnap.DSClientRest;
+  System.SysUtils, System.Classes, Proxy, IPPeerClient, Datasnap.DSClientRest,
+  smMensagensFMX,smNetworkState, untResourceString;
 
 type
   TRestClient = class(TDataModule)

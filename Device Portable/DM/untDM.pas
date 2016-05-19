@@ -12,7 +12,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, Vcl.ExtCtrls;
+  REST.Types, untLibGeral, untTypes, untResourceString, Vcl.ExtCtrls;
 
 type
   TDm = class(TDataModule)
@@ -317,7 +317,7 @@ begin
     fdqLogError.FieldByName('data').AsDateTime := Data;
     fdqLogError.Post;
 
-    if (MsgUsuario <> '') and not(IsTesteApp) then
+    if (MsgUsuario <> '') and not(IsTesteApp) and not((Pos(rs_erro_conexao_internet,MsgError)>0)) then
       ShowMessage(MsgUsuario);
 
   finally
