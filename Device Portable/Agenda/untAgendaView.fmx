@@ -229,14 +229,28 @@ inherited frmAgendaView: TfrmAgendaView
         end
       end
       object SpeedButton1: TSpeedButton
-        Position.X = 160.000000000000000000
+        Position.X = 161.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
         Text = 'teste'
         OnClick = SpeedButton1Click
       end
       object SpeedButton2: TSpeedButton
-        Position.X = 240.000000000000000000
+        Position.X = 280.000000000000000000
+        Size.Width = 42.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
         Text = 'Wtaz'
         OnClick = SpeedButton2Click
+      end
+      object SpeedButton3: TSpeedButton
+        Position.X = 224.000000000000000000
+        Size.Width = 49.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = '2'
+        OnClick = SpeedButton3Click
       end
     end
     object tbCtrlAgenda: TTabControl
@@ -245,15 +259,15 @@ inherited frmAgendaView: TfrmAgendaView
       Size.Height = 511.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 1
       TabPosition = PlatformDefault
       object tbItemListAgenda: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = False
-        Size.Width = 128.000000000000000000
+        IsSelected = True
+        Size.Width = 96.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -266,7 +280,8 @@ inherited frmAgendaView: TfrmAgendaView
           OnGesture = lstboxAgendaGesture
           Align = Client
           Margins.Top = 6.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 180.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'listboxstyle'
           TabOrder = 0
@@ -291,20 +306,20 @@ inherited frmAgendaView: TfrmAgendaView
           DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
           DefaultItemStyles.GroupFooterStyle = ''
           GroupingKind = Grouped
-          Viewport.Width = 45.000000000000000000
-          Viewport.Height = 0.000000000000000000
+          Viewport.Width = 381.000000000000000000
+          Viewport.Height = 180.000000000000000000
         end
         object layCalendar: TLayout
           Align = Top
           Position.Y = 64.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 386.000000000000000000
           Size.Height = 212.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42511.000000000000000000
-            Size.Width = 50.000000000000000000
+            Date = 42512.000000000000000000
+            Size.Width = 386.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'calendarstyle'
@@ -318,13 +333,13 @@ inherited frmAgendaView: TfrmAgendaView
           Margins.Top = 4.000000000000000000
           Margins.Bottom = 4.000000000000000000
           Position.Y = 4.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 386.000000000000000000
           Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object lstboxData: TListBox
             Align = Top
-            Size.Width = 50.000000000000000000
+            Size.Width = 386.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -332,11 +347,11 @@ inherited frmAgendaView: TfrmAgendaView
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
-            Viewport.Width = 50.000000000000000000
+            Viewport.Width = 386.000000000000000000
             Viewport.Height = 55.000000000000000000
             object ListBoxItem6: TListBoxItem
               Selectable = False
-              Size.Width = 50.000000000000000000
+              Size.Width = 386.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 0
@@ -676,7 +691,7 @@ inherited frmAgendaView: TfrmAgendaView
               end
               object btnCalendarRight: TSpeedButton
                 Align = Right
-                Position.X = 10.000000000000000000
+                Position.X = 346.000000000000000000
                 Size.Width = 40.000000000000000000
                 Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False
@@ -891,7 +906,7 @@ inherited frmAgendaView: TfrmAgendaView
           item
           end>
         IsSelected = False
-        Size.Width = 128.000000000000000000
+        Size.Width = 96.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -977,8 +992,8 @@ inherited frmAgendaView: TfrmAgendaView
         CustomIcon = <
           item
           end>
-        IsSelected = True
-        Size.Width = 130.000000000000000000
+        IsSelected = False
+        Size.Width = 96.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -988,13 +1003,94 @@ inherited frmAgendaView: TfrmAgendaView
         ExplicitSize.cy = 49.000000000000000000
         object VertScrollBox1: TVertScrollBox
           Align = Client
-          Size.Width = 386.000000000000000000
-          Size.Height = 462.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'scrollboxstyle'
           TabOrder = 0
+          Viewport.Width = 50.000000000000000000
+          Viewport.Height = 50.000000000000000000
+        end
+      end
+      object TabItem2: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 98.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'TabItem2'
+        ExplicitSize.cx = 98.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object lstTeste: TListBox
+          Align = Client
+          Size.Width = 386.000000000000000000
+          Size.Height = 462.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'listboxstyle'
+          TabOrder = 0
+          DisableFocusEffect = True
+          DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          GroupingKind = Grouped
           Viewport.Width = 386.000000000000000000
           Viewport.Height = 462.000000000000000000
+          object lblTipoCombustivel: TListBoxItem
+            Selectable = False
+            Size.Width = 386.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxitemnodetail'
+            TabOrder = 0
+            Text = 'Combust'#237'vel:'
+            object cmbTipoCombustivel: TComboBox
+              DropDownCount = 5
+              Items.Strings = (
+                'Gasolina Comum'
+                'Gasolina Aditivada'
+                'Gasolina Podium'
+                'Etanol Comum'
+                'Etanol Aditivado'
+                'Diesel'
+                'G'#225's Natural')
+              Position.X = 144.000000000000000000
+              Position.Y = 6.000000000000000000
+              Size.Width = 193.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+            end
+          end
+          object lbKMs: TListBoxItem
+            Selectable = False
+            Position.Y = 60.000000000000000000
+            Size.Width = 386.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxitemnodetail'
+            TabOrder = 1
+            Text = 'KMs:'
+            object edtKMs: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              TabOrder = 0
+              KeyboardType = NumberPad
+              Position.X = 144.000000000000000000
+              Position.Y = 8.000000000000000000
+              Size.Width = 100.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+          object ListBoxItem7: TListBoxItem
+            Position.Y = 120.000000000000000000
+            StyleLookup = 'listboxitemnodetail'
+            TabOrder = 2
+            Text = 'ListBoxItem7'
+          end
         end
       end
     end
