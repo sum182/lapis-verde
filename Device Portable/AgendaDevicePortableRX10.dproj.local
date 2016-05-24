@@ -30,7 +30,7 @@
     <Transaction>2016/05/04 07:21:00.000.390,C:\Projetos\Agenda\Device Portable\Unit1.pas=C:\Projetos\Agenda\Device Portable\DM\untDMNew.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_4_WVGA_Nexus_S"/>
+		<NoProfile iOSSimulator="iPhone5" Android="026f25f9148e62a2"/>
 	</ActiveMobileDevice>
 	<BT_BuildType>Debug</BT_BuildType>
 </BorlandProject>

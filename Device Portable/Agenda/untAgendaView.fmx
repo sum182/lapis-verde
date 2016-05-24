@@ -228,30 +228,6 @@ inherited frmAgendaView: TfrmAgendaView
           OnClick = imgAddClick
         end
       end
-      object SpeedButton1: TSpeedButton
-        Position.X = 161.000000000000000000
-        Size.Width = 48.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'teste'
-        OnClick = SpeedButton1Click
-      end
-      object SpeedButton2: TSpeedButton
-        Position.X = 280.000000000000000000
-        Size.Width = 42.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'Wtaz'
-        OnClick = SpeedButton2Click
-      end
-      object SpeedButton3: TSpeedButton
-        Position.X = 224.000000000000000000
-        Size.Width = 49.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        Text = '2'
-        OnClick = SpeedButton3Click
-      end
     end
     object tbCtrlAgenda: TTabControl
       Align = Client
@@ -267,21 +243,22 @@ inherited frmAgendaView: TfrmAgendaView
           item
           end>
         IsSelected = True
-        Size.Width = 96.000000000000000000
+        Size.Width = 193.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
-        Text = 'tbItemListAgenda'
+        Text = 'Agenda'
         ExplicitSize.cx = 76.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object lstboxAgenda: TListBox
           Touch.GestureManager = GestureManager1
           OnGesture = lstboxAgendaGesture
           Align = Client
-          Margins.Top = 6.000000000000000000
-          Size.Width = 386.000000000000000000
-          Size.Height = 180.000000000000000000
+          Margins.Left = 2.000000000000000000
+          Margins.Right = 2.000000000000000000
+          Size.Width = 382.000000000000000000
+          Size.Height = 186.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'listboxstyle'
           TabOrder = 0
@@ -306,8 +283,8 @@ inherited frmAgendaView: TfrmAgendaView
           DefaultItemStyles.GroupHeaderStyle = 'listboxgroupheader'
           DefaultItemStyles.GroupFooterStyle = ''
           GroupingKind = Grouped
-          Viewport.Width = 381.000000000000000000
-          Viewport.Height = 180.000000000000000000
+          Viewport.Width = 377.000000000000000000
+          Viewport.Height = 186.000000000000000000
         end
         object layCalendar: TLayout
           Align = Top
@@ -318,7 +295,7 @@ inherited frmAgendaView: TfrmAgendaView
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42512.000000000000000000
+            Date = 42514.000000000000000000
             Size.Width = 386.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
@@ -906,12 +883,12 @@ inherited frmAgendaView: TfrmAgendaView
           item
           end>
         IsSelected = False
-        Size.Width = 96.000000000000000000
+        Size.Width = 193.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
-        Text = 'tbItemListAgendaDev'
+        Text = 'Dev'
         ExplicitSize.cx = 157.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ListBox1: TListBox
@@ -985,111 +962,6 @@ inherited frmAgendaView: TfrmAgendaView
             Size.Height = 266.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 5
-          end
-        end
-      end
-      object TabItem1: TTabItem
-        CustomIcon = <
-          item
-          end>
-        IsSelected = False
-        Size.Width = 96.000000000000000000
-        Size.Height = 49.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = ''
-        TabOrder = 0
-        Text = 'TabItem1'
-        ExplicitSize.cx = 130.000000000000000000
-        ExplicitSize.cy = 49.000000000000000000
-        object VertScrollBox1: TVertScrollBox
-          Align = Client
-          Size.Width = 50.000000000000000000
-          Size.Height = 50.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'scrollboxstyle'
-          TabOrder = 0
-          Viewport.Width = 50.000000000000000000
-          Viewport.Height = 50.000000000000000000
-        end
-      end
-      object TabItem2: TTabItem
-        CustomIcon = <
-          item
-          end>
-        IsSelected = False
-        Size.Width = 98.000000000000000000
-        Size.Height = 49.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = ''
-        TabOrder = 0
-        Text = 'TabItem2'
-        ExplicitSize.cx = 98.000000000000000000
-        ExplicitSize.cy = 49.000000000000000000
-        object lstTeste: TListBox
-          Align = Client
-          Size.Width = 386.000000000000000000
-          Size.Height = 462.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'listboxstyle'
-          TabOrder = 0
-          DisableFocusEffect = True
-          DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
-          DefaultItemStyles.GroupHeaderStyle = ''
-          DefaultItemStyles.GroupFooterStyle = ''
-          GroupingKind = Grouped
-          Viewport.Width = 386.000000000000000000
-          Viewport.Height = 462.000000000000000000
-          object lblTipoCombustivel: TListBoxItem
-            Selectable = False
-            Size.Width = 386.000000000000000000
-            Size.Height = 60.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'listboxitemnodetail'
-            TabOrder = 0
-            Text = 'Combust'#237'vel:'
-            object cmbTipoCombustivel: TComboBox
-              DropDownCount = 5
-              Items.Strings = (
-                'Gasolina Comum'
-                'Gasolina Aditivada'
-                'Gasolina Podium'
-                'Etanol Comum'
-                'Etanol Aditivado'
-                'Diesel'
-                'G'#225's Natural')
-              Position.X = 144.000000000000000000
-              Position.Y = 6.000000000000000000
-              Size.Width = 193.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 0
-            end
-          end
-          object lbKMs: TListBoxItem
-            Selectable = False
-            Position.Y = 60.000000000000000000
-            Size.Width = 386.000000000000000000
-            Size.Height = 60.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'listboxitemnodetail'
-            TabOrder = 1
-            Text = 'KMs:'
-            object edtKMs: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              TabOrder = 0
-              KeyboardType = NumberPad
-              Position.X = 144.000000000000000000
-              Position.Y = 8.000000000000000000
-              Size.Width = 100.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-            end
-          end
-          object ListBoxItem7: TListBoxItem
-            Position.Y = 120.000000000000000000
-            StyleLookup = 'listboxitemnodetail'
-            TabOrder = 2
-            Text = 'ListBoxItem7'
           end
         end
       end

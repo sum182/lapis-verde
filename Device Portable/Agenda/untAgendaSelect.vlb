@@ -145,3 +145,6 @@ Visible=False
 [Dm.fdqTurma]
 Visible=False
 
+[DmAgenda.fdqAgenda]
+Visible=False
+

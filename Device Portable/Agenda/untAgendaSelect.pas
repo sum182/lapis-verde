@@ -53,6 +53,8 @@ begin
   tbctrlPrincipal.ActiveTab := tbitTurma;
   Dm.OpenAlunos;
   Dm.OpenTurmas;
+
+  dm.fdqAluno.First;
 end;
 
 

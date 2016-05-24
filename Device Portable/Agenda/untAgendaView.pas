@@ -50,18 +50,6 @@ type
     btnCalendarLeft: TSpeedButton;
     btnCalendarRight: TSpeedButton;
     lblCalendar: TLabel;
-    TabItem1: TTabItem;
-    SpeedButton1: TSpeedButton;
-    VertScrollBox1: TVertScrollBox;
-    SpeedButton2: TSpeedButton;
-    TabItem2: TTabItem;
-    lstTeste: TListBox;
-    lblTipoCombustivel: TListBoxItem;
-    cmbTipoCombustivel: TComboBox;
-    lbKMs: TListBoxItem;
-    edtKMs: TEdit;
-    SpeedButton3: TSpeedButton;
-    ListBoxItem7: TListBoxItem;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -80,9 +68,6 @@ type
     procedure imgCalendarRightClick(Sender: TObject);
     procedure imgCalendarDownClick(Sender: TObject);
     procedure imgCalendarUpClick(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
   private
     MargemEsquerda:Integer;
     MargemDireita:Integer;
@@ -96,6 +81,7 @@ type
     procedure SetListBoxAgendaItemLinhaBranco(Tamanho:Integer);
     procedure SetListBoxAgendaFooter;
     procedure SetListBoxItemProperty(ListBoxItem:TListBoxItem);
+    procedure SetTextProperty(Text:TText);overload;
     procedure SetTextProperty(Text:TText;ListBoxItem:TListBoxItem);overload;
     procedure SetValuesObjects;
     procedure SetStateObjects;
@@ -110,24 +96,6 @@ type
     procedure FillListBoxAgendaWait;
     procedure RefreshForm;
     procedure SetSizeBtnCalendar;
-
-    //Novos Metodos
-    procedure FillListAgenda;
-    procedure SetListAgendaItem(Descricao:String);
-    procedure SetListgendaItemEnviadoPor(Rectangle:TRectangle);
-    procedure SetTextProperty(Text:TText);overload;
-    procedure SetListAgendaItemLinhaBranco;
-
-
-    //Novos Metodos 2
-    procedure FillListAgenda2;
-    procedure SetListAgendaItem2(Descricao:String);
-    procedure SetListgendaItemEnviadoPor2(Rectangle:TRectangle);
-    procedure SetTextProperty2(Text:TText);overload;
-    procedure SetListAgendaItemLinhaBranco2(ListBoxItem:TListBoxItem);
-    procedure SetListBoxItemProperty2(ListBoxItem:TListBoxItem);
-
-
   end;
 
 var
@@ -156,62 +124,7 @@ begin
   SetStateObjects;
 end;
 
-procedure TfrmAgendaView.FillListAgenda;
-var
-  Data: string;
-  i:Integer;
-begin
-  try
-    //Text3.DisposeOf;
 
-    VertScrollBox1.BeginUpdate;
-    //lstboxAgenda.Items.Clear;
-    DataSetAgenda.Refresh;
-    DataSetAgenda.DisableControls;
-
-    DataSetAgenda.First;
-
-    while not DataSetAgenda.Eof do
-    begin
-        SetListAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);;
-        DataSetAgenda.Next;
-    end;
-
-  finally
-    VertScrollBox1.EndUpdate;
-    DataSetAgenda.EnableControls;
-  end;
-
-end;
-
-procedure TfrmAgendaView.FillListAgenda2;
-var
-  Data: string;
-  i:Integer;
-begin
-  try
-    //Text3.DisposeOf;
-
-    lstTeste.BeginUpdate;
-    //lstTeste.Items.Clear;
-
-    DataSetAgenda.Refresh;
-    DataSetAgenda.DisableControls;
-
-    DataSetAgenda.First;
-
-    while not DataSetAgenda.Eof do
-    begin
-        SetListAgendaItem2(DataSetAgenda.FieldByName('descricao').AsString);;
-        DataSetAgenda.Next;
-    end;
-
-  finally
-    lstTeste.EndUpdate;
-    DataSetAgenda.EnableControls;
-  end;
-
-end;
 
 procedure TfrmAgendaView.FillListBoxAgenda;
 var
@@ -227,8 +140,6 @@ begin
     while not DataSetAgenda.Eof do
     begin
         SetListBoxAgendaItem(DataSetAgenda.FieldByName('descricao').AsString);
-        //SetListBoxAgendaItemEnviadoPor;
-        //SetListBoxAgendaGroupHeader;
         DataSetAgenda.Next;
       end;
   finally
@@ -276,7 +187,7 @@ begin
   inherited;
   SetStyle(Self);
   SetValuesObjects;
-  //tbCtrlAgenda.TabPosition:= TTabPosition.None;
+  tbCtrlAgenda.TabPosition:= TTabPosition.None;
   tbCtrlAgenda.ActiveTab:= tbItemListAgenda;
 end;
 
@@ -343,7 +254,7 @@ end;
 procedure TfrmAgendaView.RefreshForm;
 begin
   lblCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
-  btnAdd.Enabled:= (Calendar.Date >= Date);
+  btnAdd.Visible:= (Calendar.Date >= Date);
 
   if UsuarioLogadoIsFuncionario then
     DmAgenda.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
@@ -354,142 +265,11 @@ begin
   SetSizeBtnCalendar;
 end;
 
-procedure TfrmAgendaView.SetListAgendaItem(Descricao: String);
-var
-  HeightItem: Double;
-  Text: TText;
-  Rectangle:TRectangle;
-begin
-  Rectangle:=TRectangle.Create(self);
-  Rectangle.BeginUpdate;
-  Rectangle.Align:=TAlignLayout.Top;
-  Rectangle.Fill.Color:= TAlphaColors.Ghostwhite;
-  Rectangle.Stroke.Kind:=TBrushKind.None;
-  Rectangle.Parent := VertScrollBox1;
-
-  Text := TText.Create(self);
-  Text.BeginUpdate;
-  Text.Text := Descricao;
-  SetTextProperty(Text);
-  Text.TextSettings.Font.Size :=  16;
-  Text.Parent := Rectangle;
-
-  Text.AutoSize:=False;
-  Text.Height:=15;
-  Text.AutoSize:=True;
-
-  Rectangle.Height :=  Trunc(Text.Height) + (MargemTopText)+ (Text.Margins.Top);
-  Text.EndUpdate;
-
-  SetListgendaItemEnviadoPor(Rectangle);
-  Rectangle.EndUpdate;
-
-  SetListAgendaItemLinhaBranco;
-end;
-
-procedure TfrmAgendaView.SetListAgendaItem2(Descricao: String);
-var
-  HeightItem: Double;
-  Text: TText;
-  Rectangle:TRectangle;
-  ListBoxItem: TListBoxItem;
-begin
-
-  ListBoxItem := TListBoxItem.Create(lstTEste);
-  ListBoxItem.BeginUpdate;
-  SetListBoxItemProperty2(ListBoxItem);
-
-
-  Rectangle:=TRectangle.Create(self);
-  Rectangle.BeginUpdate;
-  Rectangle.Align:=TAlignLayout.Top;
-  Rectangle.Fill.Color:= TAlphaColors.Ghostwhite;
-  Rectangle.Stroke.Kind:=TBrushKind.None;
-  Rectangle.Parent := ListBoxItem;
-
-  Text := TText.Create(self);
-  Text.BeginUpdate;
-  Text.Text := Descricao;
-  SetTextProperty2(Text);
-  Text.TextSettings.Font.Size :=  16;
-  Text.Parent := Rectangle;
-
-  Text.AutoSize:=False;
-  Text.Height:=15;
-  Text.AutoSize:=True;
-
-  Rectangle.Height :=  Trunc(Text.Height) + (MargemTopText)+ (Text.Margins.Top);
-  //ListBoxItem.WordWrap := True;
-
-  Text.EndUpdate;
-  SetListgendaItemEnviadoPor2(Rectangle);
-  ListBoxItem.Height :=  Rectangle.Height + 3;
-
-  Rectangle.EndUpdate;
-
-  //ListBoxItem.Text := Descricao;
-
-  SetListAgendaItemLinhaBranco2(ListBoxItem);
-
-  ListBoxItem.EndUpdate;
-  lstTeste.AddObject(ListBoxItem);
 
 
 
 
 
-
-exit;
-   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-  ListBoxItem.BeginUpdate;
-  SetListBoxItemProperty(ListBoxItem);
-
-  Text := TText.Create(self);
-  Text.BeginUpdate;
-  Text.Text := Descricao;
-  SetTextProperty(Text,ListBoxItem);
-  Text.TextSettings.Font.Size :=  16;
-  Text.AutoSize:=True;
-  ListBoxItem.Height:=  Trunc((Text.Height) + ( (Text.Height / 25) * 2))+3;
-  Text.Parent := ListBoxItem;
-  Text.EndUpdate;
-  ListBoxItem.WordWrap := True;
-  //ListBoxItem.Text := Descricao;
-
-  ListBoxItem.EndUpdate;
-  lstboxAgenda.AddObject(ListBoxItem);
-
-  //SetListBoxAgendaItemLinhaBranco;
-
-
-end;
-
-procedure TfrmAgendaView.SetListAgendaItemLinhaBranco;
-var
- Layout:TLayout;
-begin
-  Layout:=TLayout.Create(self);
-  Layout.BeginUpdate;
-  Layout.Align := TAlignLayout.Top;
-  Layout.Height:=12;
-  Layout.Parent:= VertScrollBox1;
-  Layout.EndUpdate;
-end;
-
-procedure TfrmAgendaView.SetListAgendaItemLinhaBranco2(ListBoxItem:TListBoxItem);
-var
-  ListBoxItem2: TListBoxItem;
-begin
-  //Linha em Branco
-  ListBoxItem2 := TListBoxItem.Create(lstTeste);
-  ListBoxItem2.BeginUpdate;
-  ListBoxItem2.Text:='';
-  SetListBoxItemProperty2(ListBoxItem2);
-  ListBoxItem2.Height:= 10;
-  ListBoxItem2.EndUpdate;
-  lstTeste.AddObject(ListBoxItem2);
-
-end;
 
 procedure TfrmAgendaView.SetListBoxAgendaFooter;
 begin
@@ -529,22 +309,17 @@ begin
   Text := TText.Create(self);
   Text.BeginUpdate;
   Text.Text := Descricao;
-  SetTextProperty(Text,ListBoxItem);
+  SetTextProperty(Text);
   Text.TextSettings.Font.Size :=  16;
   Text.Parent := Rectangle;
 
-  Rectangle.Height :=  Trunc(Text.Height) + (MargemTopText)+ (Text.Margins.Top);
-  //ListBoxItem.WordWrap := True;
+  Rectangle.Height :=  Trunc(Text.Height) + (Text.Margins.Top);
 
   Text.EndUpdate;
-  SetListgendaItemEnviadoPor(Rectangle);
-  ListBoxItem.Height :=  Rectangle.Height + 3;
+  SetListBoxAgendaItemEnviadoPor(Rectangle);
+  ListBoxItem.Height :=  Rectangle.Height + 5;
 
   Rectangle.EndUpdate;
-
-  //ListBoxItem.Text := Descricao;
-
-  //SetListAgendaItemLinhaBranco2(ListBoxItem);
   SetListBoxAgendaItemLinhaBranco(12);
 
   ListBoxItem.EndUpdate;
@@ -621,7 +396,7 @@ begin
   Text := TText.Create(self);
   Text.BeginUpdate;
   Text.Text := Texto;
-  SetTextProperty2(Text);
+  SetTextProperty(Text);
   Text.color := TAlphaColors.Mediumseagreen;
   Text.TextSettings.Font.Size :=  14;
 
@@ -671,12 +446,11 @@ var
   Rectangle:TRectangle;
 begin
   //Linha em Branco
-
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   ListBoxItem.BeginUpdate;
   ListBoxItem.Text:='';
   SetListBoxItemProperty(ListBoxItem);
-  ListBoxItem.Height:= 12;
+  ListBoxItem.Height:= Tamanho;
   ListBoxItem.EndUpdate;
 
   Rectangle:=TRectangle.Create(self);
@@ -707,6 +481,9 @@ procedure TfrmAgendaView.SetListBoxItemProperty(
   ListBoxItem: TListBoxItem);
 begin
   ListBoxItem.StyleLookup := 'listboxitemnodetail';
+  ListBoxItem.TextSettings.WordWrap := True;
+  ListBoxItem.TextSettings.VertAlign := TTextAlign.Center;
+  ListBoxItem.Selectable:=False;
   exit;
 
   {Codigo Funcionando
@@ -722,107 +499,11 @@ begin
   }
 end;
 
-procedure TfrmAgendaView.SetListBoxItemProperty2(ListBoxItem: TListBoxItem);
-begin
-  ListBoxItem.StyleLookup := 'listboxitemnodetail';
-  exit;
-  //ListBoxItem.TextSettings.WordWrap := True;
-  ListBoxItem.TextSettings.VertAlign := TTextAlign.Center;
-  ListBoxItem.Selectable:=False;
-  ListBoxItem.Margins.Left:=MargemEsquerda;
-  ListBoxItem.Margins.Right := MargemDireita;
-  ListBoxItem.Margins.Top := 2;
-  ListBoxItem.Margins.Bottom := 2;
-  ListBoxItem.Height:= 25;
-end;
-
-procedure TfrmAgendaView.SetListgendaItemEnviadoPor(Rectangle:TRectangle);
-var
-  ListBoxItem: TListBoxItem;
-  Text: TText;
-  Funcionario:string;
-  FuncionarioTipo:string;
-  Responsavel:string;
-  ResponsavelTipo:string;
-  Texto:string;
-begin
-  Funcionario:= DataSetAgenda.FieldByName('funcionario_nome').AsString;
-  FuncionarioTipo:= DataSetAgenda.FieldByName('funcionario_tipo').AsString;
-  Responsavel:= DataSetAgenda.FieldByName('responsavel_nome').AsString;
-  ResponsavelTipo:= DataSetAgenda.FieldByName('responsavel_tipo').AsString;
-
-  if Funcionario <> EmptyStr then
-    Texto:=  FuncionarioTipo + ' ' + Funcionario;
-
-  if Responsavel <> EmptyStr then
-    Texto:=  Responsavel;
-
-  {ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-  SetListBoxItemProperty(ListBoxItem);
-  ListBoxItem.Height:= 15;
-  ListBoxItem.Margins.Top := 0;
-  }
-
-  Text := TText.Create(self);
-  Text.BeginUpdate;
-  Text.Text := Texto;
-  SetTextProperty(Text);
-  Text.color := TAlphaColors.Mediumseagreen;
-  Text.TextSettings.Font.Size :=  14;
-
-  Text.AutoSize:=True;
-  //ListBoxItem.Height:=  (Text.Height);
-  Text.Parent := Rectangle;
-  Text.EndUpdate;
-  //lstboxAgenda.AddObject(ListBoxItem);
-
-  Rectangle.Height := Rectangle.Height +  (Text.Height + Text.Margins.Top);
-end;
 
 
-procedure TfrmAgendaView.SetListgendaItemEnviadoPor2(Rectangle: TRectangle);
-var
-  ListBoxItem: TListBoxItem;
-  Text: TText;
-  Funcionario:string;
-  FuncionarioTipo:string;
-  Responsavel:string;
-  ResponsavelTipo:string;
-  Texto:string;
-begin
-  Funcionario:= DataSetAgenda.FieldByName('funcionario_nome').AsString;
-  FuncionarioTipo:= DataSetAgenda.FieldByName('funcionario_tipo').AsString;
-  Responsavel:= DataSetAgenda.FieldByName('responsavel_nome').AsString;
-  ResponsavelTipo:= DataSetAgenda.FieldByName('responsavel_tipo').AsString;
 
-  if Funcionario <> EmptyStr then
-    Texto:=  FuncionarioTipo + ' ' + Funcionario;
 
-  if Responsavel <> EmptyStr then
-    Texto:=  Responsavel;
 
-  {ListBoxItem := TListBoxItem.Create(lstboxAgenda);
-  SetListBoxItemProperty(ListBoxItem);
-  ListBoxItem.Height:= 15;
-  ListBoxItem.Margins.Top := 0;
-  }
-
-  Text := TText.Create(self);
-  Text.BeginUpdate;
-  Text.Text := Texto;
-  SetTextProperty2(Text);
-  Text.color := TAlphaColors.Mediumseagreen;
-  Text.TextSettings.Font.Size :=  14;
-
-  Text.AutoSize:=True;
-  //ListBoxItem.Height:=  (Text.Height);
-  Text.Parent := Rectangle;
-  Text.EndUpdate;
-  //lstboxAgenda.AddObject(ListBoxItem);
-
-  Rectangle.Height := Rectangle.Height +  (Text.Height + Text.Margins.Top);
-
-end;
 
 procedure TfrmAgendaView.SetSizeBtnCalendar;
 begin
@@ -875,18 +556,20 @@ begin
   Text.TextSettings.HorzAlign := TTextAlign.Leading;
   Text.TextSettings.VertAlign := TTextAlign.Leading;
 
-  Text.Height:=15;
-  Text.Width := lstboxAgenda.Width - (MargemEsquerda + MargemDireita);
-
   Text.Margins.Top := MargemTopText;
   Text.Margins.Left:=MargemEsquerda;
   Text.Margins.Right:=MargemDireita;
 
+  Text.Height:=15;
+  Text.Width := lstboxAgenda.Width
+                        - (lstboxAgenda.Margins.Left + lstboxAgenda.Margins.Right)
+                        - (Text.Margins.Left  + Text.Margins.Right);
+
+
+
   Text.TextSettings.WordWrap:=True;
   Text.AutoSize:=True;
   Text.WordWrap:=True;
-
-
 
  {codigo antigo no teste 1
   Text.Align := TAlignLayout.Top;
@@ -907,24 +590,7 @@ begin
 
 end;
 
-procedure TfrmAgendaView.SetTextProperty2(Text: TText);
-begin
-  Text.Align := TAlignLayout.Top;
-  Text.TextSettings.HorzAlign := TTextAlign.Leading;
-  Text.TextSettings.VertAlign := TTextAlign.Leading;
 
-  Text.Height:=15;
-  Text.Width := lstTeste.Width - (MargemEsquerda + MargemDireita);
-
-  Text.Margins.Top := MargemTopText;
-  Text.Margins.Left:=MargemEsquerda;
-  Text.Margins.Right:=MargemDireita;
-
-  Text.TextSettings.WordWrap:=True;
-  Text.AutoSize:=True;
-  Text.WordWrap:=True;
-
-end;
 
 procedure TfrmAgendaView.SetTitulo;
 begin
@@ -936,47 +602,6 @@ begin
   MargemEsquerda:=8;
   MargemDireita:=8;
   MargemTopText:=6;
-end;
-
-procedure TfrmAgendaView.SpeedButton1Click(Sender: TObject);
-begin
-  inherited;
-  FillListAgenda;
-end;
-
-procedure TfrmAgendaView.SpeedButton2Click(Sender: TObject);
-var
-CR: TCalloutRectangle;
-L: TText;
-TmpImg: TImage;
-begin
-
-  CR := TCalloutRectangle.Create(Self);
-  CR.Parent := VertScrollBox1;
-  CR.Align := TAlignLayout.alTop;
-  CR.CalloutPosition := TCalloutPosition.cpRight;
-  CR.Margins.Top := 10;
-  CR.Margins.Bottom := 10;
-  CR.Margins.Left := 5;
-  CR.Height := 75;
-
-  L := TText.Create(Self);
-  L.Parent := CR;
-  L.Align := TAlignLayout.alClient;
-  L.Text := 'A quick brown fox jumped over the yellow log running away from the pink dog and ran down the lane.';
-  L.Margins.Right := 15;
-  L.Margins.Left := 5;
-  L.Width := CR.Width-20;
-
-  L.WordWrap := True;
-  L.AutoSize := True;
-
-end;
-
-procedure TfrmAgendaView.SpeedButton3Click(Sender: TObject);
-begin
-  inherited;
-  FillListAgenda2;
 end;
 
 procedure TfrmAgendaView.btnCalendarClick(Sender: TObject);

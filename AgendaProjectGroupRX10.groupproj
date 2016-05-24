@@ -9,12 +9,6 @@
         <Projects Include="Server Application\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\WhatsAppMessengerLayout\Messenger.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\FuelApp\FuelApp.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -41,32 +35,14 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Messenger">
-        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj"/>
-    </Target>
-    <Target Name="Messenger:Clean">
-        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Messenger:Make">
-        <MSBuild Projects="..\WhatsAppMessengerLayout\Messenger.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="FuelApp">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj"/>
-    </Target>
-    <Target Name="FuelApp:Clean">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="FuelApp:Make">
-        <MSBuild Projects="..\FuelApp\FuelApp.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;Messenger;FuelApp"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;Messenger:Clean;FuelApp:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;Messenger:Make;FuelApp:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
