@@ -69,9 +69,9 @@ type
     procedure imgCalendarDownClick(Sender: TObject);
     procedure imgCalendarUpClick(Sender: TObject);
   private
-    MargemEsquerda:Integer;
-    MargemDireita:Integer;
-    MargemTopText:Integer;
+    MarginTextLeft:Integer;
+    MarginTextRigth:Integer;
+    MarginTextTop:Integer;
     fActivityDialogThread: TThread;
     procedure SetTitulo;
     procedure SetListBoxAgendaGroupHeader;
@@ -293,7 +293,6 @@ var
   HeightItem: Double;
   Text: TText;
   Rectangle:TRectangle;
-
 begin
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   ListBoxItem.BeginUpdate;
@@ -308,10 +307,10 @@ begin
 
   Text := TText.Create(self);
   Text.BeginUpdate;
-  Text.Text := Descricao;
-  SetTextProperty(Text);
-  Text.TextSettings.Font.Size :=  16;
   Text.Parent := Rectangle;
+  Text.Text := Descricao;
+  Text.TextSettings.Font.Size :=  16;
+  SetTextProperty(Text);
 
   Rectangle.Height :=  Trunc(Text.Height) + (Text.Margins.Top);
 
@@ -399,12 +398,9 @@ begin
   SetTextProperty(Text);
   Text.color := TAlphaColors.Mediumseagreen;
   Text.TextSettings.Font.Size :=  14;
-
   Text.AutoSize:=True;
-  //ListBoxItem.Height:=  (Text.Height);
   Text.Parent := Rectangle;
   Text.EndUpdate;
-  //lstboxAgenda.AddObject(ListBoxItem);
 
   Rectangle.Height := Rectangle.Height +  (Text.Height + Text.Margins.Top);
 
@@ -445,7 +441,6 @@ var
   ListBoxItem: TListBoxItem;
   Rectangle:TRectangle;
 begin
-  //Linha em Branco
   ListBoxItem := TListBoxItem.Create(lstboxAgenda);
   ListBoxItem.BeginUpdate;
   ListBoxItem.Text:='';
@@ -525,11 +520,11 @@ begin
   Text.TextSettings.VertAlign := TTextAlign.Leading;
 
   Text.Height:=15;
-  Text.Width := lstboxAgenda.Width - (MargemEsquerda + MargemDireita);
+  Text.Width := lstboxAgenda.Width - (MarginTextLeft + MarginTextRigth);
 
-  Text.Margins.Top := MargemTopText;
-  Text.Margins.Left:=MargemEsquerda;
-  Text.Margins.Right:=MargemDireita;
+  Text.Margins.Top := MarginTextTop;
+  Text.Margins.Left:=MarginTextLeft;
+  Text.Margins.Right:=MarginTextRigth;
 
   Text.TextSettings.WordWrap:=True;
   Text.AutoSize:=True;
@@ -556,20 +551,23 @@ begin
   Text.TextSettings.HorzAlign := TTextAlign.Leading;
   Text.TextSettings.VertAlign := TTextAlign.Leading;
 
-  Text.Margins.Top := MargemTopText;
-  Text.Margins.Left:=MargemEsquerda;
-  Text.Margins.Right:=MargemDireita;
+  Text.Margins.Top := MarginTextTop;
+  Text.Margins.Left:=MarginTextLeft;
+  Text.Margins.Right:=MarginTextRigth;
 
   Text.Height:=15;
+
+  Text.TextSettings.WordWrap:=True;
+  Text.AutoSize:=True;
+  Text.WordWrap:=True;
+
   Text.Width := lstboxAgenda.Width
                         - (lstboxAgenda.Margins.Left + lstboxAgenda.Margins.Right)
                         - (Text.Margins.Left  + Text.Margins.Right);
 
 
 
-  Text.TextSettings.WordWrap:=True;
-  Text.AutoSize:=True;
-  Text.WordWrap:=True;
+
 
  {codigo antigo no teste 1
   Text.Align := TAlignLayout.Top;
@@ -599,9 +597,9 @@ end;
 
 procedure TfrmAgendaView.SetValuesObjects;
 begin
-  MargemEsquerda:=8;
-  MargemDireita:=8;
-  MargemTopText:=6;
+  MarginTextLeft:=8;
+  MarginTextRigth:=8;
+  MarginTextTop:=6;
 end;
 
 procedure TfrmAgendaView.btnCalendarClick(Sender: TObject);
