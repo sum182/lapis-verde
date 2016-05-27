@@ -1,0 +1,166 @@
+inherited frmConfiguracoes: TfrmConfiguracoes
+  Caption = 'frmBaseToolBar1'
+  ClientHeight = 540
+  ClientWidth = 386
+  StyleBook = DMStyles.styleAndroid
+  OnClose = FormClose
+  OnDeactivate = FormDeactivate
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  inherited layBase: TLayout
+    Size.Width = 386.000000000000000000
+    Size.Height = 540.000000000000000000
+    OnPaint = layBasePaint
+    inherited ToolBar1: TToolBar
+      Size.Width = 386.000000000000000000
+      inherited lblTitulo: TLabel
+        Size.Width = 124.000000000000000000
+        Text = 'Configura'#231#245'es'
+      end
+      inherited layToolBarVoltar: TLayout
+        inherited btnVoltar: TSpeedButton
+          inherited imgVoltar: TImage
+            MultiResBitmap.Height = 24
+            MultiResBitmap.Width = 24
+            MultiResBitmap = <
+              item
+                Width = 24
+                Height = 24
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                  F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB63B68EF3C218A
+                  149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
+                  942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
+                  721FB1E71A117315233D622E8C445C9B2A8470004A00FABE8A1704A900000000
+                  49454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-mdpi\ic_arrow_back_w' +
+                  'hite_24dp.png'
+              end
+              item
+                Scale = 1.500000000000000000
+                Width = 36
+                Height = 36
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+                  98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  00C8494441545847EDD64D0AC2301086E1240AAE7266BD8277F1E75C59898B24
+                  7ED3CE80A45254B093E23C20A166312F2DC63A63CC1AD45A0FF4E14B5D1C2374
+                  A32860EC18E59CAF5836BCBD2C0C9EC4945276BCBD2CCC6F632E164330BF8D39
+                  5B0CC1FC36E6F437319ED797309F0EBAFD78E55C4AE916633C8610EEFCD5D7BC
+                  F79F1DA21433DC921FE1311381D76EACE791098A1AEE3153FD850974F4730609
+                  74AC224AEF7F4CA0C3A2DE828E364AEF054DA063128565CBDB3A10F01CA5FB92
+                  2F28A49B1863CC2CE71E52D50105C235449C0000000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-hdpi\ic_arrow_back_w' +
+                  'hite_24dp.png'
+              end
+              item
+                Scale = 2.000000000000000000
+                Width = 48
+                Height = 48
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                  87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  00A6494441546843EDD8410A83301046E1D04BF56A2E3D724F90F40F9D810A71
+                  53D09929EF031151C21BD14D1A0000571963ECF3B0CB5A2CDED51A62067FBA0F
+                  36BB9D9B4257F1AFDEFBD31EC94BA1C4875028F121144A7C0885121F42A1C487
+                  50E82AFE1696F03BAD11163F59C6A9879DFF9B5E44DD4FC869ADBA3FB1533043
+                  A4A060864841C10C9182821922050533440A0A5E0D51636BD129F87B88D23BD4
+                  35E3010005B4F606DD0016D88691173A0000000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-xhdpi\ic_arrow_back_' +
+                  'white_24dp.png'
+              end
+              item
+                Scale = 3.000000000000000000
+                Width = 72
+                Height = 72
+                PNG = {
+                  89504E470D0A1A0A0000000D494844520000004800000048080600000055EDB3
+                  47000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  015149444154785EEDD9DD6E8240108661EC0534E9797F2EB56D9A5EA5DA5E08
+                  61E937321A8DEE0E7066E77D12B2A27B326F5013E80000000000B98DE3F86187
+                  9FE29CC7391886E1D3DF865193539C2345FAF28F73538BAB38478AF4EDDB7252
+                  836A1CD3F7FDAF9627DF9E8B060FE39452DE7C7B2E9A9F38359A9F38359A3F8A
+                  F3439C0AE23410A781380D1647CBAB6FCF458313A7468313A7468313A7468347
+                  71F65A88730B711A88D3409C86FF1067E3EB621ADC6EAEBF4F67F76323FE7296
+                  075F17B9D7386B2C0E94298E59750565B23890BEC27605A5796EB5EA0ACA1669
+                  35FB3DD251657FF3A59417DF9E933A1029A20E448AA8039122EA40A4883A4491
+                  764422524C1D8814518739919E7D7B4EEA40A4883A1029A20E448AA8039122EA
+                  1045DA12894831752052441DE6447AF4ED39A9432B92DDB98485987A5C20CE39
+                  0B32753920CE2D16863800000000905DD7FD018701BB1CE7CDB0A50000000049
+                  454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-xxhdpi\ic_arrow_back' +
+                  '_white_24dp.png'
+              end
+              item
+                Scale = 4.000000000000000000
+                Width = 96
+                Height = 96
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                  38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  019449444154785EEDDC4D6ADB5000855127E36CB22B49BAB66ECBD8B9AF4F1D
+                  0442EA583FD79073C0C81A68F25D6461303E0100000000003CB2EBF5FA365ECB
+                  29475AE2FF6384238DE0B3FB074638C2083D7B7FCA087B1A8167E72F19610F23
+                  ECECFB7F97CBE5D772195B48D39BE39FCFE73F39BC2C97B256628ADF9298E2B7
+                  24A6F82D89297E4B628ADF9298E2B724A6F82D89297E4B628ADF9298E2B724A6
+                  F82D89297E4B628ADF9298E2B724A6F82D89297E4B628ADF9298E2B724A6F82D
+                  89297E4B628AFF0D4FCB711389397E93F33ACF7E86A758DEDEE57939AEF613E3
+                  6F619301C4BFDFEA01C45F67B38F20EEB37A803C83C61DF07B9EF15D9BDC0146
+                  B8DF661F41467810E3A19CD74D7C11DB49A21AA12D518DD096A846684B5423B4
+                  25AA11DA12D5086D896A84B64435425BA21AA12D518DD096A846684B5423B425
+                  AA11DA12D5086D896A84B64435425BA21AA12D518DD096A846684B5423B425AA
+                  11DA12F5E611FC69DF4ED2F69611C6EF93D8CB083C3B7F4AFC238CD0B3F707E2
+                  1F69049FDDFF12BF6184171F0000000000786CA7D33BA8D4F1B7D4B6BE3A0000
+                  000049454E44AE426082}
+                FileName = 
+                  'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
+                  'p\ic_arrow_back_white_24dp\android\drawable-xxxhdpi\ic_arrow_bac' +
+                  'k_white_24dp.png'
+              end>
+          end
+        end
+      end
+    end
+    object lbPrincipal: TListBox
+      Align = Client
+      Size.Width = 386.000000000000000000
+      Size.Height = 492.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 386.000000000000000000
+      Viewport.Height = 492.000000000000000000
+      object lbghSeguranca: TListBoxGroupHeader
+        Size.Width = 386.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Seguran'#231'a'
+      end
+      object lbiSeguranca: TListBoxItem
+        Position.Y = 30.000000000000000000
+        TabOrder = 1
+        Text = 'Desconectar ao sair'
+        object swDesconectar: TSwitch
+          IsChecked = False
+          Position.X = 289.000000000000000000
+          Position.Y = 8.000000000000000000
+          TabOrder = 0
+          OnClick = swDesconectarClick
+        end
+      end
+    end
+  end
+end
