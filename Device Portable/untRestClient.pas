@@ -11,6 +11,8 @@ type
     DSRestConnection1: TDSRestConnection;
     DSRestConnectionLocal: TDSRestConnection;
     DSRestConnectionAWS: TDSRestConnection;
+    DSRestConnectionApacheLocal: TDSRestConnection;
+    DSRestConnectionApacheAWS: TDSRestConnection;
     procedure DataModuleCreate(Sender: TObject);
     private
     FInstanceOwner: Boolean;
@@ -64,8 +66,13 @@ end;
 
 procedure TRestClient.DataModuleCreate(Sender: TObject);
 begin
-  if not IsSysOSWindows then
+//  if not IsSysOSWindows then
     DSRestConnection1.Host := DSRestConnectionAWS.Host;
+
+  //teste Apache
+  DSRestConnection1.UrlPath := 'lapis_verde';
+  DSRestConnection1.UserName := '';
+  DSRestConnection1.Password := '';
 end;
 
 destructor TRestClient.Destroy;
