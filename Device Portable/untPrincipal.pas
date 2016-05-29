@@ -253,7 +253,7 @@ end;
 procedure TfrmPrincipal.lstItemTesteFornecedoresClick(Sender: TObject);
 begin
   inherited;
-  OpenForm(TfrmTesteFornecedores);
+  OpenForm(TfrmTesteString);
 end;
 
 procedure TfrmPrincipal.lstItemTesteProdutosClick(Sender: TObject);
