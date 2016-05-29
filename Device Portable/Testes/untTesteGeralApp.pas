@@ -44,11 +44,21 @@ type
     btnMetodosGetAlunos: TSpeedButton;
     Layout5: TLayout;
     btnMetodosGetAgenda: TSpeedButton;
+    TabItem3: TTabItem;
+    Layout6: TLayout;
+    SpeedButton1: TSpeedButton;
+    Layout7: TLayout;
+    SpeedButton2: TSpeedButton;
+    Layout8: TLayout;
+    lblPropriedades: TLabel;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
     procedure btnMetodosGetAlunosClick(Sender: TObject);
     procedure btnMetodosGetAgendaClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -71,6 +81,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses untRestClient;
 
 procedure TfrmTesteGeralApp.btnMetodosSyncGeralClick(Sender: TObject);
 begin
@@ -307,6 +319,14 @@ begin
   end;
 end;
 
+procedure TfrmTesteGeralApp.FormShow(Sender: TObject);
+begin
+  inherited;
+  lblPropriedades.Text:= 'RestClient.DSRestConnection1.UrlPath:' +
+                          RestClient.DSRestConnection1.UrlPath;
+
+end;
+
 procedure TfrmTesteGeralApp.SetLabelsTotais;
 begin
   lblMetodosOKValor.Text := IntToStr(MetodosOK);
@@ -330,6 +350,23 @@ procedure TfrmTesteGeralApp.SetLogTesteOk(Metodo: String);
 begin
   SetLogTeste(Metodo + ' OK');
   Inc(MetodosOK);
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  RestClient.DSRestConnection1.UrlPath := '';
+  lblPropriedades.Text:= 'RestClient.DSRestConnection1.UrlPath:' +
+                          RestClient.DSRestConnection1.UrlPath;
+
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  RestClient.DSRestConnection1.UrlPath := 'lapis_verde';
+  lblPropriedades.Text:= 'RestClient.DSRestConnection1.UrlPath:' +
+                          RestClient.DSRestConnection1.UrlPath;
 end;
 
 procedure TfrmTesteGeralApp.btnMetodosGetAgendaClick(Sender: TObject);
