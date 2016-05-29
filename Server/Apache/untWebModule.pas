@@ -17,6 +17,7 @@ type
     DSServerClassResponsavel: TDSServerClass;
     DSServerClassMain: TDSServerClass;
     DSServerClassAgenda: TDSServerClass;
+    DSAuthenticationManager1: TDSAuthenticationManager;
     procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure WebModule1DefaultHandlerAction(Sender: TObject;
@@ -31,6 +32,11 @@ type
       var PersistentClass: TPersistentClass);
     procedure DSServerClassResponsavelGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure DSAuthenticationManager1UserAuthenticate(Sender: TObject;
+      const Protocol, Context, User, Password: string; var valid: Boolean;
+      UserRoles: TStrings);
+    procedure DSAuthenticationManager1UserAuthorize(Sender: TObject;
+      AuthorizeEventObject: TDSAuthorizeEventObject; var valid: Boolean);
   private
     { Private declarations }
   public
@@ -86,6 +92,22 @@ begin
     '<head><title>Lapis Verde Server</title></head>' +
     '<body>DataSnap Server</body>' +
     '</html>';
+end;
+
+procedure TWebModule1.DSAuthenticationManager1UserAuthenticate(Sender: TObject;
+  const Protocol, Context, User, Password: string; var valid: Boolean;
+  UserRoles: TStrings);
+begin
+{ if (User = 'lapisverde_us_2017') and (Password = 'lapisverde_pw_2017') then
+   valid := True
+ else
+   valid := False;}
+end;
+
+procedure TWebModule1.DSAuthenticationManager1UserAuthorize(Sender: TObject;
+  AuthorizeEventObject: TDSAuthorizeEventObject; var valid: Boolean);
+begin
+// Valid := True;
 end;
 
 procedure TWebModule1.DSServerClass1GetClass(

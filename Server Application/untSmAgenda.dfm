@@ -31,13 +31,13 @@ object SmAgenda: TSmAgenda
       end
       item
         Name = 'DT_INI'
-        DataType = ftDateTime
+        DataType = ftDate
         ParamType = ptInput
         Value = 42437d
       end
       item
         Name = 'DT_FIM'
-        DataType = ftDateTime
+        DataType = ftDate
         ParamType = ptInput
         Value = 42804d
       end>
