@@ -96,6 +96,8 @@ Otimizar consultas, esta demorando mt da forma q esta
 
 Rest Debugger
 http://54.200.116.223:8080/datasnap/rest/TSrvServerMetodos/ReverseString/ab
+http://54.200.116.223:8080/lapis_verde/datasnap/rest/TSrvServerMetodos/ReverseString/ab
+
 
 http://localhost:8080/datasnap/rest/TContatoController
 http://localhost:8080/datasnap/rest/TContatoController/ReverseString/ab
