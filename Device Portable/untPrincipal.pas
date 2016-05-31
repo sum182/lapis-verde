@@ -15,9 +15,6 @@ type
     lstMnuMain: TListBox;
     lstGroupHeaderTestes: TListBoxGroupHeader;
     lstItemTesteGeralApp: TListBoxItem;
-    lstGroupHeaderConfig: TListBoxGroupHeader;
-    lstItemConta: TListBoxItem;
-    lstItemPreferencias: TListBoxItem;
     lstItemTesteString: TListBoxItem;
     lstItemTesteFornecedores: TListBoxItem;
     lstItemTesteProdutos: TListBoxItem;
@@ -37,7 +34,7 @@ type
     lstGroupHeaderPrincipal: TListBoxGroupHeader;
     lstGroupFooter: TListBoxGroupFooter;
     lstItemAgenda: TListBoxItem;
-    lstItemMensagem: TListBoxItem;
+    lstItemConfigurações: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -51,7 +48,6 @@ type
     procedure lstItemTesteLoginClick(Sender: TObject);
     procedure lstItemAgendaClick(Sender: TObject);
     procedure imgAgendaClick(Sender: TObject);
-    procedure lstItemMensagemClick(Sender: TObject);
     procedure imgMensagensClick(Sender: TObject);
     procedure lblAgendaClick(Sender: TObject);
     procedure lblMensagensClick(Sender: TObject);
@@ -59,6 +55,7 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure lstItemConfiguraçõesClick(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -88,7 +85,7 @@ implementation
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
   untAgendaSelect, untAgendaAdd, untTestesA, untDmAgenda,
-  untDmResponsavel, smMensagensFMX,smNetworkState;
+  untDmResponsavel, smMensagensFMX,smNetworkState, untConfiguracoes;
 
 { TfrmPrincipal }
 
@@ -268,10 +265,12 @@ begin
   AbrirAgenda;
 end;
 
-procedure TfrmPrincipal.lstItemMensagemClick(Sender: TObject);
+
+
+procedure TfrmPrincipal.lstItemConfiguraçõesClick(Sender: TObject);
 begin
   inherited;
-  AbrirMensagens;
+  OpenForm(TfrmConfiguracoes);
 end;
 
 procedure TfrmPrincipal.lstItemTesteGeralAppClick(Sender: TObject);

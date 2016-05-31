@@ -1,5 +1,12 @@
 
+Leo - conifg
+print projeto
+nao utilizar o laypaint - td hr atualiza
+ao sair nao esta chamando o salvar 
 
+debugar os salvar/ler
+
+prorcurar imagem de configuracoes e colocar no menu principal
 --------------------------------------------------------------------------------------------
 Atividades Casa
 --------------------------------------------------------------------------------------------

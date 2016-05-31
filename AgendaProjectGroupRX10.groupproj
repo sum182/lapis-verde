@@ -6,13 +6,10 @@
         <Projects Include="Device Portable\AgendaDevicePortableRX10.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Server Application\AgendaServer.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Server\Apache\mod_lapis_verde.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Server\Apache Teste\mod_teste.dproj">
+        <Projects Include="Server\Stand Alone\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -32,15 +29,6 @@
     <Target Name="AgendaDevicePortableRX10:Make">
         <MSBuild Projects="Device Portable\AgendaDevicePortableRX10.dproj" Targets="Make"/>
     </Target>
-    <Target Name="AgendaServer">
-        <MSBuild Projects="Server Application\AgendaServer.dproj"/>
-    </Target>
-    <Target Name="AgendaServer:Clean">
-        <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="AgendaServer:Make">
-        <MSBuild Projects="Server Application\AgendaServer.dproj" Targets="Make"/>
-    </Target>
     <Target Name="mod_lapis_verde">
         <MSBuild Projects="Server\Apache\mod_lapis_verde.dproj"/>
     </Target>
@@ -50,23 +38,23 @@
     <Target Name="mod_lapis_verde:Make">
         <MSBuild Projects="Server\Apache\mod_lapis_verde.dproj" Targets="Make"/>
     </Target>
-    <Target Name="mod_teste">
-        <MSBuild Projects="Server\Apache Teste\mod_teste.dproj"/>
+    <Target Name="AgendaServer">
+        <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj"/>
     </Target>
-    <Target Name="mod_teste:Clean">
-        <MSBuild Projects="Server\Apache Teste\mod_teste.dproj" Targets="Clean"/>
+    <Target Name="AgendaServer:Clean">
+        <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="mod_teste:Make">
-        <MSBuild Projects="Server\Apache Teste\mod_teste.dproj" Targets="Make"/>
+    <Target Name="AgendaServer:Make">
+        <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="AgendaDevicePortableRX10;AgendaServer;mod_lapis_verde;mod_teste"/>
+        <CallTarget Targets="AgendaDevicePortableRX10;mod_lapis_verde;AgendaServer"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AgendaDevicePortableRX10:Clean;AgendaServer:Clean;mod_lapis_verde:Clean;mod_teste:Clean"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Clean;mod_lapis_verde:Clean;AgendaServer:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AgendaDevicePortableRX10:Make;AgendaServer:Make;mod_lapis_verde:Make;mod_teste:Make"/>
+        <CallTarget Targets="AgendaDevicePortableRX10:Make;mod_lapis_verde:Make;AgendaServer:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
