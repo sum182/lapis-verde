@@ -112,6 +112,8 @@ Analisar dados do banco local quando tiver uma nova versao ou alteração do banco
 
 
 ----Server--------------------------------------------------------------------------------
+Renomear projetos e DLLs - Apache e StandAlone
+
 LogRequest
 Criar rotina para validar conexao BD
 
