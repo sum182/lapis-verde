@@ -7,6 +7,8 @@ ao sair nao esta chamando o salvar
 debugar os salvar/ler
 
 prorcurar imagem de configuracoes e colocar no menu principal
+
+
 --------------------------------------------------------------------------------------------
 Atividades Casa
 --------------------------------------------------------------------------------------------
