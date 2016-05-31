@@ -3,12 +3,11 @@ unit untSmAgenda;
 interface
 
 uses
-  System.Classes, System.SysUtils, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect,
-  Vcl.AppEvnts, untLibGeral, System.JSON, FireDAC.Phys.MySQLDef, FireDAC.Phys,
-  FireDAC.Phys.MySQL, FireDAC.Stan.StorageBin;
+  Vcl.AppEvnts, untLibGeral, System.JSON;
 
 type
 
@@ -24,10 +23,7 @@ type
     fdqAgendaAlunoaluno_id: TIntegerField;
     fdqAgendaTurmaagenda_id: TStringField;
     fdqAgendaTurmaturma_id: TIntegerField;
-    FDStanStorageBinLink1: TFDStanStorageBinLink;
-    FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
-    procedure DataModuleCreate(Sender: TObject);
   private
     procedure SetSQLAgenda(KeysInserts: String = '');overload;
     procedure SetSQLAgendaByKey(KeyValues:String);overload;
@@ -60,7 +56,8 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral,untLibServer;
+uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,untLibServer,
+  System.SysUtils;
 
 {$R *.dfm}
 
@@ -72,12 +69,6 @@ begin
   fdqAgenda.Active := False;
   fdqAgendaAluno.Active := False;
   fdqAgendaTurma.Active := False;
-end;
-
-procedure TSmAgenda.DataModuleCreate(Sender: TObject);
-begin
-  if not Assigned(SmMain) then
-    Application.CreateForm(TSmMain, SmMain);
 end;
 
 procedure TSmAgenda.fdqAgendaBeforePost(DataSet: TDataSet);
@@ -269,8 +260,12 @@ begin
 
   fdqAgenda.ParamByName('escola_id').AsInteger:= EscolaId;
   //fdqAgenda.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
+
   fdqAgenda.ParamByName('dt_ini').AsDate:= DtIni;
   fdqAgenda.ParamByName('dt_fim').AsDate:= DtFim;
+
+  //fdqAgenda.ParamByName('dt_ini').Value:= FormatDateTime('YYYY.mm.dd',DtIni);
+  //fdqAgenda.ParamByName('dt_fim').Value:= FormatDateTime('YYYY.mm.dd',DtFim);
 
  { fdqAgendaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
   //fdqAgendaAluno.ParamByName('funcionario_id').AsInteger:= FuncionarioId;

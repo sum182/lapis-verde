@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Json,
-  Datasnap.DSServer, Datasnap.DSAuth, DataSnap.DSProviderDataModuleAdapter, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+    Datasnap.DSServer, Datasnap.DSAuth, DataSnap.DSProviderDataModuleAdapter, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.Client, FireDAC.Comp.DataSet,Data.FireDACJSONReflect,
@@ -78,7 +78,7 @@ implementation
 {$R *.dfm}
 
 
-uses System.StrUtils, untSmMain, Vcl.Forms;
+uses System.StrUtils;
 
 function TSrvServerMetodos.CriarUsuarioResponsavel(Nome, SobreNome, Email,
   Senha, Telefone, CPF, RG, Sexo: String): String;
@@ -118,9 +118,6 @@ end;
 
 procedure TSrvServerMetodos.DataModuleCreate(Sender: TObject);
 begin
-  if not Assigned(SmMain) then
-    Application.CreateForm(TSmMain, SmMain);
-
   FDConnection.Close;
   FDConnection.Open;
 

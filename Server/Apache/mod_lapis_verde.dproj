@@ -131,11 +131,6 @@
             <FormType>dfm</FormType>
             <DesignClass>TWebModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\Data Module\untDmMain.pas">
-            <Form>DmMain</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -170,6 +165,12 @@
                 </DeployFile>
                 <DeployFile LocalName="Win32\Debug\mod_lapis_verde.dll" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
+                        <RemoteName>mod_lapis_verde.dll</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Release\mod_lapis_verde.dll" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
                         <RemoteName>mod_lapis_verde.dll</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>

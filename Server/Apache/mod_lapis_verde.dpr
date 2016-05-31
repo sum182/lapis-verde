@@ -18,8 +18,7 @@ uses
   untLibServer in '..\..\Lib\untLibServer.pas',
   untResourceString in '..\..\Lib\untResourceString.pas',
   untTypes in '..\..\Lib\untTypes.pas',
-  untWebModule in 'untWebModule.pas' {WebModule1: TWebModule},
-  untDmMain in '..\Data Module\untDmMain.pas' {DmMain: TDataModule};
+  untWebModule in 'untWebModule.pas' {WebModule1: TWebModule};
 
 {$R *.res}
 
