@@ -85,7 +85,10 @@ implementation
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
   untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
   untAgendaSelect, untAgendaAdd, untTestesA, untDmAgenda,
-  untDmResponsavel, smMensagensFMX,smNetworkState, untConfiguracoes;
+  untDmResponsavel, smMensagensFMX,smNetworkState
+  //, untConfiguracoes
+
+  ;
 
 { TfrmPrincipal }
 
@@ -270,7 +273,7 @@ end;
 procedure TfrmPrincipal.lstItemConfiguraçõesClick(Sender: TObject);
 begin
   inherited;
-  OpenForm(TfrmConfiguracoes);
+//  OpenForm(TfrmConfiguracoes);
 end;
 
 procedure TfrmPrincipal.lstItemTesteGeralAppClick(Sender: TObject);

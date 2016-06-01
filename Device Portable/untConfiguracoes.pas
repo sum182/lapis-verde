@@ -83,7 +83,9 @@ procedure TfrmConfiguracoes.LerConfig;
 var sValor: string;
 begin
   if not Assigned(FIniFile) then
-    FIniFile := TIniFile.Create('Config.ini');
+    //FIniFile := TIniFile.Create(Dm.AppPath + 'Arquivos\' + 'config.ini');
+    FIniFile := TIniFile.Create('config.ini');
+
   sValor := FIniFile.ReadString(SectionData, KeyEdit, 'False');
   FreeAndNil(FIniFile);
 
@@ -101,7 +103,9 @@ begin
     sValor := 'False';
 
   if not Assigned(FIniFile) then
-    FIniFile := TIniFile.Create('Config.ini');
+    //FIniFile := TIniFile.Create(Dm.AppPath + 'Arquivos\' + 'config.ini');
+    FIniFile := TIniFile.Create('config.ini');
+
   FIniFile.WriteString(SectionData, KeyEdit, sValor);
   FreeAndNil(FIniFile);
 end;

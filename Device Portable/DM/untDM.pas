@@ -12,7 +12,15 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString;
+  REST.Types, untLibGeral, untTypes, untResourceString
+
+  {$IF DEFINED(MSWINDOWS)}
+  ,
+  WinApi.Windows,
+  WinApi.ShlObj
+  {$ENDIF}
+
+  ;
 
 type
   TDm = class(TDataModule)
@@ -46,7 +54,11 @@ type
     procedure ConectarBases;
     procedure ConectarDB;
     procedure SetModoTeste;
+    procedure GetInfoFileApp;
   public
+    AppName      : String;
+    AppPath      : String;
+
     IsModoTeste: Boolean;
     IsTesteApp: Boolean;
 
@@ -137,6 +149,12 @@ begin
       FDConnection.Params.Values['Database'] := DataBase;
     end;
 
+    if smGeralFMX.IsSysOSWindows then
+    begin
+      DataBase := AppPath + 'BD' + PathDelim + DataBaseName;
+    end;
+
+    FDConnection.Params.Values['Database'] := DataBase;
     FDConnection.Open;
   except
     on E: Exception do
@@ -148,6 +166,7 @@ end;
 
 procedure TDm.DataModuleCreate(Sender: TObject);
 begin
+  GetInfoFileApp;
   FDConnectionDB.Close;
   FDCreateDB.Close;
   ConectarBases;
@@ -160,6 +179,19 @@ begin
   fUsuarioLogadoIsFuncionario := True;
   fUsuarioLogadoIsResponsavel := False;
   //
+end;
+
+procedure TDm.GetInfoFileApp;
+var
+  Path         : array [0..1023] of Char;
+  AppExeName   : array [0..1023] of Char;
+begin
+  {$IF DEFINED(MSWINDOWS)}
+  GetModuleFileName(0, AppExeName, Sizeof(AppExeName));
+  SHGetFolderPath(0, CSIDL_LOCAL_APPDATA, 0, SHGFP_TYPE_CURRENT, @Path[0]);
+  AppName:= ChangeFileExt(ExtractFileName(AppExeName), '');
+  AppPath:= ExtractFilePath(AppExeName);
+  {$ENDIF}
 end;
 
 procedure TDm.OpenAlunos;

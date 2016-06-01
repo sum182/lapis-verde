@@ -3,12 +3,12 @@ Leo - conifg
 print projeto
 nao utilizar o laypaint - td hr atualiza
 ao sair nao esta chamando o salvar 
-
 debugar os salvar/ler
+salvar no diretorio da aplicacao\arquivos
 
 prorcurar imagem de configuracoes e colocar no menu principal
 
-
+a unit FMX.Overbyte.Android.IniFiles nao esta compilando
 --------------------------------------------------------------------------------------------
 Atividades Casa
 --------------------------------------------------------------------------------------------
@@ -44,6 +44,13 @@ criar uma vm zerada so com win7 + fontes e projetos
 
 
 ----Mobile--------------------------------------------------------------------------------
+-cleaninstall
+
+aguarde ao abrir aluno/turma
+
+app nova instalacao
+sync geral
+
 lista somente turmas ativas
 
 atualizacao de bd

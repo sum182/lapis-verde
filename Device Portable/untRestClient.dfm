@@ -4,7 +4,7 @@ object RestClient: TRestClient
   Height = 198
   Width = 489
   object DSRestConnection1: TDSRestConnection
-    Host = 'localhost'
+    Host = '54.200.116.223'
     Port = 8080
     UrlPath = 'lapis_verde'
     UserName = 'lapisverde_us_2017'
