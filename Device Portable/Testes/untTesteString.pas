@@ -27,7 +27,7 @@ implementation
 
 {$R *.fmx}
 
-uses untRestClient, untFuncoes;
+uses untRestClient, untLibDevicePortable;
 
 procedure TfrmTesteString.FormCreate(Sender: TObject);
 begin

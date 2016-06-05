@@ -45,7 +45,7 @@ implementation
 {$R *.fmx}
 
 uses untRestClient, Data.FireDACJSONReflect, untDM, untDmAgenda, untAgendaView,
-  untPrincipal, untDMStyles, untFuncoes;
+  untPrincipal, untDMStyles, untLibDevicePortable;
 
 procedure TfrmAgendaSelect.FormCreate(Sender: TObject);
 begin

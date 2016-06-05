@@ -84,7 +84,7 @@ implementation
 {$R *.fmx}
 
 uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
-  untFuncoes, untDMStyles, untDM, untMensagens, smGeralFMX,
+  untLibDevicePortable, untDMStyles, untDM, untMensagens, smGeralFMX,
   untAgendaSelect, untAgendaAdd, untTestesA, untAgendaView,
   untDmAgenda, untDmResponsavel;
 

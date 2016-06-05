@@ -195,7 +195,7 @@ implementation
 
 {$R *.fmx}
 
-uses smGeralFMX, untFuncoes, untDMStyles, untDM, untRestClient, smCrypt,
+uses smGeralFMX, untLibDevicePortable, untDMStyles, untDM, untRestClient, smCrypt,
   untLogin,smMensagensFMX, FMX.Platform;
 
 procedure TfrmCriarConta.btnProximaNomeClick(Sender: TObject);

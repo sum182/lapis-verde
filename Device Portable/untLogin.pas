@@ -75,7 +75,7 @@ implementation
 {$R *.fmx}
 
 uses untDM, Proxy, untRestClient, untPrincipal, FMX.VirtualKeyboard,
-  FMX.Platform, untFuncoes, untDMStyles, untCriarConta,smMensagensFMX;
+  FMX.Platform, untLibDevicePortable, untDMStyles, untCriarConta,smMensagensFMX;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
 begin

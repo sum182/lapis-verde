@@ -74,7 +74,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses untDM, untRestClient, smDBFireDac,
-  FMX.Dialogs, System.SysUtils, smGeralFMX, untFuncoes, FMX.Forms,smMensagensFMX,smNetworkState,
+  FMX.Dialogs, System.SysUtils, smGeralFMX, untLibDevicePortable, FMX.Forms,smMensagensFMX,smNetworkState,
   untLibGeral, Data.DBXJSONReflect, System.JSON, System.ZLib;
 
 {$R *.dfm}

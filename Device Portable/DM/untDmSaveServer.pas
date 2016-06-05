@@ -36,7 +36,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses untDM, untFuncoes, untRestClient, smDBFireDac,smNetworkState,
+uses untDM, untLibDevicePortable, untRestClient, smDBFireDac,smNetworkState,
   smMensagensFMX;
 
 {$R *.dfm}

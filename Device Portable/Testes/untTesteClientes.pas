@@ -24,7 +24,7 @@ implementation
 
 {$R *.fmx}
 
-uses untDMStyles, untFuncoes;
+uses untDMStyles, untLibDevicePortable;
 
 procedure TfrmTesteClientes.FormCreate(Sender: TObject);
 begin

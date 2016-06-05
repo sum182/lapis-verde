@@ -38,7 +38,7 @@ implementation
 
 {$R *.fmx}
 
-uses Proxy, untRestClient, untDM, untFuncoes;
+uses Proxy, untRestClient, untDM, untLibDevicePortable;
 
 procedure TfrmTesteJsonXSqLite.FormCreate(Sender: TObject);
 begin

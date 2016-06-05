@@ -22,7 +22,7 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes;
+uses untLibDevicePortable;
 
 procedure TfrmMensagens.FormCreate(Sender: TObject);
 begin

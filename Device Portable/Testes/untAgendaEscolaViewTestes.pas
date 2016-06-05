@@ -109,7 +109,7 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDmAgenda, untDM, untAgendaAdd, untPrincipal,
+uses untLibDevicePortable, untDmAgenda, untDM, untAgendaAdd, untPrincipal,
   untDMStyles, untDmGetServer;
 
 procedure TfrmAgendaEscolaViewTestes.btnVoltarClick(Sender: TObject);

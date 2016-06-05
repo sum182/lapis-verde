@@ -24,7 +24,7 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes;
+uses untLibDevicePortable;
 
 procedure TfrmTesteProduto.FormCreate(Sender: TObject);
 begin

@@ -40,7 +40,7 @@ implementation
 
 {$R *.fmx}
 
-uses Proxy, untRestClient, untFuncoes;
+uses Proxy, untRestClient, untLibDevicePortable;
 
 procedure TfrmTesteJsonFdMem.FormCreate(Sender: TObject);
 begin

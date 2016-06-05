@@ -12,7 +12,12 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
+
+  //Erro
+  ,Vcl.ExtCtrls
+  //
+
 
   {$IF DEFINED(MSWINDOWS)}
   ,
@@ -55,7 +60,9 @@ type
     procedure ConectarDB;
     procedure SetModoTeste;
     procedure GetInfoFileApp;
+    procedure GetConfiguracoes;
   public
+    Configuracoes:TConfiguracoes;
     AppName      : String;
     AppPath      : String;
 
@@ -103,8 +110,7 @@ implementation
 
 { %CLASSGROUP 'FMX.Controls.TControl' }
 
-uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untRestClient,
-  untFuncoes, smDBFireDac, smMensagensFMX, smNetworkState, untDmGetServer,
+uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untRestClient, smDBFireDac, smMensagensFMX, smNetworkState, untDmGetServer,
   untDmSaveServer;
 
 {$R *.dfm}
@@ -166,6 +172,7 @@ end;
 
 procedure TDm.DataModuleCreate(Sender: TObject);
 begin
+  GetConfiguracoes;
   GetInfoFileApp;
   FDConnectionDB.Close;
   FDCreateDB.Close;
@@ -179,6 +186,12 @@ begin
   fUsuarioLogadoIsFuncionario := True;
   fUsuarioLogadoIsResponsavel := False;
   //
+end;
+
+procedure TDm.GetConfiguracoes;
+begin
+  Configuracoes:=TConfiguracoes.Create;
+  Configuracoes.GetConfiguracoes;
 end;
 
 procedure TDm.GetInfoFileApp;

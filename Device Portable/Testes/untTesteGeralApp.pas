@@ -11,7 +11,7 @@ uses
   untDmGetServer, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, smMensagensFMX,
-  untFuncoes,
+  untLibDevicePortable,
   smDBFireDac, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, untDmSaveServer, System.Classes, untDM,smNetworkState,

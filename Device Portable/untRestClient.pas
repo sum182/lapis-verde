@@ -54,7 +54,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses smGeralFMX, untFuncoes;
+uses smGeralFMX, untLibDevicePortable;
 
 {$R *.dfm}
 

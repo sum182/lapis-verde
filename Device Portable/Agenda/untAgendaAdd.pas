@@ -56,7 +56,7 @@ implementation
 
 {$R *.fmx}
 
-uses smGeralFMX, untDM, untDmAgenda, untDMStyles, untFuncoes, smMensagensFMX,
+uses smGeralFMX, untDM, untDmAgenda, untDMStyles, untLibDevicePortable, smMensagensFMX,
   FMX.Forms, untAgendaView;
 
 procedure TfrmAgendaAdd.btnVoltarClick(Sender: TObject);

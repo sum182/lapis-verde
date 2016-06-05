@@ -19,7 +19,7 @@ uses
   Proxy in 'Proxy.pas',
   untLogin in 'untLogin.pas' {frmLogin},
   smCrypt in 'C:\Componentes\sum182\D15\Units\smCrypt.pas',
-  untFuncoes in 'untFuncoes.pas',
+  untLibDevicePortable in 'untLibDevicePortable.pas',
   smFrmBase in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.pas' {frmBase},
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
   smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
