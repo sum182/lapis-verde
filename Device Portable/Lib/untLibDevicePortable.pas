@@ -1,8 +1,15 @@
-unit untFuncoes;
+unit untLibDevicePortable;
 
 interface
 
 Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString;
+
+  Type
+    TConfiguracoes = class
+      public
+        DesconectarAoSair:Boolean;
+        procedure GetConfiguracoes;
+  end;
 
   procedure SetStyle(Formulario:TForm);
   function GetEscolaId:Integer;
@@ -117,4 +124,11 @@ begin
       raise Exception.Create(rs_erro_conexao_internet);
   end;
 end;
+{ TConfiguracoes }
+
+procedure TConfiguracoes.GetConfiguracoes;
+begin
+  DesconectarAoSair:=True;
+end;
+
 end.
