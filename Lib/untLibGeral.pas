@@ -6,22 +6,21 @@ Uses Data.DB,untTypes, System.JSON, Data.DBXJSONReflect;
 
 
   Type
-
     TUsuario = class
-  private
-    function GetMarshalValue: TJSONValue;
-    public
-      Id:Integer;
-      Tipo:TUsuarioTipo;
-      FMarshalValue: TJSONValue;
+    private
+      function GetMarshalValue: TJSONValue;
+      public
+        Id:Integer;
+        Tipo:TUsuarioTipo;
+        FMarshalValue: TJSONValue;
 
-      constructor Create;
-      function Marshal:TJSONValue;
-      function UnMarshal(oObjetoJSON:TJSONValue):TUsuario;
+        constructor Create;
+        function Marshal:TJSONValue;
+        function UnMarshal(oObjetoJSON:TJSONValue):TUsuario;
 
-      //Não utilizar esta propriedade esta dando acess violation
-      property MarshalValue: TJSONValue read GetMarshalValue write FMarshalValue;
-    end;
+        //Não utilizar esta propriedade esta dando acess violation
+        property MarshalValue: TJSONValue read GetMarshalValue write FMarshalValue;
+  end;
 
 
 implementation

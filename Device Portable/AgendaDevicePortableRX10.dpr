@@ -19,7 +19,6 @@ uses
   Proxy in 'Proxy.pas',
   untLogin in 'untLogin.pas' {frmLogin},
   smCrypt in 'C:\Componentes\sum182\D15\Units\smCrypt.pas',
-  untLibDevicePortable in 'untLibDevicePortable.pas',
   smFrmBase in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBase.pas' {frmBase},
   smFrmBaseForAll in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseForAll.pas' {frmBaseForAll},
   smFrmBaseToolBar in 'C:\Componentes\sum182\D15\Forms\FireMonkey\smFrmBaseToolBar.pas' {frmBaseToolBar},
@@ -43,7 +42,8 @@ uses
   untLibServer in '..\Lib\untLibServer.pas',
   untTypes in '..\Lib\untTypes.pas',
   untTesteGeralApp in 'Testes\untTesteGeralApp.pas' {frmTesteGeralApp},
-  untResourceString in '..\Lib\untResourceString.pas';
+  untResourceString in '..\Lib\untResourceString.pas',
+  untLibDevicePortable in 'Lib\untLibDevicePortable.pas';
 
 {$R *.res}
 
@@ -73,7 +73,8 @@ begin
   Application.CreateForm(TDmGetServer, DmGetServer);
   Application.CreateForm(TDmSaveServer, DmSaveServer);
   Application.CreateForm(TRestClient, RestClient);
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  //Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.Run;
   Exit;
   // Fim do Teste

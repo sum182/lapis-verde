@@ -233,10 +233,17 @@ end;
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
+  if not Configuracoes.DesconectarAoSair  then
+  begin
+    fLoginOK:=True;
+    OpenFrmPrincipal;
+    Exit;
+  end;
+
   lblErrorLogin.Visible := False;
   btnEsqueceuSenha.Visible:=False;
   SetStyle(Self);
-  fAllowCloseForm:= False;
+  fAllowCloseForm:= True;
 end;
 
 procedure TfrmLogin.FormShow(Sender: TObject);

@@ -15,7 +15,7 @@ uses
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
 
   //Erro
-  ,Vcl.ExtCtrls
+  //,Vcl.ExtCtrls
   //
 
 
@@ -62,7 +62,7 @@ type
     procedure GetInfoFileApp;
     procedure GetConfiguracoes;
   public
-    Configuracoes:TConfiguracoes;
+
     AppName      : String;
     AppPath      : String;
 
@@ -101,6 +101,7 @@ type
 var
   Dm: TDm;
   Usuario: TUsuario;
+  Configuracoes:TConfiguracoes;
 
 const
   BASE_URL: String =
