@@ -25,7 +25,7 @@ type
  {$METHODINFO ON}
 
   public
-    function LoginFuncionario(Login:string; Senha:string):Boolean;
+    function LoginFuncionario(Login:string; Senha:string):TFDJSONDataSets;
   end;
 
 var
@@ -37,7 +37,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,
-  System.SysUtils, untLibServer;
+  System.SysUtils, untLibServer, untTypes;
 
 {$R *.dfm}
 
@@ -50,7 +50,7 @@ begin
     Application.CreateForm(TSmMain, SmMain);
 end;
 
-function TSmEscola.LoginFuncionario(Login, Senha: string): Boolean;
+function TSmEscola.LoginFuncionario(Login, Senha: string): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -67,7 +67,10 @@ begin
       fdqLoginFuncionario.ParamByName('login').AsString := Login;
       fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
       fdqLoginFuncionario.Open;
-      Result:= not (fdqLoginFuncionario.IsEmpty);
+
+      Result := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqLoginFuncionario);
+      //Result:= not (fdqLoginFuncionario.IsEmpty);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       begin
@@ -76,7 +79,7 @@ begin
       end;
     end;
   finally
-    fdqLoginFuncionario.Active := False;
+    //fdqLoginFuncionario.Active := False;
     LogServerRequest.Free;
   end;
 

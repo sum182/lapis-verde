@@ -66,8 +66,8 @@ end;
 
 procedure TRestClient.DataModuleCreate(Sender: TObject);
 begin
-//  if not IsSysOSWindows then
-  DSRestConnection1.Host := DSRestConnectionAWS.Host;
+  if not IsSysOSWindows then
+    DSRestConnection1.Host := DSRestConnectionAWS.Host;
 end;
 
 destructor TRestClient.Destroy;

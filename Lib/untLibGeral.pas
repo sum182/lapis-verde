@@ -12,6 +12,7 @@ Uses Data.DB,untTypes, System.JSON, Data.DBXJSONReflect;
       public
         Id:Integer;
         Tipo:TUsuarioTipo;
+        Nome: String;
         FMarshalValue: TJSONValue;
 
         constructor Create;

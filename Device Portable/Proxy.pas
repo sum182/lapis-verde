@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 28/05/2016 00:38:21
+// 07/06/2016 01:13:47
 //
 
 unit Proxy;
@@ -51,6 +51,7 @@ type
 
   TSmTesteClient = class(TDSAdminRestClient)
   private
+    FDataModuleCreateCommand: TDSRestCommand;
     FEchoStringCommand: TDSRestCommand;
     FReverseStringCommand: TDSRestCommand;
     FGetAlunosTesteCommand: TDSRestCommand;
@@ -59,6 +60,7 @@ type
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
+    procedure DataModuleCreate(Sender: TObject);
     function EchoString(Value: string; const ARequestFilter: string = ''): string;
     function ReverseString(Value: string; const ARequestFilter: string = ''): string;
     function GetAlunosTeste(const ARequestFilter: string = ''): TFDJSONDataSets;
@@ -67,16 +69,21 @@ type
 
   TSmEscolaClient = class(TDSAdminRestClient)
   private
+    FDataModuleCreateCommand: TDSRestCommand;
     FLoginFuncionarioCommand: TDSRestCommand;
+    FLoginFuncionarioCommand_Cache: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
-    function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
+    procedure DataModuleCreate(Sender: TObject);
+    function LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function LoginFuncionario_Cache(Login: string; Senha: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
   TSmResponsavelClient = class(TDSAdminRestClient)
   private
+    FDataModuleCreateCommand: TDSRestCommand;
     FLoginResponsavelCommand: TDSRestCommand;
     FValidarEmailExistenteResponsavelCommand: TDSRestCommand;
     FValidarCPFExistenteResponsavelCommand: TDSRestCommand;
@@ -85,6 +92,7 @@ type
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
+    procedure DataModuleCreate(Sender: TObject);
     function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
     function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
     function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
@@ -142,6 +150,7 @@ type
   TSmAgendaClient = class(TDSAdminRestClient)
   private
     FfdqAgendaBeforePostCommand: TDSRestCommand;
+    FDataModuleCreateCommand: TDSRestCommand;
     FGetAgendaCommand: TDSRestCommand;
     FGetAgendaCommand_Cache: TDSRestCommand;
     FGetAgendaTesteCommand: TDSRestCommand;
@@ -152,6 +161,7 @@ type
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
+    procedure DataModuleCreate(Sender: TObject);
     function GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): TFDJSONDataSets;
@@ -260,6 +270,11 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
+  TSmTeste_DataModuleCreate: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
+  );
+
   TSmTeste_EchoString: array [0..1] of TDSRestParameterMetaData =
   (
     (Name: 'Value'; Direction: 1; DBXType: 26; TypeName: 'string'),
@@ -282,11 +297,28 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
+  TSmEscola_DataModuleCreate: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
+  );
+
   TSmEscola_LoginFuncionario: array [0..2] of TDSRestParameterMetaData =
   (
     (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSmEscola_LoginFuncionario_Cache: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmResponsavel_DataModuleCreate: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
   );
 
   TSmResponsavel_LoginResponsavel: array [0..2] of TDSRestParameterMetaData =
@@ -464,6 +496,11 @@ const
   TSmAgenda_fdqAgendaBeforePost: array [0..0] of TDSRestParameterMetaData =
   (
     (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
+  );
+
+  TSmAgenda_DataModuleCreate: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
   );
 
   TSmAgenda_GetAgenda: array [0..5] of TDSRestParameterMetaData =
@@ -801,6 +838,31 @@ begin
   inherited;
 end;
 
+procedure TSmTesteClient.DataModuleCreate(Sender: TObject);
+begin
+  if FDataModuleCreateCommand = nil then
+  begin
+    FDataModuleCreateCommand := FConnection.CreateCommand;
+    FDataModuleCreateCommand.RequestType := 'POST';
+    FDataModuleCreateCommand.Text := 'TSmTeste."DataModuleCreate"';
+    FDataModuleCreateCommand.Prepare(TSmTeste_DataModuleCreate);
+  end;
+  if not Assigned(Sender) then
+    FDataModuleCreateCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FDataModuleCreateCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FDataModuleCreateCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FDataModuleCreateCommand.Execute;
+end;
+
 function TSmTesteClient.EchoString(Value: string; const ARequestFilter: string): string;
 begin
   if FEchoStringCommand = nil then
@@ -879,6 +941,7 @@ end;
 
 destructor TSmTesteClient.Destroy;
 begin
+  FDataModuleCreateCommand.DisposeOf;
   FEchoStringCommand.DisposeOf;
   FReverseStringCommand.DisposeOf;
   FGetAlunosTesteCommand.DisposeOf;
@@ -886,7 +949,32 @@ begin
   inherited;
 end;
 
-function TSmEscolaClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): Boolean;
+procedure TSmEscolaClient.DataModuleCreate(Sender: TObject);
+begin
+  if FDataModuleCreateCommand = nil then
+  begin
+    FDataModuleCreateCommand := FConnection.CreateCommand;
+    FDataModuleCreateCommand.RequestType := 'POST';
+    FDataModuleCreateCommand.Text := 'TSmEscola."DataModuleCreate"';
+    FDataModuleCreateCommand.Prepare(TSmEscola_DataModuleCreate);
+  end;
+  if not Assigned(Sender) then
+    FDataModuleCreateCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FDataModuleCreateCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FDataModuleCreateCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FDataModuleCreateCommand.Execute;
+end;
+
+function TSmEscolaClient.LoginFuncionario(Login: string; Senha: string; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FLoginFuncionarioCommand = nil then
   begin
@@ -898,7 +986,34 @@ begin
   FLoginFuncionarioCommand.Parameters[0].Value.SetWideString(Login);
   FLoginFuncionarioCommand.Parameters[1].Value.SetWideString(Senha);
   FLoginFuncionarioCommand.Execute(ARequestFilter);
-  Result := FLoginFuncionarioCommand.Parameters[2].Value.GetBoolean;
+  if not FLoginFuncionarioCommand.Parameters[2].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FLoginFuncionarioCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FLoginFuncionarioCommand.Parameters[2].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FLoginFuncionarioCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSmEscolaClient.LoginFuncionario_Cache(Login: string; Senha: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FLoginFuncionarioCommand_Cache = nil then
+  begin
+    FLoginFuncionarioCommand_Cache := FConnection.CreateCommand;
+    FLoginFuncionarioCommand_Cache.RequestType := 'GET';
+    FLoginFuncionarioCommand_Cache.Text := 'TSmEscola.LoginFuncionario';
+    FLoginFuncionarioCommand_Cache.Prepare(TSmEscola_LoginFuncionario_Cache);
+  end;
+  FLoginFuncionarioCommand_Cache.Parameters[0].Value.SetWideString(Login);
+  FLoginFuncionarioCommand_Cache.Parameters[1].Value.SetWideString(Senha);
+  FLoginFuncionarioCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FLoginFuncionarioCommand_Cache.Parameters[2].Value.GetString);
 end;
 
 constructor TSmEscolaClient.Create(ARestConnection: TDSRestConnection);
@@ -913,8 +1028,35 @@ end;
 
 destructor TSmEscolaClient.Destroy;
 begin
+  FDataModuleCreateCommand.DisposeOf;
   FLoginFuncionarioCommand.DisposeOf;
+  FLoginFuncionarioCommand_Cache.DisposeOf;
   inherited;
+end;
+
+procedure TSmResponsavelClient.DataModuleCreate(Sender: TObject);
+begin
+  if FDataModuleCreateCommand = nil then
+  begin
+    FDataModuleCreateCommand := FConnection.CreateCommand;
+    FDataModuleCreateCommand.RequestType := 'POST';
+    FDataModuleCreateCommand.Text := 'TSmResponsavel."DataModuleCreate"';
+    FDataModuleCreateCommand.Prepare(TSmResponsavel_DataModuleCreate);
+  end;
+  if not Assigned(Sender) then
+    FDataModuleCreateCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FDataModuleCreateCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FDataModuleCreateCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FDataModuleCreateCommand.Execute;
 end;
 
 function TSmResponsavelClient.LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string): Boolean;
@@ -993,6 +1135,7 @@ end;
 
 destructor TSmResponsavelClient.Destroy;
 begin
+  FDataModuleCreateCommand.DisposeOf;
   FLoginResponsavelCommand.DisposeOf;
   FValidarEmailExistenteResponsavelCommand.DisposeOf;
   FValidarCPFExistenteResponsavelCommand.DisposeOf;
@@ -1504,6 +1647,31 @@ begin
   FfdqAgendaBeforePostCommand.Execute;
 end;
 
+procedure TSmAgendaClient.DataModuleCreate(Sender: TObject);
+begin
+  if FDataModuleCreateCommand = nil then
+  begin
+    FDataModuleCreateCommand := FConnection.CreateCommand;
+    FDataModuleCreateCommand.RequestType := 'POST';
+    FDataModuleCreateCommand.Text := 'TSmAgenda."DataModuleCreate"';
+    FDataModuleCreateCommand.Prepare(TSmAgenda_DataModuleCreate);
+  end;
+  if not Assigned(Sender) then
+    FDataModuleCreateCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FDataModuleCreateCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FDataModuleCreateCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FDataModuleCreateCommand.Execute;
+end;
+
 function TSmAgendaClient.GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetAgendaCommand = nil then
@@ -1643,6 +1811,7 @@ end;
 destructor TSmAgendaClient.Destroy;
 begin
   FfdqAgendaBeforePostCommand.DisposeOf;
+  FDataModuleCreateCommand.DisposeOf;
   FGetAgendaCommand.DisposeOf;
   FGetAgendaCommand_Cache.DisposeOf;
   FGetAgendaTesteCommand.DisposeOf;

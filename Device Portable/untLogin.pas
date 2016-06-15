@@ -75,7 +75,8 @@ implementation
 {$R *.fmx}
 
 uses untDM, Proxy, untRestClient, untPrincipal, FMX.VirtualKeyboard,
-  FMX.Platform, untLibDevicePortable, untDMStyles, untCriarConta,smMensagensFMX;
+  FMX.Platform, untLibDevicePortable, untDMStyles, untCriarConta,smMensagensFMX,
+  Data.FireDACJSONReflect, FireDAC.Comp.DataSet;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
 begin
@@ -298,14 +299,21 @@ begin
 end;
 
 function TfrmLogin.LoginFuncionario: boolean;
+var
+  LDataSetList  : TFDJSONDataSets;
+  LDataSet: TFDDataSet;
 begin
   try
     try
       if not ValidacoesRestClientBeforeExecute(True) then
         Exit;
 
-      Result := RestClient.SmEscolaClient.LoginFuncionario
-      (fLogin, fSenha) ;
+      LDataSetList := RestClient.SmEscolaClient.LoginFuncionario(fLogin, fSenha) ;
+      LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+
+      Result:= (LDataSet.RecordCount >= 1) and
+                (LDataSet.FieldByName('funcionario_id').AsInteger >= 1);
+
     finally
        //
     end;
@@ -320,14 +328,23 @@ begin
 end;
 
 function TfrmLogin.LoginResponsavel: boolean;
+var
+  LDataSetList  : TFDJSONDataSets;
+  LDataSet: TFDDataSet;
 begin
   try
     try
        if not ValidacoesRestClientBeforeExecute(True) then
          Exit;
+      result:=False;
+       exit;
+       //LDataSetList := RestClient.SmResponsavelClient.LoginResponsavel(fLogin, fSenha);
+       LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
 
-       Result := RestClient.SmResponsavelClient.LoginResponsavel
-    (fLogin, fSenha);
+       Result:= (LDataSet.RecordCount >= 1) and
+                (LDataSet.FieldByName('responsavel_id').AsInteger >= 1);
+
+
     finally
        //
     end;

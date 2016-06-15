@@ -128,7 +128,7 @@ end;
 
 procedure TConfiguracoes.GetConfiguracoes;
 begin
-  DesconectarAoSair:=False;
+  DesconectarAoSair:=True;
 end;
 
 end.

@@ -36,6 +36,7 @@ type
     lstItemAgenda: TListBoxItem;
     lstItemConfigurações: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
+    lblUsuario: TListBoxItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);
