@@ -26,10 +26,6 @@ type
     layToolBarMenu: TLayout;
     layMenu: TLayout;
     GridPanelLayout1: TGridPanelLayout;
-    imgAgenda: TImage;
-    lblAgenda: TLabel;
-    imgMensagens: TImage;
-    lblMensagens: TLabel;
     imgMenu: TImage;
     lstGroupHeaderPrincipal: TListBoxGroupHeader;
     lstGroupFooter: TListBoxGroupFooter;
@@ -37,6 +33,14 @@ type
     lstItemConfigurações: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
     lblUsuario: TListBoxItem;
+    imgAgenda: TImage;
+    lblAgenda: TLabel;
+    imgMensagens: TImage;
+    lblMensagens: TLabel;
+    Image1: TImage;
+    Label1: TLabel;
+    Image2: TImage;
+    Label2: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);
