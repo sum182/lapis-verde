@@ -36,7 +36,7 @@ end;
 procedure TfrmSplashScreen.FormShow(Sender: TObject);
 begin
   inherited;
-  Sleep(3000);
+ { Sleep(3000);
   if not Assigned(frmPrincipal) then
     Application.CreateForm(TfrmPrincipal, frmPrincipal);
 
@@ -46,7 +46,7 @@ begin
   begin
     frmLogin.DisposeOf;
     frmLogin := nil;
-  end;
+  end;  }
 end;
 
 end.

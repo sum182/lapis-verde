@@ -15,6 +15,12 @@
         <Projects Include="..\FMX.Devgear-master\FMX.Devgear-master\Samples\SplashWindowTheme\SplashWindowTheme.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\SplashFormFMX\SplashFormFMX.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\SplashFormFMX\SplashFormFMXRX10.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +65,32 @@
     <Target Name="SplashWindowTheme:Make">
         <MSBuild Projects="..\FMX.Devgear-master\FMX.Devgear-master\Samples\SplashWindowTheme\SplashWindowTheme.dproj" Targets="Make"/>
     </Target>
+    <Target Name="SplashFormFMX">
+        <MSBuild Projects="..\SplashFormFMX\SplashFormFMX.dproj"/>
+    </Target>
+    <Target Name="SplashFormFMX:Clean">
+        <MSBuild Projects="..\SplashFormFMX\SplashFormFMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SplashFormFMX:Make">
+        <MSBuild Projects="..\SplashFormFMX\SplashFormFMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SplashFormFMXRX10">
+        <MSBuild Projects="..\SplashFormFMX\SplashFormFMXRX10.dproj"/>
+    </Target>
+    <Target Name="SplashFormFMXRX10:Clean">
+        <MSBuild Projects="..\SplashFormFMX\SplashFormFMXRX10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SplashFormFMXRX10:Make">
+        <MSBuild Projects="..\SplashFormFMX\SplashFormFMXRX10.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;SplashWindowTheme"/>
+        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;SplashWindowTheme;SplashFormFMX;SplashFormFMXRX10"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;SplashWindowTheme:Clean"/>
+        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;SplashWindowTheme:Clean;SplashFormFMX:Clean;SplashFormFMXRX10:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;SplashWindowTheme:Make"/>
+        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;SplashWindowTheme:Make;SplashFormFMX:Make;SplashFormFMXRX10:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

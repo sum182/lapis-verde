@@ -3,6 +3,7 @@ program LapisVerde;
 uses
   System.StartUpCopy,
   FMX.Forms,
+  FMX.MobilePreview,
   System.UITypes,
   untDM in 'DM\untDM.pas' {Dm: TDataModule},
   untDMStyles in 'DM\untDMStyles.pas' {DMStyles: TDataModule},
@@ -44,11 +45,26 @@ uses
   untTesteGeralApp in 'Testes\untTesteGeralApp.pas' {frmTesteGeralApp},
   untResourceString in '..\Lib\untResourceString.pas',
   untLibDevicePortable in 'Lib\untLibDevicePortable.pas',
-  untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen};
+  untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen},
+  System.SysUtils {frmSplashScreen},
+  uSplashForm in 'SplashScreen\uSplashForm.pas' {FormSplash};
 
 {$R *.res}
 
 begin
+
+//Splash Novo
+
+
+
+  //Modo Teste 2
+  Application.Initialize;
+  Application.CreateForm(TFormSplash, FormSplash);
+  Application.Run;
+
+  Exit;
+
+//fim do splash
   //Modo Teste
  { Application.Initialize;
   Application.CreateForm(TDM, DM);
@@ -67,6 +83,10 @@ begin
 
   //Modo Teste 2
   Application.Initialize;
+  frmSplashScreen:= TfrmSplashScreen.Create(Application);
+  frmSplashScreen.Show;
+ Sleep(1000);
+
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmAgenda, DmAgenda);
@@ -74,11 +94,23 @@ begin
   Application.CreateForm(TDmGetServer, DmGetServer);
   Application.CreateForm(TDmSaveServer, DmSaveServer);
   Application.CreateForm(TRestClient, RestClient);
-  Application.CreateForm(TfrmSplashScreen, frmSplashScreen);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TFormSplash, FormSplash);
+  { frmSplashScreen := TfrmSplashScreen.Create( Application );
+  frmSplashScreen.Show;   }
+
+
+ // frmSplashScreen.DisposeOf;
+
   //Application.CreateForm(TfrmPrincipal, frmPrincipal);
 
   //Application.CreateForm(TfrmLogin, frmLogin);
+
+frmSplashScreen.Hide;
+frmSplashScreen.Free;
+  
   Application.Run;
+
   Exit;
   // Fim do Teste
 
