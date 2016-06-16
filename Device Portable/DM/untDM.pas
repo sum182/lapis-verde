@@ -13,7 +13,6 @@ uses
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
-
   //Erro
   //,Vcl.ExtCtrls
   //

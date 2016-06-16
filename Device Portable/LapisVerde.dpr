@@ -43,7 +43,8 @@ uses
   untTypes in '..\Lib\untTypes.pas',
   untTesteGeralApp in 'Testes\untTesteGeralApp.pas' {frmTesteGeralApp},
   untResourceString in '..\Lib\untResourceString.pas',
-  untLibDevicePortable in 'Lib\untLibDevicePortable.pas';
+  untLibDevicePortable in 'Lib\untLibDevicePortable.pas',
+  untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen};
 
 {$R *.res}
 
@@ -73,7 +74,9 @@ begin
   Application.CreateForm(TDmGetServer, DmGetServer);
   Application.CreateForm(TDmSaveServer, DmSaveServer);
   Application.CreateForm(TRestClient, RestClient);
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmSplashScreen, frmSplashScreen);
+  //Application.CreateForm(TfrmPrincipal, frmPrincipal);
+
   //Application.CreateForm(TfrmLogin, frmLogin);
   Application.Run;
   Exit;
