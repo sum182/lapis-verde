@@ -383,14 +383,16 @@ inherited frmLogin: TfrmLogin
         Size.PlatformDefault = False
         TabOrder = 2
         object Label1: TLabel
-          Align = HorzCenter
-          StyledSettings = [Size, FontColor]
+          Align = Center
+          StyledSettings = []
           Size.Width = 320.000000000000000000
-          Size.Height = 89.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'labelstyle'
-          TextSettings.Font.Family = 'Segoe UI Semibold'
+          TextSettings.Font.Family = 'Comic Sans MS'
+          TextSettings.Font.Size = 18.000000000000000000
           TextSettings.Font.Style = [fsBold]
+          TextSettings.FontColor = claDarkgreen
           TextSettings.HorzAlign = Center
           Text = 'L'#225'pis Verde'
         end

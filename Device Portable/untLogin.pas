@@ -23,7 +23,6 @@ type
     lauCabecalho: TLayout;
     layStatus: TLayout;
     VertScrollBox1: TVertScrollBox;
-    Label1: TLabel;
     imgUsuario: TImage;
     imgSenha: TImage;
     layContaUsuario: TLayout;
@@ -31,6 +30,7 @@ type
     Layout1: TLayout;
     btnCriarConta: TSpeedButton;
     fgVirtualKeyboard: TfgVirtualKeyboard;
+    Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);

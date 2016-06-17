@@ -6,13 +6,15 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Controls.Presentation, FMX.StdCtrls, untPrincipal, untDM, untDmAgenda,
-  untDmGetServer, untDmResponsavel, untDmSaveServer, untDMStyles, untRestClient;
+  untDmGetServer, untDmResponsavel, untDmSaveServer, untDMStyles, untRestClient,
+  FMX.Layouts;
 
 type
   TFormSplash = class(TForm)
-    SplashImage: TImage;
     StartupTimer: TTimer;
-    Image1: TImage;
+    Layout1: TLayout;
+    Label1: TLabel;
+    SplashImage: TImage;
     procedure FormCreate(Sender: TObject);
     procedure SplashImagePaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
     procedure StartupTimerTimer(Sender: TObject);
