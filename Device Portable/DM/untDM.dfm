@@ -244,4 +244,19 @@ object Dm: TDm
     Left = 131
     Top = 164
   end
+  object fdqLoginRealizado: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select * from login_realizado'
+      'where login_realizado_id = :login_realizado_id')
+    Left = 40
+    Top = 272
+    ParamData = <
+      item
+        Name = 'LOGIN_REALIZADO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
 end

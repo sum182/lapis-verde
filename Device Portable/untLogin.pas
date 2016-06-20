@@ -8,7 +8,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   smFrmBaseForAll,smGeralFMX, FMX.Effects, FMX.Objects,
   FMX.Controls.Presentation, FMX.Edit, FMX.Layouts, smCrypt, FMX.ListBox,
-  FMX.TabControl, FGX.ProgressDialog, FGX.VirtualKeyboard;
+  FMX.TabControl, FGX.ProgressDialog, FGX.VirtualKeyboard, untTypes;
 
 type
   TfrmLogin = class(TfrmBaseForAll)
@@ -313,6 +313,19 @@ begin
 
       Result:= (LDataSet.RecordCount >= 1) and
                 (LDataSet.FieldByName('funcionario_id').AsInteger >= 1);
+
+      if Result then
+      begin
+        Dm.fdqLoginRealizado.Close;
+        Dm.fdqLoginRealizado.Open;
+        Dm.fdqLoginRealizado.Append;
+        Dm.fdqLoginRealizado.FieldByName('usuario_id').AsInteger := LDataSet.FieldByName('funcionario_id').AsInteger;
+        Dm.fdqLoginRealizado.FieldByName('usuario_tipo').AsInteger := Integer(TUsuarioTipo.Funcionario);
+        Dm.fdqLoginRealizado.FieldByName('data_login').AsDateTime := Now;
+        Dm.fdqLoginRealizado.Post;
+        Dm.fdqLoginRealizado.Close;
+      end;
+
 
     finally
        //

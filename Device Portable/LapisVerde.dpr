@@ -5,6 +5,7 @@ uses
   FMX.Forms,
   FMX.MobilePreview,
   System.UITypes,
+  System.SysUtils,
   untDM in 'DM\untDM.pas' {Dm: TDataModule},
   untDMStyles in 'DM\untDMStyles.pas' {DMStyles: TDataModule},
   untDmResponsavel in 'DM\untDmResponsavel.pas' {DmResponsavel: TDataModule},
@@ -45,48 +46,20 @@ uses
   untTesteGeralApp in 'Testes\untTesteGeralApp.pas' {frmTesteGeralApp},
   untResourceString in '..\Lib\untResourceString.pas',
   untLibDevicePortable in 'Lib\untLibDevicePortable.pas',
-  untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen},
-  System.SysUtils {frmSplashScreen},
-  uSplashForm in 'SplashScreen\uSplashForm.pas' {FormSplash};
+  untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen};
 
 {$R *.res}
 
 begin
-
-//Splash Novo
-
-
-
-  //Modo Teste 2
+  //Modo Produção
   Application.Initialize;
-  Application.CreateForm(TFormSplash, FormSplash);
+  Application.CreateForm(TfrmSplashScreen, frmSplashScreen);
   Application.Run;
-
   Exit;
 
-//fim do splash
+
   //Modo Teste
- { Application.Initialize;
-  Application.CreateForm(TDM, DM);
-  Application.CreateForm(TDmResponsavel, DmResponsavel);
-  Application.CreateForm(TDmEscola, DmEscola);
-  Application.CreateForm(TDMStyles, DMStyles);
-  Application.CreateForm(TModuloCliente, ModuloCliente);
-  Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
-   //Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TfrmPrincipalTeste, frmPrincipalTeste);
-  Application.Run;
-  Exit;
-  }// Fim do Teste
-
-
-
-  //Modo Teste 2
   Application.Initialize;
-  frmSplashScreen:= TfrmSplashScreen.Create(Application);
-  frmSplashScreen.Show;
- Sleep(1000);
-
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmAgenda, DmAgenda);
@@ -95,34 +68,6 @@ begin
   Application.CreateForm(TDmSaveServer, DmSaveServer);
   Application.CreateForm(TRestClient, RestClient);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TFormSplash, FormSplash);
-  { frmSplashScreen := TfrmSplashScreen.Create( Application );
-  frmSplashScreen.Show;   }
-
-
- // frmSplashScreen.DisposeOf;
-
-  //Application.CreateForm(TfrmPrincipal, frmPrincipal);
-
-  //Application.CreateForm(TfrmLogin, frmLogin);
-
-frmSplashScreen.Hide;
-frmSplashScreen.Free;
-  
   Application.Run;
 
-  Exit;
-  // Fim do Teste
-
-
-
-   //Modo Correto
-  {Application.Initialize;
-  Application.CreateForm(TDM, DM);
-  Application.CreateForm(TDmResponsavel, DmResponsavel);
-  Application.CreateForm(TDmEscola, DmEscola);
-  Application.CreateForm(TDMStyles, DMStyles);
-  Application.CreateForm(TModuloCliente, ModuloCliente);
-  Application.CreateForm(TfrmLogin, frmLogin);
-  Application.Run;  }
 end.

@@ -3,19 +3,25 @@ unit untSplashScreen;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
-  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  smFrmBaseForAll, FMX.Objects, untPrincipal, smGeralFMX;
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
+  FMX.Controls.Presentation, FMX.StdCtrls, untPrincipal, untDM, untDmAgenda,
+  untDmGetServer, untDmResponsavel, untDmSaveServer, untDMStyles, untRestClient,
+  FMX.Layouts;
 
 type
-  TfrmSplashScreen = class(TfrmBaseForAll)
-    Image1: TImage;
+  TfrmSplashScreen = class(TForm)
+    StartupTimer: TTimer;
+    Layout1: TLayout;
+    Label1: TLabel;
+    SplashImage: TImage;
     procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
+    procedure SplashImagePaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
+    procedure StartupTimerTimer(Sender: TObject);
   private
-    { Private declarations }
+    FInitialized: Boolean;
+    procedure LoadMainForm;
   public
-    { Public declarations }
   end;
 
 var
@@ -23,30 +29,68 @@ var
 
 implementation
 
+uses
+  System.Devices;
+
 {$R *.fmx}
 
-uses untLogin;
+resourcestring
+  SNotSuitableForDevice = 'The application is not suitable for this device!';
 
 procedure TfrmSplashScreen.FormCreate(Sender: TObject);
 begin
-  inherited;
-  fAllowCloseForm:=True;
+  StartupTimer.Enabled := false;
+  StartupTimer.Interval := 2000; // can be changed to improve startup speed in later releases
 end;
 
-procedure TfrmSplashScreen.FormShow(Sender: TObject);
+procedure TfrmSplashScreen.LoadMainForm;
+type
+  TFormClass = class of TForm;
+var
+  form: TForm;
+  formClass: TFormClass;
 begin
-  inherited;
- { Sleep(3000);
-  if not Assigned(frmPrincipal) then
-    Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  formClass := nil;
+  {case TDeviceInfo.ThisDevice.DeviceClass of
+    TDeviceInfo.TDeviceClass.Desktop: formClass := TMainFormDesktop;
+    TDeviceInfo.TDeviceClass.Phone: formClass := TMainFormPhone;
+    TDeviceInfo.TDeviceClass.Tablet: formClass := TMainFormTablet;
+  end; }
 
-  frmPrincipal.Show;
+  Application.CreateForm(TDm, Dm);
+  Application.CreateForm(TDmResponsavel, DmResponsavel);
+  Application.CreateForm(TDmAgenda, DmAgenda);
+  Application.CreateForm(TDMStyles, DMStyles);
+  Application.CreateForm(TDmGetServer, DmGetServer);
+  Application.CreateForm(TDmSaveServer, DmSaveServer);
+  Application.CreateForm(TRestClient, RestClient);
 
-  if IsSysOSWindows then
-  begin
-    frmLogin.DisposeOf;
-    frmLogin := nil;
-  end;  }
+
+  formClass := TfrmPrincipal;
+
+  if formClass <> nil then begin
+    form := formClass.Create(Application);
+    form.Show;
+    Application.MainForm := form;
+  end
+  else begin
+    ShowMessage(SNotSuitableForDevice);
+  end;
+  Close;
+end;
+
+procedure TfrmSplashScreen.SplashImagePaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
+begin
+  StartupTimer.Enabled := not FInitialized;
+end;
+
+procedure TfrmSplashScreen.StartupTimerTimer(Sender: TObject);
+begin
+  StartupTimer.Enabled := false;
+  if not FInitialized then begin
+    FInitialized := true;
+    LoadMainForm;
+  end;
 end;
 
 end.
