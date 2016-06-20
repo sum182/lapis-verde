@@ -139,10 +139,7 @@ begin
                       ClassName,
                       'GetAgenda',
                       Now,
-                      'Erro na busca da agenda' + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
+                      'Erro na busca da agenda' + #13 + E.Message
                     );
       Raise;
     end;
@@ -218,10 +215,7 @@ begin
                       ClassName,
                       'GetAgenda',
                       Now,
-                      '**Erro na busca da agenda Teste' + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
+                      '**Erro na busca da agenda Teste' + #13 + E.Message
                     );
        Raise;
     end;
@@ -262,10 +256,7 @@ begin
                       ClassName,
                       'GetFuncionarios',
                       Now,
-                      'Erro na busca de Funcionarios' + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
+                      'Erro na busca de Funcionarios' + #13 + E.Message
                       );
        Raise;
     end;
@@ -316,10 +307,7 @@ begin
                     ClassName,
                     'GetAlunos',
                     Now,
-                    'Erro na busca de alunos' + #13 + E.Message,
-                    GetEscolaId,
-                    GetResponsavelId,
-                    GetFuncionarioId
+                    'Erro na busca de alunos' + #13 + E.Message
                     );
      Raise;
   end;
@@ -467,11 +455,8 @@ begin
                       ClassName,
                       'GetDataSet:' + Nome,
                       Now,
-                      'Erro na busca GetDataSet:' + Nome + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
-                      );
+                      'Erro na busca GetDataSet:' + Nome + #13 + E.Message
+                     );
        Raise;
     end;
     end;
@@ -507,11 +492,8 @@ begin
                     ClassName,
                     'GetTabelaAtualizacao',
                     Now,
-                    'Erro na busca de Tabelas Atualização' + #13 + E.Message,
-                    GetEscolaId,
-                    GetResponsavelId,
-                    GetFuncionarioId
-                    );
+                    'Erro na busca de Tabelas Atualização' + #13 + E.Message
+                   );
     Raise;
   end;
   end;
@@ -639,10 +621,7 @@ begin
                       ClassName,
                       'GetResponsaveis',
                       Now,
-                      'Erro na busca dos responsaveis' + #13 + E.Message,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
+                      'Erro na busca dos responsaveis' + #13 + E.Message
                       );
        Raise;
     end;
@@ -710,10 +689,7 @@ begin
                     ClassName,
                     'GetTurmas',
                     Now,
-                    'Erro na busca das turmas' + #13 + E.Message,
-                    GetEscolaId,
-                    GetResponsavelId,
-                    GetFuncionarioId
+                    'Erro na busca das turmas' + #13 + E.Message
                     );
     Raise;
   end;

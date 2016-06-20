@@ -234,7 +234,11 @@ end;
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
-  if not Configuracoes.DesconectarAoSair  then
+  Dm.fdqLoginRealizado.Close;
+  Dm.fdqLoginRealizado.Open;
+
+
+  if not (Configuracoes.DesconectarAoSair) and not(Dm.fdqLoginRealizado.IsEmpty) then
   begin
     fLoginOK:=True;
     OpenFrmPrincipal;
@@ -286,15 +290,11 @@ begin
 
   if LoginResponsavel then
   begin
-    DM.fUsuarioLogadoIsResponsavel := True;
-    DM.fUsuarioLogadoIsFuncionario := False;
     fLoginOk:=True;
   end
   else if LoginFuncionario then
   begin
     fLoginOk:=True;
-    DM.fUsuarioLogadoIsResponsavel := False;
-    DM.fUsuarioLogadoIsFuncionario := True;
   end ;
 end;
 
@@ -316,17 +316,10 @@ begin
 
       if Result then
       begin
-        Dm.fdqLoginRealizado.Close;
-        Dm.fdqLoginRealizado.Open;
-        Dm.fdqLoginRealizado.Append;
-        Dm.fdqLoginRealizado.FieldByName('usuario_id').AsInteger := LDataSet.FieldByName('funcionario_id').AsInteger;
-        Dm.fdqLoginRealizado.FieldByName('usuario_tipo').AsInteger := Integer(TUsuarioTipo.Funcionario);
-        Dm.fdqLoginRealizado.FieldByName('data_login').AsDateTime := Now;
-        Dm.fdqLoginRealizado.Post;
-        Dm.fdqLoginRealizado.Close;
+        Dm.SetLogin(LDataSet.FieldByName('funcionario_id').AsInteger,
+                    TUsuarioTipo.Funcionario,
+                    LDataSet.FieldByName('escola_id').AsInteger);
       end;
-
-
     finally
        //
     end;

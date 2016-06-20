@@ -98,10 +98,7 @@ begin
                       ClassName,
                       'SalvarAgenda',
                       Now,
-                      'Erro ao Salvar Agenda' + #13 + MsgRetornoServer,
-                      GetEscolaId,
-                      GetResponsavelId,
-                      GetFuncionarioId
+                      'Erro ao Salvar Agenda' + #13 + MsgRetornoServer
                     );
       fdqAgenda.Active := False;
       fdqAgendaAluno.Active := False;
@@ -152,10 +149,7 @@ begin
                       ClassName,
                       'SalvarLogError',
                       Now,
-                      'Erro ao Salvar LogError' + #13 + MsgRetornoServer,
-                      GetEscolaId,
-                      0,
-                      GetFuncionarioId
+                      'Erro ao Salvar LogError' + #13 + MsgRetornoServer
                     );
     fdqLogError.Active := False;
   end;

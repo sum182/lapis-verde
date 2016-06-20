@@ -51,6 +51,8 @@ type
     fdqFunc: TFDQuery;
     fdqFuncTipo: TFDQuery;
     fdqLoginRealizado: TFDQuery;
+    FDConnectionDBWin32Release: TFDConnection;
+    FDConnectionDBWin32Debug: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -70,12 +72,7 @@ type
     IsModoTeste: Boolean;
     IsTesteApp: Boolean;
 
-    fUsuarioLogadoIsResponsavel: Boolean;
-    fUsuarioLogadoIsFuncionario: Boolean;
-
     fEscolaId: Integer;
-    fResponsavelId: Integer;
-    fFuncionarioId: Integer;
 
     procedure OpenAlunos;
     procedure OpenTurmas;
@@ -87,12 +84,12 @@ type
     procedure CloseFuncionarios;
 
     procedure ResetRESTConnection;
-    procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
-      Data: TDateTime; MsgUsuario: String = ''; EscolaId: Integer = 0;
-      ResponsavelId: Integer = 0; FuncionarioId: Integer = 0);
+    procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
     procedure OpenProcessoAtualizacao;
     function ProcessHasUpdate(Process: string): Boolean;
     procedure ProcessSaveUpdate(Process: string);
+
+    procedure SetLogin(IdUsuario:Integer; TipoUsuario: TUsuarioTipo;EscolaId:Integer);
 
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
@@ -183,11 +180,6 @@ begin
   Usuario := TUsuario.Create;
 
   SetModoTeste;
-
-  // mudar este por tipo de usuario
-  fUsuarioLogadoIsFuncionario := True;
-  fUsuarioLogadoIsResponsavel := False;
-  //
 end;
 
 procedure TDm.GetConfiguracoes;
@@ -336,9 +328,7 @@ begin
   RESTClient1.BaseURL := BASE_URL;
 end;
 
-procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: String;
-  Data: TDateTime; MsgUsuario: String; EscolaId, ResponsavelId,
-  FuncionarioId: Integer);
+procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
 begin
   try
     fdqLogError.Active := False;
@@ -352,14 +342,13 @@ begin
     fdqLogError.FieldByName('class').AsString := Classe;
     fdqLogError.FieldByName('metodo').AsString := Metodo;
 
-    if EscolaId > 0 then
-      fdqLogError.FieldByName('escola_id').AsInteger := EscolaId;
+    fdqLogError.FieldByName('escola_id').AsInteger := GetEscolaId;
 
-    if ResponsavelId > 0 then
-      fdqLogError.FieldByName('responsavel_id').AsInteger := ResponsavelId;
+    if Usuario.Tipo = Responsavel then
+      fdqLogError.FieldByName('responsavel_id').AsInteger := Usuario.Id;
 
-    if FuncionarioId > 0 then
-      fdqLogError.FieldByName('funcionario_id').AsInteger := FuncionarioId;
+     if Usuario.Tipo = Funcionario then
+      fdqLogError.FieldByName('funcionario_id').AsInteger := Usuario.Id;
 
     fdqLogError.FieldByName('data').AsDateTime := Data;
     fdqLogError.Post;
@@ -372,12 +361,26 @@ begin
   end;
 end;
 
+procedure TDm.SetLogin(IdUsuario: Integer; TipoUsuario: TUsuarioTipo;EscolaId:Integer);
+begin
+  Usuario.Tipo := TipoUsuario;
+  Usuario.Id := IdUsuario;
+  Dm.fEscolaId:= EscolaId;
+
+  Dm.fdqLoginRealizado.Close;
+  Dm.fdqLoginRealizado.Open;
+  Dm.fdqLoginRealizado.Append;
+  Dm.fdqLoginRealizado.FieldByName('usuario_id').AsInteger := IdUsuario;
+  Dm.fdqLoginRealizado.FieldByName('usuario_tipo').AsInteger := Integer(TipoUsuario);
+  Dm.fdqLoginRealizado.FieldByName('data_login').AsDateTime := Now;
+  Dm.fdqLoginRealizado.Post;
+  Dm.fdqLoginRealizado.Close;
+end;
+
 procedure TDm.SetModoTeste;
 begin
   IsModoTeste := True;
-  fFuncionarioId := 16;
   fEscolaId := 1;
-  fResponsavelId := 0;
 
   Usuario.Tipo := Funcionario;
   Usuario.Id := 16;

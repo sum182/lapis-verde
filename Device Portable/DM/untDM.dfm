@@ -248,15 +248,39 @@ object Dm: TDm
     Connection = FDConnectionDB
     SQL.Strings = (
       'select * from login_realizado'
-      'where login_realizado_id = :login_realizado_id')
+      'order by data_login desc'
+      'limit 1')
     Left = 40
     Top = 272
-    ParamData = <
-      item
-        Name = 'LOGIN_REALIZADO_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
+  end
+  object FDConnectionDBWin32Release: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Projetos\Agenda\Device Portable\Win32\Release\BD\db.' +
+        's3db'
+      'LockingMode=Normal'
+      'OpenMode=ReadWrite'
+      'CacheSize=90000'
+      'DriverID=SQLite')
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    LoginPrompt = False
+    Left = 240
+    Top = 8
+  end
+  object FDConnectionDBWin32Debug: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Projetos\Agenda\Device Portable\Win32\Debug\BD\db.s3' +
+        'db'
+      'LockingMode=Normal'
+      'OpenMode=ReadWrite'
+      'CacheSize=90000'
+      'DriverID=SQLite')
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    LoginPrompt = False
+    Left = 392
+    Top = 8
   end
 end

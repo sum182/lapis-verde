@@ -2,7 +2,8 @@ unit untLibDevicePortable;
 
 interface
 
-Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString;
+Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString,
+  untTypes;
 
   Type
     TConfiguracoes = class
@@ -13,8 +14,6 @@ Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString;
 
   procedure SetStyle(Formulario:TForm);
   function GetEscolaId:Integer;
-  function GetFuncionarioId:Integer;
-  function GetResponsavelId:Integer;
   function IsModoTeste:Boolean;
   function IsTesteApp:Boolean;
 
@@ -50,24 +49,14 @@ begin
   Result:= DM.fEscolaId;
 end;
 
-function GetFuncionarioId:Integer;
-begin
-  Result:= DM.fFuncionarioId;
-end;
-
-function GetResponsavelId:Integer;
-begin
-  Result:= DM.fResponsavelId;
-end;
-
 function UsuarioLogadoIsResponsavel:boolean;
 begin
-  Result:= DM.fUsuarioLogadoIsResponsavel;
+  Result:= (Usuario.Tipo = Responsavel);
 end;
 
 function UsuarioLogadoIsFuncionario:boolean;
 begin
-  Result:= DM.fUsuarioLogadoIsFuncionario;
+  Result:= (Usuario.Tipo = Funcionario);
 end;
 
 function GetApplicationName:string;

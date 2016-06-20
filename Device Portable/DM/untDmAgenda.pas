@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils,
-  FMX.Types, Data.FireDACJSONReflect;
+  FMX.Types, Data.FireDACJSONReflect, untTypes;
 
 type
   TDmAgenda = class(TDataModule)
@@ -87,7 +87,13 @@ begin
     fdqAgendaCriar.FieldByName('descricao').AsString:=Texto;
     fdqAgendaCriar.FieldByName('data').AsDateTime:=Data;
     fdqAgendaCriar.FieldByName('data_insert_local').AsDateTime:=Now;
-    fdqAgendaCriar.FieldByName('funcionario_id').AsInteger:=GetFuncionarioId;
+
+    if Usuario.Tipo = Funcionario then
+      fdqAgendaCriar.FieldByName('funcionario_id').AsInteger:=Usuario.Id;
+
+    if Usuario.Tipo = Responsavel then
+      fdqAgendaCriar.FieldByName('responsavel_id').AsInteger:=Usuario.Id;
+
     fdqAgendaCriar.FieldByName('escola_id').AsInteger:=GetEscolaId;
     fdqAgendaCriar.Post;
 
@@ -134,10 +140,8 @@ begin
                     ClassName,
                     'CriarAgenda',
                     Now,
-                    'Erro ao Criar Agenda' + #13 + E.Message,
-                    GetEscolaId,
-                    GetResponsavelId,
-                    GetFuncionarioId
+                    'Erro ao Criar Agenda' + #13 + E.Message
+
                   );
     Raise;
   end;
