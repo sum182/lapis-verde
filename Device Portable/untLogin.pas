@@ -62,6 +62,7 @@ type
     procedure Login;
     function GetTextoLogin:String;
     procedure SetStateButtons;
+    procedure LoginAuto;
 
   public
     { Public declarations }
@@ -234,12 +235,13 @@ end;
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
-  Dm.fdqLoginRealizado.Close;
-  Dm.fdqLoginRealizado.Open;
+  Dm.fdqLoginUltimo.Close;
+  Dm.fdqLoginUltimo.Open;
 
 
-  if not (Configuracoes.DesconectarAoSair) and not(Dm.fdqLoginRealizado.IsEmpty) then
+  if not (Configuracoes.DesconectarAoSair) and not(Dm.fdqLoginUltimo.IsEmpty) then
   begin
+    LoginAuto;
     fLoginOK:=True;
     OpenFrmPrincipal;
     Exit;
@@ -296,6 +298,20 @@ begin
   begin
     fLoginOk:=True;
   end ;
+end;
+
+procedure TfrmLogin.LoginAuto;
+begin
+  Dm.fdqLoginUltimo.Close;
+  Dm.fdqLoginUltimo.Open;
+
+  if dm.fdqLoginUltimo.IsEmpty then
+    Exit;
+
+
+  Dm.SetLogin(Dm.fdqLoginUltimo.FieldByName('usuario_id').AsInteger,
+              TUsuarioTipo(Dm.fdqLoginUltimo.FieldByName('usuario_tipo').AsInteger),
+              Dm.fdqLoginUltimo.FieldByName('escola_id').AsInteger);
 end;
 
 function TfrmLogin.LoginFuncionario: boolean;
@@ -374,12 +390,14 @@ begin
     Application.CreateForm(TfrmPrincipal, frmPrincipal);
 
   frmPrincipal.Show;
+  Application.MainForm := frmPrincipal;
 
   if IsSysOSWindows then
   begin
     frmLogin.DisposeOf;
     frmLogin := nil;
   end;
+
 end;
 
 

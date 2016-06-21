@@ -12,8 +12,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  Vcl.ExtCtrls
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
   //Erro
   //,Vcl.ExtCtrls
   //
@@ -53,6 +52,7 @@ type
     fdqLoginRealizado: TFDQuery;
     FDConnectionDBWin32Release: TFDConnection;
     FDConnectionDBWin32Debug: TFDConnection;
+    fdqLoginUltimo: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -373,6 +373,10 @@ begin
   Dm.fdqLoginRealizado.FieldByName('usuario_id').AsInteger := IdUsuario;
   Dm.fdqLoginRealizado.FieldByName('usuario_tipo').AsInteger := Integer(TipoUsuario);
   Dm.fdqLoginRealizado.FieldByName('data_login').AsDateTime := Now;
+
+  if TipoUsuario = Funcionario then
+    Dm.fdqLoginRealizado.FieldByName('escola_id').AsInteger:= EscolaId;
+
   Dm.fdqLoginRealizado.Post;
   Dm.fdqLoginRealizado.Close;
 end;

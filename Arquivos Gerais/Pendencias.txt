@@ -44,7 +44,10 @@ criar uma vm zerada so com win7 + fontes e projetos
 
 
 ----Mobile--------------------------------------------------------------------------------
--cleaninstall
+-cleaninstall 
+
+LoginAuto
+1o acesso
 
 aguarde ao abrir aluno/turma
 

@@ -248,10 +248,16 @@ object Dm: TDm
     Connection = FDConnectionDB
     SQL.Strings = (
       'select * from login_realizado'
-      'order by data_login desc'
-      'limit 1')
+      'where login_realizado_id = :login_realizado_id')
     Left = 40
     Top = 272
+    ParamData = <
+      item
+        Name = 'LOGIN_REALIZADO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
   object FDConnectionDBWin32Release: TFDConnection
     Params.Strings = (
@@ -282,5 +288,14 @@ object Dm: TDm
     LoginPrompt = False
     Left = 392
     Top = 8
+  end
+  object fdqLoginUltimo: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select * from login_realizado'
+      'order by data_login desc'
+      'limit 1')
+    Left = 136
+    Top = 272
   end
 end

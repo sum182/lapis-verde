@@ -35,11 +35,11 @@ type
     lblUsuario: TListBoxItem;
     imgAgenda: TImage;
     lblAgenda: TLabel;
-    imgMensagens: TImage;
+    imgMeuPerfil: TImage;
     lblMensagens: TLabel;
-    Image1: TImage;
+    imgConfiguracoes: TImage;
     Label1: TLabel;
-    Image2: TImage;
+    imgSair: TImage;
     Label2: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -61,6 +61,7 @@ type
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure lstItemConfiguraçõesClick(Sender: TObject);
+    procedure imgSairClick(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -214,7 +215,7 @@ procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
   inherited;
   frmLogin.DisposeOf;
-  frmLogin:= nil;
+  frmLogin := nil;
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;
@@ -224,6 +225,12 @@ begin
   ToolBarPincipal.Visible:=True;
   MultiView1.HideMaster;
 end;
+
+procedure TfrmPrincipal.imgSairClick(Sender: TObject);
+begin
+  inherited;
+  Application.Terminate;
+end;
 
 procedure TfrmPrincipal.imgMensagensClick(Sender: TObject);
 begin
