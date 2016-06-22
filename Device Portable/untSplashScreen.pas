@@ -65,8 +65,16 @@ begin
   Application.CreateForm(TDmSaveServer, DmSaveServer);
   Application.CreateForm(TRestClient, RestClient);
 
+  Dm.fdqLoginUltimo.Close;
+  Dm.fdqLoginUltimo.Open;
 
-  formClass := TfrmPrincipal;
+  if not (Configuracoes.DesconectarAoSair) and not(Dm.fdqLoginUltimo.IsEmpty) then
+  begin
+    formClass:=TfrmPrincipal;
+    DM.LoginAuto;
+  end
+  else
+    formClass := TfrmLogin;
 
   if formClass <> nil then begin
     form := formClass.Create(Application);

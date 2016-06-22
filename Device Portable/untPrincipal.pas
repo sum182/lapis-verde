@@ -75,6 +75,7 @@ type
     procedure HideMenuPrincipal;
     procedure AbrirAgenda;
     procedure AbrirMensagens;
+    procedure Sair;
   protected
 
   public
@@ -140,6 +141,11 @@ begin
 end;
 
 
+procedure TfrmPrincipal.Sair;
+begin
+  Application.Terminate;
+end;
+
 procedure TfrmPrincipal.ShowMenuPrincipal;
 begin
   layPrincipal.Visible:=False;
@@ -204,18 +210,25 @@ begin
     //Caso tenha algum form aberto
     else if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm)) then
     begin
-        Key := 0;
-        BotaoVoltarOnClick(self);
+      Key := 0;
+      BotaoVoltarOnClick(self);
     end
     else
-      fAllowCloseForm:=True;
+    begin
+      Key := 0;
+      Sair;
+    end;
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
   inherited;
-  frmLogin.DisposeOf;
-  frmLogin := nil;
+  if Assigned(frmLogin) then
+  begin
+    frmLogin.Close;
+    frmLogin.DisposeOf;
+    frmLogin := nil;
+  end;
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;
@@ -229,7 +242,7 @@ begin
 procedure TfrmPrincipal.imgSairClick(Sender: TObject);
 begin
   inherited;
-  Application.Terminate;
+  Sair;
 end;
 
 procedure TfrmPrincipal.imgMensagensClick(Sender: TObject);

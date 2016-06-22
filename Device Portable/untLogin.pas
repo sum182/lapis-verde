@@ -62,7 +62,6 @@ type
     procedure Login;
     function GetTextoLogin:String;
     procedure SetStateButtons;
-    procedure LoginAuto;
 
   public
     { Public declarations }
@@ -235,9 +234,8 @@ end;
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
-  Dm.fdqLoginUltimo.Close;
+  {Dm.fdqLoginUltimo.Close;
   Dm.fdqLoginUltimo.Open;
-
 
   if not (Configuracoes.DesconectarAoSair) and not(Dm.fdqLoginUltimo.IsEmpty) then
   begin
@@ -245,7 +243,7 @@ begin
     fLoginOK:=True;
     OpenFrmPrincipal;
     Exit;
-  end;
+  end; }
 
   lblErrorLogin.Visible := False;
   btnEsqueceuSenha.Visible:=False;
@@ -298,20 +296,6 @@ begin
   begin
     fLoginOk:=True;
   end ;
-end;
-
-procedure TfrmLogin.LoginAuto;
-begin
-  Dm.fdqLoginUltimo.Close;
-  Dm.fdqLoginUltimo.Open;
-
-  if dm.fdqLoginUltimo.IsEmpty then
-    Exit;
-
-
-  Dm.SetLogin(Dm.fdqLoginUltimo.FieldByName('usuario_id').AsInteger,
-              TUsuarioTipo(Dm.fdqLoginUltimo.FieldByName('usuario_tipo').AsInteger),
-              Dm.fdqLoginUltimo.FieldByName('escola_id').AsInteger);
 end;
 
 function TfrmLogin.LoginFuncionario: boolean;
@@ -397,7 +381,6 @@ begin
     frmLogin.DisposeOf;
     frmLogin := nil;
   end;
-
 end;
 
 

@@ -13,6 +13,7 @@ uses
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
+
   //Erro
   //,Vcl.ExtCtrls
   //
@@ -90,6 +91,7 @@ type
     procedure ProcessSaveUpdate(Process: string);
 
     procedure SetLogin(IdUsuario:Integer; TipoUsuario: TUsuarioTipo;EscolaId:Integer);
+    procedure LoginAuto;
 
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
@@ -199,6 +201,19 @@ begin
   AppName:= ChangeFileExt(ExtractFileName(AppExeName), '');
   AppPath:= ExtractFilePath(AppExeName);
   {$ENDIF}
+end;
+
+procedure TDm.LoginAuto;
+begin
+  fdqLoginUltimo.Close;
+  fdqLoginUltimo.Open;
+
+  if fdqLoginUltimo.IsEmpty then
+    Exit;
+
+  SetLogin(fdqLoginUltimo.FieldByName('usuario_id').AsInteger,
+              TUsuarioTipo(fdqLoginUltimo.FieldByName('usuario_tipo').AsInteger),
+              fdqLoginUltimo.FieldByName('escola_id').AsInteger);
 end;
 
 procedure TDm.OpenAlunos;
