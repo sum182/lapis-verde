@@ -12,6 +12,9 @@
         <Projects Include="Server\Stand Alone\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\mobile\VendasApp.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj" Targets="Make"/>
     </Target>
+    <Target Name="VendasApp">
+        <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\mobile\VendasApp.dproj"/>
+    </Target>
+    <Target Name="VendasApp:Clean">
+        <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\mobile\VendasApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VendasApp:Make">
+        <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\mobile\VendasApp.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer"/>
+        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;VendasApp"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean"/>
+        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;VendasApp:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make"/>
+        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;VendasApp:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

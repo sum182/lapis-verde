@@ -46,7 +46,8 @@ uses
   untTesteGeralApp in 'Testes\untTesteGeralApp.pas' {frmTesteGeralApp},
   untResourceString in '..\Lib\untResourceString.pas',
   untLibDevicePortable in 'Lib\untLibDevicePortable.pas',
-  untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen};
+  untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen},
+  untPerfilFuncionario in 'Perfil\untPerfilFuncionario.pas' {frmPerfilFuncionario};
 
 {$R *.res}
 

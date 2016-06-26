@@ -31,10 +31,11 @@ type
 
     procedure GetProcessoAtualizacao;
 
-    procedure GetDataSet(Nome: String;
+    function GetDataSet(Nome: String;
                          UtilizaParamEscolaId:Boolean=True;
-                         Condicoes: String=''
-                         );
+                         Condicoes: String='';
+                         AtualizaDataSetLocal:Boolean=True
+                         ):TFDDataSet;
 
     procedure GetEscola;
     procedure GetPeriodoTipo;
@@ -46,6 +47,7 @@ type
     procedure GetTurmas;
     procedure GetResponsaveis;
     procedure GetFuncionarios;
+    function GetFuncionario(FuncionarioId:Integer):TFDDataSet;
     procedure GetAgenda(DtIni,DtFim:TDateTime);
     procedure GetAgendaTeste(DtIni,DtFim:TDateTime);
 
@@ -230,6 +232,14 @@ begin
   GetDataSet('agenda_tipo',False);
 end;
 
+function TDmGetServer.GetFuncionario(FuncionarioId: Integer):TFDDataSet;
+begin
+  Result:= GetDataSet('funcionario',
+              True,
+              'and funcionario_id = ' + IntToStr(FuncionarioId),
+              False);
+end;
+
 procedure TDmGetServer.GetFuncionarios;
 var
   LDataSetList  : TFDJSONDataSets;
@@ -402,8 +412,8 @@ begin
   end;
 end;
 
-procedure TDmGetServer.GetDataSet(Nome: String; UtilizaParamEscolaId: Boolean;
-  Condicoes: String);
+function TDmGetServer.GetDataSet(Nome: String; UtilizaParamEscolaId: Boolean;
+  Condicoes: String;AtualizaDataSetLocal:Boolean):TFDDataSet;
 var
   LDataSetList  : TFDJSONDataSets;
   LDataSetServer: TFDDataSet;
@@ -414,23 +424,26 @@ begin
       if Nome = '' then
        raise Exception.Create('GetDataSet: Nome não definido');
 
-      if not Dm.ProcessHasUpdate(Nome) then
+      if not Dm.ProcessHasUpdate(Nome) and (AtualizaDataSetLocal) then
        Exit;
 
-      fdqDataSet := TFDQuery.Create(self);
-      fdqDataSet.Connection:=Dm.FDConnectionDB;
+      if AtualizaDataSetLocal then
+      begin
+        fdqDataSet := TFDQuery.Create(self);
+        fdqDataSet.Connection:=Dm.FDConnectionDB;
 
-      fdqDataSet.Active := False;
+        fdqDataSet.Active := False;
 
-      fdqDataSet.SQL.Clear;
-      fdqDataSet.SQL.Add('select * from ' + Nome);
-      fdqDataSet.SQL.Add('where 1 = 1');
+        fdqDataSet.SQL.Clear;
+        fdqDataSet.SQL.Add('select * from ' + Nome);
+        fdqDataSet.SQL.Add('where 1 = 1');
 
-      if UtilizaParamEscolaId then
-        fdqDataSet.SQL.Add('and escola_id = ' + IntToStr(GetEscolaId));
+        if UtilizaParamEscolaId then
+          fdqDataSet.SQL.Add('and escola_id = ' + IntToStr(GetEscolaId));
 
-      if Condicoes <> EmptyStr then
-        fdqDataSet.SQL.Add(Condicoes);
+        if Condicoes <> EmptyStr then
+          fdqDataSet.SQL.Add(Condicoes);
+      end;
 
 
       if not ValidacoesRestClientBeforeExecute then
@@ -445,8 +458,13 @@ begin
 
 
       LDataSetServer := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
-      CopyDataSet(LDataSetServer,fdqDataSet,False,[coAppend,coEdit]);
-      DM.ProcessSaveUpdate(Nome);
+      Result:= LDataSetServer;
+      if AtualizaDataSetLocal then
+      begin
+        CopyDataSet(LDataSetServer,fdqDataSet,False,[coAppend,coEdit]);
+        DM.ProcessSaveUpdate(Nome);
+      end;
+
     except on E:Exception do
     begin
       DM.SetLogError( E.Message,
@@ -461,7 +479,8 @@ begin
     end;
     end;
   finally
-    fdqDataSet.DisposeOf;
+    if AtualizaDataSetLocal then
+      fdqDataSet.DisposeOf;
   end;
 
 end;

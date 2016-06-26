@@ -62,6 +62,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure lstItemConfiguraçõesClick(Sender: TObject);
     procedure imgSairClick(Sender: TObject);
+    procedure imgMeuPerfilClick(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -95,7 +96,7 @@ uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, 
   untDmResponsavel, smMensagensFMX,smNetworkState
   //, untConfiguracoes
 
-  ;
+  , untPerfilFuncionario, untTypes;
 
 { TfrmPrincipal }
 
@@ -261,6 +262,13 @@ procedure TfrmPrincipal.imgMenuClick(Sender: TObject);
 begin
   inherited;
   btnMenu.OnClick(self);
+end;
+
+procedure TfrmPrincipal.imgMeuPerfilClick(Sender: TObject);
+begin
+  inherited;
+  if Usuario.Tipo = Funcionario then
+    OpenForm(TfrmPerfilFuncionario);
 end;
 
 procedure TfrmPrincipal.lblAgendaClick(Sender: TObject);

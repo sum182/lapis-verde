@@ -14,7 +14,9 @@ inherited frmAgendaView: TfrmAgendaView
       Size.Width = 386.000000000000000000
       StyleLookup = 'toolbarstyle'
       inherited lblTitulo: TLabel
-        Size.Width = 132.000000000000000000
+        AutoSize = True
+        Size.Width = 67.000000000000000000
+        TextSettings.WordWrap = False
         Text = 'Agenda'
       end
       inherited layToolBarVoltar: TLayout
@@ -295,7 +297,7 @@ inherited frmAgendaView: TfrmAgendaView
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42515.000000000000000000
+            Date = 42546.000000000000000000
             Size.Width = 386.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
