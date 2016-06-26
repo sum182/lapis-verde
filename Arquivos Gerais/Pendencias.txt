@@ -45,7 +45,7 @@ criar uma vm zerada so com win7 + fontes e projetos
 
 ----Mobile--------------------------------------------------------------------------------
 -cleaninstall 
-
+nome alunso grande
 LoginAuto
 1o acesso
 
