@@ -90,13 +90,13 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
                   98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  00C3494441545847EDD6DD0A0221108661B5C0CBAE5BE85EFAB9B4E840ED9B75
-                  0642232A6847691E08D93C98975DB275C698199452F6F4E14B5D1C2374A328A0
-                  765429A50B960D6FAF0B83BB989C73E4ED75617E1B73B61882F96DCCC96208E6
-                  B731C7BF89F1BC3E85F974D0EDEA95735788311E420837FEEA6BDEFBCF0E518A
-                  596EC98FF0984EE07518F33C324151CB3D66AABF30818E71CE20818E29A2F4FE
-                  C7043A2CEA2DE868A3F45ED0043ABA282C5BDED68180C728DD977C4121C3C418
-                  635E72EE0E53650105604FFC220000000049454E44AE426082}
+                  00C7494441545847EDD65D0AC2301046D1240A9255EB16DC8B3F2B0BE24312BF
+                  69674052292AD849710E48A879984B8BB1CE18B306B5D6037DF85217C708DD28
+                  0A183B4639E72B960D6F2F0B832731A5941D6F2F0BF3DB988BC510CC6F63CE16
+                  4330BF8D39FD4D8CE7F525CCA7836E3F5E399752BAC5188F21843B7FF535EFFD
+                  678728C50CB7E44778CC44E0B51BEB796482A2867BCC547F61021DFD9C41021D
+                  AB88D2FB1F13E8B0A8B7A0A38DD27B4113E8984461D9F2B60E043C47E9BEE40B
+                  0AE926C61833CBB90753350105DD7B058B0000000049454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
                   'p\ic_arrow_back_white_24dp\android\drawable-hdpi\ic_arrow_back_w' +
@@ -108,10 +108,10 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5D05D69671C218A
+                  007149444154484BEDD04B0A80301003D0E271046FE3E73AF5CC5D6A671C218A
                   145712070A7D20A55924D2D0D4455563CE79C595EB2CB74F534ABB880C88398A
                   F20531472B7FE552FE156A6E1D4E5FF623FF3DD1A5189911733D46363B26C45C
-                  EE23F65C2362AE62A447CC8591886B5385100EA9F2FC92B6D18BB60000000049
+                  EE23F65C2362AE62A447CC8591886B5385100E601FFC4A8D3283E20000000049
                   454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -121,176 +121,288 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
           end
         end
       end
+      object SpeedButton1: TSpeedButton
+        Align = Right
+        Position.X = 220.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'donetoolbutton'
+      end
+      object SpeedButton2: TSpeedButton
+        Align = Right
+        Position.X = 270.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'deletetoolbutton'
+      end
     end
-    object VertScrollBox1: TVertScrollBox
+    object ListBox1: TListBox
       Align = Client
       Size.Width = 320.000000000000000000
       Size.Height = 484.000000000000000000
       Size.PlatformDefault = False
+      StyleLookup = 'transparentlistboxstyle'
       TabOrder = 1
-      Viewport.Width = 320.000000000000000000
+      DisableFocusEffect = True
+      ItemHeight = 90.000000000000000000
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 275.000000000000000000
       Viewport.Height = 484.000000000000000000
-      object layNome: TLayout
-        Align = Top
-        Size.Width = 320.000000000000000000
-        Size.Height = 60.000000000000000000
+      object ListBoxItem1: TListBoxItem
+        Selectable = False
+        Size.Width = 275.000000000000000000
+        Size.Height = 90.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 5
+        TabOrder = 0
         object edtNome: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Contents
+          Align = Top
           TabOrder = 0
           KeyboardType = Alphabet
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 20.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 33.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
           Margins.Right = 30.000000000000000000
           Margins.Bottom = 20.000000000000000000
-          Size.Width = 270.000000000000000000
+          Size.Width = 240.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Nome'
+        end
+        object lblNome: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Nome'
         end
       end
-      object Layout1: TLayout
-        Align = Top
-        Position.Y = 60.000000000000000000
-        Size.Width = 320.000000000000000000
-        Size.Height = 60.000000000000000000
+      object ListBoxItem2: TListBoxItem
+        Selectable = False
+        Position.Y = 90.000000000000000000
+        Size.Width = 275.000000000000000000
+        Size.Height = 90.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 6
+        TabOrder = 1
+        object Label1: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Sobrenome'
+        end
         object edtSobrenome: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Contents
-          TabOrder = 0
+          Align = Top
+          TabOrder = 1
           KeyboardType = Alphabet
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 20.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 33.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
           Margins.Right = 30.000000000000000000
           Margins.Bottom = 20.000000000000000000
-          Size.Width = 270.000000000000000000
+          Size.Width = 240.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Sobrenome'
         end
       end
-      object layEmail: TLayout
-        Align = Top
-        Position.Y = 120.000000000000000000
-        Size.Width = 320.000000000000000000
-        Size.Height = 60.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 4
-        object edtEmail: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Contents
-          TabOrder = 0
-          KeyboardType = EmailAddress
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 20.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 270.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TextPrompt = 'Email'
-        end
-      end
-      object layCriarSenha: TLayout
-        Align = Top
+      object ListBoxItem3: TListBoxItem
+        Selectable = False
         Position.Y = 180.000000000000000000
-        Size.Width = 320.000000000000000000
-        Size.Height = 60.000000000000000000
+        Size.Width = 275.000000000000000000
+        Size.Height = 90.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
-        object edtSenha: TEdit
+        object Label2: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Email'
+        end
+        object edtEmail: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Contents
-          TabOrder = 0
-          ReturnKeyType = Next
-          Password = True
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 20.000000000000000000
+          Align = Top
+          TabOrder = 1
+          KeyboardType = EmailAddress
+          Position.X = 5.000000000000000000
+          Position.Y = 33.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
           Margins.Right = 30.000000000000000000
           Margins.Bottom = 20.000000000000000000
-          Size.Width = 270.000000000000000000
+          Size.Width = 240.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Senha'
         end
       end
-      object laySexo: TLayout
-        Align = Top
-        Position.Y = 360.000000000000000000
-        Size.Width = 320.000000000000000000
-        Size.Height = 60.000000000000000000
+      object ListBoxItem4: TListBoxItem
+        Selectable = False
+        Position.Y = 270.000000000000000000
+        Size.Width = 275.000000000000000000
+        Size.Height = 90.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
+        object Label5: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Senha'
+        end
+        object edtSenha: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 1
+          ReturnKeyType = Next
+          Password = True
+          Position.X = 5.000000000000000000
+          Position.Y = 33.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Margins.Bottom = 20.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+      object ListBoxItem5: TListBoxItem
+        Selectable = False
+        Position.Y = 360.000000000000000000
+        Size.Width = 275.000000000000000000
+        Size.Height = 90.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object Label3: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'CPF'
+        end
+        object edtCPF: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 0
+          KeyboardType = NumberPad
+          Position.X = 5.000000000000000000
+          Position.Y = 33.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Margins.Bottom = 20.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+      object ListBoxItem6: TListBoxItem
+        Selectable = False
+        Position.Y = 450.000000000000000000
+        Size.Width = 275.000000000000000000
+        Size.Height = 90.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        object Label6: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'RG'
+        end
+        object edtRG: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 0
+          KeyboardType = NumberPad
+          Position.X = 5.000000000000000000
+          Position.Y = 33.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Margins.Bottom = 20.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+      object ListBoxItem7: TListBoxItem
+        Selectable = False
+        Position.Y = 540.000000000000000000
+        Size.Width = 275.000000000000000000
+        Size.Height = 90.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        object Label7: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Sexo'
+        end
         object cmbSexo: TComboBox
-          Align = Contents
+          Align = Top
           Items.Strings = (
             'Masculino'
             'Feminino')
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 20.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
           Margins.Right = 30.000000000000000000
           Margins.Bottom = 20.000000000000000000
-          Size.Width = 270.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 33.000000000000000000
+          Size.Width = 240.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
-          object lblSexo: TLabel
-            Align = Contents
-            Enabled = False
-            Margins.Left = 5.000000000000000000
-            Size.Width = 265.000000000000000000
-            Size.Height = 32.000000000000000000
-            Size.PlatformDefault = False
-            Text = 'Sexo'
-          end
-        end
-      end
-      object layRG: TLayout
-        Align = Top
-        Position.Y = 300.000000000000000000
-        Size.Width = 320.000000000000000000
-        Size.Height = 60.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        object edtRG: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Contents
-          TabOrder = 0
-          KeyboardType = NumberPad
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 20.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 270.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TextPrompt = 'RG'
-        end
-      end
-      object layCPF: TLayout
-        Align = Top
-        Position.Y = 240.000000000000000000
-        Size.Width = 320.000000000000000000
-        Size.Height = 60.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 0
-        object edtCPF: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Contents
-          TabOrder = 0
-          KeyboardType = NumberPad
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 20.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 270.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TextPrompt = 'CPF'
         end
       end
     end
@@ -300,8 +412,8 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
       'where f.escola_id = :escola_id')
-    Left = 244
-    Top = 297
+    Left = 268
+    Top = 321
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -383,7 +495,7 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 152
+    Left = 208
     Top = 408
     object fdmPerfilfuncionario_id: TIntegerField
       FieldName = 'funcionario_id'
@@ -448,14 +560,14 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
   object BindSourceDB1: TBindSourceDB
     DataSet = fdmPerfil
     ScopeMappings = <>
-    Left = 160
-    Top = 288
+    Left = 280
+    Top = 232
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 76
-    Top = 341
+    Left = 260
+    Top = 261
     object LinkControlToField1: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -472,7 +584,6 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
     end
     object LinkFillControlToField1: TLinkFillControlToField
       Category = 'Quick Bindings'
-      Control = cmbSexo
       Track = True
       FillDataSource = BindSourceDB1
       FillDisplayFieldName = 'sexo'
@@ -481,20 +592,6 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
-    object LinkControlToField3: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'rg'
-      Control = edtRG
-      Track = False
-    end
-    object LinkControlToField4: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'cpf'
-      Control = edtCPF
-      Track = False
-    end
     object LinkControlToField5: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -502,11 +599,25 @@ inherited frmPerfilFuncionario: TfrmPerfilFuncionario
       Control = edtEmail
       Track = False
     end
-    object LinkControlToField6: TLinkControlToField
+    object LinkControlToField3: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
       FieldName = 'senha'
       Control = edtSenha
+      Track = False
+    end
+    object LinkControlToField4: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'rg'
+      Control = edtRG
+      Track = False
+    end
+    object LinkControlToField6: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'cpf'
+      Control = edtCPF
       Track = False
     end
   end

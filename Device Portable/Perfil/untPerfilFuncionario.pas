@@ -43,29 +43,37 @@ type
     fdmPerfilescola_id: TIntegerField;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
-    VertScrollBox1: TVertScrollBox;
-    layNome: TLayout;
     edtNome: TEdit;
-    Layout1: TLayout;
     edtSobrenome: TEdit;
-    layEmail: TLayout;
     edtEmail: TEdit;
-    layCriarSenha: TLayout;
-    edtSenha: TEdit;
-    laySexo: TLayout;
-    cmbSexo: TComboBox;
-    lblSexo: TLabel;
-    layRG: TLayout;
-    edtRG: TEdit;
-    layCPF: TLayout;
-    edtCPF: TEdit;
     LinkControlToField1: TLinkControlToField;
     LinkControlToField2: TLinkControlToField;
     LinkFillControlToField1: TLinkFillControlToField;
+    LinkControlToField5: TLinkControlToField;
+    lblNome: TLabel;
+    ListBox1: TListBox;
+    ListBoxItem1: TListBoxItem;
+    ListBoxItem2: TListBoxItem;
+    Label1: TLabel;
+    ListBoxItem3: TListBoxItem;
+    Label2: TLabel;
+    ListBoxItem4: TListBoxItem;
+    ListBoxItem5: TListBoxItem;
+    ListBoxItem6: TListBoxItem;
+    ListBoxItem7: TListBoxItem;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label5: TLabel;
+    edtSenha: TEdit;
+    Label3: TLabel;
+    edtCPF: TEdit;
+    edtRG: TEdit;
+    cmbSexo: TComboBox;
     LinkControlToField3: TLinkControlToField;
     LinkControlToField4: TLinkControlToField;
-    LinkControlToField5: TLinkControlToField;
     LinkControlToField6: TLinkControlToField;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     procedure FormCreate(Sender: TObject);
   private
     FActivityDialogThread: TThread;
@@ -81,7 +89,7 @@ implementation
 
 {$R *.fmx}
 
-uses untDMStyles, untDmGetServer, untDM, untTypes;
+uses untDMStyles, untDmGetServer, untDM, untTypes, smCrypt;
 
 { TfrmPerfilFuncionario }
 
@@ -96,7 +104,7 @@ if not DM.fgActivityDialog.IsShown then
           TThread.Synchronize(nil, procedure
           begin
             layBase.Enabled:=False;
-            DM.fgActivityDialog.Message := 'Buscando Dados';
+            DM.fgActivityDialog.Message := 'Carregando Perfil';
             DM.fgActivityDialog.Show;
           end);
 
@@ -130,6 +138,19 @@ begin
 
   fdmPerfil.Close;
   fdmPerfil.AppendData(DataSet);
+
+  fdmPerfil.Edit;
+  fdmPerfil.FieldByName('senha').AsString := Decrypt(fdmPerfil.FieldByName('senha').AsString);
+
+  if (fdmPerfil.FieldByName('sexo').AsString ='M')then
+    cmbSexo.ItemIndex := 0
+  else if (fdmPerfil.FieldByName('sexo').AsString ='F')then
+    cmbSexo.ItemIndex := 1
+  else
+    cmbSexo.ItemIndex := -1;
+
+  fdmPerfil.Post;
 end;
+
 
 end.
