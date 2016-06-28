@@ -592,7 +592,7 @@ end;
 
 procedure TfrmAgendaView.SetTitulo;
 begin
-  lblTitulo.Text := NomeCompleto;
+  lblTitulo.Text := OwnerAgenda;
 end;
 
 procedure TfrmAgendaView.SetValuesObjects;

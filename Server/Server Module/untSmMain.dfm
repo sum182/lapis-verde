@@ -24,6 +24,7 @@ object SmMain: TSmMain
       'Password=senhabdagenda'
       'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
+    Connected = True
     LoginPrompt = False
     AfterConnect = FDConnectionAfterConnect
     Left = 26
@@ -45,8 +46,8 @@ object SmMain: TSmMain
     SQL.Strings = (
       'select * from log_error l'
       'where l.log_error_id = :log_error_id')
-    Left = 64
-    Top = 320
+    Left = 56
+    Top = 288
     ParamData = <
       item
         Name = 'LOG_ERROR_ID'
@@ -66,8 +67,8 @@ object SmMain: TSmMain
       'SELECT * FROM processo_atualizacao'
       'where ((escola_id = :escola_id) or (escola_id = 0))'
       '')
-    Left = 272
-    Top = 320
+    Left = 264
+    Top = 288
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -81,8 +82,8 @@ object SmMain: TSmMain
     SQL.Strings = (
       'select * from log_server_request l'
       'where l.log_server_request_id = :log_server_request_id')
-    Left = 152
-    Top = 320
+    Left = 144
+    Top = 288
     ParamData = <
       item
         Name = 'LOG_SERVER_REQUEST_ID'
@@ -198,7 +199,7 @@ object SmMain: TSmMain
         Value = 1
       end>
   end
-  object fdqFunc: TFDQuery
+  object fdqFuncionarios: TFDQuery
     Connection = FDConnection
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
@@ -206,9 +207,35 @@ object SmMain: TSmMain
       'where f.escola_id = :escola_id'
       ''
       'and ativo = '#39'S'#39)
-    Left = 64
-    Top = 248
+    Left = 56
+    Top = 232
     ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+  end
+  object fdqFuncionario: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'select * from funcionario f'#13#10#10
+      ''
+      'where funcionario_id = :funcionario_id '
+      ''
+      'and f.escola_id = :escola_id'
+      ''
+      'and ativo = '#39'S'#39)
+    Left = 144
+    Top = 232
+    ParamData = <
+      item
+        Name = 'FUNCIONARIO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
       item
         Name = 'ESCOLA_ID'
         DataType = ftInteger

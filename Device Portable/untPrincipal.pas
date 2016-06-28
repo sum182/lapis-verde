@@ -29,7 +29,7 @@ type
     imgMenu: TImage;
     lstGroupHeaderPrincipal: TListBoxGroupHeader;
     lstGroupFooter: TListBoxGroupFooter;
-    lstItemAgenda: TListBoxItem;
+    lstItemSobre: TListBoxItem;
     lstItemConfigurações: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
     lblUsuario: TListBoxItem;
@@ -51,7 +51,7 @@ type
     procedure lstItemTesteFornecedoresClick(Sender: TObject);
     procedure imgMenuClick(Sender: TObject);
     procedure lstItemTesteLoginClick(Sender: TObject);
-    procedure lstItemAgendaClick(Sender: TObject);
+    procedure lstItemSobreClick(Sender: TObject);
     procedure imgAgendaClick(Sender: TObject);
     procedure imgMensagensClick(Sender: TObject);
     procedure lblAgendaClick(Sender: TObject);
@@ -96,7 +96,7 @@ uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, 
   untDmResponsavel, smMensagensFMX,smNetworkState
   //, untConfiguracoes
 
-  , untPerfilFuncionario, untTypes;
+  , untPerfil, untTypes, untSobre;
 
 { TfrmPrincipal }
 
@@ -268,7 +268,7 @@ procedure TfrmPrincipal.imgMeuPerfilClick(Sender: TObject);
 begin
   inherited;
   if Usuario.Tipo = Funcionario then
-    OpenForm(TfrmPerfilFuncionario);
+    OpenForm(TfrmPerfil);
 end;
 
 procedure TfrmPrincipal.lblAgendaClick(Sender: TObject);
@@ -295,10 +295,10 @@ begin
    OpenForm(TfrmTesteProduto);
 end;
 
-procedure TfrmPrincipal.lstItemAgendaClick(Sender: TObject);
+procedure TfrmPrincipal.lstItemSobreClick(Sender: TObject);
 begin
   inherited;
-  AbrirAgenda;
+  OpenForm(TfrmSobre);
 end;
 
 

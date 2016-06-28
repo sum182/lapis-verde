@@ -29,7 +29,8 @@ type
     fdqResp: TFDQuery;
     fdqRespAluno: TFDQuery;
     fdqRespTelefone: TFDQuery;
-    fdqFunc: TFDQuery;
+    fdqFuncionarios: TFDQuery;
+    fdqFuncionario: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
@@ -56,7 +57,7 @@ type
     function GetTurmas(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetResponsaveis(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetFuncionarios(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
-
+    function SalvarFuncionario(EscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
 
     function SalvarLogError(EscolaId:Integer;
                             pUsuario:TJSONValue;
@@ -228,9 +229,9 @@ begin
                                             Usuario);
       Result := TFDJSONDataSets.Create;
 
-      fdqFunc.Active := False;
-      fdqFunc.ParamByName('escola_id').AsInteger:= EscolaId;
-      TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFunc);
+      fdqFuncionarios.Active := False;
+      fdqFuncionarios.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFuncionarios);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       begin
@@ -369,6 +370,56 @@ begin
   SetSQLLogError(EscolaId,KeyValues);
 
   fdqLogError.Active := True;
+end;
+
+function TSmMain.SalvarFuncionario(EscolaId: Integer; pUsuario: TJSONValue;
+  LDataSetList: TFDJSONDataSets): String;
+var
+  LogServerRequest:TLogServerRequest;
+  LDataSet: TFDDataSet;
+begin
+  //Método para salvar o Funcionario
+  try
+    try
+      Usuario:= Usuario.UnMarshal(pUsuario);
+
+      if Usuario.Tipo <>  Funcionario then
+        Exit;
+
+      LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+
+      if LDataSet.IsEmpty then
+        Exit;
+
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'SalvarFuncionario',
+                                            EscolaId,
+                                            Usuario);
+      fdqFuncionario.Active := False;
+      fdqFuncionario.ParamByName('funcionario_id').AsInteger:= Usuario.Id;
+      fdqFuncionario.ParamByName('escola_id').AsInteger:= EscolaId;
+      fdqFuncionario.Open;
+
+      if fdqFuncionario.IsEmpty then
+        raise Exception.Create('Erro ao localizar funcionário de Id:' +
+                                IntToStr(Usuario.Id));
+      fdqFuncionario.Edit;
+      fdqFuncionario.FieldByName('nome').AsString := LDataSet.FieldByName('nome').AsString;
+      fdqFuncionario.Post;
+
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
+    LogServerRequest.Free;
+  end;
+
 end;
 
 function TSmMain.SalvarLogError(EscolaId:Integer;

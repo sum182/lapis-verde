@@ -264,20 +264,25 @@
         <iPad_AppIcon144>$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_144x144.png</iPad_AppIcon144>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
+        <Manifest_File>None</Manifest_File>
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;FireDACMSSQLDriver;bindcompfmx;DBXOracleDriver;inetdb;FmxTeeUI;FireDACIBDriver;fmx;fmxdae;FireDACDBXDriver;dbexpress;IndyCore;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;IndySystem;fmxFireDAC;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;ibxbindings;rtl;FireDACDSDriver;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;bindcomp;DBXInformixDriver;IndyIPClient;dbxcds;FireDACODBCDriver;DataSnapIndy10ServerTransport;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true;LSApplicationCategoryType=public.app-category.utilities;NSLocationAlwaysUsageDescription=The reason for accessing the location information of the user;NSLocationWhenInUseUsageDescription=The reason for accessing the location information of the user</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <VerInfo_Release>3</VerInfo_Release>
+        <VerInfo_Build>4</VerInfo_Build>
+        <VerInfo_MinorVer>2</VerInfo_MinorVer>
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
         <Icon_MainIcon>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.ico</Icon_MainIcon>
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;svnui;tethering;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;svn;Intraweb;DBXOracleDriver;inetdb;FmxTeeUI;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;TeeDB;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;FireDACDSDriver;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;TeeUI;vclribbon;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Locale>1046</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.2.3.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
@@ -325,10 +330,15 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
+        <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
+        <VerInfo_Keys>package=com.lapisverde.app;label=Lápis Verde;versionCode=4;versionName=1.2.3;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
         <Android_SplashTileMode>disabled</Android_SplashTileMode>
-        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Build>4</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Build>4</VerInfo_Build>
+        <VerInfo_MinorVer>2</VerInfo_MinorVer>
+        <VerInfo_Release>3</VerInfo_Release>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -468,8 +478,12 @@
             <Form>frmSplashScreen</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Perfil\untPerfilFuncionario.pas">
-            <Form>frmPerfilFuncionario</Form>
+        <DCCReference Include="Perfil\untPerfil.pas">
+            <Form>frmPerfil</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="untSobre.pas">
+            <Form>frmSobre</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -524,7 +538,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Debug" Class="Android_LauncherIcon72">
+                <DeployFile LocalName="..\Imagens\ico\Aplicação\1\drawable-xxhdpi\ic_launcher.png" Configuration="Release" Class="Android_LauncherIcon144">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -776,18 +790,33 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Imagens\ico\Aplicação\1\drawable-xxhdpi\ic_launcher.png" Configuration="Release" Class="Android_LauncherIcon144">
+                <DeployFile LocalName="..\Imagens\ico\Android\drawable-hdpi-72 x 72\ic_launcher.png" Configuration="Debug" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -1141,27 +1170,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>

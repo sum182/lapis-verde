@@ -16,3 +16,6 @@ Visible=False
 [DmEscola.fdqTurma]
 Visible=False
 
+[frmTesteGeralApp.fdmTeste]
+Visible=False
+

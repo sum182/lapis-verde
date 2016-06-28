@@ -47,7 +47,8 @@ uses
   untResourceString in '..\Lib\untResourceString.pas',
   untLibDevicePortable in 'Lib\untLibDevicePortable.pas',
   untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen},
-  untPerfilFuncionario in 'Perfil\untPerfilFuncionario.pas' {frmPerfilFuncionario};
+  untPerfil in 'Perfil\untPerfil.pas' {frmPerfil},
+  untSobre in 'untSobre.pas' {frmSobre};
 
 {$R *.res}
 
@@ -55,6 +56,7 @@ begin
   //Modo Produção
   Application.Initialize;
   Application.CreateForm(TfrmSplashScreen, frmSplashScreen);
+  Application.CreateForm(TfrmSobre, frmSobre);
   Application.Run;
   Exit;
 

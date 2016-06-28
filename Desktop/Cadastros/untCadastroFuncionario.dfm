@@ -1333,7 +1333,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     BeforeOpen = fdqBuscaBeforeOpen
     Connection = DM.FDConnection
     SQL.Strings = (
-      'SELECT * FROM agenda.funcionario'
+      'SELECT * FROM funcionario'
       'where funcionario_id = :funcionario_id')
     Left = 928
     ParamData = <

@@ -679,7 +679,7 @@ begin
   except on E:Exception do
     begin
       fCPFOk:= False;
-      msgErrorCriarConta:= 'Erro ao validar CPF';
+      msgErrorCriarConta:= 'Erro ao Validar CPF';
       ShowMessage( msgErrorCriarConta + #13 + E.Message);
       lblErrorCriarConta.Text:= msgErrorCriarConta;
       Abort;
@@ -711,7 +711,7 @@ begin
     end;
   except on E:Exception do
     begin
-      ShowMessage('Erro ao validar E-mail' + #13 + E.Message);
+      ShowMessage('Erro ao Validar E-mail' + #13 + E.Message);
       Abort;
     end;
   end;
