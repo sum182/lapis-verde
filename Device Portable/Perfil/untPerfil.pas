@@ -1,4 +1,4 @@
-unit untPerfilFuncionario;
+unit untPerfil;
 
 interface
 
@@ -14,7 +14,7 @@ uses
   FMX.Edit, FMX.ListBox;
 
 type
-  TfrmPerfilFuncionario = class(TfrmBaseToolBar)
+  TfrmPerfil = class(TfrmBaseToolBar)
     fdqFunc: TFDQuery;
     fdmPerfil: TFDMemTable;
     fdqFuncfuncionario_id: TIntegerField;
@@ -52,15 +52,15 @@ type
     LinkControlToField5: TLinkControlToField;
     lblNome: TLabel;
     ListBox1: TListBox;
-    ListBoxItem1: TListBoxItem;
-    ListBoxItem2: TListBoxItem;
+    lstItemNome: TListBoxItem;
+    lstItemSobrenome: TListBoxItem;
     Label1: TLabel;
-    ListBoxItem3: TListBoxItem;
+    lstItemEmail: TListBoxItem;
     Label2: TLabel;
-    ListBoxItem4: TListBoxItem;
-    ListBoxItem5: TListBoxItem;
-    ListBoxItem6: TListBoxItem;
-    ListBoxItem7: TListBoxItem;
+    lstItemSenha: TListBoxItem;
+    lstItemCPF: TListBoxItem;
+    lstItemRG: TListBoxItem;
+    lstItemSexo: TListBoxItem;
     Label6: TLabel;
     Label7: TLabel;
     Label5: TLabel;
@@ -74,7 +74,12 @@ type
     LinkControlToField6: TLinkControlToField;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
+    lstItemTelefone: TListBoxItem;
+    Label4: TLabel;
+    edtTelefone: TEdit;
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     FActivityDialogThread: TThread;
     procedure GetPerfil;
@@ -83,7 +88,7 @@ type
   end;
 
 var
-  frmPerfilFuncionario: TfrmPerfilFuncionario;
+  frmPerfil: TfrmPerfil;
 
 implementation
 
@@ -93,7 +98,7 @@ uses untDMStyles, untDmGetServer, untDM, untTypes, smCrypt;
 
 { TfrmPerfilFuncionario }
 
-procedure TfrmPerfilFuncionario.FormCreate(Sender: TObject);
+procedure TfrmPerfil.FormCreate(Sender: TObject);
 begin
   inherited;
 if not DM.fgActivityDialog.IsShown then
@@ -130,7 +135,18 @@ if not DM.fgActivityDialog.IsShown then
 
 end;
 
-procedure TfrmPerfilFuncionario.GetPerfil;
+procedure TfrmPerfil.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  if Key = vkHardwareBack then
+  begin
+    if DM.fgActivityDialog.IsShown  Then
+      FActivityDialogThread.Terminate;
+  end;
+  inherited;
+end;
+
+procedure TfrmPerfil.GetPerfil;
 var
   DataSet:TFDDataSet;
 begin
@@ -148,6 +164,8 @@ begin
     cmbSexo.ItemIndex := 1
   else
     cmbSexo.ItemIndex := -1;
+
+  lstItemTelefone.Visible := (Usuario.Tipo = Responsavel);
 
   fdmPerfil.Post;
 end;
