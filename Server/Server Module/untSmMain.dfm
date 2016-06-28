@@ -24,7 +24,6 @@ object SmMain: TSmMain
       'Password=senhabdagenda'
       'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     AfterConnect = FDConnectionAfterConnect
     Left = 26

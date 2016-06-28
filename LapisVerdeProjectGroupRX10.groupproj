@@ -15,6 +15,9 @@
         <Projects Include="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\mobile\VendasApp.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemo.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="VendasApp:Make">
         <MSBuild Projects="..\TDevRocks\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\tdevrocks-curso-criando-aplicativos-m-veis-com-delphi-535a6fb8a8bc\mobile\VendasApp.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ProgressDialogDemo">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemo.dproj"/>
+    </Target>
+    <Target Name="ProgressDialogDemo:Clean">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProgressDialogDemo:Make">
+        <MSBuild Projects="C:\Componentes\fgx\fgx_0.7.1.74\Samples\ProgressDialogDemo\ProgressDialogDemo.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;VendasApp"/>
+        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;VendasApp;ProgressDialogDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;VendasApp:Clean"/>
+        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;VendasApp:Clean;ProgressDialogDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;VendasApp:Make"/>
+        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;VendasApp:Make;ProgressDialogDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
