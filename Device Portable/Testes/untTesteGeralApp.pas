@@ -59,6 +59,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -317,6 +318,12 @@ begin
     on E: Exception do
       SetLogTesteErro(Metodo, E.Message);
   end;
+end;
+
+procedure TfrmTesteGeralApp.FormCreate(Sender: TObject);
+begin
+  inherited;
+  TabControl1.ActiveTab:= TabItem1;
 end;
 
 procedure TfrmTesteGeralApp.FormShow(Sender: TObject);
