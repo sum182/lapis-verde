@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 07/06/2016 01:13:47
+// 28/06/2016 11:52:05
 //
 
 unit Proxy;
@@ -116,6 +116,7 @@ type
     FGetResponsaveisCommand_Cache: TDSRestCommand;
     FGetFuncionariosCommand: TDSRestCommand;
     FGetFuncionariosCommand_Cache: TDSRestCommand;
+    FSalvarFuncionarioCommand: TDSRestCommand;
     FSalvarLogErrorCommand: TDSRestCommand;
     FGetProcessoAtualizacaoCommand: TDSRestCommand;
     FGetProcessoAtualizacaoCommand_Cache: TDSRestCommand;
@@ -140,6 +141,7 @@ type
     function GetResponsaveis_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetFuncionarios(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetFuncionarios_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function SalvarFuncionario(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     function SalvarLogError(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     function GetProcessoAtualizacao(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetProcessoAtualizacao_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
@@ -449,6 +451,14 @@ const
     (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmMain_SalvarFuncionario: array [0..3] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
   TSmMain_SalvarLogError: array [0..3] of TDSRestParameterMetaData =
@@ -1481,6 +1491,34 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetFuncionariosCommand_Cache.Parameters[2].Value.GetString);
 end;
 
+function TSmMainClient.SalvarFuncionario(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+begin
+  if FSalvarFuncionarioCommand = nil then
+  begin
+    FSalvarFuncionarioCommand := FConnection.CreateCommand;
+    FSalvarFuncionarioCommand.RequestType := 'POST';
+    FSalvarFuncionarioCommand.Text := 'TSmMain."SalvarFuncionario"';
+    FSalvarFuncionarioCommand.Prepare(TSmMain_SalvarFuncionario);
+  end;
+  FSalvarFuncionarioCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarFuncionarioCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  if not Assigned(LDataSetList) then
+    FSalvarFuncionarioCommand.Parameters[2].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FSalvarFuncionarioCommand.Parameters[2].ConnectionHandler).GetJSONMarshaler;
+    try
+      FSalvarFuncionarioCommand.Parameters[2].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      if FInstanceOwner then
+        LDataSetList.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FSalvarFuncionarioCommand.Execute(ARequestFilter);
+  Result := FSalvarFuncionarioCommand.Parameters[3].Value.GetWideString;
+end;
+
 function TSmMainClient.SalvarLogError(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarLogErrorCommand = nil then
@@ -1626,6 +1664,7 @@ begin
   FGetResponsaveisCommand_Cache.DisposeOf;
   FGetFuncionariosCommand.DisposeOf;
   FGetFuncionariosCommand_Cache.DisposeOf;
+  FSalvarFuncionarioCommand.DisposeOf;
   FSalvarLogErrorCommand.DisposeOf;
   FGetProcessoAtualizacaoCommand.DisposeOf;
   FGetProcessoAtualizacaoCommand_Cache.DisposeOf;

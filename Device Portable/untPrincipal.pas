@@ -15,11 +15,6 @@ type
     lstMnuMain: TListBox;
     lstGroupHeaderTestes: TListBoxGroupHeader;
     lstItemTesteGeralApp: TListBoxItem;
-    lstItemTesteString: TListBoxItem;
-    lstItemTesteFornecedores: TListBoxItem;
-    lstItemTesteProdutos: TListBoxItem;
-    lstItemTesteJsonFdMem: TListBoxItem;
-    lstItemTesteJsonSQLite: TListBoxItem;
     ToolBarPincipal: TToolBar;
     btnMenu: TSpeedButton;
     lblTitulo: TLabel;
@@ -27,12 +22,8 @@ type
     layMenu: TLayout;
     GridPanelLayout1: TGridPanelLayout;
     imgMenu: TImage;
-    lstGroupHeaderPrincipal: TListBoxGroupHeader;
-    lstGroupFooter: TListBoxGroupFooter;
     lstItemSobre: TListBoxItem;
-    lstItemConfigurações: TListBoxItem;
     lstItemTesteLogin: TListBoxItem;
-    lblUsuario: TListBoxItem;
     imgAgenda: TImage;
     lblAgenda: TLabel;
     imgMeuPerfil: TImage;
@@ -41,14 +32,12 @@ type
     Label1: TLabel;
     imgSair: TImage;
     Label2: TLabel;
+    imgEnviar: TImage;
+    Label3: TLabel;
+    lstItemUsuario: TListBoxItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);
-    procedure lstItemTesteProdutosClick(Sender: TObject);
-    procedure lstItemTesteStringClick(Sender: TObject);
-    procedure lstItemTesteJsonFdMemClick(Sender: TObject);
-    procedure lstItemTesteJsonSQLiteClick(Sender: TObject);
-    procedure lstItemTesteFornecedoresClick(Sender: TObject);
     procedure imgMenuClick(Sender: TObject);
     procedure lstItemTesteLoginClick(Sender: TObject);
     procedure lstItemSobreClick(Sender: TObject);
@@ -60,7 +49,6 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
-    procedure lstItemConfiguraçõesClick(Sender: TObject);
     procedure imgSairClick(Sender: TObject);
     procedure imgMeuPerfilClick(Sender: TObject);
   private
@@ -77,6 +65,8 @@ type
     procedure AbrirAgenda;
     procedure AbrirMensagens;
     procedure Sair;
+    procedure SetModoTeste;
+    procedure SetUsuario;
   protected
 
   public
@@ -90,9 +80,9 @@ implementation
 
 {$R *.fmx}
 
-uses untTesteString, untTesteJsonFdMem, untTesteClientes, untTesteFornecedores, untTesteProduto, untTesteJsonXSqLite, untLogin,
+uses untLogin,
   untLibDevicePortable, untDMStyles, untDM, untMensagens, smGeralFMX,
-  untAgendaSelect, untAgendaAdd, untTestesA, untDmAgenda,
+  untAgendaSelect, untAgendaAdd, untDmAgenda,
   untDmResponsavel, smMensagensFMX,smNetworkState
   //, untConfiguracoes
 
@@ -147,6 +137,18 @@ begin
   Application.Terminate;
 end;
 
+procedure TfrmPrincipal.SetModoTeste;
+begin
+  lstGroupHeaderTestes.Visible := IsModoTeste;
+  lstItemTesteGeralApp.Visible := IsModoTeste;
+  lstItemTesteLogin.Visible := IsModoTeste;
+end;
+
+procedure TfrmPrincipal.SetUsuario;
+begin
+  lstItemUsuario.Text:= 'Usuário: ' + Usuario.Nome;
+end;
+
 procedure TfrmPrincipal.ShowMenuPrincipal;
 begin
   layPrincipal.Visible:=False;
@@ -192,6 +194,8 @@ begin
   SetStyle(Self);
   fShowMenuPrincipal:=True;
   fShowForm:=False;
+  SetModoTeste;
+  SetUsuario;
 end;
 
 
@@ -283,18 +287,6 @@ begin
   AbrirMensagens;
 end;
 
-procedure TfrmPrincipal.lstItemTesteFornecedoresClick(Sender: TObject);
-begin
-  inherited;
-  OpenForm(TfrmTesteString);
-end;
-
-procedure TfrmPrincipal.lstItemTesteProdutosClick(Sender: TObject);
-begin
-  inherited;
-   OpenForm(TfrmTesteProduto);
-end;
-
 procedure TfrmPrincipal.lstItemSobreClick(Sender: TObject);
 begin
   inherited;
@@ -303,34 +295,10 @@ end;
 
 
 
-procedure TfrmPrincipal.lstItemConfiguraçõesClick(Sender: TObject);
-begin
-  inherited;
-//  OpenForm(TfrmConfiguracoes);
-end;
-
 procedure TfrmPrincipal.lstItemTesteGeralAppClick(Sender: TObject);
 begin
   inherited;
   OpenForm(TfrmTesteGeralApp);
-end;
-
-procedure TfrmPrincipal.lstItemTesteStringClick(Sender: TObject);
-begin
-  inherited;
-    OpenForm(TfrmTesteString);
-end;
-
-procedure TfrmPrincipal.lstItemTesteJsonFdMemClick(Sender: TObject);
-begin
-  inherited;
-    OpenForm(TfrmTesteJsonFdMem);
-end;
-
-procedure TfrmPrincipal.lstItemTesteJsonSQLiteClick(Sender: TObject);
-begin
-  inherited;
-  OpenForm(TfrmTesteJsonXSqLite);
 end;
 
 procedure TfrmPrincipal.lstItemTesteLoginClick(Sender: TObject);
@@ -338,5 +306,6 @@ begin
   inherited;
   OpenForm(TfrmLogin);
 end;
+
 
 end.

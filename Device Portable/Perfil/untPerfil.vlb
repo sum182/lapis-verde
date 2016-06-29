@@ -214,7 +214,7 @@ Coordinates=213,863,93,36
 Coordinates=114,863,96,36
 
 []
-Coordinates=450,120,84,123
+Coordinates=382,1,96,58
 LayerNames=NewLayer1
 Visible=False
 
@@ -298,12 +298,6 @@ Coordinates=599,111,72,36
 
 [lstItemSexo]
 Coordinates=126,316,82,36
-
-[SpeedButton2]
-Coordinates=382,1,96,58
-
-[SpeedButton1]
-Coordinates=243,1,96,58
 
 [edtTelefone]
 Coordinates=1070,260,82,58

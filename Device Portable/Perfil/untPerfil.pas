@@ -72,17 +72,18 @@ type
     LinkControlToField3: TLinkControlToField;
     LinkControlToField4: TLinkControlToField;
     LinkControlToField6: TLinkControlToField;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     lstItemTelefone: TListBoxItem;
     Label4: TLabel;
     edtTelefone: TEdit;
+    imgSalvar: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure imgVoltarClick(Sender: TObject);
   private
     FActivityDialogThread: TThread;
     procedure GetPerfil;
+    procedure SalvarPerfil;
   public
     { Public declarations }
   end;
@@ -94,7 +95,8 @@ implementation
 
 {$R *.fmx}
 
-uses untDMStyles, untDmGetServer, untDM, untTypes, smCrypt;
+uses untDMStyles, untDmGetServer, untDM, untTypes, smCrypt, untRestClient,
+  untDmSaveServer;
 
 { TfrmPerfilFuncionario }
 
@@ -170,5 +172,31 @@ begin
   fdmPerfil.Post;
 end;
 
+
+procedure TfrmPerfil.imgVoltarClick(Sender: TObject);
+begin
+  inherited;
+  SalvarPerfil;
+end;
+
+procedure TfrmPerfil.SalvarPerfil;
+var
+  fdmSalvar: TFDMemTable;
+begin
+  try
+    fdmSalvar := TFDMemTable.Create(Application);
+
+    fdmSalvar.AppendData(fdmPerfil);
+    fdmSalvar.Edit;
+    fdmSalvar.FieldByName('senha').AsString := Encrypt(fdmSalvar.FieldByName('senha').AsString);
+    fdmSalvar.Post;
+
+    if Usuario.Tipo = Funcionario then
+      DmSaveServer.SaveFuncionario(fdmSalvar);
+  finally
+    fdmSalvar.DisposeOf;
+  end;
+
+end;
 
 end.

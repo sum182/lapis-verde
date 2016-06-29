@@ -19,3 +19,6 @@ Visible=False
 [frmTesteGeralApp.fdmTeste]
 Visible=False
 
+[frmPerfil.fdmPerfil]
+Visible=False
+

@@ -23,6 +23,8 @@ type
   public
     procedure SaveLogError;
     procedure SaveAgenda;
+    procedure SaveFuncionario(DataSet:TFDAdaptedDataSet);
+
 
 
     procedure SaveDadosServerGeral;
@@ -173,6 +175,45 @@ begin
   end;
 
 end;
+
+procedure TDmSaveServer.SaveFuncionario(DataSet:TFDAdaptedDataSet);
+var
+  LDataSetList  : TFDJSONDataSets;
+  MsgRetornoServer:string;
+begin
+  //Método para salvar o funcionário no server
+  try
+    try
+      if not smNetworkState.IsConnected then
+        Exit;
+
+      LDataSetList := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,DataSet);
+
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
+      MsgRetornoServer:= RestClient.SmMainClient.SalvarFuncionario(GetEscolaId,Usuario.Marshal,LDataSetList);
+
+    except on E:Exception do
+    begin
+      DM.SetLogError( MsgRetornoServer + E.Message,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'SaveFuncionario',
+                      Now,
+                      'Erro ao Salvar Funcionario' + #13 + E.Message
+                        );
+      Raise;
+    end;
+    end;
+  finally
+  end;
+
+  MsgPoupUpTeste('Funcionário salvo com sucesso');
+end;
+
 
 procedure TDmSaveServer.SaveDadosServerBasico;
 begin

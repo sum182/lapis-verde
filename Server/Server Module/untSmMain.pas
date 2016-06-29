@@ -407,6 +407,12 @@ begin
                                 IntToStr(Usuario.Id));
       fdqFuncionario.Edit;
       fdqFuncionario.FieldByName('nome').AsString := LDataSet.FieldByName('nome').AsString;
+      fdqFuncionario.FieldByName('sobrenome').AsString := LDataSet.FieldByName('sobrenome').AsString;
+      fdqFuncionario.FieldByName('sexo').AsString := LDataSet.FieldByName('sexo').AsString;
+      fdqFuncionario.FieldByName('rg').AsString := LDataSet.FieldByName('rg').AsString;
+      fdqFuncionario.FieldByName('cpf').AsString := LDataSet.FieldByName('cpf').AsString;
+      fdqFuncionario.FieldByName('email').AsString := LDataSet.FieldByName('email').AsString;
+      fdqFuncionario.FieldByName('senha').AsString := LDataSet.FieldByName('senha').AsString;
       fdqFuncionario.Post;
 
       SmMain.SaveLogServerRequest(LogServerRequest);
