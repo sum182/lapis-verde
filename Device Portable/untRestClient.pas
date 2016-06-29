@@ -66,6 +66,10 @@ end;
 
 procedure TRestClient.DataModuleCreate(Sender: TObject);
 begin
+    DSRestConnection1.Host := DSRestConnectionLocal.Host;
+    DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
+    exit;
+
   //if not IsSysOSWindows then
   //begin
     DSRestConnection1.Host := DSRestConnectionApacheAWS.Host;
