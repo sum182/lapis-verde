@@ -6,8 +6,13 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.MultiView, FMX.Layouts,smFrmBaseForAll,
-  FMX.ListBox, FMX.Objects, untDmGetServer, untTesteGeralApp;
+  FMX.ListBox, FMX.Objects, untDmGetServer, untTesteGeralApp
 
+
+  {$IFDEF ANDROID}
+   ,Androidapi.Helpers
+  {$ENDIF}
+  ;
 type
   TfrmPrincipal = class(TfrmBaseForAll)
     layPrincipal: TLayout;
@@ -134,7 +139,23 @@ end;
 
 procedure TfrmPrincipal.Sair;
 begin
-  Application.Terminate;
+  MessageDlg('Deseja realmente fechar o Lápis Verde?',
+    System.UITypes.TMsgDlgType.mtInformation,
+    [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+    procedure(const BotaoPressionado: TModalResult)
+      begin
+        case BotaoPressionado of
+          mrYes:
+            begin
+             Application.Terminate;
+            end;
+          mrNo:
+            begin
+              Abort;
+            end;
+        end;
+      end
+    );
 end;
 
 procedure TfrmPrincipal.SetModoTeste;
@@ -177,7 +198,7 @@ end;
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-  Application.Terminate;
+  Sair;
 end;
 
 procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);

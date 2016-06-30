@@ -66,15 +66,25 @@ end;
 
 procedure TRestClient.DataModuleCreate(Sender: TObject);
 begin
+   //Windows
+   if IsSysOSWindows then
+   begin
+    {
+    //Server local stand alone
     DSRestConnection1.Host := DSRestConnectionLocal.Host;
     DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
-    exit;
+    exit; }
 
-  //if not IsSysOSWindows then
-  //begin
     DSRestConnection1.Host := DSRestConnectionApacheAWS.Host;
     DSRestConnection1.UrlPath := DSRestConnectionApacheAWS.UrlPath;
-  //end;
+  end;
+
+
+  if not IsSysOSWindows then
+  begin
+    DSRestConnection1.Host := DSRestConnectionApacheAWS.Host;
+    DSRestConnection1.UrlPath := DSRestConnectionApacheAWS.UrlPath;
+  end;
 end;
 
 destructor TRestClient.Destroy;

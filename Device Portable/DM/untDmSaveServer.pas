@@ -210,8 +210,6 @@ begin
     end;
   finally
   end;
-
-  MsgPoupUpTeste('Funcionário salvo com sucesso');
 end;
 
 

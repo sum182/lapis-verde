@@ -11,7 +11,12 @@ uses
   FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.Client,
   FireDAC.Comp.DataSet, System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
-  FMX.Edit, FMX.ListBox;
+  FMX.Edit, FMX.ListBox,smNetworkState
+
+  {$IFDEF ANDROID}
+   ,Androidapi.Helpers
+  {$ENDIF}
+  ;
 
 type
   TfrmPerfil = class(TfrmBaseToolBar)
@@ -79,7 +84,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
-    procedure imgVoltarClick(Sender: TObject);
+    procedure imgSalvarClick(Sender: TObject);
   private
     FActivityDialogThread: TThread;
     procedure GetPerfil;
@@ -96,14 +101,14 @@ implementation
 {$R *.fmx}
 
 uses untDMStyles, untDmGetServer, untDM, untTypes, smCrypt, untRestClient,
-  untDmSaveServer;
+  untDmSaveServer, smMensagensFMX, untResourceString;
 
 { TfrmPerfilFuncionario }
 
 procedure TfrmPerfil.FormCreate(Sender: TObject);
 begin
   inherited;
-if not DM.fgActivityDialog.IsShown then
+  if not DM.fgActivityDialog.IsShown then
   begin
     FActivityDialogThread := TThread.CreateAnonymousThread(procedure
       begin
@@ -111,7 +116,7 @@ if not DM.fgActivityDialog.IsShown then
           TThread.Synchronize(nil, procedure
           begin
             layBase.Enabled:=False;
-            DM.fgActivityDialog.Message := 'Carregando Perfil';
+            DM.fgActivityDialog.Message := rs_carregando_informacoes;
             DM.fgActivityDialog.Show;
           end);
 
@@ -140,10 +145,15 @@ end;
 procedure TfrmPerfil.FormKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
+   MsgPoupUp('FormKeyUp');
+
   if Key = vkHardwareBack then
   begin
     if DM.fgActivityDialog.IsShown  Then
+    begin
       FActivityDialogThread.Terminate;
+      MsgPoupUp('FActivityDialogThread.Terminate;');
+    end;
   end;
   inherited;
 end;
@@ -152,6 +162,12 @@ procedure TfrmPerfil.GetPerfil;
 var
   DataSet:TFDDataSet;
 begin
+  if not smNetworkState.ValidarConexao  then
+  begin
+    imgVoltar.OnClick(self);
+    Exit;
+  end;
+
   DataSet:= DmGetServer.GetFuncionario(Usuario.Id);
 
   fdmPerfil.Close;
@@ -173,10 +189,46 @@ begin
 end;
 
 
-procedure TfrmPerfil.imgVoltarClick(Sender: TObject);
+procedure TfrmPerfil.imgSalvarClick(Sender: TObject);
 begin
   inherited;
-  SalvarPerfil;
+  if not smNetworkState.ValidarConexao  then
+  begin
+    Exit;
+  end;
+
+  if not DM.fgActivityDialog.IsShown then
+  begin
+    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+      begin
+        try
+          TThread.Synchronize(nil, procedure
+          begin
+            layBase.Enabled:=False;
+            DM.fgActivityDialog.Message := rs_salvando_informacoes;
+            DM.fgActivityDialog.Show;
+          end);
+
+          SalvarPerfil;
+
+          if TThread.CheckTerminated then
+            Exit;
+
+
+        finally
+          if not TThread.CheckTerminated then
+            TThread.Synchronize(nil, procedure
+            begin
+               DM.fgActivityDialog.Hide;
+               layBase.Enabled:=True;
+               Application.ProcessMessages;
+               imgVoltar.OnClick(self);
+            end);
+        end;
+      end);
+    FActivityDialogThread.FreeOnTerminate := False;
+    FActivityDialogThread.Start;
+  end;
 end;
 
 procedure TfrmPerfil.SalvarPerfil;
@@ -189,10 +241,18 @@ begin
     fdmSalvar.AppendData(fdmPerfil);
     fdmSalvar.Edit;
     fdmSalvar.FieldByName('senha').AsString := Encrypt(fdmSalvar.FieldByName('senha').AsString);
+
+    if cmbSexo.ItemIndex >= 0 then
+      fdmSalvar.FieldByName('sexo').AsString := Copy(cmbSexo.Selected.Text,0,1)
+    else
+      fdmSalvar.FieldByName('sexo').Clear;
+
     fdmSalvar.Post;
 
     if Usuario.Tipo = Funcionario then
       DmSaveServer.SaveFuncionario(fdmSalvar);
+
+    MsgPoupUp('Perfil atualizado com sucesso!');
   finally
     fdmSalvar.DisposeOf;
   end;
