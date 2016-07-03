@@ -33,7 +33,8 @@ uses
     Androidapi.JNI,
     Androidapi.JNI.App,
     Androidapi.JNI.GraphicsContentViewText,
-    Androidapi.JNI.JavaTypes;
+    Androidapi.JNI.JavaTypes,
+    Androidapi.Helpers;
 
 type
     TIniFile = class(System.IniFiles.TCustomIniFile)

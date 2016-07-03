@@ -56,6 +56,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure imgSairClick(Sender: TObject);
     procedure imgMeuPerfilClick(Sender: TObject);
+    procedure imgConfiguracoesClick(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -91,7 +92,7 @@ uses untLogin,
   untDmResponsavel, smMensagensFMX,smNetworkState
   //, untConfiguracoes
 
-  , untPerfil, untTypes, untSobre;
+  , untPerfil, untTypes, untSobre, untConfiguracoes;
 
 { TfrmPrincipal }
 
@@ -281,6 +282,12 @@ procedure TfrmPrincipal.imgAgendaClick(Sender: TObject);
 begin
   inherited;
   AbrirAgenda;
+end;
+
+procedure TfrmPrincipal.imgConfiguracoesClick(Sender: TObject);
+begin
+  inherited;
+  OpenForm(TfrmConfiguracoes);
 end;
 
 procedure TfrmPrincipal.imgMenuClick(Sender: TObject);

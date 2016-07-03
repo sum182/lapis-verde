@@ -136,7 +136,7 @@ end;
 
 procedure TDm.ConectarDB;
 begin
-  ConectarSQLite(FDCreateDB, 'db.s3db');
+  //ConectarSQLite(FDCreateDB, 'db.s3db');
   FDCreateDB.Close;
   ConectarSQLite(FDConnectionDB, 'db.s3db');
 end;
@@ -172,8 +172,8 @@ end;
 
 procedure TDm.DataModuleCreate(Sender: TObject);
 begin
-  GetConfiguracoes;
   GetInfoFileApp;
+  GetConfiguracoes;
   FDConnectionDB.Close;
   FDCreateDB.Close;
   ConectarBases;

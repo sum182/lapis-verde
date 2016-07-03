@@ -15,15 +15,11 @@ type
     lbghSeguranca: TListBoxGroupHeader;
     lbiSeguranca: TListBoxItem;
     swDesconectar: TSwitch;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormShow(Sender: TObject);
     procedure swDesconectarClick(Sender: TObject);
-    procedure FormDeactivate(Sender: TObject);
-    procedure layBasePaint(Sender: TObject; Canvas: TCanvas;
-      const ARect: TRectF);
+    procedure imgVoltarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-    FIniFile: TIniFile;
   public
     { Public declarations }
     procedure SalvarConfig;
@@ -37,39 +33,23 @@ implementation
 
 {$R *.fmx}
 
-uses untFuncoes, untDMStyles, untDM;
+uses {untFuncoes,} untDMStyles, untDM, smGeralFMX;
 
-const
-    SectionData = 'CONFIGURACOES';
-    KeyEdit     = 'DesconectarAoSair';
 
 { TfrmConfiguracoes }
 
-procedure TfrmConfiguracoes.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TfrmConfiguracoes.FormCreate(Sender: TObject);
+begin
+  inherited;
+
+  LerConfig;
+end;
+
+procedure TfrmConfiguracoes.imgVoltarClick(Sender: TObject);
 begin
   inherited;
 
   SalvarConfig;
-end;
-
-procedure TfrmConfiguracoes.FormDeactivate(Sender: TObject);
-begin
-  SalvarConfig;
-  inherited;
-end;
-
-procedure TfrmConfiguracoes.FormShow(Sender: TObject);
-begin
-  LerConfig;
-  inherited;
-end;
-
-procedure TfrmConfiguracoes.layBasePaint(Sender: TObject; Canvas: TCanvas;
-  const ARect: TRectF);
-begin
-  inherited;
-  LerConfig;
 end;
 
 procedure TfrmConfiguracoes.swDesconectarClick(Sender: TObject);
@@ -80,34 +60,42 @@ begin
 end;
 
 procedure TfrmConfiguracoes.LerConfig;
-var sValor: string;
+var
+  sValor: string;
+  Diretorio: string;
 begin
-  if not Assigned(FIniFile) then
-    //FIniFile := TIniFile.Create(Dm.AppPath + 'Arquivos\' + 'config.ini');
-    FIniFile := TIniFile.Create('config.ini');
+  exit;
+  try
+    if not Assigned(Configuracoes.FIniFile) then
+      Configuracoes.FIniFile := TIniFile.Create(Configuracoes.GetDiretorio + 'config.ini');
 
-  sValor := FIniFile.ReadString(SectionData, KeyEdit, 'False');
-  FreeAndNil(FIniFile);
+    //ShowMessage(Configuracoes.GetDiretorio + 'config.ini');
 
-  if (sValor = 'True') then
-    swDesconectar.IsChecked := True;
+    sValor := Configuracoes.FIniFile.ReadString(Configuracoes.SectionData, 'DesconectarAoSair', 'False');
+    //ShowMessage( Configuracoes.FIniFile.ReadString(Configuracoes.SectionData, 'DesconectarAoSair', 'False'));
+
+    swDesconectar.IsChecked :=  (sValor = 'True');
+  finally
+    Configuracoes.FIniFile.DisposeOf;
+  end;
+
 end;
 
 procedure TfrmConfiguracoes.SalvarConfig;
-var sValor: string;
+var
+  sValor: string;
 begin
-
-  if (swDesconectar.IsChecked) then
+  exit;
+  if (swDesconectar.IsChecked) then
     sValor := 'True'
   else
     sValor := 'False';
 
-  if not Assigned(FIniFile) then
-    //FIniFile := TIniFile.Create(Dm.AppPath + 'Arquivos\' + 'config.ini');
-    FIniFile := TIniFile.Create('config.ini');
+  if not Assigned(Configuracoes.FIniFile) then
+    Configuracoes.FIniFile := TIniFile.Create(Configuracoes.GetDiretorio + 'config.ini');
 
-  FIniFile.WriteString(SectionData, KeyEdit, sValor);
-  FreeAndNil(FIniFile);
+  Configuracoes.FIniFile.WriteString(Configuracoes.SectionData, 'DesconectarAoSair', sValor);
+  FreeAndNil(Configuracoes.FIniFile);
 end;
 
 end.

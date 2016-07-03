@@ -48,7 +48,8 @@ uses
   untLibDevicePortable in 'Lib\untLibDevicePortable.pas',
   untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen},
   untPerfil in 'Perfil\untPerfil.pas' {frmPerfil},
-  untSobre in 'untSobre.pas' {frmSobre};
+  untSobre in 'untSobre.pas' {frmSobre},
+  untConfiguracoes in 'untConfiguracoes.pas' {frmConfiguracoes};
 
 {$R *.res}
 
@@ -56,7 +57,6 @@ begin
   //Modo Produção
   Application.Initialize;
   Application.CreateForm(TfrmSplashScreen, frmSplashScreen);
-  Application.CreateForm(TfrmSobre, frmSobre);
   Application.Run;
   Exit;
 

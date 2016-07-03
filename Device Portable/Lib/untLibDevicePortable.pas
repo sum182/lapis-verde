@@ -3,13 +3,19 @@ unit untLibDevicePortable;
 interface
 
 Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString,
-  untTypes;
+  untTypes, System.IOUtils,FMX.Overbyte.IniFiles;
 
   Type
     TConfiguracoes = class
       public
+        FIniFile: TIniFile;
         DesconectarAoSair:Boolean;
         procedure GetConfiguracoes;
+        function GetDiretorio:String;
+
+        const
+          SectionData = 'CONFIGURACOES';
+
   end;
 
   procedure SetStyle(Formulario:TForm);
@@ -116,8 +122,33 @@ end;
 { TConfiguracoes }
 
 procedure TConfiguracoes.GetConfiguracoes;
+var
+  sValor: string;
+  Diretorio: string;
 begin
   DesconectarAoSair:=False;
+  exit;
+
+  try
+    if not Assigned(FIniFile) then
+      FIniFile := TIniFile.Create(GetDiretorio + 'config.ini');
+
+    sValor := FIniFile.ReadString(SectionData, 'DesconectarAoSair', 'False');
+    DesconectarAoSair:= (sValor = 'True');
+  finally
+    FIniFile.DisposeOf;
+  end;
+
+end;
+
+
+function TConfiguracoes.GetDiretorio: String;
+begin
+  if smGeralFMX.IsSysOSAndroid or (smGeralFMX.IsSysOSiOS) then
+    Result := TPath.GetDocumentsPath + PathDelim;
+
+  if smGeralFMX.IsSysOSWindows then
+    Result := Dm.AppPath + 'Arquivos\';
 end;
 
 end.
