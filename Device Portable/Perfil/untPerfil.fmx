@@ -623,60 +623,7 @@ inherited frmPerfil: TfrmPerfil
     end
   end
   object fdmPerfil: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'nome'
-        DataType = ftString
-        Size = 150
-      end
-      item
-        Name = 'sobrenome'
-        DataType = ftString
-        Size = 150
-      end
-      item
-        Name = 'sexo'
-        DataType = ftString
-        Size = 1
-      end
-      item
-        Name = 'rg'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'cpf'
-        DataType = ftLargeint
-      end
-      item
-        Name = 'ativo'
-        DataType = ftString
-        Size = 1
-      end
-      item
-        Name = 'email'
-        DataType = ftString
-        Size = 150
-      end
-      item
-        Name = 'senha'
-        DataType = ftString
-        Size = 150
-      end
-      item
-        Name = 'informacoes_gerais'
-        DataType = ftBlob
-      end
-      item
-        Name = 'telefone'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'escola_id'
-        DataType = ftInteger
-      end>
+    FieldDefs = <>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
