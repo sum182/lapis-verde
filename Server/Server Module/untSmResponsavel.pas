@@ -8,7 +8,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, untLibGeral, untLibServer,
   FireDAC.Phys.MySQLDef, FireDAC.Phys, FireDAC.Phys.MySQL,
-  FireDAC.Stan.StorageBin;
+  FireDAC.Stan.StorageBin,System.JSON, untTypes,Data.FireDACJSONReflect;
 
 type
 {$METHODINFO ON}
@@ -35,6 +35,7 @@ type
                                       CPF: String;
                                       RG: String;
                                       Sexo: String):String;
+    function SalvarResponsavel(EscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
 
   end;
 
@@ -141,6 +142,77 @@ begin
     end;
   finally
     fdqLoginResponsavel.Active := False;
+    LogServerRequest.Free;
+  end;
+end;
+
+function TSmResponsavel.SalvarResponsavel(EscolaId: Integer;
+  pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets): String;
+var
+  LogServerRequest:TLogServerRequest;
+  LDataSet: TFDDataSet;
+begin
+  //Método para salvar o Responsável
+  try
+    try
+      Usuario:= Usuario.UnMarshal(pUsuario);
+
+      if Usuario.Tipo <>  Responsavel then
+        Exit;
+
+      LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+
+      if LDataSet.IsEmpty then
+        Exit;
+
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'SalvarFuncionario',
+                                            EscolaId,
+                                            Usuario);
+      fdqResponsavel.Active := False;
+      fdqResponsavel.ParamByName('responsavel_id').AsInteger:= Usuario.Id;
+      fdqResponsavel.Open;
+
+      if fdqResponsavel.IsEmpty then
+        raise Exception.Create('Erro ao localizar Responsável de Id:' +
+                                IntToStr(Usuario.Id));
+      fdqResponsavel.Edit;
+      fdqResponsavel.FieldByName('nome').AsString := LDataSet.FieldByName('nome').AsString;
+      fdqResponsavel.FieldByName('sobrenome').AsString := LDataSet.FieldByName('sobrenome').AsString;
+      fdqResponsavel.FieldByName('sexo').AsString := LDataSet.FieldByName('sexo').AsString;
+      fdqResponsavel.FieldByName('rg').AsString := LDataSet.FieldByName('rg').AsString;
+      fdqResponsavel.FieldByName('cpf').AsString := LDataSet.FieldByName('cpf').AsString;
+      fdqResponsavel.FieldByName('email').AsString := LDataSet.FieldByName('email').AsString;
+      fdqResponsavel.FieldByName('senha').AsString := LDataSet.FieldByName('senha').AsString;
+      fdqResponsavel.Post;
+
+      //Atualizando o Telefone
+      if LDataSet.FieldByName('telefone').AsString <> '' then
+      begin
+        fdqResponsavelTelefone.Close;
+        fdqResponsavelTelefone.ParamByName('responsavel_id').AsInteger:= Usuario.Id;
+        fdqResponsavelTelefone.Open;
+
+        if fdqResponsavelTelefone.IsEmpty then
+          fdqResponsavelTelefone.Append;
+
+        fdqResponsavelTelefone.FieldByName('responsavel_id').AsInteger := fdqResponsavel.FieldByName('responsavel_id').AsInteger;
+        fdqResponsavelTelefone.FieldByName('telefone_tipo_id').AsInteger := 2;
+        fdqResponsavelTelefone.FieldByName('numero').AsString := LDataSet.FieldByName('telefone').AsString;
+        fdqResponsavelTelefone.Post;
+      end;
+
+
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
     LogServerRequest.Free;
   end;
 end;

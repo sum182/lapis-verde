@@ -48,6 +48,8 @@ type
     procedure GetResponsaveis;
     procedure GetFuncionarios;
     function GetFuncionario(FuncionarioId:Integer):TFDDataSet;
+    function GetResponsavel(ResponsavelId:Integer):TFDDataSet;
+
     procedure GetAgenda(DtIni,DtFim:TDateTime);
     procedure GetAgendaTeste(DtIni,DtFim:TDateTime);
 
@@ -648,6 +650,15 @@ begin
   finally
     //CloseResponsaveis;
   end;
+end;
+
+function TDmGetServer.GetResponsavel(ResponsavelId: Integer): TFDDataSet;
+begin
+  Result:= GetDataSet('responsavel',
+              True,
+              'and responsavel_id = ' + IntToStr(ResponsavelId),
+              False);
+
 end;
 
 procedure TDmGetServer.GetResponsavelTipo;

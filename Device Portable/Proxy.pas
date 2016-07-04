@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 28/06/2016 11:52:05
+// 04/07/2016 17:54:02
 //
 
 unit Proxy;
@@ -88,6 +88,7 @@ type
     FValidarEmailExistenteResponsavelCommand: TDSRestCommand;
     FValidarCPFExistenteResponsavelCommand: TDSRestCommand;
     FCriarUsuarioResponsavelCommand: TDSRestCommand;
+    FSalvarResponsavelCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -97,6 +98,7 @@ type
     function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
     function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
     function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
+    function SalvarResponsavel(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
   end;
 
   TSmMainClient = class(TDSAdminRestClient)
@@ -352,6 +354,14 @@ const
     (Name: 'CPF'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'RG'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Sexo'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmResponsavel_SalvarResponsavel: array [0..3] of TDSRestParameterMetaData =
+  (
+    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
@@ -1133,6 +1143,34 @@ begin
   Result := FCriarUsuarioResponsavelCommand.Parameters[8].Value.GetWideString;
 end;
 
+function TSmResponsavelClient.SalvarResponsavel(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+begin
+  if FSalvarResponsavelCommand = nil then
+  begin
+    FSalvarResponsavelCommand := FConnection.CreateCommand;
+    FSalvarResponsavelCommand.RequestType := 'POST';
+    FSalvarResponsavelCommand.Text := 'TSmResponsavel."SalvarResponsavel"';
+    FSalvarResponsavelCommand.Prepare(TSmResponsavel_SalvarResponsavel);
+  end;
+  FSalvarResponsavelCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarResponsavelCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  if not Assigned(LDataSetList) then
+    FSalvarResponsavelCommand.Parameters[2].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FSalvarResponsavelCommand.Parameters[2].ConnectionHandler).GetJSONMarshaler;
+    try
+      FSalvarResponsavelCommand.Parameters[2].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      if FInstanceOwner then
+        LDataSetList.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FSalvarResponsavelCommand.Execute(ARequestFilter);
+  Result := FSalvarResponsavelCommand.Parameters[3].Value.GetWideString;
+end;
+
 constructor TSmResponsavelClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -1150,6 +1188,7 @@ begin
   FValidarEmailExistenteResponsavelCommand.DisposeOf;
   FValidarCPFExistenteResponsavelCommand.DisposeOf;
   FCriarUsuarioResponsavelCommand.DisposeOf;
+  FSalvarResponsavelCommand.DisposeOf;
   inherited;
 end;
 

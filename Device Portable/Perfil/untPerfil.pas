@@ -34,7 +34,6 @@ type
     fdqFuncinformacoes_gerais: TBlobField;
     fdqFuncfuncionario_tipo_id: TSmallintField;
     fdqFuncescola_id: TIntegerField;
-    fdmPerfilfuncionario_id: TIntegerField;
     fdmPerfilnome: TStringField;
     fdmPerfilsobrenome: TStringField;
     fdmPerfilsexo: TStringField;
@@ -44,7 +43,6 @@ type
     fdmPerfilemail: TStringField;
     fdmPerfilsenha: TStringField;
     fdmPerfilinformacoes_gerais: TBlobField;
-    fdmPerfilfuncionario_tipo_id: TSmallintField;
     fdmPerfilescola_id: TIntegerField;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
@@ -81,6 +79,8 @@ type
     Label4: TLabel;
     edtTelefone: TEdit;
     imgSalvar: TImage;
+    fdmPerfiltelefone: TStringField;
+    LinkControlToField7: TLinkControlToField;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
@@ -168,7 +168,11 @@ begin
     Exit;
   end;
 
-  DataSet:= DmGetServer.GetFuncionario(Usuario.Id);
+  if Usuario.Tipo = Funcionario then
+    DataSet:= DmGetServer.GetFuncionario(Usuario.Id);
+
+  if Usuario.Tipo = Responsavel then
+    DataSet:= DmGetServer.GetResponsavel(Usuario.Id);
 
   fdmPerfil.Close;
   fdmPerfil.AppendData(DataSet);
@@ -251,6 +255,9 @@ begin
 
     if Usuario.Tipo = Funcionario then
       DmSaveServer.SaveFuncionario(fdmSalvar);
+
+    if Usuario.Tipo = Responsavel then
+      DmSaveServer.SaveResponsavel(fdmSalvar);
 
     MsgPoupUp('Perfil atualizado com sucesso!');
   finally

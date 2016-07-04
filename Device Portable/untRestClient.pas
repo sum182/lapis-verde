@@ -69,11 +69,11 @@ begin
    //Windows
    if IsSysOSWindows then
    begin
-    {
-    //Server local stand alone
+
+    //Modo de Teste - Server local stand alone
     DSRestConnection1.Host := DSRestConnectionLocal.Host;
     DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
-    exit; }
+    exit;
 
     DSRestConnection1.Host := DSRestConnectionApacheAWS.Host;
     DSRestConnection1.UrlPath := DSRestConnectionApacheAWS.UrlPath;

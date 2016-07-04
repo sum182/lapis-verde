@@ -126,7 +126,7 @@ var
   sValor: string;
   Diretorio: string;
 begin
-  DesconectarAoSair:=False;
+  DesconectarAoSair:=True;
   exit;
 
   try

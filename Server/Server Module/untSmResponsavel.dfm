@@ -98,7 +98,7 @@ object SmResponsavel: TSmResponsavel
       ''
       ''
       '')
-    Left = 58
+    Left = 66
     Top = 256
     ParamData = <
       item

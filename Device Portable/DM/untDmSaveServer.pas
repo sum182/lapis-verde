@@ -24,6 +24,7 @@ type
     procedure SaveLogError;
     procedure SaveAgenda;
     procedure SaveFuncionario(DataSet:TFDAdaptedDataSet);
+    procedure SaveResponsavel(DataSet:TFDAdaptedDataSet);
 
 
 
@@ -154,6 +155,42 @@ begin
                       'Erro ao Salvar LogError' + #13 + MsgRetornoServer
                     );
     fdqLogError.Active := False;
+  end;
+end;
+
+procedure TDmSaveServer.SaveResponsavel(DataSet: TFDAdaptedDataSet);
+var
+  LDataSetList  : TFDJSONDataSets;
+  MsgRetornoServer:string;
+begin
+  //Método para salvar o Responsavel no server
+  try
+    try
+      if not smNetworkState.IsConnected then
+        Exit;
+
+      LDataSetList := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,DataSet);
+
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
+      MsgRetornoServer:= RestClient.SmResponsavelClient.SalvarResponsavel(GetEscolaId,Usuario.Marshal,LDataSetList);
+
+    except on E:Exception do
+    begin
+      DM.SetLogError( MsgRetornoServer + E.Message,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'SaveResponsavel',
+                      Now,
+                      'Erro ao Salvar Responsável' + #13 + E.Message
+                        );
+      Raise;
+    end;
+    end;
+  finally
   end;
 end;
 
