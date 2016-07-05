@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 04/07/2016 17:54:02
+// 05/07/2016 00:46:07
 //
 
 unit Proxy;
@@ -85,6 +85,7 @@ type
   private
     FDataModuleCreateCommand: TDSRestCommand;
     FLoginResponsavelCommand: TDSRestCommand;
+    FLoginResponsavelCommand_Cache: TDSRestCommand;
     FValidarEmailExistenteResponsavelCommand: TDSRestCommand;
     FValidarCPFExistenteResponsavelCommand: TDSRestCommand;
     FCriarUsuarioResponsavelCommand: TDSRestCommand;
@@ -94,7 +95,8 @@ type
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
     procedure DataModuleCreate(Sender: TObject);
-    function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): Boolean;
+    function LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function LoginResponsavel_Cache(Login: string; Senha: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
     function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
     function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
@@ -329,7 +331,14 @@ const
   (
     (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
-    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSmResponsavel_LoginResponsavel_Cache: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'Login'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
   TSmResponsavel_ValidarEmailExistenteResponsavel: array [0..1] of TDSRestParameterMetaData =
@@ -1079,7 +1088,7 @@ begin
   FDataModuleCreateCommand.Execute;
 end;
 
-function TSmResponsavelClient.LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string): Boolean;
+function TSmResponsavelClient.LoginResponsavel(Login: string; Senha: string; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FLoginResponsavelCommand = nil then
   begin
@@ -1091,7 +1100,34 @@ begin
   FLoginResponsavelCommand.Parameters[0].Value.SetWideString(Login);
   FLoginResponsavelCommand.Parameters[1].Value.SetWideString(Senha);
   FLoginResponsavelCommand.Execute(ARequestFilter);
-  Result := FLoginResponsavelCommand.Parameters[2].Value.GetBoolean;
+  if not FLoginResponsavelCommand.Parameters[2].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FLoginResponsavelCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FLoginResponsavelCommand.Parameters[2].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FLoginResponsavelCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSmResponsavelClient.LoginResponsavel_Cache(Login: string; Senha: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FLoginResponsavelCommand_Cache = nil then
+  begin
+    FLoginResponsavelCommand_Cache := FConnection.CreateCommand;
+    FLoginResponsavelCommand_Cache.RequestType := 'GET';
+    FLoginResponsavelCommand_Cache.Text := 'TSmResponsavel.LoginResponsavel';
+    FLoginResponsavelCommand_Cache.Prepare(TSmResponsavel_LoginResponsavel_Cache);
+  end;
+  FLoginResponsavelCommand_Cache.Parameters[0].Value.SetWideString(Login);
+  FLoginResponsavelCommand_Cache.Parameters[1].Value.SetWideString(Senha);
+  FLoginResponsavelCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FLoginResponsavelCommand_Cache.Parameters[2].Value.GetString);
 end;
 
 function TSmResponsavelClient.ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string): Boolean;
@@ -1185,6 +1221,7 @@ destructor TSmResponsavelClient.Destroy;
 begin
   FDataModuleCreateCommand.DisposeOf;
   FLoginResponsavelCommand.DisposeOf;
+  FLoginResponsavelCommand_Cache.DisposeOf;
   FValidarEmailExistenteResponsavelCommand.DisposeOf;
   FValidarCPFExistenteResponsavelCommand.DisposeOf;
   FCriarUsuarioResponsavelCommand.DisposeOf;

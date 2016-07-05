@@ -342,13 +342,21 @@ begin
     try
        if not ValidacoesRestClientBeforeExecute(True) then
          Exit;
-      result:=False;
-       exit;
-       //LDataSetList := RestClient.SmResponsavelClient.LoginResponsavel(fLogin, fSenha);
+
+       //result:=False;
+       //exit;
+       LDataSetList := RestClient.SmResponsavelClient.LoginResponsavel(fLogin, fSenha);
        LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
 
        Result:= (LDataSet.RecordCount >= 1) and
                 (LDataSet.FieldByName('responsavel_id').AsInteger >= 1);
+
+      if Result then
+      begin
+        Dm.SetLogin(LDataSet.FieldByName('responsavel_id').AsInteger,
+                    TUsuarioTipo.Responsavel,
+                    0);
+      end;
 
 
     finally

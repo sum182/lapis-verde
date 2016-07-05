@@ -79,8 +79,6 @@ type
     Label4: TLabel;
     edtTelefone: TEdit;
     imgSalvar: TImage;
-    fdmPerfiltelefone: TStringField;
-    LinkControlToField7: TLinkControlToField;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
@@ -187,7 +185,9 @@ begin
   else
     cmbSexo.ItemIndex := -1;
 
-  lstItemTelefone.Visible := (Usuario.Tipo = Responsavel);
+  { TODO : Consertar no futuro }
+  //lstItemTelefone.Visible := (Usuario.Tipo = Responsavel);
+  lstItemTelefone.Visible := False;
 
   fdmPerfil.Post;
 end;

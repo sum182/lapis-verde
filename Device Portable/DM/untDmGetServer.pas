@@ -655,7 +655,7 @@ end;
 function TDmGetServer.GetResponsavel(ResponsavelId: Integer): TFDDataSet;
 begin
   Result:= GetDataSet('responsavel',
-              True,
+              False,
               'and responsavel_id = ' + IntToStr(ResponsavelId),
               False);
 

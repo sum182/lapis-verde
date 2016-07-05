@@ -24,7 +24,7 @@ type
   private
     { Private declarations }
   public
-    function LoginResponsavel(Login:string; Senha:string):Boolean;
+    function LoginResponsavel(Login:string; Senha:string):TFDJSONDataSets;
     function ValidarEmailExistenteResponsavel(Email:String):Boolean;
     function ValidarCPFExistenteResponsavel(CPF:String):Boolean;
     function CriarUsuarioResponsavel( Nome:String;
@@ -115,7 +115,7 @@ begin
     Application.CreateForm(TSmMain, SmMain);
 end;
 
-function TSmResponsavel.LoginResponsavel(Login, Senha: string): Boolean;
+function TSmResponsavel.LoginResponsavel(Login, Senha: string): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -132,7 +132,11 @@ begin
       fdqLoginResponsavel.ParamByName('login').AsString := Login;
       fdqLoginResponsavel.ParamByName('senha').AsString := Senha;
       fdqLoginResponsavel.Open;
-      Result:= not (fdqLoginResponsavel.IsEmpty);
+
+      Result := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqLoginResponsavel);
+
+      //Result:= not (fdqLoginResponsavel.IsEmpty);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       begin
@@ -141,7 +145,7 @@ begin
       end;
     end;
   finally
-    fdqLoginResponsavel.Active := False;
+    //fdqLoginResponsavel.Active := False;
     LogServerRequest.Free;
   end;
 end;
@@ -168,7 +172,7 @@ begin
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
-                                            'SalvarFuncionario',
+                                            'SalvarResponsavel',
                                             EscolaId,
                                             Usuario);
       fdqResponsavel.Active := False;

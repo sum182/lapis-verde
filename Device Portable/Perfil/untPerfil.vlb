@@ -1,60 +1,60 @@
 ﻿[layBase]
-Coordinates=10,636,53,33
+Coordinates=10,636,60,36
 Visible=False
 
 [btnVoltar]
-Coordinates=974,432,59,33
+Coordinates=974,432,66,36
 Visible=False
 
 [ToolBar1]
-Coordinates=1013,568,58,33
+Coordinates=1013,568,67,36
 Visible=False
 
 [layToolBarVoltar]
-Coordinates=80,636,96,33
+Coordinates=80,636,110,36
 Visible=False
 
 [lblTitulo]
-Coordinates=1050,432,54,33
+Coordinates=1050,432,60,36
 Visible=False
 
 [imgVoltar]
-Coordinates=749,432,61,33
+Coordinates=749,432,69,36
 Visible=False
 
 [fdmPerfilescola_id]
-Coordinates=990,155,105,33
+Coordinates=990,155,120,36
 
 [DmGetServer.fdqAgendaAluno]
 Coordinates=496,500,165,33
 Visible=False
 
 [Dm.fdqAluno]
-Coordinates=10,364,78,33
+Coordinates=10,364,89,36
 Visible=False
 
 [fdqFuncsenha]
-Coordinates=990,210,84,33
+Coordinates=990,210,96,36
 
 [DmGetServer.fdqAgendaKeysInsert]
 Coordinates=404,432,189,33
 Visible=False
 
 [Dm.fdqProcessoAtualizacao]
-Coordinates=1017,10,153,51
+Coordinates=1017,10,176,58
 
 [fdqFuncemail]
-Coordinates=990,265,81,33
+Coordinates=990,265,92,36
 
 [fdmPerfilativo]
-Coordinates=990,320,83,33
+Coordinates=990,320,93,36
 
 [DmGetServer.fdqAluno]
 Coordinates=10,500,128,33
 Visible=False
 
 [fdqFuncfuncionario_id]
-Coordinates=990,485,125,33
+Coordinates=990,485,141,36
 
 [DmGetServer.fdqFunc]
 Coordinates=1081,364,123,33
@@ -64,12 +64,12 @@ Visible=False
 Coordinates=813,10,166,51
 
 [fdmPerfil]
-Coordinates=1696,190,58,33
+Coordinates=2304,270,66,36
 LayerNames=NewLayer0
 Visible=True
 
 [fdmPerfilrg]
-Coordinates=325,441,69,33
+Coordinates=325,441,77,36
 
 [DmGetServer.fdqRespAluno]
 Coordinates=10,568,153,33
@@ -84,50 +84,50 @@ Coordinates=751,500,202,33
 Visible=False
 
 [fdmPerfilcpf]
-Coordinates=757,844,74,33
+Coordinates=757,844,83,36
 
 [Dm.RESTClient1]
-Coordinates=630,400,95,33
+Coordinates=630,400,112,36
 Visible=False
 
 [fdqFunccpf]
-Coordinates=678,863,70,33
+Coordinates=678,863,78,36
 
 [fdmPerfilsenha]
-Coordinates=990,705,88,33
+Coordinates=990,705,100,36
 
 [fdmPerfilinformacoes_gerais]
-Coordinates=990,760,156,33
+Coordinates=990,760,178,36
 
 [DmGetServer.fdqTurmaAluno]
 Coordinates=739,364,159,33
 Visible=False
 
 [fdmPerfilnome]
-Coordinates=990,815,86,33
+Coordinates=990,815,97,36
 
 [fdqFuncsexo]
-Coordinates=971,863,78,33
+Coordinates=971,863,88,36
 
 [fdqFuncrg]
-Coordinates=599,863,65,33
+Coordinates=599,863,72,36
 
 [fdqFuncinformacoes_gerais]
-Coordinates=1262,1,152,33
+Coordinates=1262,1,173,36
 
 [Dm.fdqRespTelefone]
-Coordinates=828,432,117,33
+Coordinates=828,432,136,36
 Visible=False
 
 [fdqFunc]
-Coordinates=270,380,54,33
+Coordinates=270,380,61,36
 Visible=False
 
 [fdqFuncescola_id]
-Coordinates=871,767,101,33
+Coordinates=871,767,115,36
 
 [Dm.fdqResp]
-Coordinates=521,568,74,33
+Coordinates=521,568,86,36
 Visible=False
 
 [DmGetServer.fdqResp]
@@ -135,43 +135,43 @@ Coordinates=144,432,124,33
 Visible=False
 
 [fdqFuncativo]
-Coordinates=510,863,78,33
+Coordinates=510,863,88,36
 
 [Dm.fdqLoginRealizado]
-Coordinates=109,364,125,33
+Coordinates=109,364,145,36
 Visible=False
 
 [Dm.fdqTurmaAluno]
-Coordinates=372,364,110,33
+Coordinates=372,364,126,36
 Visible=False
 
 [fdmPerfilsexo]
-Coordinates=411,863,82,33
+Coordinates=411,863,93,36
 
 [Dm.fdqLogError]
-Coordinates=633,432,93,33
+Coordinates=633,432,106,36
 Visible=False
 
 [Dm.fdqRespAluno]
-Coordinates=508,364,104,33
+Coordinates=508,364,118,36
 Visible=False
 
 [fdmPerfilsobrenome]
-Coordinates=1262,56,114,33
+Coordinates=1262,56,130,36
 
 [DmGetServer.fdqAgendaTurma]
 Coordinates=197,568,168,33
 Visible=False
 
 [Dm.fdqFuncTipo]
-Coordinates=402,568,96,33
+Coordinates=402,568,109,36
 Visible=False
 
 [fdqFuncfuncionario_tipo_id]
-Coordinates=1262,111,150,33
+Coordinates=1262,111,169,36
 
 [Dm.RESTResponse1]
-Coordinates=160,420,116,33
+Coordinates=160,420,137,36
 Visible=False
 
 [DmGetServer.fdqAgenda]
@@ -179,36 +179,36 @@ Coordinates=328,500,136,33
 Visible=False
 
 [Dm.fdqLoginUltimo]
-Coordinates=10,432,109,33
+Coordinates=10,432,124,36
 Visible=False
 
 [Dm.fdqTurma]
-Coordinates=636,364,81,33
+Coordinates=636,364,93,36
 Visible=False
 
 [Dm.fdqRespTipo]
-Coordinates=995,500,96,33
+Coordinates=995,500,111,36
 Visible=False
 
 [Dm.fdqFunc]
-Coordinates=987,364,74,33
+Coordinates=987,364,84,36
 Visible=False
 
 [fdqFuncsobrenome]
-Coordinates=1262,166,110,33
+Coordinates=1262,166,125,36
 
 [Dm.RESTRequest1]
-Coordinates=770,340,107,33
+Coordinates=770,340,127,36
 Visible=False
 
 [fdqFuncnome]
-Coordinates=213,863,82,33
+Coordinates=213,863,93,36
 
 [fdmPerfilemail]
-Coordinates=114,863,85,33
+Coordinates=114,863,96,36
 
 []
-Coordinates=990,595,146,36
+Coordinates=599,320,112,36
 LayerNames=NewLayer1
 Visible=False
 
@@ -218,93 +218,91 @@ ActiveLayerNames=NewLayer0;NewLayer1
 EditingLayerName=NewLayer1
 
 [BindSourceDB1]
-Coordinates=1628,180,96,267
+Coordinates=2228,260,114,322
 LayerNames=NewLayer1
 
 [BindingsList1]
-Coordinates=0,0,82,33
+Coordinates=0,0,91,36
 
 [edtEmail]
-Coordinates=140,100,57,51
+Coordinates=140,100,65,58
 LayerNames=NewLayer1
 
 [edtSobrenome]
-Coordinates=450,60,86,51
+Coordinates=450,60,98,58
 LayerNames=NewLayer1
 
 [edtNome]
-Coordinates=450,0,58,51
+Coordinates=450,0,66,58
 LayerNames=NewLayer1
 
 [Label7]
-Coordinates=51,55,46,51
+Coordinates=51,55,53,58
 
 [Label6]
-Coordinates=343,1,46,51
+Coordinates=343,1,53,58
 
 [lblNome]
-Coordinates=243,232,54,51
+Coordinates=243,232,62,58
 
 [edtSenha]
-Coordinates=343,155,60,51
+Coordinates=343,155,69,58
 
 [Label2]
-Coordinates=343,232,46,51
+Coordinates=343,232,53,58
 
 [ListBox1]
-Coordinates=422,137,116,177
+Coordinates=422,137,139,212
+Visible=True
 
 [Label1]
-Coordinates=110,1,46,51
+Coordinates=110,1,53,58
 
 [Label5]
-Coordinates=243,78,46,51
+Coordinates=243,78,53,58
 
 [Label3]
-Coordinates=243,1,46,51
+Coordinates=243,1,53,58
 
 [edtRG]
-Coordinates=343,78,45,51
+Coordinates=343,78,51,58
 
 [cmbSexo]
-Coordinates=31,132,84,123
+Coordinates=31,132,101,146
 
 [edtCPF]
-Coordinates=243,155,50,51
+Coordinates=243,155,58,58
 
 [lstItemSobrenome]
-Coordinates=225,316,104,33
+Coordinates=225,316,119,36
 
 [lstItemNome]
-Coordinates=599,56,76,33
+Coordinates=599,56,87,36
 
 [lstItemEmail]
-Coordinates=27,316,75,33
+Coordinates=27,316,85,36
 
 [lstItemSenha]
-Coordinates=324,316,78,33
+Coordinates=324,316,90,36
 
 [lstItemCPF]
-Coordinates=599,1,68,33
+Coordinates=599,1,78,36
 
 [lstItemRG]
-Coordinates=599,111,62,33
+Coordinates=599,111,72,36
 
 [lstItemSexo]
-Coordinates=126,316,72,33
+Coordinates=126,316,82,36
 
 [edtTelefone]
-Coordinates=490,410,72,51
+Coordinates=490,410,82,58
 
 [lstItemTelefone]
-Coordinates=599,243,89,33
+Coordinates=599,243,103,36
 
 [Label4]
-Coordinates=599,166,46,51
+Coordinates=599,166,53,58
 
 [imgSalvar]
-Coordinates=599,243,63,51
-
-[fdmPerfiltelefone]
-Coordinates=599,320,98,33
+Coordinates=599,243,72,58
 

@@ -299,8 +299,7 @@ end;
 procedure TfrmPrincipal.imgMeuPerfilClick(Sender: TObject);
 begin
   inherited;
-  if Usuario.Tipo = Funcionario then
-    OpenForm(TfrmPerfil);
+  OpenForm(TfrmPerfil);
 end;
 
 procedure TfrmPrincipal.lblAgendaClick(Sender: TObject);
