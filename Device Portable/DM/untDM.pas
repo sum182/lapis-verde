@@ -56,6 +56,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
+    procedure fgActivityDialogCancel(Sender: TObject);
   private
     SyncServer: Boolean;
     procedure ConectarSQLite(FDConnection: TFDConnection; DataBaseName: String);
@@ -101,6 +102,7 @@ var
   Dm: TDm;
   Usuario: TUsuario;
   Configuracoes:TConfiguracoes;
+  FActivityDialogThread: TThread;
 
 const
   BASE_URL: String =
@@ -181,6 +183,11 @@ begin
   Usuario := TUsuario.Create;
 
   SetModoTeste;
+end;
+
+procedure TDm.fgActivityDialogCancel(Sender: TObject);
+begin
+  FActivityDialogThread.Terminate;
 end;
 
 procedure TDm.GetConfiguracoes;

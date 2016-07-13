@@ -80,11 +80,8 @@ type
     edtTelefone: TEdit;
     imgSalvar: TImage;
     procedure FormCreate(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
     procedure imgSalvarClick(Sender: TObject);
   private
-    FActivityDialogThread: TThread;
     procedure GetPerfil;
     procedure SalvarPerfil;
   public
@@ -121,7 +118,14 @@ begin
           GetPerfil;
 
           if TThread.CheckTerminated then
-            Exit;
+          begin
+            TThread.Synchronize(nil, procedure
+            begin
+              imgVoltar.OnClick(self);
+              Application.ProcessMessages;
+              Exit;
+            end);
+          end;
 
 
         finally
@@ -138,22 +142,6 @@ begin
     FActivityDialogThread.Start;
   end;
 
-end;
-
-procedure TfrmPerfil.FormKeyUp(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
-begin
-   MsgPoupUp('FormKeyUp');
-
-  if Key = vkHardwareBack then
-  begin
-    if DM.fgActivityDialog.IsShown  Then
-    begin
-      FActivityDialogThread.Terminate;
-      MsgPoupUp('FActivityDialogThread.Terminate;');
-    end;
-  end;
-  inherited;
 end;
 
 procedure TfrmPerfil.GetPerfil;
@@ -216,7 +204,12 @@ begin
           SalvarPerfil;
 
           if TThread.CheckTerminated then
-            Exit;
+            TThread.Synchronize(nil, procedure
+            begin
+               layBase.Enabled:=True;
+               Application.ProcessMessages;
+               Exit;
+            end);
 
 
         finally

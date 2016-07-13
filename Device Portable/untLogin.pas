@@ -52,7 +52,7 @@ type
     procedure edtUsuarioClick(Sender: TObject);
     procedure edtSenhaClick(Sender: TObject);
   private
-    FActivityDialogThread: TThread;
+    fErroLogin:boolean;
     fLoginOK:boolean;
     fLogin: string;
     fSenha: string;
@@ -110,7 +110,17 @@ begin
           Login;
 
           if TThread.CheckTerminated then
-            Exit;
+          begin
+            TThread.Synchronize(nil, procedure
+            begin
+              layBase.Enabled:=True;
+              Application.ProcessMessages;
+              lblErrorLogin.Visible := False;
+              edtSenha.Text:= EmptyStr;
+              KeyboardHide;
+              Exit;
+            end);
+          end;
 
 
         finally
@@ -129,7 +139,9 @@ begin
                 layBase.Enabled:=True;
                 Application.ProcessMessages;
 
-                lblErrorLogin.Visible := True;
+                if not fErroLogin then
+                  lblErrorLogin.Visible := True;
+
                 edtSenha.Text:= EmptyStr;
                 //edtSenha.SetFocus;
                 KeyboardHide;
@@ -282,6 +294,7 @@ end;
 procedure TfrmLogin.Login;
 begin
   fLoginOK:=False;
+  fErroLogin:=False;
   KeyboardHide;
   btnLogin.SetFocus;
   lblErrorLogin.Visible := False;
@@ -326,8 +339,18 @@ begin
   except
   on E:Exception do
     begin
-      MsgPoupUp('Erro ao realizar o Login.');
+      fErroLogin:=True;
       fLoginOk:=False;
+
+      DM.SetLogError( E.Message,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'LoginFuncionario',
+                      Now,
+                      'Erro ao realizar o Login.' + #13 + E.Message
+                     );
+
       Abort;
     end;
   end;
@@ -365,8 +388,18 @@ begin
   except
   on E:Exception do
     begin
-      MsgPoupUp('Erro ao realizar o Login.');
+      fErroLogin:=True;
       fLoginOk:=False;
+
+      DM.SetLogError( E.Message,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'LoginResponsavel',
+                      Now,
+                      'Erro ao realizar o Login.' + #13 + E.Message
+                     );
+
       Abort;
     end;
   end;

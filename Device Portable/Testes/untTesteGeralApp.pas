@@ -64,7 +64,6 @@ type
     Metodo: String;
     MetodosOK: Integer;
     MetodosErro: Integer;
-    FActivityDialogThread: TThread;
     procedure SetLogTeste(Descricao: String);
     procedure SetLogTesteOk(Metodo: String);
     procedure SetLogTesteErro(Metodo: String; Erro: String);

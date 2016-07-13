@@ -158,7 +158,6 @@ type
   private
     fAllowCloseForm : Boolean;
     MsgCriarConta:String;
-    fActivityDialogThread: TThread;
     fEmailOk:Boolean;
     fCPFOk:Boolean;
     fCriarContaOk:Boolean;

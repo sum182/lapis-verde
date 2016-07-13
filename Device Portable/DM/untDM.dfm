@@ -26,6 +26,8 @@ object Dm: TDm
     Top = 61
   end
   object fgActivityDialog: TfgActivityDialog
+    Cancellable = True
+    OnCancel = fgActivityDialogCancel
     Left = 648
     Top = 111
   end
