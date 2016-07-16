@@ -404,7 +404,7 @@ inherited frmLogin: TfrmLogin
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
-        object lblErrorLogin: TLabel
+        object lblUsuarioInvalido: TLabel
           Align = Center
           StyledSettings = []
           Size.Width = 320.000000000000000000
@@ -472,7 +472,7 @@ inherited frmLogin: TfrmLogin
       end
     end
   end
-  object fgVirtualKeyboard: TfgVirtualKeyboard
+  object fgKeyboard: TfgVirtualKeyboard
     Buttons = <
       item
         Caption = 'Apple'
@@ -483,8 +483,8 @@ inherited frmLogin: TfrmLogin
       item
         Caption = 'Tomato'
       end>
-    OnShow = fgVirtualKeyboardShow
-    OnHide = fgVirtualKeyboardHide
+    OnShow = fgKeyboardShow
+    OnHide = fgKeyboardHide
     Left = 252
     Top = 368
   end

@@ -1,14 +1,9 @@
 inherited frmPerfil: TfrmPerfil
   Caption = 'Meu Perfil'
-  ClientHeight = 600
-  ClientWidth = 317
   StyleBook = DMStyles.styleAndroid
   DesignerMasterStyle = 3
   inherited layBase: TLayout
-    Size.Width = 317.000000000000000000
-    Size.Height = 600.000000000000000000
     inherited ToolBar1: TToolBar
-      Size.Width = 317.000000000000000000
       inherited lblTitulo: TLabel
         Text = 'Meu Perfil'
       end
@@ -111,10 +106,10 @@ inherited frmPerfil: TfrmPerfil
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E1DB65368EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB55B68EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A8470005B3CFA52081F188600000000
+                  721FB1E71A117315233D622E8C445C9B2A847000B64BFA2E33397ABA00000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -134,11 +129,11 @@ inherited frmPerfil: TfrmPerfil
             PNG = {
               89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
               F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-              009349444154484BEDCE4D0A84300C86E122CEB217F136FE2C3C8EB7113C5EE9
-              4AA19D7C35116556D2B871FA8228C13CAD29956E154268F8533FC207E7DC1663
+              009349444154484BEDCE4D0A84300C86E122CEB607F136FE2C3C8EB711BC5DE9
+              4EA19D7C35116556D2B871FA8228C13CAD29956E154268F8533FC207E7DC1663
               9C7894AAF89D1570EFFD6CADAD79A4D7E9E6E872FBECFE10A79F3FF42C04B43C
               FA29EBE6B43C628B8095BE3B1E1F65E11216B10DE87C880A2E0180C287F4AAB8
-              04081A60755C02B8BB295D5C02FC185E7A43C67C017E48EB8A55FF440C000000
+              04081A60755C02B8BB295D5C02FC185E7A43C67C01CBADEB6078D60975000000
               0049454E44AE426082}
             FileName = 
               'C:\Projetos\Agenda\Imagens\ic_done\ic_done_white_24dp\android\dr' +
@@ -152,13 +147,13 @@ inherited frmPerfil: TfrmPerfil
               89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
               98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
               00E7494441545847ED96310E8240104529C4C25379080B2F63E26D2CD4A8C7B2
-              DD8E18C0FF9919347143E5EE129DD70CBB4BFE7F218450398EE3FC1B7DDF2FBB
+              DC9218C0FF9919347143E5EE129DD70CBB4BFE7F218450398EE3FC1B7DDF2FBB
               AEDBEAB22C9469DBF68649F6BA5D0608BCCB186B3DCE0B8A6332659E108A6725
               53BB4C0C14BB4C141453E62A0E23DF91C1D77483F0030217BA3509EE4B2B1342
               78301125478C49299CA7932110DA69E800CA4E185129ECA79531182AD9424C0A
               6BCA5C861B5EA47B81192E1D02CACF18B59EE5953158225D824AAD8AC8182C93
               4EA1699ABB5E1AF9640C964AF707F9650C968BC34839198312E2320319033265
-              FEF41CC7F93DAAEA09274F198863936E020000000049454E44AE426082}
+              FEF41CC7F93DAAEA090ABA19852C5019B30000000049454E44AE426082}
             FileName = 
               'C:\Projetos\Agenda\Imagens\ic_done\ic_done_white_24dp\android\dr' +
               'awable-hdpi\ic_done_white_24dp.png'
@@ -234,7 +229,7 @@ inherited frmPerfil: TfrmPerfil
               'awable-xxxhdpi\ic_done_white_24dp.png'
           end>
         Align = Right
-        Position.X = 269.000000000000000000
+        Position.X = 272.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -242,308 +237,317 @@ inherited frmPerfil: TfrmPerfil
         OnClick = imgSalvarClick
       end
     end
-    object ListBox1: TListBox
+    object VertScrollBox1: TVertScrollBox
       Align = Client
-      Size.Width = 317.000000000000000000
-      Size.Height = 552.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'transparentlistboxstyle'
       TabOrder = 1
-      DisableFocusEffect = True
-      ItemHeight = 90.000000000000000000
-      DefaultItemStyles.ItemStyle = ''
-      DefaultItemStyles.GroupHeaderStyle = ''
-      DefaultItemStyles.GroupFooterStyle = ''
-      Viewport.Width = 272.000000000000000000
-      Viewport.Height = 552.000000000000000000
-      object lstItemNome: TListBoxItem
-        Selectable = False
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
+      Viewport.Width = 320.000000000000000000
+      Viewport.Height = 432.000000000000000000
+      object ListBox1: TListBox
+        Align = Client
+        Size.Width = 320.000000000000000000
+        Size.Height = 432.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'transparentlistboxstyle'
         TabOrder = 0
-        object edtNome: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
+        DisableFocusEffect = True
+        ItemHeight = 90.000000000000000000
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 275.000000000000000000
+        Viewport.Height = 432.000000000000000000
+        object lstItemNome: TListBoxItem
+          Selectable = False
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
+          Size.PlatformDefault = False
           TabOrder = 0
-          KeyboardType = Alphabet
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
+          object edtNome: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            KeyboardType = Alphabet
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object lblNome: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Nome'
+          end
         end
-        object lblNome: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
+        object lstItemSobrenome: TListBoxItem
+          Selectable = False
+          Position.Y = 90.000000000000000000
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
           Size.PlatformDefault = False
-          Text = 'Nome'
-        end
-      end
-      object lstItemSobrenome: TListBoxItem
-        Selectable = False
-        Position.Y = 90.000000000000000000
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        object Label1: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'Sobrenome'
-        end
-        object edtSobrenome: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
           TabOrder = 1
-          KeyboardType = Alphabet
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
+          object Label1: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Sobrenome'
+          end
+          object edtSobrenome: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            KeyboardType = Alphabet
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
         end
-      end
-      object lstItemEmail: TListBoxItem
-        Selectable = False
-        Position.Y = 180.000000000000000000
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 2
-        object Label2: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
+        object lstItemEmail: TListBoxItem
+          Selectable = False
+          Position.Y = 180.000000000000000000
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
           Size.PlatformDefault = False
-          Text = 'Email'
+          TabOrder = 2
+          object Label2: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Email'
+          end
+          object edtEmail: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            KeyboardType = EmailAddress
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
         end
-        object edtEmail: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 1
-          KeyboardType = EmailAddress
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
+        object lstItemSenha: TListBoxItem
+          Selectable = False
+          Position.Y = 270.000000000000000000
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
           Size.PlatformDefault = False
+          TabOrder = 3
+          object Label5: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Senha'
+          end
+          object edtSenha: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            ReturnKeyType = Next
+            Password = True
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
         end
-      end
-      object lstItemSenha: TListBoxItem
-        Selectable = False
-        Position.Y = 270.000000000000000000
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 3
-        object Label5: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
+        object lstItemTelefone: TListBoxItem
+          Selectable = False
+          Position.Y = 360.000000000000000000
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
           Size.PlatformDefault = False
-          Text = 'Senha'
+          TabOrder = 6
+          object Label4: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Telefone'
+          end
+          object edtTelefone: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            KeyboardType = PhonePad
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Celular'
+          end
         end
-        object edtSenha: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 1
-          ReturnKeyType = Next
-          Password = True
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
+        object lstItemCPF: TListBoxItem
+          Selectable = False
+          Position.Y = 450.000000000000000000
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
           Size.PlatformDefault = False
+          TabOrder = 4
+          object Label3: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'CPF'
+          end
+          object edtCPF: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            KeyboardType = NumberPad
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
         end
-      end
-      object lstItemTelefone: TListBoxItem
-        Selectable = False
-        Position.Y = 360.000000000000000000
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 6
-        object Label4: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
+        object lstItemRG: TListBoxItem
+          Selectable = False
+          Position.Y = 540.000000000000000000
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
           Size.PlatformDefault = False
-          Text = 'Telefone'
+          TabOrder = 5
+          object Label6: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'RG'
+          end
+          object edtRG: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            KeyboardType = NumberPad
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
         end
-        object edtTelefone: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 0
-          KeyboardType = PhonePad
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
+        object lstItemSexo: TListBoxItem
+          Selectable = False
+          Position.Y = 630.000000000000000000
+          Size.Width = 275.000000000000000000
+          Size.Height = 90.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Celular'
-        end
-      end
-      object lstItemCPF: TListBoxItem
-        Selectable = False
-        Position.Y = 450.000000000000000000
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 4
-        object Label3: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'CPF'
-        end
-        object edtCPF: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 0
-          KeyboardType = NumberPad
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-        end
-      end
-      object lstItemRG: TListBoxItem
-        Selectable = False
-        Position.Y = 540.000000000000000000
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 5
-        object Label6: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'RG'
-        end
-        object edtRG: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 0
-          KeyboardType = NumberPad
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-        end
-      end
-      object lstItemSexo: TListBoxItem
-        Selectable = False
-        Position.Y = 630.000000000000000000
-        Size.Width = 272.000000000000000000
-        Size.Height = 90.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 7
-        object Label7: TLabel
-          Align = Top
-          StyledSettings = [Family, Size, FontColor]
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'Sexo'
-        end
-        object cmbSexo: TComboBox
-          Align = Top
-          Items.Strings = (
-            'Masculino'
-            'Feminino')
-          Margins.Left = 5.000000000000000000
-          Margins.Top = 5.000000000000000000
-          Margins.Right = 30.000000000000000000
-          Margins.Bottom = 20.000000000000000000
-          Position.X = 5.000000000000000000
-          Position.Y = 33.000000000000000000
-          Size.Width = 237.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 0
+          TabOrder = 7
+          object Label7: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Sexo'
+          end
+          object cmbSexo: TComboBox
+            Align = Top
+            Items.Strings = (
+              'Masculino'
+              'Feminino')
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 33.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
         end
       end
     end
@@ -553,8 +557,8 @@ inherited frmPerfil: TfrmPerfil
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
       'where f.escola_id = :escola_id')
-    Left = 140
-    Top = 457
+    Left = 260
+    Top = 249
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -636,8 +640,8 @@ inherited frmPerfil: TfrmPerfil
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 224
-    Top = 464
+    Left = 256
+    Top = 192
     object fdmPerfilnome: TStringField
       FieldName = 'nome'
       Origin = 'nome'
@@ -751,5 +755,21 @@ inherited frmPerfil: TfrmPerfil
       Control = edtCPF
       Track = False
     end
+  end
+  object fgKeyboard: TfgVirtualKeyboard
+    Buttons = <
+      item
+        Caption = 'Apple'
+      end
+      item
+        Caption = 'Orange'
+      end
+      item
+        Caption = 'Tomato'
+      end>
+    OnShow = fgKeyboardShow
+    OnHide = fgKeyboardHide
+    Left = 252
+    Top = 136
   end
 end

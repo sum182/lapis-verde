@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.Client,
   FireDAC.Comp.DataSet, System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
-  FMX.Edit, FMX.ListBox,smNetworkState
+  FMX.Edit, FMX.ListBox,smNetworkState, FGX.VirtualKeyboard
 
   {$IFDEF ANDROID}
    ,Androidapi.Helpers
@@ -79,8 +79,12 @@ type
     Label4: TLabel;
     edtTelefone: TEdit;
     imgSalvar: TImage;
+    fgKeyboard: TfgVirtualKeyboard;
+    VertScrollBox1: TVertScrollBox;
     procedure FormCreate(Sender: TObject);
     procedure imgSalvarClick(Sender: TObject);
+    procedure fgKeyboardHide(Sender: TObject; const Bounds: TRect);
+    procedure fgKeyboardShow(Sender: TObject; const Bounds: TRect);
   private
     procedure GetPerfil;
     procedure SalvarPerfil;
@@ -99,6 +103,23 @@ uses untDMStyles, untDmGetServer, untDM, untTypes, smCrypt, untRestClient,
   untDmSaveServer, smMensagensFMX, untResourceString;
 
 { TfrmPerfilFuncionario }
+
+procedure TfrmPerfil.fgKeyboardHide(Sender: TObject; const Bounds: TRect);
+begin
+  inherited;
+  layBase.Align := TAlignLayout.Client;
+end;
+
+procedure TfrmPerfil.fgKeyboardShow(Sender: TObject; const Bounds: TRect);
+begin
+  inherited;
+  layBase.Align := TAlignLayout.Top;
+
+  if BorderStyle <> TFmxFormBorderStyle.None then
+    layBase.Height := Screen.Size.Height - Bounds.Height
+  else
+    layBase.Height := Screen.Size.Height - Bounds.Height - 20;
+end;
 
 procedure TfrmPerfil.FormCreate(Sender: TObject);
 begin

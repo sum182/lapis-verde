@@ -8,7 +8,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   smFrmBaseForAll,smGeralFMX, FMX.Effects, FMX.Objects,
   FMX.Controls.Presentation, FMX.Edit, FMX.Layouts, smCrypt, FMX.ListBox,
-  FMX.TabControl, FGX.ProgressDialog, FGX.VirtualKeyboard, untTypes;
+  FMX.TabControl, FGX.ProgressDialog, FGX.VirtualKeyboard, untTypes,smNetworkState;
 
 type
   TfrmLogin = class(TfrmBaseForAll)
@@ -16,7 +16,7 @@ type
     layUsuario: TLayout;
     laySenha: TLayout;
     layBotoes: TLayout;
-    lblErrorLogin: TLabel;
+    lblUsuarioInvalido: TLabel;
     edtSenha: TEdit;
     edtUsuario: TEdit;
     btnLogin: TSpeedButton;
@@ -29,7 +29,7 @@ type
     btnEsqueceuSenha: TSpeedButton;
     Layout1: TLayout;
     btnCriarConta: TSpeedButton;
-    fgVirtualKeyboard: TfgVirtualKeyboard;
+    fgKeyboard: TfgVirtualKeyboard;
     Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure edtUsuarioKeyDown(Sender: TObject; var Key: Word;
@@ -47,8 +47,8 @@ type
     procedure edtSenhaChange(Sender: TObject);
     procedure edtSenhaChangeTracking(Sender: TObject);
     procedure edtUsuarioChangeTracking(Sender: TObject);
-    procedure fgVirtualKeyboardHide(Sender: TObject; const Bounds: TRect);
-    procedure fgVirtualKeyboardShow(Sender: TObject; const Bounds: TRect);
+    procedure fgKeyboardHide(Sender: TObject; const Bounds: TRect);
+    procedure fgKeyboardShow(Sender: TObject; const Bounds: TRect);
     procedure edtUsuarioClick(Sender: TObject);
     procedure edtSenhaClick(Sender: TObject);
   private
@@ -115,7 +115,7 @@ begin
             begin
               layBase.Enabled:=True;
               Application.ProcessMessages;
-              lblErrorLogin.Visible := False;
+              lblUsuarioInvalido.Visible := False;
               edtSenha.Text:= EmptyStr;
               KeyboardHide;
               Exit;
@@ -138,10 +138,7 @@ begin
                 DM.fgActivityDialog.Hide;
                 layBase.Enabled:=True;
                 Application.ProcessMessages;
-
-                if not fErroLogin then
-                  lblErrorLogin.Visible := True;
-
+                lblUsuarioInvalido.Visible := not fErroLogin;
                 edtSenha.Text:= EmptyStr;
                 //edtSenha.SetFocus;
                 KeyboardHide;
@@ -187,13 +184,13 @@ begin
 end;
 
 
-procedure TfrmLogin.fgVirtualKeyboardHide(Sender: TObject; const Bounds: TRect);
+procedure TfrmLogin.fgKeyboardHide(Sender: TObject; const Bounds: TRect);
 begin
   inherited;
   layBase.Align := TAlignLayout.Client;
 end;
 
-procedure TfrmLogin.fgVirtualKeyboardShow(Sender: TObject; const Bounds: TRect);
+procedure TfrmLogin.fgKeyboardShow(Sender: TObject; const Bounds: TRect);
 begin
   inherited;
   layBase.Align := TAlignLayout.Top;
@@ -257,7 +254,7 @@ begin
     Exit;
   end; }
 
-  lblErrorLogin.Visible := False;
+  lblUsuarioInvalido.Visible := False;
   btnEsqueceuSenha.Visible:=False;
   SetStyle(Self);
   fAllowCloseForm:= True;
@@ -266,7 +263,7 @@ end;
 procedure TfrmLogin.FormShow(Sender: TObject);
 begin
   inherited;
-  lblErrorLogin.Visible:=False;
+  lblUsuarioInvalido.Visible:=False;
   SetStateButtons;
 end;
 
@@ -297,9 +294,14 @@ begin
   fErroLogin:=False;
   KeyboardHide;
   btnLogin.SetFocus;
-  lblErrorLogin.Visible := False;
+  lblUsuarioInvalido.Visible := False;
   fLogin := GetTextoLogin;
   fSenha := Encrypt(edtSenha.Text);
+
+  if not smNetworkState.ValidarConexao  then
+  begin
+    Exit;
+  end;
 
   if LoginResponsavel then
   begin

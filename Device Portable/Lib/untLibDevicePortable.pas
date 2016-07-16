@@ -104,6 +104,7 @@ begin
   if IsSysOSWindows then
     Exit;
 
+  Exit;
   smMensagensFMX.MsgPoupUp(Mensagem);
 end;
 

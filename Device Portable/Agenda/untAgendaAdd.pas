@@ -14,7 +14,7 @@ type
     btnEnviar: TSpeedButton;
     lblAgenda: TLabel;
     layEspaco1: TLayout;
-    fgVirtualKeyboard1: TfgVirtualKeyboard;
+    fgKeyboard: TfgVirtualKeyboard;
     layMemo: TLayout;
     VertScrollBox1: TVertScrollBox;
     imgEnviar: TImage;
@@ -34,8 +34,8 @@ type
     procedure memAgendaChangeTracking(Sender: TObject);
     procedure memAgendaChange(Sender: TObject);
     procedure memAgendaClick(Sender: TObject);
-    procedure fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
-    procedure fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
+    procedure fgKeyboardHide(Sender: TObject; const Bounds: TRect);
+    procedure fgKeyboardShow(Sender: TObject; const Bounds: TRect);
     procedure imgEnviarClick(Sender: TObject);
   private
     procedure SetCabecalho;
@@ -66,14 +66,14 @@ begin
   inherited;
 end;
 
-procedure TfrmAgendaAdd.fgVirtualKeyboard1Hide(Sender: TObject;
+procedure TfrmAgendaAdd.fgKeyboardHide(Sender: TObject;
   const Bounds: TRect);
 begin
   inherited;
   layBase.Align := TAlignLayout.Client;
 end;
 
-procedure TfrmAgendaAdd.fgVirtualKeyboard1Show(Sender: TObject;
+procedure TfrmAgendaAdd.fgKeyboardShow(Sender: TObject;
   const Bounds: TRect);
 begin
   inherited;
