@@ -15,7 +15,7 @@ uses
   smDBFireDac, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, untDmSaveServer, System.Classes, untDM,smNetworkState,
-  FMX.TabControl;
+  FMX.TabControl, FMX.ScrollBox, FMX.Memo, FMX.Edit;
 
 type
   TfrmTesteGeralApp = class(TfrmBaseToolBar)
@@ -51,6 +51,9 @@ type
     SpeedButton2: TSpeedButton;
     Layout8: TLayout;
     lblPropriedades: TLabel;
+    TabItem4: TTabItem;
+    Edit1: TEdit;
+    Memo1: TMemo;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);

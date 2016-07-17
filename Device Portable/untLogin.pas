@@ -60,6 +60,7 @@ type
     function LoginFuncionario: boolean;
     procedure OpenFrmPrincipal;
     procedure Login;
+    procedure FimLogin;
     function GetTextoLogin:String;
     procedure SetStateButtons;
 
@@ -113,12 +114,7 @@ begin
           begin
             TThread.Synchronize(nil, procedure
             begin
-              layBase.Enabled:=True;
-              Application.ProcessMessages;
-              lblUsuarioInvalido.Visible := False;
-              edtSenha.Text:= EmptyStr;
-              KeyboardHide;
-              Exit;
+              FimLogin;
             end);
           end;
 
@@ -127,22 +123,11 @@ begin
           if not TThread.CheckTerminated then
             TThread.Synchronize(nil, procedure
             begin
+             
               if fLoginOk then
-              begin
                 OpenFrmPrincipal;
-                DM.fgActivityDialog.Hide;
-                Application.ProcessMessages;
-              end
-              else
-              begin
-                DM.fgActivityDialog.Hide;
-                layBase.Enabled:=True;
-                Application.ProcessMessages;
-                lblUsuarioInvalido.Visible := not fErroLogin;
-                edtSenha.Text:= EmptyStr;
-                //edtSenha.SetFocus;
-                KeyboardHide;
-              end;
+              FimLogin;
+
             end);
         end;
       end);
@@ -240,6 +225,23 @@ begin
    end;
 end;
 
+procedure TfrmLogin.FimLogin;
+begin
+  DM.fgActivityDialog.Hide;
+  layBase.Enabled:=True;
+  lblUsuarioInvalido.Visible := not fLoginOK;
+
+  if fErroLogin then
+    lblUsuarioInvalido.Visible := False;
+
+  if (fErroLogin) or (not fLoginOK) Then
+    edtSenha.Text:= EmptyStr;
+
+  //edtSenha.SetFocus;
+  Application.ProcessMessages;
+  KeyboardHide;
+end;
+
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -300,6 +302,7 @@ begin
 
   if not smNetworkState.ValidarConexao  then
   begin
+    fErroLogin:=True;
     Exit;
   end;
 
@@ -368,8 +371,6 @@ begin
        if not ValidacoesRestClientBeforeExecute(True) then
          Exit;
 
-       //result:=False;
-       //exit;
        LDataSetList := RestClient.SmResponsavelClient.LoginResponsavel(fLogin, fSenha);
        LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
 
@@ -380,7 +381,8 @@ begin
       begin
         Dm.SetLogin(LDataSet.FieldByName('responsavel_id').AsInteger,
                     TUsuarioTipo.Responsavel,
-                    0);
+                    0
+                    );
       end;
 
 

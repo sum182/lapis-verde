@@ -12,7 +12,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
+  Vcl.ExtCtrls
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -53,6 +54,7 @@ type
     FDConnectionDBWin32Release: TFDConnection;
     FDConnectionDBWin32Debug: TFDConnection;
     fdqLoginUltimo: TFDQuery;
+    fdqUsuarioLogado: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -91,6 +93,9 @@ type
     procedure ProcessSaveUpdate(Process: string);
 
     procedure SetLogin(IdUsuario:Integer; TipoUsuario: TUsuarioTipo;EscolaId:Integer);
+
+    procedure OpenUsuarioLogado;
+
     procedure LoginAuto;
 
     procedure SyncronizarDadosServerGeral;
@@ -308,6 +313,34 @@ begin
   OpenTurmaAluno;
 end;
 
+procedure TDm.OpenUsuarioLogado;
+begin
+  fdqUsuarioLogado.Close;
+  fdqUsuarioLogado.SQL.Clear;
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqUsuarioLogado.SQL.Add('select * from responsavel r');
+    fdqUsuarioLogado.SQL.Add('where r.responsavel_id = :responsavel_id');
+    fdqUsuarioLogado.ParamByName('responsavel_id').AsInteger := Usuario.Id;
+  end;
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqUsuarioLogado.SQL.Add('select * from funcionario f');
+    fdqUsuarioLogado.SQL.Add('where f.escola_id = :escola_id');
+    fdqUsuarioLogado.SQL.Add('and f.funcionario_id = :funcionario_id');
+    fdqUsuarioLogado.ParamByName('escola_id').AsInteger := GetEscolaId;
+    fdqUsuarioLogado.ParamByName('funcionario_id').AsInteger := Usuario.Id;
+  end;
+
+
+  fdqUsuarioLogado.Open;
+
+  Usuario.Nome := fdqUsuarioLogado.FieldByName('nome').AsString;
+  Usuario.Sobrenome := fdqUsuarioLogado.FieldByName('Sobrenome').AsString;
+end;
+
 function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
 
@@ -386,6 +419,9 @@ procedure TDm.SetLogin(IdUsuario: Integer; TipoUsuario: TUsuarioTipo;EscolaId:In
 begin
   Usuario.Tipo := TipoUsuario;
   Usuario.Id := IdUsuario;
+  OpenUsuarioLogado;
+  //Usuario.Nome:= Nome;
+  //Usuario.Sobrenome:= Sobrenome;
   Dm.fEscolaId:= EscolaId;
 
   Dm.fdqLoginRealizado.Close;
@@ -407,8 +443,8 @@ begin
   IsModoTeste := True;
   fEscolaId := 1;
 
-  Usuario.Tipo := Funcionario;
-  Usuario.Id := 16;
+  //Usuario.Tipo := Funcionario;
+  //Usuario.Id := 16;
 end;
 
 procedure TDm.SyncronizarDadosServerGeral;

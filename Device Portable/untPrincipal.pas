@@ -218,6 +218,9 @@ begin
   fShowForm:=False;
   SetModoTeste;
   SetUsuario;
+
+  { TODO : Implentar uma saudação para usuário }
+  lstItemUsuario.Text:=Usuario.Nome;
 end;
 
 

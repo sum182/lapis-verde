@@ -116,9 +116,9 @@ begin
   layBase.Align := TAlignLayout.Top;
 
   if BorderStyle <> TFmxFormBorderStyle.None then
-    layBase.Height := Screen.Size.Height - Bounds.Height
+    layBase.Height := Screen.Size.Height - Bounds.Height - (0 + 20)
   else
-    layBase.Height := Screen.Size.Height - Bounds.Height - 20;
+    layBase.Height := Screen.Size.Height - Bounds.Height - (20 + 20);
 end;
 
 procedure TfrmPerfil.FormCreate(Sender: TObject);
@@ -273,6 +273,7 @@ begin
     if Usuario.Tipo = Responsavel then
       DmSaveServer.SaveResponsavel(fdmSalvar);
 
+    Dm.OpenUsuarioLogado;
     MsgPoupUp('Perfil atualizado com sucesso!');
   finally
     fdmSalvar.DisposeOf;

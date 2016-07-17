@@ -300,4 +300,9 @@ object Dm: TDm
     Left = 136
     Top = 272
   end
+  object fdqUsuarioLogado: TFDQuery
+    Connection = FDConnectionDB
+    Left = 232
+    Top = 272
+  end
 end
