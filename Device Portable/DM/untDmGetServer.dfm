@@ -20,6 +20,29 @@ object DmGetServer: TDmGetServer
         ParamType = ptInput
         Value = 1
       end>
+    object fdqProcessoAtualizacaoprocesso_atualizacao_id: TIntegerField
+      FieldName = 'processo_atualizacao_id'
+      Origin = 'processo_atualizacao_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqProcessoAtualizacaoprocesso: TStringField
+      FieldName = 'processo'
+      Origin = 'processo'
+      Size = 200
+    end
+    object fdqProcessoAtualizacaodata: TDateTimeField
+      FieldName = 'data'
+      Origin = 'data'
+    end
+    object fdqProcessoAtualizacaodata_local: TDateTimeField
+      FieldName = 'data_local'
+      Origin = 'data_local'
+    end
+    object fdqProcessoAtualizacaoescola_id: TIntegerField
+      FieldName = 'escola_id'
+      Origin = 'escola_id'
+    end
   end
   object fdqAluno: TFDQuery
     Connection = Dm.FDConnectionDB

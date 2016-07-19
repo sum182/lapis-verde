@@ -82,7 +82,11 @@ object Dm: TDm
     Top = 8
   end
   object fdqProcessoAtualizacao: TFDQuery
-    IndexFieldNames = 'processo'
+    Indexes = <
+      item
+        Active = True
+        Fields = 'processo'
+      end>
     Connection = FDConnectionDB
     SQL.Strings = (
       'SELECT * FROM processo_atualizacao'
@@ -302,7 +306,7 @@ object Dm: TDm
   end
   object fdqUsuarioLogado: TFDQuery
     Connection = FDConnectionDB
-    Left = 232
-    Top = 272
+    Left = 264
+    Top = 264
   end
 end

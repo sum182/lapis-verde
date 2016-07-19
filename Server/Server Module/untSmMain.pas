@@ -261,8 +261,34 @@ begin
                                             EscolaId,
                                             Usuario);
 
-      fdqProcessoAtualizacao.Active := False;
-      fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= EscolaId;
+
+      fdqProcessoAtualizacao.Close;
+      fdqProcessoAtualizacao.SQL.Clear;
+
+
+      if Usuario.Tipo = Funcionario then
+      begin
+        fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
+        fdqProcessoAtualizacao.SQL.Add('where ((escola_id = :escola_id) or (escola_id = 0))');
+        fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger := EscolaId;
+      end;
+
+
+      if Usuario.Tipo = Responsavel then
+      begin
+        fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
+        fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) or escola_id in (select a.escola_id');
+        fdqProcessoAtualizacao.SQL.Add('                                       from aluno a');
+        fdqProcessoAtualizacao.SQL.Add('                                       where a.aluno_id in (select ra.aluno_id from responsavel_aluno ra');
+        fdqProcessoAtualizacao.SQL.Add('                                                            where ra.responsavel_id = :responsavel_id');
+        fdqProcessoAtualizacao.SQL.Add('                                                            )');
+        fdqProcessoAtualizacao.SQL.Add('                                       )');
+        fdqProcessoAtualizacao.ParamByName('responsavel_id').AsInteger := Usuario.Id;
+      end;
+
+      fdqProcessoAtualizacao.Open;
+
+
       TFDJSONDataSetsWriter.ListAdd(Result,fdqProcessoAtualizacao);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do

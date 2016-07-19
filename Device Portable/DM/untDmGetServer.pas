@@ -24,6 +24,11 @@ type
     fdqAgendaAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
     fdqAgendaKeysInsert: TFDQuery;
+    fdqProcessoAtualizacaoprocesso_atualizacao_id: TIntegerField;
+    fdqProcessoAtualizacaoprocesso: TStringField;
+    fdqProcessoAtualizacaodata: TDateTimeField;
+    fdqProcessoAtualizacaodata_local: TDateTimeField;
+    fdqProcessoAtualizacaoescola_id: TIntegerField;
   private
   public
     procedure OpenProcessoAtualizacao;
@@ -79,7 +84,7 @@ implementation
 
 uses untDM, untRestClient, smDBFireDac,
   FMX.Dialogs, System.SysUtils, smGeralFMX, untLibDevicePortable, FMX.Forms,smMensagensFMX,smNetworkState,
-  untLibGeral, Data.DBXJSONReflect, System.JSON, System.ZLib;
+  untLibGeral, Data.DBXJSONReflect, System.JSON, System.ZLib, untTypes;
 
 {$R *.dfm}
 
@@ -552,7 +557,29 @@ end;
 procedure TDmGetServer.OpenProcessoAtualizacao;
 begin
   fdqProcessoAtualizacao.Close;
-  fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqProcessoAtualizacao.SQL.Clear;
+
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
+    fdqProcessoAtualizacao.SQL.Add('where ((escola_id = :escola_id) or (escola_id = 0))');
+    fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger := GetEscolaId;
+  end;
+
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
+    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) or escola_id in (select a.escola_id');
+    fdqProcessoAtualizacao.SQL.Add('                                       from aluno a');
+    fdqProcessoAtualizacao.SQL.Add('                                       where a.aluno_id in (select ra.aluno_id from responsavel_aluno ra');
+    fdqProcessoAtualizacao.SQL.Add('                                                            where ra.responsavel_id = :responsavel_id');
+    fdqProcessoAtualizacao.SQL.Add('                                                            )');
+    fdqProcessoAtualizacao.SQL.Add('                                       )');
+    fdqProcessoAtualizacao.ParamByName('responsavel_id').AsInteger := Usuario.Id;
+  end;
+
   fdqProcessoAtualizacao.Open;
 end;
 
