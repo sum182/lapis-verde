@@ -427,6 +427,8 @@ var
   fdqDataSet: TFDQuery;
 begin
   try
+    fdqDataSet := TFDQuery.Create(self);
+
     try
       if Nome = '' then
        raise Exception.Create('GetDataSet: Nome não definido');
@@ -436,7 +438,6 @@ begin
 
       if AtualizaDataSetLocal then
       begin
-        fdqDataSet := TFDQuery.Create(self);
         fdqDataSet.Connection:=Dm.FDConnectionDB;
 
         fdqDataSet.Active := False;
@@ -486,7 +487,8 @@ begin
     end;
     end;
   finally
-    if AtualizaDataSetLocal then
+    //if AtualizaDataSetLocal then
+     if Assigned(fdqDataSet) then
       fdqDataSet.DisposeOf;
   end;
 
