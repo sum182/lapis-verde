@@ -148,17 +148,9 @@ object SmMain: TSmMain
     Connection = FDConnection
     SQL.Strings = (
       'select * from responsavel r'
-      'where r.escola_id = :escola_id'
-      'and ativo = '#39'S'#39)
+      'where ativo = '#39'S'#39)
     Left = 56
     Top = 176
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftString
-        ParamType = ptInput
-        Value = '1'
-      end>
   end
   object fdqRespAluno: TFDQuery
     Connection = FDConnection
@@ -168,16 +160,10 @@ object SmMain: TSmMain
       
         'inner join responsavel r on (r.responsavel_id = ra.responsavel_i' +
         'd)'
-      'where r.escola_id = :escola_id')
+      'where r.ativo = '#39'S'#39
+      '')
     Left = 144
     Top = 176
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 1
-      end>
   end
   object fdqRespTelefone: TFDQuery
     Connection = FDConnection
@@ -187,16 +173,11 @@ object SmMain: TSmMain
       
         'inner join responsavel r on (r.responsavel_id = rt.responsavel_i' +
         'd)'
-      'where r.escola_id = :escola_id')
+      'where r.ativo = '#39'S'#39
+      ''
+      '')
     Left = 240
     Top = 176
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 1
-      end>
   end
   object fdqFuncionarios: TFDQuery
     Connection = FDConnection

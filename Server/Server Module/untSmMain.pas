@@ -321,15 +321,15 @@ begin
       Result := TFDJSONDataSets.Create;
 
       fdqResp.Active := False;
-      fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
+      //fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel',fdqResp);
 
       fdqRespAluno.Active := False;
-      fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      //fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_aluno',fdqRespAluno);
 
       fdqRespTelefone.Active := False;
-      fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
+      //fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);
       SmMain.SaveLogServerRequest(LogServerRequest);
      except on E:Exception do

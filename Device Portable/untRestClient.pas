@@ -70,6 +70,12 @@ begin
    if IsSysOSWindows then
    begin
 
+    //Modo de Teste - Apache Local
+    DSRestConnection1.Host := DSRestConnectionApacheLocal.Host;
+    DSRestConnection1.UrlPath := DSRestConnectionApacheLocal.UrlPath;
+    exit;
+
+
     //Modo de Teste - Server local stand alone
     {DSRestConnection1.Host := DSRestConnectionLocal.Host;
     DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
