@@ -1,4 +1,4 @@
-program Agenda;
+program LapisVerde;
 
 uses
   Controls,
