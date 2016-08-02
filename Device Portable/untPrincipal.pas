@@ -73,6 +73,7 @@ type
     procedure Sair;
     procedure SetModoTeste;
     procedure SetUsuario;
+    procedure PrimeiroAcesso;
   protected
 
   public
@@ -137,6 +138,54 @@ begin
    ToolBarPincipal.Visible:=False;
 end;
 
+
+procedure TfrmPrincipal.PrimeiroAcesso;
+begin
+
+  Dm.PrimeiroAcessoVerificar;
+  if PrimeiroAcessoOK then
+   Exit;
+
+
+  if DM.fgActivityDialog.IsShown Then
+   DM.fgActivityDialog.Hide;
+
+  FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+    begin
+      try
+        TThread.Synchronize(nil, procedure
+        begin
+          GridPanelLayout1.Enabled:=False;
+          DM.fgActivityDialog.Title:='Aguarde';
+          DM.fgActivityDialog.Message := 'Atualizando informações para seu primeiro acesso.';
+          DM.fgActivityDialog.Show;
+        end);
+
+        Dm.PrimeiroAcessoExecutar;
+
+        if TThread.CheckTerminated then
+          TThread.Synchronize(nil, procedure
+          begin
+             GridPanelLayout1.Enabled:=True;
+             Application.ProcessMessages;
+             DM.fgActivityDialog.Title:='';
+             Exit;
+          end);
+
+      finally
+        if not TThread.CheckTerminated then
+          TThread.Synchronize(nil, procedure
+          begin
+             DM.fgActivityDialog.Hide;
+             GridPanelLayout1.Enabled:=True;
+             Application.ProcessMessages;
+             DM.fgActivityDialog.Title:='';
+          end);
+      end;
+    end);
+  FActivityDialogThread.FreeOnTerminate := False;
+  FActivityDialogThread.Start;
+end;
 
 procedure TfrmPrincipal.Sair;
 begin
@@ -260,7 +309,7 @@ begin
     frmLogin := nil;
   end;
 
-  Dm.PrimeiroAcesso;
+  PrimeiroAcesso;
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;

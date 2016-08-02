@@ -12,8 +12,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  Vcl.ExtCtrls
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -91,7 +90,11 @@ type
     procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
     procedure OpenProcessoAtualizacao;
     procedure OpenParametro;
-    procedure PrimeiroAcesso;
+
+    procedure PrimeiroAcessoVerificar;
+    procedure PrimeiroAcessoExecutar;
+
+
     function ProcessHasUpdate(Process: string): Boolean;
     procedure ProcessSaveUpdate(Process: string);
 
@@ -140,8 +143,8 @@ begin
   if not smNetworkState.IsConnected then
     Exit;
 
-  if not PrimeiroAcessoOK then
-    Exit;
+  //if not PrimeiroAcessoOK then
+    //Exit;
 
   Result:= True;
 end;
@@ -237,6 +240,23 @@ begin
   AppName:= ChangeFileExt(ExtractFileName(AppExeName), '');
   AppPath:= ExtractFilePath(AppExeName);
   {$ENDIF}
+end;
+
+procedure TDm.PrimeiroAcessoVerificar;
+var
+  Chave:String;
+  FieldUsuario:String;
+begin
+  PrimeiroAcessoOK:=False;
+  OpenParametro;
+  Chave:='primeiro_acesso';
+  fdqParametro.IndexFieldNames := 'chave';
+  if fdqParametro.FindKey([Chave]) Then
+    if fdqParametro.FieldByName('valor').AsString = 'OK' then
+    begin
+      PrimeiroAcessoOK:=True;
+      Exit;
+    end;
 end;
 
 procedure TDm.LoginAuto;
@@ -412,12 +432,13 @@ begin
   Usuario.Sobrenome := fdqUsuarioLogado.FieldByName('Sobrenome').AsString;
 end;
 
-procedure TDm.PrimeiroAcesso;
+procedure TDm.PrimeiroAcessoExecutar;
 var
   Chave:String;
   FieldUsuario:String;
 begin
   try
+    MsgPoupUpTeste('ini primeiro acesso');
     PrimeiroAcessoOK:=False;
     OpenParametro;
     Chave:='primeiro_acesso';
@@ -435,10 +456,13 @@ begin
       fdqParametro.FieldByName('Chave').AsString:=Chave;
       fdqParametro.FieldByName(FieldUsuario).AsInteger:=Usuario.Id;
       fdqParametro.Post;
+      MsgPoupUpTeste('primeiro acesso new');
+
     end
     else if fdqParametro.FieldByName('valor').AsString = 'OK' then
     begin
       PrimeiroAcessoOK:=True;
+       MsgPoupUpTeste('primeiro acesso ok');
       Exit;
     end;
 
@@ -453,6 +477,7 @@ begin
   finally
     if not PrimeiroAcessoOK then
       ShowMessage('Não foi possível syncronizar dados para seu primeiro acesso!');
+    MsgPoupUpTeste('fim primeiro acesso');
   end;
 end;
 

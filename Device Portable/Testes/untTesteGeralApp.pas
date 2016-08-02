@@ -54,6 +54,8 @@ type
     TabItem4: TTabItem;
     Edit1: TEdit;
     Memo1: TMemo;
+    Layout9: TLayout;
+    SpeedButton3: TSpeedButton;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
@@ -63,6 +65,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -376,6 +379,12 @@ begin
   RestClient.DSRestConnection1.UrlPath := 'lapis_verde';
   lblPropriedades.Text:= 'RestClient.DSRestConnection1.UrlPath:' +
                           RestClient.DSRestConnection1.UrlPath;
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+  Dm.PrimeiroAcessoExecutar;
 end;
 
 procedure TfrmTesteGeralApp.btnMetodosGetAgendaClick(Sender: TObject);
