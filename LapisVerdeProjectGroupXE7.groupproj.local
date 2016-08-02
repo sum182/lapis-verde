@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/04/01 23:59:18.000.308,C:\Projetos\Agenda\AgendaProjectGroup.groupproj=C:\Projetos\Agenda\AgendaProjectGroupXE7.groupproj</Transaction>
+    <Transaction>2016/08/02 10:43:58.989,C:\Projetos\Agenda\LapisVerdeProjectGroupXE7.groupproj=C:\Projetos\Agenda\AgendaProjectGroupXE7.groupproj</Transaction>
+  </Transactions>
+	<Default.Personality>
+		<Projects ActiveProject="C:\Projetos\Agenda\Desktop\LapisVerde.dproj"/>
+	</Default.Personality>
+</BorlandProject>

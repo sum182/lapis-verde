@@ -3,7 +3,7 @@
         <ProjectGuid>{B666703C-8E5F-4FA9-9E73-E6F953DD90AD}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Desktop\Agenda.dproj">
+        <Projects Include="Desktop\LapisVerde.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Criptografia\Criptografia.dproj">
@@ -23,14 +23,14 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="Agenda">
-        <MSBuild Projects="Desktop\Agenda.dproj"/>
+    <Target Name="LapisVerde">
+        <MSBuild Projects="Desktop\LapisVerde.dproj"/>
     </Target>
-    <Target Name="Agenda:Clean">
-        <MSBuild Projects="Desktop\Agenda.dproj" Targets="Clean"/>
+    <Target Name="LapisVerde:Clean">
+        <MSBuild Projects="Desktop\LapisVerde.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="Agenda:Make">
-        <MSBuild Projects="Desktop\Agenda.dproj" Targets="Make"/>
+    <Target Name="LapisVerde:Make">
+        <MSBuild Projects="Desktop\LapisVerde.dproj" Targets="Make"/>
     </Target>
     <Target Name="Criptografia">
         <MSBuild Projects="Criptografia\Criptografia.dproj"/>
@@ -60,13 +60,13 @@
         <MSBuild Projects="C:\Componentes\sum182\D15\Sum182D15.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="Agenda;Criptografia;Sum182;Sum182D15"/>
+        <CallTarget Targets="LapisVerde;Criptografia;Sum182;Sum182D15"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Agenda:Clean;Criptografia:Clean;Sum182:Clean;Sum182D15:Clean"/>
+        <CallTarget Targets="LapisVerde:Clean;Criptografia:Clean;Sum182:Clean;Sum182D15:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Agenda:Make;Criptografia:Make;Sum182:Make;Sum182D15:Make"/>
+        <CallTarget Targets="LapisVerde:Make;Criptografia:Make;Sum182:Make;Sum182D15:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
