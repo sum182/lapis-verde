@@ -127,7 +127,6 @@ procedure TfrmCadastroFuncionario.fdqBuscaBeforeOpen(DataSet: TDataSet);
 begin
   inherited;
   SetIdEscolaParamBusca(fdqBusca);
-
 end;
 
 procedure TfrmCadastroFuncionario.fdqCadAfterOpen(DataSet: TDataSet);

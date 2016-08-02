@@ -38,7 +38,7 @@ type
     StatusBar: TdxRibbonStatusBar;
     cxImageList1: TcxImageList;
     dxRibbon1: TdxRibbon;
-    dxRibbon1TabCadastros: TdxRibbonTab;
+    mnCadastros: TdxRibbonTab;
     dxBarManager1: TdxBarManager;
     dxBarManager1Bar2: TdxBar;
     dxBarManager1Bar3: TdxBar;
@@ -103,7 +103,7 @@ type
     mnAdministradorSistema: TdxRibbonTab;
     dxBarManager1Bar4: TdxBar;
     dxBarLargeButton33: TdxBarLargeButton;
-    dxRibbon1TabAgenda: TdxRibbonTab;
+    mnAgenda: TdxRibbonTab;
     dxBarManager1Bar1: TdxBar;
     dxBarLargeButton34: TdxBarLargeButton;
     dxBarLargeButton35: TdxBarLargeButton;
@@ -229,6 +229,7 @@ end;
 
 procedure TfrmMenuPrincipal.SetViewMenus;
 begin
+  mnAgenda.Visible:=False;
   mnAdministradorSistema.Visible:= UsuarioIsAdminSistema;
 end;
 
@@ -322,7 +323,7 @@ end;
 
 procedure TfrmMenuPrincipal.FormShow(Sender: TObject);
 begin
-  dxRibbon1.ActiveTab:= dxRibbon1TabAgenda;
+  dxRibbon1.ActiveTab:= mnCadastros;
   SetViewMenus;
 end;
 

@@ -109,7 +109,7 @@ begin
   try
     try
       Dir := ExtractFilePath(Application.Exename);
-      Ini := TIniFile.Create(Dir + 'Agenda.ini');
+      Ini := TIniFile.Create(Dir + 'LapisVerde.ini');
       fIniDataBase := Decrypt(Ini.ReadString('BD', 'Database', EmptyStr));
       fIniUser_Name :=  Decrypt(Ini.ReadString('BD', 'User_Name', EmptyStr));
       fIniPassword := Decrypt(Ini.ReadString('BD', 'Password', EmptyStr));
@@ -120,7 +120,7 @@ begin
       fIdEscola:=Ini.ReadInteger('Configuracoes', 'IdEscola',0);
     except
       on E: Exception do
-        smMensagens.Msg('Erro ao ler o arquivo Leitura.ini!' + #13 +
+        smMensagens.Msg('Erro ao ler o arquivo LapisVerde.ini!' + #13 +
           E.Message, mtErro);
     end;
   finally
@@ -198,7 +198,7 @@ end;
 
 function TDM.GetNomeAplicacao: string;
 begin
-  Result:= 'Sistema Agenda';
+  Result:= 'Lápis Verde';
 end;
 
 function TDM.GetFuncionarioNomeCompleto: String;
