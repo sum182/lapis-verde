@@ -32,6 +32,7 @@ type
       const AItem: TListViewItem);
     procedure lstTurmasItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure SetView;
   private
   public
     { Public declarations }
@@ -45,7 +46,7 @@ implementation
 {$R *.fmx}
 
 uses untRestClient, Data.FireDACJSONReflect, untDM, untDmAgenda, untAgendaView,
-  untPrincipal, untDMStyles, untLibDevicePortable;
+  untPrincipal, untDMStyles, untLibDevicePortable, untTypes;
 
 procedure TfrmAgendaSelect.FormCreate(Sender: TObject);
 begin
@@ -55,6 +56,7 @@ begin
   Dm.OpenTurmas;
 
   dm.fdqAluno.First;
+  SetView;
 end;
 
 
@@ -88,6 +90,16 @@ begin
   frmAgendaView.NomeCompleto:= Dm.fdqTurma.FieldByName('nome').AsString;
   frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
   frmAgendaView.Show;
+end;
+
+procedure TfrmAgendaSelect.SetView;
+begin
+  if Usuario.Tipo = Responsavel then
+  begin
+    tbitTurma.Visible:=False;
+    tbCtrlPrincipal.ActiveTab:= tbitAlunos;
+    //tbCtrlPrincipal.TabPosition:= TTabPosition.None;
+  end;
 end;
 
 end.

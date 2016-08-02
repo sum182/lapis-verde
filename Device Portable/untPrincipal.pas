@@ -259,6 +259,8 @@ begin
     frmLogin.DisposeOf;
     frmLogin := nil;
   end;
+
+  Dm.PrimeiroAcesso;
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;

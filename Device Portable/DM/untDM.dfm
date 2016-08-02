@@ -288,4 +288,11 @@ object Dm: TDm
     Left = 264
     Top = 264
   end
+  object fdqParametro: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select * from parametro')
+    Left = 40
+    Top = 328
+  end
 end

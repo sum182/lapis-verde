@@ -55,6 +55,7 @@ type
     FDConnectionDBWin32Debug: TFDConnection;
     fdqLoginUltimo: TFDQuery;
     fdqUsuarioLogado: TFDQuery;
+    fdqParametro: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -89,6 +90,8 @@ type
     procedure ResetRESTConnection;
     procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
     procedure OpenProcessoAtualizacao;
+    procedure OpenParametro;
+    procedure PrimeiroAcesso;
     function ProcessHasUpdate(Process: string): Boolean;
     procedure ProcessSaveUpdate(Process: string);
 
@@ -98,6 +101,7 @@ type
 
     procedure LoginAuto;
 
+    function AllowSyncronizar:Boolean;
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
 
@@ -108,6 +112,7 @@ var
   Usuario: TUsuario;
   Configuracoes:TConfiguracoes;
   FActivityDialogThread: TThread;
+  PrimeiroAcessoOK:Boolean;
 
 const
   BASE_URL: String =
@@ -121,6 +126,25 @@ uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untRestClient, smDBFireDa
   untDmSaveServer;
 
 {$R *.dfm}
+
+function TDm.AllowSyncronizar: Boolean;
+begin
+  Result := False;
+
+  if SyncServer then
+      Exit;
+
+  if Usuario.Id <= 0 then
+      Exit;
+
+  if not smNetworkState.IsConnected then
+    Exit;
+
+  if not PrimeiroAcessoOK then
+    Exit;
+
+  Result:= True;
+end;
 
 procedure TDm.CloseFuncionarios;
 begin
@@ -188,6 +212,7 @@ begin
   Usuario := TUsuario.Create;
 
   SetModoTeste;
+  OpenParametro;
 end;
 
 procedure TDm.fgActivityDialogCancel(Sender: TObject);
@@ -242,6 +267,30 @@ begin
 
   fdqFuncTipo.Close;
   fdqFuncTipo.Open;
+end;
+
+procedure TDm.OpenParametro;
+begin
+  fdqParametro.Close;
+  fdqParametro.SQL.Clear;
+  fdqParametro.SQL.Add('select * from parametro');
+  fdqParametro.SQL.Add('where 1=1');
+  fdqParametro.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqParametro.SQL.Add(' or (funcionario_id = :funcionario_id)');
+    fdqParametro.ParamByName('funcionario_id').AsInteger:=Usuario.Id;
+  end;
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqParametro.SQL.Add(' or (responsavel_id = :responsavel_id)');
+    fdqParametro.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
+  end;
+
+  fdqParametro.SQL.Add(')');
+  fdqParametro.Open;
 end;
 
 procedure TDm.OpenProcessoAtualizacao;
@@ -363,6 +412,50 @@ begin
   Usuario.Sobrenome := fdqUsuarioLogado.FieldByName('Sobrenome').AsString;
 end;
 
+procedure TDm.PrimeiroAcesso;
+var
+  Chave:String;
+  FieldUsuario:String;
+begin
+  try
+    PrimeiroAcessoOK:=False;
+    OpenParametro;
+    Chave:='primeiro_acesso';
+    fdqParametro.IndexFieldNames := 'chave';
+    if not fdqParametro.FindKey([Chave]) Then
+    begin
+      if Usuario.Tipo = Funcionario then
+        FieldUsuario:='funcionario_id';
+
+      if Usuario.Tipo = Responsavel then
+        FieldUsuario:='responsavel_id';
+
+      fdqParametro.Append;
+      fdqParametro.FieldByName('parametro_id').AsString:=GetGUID;
+      fdqParametro.FieldByName('Chave').AsString:=Chave;
+      fdqParametro.FieldByName(FieldUsuario).AsInteger:=Usuario.Id;
+      fdqParametro.Post;
+    end
+    else if fdqParametro.FieldByName('valor').AsString = 'OK' then
+    begin
+      PrimeiroAcessoOK:=True;
+      Exit;
+    end;
+
+    if not smNetworkState.ValidarConexao then
+      Exit;
+
+    SyncronizarDadosServerGeral;
+    fdqParametro.Edit;
+    fdqParametro.FieldByName('valor').AsString:='OK';
+    fdqParametro.Post;
+    PrimeiroAcessoOK:=True;
+  finally
+    if not PrimeiroAcessoOK then
+      ShowMessage('Não foi possível syncronizar dados para seu primeiro acesso!');
+  end;
+end;
+
 function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
 
@@ -472,13 +565,7 @@ end;
 procedure TDm.SyncronizarDadosServerGeral;
 begin
   try
-    if SyncServer then
-      Exit;
-
-    if Usuario.Id <= 0 then
-      Exit;
-
-    if not smNetworkState.IsConnected then
+    if not AllowSyncronizar then
       Exit;
 
     SyncServer := True;
@@ -507,13 +594,7 @@ end;
 procedure TDm.SyncronizarDadosServerBasico;
 begin
   try
-    if SyncServer then
-      Exit;
-
-    if Usuario.Id <= 0 then
-      Exit;
-
-    if not smNetworkState.IsConnected then
+    if not AllowSyncronizar then
       Exit;
 
     SyncServer := True;
