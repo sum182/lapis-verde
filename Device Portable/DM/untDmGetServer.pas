@@ -511,7 +511,7 @@ begin
 
     LDataSetList := RestClient.SmMainClient.GetProcessoAtualizacao(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
-    CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit]);
+    CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit,coDelete]);
   except on E:Exception do
   begin
     DM.SetLogError( E.Message,
@@ -724,9 +724,8 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-    //teste
-   //if not Dm.ProcessHasUpdate('turma') then
-    // Exit;
+    if not Dm.ProcessHasUpdate('turma') then
+      Exit;
 
     OpenTurmas;
     if not ValidacoesRestClientBeforeExecute then
