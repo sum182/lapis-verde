@@ -408,6 +408,7 @@ begin
 
   try
     DmGetServer.GetResponsaveis;
+    MsgPoupUp('DmGetServer.GetResponsaveis OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetResponsaveis Erro:' + e.Message);
   end;
@@ -433,7 +434,7 @@ begin
 
   try
     DmGetServer.GetAlunos;
-    //MsgPoupUpTeste('DmGetServer.GetAlunos OK');
+    MsgPoupUpTeste('DmGetServer.GetAlunos OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
   end;

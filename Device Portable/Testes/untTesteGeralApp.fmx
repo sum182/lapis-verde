@@ -128,14 +128,14 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 6
       TabPosition = PlatformDefault
       object TabItem1: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 80.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -239,7 +239,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 80.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
