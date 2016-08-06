@@ -139,7 +139,7 @@ begin
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
       OpenAgendaTurma(KeyValues);
       CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
-
+      MsgPoupUpTeste('DmGetServer.GetAgenda Executado: ' + DateToStr(DtIni) + ' à '+ DateToStr(DtFim));
     except on E:Exception do
     begin
       DM.SetLogError( E.Message,
@@ -265,6 +265,7 @@ begin
       CopyDataSet(LDataSet,fdqFunc);
 
       DM.ProcessSaveUpdate('funcionario');
+      MsgPoupUpTeste('DmGetServer.GetFuncionarios Executado');
     except on E:Exception do
     begin
       DM.SetLogError( E.Message,
@@ -315,7 +316,7 @@ begin
     CopyDataSet(LDataSet,fdqAluno);
 
     DM.ProcessSaveUpdate('aluno');
-
+    MsgPoupUpTeste('DmGetServer.GetAlunos Executado');
   except on E:Exception do
   begin
     DM.SetLogError( E.Message,
@@ -336,84 +337,84 @@ procedure TDmGetServer.GetDadosServerGeral;
 begin
   try
     GetProcessoAtualizacao;
-    MsgPoupUpTeste('DmGetServer.GetTabelaAtualizacao OK');
+    //MsgPoupUpTeste('DmGetServer.GetTabelaAtualizacao OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetTabelaAtualizacao Erro:' + e.Message);
   end;
 
   try
-    GetAlunos;;
-    MsgPoupUpTeste('DmGetServer.GetAlunos OK');
+    GetAlunos;
+    //MsgPoupUpTeste('DmGetServer.GetAlunos OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
   end;
 
   try
     GetTurmas;
-    MsgPoupUpTeste('DmGetServer.GetTurmas OK');
+    //MsgPoupUpTeste('DmGetServer.GetTurmas OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetTurmas Erro:' + e.Message);
   end;
 
   try
     GetResponsaveis;
-    MsgPoupUpTeste('DmGetServer.GetResponsaveis OK');
+    //MsgPoupUpTeste('DmGetServer.GetResponsaveis OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetResponsaveis Erro:' + e.Message);
   end;
 
   try
     GetFuncionarios;
-    MsgPoupUpTeste('DmGetServer.GetFuncionarios OK');
+    //MsgPoupUpTeste('DmGetServer.GetFuncionarios OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetFuncionarios Erro:' + e.Message);
   end;
 
   try
     GetEscola;
-    MsgPoupUpTeste('DmGetServer.GetEscola OK');
+    //MsgPoupUpTeste('DmGetServer.GetEscola OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetEscola Erro:' + e.Message);
   end;
 
   try
     GetPeriodoTipo;
-    MsgPoupUpTeste('DmGetServer.PeriodoTipo OK');
+    //MsgPoupUpTeste('DmGetServer.PeriodoTipo OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.PeriodoTipo Erro:' + e.Message);
   end;
 
   try
     GetResponsavelTipo;
-    MsgPoupUpTeste('DmGetServer.ResponsavelTipo OK');
+    //MsgPoupUpTeste('DmGetServer.ResponsavelTipo OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.ResponsavelTipo Erro:' + e.Message);
   end;
 
   try
     GetFuncionarioTipo;
-    MsgPoupUpTeste('DmGetServer.FuncionarioTipo OK');
+    //MsgPoupUpTeste('DmGetServer.FuncionarioTipo OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.FuncionarioTipo Erro:' + e.Message);
   end;
 
   try
     GetTelefoneTipo;
-    MsgPoupUpTeste('DmGetServer.TelefoneTipo OK');
+    //MsgPoupUpTeste('DmGetServer.TelefoneTipo OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.TelefoneTipo Erro:' + e.Message);
   end;
 
   try
     GetAgendaTipo;
-    MsgPoupUpTeste('DmGetServer.AgendaTipo OK');
+    //MsgPoupUpTeste('DmGetServer.AgendaTipo OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.AgendaTipo Erro:' + e.Message);
   end;
 
   try
     GetAgenda(Now - 30, Now + 1);
-    MsgPoupUpTeste('DmGetServer.GetAgenda OK');
+    //MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);
   end;
@@ -473,6 +474,7 @@ begin
         DM.ProcessSaveUpdate(Nome);
       end;
 
+      MsgPoupUpTeste('DmGetServer.' + Nome + ' Executado');
     except on E:Exception do
     begin
       DM.SetLogError( E.Message,
@@ -511,7 +513,8 @@ begin
 
     LDataSetList := RestClient.SmMainClient.GetProcessoAtualizacao(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
-    CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit,coDelete]);
+    CopyDataSet(LDataSet,fdqProcessoAtualizacao,False,[coAppend,coEdit]);
+    MsgPoupUpTeste('DmGetServer.GetTabelaAtualizacao Executado');
   except on E:Exception do
   begin
     DM.SetLogError( E.Message,
@@ -663,6 +666,7 @@ begin
       CopyDataSet(LDataSet,fdqRespTelefone);
 
       DM.ProcessSaveUpdate('responsavel');
+      MsgPoupUpTeste('DmGetServer.GetResponsaveis Executado');
     except on E:Exception do
     begin
       DM.SetLogError( E.Message,
@@ -699,16 +703,9 @@ procedure TDmGetServer.GetDadosServerBasico;
 begin
   try
     GetAgenda(Now - 1, Now + 7);
-    MsgPoupUpTeste('DmGetServer.GetAgenda OK');
+    //MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);
-  end;
-
-  try
-    GetAlunos;
-    MsgPoupUpTeste('DmGetServer.GetAlunos OK');
-  except on E:Exception do
-    MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
   end;
 
 end;
@@ -739,6 +736,7 @@ begin
     CopyDataSet(LDataSet,fdqTurmaAluno);
 
     DM.ProcessSaveUpdate('turma');
+    MsgPoupUpTeste('DmGetServer.GetTurmas Executado');
   except on E:Exception do
   begin
     DM.SetLogError( E.Message,

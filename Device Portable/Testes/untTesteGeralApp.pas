@@ -56,6 +56,8 @@ type
     Memo1: TMemo;
     Layout9: TLayout;
     SpeedButton3: TSpeedButton;
+    Layout10: TLayout;
+    btnGetResponsaveis: TSpeedButton;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
@@ -66,6 +68,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure btnGetResponsaveisClick(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -323,6 +326,16 @@ begin
     on E: Exception do
       SetLogTesteErro(Metodo, E.Message);
   end;
+
+   //Metodos DM
+   try
+    Metodo := 'Dm.PrimeiroAcessoExecutar';
+    Dm.PrimeiroAcessoExecutar;
+    SetLogTesteOk(Metodo);
+  except
+    on E: Exception do
+      SetLogTesteErro(Metodo, E.Message);
+  end;
 end;
 
 procedure TfrmTesteGeralApp.FormCreate(Sender: TObject);
@@ -387,12 +400,26 @@ begin
   Dm.PrimeiroAcessoExecutar;
 end;
 
+procedure TfrmTesteGeralApp.btnGetResponsaveisClick(Sender: TObject);
+begin
+  inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
+  try
+    DmGetServer.GetResponsaveis;
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetResponsaveis Erro:' + e.Message);
+  end;
+
+end;
+
 procedure TfrmTesteGeralApp.btnMetodosGetAgendaClick(Sender: TObject);
 begin
   inherited;
   try
     DmGetServer.GetAgenda(Now - 1, Now + 7);
-    MsgPoupUpTeste('DmGetServer.GetAgenda OK');
+    //MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);
   end;
@@ -406,7 +433,7 @@ begin
 
   try
     DmGetServer.GetAlunos;
-    MsgPoupUpTeste('DmGetServer.GetAlunos OK');
+    //MsgPoupUpTeste('DmGetServer.GetAlunos OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
   end;

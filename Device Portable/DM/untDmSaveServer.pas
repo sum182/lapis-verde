@@ -85,6 +85,7 @@ begin
       if MsgRetornoServer = EmptyStr then
         SetFlagEnviado(fdqAgenda);
 
+      MsgPoupUpTeste('DmSaveServer.SalvarAgenda Executado');
     except on E:Exception do
     begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
@@ -133,7 +134,7 @@ begin
         Exit;
 
       MsgRetornoServer:= RestClient.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
-
+      MsgPoupUpTeste('DmSaveServer.SalvarLogError Executado');
     except on E:Exception do
     begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
@@ -198,7 +199,7 @@ procedure TDmSaveServer.SaveDadosServerGeral;
 begin
   try
     SaveAgenda;
-    MsgPoupUpTeste('DmSaveServer.SalvarAgenda OK');
+    //MsgPoupUpTeste('DmSaveServer.SalvarAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmSaveServer.SalvarAgenda Erro:' + e.Message);
   end;
@@ -206,7 +207,7 @@ begin
 
   try
     SaveLogError;
-    MsgPoupUpTeste('DmSaveServer.SalvarLogError OK');
+    //MsgPoupUpTeste('DmSaveServer.SalvarLogError OK');
   except on E:Exception do
     MsgPoupUp('DmSaveServer.SalvarLogError Erro:' + e.Message);
   end;
@@ -254,7 +255,7 @@ procedure TDmSaveServer.SaveDadosServerBasico;
 begin
   try
     SaveAgenda;
-    MsgPoupUpTeste('DmSaveServer.SalvarAgenda OK');
+    //MsgPoupUpTeste('DmSaveServer.SalvarAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmSaveServer.SalvarAgenda Erro:' + e.Message);
   end;

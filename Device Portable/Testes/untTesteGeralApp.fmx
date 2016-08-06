@@ -21,10 +21,10 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB63B68EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E5DB64B68EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A8470004A00FABE8A1704A900000000
+                  721FB1E71A117315233D622E8C445C9B2A847000002DFA764E4E756F00000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -128,14 +128,14 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
       Size.Height = 432.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 6
       TabPosition = PlatformDefault
       object TabItem1: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 80.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -146,7 +146,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         ExplicitSize.cy = 49.000000000000000000
         object layMetodosOK: TLayout
           Align = Top
-          Size.Width = 50.000000000000000000
+          Size.Width = 320.000000000000000000
           Size.Height = 37.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -174,7 +174,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout1: TLayout
           Align = Top
           Position.Y = 37.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 320.000000000000000000
           Size.Height = 37.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
@@ -202,7 +202,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object LayTestar: TLayout
           Align = Top
           Position.Y = 74.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 320.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
@@ -225,7 +225,8 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           ItemSpaces.Left = 8.000000000000000000
           ItemSpaces.Right = 2.000000000000000000
           Align = Client
-          Size.Width = 50.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 249.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
           ItemAppearance.ItemHeight = 70
@@ -238,7 +239,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 80.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -252,7 +253,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           Size.Width = 320.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 6
+          TabOrder = 7
           object btnMetodosSyncGeral: TSpeedButton
             Align = Center
             Size.Width = 191.000000000000000000
@@ -270,7 +271,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           Size.Width = 320.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 5
+          TabOrder = 6
           object btnMetodosSyncBasico: TSpeedButton
             Align = Center
             Size.Width = 191.000000000000000000
@@ -288,7 +289,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           Size.Width = 320.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 4
+          TabOrder = 5
           object btnMetodosGetAlunos: TSpeedButton
             Align = Center
             Size.Width = 191.000000000000000000
@@ -302,7 +303,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         end
         object Layout5: TLayout
           Align = Top
-          Position.Y = 180.000000000000000000
+          Position.Y = 240.000000000000000000
           Size.Width = 320.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
@@ -320,7 +321,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         end
         object Layout9: TLayout
           Align = Top
-          Position.Y = 240.000000000000000000
+          Position.Y = 300.000000000000000000
           Size.Width = 320.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
@@ -334,6 +335,24 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
             Text = 'Primeiro Acesso'
             TextSettings.FontColor = claBlue
             OnClick = SpeedButton3Click
+          end
+        end
+        object Layout10: TLayout
+          Align = Top
+          Position.Y = 180.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object btnGetResponsaveis: TSpeedButton
+            Align = Center
+            Size.Width = 191.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'GetResponsaveis'
+            TextSettings.FontColor = claBlue
+            OnClick = btnGetResponsaveisClick
           end
         end
       end

@@ -116,6 +116,7 @@ var
   Configuracoes:TConfiguracoes;
   FActivityDialogThread: TThread;
   PrimeiroAcessoOK:Boolean;
+  PrimeiroAcessoInExecute:Boolean;
 
 const
   BASE_URL: String =
@@ -143,8 +144,9 @@ begin
   if not smNetworkState.IsConnected then
     Exit;
 
-  //if not PrimeiroAcessoOK then
-    //Exit;
+  if not PrimeiroAcessoOK then
+    if not PrimeiroAcessoInExecute then
+      Exit;
 
   Result:= True;
 end;
@@ -213,6 +215,9 @@ begin
   ConectarBases;
 
   Usuario := TUsuario.Create;
+
+  PrimeiroAcessoInExecute:=False;
+  PrimeiroAcessoOK:=False;
 
   SetModoTeste;
   OpenParametro;
@@ -438,46 +443,64 @@ var
   FieldUsuario:String;
 begin
   try
-    MsgPoupUpTeste('ini primeiro acesso');
-    PrimeiroAcessoOK:=False;
-    OpenParametro;
-    Chave:='primeiro_acesso';
-    fdqParametro.IndexFieldNames := 'chave';
-    if not fdqParametro.FindKey([Chave]) Then
-    begin
-      if Usuario.Tipo = Funcionario then
-        FieldUsuario:='funcionario_id';
+    try
+      PrimeiroAcessoInExecute:=True;
+      MsgPoupUpTeste('ini primeiro acesso');
+      PrimeiroAcessoOK:=False;
+      OpenParametro;
+      Chave:='primeiro_acesso';
+      fdqParametro.IndexFieldNames := 'chave';
+      if not fdqParametro.FindKey([Chave]) Then
+      begin
+        if Usuario.Tipo = Funcionario then
+          FieldUsuario:='funcionario_id';
 
-      if Usuario.Tipo = Responsavel then
-        FieldUsuario:='responsavel_id';
+        if Usuario.Tipo = Responsavel then
+          FieldUsuario:='responsavel_id';
 
-      fdqParametro.Append;
-      fdqParametro.FieldByName('parametro_id').AsString:=GetGUID;
-      fdqParametro.FieldByName('Chave').AsString:=Chave;
-      fdqParametro.FieldByName(FieldUsuario).AsInteger:=Usuario.Id;
+        fdqParametro.Append;
+        fdqParametro.FieldByName('parametro_id').AsString:=GetGUID;
+        fdqParametro.FieldByName('Chave').AsString:=Chave;
+        fdqParametro.FieldByName(FieldUsuario).AsInteger:=Usuario.Id;
+        fdqParametro.Post;
+        MsgPoupUpTeste('primeiro acesso new');
+
+      end
+      else if fdqParametro.FieldByName('valor').AsString = 'OK' then
+      begin
+        PrimeiroAcessoOK:=True;
+        MsgPoupUpTeste('primeiro acesso ok');
+        Exit;
+      end;
+
+      if not smNetworkState.ValidarConexao then
+        Exit;
+
+      MsgPoupUpTeste('SyncronizarDadosServerGeral');
+      SyncronizarDadosServerGeral;
+      fdqParametro.Edit;
+      fdqParametro.FieldByName('valor').AsString:='OK';
       fdqParametro.Post;
-      MsgPoupUpTeste('primeiro acesso new');
-
-    end
-    else if fdqParametro.FieldByName('valor').AsString = 'OK' then
-    begin
       PrimeiroAcessoOK:=True;
-       MsgPoupUpTeste('primeiro acesso ok');
-      Exit;
+    finally
+      if not PrimeiroAcessoOK then
+        ShowMessage('Não foi possível syncronizar dados para seu primeiro acesso!');
+
+      MsgPoupUpTeste('fim primeiro acesso');
+      PrimeiroAcessoInExecute:=False;
     end;
 
-    if not smNetworkState.ValidarConexao then
-      Exit;
-
-    SyncronizarDadosServerGeral;
-    fdqParametro.Edit;
-    fdqParametro.FieldByName('valor').AsString:='OK';
-    fdqParametro.Post;
-    PrimeiroAcessoOK:=True;
-  finally
-    if not PrimeiroAcessoOK then
-      ShowMessage('Não foi possível syncronizar dados para seu primeiro acesso!');
-    MsgPoupUpTeste('fim primeiro acesso');
+  except on E:Exception do
+    begin
+        DM.SetLogError( E.Message,
+                        GetApplicationName,
+                        UnitName,
+                        ClassName,
+                        'PrimeiroAcessoExecutar',
+                        Now,
+                        'Erro ao Syncronizar informações do primeiro acesso' + #13 + E.Message
+                      );
+    end;
   end;
 end;
 
@@ -620,6 +643,9 @@ procedure TDm.SyncronizarDadosServerBasico;
 begin
   try
     if not AllowSyncronizar then
+      Exit;
+
+    if PrimeiroAcessoInExecute then
       Exit;
 
     SyncServer := True;
