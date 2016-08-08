@@ -31,6 +31,7 @@ type
     fdqRespTelefone: TFDQuery;
     fdqFuncionarios: TFDQuery;
     fdqFuncionario: TFDQuery;
+    fdqRespEscola: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
@@ -320,14 +321,22 @@ begin
 
       Result := TFDJSONDataSets.Create;
 
+      //Tabela responsavel
       fdqResp.Active := False;
       //fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel',fdqResp);
 
+      //Tabela de responsavel_escola
+      fdqRespEscola.Active := False;
+      //fdqRespEscola.ParamByName('escola_id').AsInteger:= EscolaId;
+      TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_escola',fdqRespEscola);
+
+      //Tabela de responsavel_aluno
       fdqRespAluno.Active := False;
       //fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_aluno',fdqRespAluno);
 
+      //Tabela de responsavel_telefone
       fdqRespTelefone.Active := False;
       //fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);

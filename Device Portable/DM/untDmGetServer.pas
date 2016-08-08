@@ -29,6 +29,7 @@ type
     fdqProcessoAtualizacaodata: TDateTimeField;
     fdqProcessoAtualizacaodata_local: TDateTimeField;
     fdqProcessoAtualizacaoescola_id: TIntegerField;
+    fdqRespEscola: TFDQuery;
   private
   public
     procedure OpenProcessoAtualizacao;
@@ -648,8 +649,8 @@ var
 begin
   try
     try
-      if not Dm.ProcessHasUpdate('responsavel') then
-       Exit;
+      //if not Dm.ProcessHasUpdate('responsavel') then
+       //Exit;
 
       //OpenResponsaveis;
       if not ValidacoesRestClientBeforeExecute then
@@ -658,6 +659,9 @@ begin
       LDataSetList := RestClient.SmMainClient.GetResponsaveis(GetEscolaId,Usuario.Marshal);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
       CopyDataSet(LDataSet,fdqResp);
+
+      LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_escola');
+      CopyDataSet(LDataSet,fdqRespEscola);
 
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel_aluno');
       CopyDataSet(LDataSet,fdqRespAluno);

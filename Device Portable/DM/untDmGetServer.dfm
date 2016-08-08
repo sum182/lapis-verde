@@ -122,8 +122,8 @@ object DmGetServer: TDmGetServer
         'inner join responsavel r on (r.responsavel_id = ra.responsavel_i' +
         'd)'
       'where r.escola_id = :escola_id')
-    Left = 123
-    Top = 65
+    Left = 211
+    Top = 73
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -141,8 +141,8 @@ object DmGetServer: TDmGetServer
         'inner join responsavel r on (r.responsavel_id = rt.responsavel_i' +
         'd)'
       'where r.escola_id = :escola_id')
-    Left = 211
-    Top = 65
+    Left = 299
+    Top = 73
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -156,8 +156,8 @@ object DmGetServer: TDmGetServer
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
       'where f.escola_id = :escola_id')
-    Left = 314
-    Top = 65
+    Left = 402
+    Top = 73
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -261,5 +261,14 @@ object DmGetServer: TDmGetServer
         ParamType = ptInput
         Value = 42478d
       end>
+  end
+  object fdqRespEscola: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select re.*'
+      'from responsavel_escola re'
+      'where re.ativo = '#39'S'#39)
+    Left = 120
+    Top = 72
   end
 end
