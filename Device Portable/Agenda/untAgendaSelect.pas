@@ -30,10 +30,12 @@ type
     procedure FormCreate(Sender: TObject);
     procedure lstAlunosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure SetView;
     procedure lstTurmasItemClick(const Sender: TObject;
       const AItem: TListViewItem);
-    procedure SetView;
   private
+    procedure OpenAgendaAluno;
+    procedure OpenAgendaTurma;
   public
     { Public declarations }
   end;
@@ -65,6 +67,18 @@ procedure TfrmAgendaSelect.lstAlunosItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   inherited;
+  OpenAgendaAluno;
+end;
+
+procedure TfrmAgendaSelect.lstTurmasItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  inherited;
+  OpenAgendaTurma;
+end;
+
+procedure TfrmAgendaSelect.OpenAgendaAluno;
+begin
   //frmPrincipal.OpenForm(TfrmAgenda);
   if not Assigned(frmAgendaView) then
     Application.CreateForm(TfrmAgendaView, frmAgendaView);
@@ -77,10 +91,8 @@ begin
   frmAgendaView.Show;
 end;
 
-procedure TfrmAgendaSelect.lstTurmasItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
+procedure TfrmAgendaSelect.OpenAgendaTurma;
 begin
-  inherited;
   if not Assigned(frmAgendaView) then
     Application.CreateForm(TfrmAgendaView, frmAgendaView);
 
@@ -98,7 +110,7 @@ begin
   begin
     tbitTurma.Visible:=False;
     tbCtrlPrincipal.ActiveTab:= tbitAlunos;
-    //tbCtrlPrincipal.TabPosition:= TTabPosition.None;
+    tbCtrlPrincipal.TabPosition:= TTabPosition.None;
   end;
 end;
 

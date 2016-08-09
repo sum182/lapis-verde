@@ -256,7 +256,7 @@ begin
   lblCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
   btnAdd.Visible:= (Calendar.Date >= Date);
 
-  if UsuarioLogadoIsFuncionario then
+  //if UsuarioLogadoIsFuncionario then
     DmAgenda.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
 
   SetTitulo;

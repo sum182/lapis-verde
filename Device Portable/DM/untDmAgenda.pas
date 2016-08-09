@@ -94,7 +94,9 @@ begin
     if Usuario.Tipo = Responsavel then
       fdqAgendaCriar.FieldByName('responsavel_id').AsInteger:=Usuario.Id;
 
+    //Pegar a escola id de acordo com o Aluno
     fdqAgendaCriar.FieldByName('escola_id').AsInteger:=GetEscolaId;
+
     fdqAgendaCriar.Post;
 
     if AlunoId > 0 then

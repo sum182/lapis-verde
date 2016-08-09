@@ -78,6 +78,8 @@ type
 
     fEscolaId: Integer;
 
+
+    procedure SetSQLAlunos;
     procedure OpenAlunos;
     procedure OpenTurmas;
     procedure OpenTurmaAluno; overload;
@@ -281,7 +283,14 @@ end;
 procedure TDm.OpenAlunos;
 begin
   fdqAluno.Close;
-  fdqAluno.ParamByName('escola_id').AsInteger := GetEscolaId;
+  SetSQLAlunos;
+
+  if Usuario.Tipo = Funcionario then
+    fdqAluno.ParamByName('escola_id').AsInteger := GetEscolaId;
+
+  if Usuario.Tipo = Responsavel then
+    fdqAluno.ParamByName('responsavel_id').AsInteger := Usuario.Id;
+
   fdqAluno.Open;
 end;
 
@@ -609,6 +618,36 @@ begin
 
   //Usuario.Tipo := Funcionario;
   //Usuario.Id := 16;
+end;
+
+procedure TDm.SetSQLAlunos;
+begin
+
+  fdqAluno.SQL.Clear;
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqAluno.SQL.Clear;
+    fdqAluno.SQL.Add(' select a.*,');
+    fdqAluno.SQL.Add('       coalesce(a.nome,'') || ' + ' ' + ' || coalesce(a.sobrenome,'') as nome_completo');
+    fdqAluno.SQL.Add('');
+    fdqAluno.SQL.Add('from aluno a');
+    fdqAluno.SQL.Add('where escola_id = :escola_id');
+    fdqAluno.SQL.Add('order by nome');
+  end;
+
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqAluno.SQL.Clear;
+    fdqAluno.SQL.Add(' select a.*,');
+    fdqAluno.SQL.Add('       coalesce(a.nome,'') || ' + ' ' + ' || coalesce(a.sobrenome,'') as nome_completo');
+    fdqAluno.SQL.Add('');
+    fdqAluno.SQL.Add('from aluno a');
+    fdqAluno.SQL.Add('inner join responsavel_aluno ra on (ra.aluno_id = a.aluno_id)');
+    fdqAluno.SQL.Add('where ra.responsavel_id = :responsavel_id');
+    fdqAluno.SQL.Add('order by nome');
+  end;
 end;
 
 procedure TDm.SyncronizarDadosServerGeral;

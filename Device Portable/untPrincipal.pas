@@ -74,6 +74,7 @@ type
     procedure SetModoTeste;
     procedure SetUsuario;
     procedure PrimeiroAcesso;
+    function OpenAgendaAlunoAutomatico:Boolean;
   protected
 
   public
@@ -93,9 +94,33 @@ uses untLogin,
   untDmResponsavel, smMensagensFMX,smNetworkState
   //, untConfiguracoes
 
-  , untPerfil, untTypes, untSobre, untConfiguracoes;
+  , untPerfil, untTypes, untSobre, untConfiguracoes, untAgendaView;
 
 { TfrmPrincipal }
+
+
+function TfrmPrincipal.OpenAgendaAlunoAutomatico: Boolean;
+begin
+  Result:=False;
+
+  if Usuario.Tipo = Funcionario then
+    Exit;
+
+  Dm.OpenAlunos;
+  if Dm.fdqAluno.RecordCount = 1 then
+  begin
+    if not Assigned(frmAgendaView) then
+        Application.CreateForm(TfrmAgendaView, frmAgendaView);
+
+    frmAgendaView.AlunoId:= Dm.fdqAluno.FieldByName('aluno_id').AsInteger;
+    frmAgendaView.OwnerAgenda:= Dm.fdqAluno.FieldByName('nome').AsString;
+    frmAgendaView.NomeCompleto:= Dm.fdqAluno.FieldByName('nome_completo').AsString;
+    frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
+    frmAgendaView.TurmaId:= 0;
+    Result:=True;
+    frmAgendaView.Show;
+  end;
+end;
 
 procedure TfrmPrincipal.OpenForm(AFormClass: TComponentClass);
 begin
@@ -232,7 +257,8 @@ end;
 
 procedure TfrmPrincipal.AbrirAgenda;
 begin
-  OpenForm(TfrmAgendaSelect);
+  if not OpenAgendaAlunoAutomatico then
+    OpenForm(TfrmAgendaSelect);
 end;
 
 procedure TfrmPrincipal.AbrirMensagens;
