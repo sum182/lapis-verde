@@ -53,6 +53,7 @@ type
 
     procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
+    function GetSQLResponsavelEscola(ResponsavelId:Integer):String;
    {$METHODINFO ON}
     function GetAlunos(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetTurmas(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
@@ -146,8 +147,32 @@ begin
 
       Result := TFDJSONDataSets.Create;
 
-      fdqAluno.Active := False;
-      fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      if Usuario.Tipo = Funcionario then
+      begin
+        fdqAluno.Active := False;
+        fdqAluno.SQL.Clear;
+        fdqAluno.SQL.Add('SELECT a.*, concat(coalesce(a.nome,''),' + ' ' + ', coalesce(a.sobrenome,'')) as nome_completo');
+        fdqAluno.SQL.Add('FROM aluno a');
+        fdqAluno.SQL.Add('where 1=1');
+        fdqAluno.SQL.Add('and escola_id = :escola_id');
+        fdqAluno.SQL.Add('and ativo = '+ QuoTedStr('S'));
+        fdqAluno.SQL.Add('order by nome_completo');
+        fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      end;
+
+
+      if Usuario.Tipo = Responsavel then
+      begin
+        fdqAluno.Active := False;
+        fdqAluno.SQL.Clear;
+        fdqAluno.SQL.Add('SELECT a.*, concat(coalesce(a.nome,''),' + ' ' + ', coalesce(a.sobrenome,'')) as nome_completo');
+        fdqAluno.SQL.Add('FROM aluno a');
+        fdqAluno.SQL.Add('where 1=1');
+        fdqAluno.SQL.Add(GetSQLResponsavelEscola(Usuario.Id));
+        fdqAluno.SQL.Add('and ativo = '+ QuoTedStr('S'));
+        fdqAluno.SQL.Add('order by nome_completo');
+      end;
+
       TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
@@ -352,6 +377,17 @@ begin
   end;
 
 end;
+function TSmMain.GetSQLResponsavelEscola(ResponsavelId: Integer): String;
+begin
+  Result:=
+  'and escola_id in ('+
+                      ' select a.escola_id from aluno a'+
+                      ' inner join responsavel_aluno ra on (ra.aluno_id = a.aluno_id)'+
+                      ' where ra.responsavel_id = '+ IntToStr(ResponsavelId)+
+                      ' group by a.escola_id'+
+                       ')';
+end;
+
 function TSmMain.GetTurmas(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
