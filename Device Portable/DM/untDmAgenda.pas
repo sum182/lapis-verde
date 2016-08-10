@@ -89,13 +89,18 @@ begin
     fdqAgendaCriar.FieldByName('data_insert_local').AsDateTime:=Now;
 
     if Usuario.Tipo = Funcionario then
+    begin
       fdqAgendaCriar.FieldByName('funcionario_id').AsInteger:=Usuario.Id;
+      fdqAgendaCriar.FieldByName('escola_id').AsInteger:=GetEscolaId;
+    end;
 
     if Usuario.Tipo = Responsavel then
+    begin
       fdqAgendaCriar.FieldByName('responsavel_id').AsInteger:=Usuario.Id;
+      fdqAgendaCriar.FieldByName('escola_id').AsInteger:=GetEscolaId(AlunoId);
+    end;
 
     //Pegar a escola id de acordo com o Aluno
-    fdqAgendaCriar.FieldByName('escola_id').AsInteger:=GetEscolaId;
 
     fdqAgendaCriar.Post;
 
@@ -181,7 +186,11 @@ end;
 
 procedure TDmAgenda.SetParamsAgenda(AlunoId, TurmaId: Integer;Data:TDate);
 begin
-  fdqAgenda.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  if Usuario.Tipo = Funcionario then
+    fdqAgenda.ParamByName('escola_id').AsInteger:= GetEscolaId;
+
+  if Usuario.Tipo = Responsavel then
+    fdqAgenda.ParamByName('escola_id').AsInteger:= GetEscolaId(AlunoId);
 
   if AlunoId > 0 then
     fdqAgenda.ParamByName('aluno_id').AsInteger:= AlunoId;

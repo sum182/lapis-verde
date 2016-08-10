@@ -1,7 +1,7 @@
 object frmMainServer: TfrmMainServer
   Left = 271
   Top = 114
-  Caption = 'Servidor de Aplica'#231#227'o Rest/Json - Agenda'
+  Caption = 'L'#225'pis Verde - Servidor de Aplica'#231#227'o Rest/Json'
   ClientHeight = 235
   ClientWidth = 399
   Color = clBtnFace

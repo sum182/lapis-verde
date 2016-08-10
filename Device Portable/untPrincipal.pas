@@ -336,6 +336,7 @@ begin
   end;
 
   PrimeiroAcesso;
+  Dm.OpenQuerys;
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;

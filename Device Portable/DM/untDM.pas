@@ -93,6 +93,8 @@ type
     procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
     procedure OpenProcessoAtualizacao;
     procedure OpenParametro;
+    procedure OpenQuerys;
+
 
     procedure PrimeiroAcessoVerificar;
     procedure PrimeiroAcessoExecutar;
@@ -345,16 +347,25 @@ begin
    if Usuario.Tipo = Responsavel then
   begin
     fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
-    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) or escola_id in (select a.escola_id');
+     { TODO : OpenProcessoAtualizacao - Busca por Responsavel }
+    //As linhas abaixo estao inativas devido nao poder realizar os joins.
+    //As tabelas neste momento estao vazias
+    {fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) or escola_id in (select a.escola_id');
     fdqProcessoAtualizacao.SQL.Add('                                       from aluno a');
     fdqProcessoAtualizacao.SQL.Add('                                       where a.aluno_id in (select ra.aluno_id from responsavel_aluno ra');
     fdqProcessoAtualizacao.SQL.Add('                                                            where ra.responsavel_id = :responsavel_id');
     fdqProcessoAtualizacao.SQL.Add('                                                            )');
     fdqProcessoAtualizacao.SQL.Add('                                       )');
-    fdqProcessoAtualizacao.ParamByName('responsavel_id').AsInteger := Usuario.Id;
+    fdqProcessoAtualizacao.ParamByName('responsavel_id').AsInteger := Usuario.Id;}
   end;
 
   fdqProcessoAtualizacao.Open;
+end;
+
+procedure TDm.OpenQuerys;
+begin
+  OpenAlunos;
+  OpenTurmas;
 end;
 
 procedure TDm.OpenResponsaveis;

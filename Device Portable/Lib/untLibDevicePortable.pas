@@ -19,7 +19,7 @@ Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString,
   end;
 
   procedure SetStyle(Formulario:TForm);
-  function GetEscolaId:Integer;
+  function GetEscolaId(AlunoId:Integer=0):Integer;
   function IsModoTeste:Boolean;
   function IsTesteApp:Boolean;
 
@@ -50,9 +50,26 @@ begin
 
 end;
 
-function GetEscolaId:Integer;
+function GetEscolaId(AlunoId:Integer=0):Integer;
 begin
-  Result:= DM.fEscolaId;
+  if Usuario.Tipo = Funcionario then
+  begin
+    Result:= DM.fEscolaId;
+    Exit;
+  end;
+
+  if AlunoId > 0 then
+  begin
+    if DM.fdqAluno.State in [dsInactive] then
+      DM.fdqAluno.Open;
+
+    DM.fdqAluno.IndexFieldNames := 'aluno_id';
+    if not DM.fdqAluno.FindKey([AlunoId]) Then
+      Exit;
+
+    Result:= DM.fdqAluno.FieldByName('escola_id').AsInteger;
+  end;
+
 end;
 
 function UsuarioLogadoIsResponsavel:boolean;
