@@ -344,6 +344,13 @@ begin
   end;
 
   try
+    GetResponsaveis;
+    //MsgPoupUpTeste('DmGetServer.GetResponsaveis OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetResponsaveis Erro:' + e.Message);
+  end;
+
+  try
     GetAlunos;
     //MsgPoupUpTeste('DmGetServer.GetAlunos OK');
   except on E:Exception do
@@ -355,13 +362,6 @@ begin
     //MsgPoupUpTeste('DmGetServer.GetTurmas OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetTurmas Erro:' + e.Message);
-  end;
-
-  try
-    GetResponsaveis;
-    //MsgPoupUpTeste('DmGetServer.GetResponsaveis OK');
-  except on E:Exception do
-    MsgPoupUp('DmGetServer.GetResponsaveis Erro:' + e.Message);
   end;
 
   try
@@ -577,6 +577,9 @@ begin
   if Usuario.Tipo = Responsavel then
   begin
     fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
+    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) ' + GetSQLEscolaId('or'));
+
+
     { TODO : OpenProcessoAtualizacao - Busca por Responsavel }
     //As linhas abaixo estao inativas devido nao poder realizar os joins.
     //As tabelas neste momento estao vazias
