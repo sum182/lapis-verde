@@ -577,7 +577,7 @@ begin
   if Usuario.Tipo = Responsavel then
   begin
     fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
-    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) ' + GetSQLEscolaId('or'));
+    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) ' + GetSQLEscolaId('escola_id','or'));
   end;
 
   fdqProcessoAtualizacao.Open;
@@ -643,8 +643,8 @@ var
 begin
   try
     try
-      //if not Dm.ProcessHasUpdate('responsavel') then
-       //Exit;
+      if not Dm.ProcessHasUpdate('responsavel') and not (PrimeiroAcessoInExecute) then
+       Exit;
 
       //OpenResponsaveis;
       if not ValidacoesRestClientBeforeExecute then

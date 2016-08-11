@@ -347,7 +347,7 @@ begin
    if Usuario.Tipo = Responsavel then
   begin
     fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
-    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) ' + GetSQLEscolaId('or'));
+    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) ' + GetSQLEscolaId('escola_id','or'));
   end;
 
   fdqProcessoAtualizacao.Open;
@@ -521,11 +521,11 @@ begin
     Exit;
   end;
 
-  if PrimeiroAcessoInExecute then
+  {if PrimeiroAcessoInExecute then
   begin
     Result:=True;
     Exit;
-  end;
+  end;}
 
   OpenProcessoAtualizacao;
 

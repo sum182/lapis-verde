@@ -20,7 +20,7 @@ Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString,
 
   procedure SetStyle(Formulario:TForm);
   function GetEscolaId(AlunoId:Integer=0):Integer;
-  function GetSQLEscolaId(Condicao:String = 'and'):String;
+  function GetSQLEscolaId(FieldNameEscolaId:String = 'escola_id';Condicao:String = 'and'):String;
   function IsModoTeste:Boolean;
   function IsTesteApp:Boolean;
 
@@ -73,17 +73,18 @@ begin
 
 end;
 
-function GetSQLEscolaId(Condicao:String = 'and'):String;
+function GetSQLEscolaId(FieldNameEscolaId:String = 'escola_id';Condicao:String = 'and'):String;
 begin
  if Usuario.Tipo = Responsavel then
-    Result:=  Condicao + ' escola_id in ('+
+    Result:=  Condicao + ' ' + FieldNameEscolaId +
+                       ' in ('+
                               ' select re.escola_id from responsavel_escola re'+
                               ' where re.responsavel_id = '+ IntToStr(Usuario.Id)+
                               ' group by re.escola_id'+
                                ')';
 
   if Usuario.Tipo = Funcionario then
-    Result:= Condicao + ' escola_id = ' + IntToStr(GetEscolaId());
+    Result:= Condicao + ' ' + FieldNameEscolaId + ' = ' + IntToStr(GetEscolaId());
 end;
 
 function UsuarioLogadoIsResponsavel:boolean;
