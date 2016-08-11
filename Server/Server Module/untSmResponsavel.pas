@@ -35,7 +35,7 @@ type
                                       CPF: String;
                                       RG: String;
                                       Sexo: String):String;
-    function SalvarResponsavel(EscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
+    function SalvarResponsavel(pEscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
 
   end;
 
@@ -150,7 +150,7 @@ begin
   end;
 end;
 
-function TSmResponsavel.SalvarResponsavel(EscolaId: Integer;
+function TSmResponsavel.SalvarResponsavel(pEscolaId: Integer;
   pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets): String;
 var
   LogServerRequest:TLogServerRequest;
@@ -159,7 +159,7 @@ begin
   //Método para salvar o Responsável
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SmMain.SetParamsServer(pEscolaId,pUsuario);
 
       if Usuario.Tipo <>  Responsavel then
         Exit;

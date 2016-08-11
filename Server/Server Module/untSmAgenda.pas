@@ -33,23 +33,23 @@ type
     procedure SetSQLAgendaByKey(KeyValues:String);overload;
     procedure SetSQLAgendaDet(KeyValues:String);
 
-    procedure SetParamsAgenda(EscolaId:Integer;DtIni,DtFim:TDateTime);
+    procedure SetParamsAgenda(DtIni,DtFim:TDateTime);
 
-    procedure OpenAgenda(EscolaId:Integer;DtIni,DtFim:TDateTime;KeysInserts: String = '');overload;
-    procedure OpenAgenda(EscolaId:Integer;KeyValues:String);overload;
+    procedure OpenAgenda(DtIni,DtFim:TDateTime;KeysInserts: String = '');overload;
+    procedure OpenAgenda(KeyValues:String);overload;
     procedure CloseAgenda;
 
 
-     procedure OpenAgendaTeste(EscolaId:Integer;DtIni,DtFim:TDateTime);
+     procedure OpenAgendaTeste(DtIni,DtFim:TDateTime);
      procedure SetSQLAgendaTeste;
 
 
 
  {$METHODINFO ON}
   public
-    function GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
-    function GetAgendaTeste(EscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
-    function SalvarAgenda(EscolaId:Integer; pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
+    function GetAgenda(pEscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
+    function GetAgendaTeste(pEscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
+    function SalvarAgenda(pEscolaId:Integer; pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
   end;
 
 var
@@ -87,7 +87,7 @@ begin
 end;
 
 
-function TSmAgenda.GetAgenda(EscolaId:Integer;pUsuario:TJSONValue;
+function TSmAgenda.GetAgenda(pEscolaId:Integer;pUsuario:TJSONValue;
    DtIni,DtFim:TDateTime;KeysInserts: String = ''): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
@@ -96,7 +96,7 @@ begin
   //Método para retornar as Agendas
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SmMain.SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -104,7 +104,7 @@ begin
                                             EscolaId,
                                             Usuario);
 
-      OpenAgenda(EscolaId,DtIni,DtFim,KeysInserts);
+      OpenAgenda(DtIni,DtFim,KeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
@@ -123,7 +123,7 @@ end;
 
 
 
-function TSmAgenda.GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue;
+function TSmAgenda.GetAgendaTeste(pEscolaId: Integer; pUsuario: TJSONValue;
   DtIni, DtFim: TDateTime;KeysInserts: String = '' ): TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
@@ -131,7 +131,7 @@ begin
   //Método para retornar as Agendas
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SmMain.SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -139,8 +139,8 @@ begin
                                             EscolaId,
                                             Usuario);
 
-      OpenAgendaTeste(EscolaId,DtIni,DtFim);
-      //OpenAgenda(EscolaId,DtIni,DtFim,KeysInserts);
+      OpenAgendaTeste(DtIni,DtFim);
+      //OpenAgenda(DtIni,DtFim,KeysInserts);
       Result := TFDJSONDataSets.Create;
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda',fdqAgenda);
       TFDJSONDataSetsWriter.ListAdd(Result,'agenda_aluno',fdqAgendaAluno);
@@ -160,14 +160,13 @@ end;
 
 
 
-procedure TSmAgenda.OpenAgenda(EscolaId:Integer; DtIni,
-  DtFim: TDateTime;KeysInserts: String = '');
+procedure TSmAgenda.OpenAgenda(DtIni,DtFim: TDateTime;KeysInserts: String = '');
 var
   KeyValues:String;
 begin
   CloseAgenda;
   SetSQLAgenda(KeysInserts);
-  SetParamsAgenda(EscolaId,DtIni, DtFim);
+  SetParamsAgenda(DtIni, DtFim);
   fdqAgenda.Active := True;
   KeyValues:= GetKeyValuesDataSet(fdqAgenda,'agenda_id');
   SetSQLAgendaDet(KeyValues);
@@ -176,7 +175,7 @@ begin
   fdqAgendaTurma.Active := True;
 end;
 
-procedure TSmAgenda.OpenAgenda(EscolaId:Integer;KeyValues:String);
+procedure TSmAgenda.OpenAgenda(KeyValues:String);
 begin
   CloseAgenda;
 
@@ -187,13 +186,13 @@ begin
   fdqAgendaTurma.Active := True;
 end;
 
-procedure TSmAgenda.OpenAgendaTeste(EscolaId: Integer; DtIni, DtFim: TDateTime);
+procedure TSmAgenda.OpenAgendaTeste(DtIni, DtFim: TDateTime);
 var
   KeyValues:String;
 begin
   CloseAgenda;
   SetSQLAgendaTeste;
-  SetParamsAgenda(EscolaId,DtIni, DtFim);
+  SetParamsAgenda(DtIni,DtFim);
   fdqAgenda.Active := True;
   KeyValues:= GetKeyValuesDataSet(fdqAgenda,'agenda_id');
   SetSQLAgendaDet(KeyValues);
@@ -203,7 +202,7 @@ begin
 end;
 
 
-function TSmAgenda.SalvarAgenda(EscolaId:Integer;pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets): String;
+function TSmAgenda.SalvarAgenda(pEscolaId:Integer;pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets): String;
 var
   LDataSet: TFDDataSet;
   Exceptions:string;
@@ -217,7 +216,7 @@ begin
     KeyValues:= EmptyStr;
 
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SmMain.SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -232,7 +231,7 @@ begin
         Exit;
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'agenda_id');
-      OpenAgenda(EscolaId,KeyValues);
+      OpenAgenda(KeyValues);
       CopyDataSet(LDataSet,fdqAgenda,False,[coAppend,coEdit]);
 
       //Pegando dados da agenda_aluno
@@ -260,8 +259,7 @@ begin
   end;
 end;
 
-procedure TSmAgenda.SetParamsAgenda(EscolaId:Integer;DtIni,
-  DtFim: TDateTime);
+procedure TSmAgenda.SetParamsAgenda(DtIni,DtFim: TDateTime);
 begin
   DtIni:= StrToDate(FormatDateTime('dd/mm/yyyy',DtIni));
   DtFim:= StrToDate(FormatDateTime('dd/mm/yyyy',DtFim));

@@ -242,7 +242,7 @@ end;
 
 procedure TfrmPrincipal.SetUsuario;
 begin
-  lstItemUsuario.Text:= 'Usuário: ' + Usuario.Nome;
+  lstItemUsuario.Text:=Usuario.Nome;
 end;
 
 procedure TfrmPrincipal.ShowMenuPrincipal;
@@ -295,7 +295,7 @@ begin
   SetUsuario;
 
   { TODO : Implentar uma saudação para usuário }
-  lstItemUsuario.Text:=Usuario.Nome;
+  SetUsuario;
 end;
 
 

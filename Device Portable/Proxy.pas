@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 05/07/2016 00:46:07
+// 11/08/2016 15:46:14
 //
 
 unit Proxy;
@@ -100,7 +100,7 @@ type
     function ValidarEmailExistenteResponsavel(Email: string; const ARequestFilter: string = ''): Boolean;
     function ValidarCPFExistenteResponsavel(CPF: string; const ARequestFilter: string = ''): Boolean;
     function CriarUsuarioResponsavel(Nome: string; SobreNome: string; Email: string; Senha: string; Telefone: string; CPF: string; RG: string; Sexo: string; const ARequestFilter: string = ''): string;
-    function SalvarResponsavel(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    function SalvarResponsavel(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
   end;
 
   TSmMainClient = class(TDSAdminRestClient)
@@ -112,6 +112,8 @@ type
     FSetLogErrorOldCommand: TDSRestCommand;
     FSaveLogErrorCommand: TDSRestCommand;
     FSaveLogServerRequestCommand: TDSRestCommand;
+    FGetSQLEscolaIdCommand: TDSRestCommand;
+    FSetParamsServerCommand: TDSRestCommand;
     FGetAlunosCommand: TDSRestCommand;
     FGetAlunosCommand_Cache: TDSRestCommand;
     FGetTurmasCommand: TDSRestCommand;
@@ -134,23 +136,25 @@ type
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure FDConnectionAfterConnect(Sender: TObject);
-    procedure SetLogErrorOld(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; EscolaId: Integer);
+    procedure SetLogErrorOld(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; pEscolaId: Integer);
     procedure SaveLogError(LogServerRequest: TLogServerRequest);
     procedure SaveLogServerRequest(LogServerRequest: TLogServerRequest);
-    function GetAlunos(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetAlunos_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetTurmas(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetTurmas_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetResponsaveis(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetResponsaveis_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetFuncionarios(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetFuncionarios_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function SalvarFuncionario(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
-    function SalvarLogError(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
-    function GetProcessoAtualizacao(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetProcessoAtualizacao_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetDataSet(EscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetDataSet_Cache(EscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetSQLEscolaId(FieldNameEscolaId: string; Condicao: string; const ARequestFilter: string = ''): string;
+    procedure SetParamsServer(pEscolaId: Integer; pUsuario: TJSONValue);
+    function GetAlunos(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAlunos_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetTurmas(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetTurmas_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetResponsaveis(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetResponsaveis_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetFuncionarios(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetFuncionarios_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    function SalvarLogError(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    function GetProcessoAtualizacao(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetProcessoAtualizacao_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetDataSet(pEscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetDataSet_Cache(pEscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
   end;
 
   TSmAgendaClient = class(TDSAdminRestClient)
@@ -168,11 +172,11 @@ type
     destructor Destroy; override;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
-    function GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): TFDJSONDataSets;
-    function GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
-    function SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    function GetAgenda(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAgenda_Cache(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetAgendaTeste(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetAgendaTeste_Cache(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function SalvarAgenda(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
   end;
 
   IDSRestCachedTFDJSONDataSets = interface(IDSRestCachedObject<TFDJSONDataSets>)
@@ -368,7 +372,7 @@ const
 
   TSmResponsavel_SalvarResponsavel: array [0..3] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
@@ -403,7 +407,7 @@ const
     (Name: 'Classe'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Metodo'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'Data'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer')
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer')
   );
 
   TSmMain_SaveLogError: array [0..0] of TDSRestParameterMetaData =
@@ -416,65 +420,78 @@ const
     (Name: 'LogServerRequest'; Direction: 1; DBXType: 37; TypeName: 'TLogServerRequest')
   );
 
+  TSmMain_GetSQLEscolaId: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'FieldNameEscolaId'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: 'Condicao'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmMain_SetParamsServer: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue')
+  );
+
   TSmMain_GetAlunos: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
   TSmMain_GetAlunos_Cache: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
   TSmMain_GetTurmas: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
   TSmMain_GetTurmas_Cache: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
   TSmMain_GetResponsaveis: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
   TSmMain_GetResponsaveis_Cache: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
   TSmMain_GetFuncionarios: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
   TSmMain_GetFuncionarios_Cache: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
   TSmMain_SalvarFuncionario: array [0..3] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
@@ -482,7 +499,7 @@ const
 
   TSmMain_SalvarLogError: array [0..3] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
@@ -490,21 +507,21 @@ const
 
   TSmMain_GetProcessoAtualizacao: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
   );
 
   TSmMain_GetProcessoAtualizacao_Cache: array [0..2] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
   );
 
   TSmMain_GetDataSet: array [0..5] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'Nome'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'UtilizaParamEscolaId'; Direction: 1; DBXType: 4; TypeName: 'Boolean'),
@@ -514,7 +531,7 @@ const
 
   TSmMain_GetDataSet_Cache: array [0..5] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'Nome'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'UtilizaParamEscolaId'; Direction: 1; DBXType: 4; TypeName: 'Boolean'),
@@ -534,7 +551,7 @@ const
 
   TSmAgenda_GetAgenda: array [0..5] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
@@ -544,7 +561,7 @@ const
 
   TSmAgenda_GetAgenda_Cache: array [0..5] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
@@ -554,7 +571,7 @@ const
 
   TSmAgenda_GetAgendaTeste: array [0..5] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
@@ -564,7 +581,7 @@ const
 
   TSmAgenda_GetAgendaTeste_Cache: array [0..5] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
@@ -574,7 +591,7 @@ const
 
   TSmAgenda_SalvarAgenda: array [0..5] of TDSRestParameterMetaData =
   (
-    (Name: 'EscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
     (Name: 'DtIni'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
     (Name: 'DtFim'; Direction: 1; DBXType: 11; TypeName: 'TDateTime'),
@@ -1179,7 +1196,7 @@ begin
   Result := FCriarUsuarioResponsavelCommand.Parameters[8].Value.GetWideString;
 end;
 
-function TSmResponsavelClient.SalvarResponsavel(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+function TSmResponsavelClient.SalvarResponsavel(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarResponsavelCommand = nil then
   begin
@@ -1188,7 +1205,7 @@ begin
     FSalvarResponsavelCommand.Text := 'TSmResponsavel."SalvarResponsavel"';
     FSalvarResponsavelCommand.Prepare(TSmResponsavel_SalvarResponsavel);
   end;
-  FSalvarResponsavelCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarResponsavelCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FSalvarResponsavelCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   if not Assigned(LDataSetList) then
     FSalvarResponsavelCommand.Parameters[2].Value.SetNull
@@ -1330,7 +1347,7 @@ begin
   FFDConnectionAfterConnectCommand.Execute;
 end;
 
-procedure TSmMainClient.SetLogErrorOld(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; EscolaId: Integer);
+procedure TSmMainClient.SetLogErrorOld(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; pEscolaId: Integer);
 begin
   if FSetLogErrorOldCommand = nil then
   begin
@@ -1345,7 +1362,7 @@ begin
   FSetLogErrorOldCommand.Parameters[3].Value.SetWideString(Classe);
   FSetLogErrorOldCommand.Parameters[4].Value.SetWideString(Metodo);
   FSetLogErrorOldCommand.Parameters[5].Value.AsDateTime := Data;
-  FSetLogErrorOldCommand.Parameters[6].Value.SetInt32(EscolaId);
+  FSetLogErrorOldCommand.Parameters[6].Value.SetInt32(pEscolaId);
   FSetLogErrorOldCommand.Execute;
 end;
 
@@ -1399,7 +1416,36 @@ begin
   FSaveLogServerRequestCommand.Execute;
 end;
 
-function TSmMainClient.GetAlunos(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetSQLEscolaId(FieldNameEscolaId: string; Condicao: string; const ARequestFilter: string): string;
+begin
+  if FGetSQLEscolaIdCommand = nil then
+  begin
+    FGetSQLEscolaIdCommand := FConnection.CreateCommand;
+    FGetSQLEscolaIdCommand.RequestType := 'GET';
+    FGetSQLEscolaIdCommand.Text := 'TSmMain.GetSQLEscolaId';
+    FGetSQLEscolaIdCommand.Prepare(TSmMain_GetSQLEscolaId);
+  end;
+  FGetSQLEscolaIdCommand.Parameters[0].Value.SetWideString(FieldNameEscolaId);
+  FGetSQLEscolaIdCommand.Parameters[1].Value.SetWideString(Condicao);
+  FGetSQLEscolaIdCommand.Execute(ARequestFilter);
+  Result := FGetSQLEscolaIdCommand.Parameters[2].Value.GetWideString;
+end;
+
+procedure TSmMainClient.SetParamsServer(pEscolaId: Integer; pUsuario: TJSONValue);
+begin
+  if FSetParamsServerCommand = nil then
+  begin
+    FSetParamsServerCommand := FConnection.CreateCommand;
+    FSetParamsServerCommand.RequestType := 'POST';
+    FSetParamsServerCommand.Text := 'TSmMain."SetParamsServer"';
+    FSetParamsServerCommand.Prepare(TSmMain_SetParamsServer);
+  end;
+  FSetParamsServerCommand.Parameters[0].Value.SetInt32(pEscolaId);
+  FSetParamsServerCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FSetParamsServerCommand.Execute;
+end;
+
+function TSmMainClient.GetAlunos(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetAlunosCommand = nil then
   begin
@@ -1408,7 +1454,7 @@ begin
     FGetAlunosCommand.Text := 'TSmMain."GetAlunos"';
     FGetAlunosCommand.Prepare(TSmMain_GetAlunos);
   end;
-  FGetAlunosCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAlunosCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetAlunosCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAlunosCommand.Execute(ARequestFilter);
   if not FGetAlunosCommand.Parameters[2].Value.IsNull then
@@ -1426,7 +1472,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetAlunos_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetAlunos_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetAlunosCommand_Cache = nil then
   begin
@@ -1435,13 +1481,13 @@ begin
     FGetAlunosCommand_Cache.Text := 'TSmMain."GetAlunos"';
     FGetAlunosCommand_Cache.Prepare(TSmMain_GetAlunos_Cache);
   end;
-  FGetAlunosCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAlunosCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetAlunosCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAlunosCommand_Cache.ExecuteCache(ARequestFilter);
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAlunosCommand_Cache.Parameters[2].Value.GetString);
 end;
 
-function TSmMainClient.GetTurmas(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetTurmas(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetTurmasCommand = nil then
   begin
@@ -1450,7 +1496,7 @@ begin
     FGetTurmasCommand.Text := 'TSmMain."GetTurmas"';
     FGetTurmasCommand.Prepare(TSmMain_GetTurmas);
   end;
-  FGetTurmasCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetTurmasCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetTurmasCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetTurmasCommand.Execute(ARequestFilter);
   if not FGetTurmasCommand.Parameters[2].Value.IsNull then
@@ -1468,7 +1514,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetTurmas_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetTurmas_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetTurmasCommand_Cache = nil then
   begin
@@ -1477,13 +1523,13 @@ begin
     FGetTurmasCommand_Cache.Text := 'TSmMain."GetTurmas"';
     FGetTurmasCommand_Cache.Prepare(TSmMain_GetTurmas_Cache);
   end;
-  FGetTurmasCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetTurmasCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetTurmasCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetTurmasCommand_Cache.ExecuteCache(ARequestFilter);
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetTurmasCommand_Cache.Parameters[2].Value.GetString);
 end;
 
-function TSmMainClient.GetResponsaveis(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetResponsaveis(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetResponsaveisCommand = nil then
   begin
@@ -1492,7 +1538,7 @@ begin
     FGetResponsaveisCommand.Text := 'TSmMain."GetResponsaveis"';
     FGetResponsaveisCommand.Prepare(TSmMain_GetResponsaveis);
   end;
-  FGetResponsaveisCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetResponsaveisCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetResponsaveisCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetResponsaveisCommand.Execute(ARequestFilter);
   if not FGetResponsaveisCommand.Parameters[2].Value.IsNull then
@@ -1510,7 +1556,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetResponsaveis_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetResponsaveis_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetResponsaveisCommand_Cache = nil then
   begin
@@ -1519,13 +1565,13 @@ begin
     FGetResponsaveisCommand_Cache.Text := 'TSmMain."GetResponsaveis"';
     FGetResponsaveisCommand_Cache.Prepare(TSmMain_GetResponsaveis_Cache);
   end;
-  FGetResponsaveisCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetResponsaveisCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetResponsaveisCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetResponsaveisCommand_Cache.ExecuteCache(ARequestFilter);
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetResponsaveisCommand_Cache.Parameters[2].Value.GetString);
 end;
 
-function TSmMainClient.GetFuncionarios(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetFuncionarios(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetFuncionariosCommand = nil then
   begin
@@ -1534,7 +1580,7 @@ begin
     FGetFuncionariosCommand.Text := 'TSmMain."GetFuncionarios"';
     FGetFuncionariosCommand.Prepare(TSmMain_GetFuncionarios);
   end;
-  FGetFuncionariosCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetFuncionariosCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetFuncionariosCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetFuncionariosCommand.Execute(ARequestFilter);
   if not FGetFuncionariosCommand.Parameters[2].Value.IsNull then
@@ -1552,7 +1598,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetFuncionarios_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetFuncionarios_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetFuncionariosCommand_Cache = nil then
   begin
@@ -1561,13 +1607,13 @@ begin
     FGetFuncionariosCommand_Cache.Text := 'TSmMain."GetFuncionarios"';
     FGetFuncionariosCommand_Cache.Prepare(TSmMain_GetFuncionarios_Cache);
   end;
-  FGetFuncionariosCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetFuncionariosCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetFuncionariosCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetFuncionariosCommand_Cache.ExecuteCache(ARequestFilter);
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetFuncionariosCommand_Cache.Parameters[2].Value.GetString);
 end;
 
-function TSmMainClient.SalvarFuncionario(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+function TSmMainClient.SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarFuncionarioCommand = nil then
   begin
@@ -1576,7 +1622,7 @@ begin
     FSalvarFuncionarioCommand.Text := 'TSmMain."SalvarFuncionario"';
     FSalvarFuncionarioCommand.Prepare(TSmMain_SalvarFuncionario);
   end;
-  FSalvarFuncionarioCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarFuncionarioCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FSalvarFuncionarioCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   if not Assigned(LDataSetList) then
     FSalvarFuncionarioCommand.Parameters[2].Value.SetNull
@@ -1595,7 +1641,7 @@ begin
   Result := FSalvarFuncionarioCommand.Parameters[3].Value.GetWideString;
 end;
 
-function TSmMainClient.SalvarLogError(EscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+function TSmMainClient.SalvarLogError(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarLogErrorCommand = nil then
   begin
@@ -1604,7 +1650,7 @@ begin
     FSalvarLogErrorCommand.Text := 'TSmMain."SalvarLogError"';
     FSalvarLogErrorCommand.Prepare(TSmMain_SalvarLogError);
   end;
-  FSalvarLogErrorCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarLogErrorCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FSalvarLogErrorCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   if not Assigned(LDataSetList) then
     FSalvarLogErrorCommand.Parameters[2].Value.SetNull
@@ -1623,7 +1669,7 @@ begin
   Result := FSalvarLogErrorCommand.Parameters[3].Value.GetWideString;
 end;
 
-function TSmMainClient.GetProcessoAtualizacao(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetProcessoAtualizacao(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetProcessoAtualizacaoCommand = nil then
   begin
@@ -1632,7 +1678,7 @@ begin
     FGetProcessoAtualizacaoCommand.Text := 'TSmMain."GetProcessoAtualizacao"';
     FGetProcessoAtualizacaoCommand.Prepare(TSmMain_GetProcessoAtualizacao);
   end;
-  FGetProcessoAtualizacaoCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetProcessoAtualizacaoCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetProcessoAtualizacaoCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetProcessoAtualizacaoCommand.Execute(ARequestFilter);
   if not FGetProcessoAtualizacaoCommand.Parameters[2].Value.IsNull then
@@ -1650,7 +1696,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetProcessoAtualizacao_Cache(EscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetProcessoAtualizacao_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetProcessoAtualizacaoCommand_Cache = nil then
   begin
@@ -1659,13 +1705,13 @@ begin
     FGetProcessoAtualizacaoCommand_Cache.Text := 'TSmMain."GetProcessoAtualizacao"';
     FGetProcessoAtualizacaoCommand_Cache.Prepare(TSmMain_GetProcessoAtualizacao_Cache);
   end;
-  FGetProcessoAtualizacaoCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetProcessoAtualizacaoCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetProcessoAtualizacaoCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetProcessoAtualizacaoCommand_Cache.ExecuteCache(ARequestFilter);
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetProcessoAtualizacaoCommand_Cache.Parameters[2].Value.GetString);
 end;
 
-function TSmMainClient.GetDataSet(EscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string): TFDJSONDataSets;
+function TSmMainClient.GetDataSet(pEscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetDataSetCommand = nil then
   begin
@@ -1674,7 +1720,7 @@ begin
     FGetDataSetCommand.Text := 'TSmMain."GetDataSet"';
     FGetDataSetCommand.Prepare(TSmMain_GetDataSet);
   end;
-  FGetDataSetCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetDataSetCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetDataSetCommand.Parameters[1].Value.SetWideString(Nome);
   FGetDataSetCommand.Parameters[2].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetDataSetCommand.Parameters[3].Value.SetBoolean(UtilizaParamEscolaId);
@@ -1695,7 +1741,7 @@ begin
     Result := nil;
 end;
 
-function TSmMainClient.GetDataSet_Cache(EscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmMainClient.GetDataSet_Cache(pEscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetDataSetCommand_Cache = nil then
   begin
@@ -1704,7 +1750,7 @@ begin
     FGetDataSetCommand_Cache.Text := 'TSmMain."GetDataSet"';
     FGetDataSetCommand_Cache.Prepare(TSmMain_GetDataSet_Cache);
   end;
-  FGetDataSetCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetDataSetCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetDataSetCommand_Cache.Parameters[1].Value.SetWideString(Nome);
   FGetDataSetCommand_Cache.Parameters[2].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetDataSetCommand_Cache.Parameters[3].Value.SetBoolean(UtilizaParamEscolaId);
@@ -1732,6 +1778,8 @@ begin
   FSetLogErrorOldCommand.DisposeOf;
   FSaveLogErrorCommand.DisposeOf;
   FSaveLogServerRequestCommand.DisposeOf;
+  FGetSQLEscolaIdCommand.DisposeOf;
+  FSetParamsServerCommand.DisposeOf;
   FGetAlunosCommand.DisposeOf;
   FGetAlunosCommand_Cache.DisposeOf;
   FGetTurmasCommand.DisposeOf;
@@ -1787,7 +1835,7 @@ begin
   FDataModuleCreateCommand.Execute;
 end;
 
-function TSmAgendaClient.GetAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): TFDJSONDataSets;
+function TSmAgendaClient.GetAgenda(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetAgendaCommand = nil then
   begin
@@ -1796,7 +1844,7 @@ begin
     FGetAgendaCommand.Text := 'TSmAgenda."GetAgenda"';
     FGetAgendaCommand.Prepare(TSmAgenda_GetAgenda);
   end;
-  FGetAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetAgendaCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAgendaCommand.Parameters[2].Value.AsDateTime := DtIni;
   FGetAgendaCommand.Parameters[3].Value.AsDateTime := DtFim;
@@ -1817,7 +1865,7 @@ begin
     Result := nil;
 end;
 
-function TSmAgendaClient.GetAgenda_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmAgendaClient.GetAgenda_Cache(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetAgendaCommand_Cache = nil then
   begin
@@ -1826,7 +1874,7 @@ begin
     FGetAgendaCommand_Cache.Text := 'TSmAgenda."GetAgenda"';
     FGetAgendaCommand_Cache.Prepare(TSmAgenda_GetAgenda_Cache);
   end;
-  FGetAgendaCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetAgendaCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAgendaCommand_Cache.Parameters[2].Value.AsDateTime := DtIni;
   FGetAgendaCommand_Cache.Parameters[3].Value.AsDateTime := DtFim;
@@ -1835,7 +1883,7 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaCommand_Cache.Parameters[5].Value.GetString);
 end;
 
-function TSmAgendaClient.GetAgendaTeste(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): TFDJSONDataSets;
+function TSmAgendaClient.GetAgendaTeste(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetAgendaTesteCommand = nil then
   begin
@@ -1844,7 +1892,7 @@ begin
     FGetAgendaTesteCommand.Text := 'TSmAgenda."GetAgendaTeste"';
     FGetAgendaTesteCommand.Prepare(TSmAgenda_GetAgendaTeste);
   end;
-  FGetAgendaTesteCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaTesteCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FGetAgendaTesteCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAgendaTesteCommand.Parameters[2].Value.AsDateTime := DtIni;
   FGetAgendaTesteCommand.Parameters[3].Value.AsDateTime := DtFim;
@@ -1865,7 +1913,7 @@ begin
     Result := nil;
 end;
 
-function TSmAgendaClient.GetAgendaTeste_Cache(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+function TSmAgendaClient.GetAgendaTeste_Cache(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; KeysInserts: string; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
 begin
   if FGetAgendaTesteCommand_Cache = nil then
   begin
@@ -1874,7 +1922,7 @@ begin
     FGetAgendaTesteCommand_Cache.Text := 'TSmAgenda."GetAgendaTeste"';
     FGetAgendaTesteCommand_Cache.Prepare(TSmAgenda_GetAgendaTeste_Cache);
   end;
-  FGetAgendaTesteCommand_Cache.Parameters[0].Value.SetInt32(EscolaId);
+  FGetAgendaTesteCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
   FGetAgendaTesteCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FGetAgendaTesteCommand_Cache.Parameters[2].Value.AsDateTime := DtIni;
   FGetAgendaTesteCommand_Cache.Parameters[3].Value.AsDateTime := DtFim;
@@ -1883,7 +1931,7 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetAgendaTesteCommand_Cache.Parameters[5].Value.GetString);
 end;
 
-function TSmAgendaClient.SalvarAgenda(EscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+function TSmAgendaClient.SalvarAgenda(pEscolaId: Integer; pUsuario: TJSONValue; DtIni: TDateTime; DtFim: TDateTime; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarAgendaCommand = nil then
   begin
@@ -1892,7 +1940,7 @@ begin
     FSalvarAgendaCommand.Text := 'TSmAgenda."SalvarAgenda"';
     FSalvarAgendaCommand.Prepare(TSmAgenda_SalvarAgenda);
   end;
-  FSalvarAgendaCommand.Parameters[0].Value.SetInt32(EscolaId);
+  FSalvarAgendaCommand.Parameters[0].Value.SetInt32(pEscolaId);
   FSalvarAgendaCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
   FSalvarAgendaCommand.Parameters[2].Value.AsDateTime := DtIni;
   FSalvarAgendaCommand.Parameters[3].Value.AsDateTime := DtFim;

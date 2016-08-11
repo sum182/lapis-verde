@@ -37,37 +37,41 @@ type
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure FDConnectionAfterConnect(Sender: TObject);
   private
-    procedure SetSQLLogError(EscolaId:Integer);overload;
-    procedure SetSQLLogError(EscolaId:Integer;KeyValues:String);overload;
-    procedure OpenLogError(EscolaId:Integer);overload;
-    procedure OpenLogError(EscolaId:Integer;KeyValues:String);overload;
+    procedure SetSQLLogError;overload;
+    procedure SetSQLLogError(KeyValues:String);overload;
+    procedure SetSQLResponsaveis;overload;
+    procedure OpenLogError;overload;
+    procedure OpenLogError(KeyValues:String);overload;
     procedure CloseLogError;
     procedure SetTimeZone;
+
+    procedure SetParamsResponsaveis;overload;
   {$METHODINFO ON}
   public
     {$METHODINFO OFF}
     procedure SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                            Data:TDateTime;
-                           EscolaId:Integer = 0
+                           pEscolaId:Integer = 0
                           );overload;
 
     procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
     function GetSQLEscolaId(FieldNameEscolaId:String = 'escola_id';Condicao:String = 'and'):String;
+    procedure SetParamsServer(pEscolaId:Integer;pUsuario:TJSONValue);
    {$METHODINFO ON}
-    function GetAlunos(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
-    function GetTurmas(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
-    function GetResponsaveis(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
-    function GetFuncionarios(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
-    function SalvarFuncionario(EscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
+    function GetAlunos(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetTurmas(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetResponsaveis(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetFuncionarios(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function SalvarFuncionario(pEscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
 
-    function SalvarLogError(EscolaId:Integer;
+    function SalvarLogError(pEscolaId:Integer;
                             pUsuario:TJSONValue;
                             LDataSetList: TFDJSONDataSets = nil ):String;
 
-    function GetProcessoAtualizacao(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetProcessoAtualizacao(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 
-    function GetDataSet( EscolaId:Integer;
+    function GetDataSet( pEscolaId:Integer;
                          Nome: String;
                          pUsuario:TJSONValue;
                          UtilizaParamEscolaId:Boolean=True;
@@ -80,6 +84,7 @@ type
 var
   SmMain: TSmMain;
   Usuario:TUsuario;
+  EscolaId:Integer;
 {$METHODINFO OFF}
 
 implementation
@@ -130,14 +135,14 @@ begin
   Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
-function TSmMain.GetAlunos(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+function TSmMain.GetAlunos(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Alunos
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest(UnitName,
                                            ClassName,
@@ -172,7 +177,7 @@ begin
   end;
 end;
 
-function TSmMain.GetDataSet(EscolaId: Integer; Nome: String;
+function TSmMain.GetDataSet(pEscolaId: Integer; Nome: String;
                             pUsuario:TJSONValue;
                             UtilizaParamEscolaId:Boolean;
                             Condicoes: String): TFDJSONDataSets;
@@ -186,7 +191,7 @@ begin
       if Nome = '' then
        raise Exception.Create('GetDataSet: Nome não definido');
 
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -225,14 +230,14 @@ begin
 
 end;
 
-function TSmMain.GetFuncionarios(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+function TSmMain.GetFuncionarios(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Funcionarios
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -257,7 +262,7 @@ begin
 end;
 
 
-function TSmMain.GetProcessoAtualizacao(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+function TSmMain.GetProcessoAtualizacao(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
@@ -265,7 +270,7 @@ begin
   try
     try
       Result := TFDJSONDataSets.Create;
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -315,90 +320,37 @@ begin
 
 end;
 
-function TSmMain.GetResponsaveis(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+function TSmMain.GetResponsaveis(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Responsaveis
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest(UnitName,
                                            ClassName,
                                            'GetResponsaveis',
-                                           EscolaId,
+                                           pEscolaId,
                                            Usuario);
 
       Result := TFDJSONDataSets.Create;
 
+      SetSQLResponsaveis;
+      SetParamsResponsaveis;
+
       //Tabela responsavel
-      fdqResp.Active := False;
-      fdqResp.SQL.Clear;
-      fdqResp.SQL.Add('select * from responsavel r');
-      fdqResp.SQL.Add('inner join responsavel_escola re on (r.responsavel_id = re.responsavel_id)');
-      fdqResp.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
-      fdqResp.SQL.Add(GetSQLEscolaId('re.escola_id'));
-
-      if Usuario.Tipo = Funcionario then
-        fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
-
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel',fdqResp);
-      //Fim Tabela responsavel
-
-
-
-
 
       //Tabela de responsavel_escola
-      fdqRespEscola.Active := False;
-      fdqRespEscola.SQL.Clear;
-      fdqRespEscola.SQL.Add('select re.*');
-      fdqRespEscola.SQL.Add('from responsavel_escola re');
-      fdqRespEscola.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
-      fdqRespEscola.SQL.Add(GetSQLEscolaId('re.escola_id'));
-
-      if Usuario.Tipo = Funcionario then
-        fdqRespEscola.ParamByName('escola_id').AsInteger:= EscolaId;
-
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_escola',fdqRespEscola);
-      //Fim  Tabela de responsavel_escola
-
-
-
-
 
       //Tabela de responsavel_aluno
-      fdqRespAluno.Active := False;
-      fdqRespAluno.SQL.Clear;
-      fdqRespAluno.SQL.Add('select ra.*');
-      fdqRespAluno.SQL.Add('from responsavel_aluno ra');
-      fdqRespAluno.SQL.Add('inner join responsavel_escola re on (ra.responsavel_id = re.responsavel_id)');
-      fdqRespAluno.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
-      fdqRespAluno.SQL.Add(GetSQLEscolaId('re.escola_id'));
-
-      if Usuario.Tipo = Funcionario then
-        fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
-
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_aluno',fdqRespAluno);
-      //Fim //Tabela de responsavel_aluno
-
-
 
       //Tabela de responsavel_telefone
-      fdqRespTelefone.Active := False;
-      fdqRespTelefone.SQL.Clear;
-      fdqRespTelefone.SQl.Add('select rt.*');
-      fdqRespTelefone.SQl.Add('from responsavel_telefone rt');
-      fdqRespTelefone.SQl.Add('inner join responsavel_escola re on (rt.responsavel_id = re.responsavel_id)');
-      fdqRespTelefone.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
-      fdqRespTelefone.SQL.Add(GetSQLEscolaId('re.escola_id'));
-
-      if Usuario.Tipo = Funcionario then
-        fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
-
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel_telefone',fdqRespTelefone);
-      //Fim Tabela de responsavel_telefone
 
       SmMain.SaveLogServerRequest(LogServerRequest);
      except on E:Exception do
@@ -426,14 +378,14 @@ begin
     Result:=  Condicao + ' ' + FieldNameEscolaId + ' =:escola_id';
 end;
 
-function TSmMain.GetTurmas(EscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+function TSmMain.GetTurmas(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar as Turmas
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -464,24 +416,23 @@ end;
 
 
 
-procedure TSmMain.OpenLogError(EscolaId: Integer);
+procedure TSmMain.OpenLogError;
 begin
   CloseLogError;
-  SetSQLLogError(EscolaId);
+  SetSQLLogError;
   fdqLogError.Active := True;
 end;
 
-procedure TSmMain.OpenLogError(EscolaId: Integer;
-  KeyValues: String);
+procedure TSmMain.OpenLogError(KeyValues: String);
 begin
   CloseLogError;
 
-  SetSQLLogError(EscolaId,KeyValues);
+  SetSQLLogError(KeyValues);
 
   fdqLogError.Active := True;
 end;
 
-function TSmMain.SalvarFuncionario(EscolaId: Integer; pUsuario: TJSONValue;
+function TSmMain.SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue;
   LDataSetList: TFDJSONDataSets): String;
 var
   LogServerRequest:TLogServerRequest;
@@ -490,7 +441,7 @@ begin
   //Método para salvar o Funcionario
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
 
       if Usuario.Tipo <>  Funcionario then
         Exit;
@@ -537,7 +488,7 @@ begin
 
 end;
 
-function TSmMain.SalvarLogError(EscolaId:Integer;
+function TSmMain.SalvarLogError(pEscolaId:Integer;
                                 pUsuario:TJSONValue;
                                 LDataSetList: TFDJSONDataSets=nil):String;
 var
@@ -549,7 +500,7 @@ begin
   //Método para Salvar Logs de Erros
   try
     try
-      Usuario:= Usuario.UnMarshal(pUsuario);
+      SetParamsServer(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -568,7 +519,7 @@ begin
 
 
       KeyValues:= GetKeyValuesDataSet(LDataSet,'log_error_id');
-      OpenLogError(EscolaId,KeyValues);
+      OpenLogError(KeyValues);
       CopyDataSet(LDataSet,fdqLogError,False,[coAppend,coEdit]);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
@@ -590,7 +541,7 @@ end;
 
 procedure TSmMain.SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                                Data:TDateTime;
-                               EscolaId:Integer = 0);
+                               pEscolaId:Integer = 0);
 begin
   try
     fdqLogError.Active:=False;
@@ -620,6 +571,27 @@ begin
     fdqLogError.Active:=False;
   end;
 
+end;
+
+procedure TSmMain.SetParamsResponsaveis;
+begin
+  if Usuario.Tipo = Funcionario then
+    fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
+
+  if Usuario.Tipo = Funcionario then
+    fdqRespEscola.ParamByName('escola_id').AsInteger:= EscolaId;
+
+  if Usuario.Tipo = Funcionario then
+    fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+
+  if Usuario.Tipo = Funcionario then
+    fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
+end;
+
+procedure TSmMain.SetParamsServer(pEscolaId: Integer; pUsuario: TJSONValue);
+begin
+  Usuario:= Usuario.UnMarshal(pUsuario);
+  EscolaId:= pEscolaId;
 end;
 
 procedure TSmMain.SaveLogServerRequest(LogServerRequest: TLogServerRequest);
@@ -661,7 +633,7 @@ begin
   end;
 end;
 
-procedure TSmMain.SetSQLLogError(EscolaId:Integer);
+procedure TSmMain.SetSQLLogError;
 begin
   fdqLogError.SQL.Clear;
   fdqLogError.SQL.Add('select * from log_error ');
@@ -701,7 +673,7 @@ begin
 
 end;
 
-procedure TSmMain.SetSQLLogError(EscolaId:Integer;KeyValues: String);
+procedure TSmMain.SetSQLLogError(KeyValues: String);
 begin
   if KeyValues = EmptyStr then
     KeyValues:= QuoTedStr('0');
@@ -709,6 +681,43 @@ begin
   fdqLogError.SQL.Clear;
   fdqLogError.SQL.Add('select * from log_error ');
   fdqLogError.SQL.Add('where log_error_id in (' + KeyValues + ')');
+end;
+
+procedure TSmMain.SetSQLResponsaveis;
+begin
+  //Tabela responsavel
+  fdqResp.Active := False;
+  fdqResp.SQL.Clear;
+  fdqResp.SQL.Add('select * from responsavel r');
+  fdqResp.SQL.Add('inner join responsavel_escola re on (r.responsavel_id = re.responsavel_id)');
+  fdqResp.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqResp.SQL.Add(GetSQLEscolaId('re.escola_id'));
+
+  //Tabela de responsavel_escola
+  fdqRespEscola.Active := False;
+  fdqRespEscola.SQL.Clear;
+  fdqRespEscola.SQL.Add('select re.*');
+  fdqRespEscola.SQL.Add('from responsavel_escola re');
+  fdqRespEscola.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespEscola.SQL.Add(GetSQLEscolaId('re.escola_id'));
+
+  //Tabela de responsavel_aluno
+  fdqRespAluno.Active := False;
+  fdqRespAluno.SQL.Clear;
+  fdqRespAluno.SQL.Add('select ra.*');
+  fdqRespAluno.SQL.Add('from responsavel_aluno ra');
+  fdqRespAluno.SQL.Add('inner join responsavel_escola re on (ra.responsavel_id = re.responsavel_id)');
+  fdqRespAluno.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespAluno.SQL.Add(GetSQLEscolaId('re.escola_id'));
+
+  //Tabela de responsavel_telefone
+  fdqRespTelefone.Active := False;
+  fdqRespTelefone.SQL.Clear;
+  fdqRespTelefone.SQl.Add('select rt.*');
+  fdqRespTelefone.SQl.Add('from responsavel_telefone rt');
+  fdqRespTelefone.SQl.Add('inner join responsavel_escola re on (rt.responsavel_id = re.responsavel_id)');
+  fdqRespTelefone.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespTelefone.SQL.Add(GetSQLEscolaId('re.escola_id'));
 end;
 
 procedure TSmMain.SetTimeZone;
