@@ -45,7 +45,6 @@ type
     procedure CloseLogError;
     procedure SetTimeZone;
 
-    procedure SetParamsResponsaveis;overload;
   {$METHODINFO ON}
   public
     {$METHODINFO OFF}
@@ -161,10 +160,7 @@ begin
       fdqAluno.SQL.Add('and ativo = '+ QuoTedStr('S'));
       fdqAluno.SQL.Add('order by nome_completo');
 
-      if Usuario.Tipo = Funcionario then
-        fdqAluno.ParamByName('escola_id').AsInteger:= EscolaId;
-
-      TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       begin
@@ -246,8 +242,14 @@ begin
                                             Usuario);
       Result := TFDJSONDataSets.Create;
 
+      fdqFuncionarios.SQL.Clear;
+      fdqFuncionarios.Params.Clear;
+
       fdqFuncionarios.Active := False;
-      fdqFuncionarios.ParamByName('escola_id').AsInteger:= EscolaId;
+      fdqFuncionarios.SQL.Add('select * from funcionario f');
+      fdqFuncionarios.SQL.Add('where ativo = '+ QuotedStr('S'));
+      fdqFuncionarios.SQL.Add(GetSQLEscolaId);
+
       TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFuncionarios);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
@@ -338,7 +340,6 @@ begin
       Result := TFDJSONDataSets.Create;
 
       SetSQLResponsaveis;
-      SetParamsResponsaveis;
 
       //Tabela responsavel
       TFDJSONDataSetsWriter.ListAdd(Result,'responsavel',fdqResp);
@@ -369,13 +370,15 @@ begin
  if Usuario.Tipo = Responsavel then
     Result:=  Condicao + ' ' + FieldNameEscolaId +
                        ' in ('+
-                              ' select re.escola_id from responsavel_escola re'+
-                              ' where re.responsavel_id = '+ IntToStr(Usuario.Id)+
-                              ' group by re.escola_id'+
+                              ' select re_sub.escola_id from responsavel_escola re_sub'+
+                              ' where re_sub.responsavel_id = '+ IntToStr(Usuario.Id)+
+                              ' group by re_sub.escola_id'+
                                ')';
 
   if Usuario.Tipo = Funcionario then
-    Result:=  Condicao + ' ' + FieldNameEscolaId + ' =:escola_id';
+    //Result:=  Condicao + ' ' + FieldNameEscolaId + ' =:escola_id';
+    Result:= Condicao + ' ' + FieldNameEscolaId + ' = ' + IntToStr(EscolaId);
+
 end;
 
 function TSmMain.GetTurmas(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
@@ -383,6 +386,7 @@ var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar as Turmas
+  //analisar rotina acho q esta com erro
   try
     try
       SetParamsServer(pEscolaId,pUsuario);
@@ -396,11 +400,21 @@ begin
       Result := TFDJSONDataSets.Create;
 
       fdqTurma.Active := False;
-      fdqTurma.ParamByName('escola_id').AsInteger:= EscolaId;
+      fdqTurma.SQL.Clear;
+      fdqTurma.SQL.Add(' SELECT * FROM turma t');
+      fdqTurma.SQL.Add(' where 1=1');
+      fdqTurma.SQL.Add(GetSQLEscolaId);
+      fdqTurma.SQL.Add('order by nome');
       TFDJSONDataSetsWriter.ListAdd(Result,'turma',fdqTurma);
 
       fdqTurmaAluno.Active := False;
-      fdqTurmaAluno.ParamByName('escola_id').AsInteger:= EscolaId;
+      fdqTurmaAluno.SQL.Clear;
+      fdqTurmaAluno.SQL.Add('select');
+      fdqTurmaAluno.SQL.Add('ta.*');
+      fdqTurmaAluno.SQL.Add('from turma_aluno ta');
+      fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+      fdqTurmaAluno.SQL.Add(GetSQLEscolaId());
+
       TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
@@ -573,20 +587,6 @@ begin
 
 end;
 
-procedure TSmMain.SetParamsResponsaveis;
-begin
-  if Usuario.Tipo = Funcionario then
-    fdqResp.ParamByName('escola_id').AsInteger:= EscolaId;
-
-  if Usuario.Tipo = Funcionario then
-    fdqRespEscola.ParamByName('escola_id').AsInteger:= EscolaId;
-
-  if Usuario.Tipo = Funcionario then
-    fdqRespAluno.ParamByName('escola_id').AsInteger:= EscolaId;
-
-  if Usuario.Tipo = Funcionario then
-    fdqRespTelefone.ParamByName('escola_id').AsInteger:= EscolaId;
-end;
 
 procedure TSmMain.SetParamsServer(pEscolaId: Integer; pUsuario: TJSONValue);
 begin
