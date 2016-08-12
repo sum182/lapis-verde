@@ -111,6 +111,7 @@ begin
     tbitTurma.Visible:=False;
     tbCtrlPrincipal.ActiveTab:= tbitAlunos;
     tbCtrlPrincipal.TabPosition:= TTabPosition.None;
+    lstAlunos.SearchVisible:=False;
   end;
 end;
 

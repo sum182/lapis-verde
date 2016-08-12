@@ -58,6 +58,8 @@ type
     SpeedButton3: TSpeedButton;
     Layout10: TLayout;
     btnGetResponsaveis: TSpeedButton;
+    Layout11: TLayout;
+    SpeedButton4: TSpeedButton;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
@@ -69,6 +71,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure btnGetResponsaveisClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -98,8 +101,9 @@ begin
   inherited;
   if not smNetworkState.ValidarConexao then
     Exit;
-
+  Dm.IsTesteApp:= True;
   Dm.SyncronizarDadosServerGeral;
+  Dm.IsTesteApp:= False;
 end;
 
 procedure TfrmTesteGeralApp.btnTesteGeralClick(Sender: TObject);
@@ -397,7 +401,17 @@ end;
 procedure TfrmTesteGeralApp.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
+  Dm.IsTesteApp:= True;
   Dm.PrimeiroAcessoExecutar;
+  Dm.IsTesteApp:= False;
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton4Click(Sender: TObject);
+begin
+  inherited;
+  Dm.IsTesteApp:= True;
+  Dm.DeleteAllTabels;
+  Dm.IsTesteApp:= False;
 end;
 
 procedure TfrmTesteGeralApp.btnGetResponsaveisClick(Sender: TObject);
@@ -407,7 +421,10 @@ begin
     Exit;
 
   try
+    Dm.IsTesteApp:= True;
     DmGetServer.GetResponsaveis;
+    Dm.IsTesteApp:= False;
+
     MsgPoupUp('DmGetServer.GetResponsaveis OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetResponsaveis Erro:' + e.Message);
@@ -419,7 +436,9 @@ procedure TfrmTesteGeralApp.btnMetodosGetAgendaClick(Sender: TObject);
 begin
   inherited;
   try
+    Dm.IsTesteApp:= True;
     DmGetServer.GetAgenda(Now - 1, Now + 7);
+    Dm.IsTesteApp:= False;
     //MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);
@@ -433,7 +452,9 @@ begin
     Exit;
 
   try
+    Dm.IsTesteApp:= True;
     DmGetServer.GetAlunos;
+    Dm.IsTesteApp:= False;
     MsgPoupUpTeste('DmGetServer.GetAlunos OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAlunos Erro:' + e.Message);
@@ -447,7 +468,9 @@ begin
   if not smNetworkState.ValidarConexao then
     Exit;
 
+  Dm.IsTesteApp:= True;
   Dm.SyncronizarDadosServerBasico;
+  Dm.IsTesteApp:= False;
 end;
 
 procedure TfrmTesteGeralApp.TesteMetodosDmGetServer;

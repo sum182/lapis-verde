@@ -78,6 +78,8 @@ type
 
     fEscolaId: Integer;
 
+    procedure DeleteTabel(Tabela:String);
+    procedure DeleteAllTabels;
 
     procedure SetSQLAlunos;
     procedure OpenAlunos;
@@ -226,6 +228,43 @@ begin
 
   SetModoTeste;
   OpenParametro;
+end;
+
+procedure TDm.DeleteAllTabels;
+begin
+  DeleteTabel('agenda');
+  DeleteTabel('agenda_aluno');
+  DeleteTabel('agenda_tipo');
+  DeleteTabel('agenda_turma');
+  DeleteTabel('aluno');
+  DeleteTabel('aluno_foto');
+  DeleteTabel('escola');
+  DeleteTabel('escola_endereco');
+  DeleteTabel('escola_telefone');
+  DeleteTabel('funcionario');
+  DeleteTabel('funcionario_foto');
+  DeleteTabel('funcionario_tipo');
+  DeleteTabel('log_error');
+  DeleteTabel('login_realizado');
+  DeleteTabel('mensagem');
+  DeleteTabel('mensagem_tipo');
+  DeleteTabel('parametro');
+  DeleteTabel('periodo_tipo');
+  DeleteTabel('processo_atualizacao');
+  DeleteTabel('responsavel');
+  DeleteTabel('responsavel_aluno');
+  DeleteTabel('responsavel_escola');
+  DeleteTabel('responsavel_foto');
+  DeleteTabel('responsavel_telefone');
+  DeleteTabel('responsavel_tipo');
+  DeleteTabel('telefone_tipo');
+  DeleteTabel('turma');
+  DeleteTabel('turma_aluno');
+end;
+
+procedure TDm.DeleteTabel(Tabela: String);
+begin
+  FDConnectionDB.ExecSQL('delete from ' + Tabela);
 end;
 
 procedure TDm.fgActivityDialogCancel(Sender: TObject);
@@ -457,7 +496,6 @@ begin
   try
     try
       PrimeiroAcessoInExecute:=True;
-      MsgPoupUpTeste('ini primeiro acesso');
       PrimeiroAcessoOK:=False;
       OpenParametro;
       Chave:='primeiro_acesso';
@@ -494,7 +532,6 @@ begin
       if not PrimeiroAcessoOK then
         ShowMessage('Não foi possível syncronizar dados para seu primeiro acesso!');
 
-      MsgPoupUpTeste('fim primeiro acesso');
       PrimeiroAcessoInExecute:=False;
     end;
 
@@ -521,11 +558,11 @@ begin
     Exit;
   end;
 
-  {if PrimeiroAcessoInExecute then
+  if PrimeiroAcessoInExecute then
   begin
     Result:=True;
     Exit;
-  end;}
+  end;
 
   OpenProcessoAtualizacao;
 

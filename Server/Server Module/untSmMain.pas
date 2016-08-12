@@ -591,6 +591,10 @@ end;
 procedure TSmMain.SetParamsServer(pEscolaId: Integer; pUsuario: TJSONValue);
 begin
   Usuario:= Usuario.UnMarshal(pUsuario);
+
+  if pEscolaId <= 0 then
+    pEscolaId:= 0;
+
   EscolaId:= pEscolaId;
 end;
 
