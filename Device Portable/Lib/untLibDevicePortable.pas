@@ -59,6 +59,12 @@ begin
     Exit;
   end;
 
+  if Usuario.Tipo = Responsavel then
+  begin
+    Result:= 0;
+    Exit;
+  end;
+
   if AlunoId > 0 then
   begin
     if DM.fdqAluno.State in [dsInactive] then

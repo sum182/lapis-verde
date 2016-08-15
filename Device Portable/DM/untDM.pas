@@ -12,8 +12,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  Vcl.ExtCtrls
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -339,7 +338,9 @@ end;
 procedure TDm.OpenFuncionarios;
 begin
   fdqFunc.Close;
-  fdqFunc.ParamByName('escola_id').AsInteger := GetEscolaId;
+  fdqFunc.SQL.Clear;
+  fdqFunc.SQL.Add(rs_SQLFuncionario);
+  fdqFunc.SQL.Add(GetSQLEscolaId);
   fdqFunc.Open;
 
   fdqFuncTipo.Close;

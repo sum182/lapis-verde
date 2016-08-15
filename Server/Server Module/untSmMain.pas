@@ -227,6 +227,8 @@ var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Funcionarios
+  //Migracao Resp OK Server x Mobile
+
   try
     try
       SetParamsServer(pEscolaId,pUsuario);
@@ -239,11 +241,7 @@ begin
       Result := TFDJSONDataSets.Create;
 
       fdqFuncionarios.SQL.Clear;
-      fdqFuncionarios.Params.Clear;
-
-      fdqFuncionarios.Active := False;
-      fdqFuncionarios.SQL.Add('select * from funcionario f');
-      fdqFuncionarios.SQL.Add('where ativo = '+ QuotedStr('S'));
+      fdqFuncionarios.SQL.Add(rs_SQLFuncionario);
       fdqFuncionarios.SQL.Add(GetSQLEscolaId);
 
       TFDJSONDataSetsWriter.ListAdd(Result,'funcionario',fdqFuncionarios);

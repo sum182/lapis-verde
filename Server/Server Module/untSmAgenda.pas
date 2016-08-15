@@ -265,7 +265,8 @@ begin
   DtFim:= StrToDate(FormatDateTime('dd/mm/yyyy',DtFim));
 
 
-  fdqAgenda.ParamByName('escola_id').AsInteger:= EscolaId;
+  //fdqAgenda.ParamByName('escola_id').AsInteger:= EscolaId;
+
   //fdqAgenda.ParamByName('funcionario_id').AsInteger:= FuncionarioId;
   fdqAgenda.ParamByName('dt_ini').AsDate:= DtIni;
   fdqAgenda.ParamByName('dt_fim').AsDate:= DtFim;
@@ -295,7 +296,11 @@ begin
   fdqAgenda.SQL.Add('inner join funcionario f on (f.funcionario_id = t.funcionario_id)');
   fdqAgenda.SQL.Add('where 1=1');
   //fdqAgenda.SQL.Add('and t.funcionario_id = :funcionario_id');
-  fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
+
+  //fdqAgenda.SQL.Add('and ag.escola_id = :escola_id');
+  fdqAgenda.SQL.Add(SmMain.GetSQLEscolaId('ag.escola_id'));
+
+
   fdqAgenda.SQL.Add('and ag.data between :dt_ini and :dt_fim');
 
   if KeysInserts <> '' then

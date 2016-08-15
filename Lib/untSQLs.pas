@@ -24,7 +24,7 @@ resourcestring
   rs_SQLResposavelTelefone =  'select rt.*' + #13 +
                               'from responsavel_telefone rt' + #13 +
                               'inner join responsavel_escola re on (rt.responsavel_id = re.responsavel_id)' + #13 +
-                                                     'where re.ativo = ''S'' ';
+                              'where re.ativo = ''S'' ';
 
 
   rs_SQLAluno =  'SELECT a.*, coalesce(a.nome,'') ||' + ' ' + '|| coalesce(a.sobrenome,'') as nome_completo'+ #13 +
@@ -42,6 +42,10 @@ resourcestring
                      'from turma_aluno ta'+ #13 +
                      'inner join turma t on (t.turma_id = ta.turma_id )'+ #13 +
                      ' where 1=1';
+
+
+  rs_SQLFuncionario = 'select * from funcionario f' + #13 +
+                      'where ativo = ''S'' ';
 
 
 

@@ -36,6 +36,7 @@ type
     procedure OpenProcessoAtualizacao;
     procedure OpenAlunos;
     procedure OpenTurmas;
+    procedure OpenFuncionarios;
     procedure OpenResponsaveis;
 
 
@@ -116,12 +117,12 @@ begin
       if not ValidacoesRestClientBeforeExecute then
         Exit;
 
-      LDataSetList := RestClient.SmAgendaClient.GetAgenda(GetEscolaId,
-                                                             Usuario.Marshal,
-                                                             DtIni,
-                                                             DtFim,
-                                                             GetAgendaKeysInsert(DtIni,DtFim)
-                                                             );
+      LDataSetList := RestClient.SmAgendaClient.GetAgenda( GetEscolaId,
+                                                           Usuario.Marshal,
+                                                           DtIni,
+                                                           DtFim,
+                                                           GetAgendaKeysInsert(DtIni,DtFim)
+                                                          );
 
       //Pegando dados da agenda
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda');
@@ -265,6 +266,7 @@ begin
       if not ValidacoesRestClientBeforeExecute then
         Exit;
 
+      OpenFuncionarios;
       LDataSetList := RestClient.SmMainClient.GetFuncionarios(GetEscolaId,Usuario.Marshal);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'funcionario');
       CopyDataSet(LDataSet,fdqFunc);
@@ -572,6 +574,15 @@ begin
   fdqAluno.SQL.Add(GetSQLEscolaId);
 end;
 
+procedure TDmGetServer.OpenFuncionarios;
+begin
+  fdqFunc.Close;
+  fdqFunc.SQL.Clear;
+  fdqFunc.SQL.Add(rs_SQLFuncionario);
+  fdqFunc.SQL.Add(GetSQLEscolaId);
+  fdqFunc.Open;
+end;
+
 procedure TDmGetServer.OpenProcessoAtualizacao;
 begin
   fdqProcessoAtualizacao.Close;
@@ -693,10 +704,11 @@ begin
       if not Dm.ProcessHasUpdate('responsavel') and not (PrimeiroAcessoInExecute) then
        Exit;
 
-      OpenResponsaveis;
+
       if not ValidacoesRestClientBeforeExecute then
         Exit;
 
+      OpenResponsaveis;
       LDataSetList := RestClient.SmMainClient.GetResponsaveis(GetEscolaId,Usuario.Marshal);
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'responsavel');
       CopyDataSet(LDataSet,fdqResp);
