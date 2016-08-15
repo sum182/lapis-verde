@@ -34,6 +34,7 @@ type
   private
   public
     procedure OpenProcessoAtualizacao;
+    procedure OpenAlunos;
     procedure OpenTurmas;
     procedure OpenResponsaveis;
 
@@ -312,6 +313,7 @@ begin
     if not Dm.ProcessHasUpdate('aluno') then
       Exit;
 
+    OpenAlunos;
     if not ValidacoesRestClientBeforeExecute then
       Exit;
 
@@ -563,6 +565,13 @@ begin
   fdqAgendaTurma.Active := True;
 end;
 
+procedure TDmGetServer.OpenAlunos;
+begin
+  fdqAluno.SQL.Clear;
+  fdqAluno.SQL.Add(rs_SQLAluno);
+  fdqAluno.SQL.Add(GetSQLEscolaId);
+end;
+
 procedure TDmGetServer.OpenProcessoAtualizacao;
 begin
   fdqProcessoAtualizacao.Close;
@@ -620,21 +629,16 @@ procedure TDmGetServer.OpenTurmas;
 begin
   fdqTurma.Close;
   fdqTurma.SQL.Clear;
-  fdqTurma.SQL.Add(' SELECT * FROM turma t');
-  fdqTurma.SQL.Add(' where 1=1');
+  fdqTurma.SQL.Add(rs_SQLTurma);
   fdqTurma.SQL.Add(GetSQLEscolaId);
-  fdqTurma.SQL.Add('order by nome');
+  fdqTurma.SQL.Add('order by nome');
   fdqTurma.Open;
 
   fdqTurmaAluno.Close;
   fdqTurmaAluno.SQL.Clear;
-  fdqTurmaAluno.SQL.Add('select');
-  fdqTurmaAluno.SQL.Add('ta.*');
-  fdqTurmaAluno.SQL.Add('from turma_aluno ta');
-  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
-  fdqTurmaAluno.SQL.Add(' where 1=1');
+  fdqTurmaAluno.SQL.Add(rs_SQLTurmaAluno);
   fdqTurmaAluno.SQL.Add(GetSQLEscolaId());
-  fdqTurmaAluno.Open;
+  fdqTurmaAluno.Open;
 end;
 
 procedure TDmGetServer.SetSQLAgendaAluno(KeyValues: String);

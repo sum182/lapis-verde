@@ -27,6 +27,23 @@ resourcestring
                                                      'where re.ativo = ''S'' ';
 
 
+  rs_SQLAluno =  'SELECT a.*, coalesce(a.nome,'') ||' + ' ' + '|| coalesce(a.sobrenome,'') as nome_completo'+ #13 +
+                 'FROM aluno a'+ #13 +
+                 'where 1=1' + #13 +
+                 'and ativo = ''S'' ';
+
+
+
+  rs_SQLTurma = 'SELECT * FROM turma t' + #13 +
+                'where 1=1';
+
+  rs_SQLTurmaAluno = 'select'+ #13 +
+                     'ta.*'+ #13 +
+                     'from turma_aluno ta'+ #13 +
+                     'inner join turma t on (t.turma_id = ta.turma_id )'+ #13 +
+                     ' where 1=1';
+
+
 
 
 

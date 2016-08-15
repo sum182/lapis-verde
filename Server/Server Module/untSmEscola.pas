@@ -64,7 +64,7 @@ begin
                                            );
 
       fdqLoginFuncionario.Close;
-      fdqLoginFuncionario.ParamByName('login').AsString := Login;
+      fdqLoginFuncionario.ParamByName('login').AsString := UpperCase(Login);
       fdqLoginFuncionario.ParamByName('senha').AsString := Senha;
       fdqLoginFuncionario.Open;
 

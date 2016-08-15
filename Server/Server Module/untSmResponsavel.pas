@@ -129,7 +129,7 @@ begin
                                            );
 
       fdqLoginResponsavel.Close;
-      fdqLoginResponsavel.ParamByName('login').AsString := Login;
+      fdqLoginResponsavel.ParamByName('login').AsString := UpperCase(Login);
       fdqLoginResponsavel.ParamByName('senha').AsString := Senha;
       fdqLoginResponsavel.Open;
 

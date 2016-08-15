@@ -401,20 +401,7 @@ end;
 
 procedure TDm.OpenResponsaveis;
 begin
-{  fdqResp.Close;
-  fdqResp.ParamByName('escola_id').AsInteger := GetEscolaId;
-  fdqResp.Open;
-
-  fdqRespAluno.Close;
-  fdqRespAluno.ParamByName('escola_id').AsInteger := GetEscolaId;
-  fdqRespAluno.Open;
-
-  fdqRespTelefone.Close;
-  fdqRespTelefone.ParamByName('escola_id').AsInteger := GetEscolaId;
-  fdqRespTelefone.Open; }
-
   //Tabela responsavel
-    //Tabela responsavel
   fdqResp.Active := False;
   fdqResp.SQL.Clear;
   fdqResp.SQL.Add(rs_SQLResposavel);
@@ -446,13 +433,10 @@ procedure TDm.OpenTurmaAluno;
 begin
   fdqTurmaAluno.Close;
   fdqTurmaAluno.SQL.Clear;
-  fdqTurmaAluno.SQL.Add('select');
-  fdqTurmaAluno.SQL.Add('ta.*');
-  fdqTurmaAluno.SQL.Add('from turma_aluno ta');
-  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
-  fdqTurmaAluno.SQL.Add(' where 1=1');
+  fdqTurmaAluno.SQL.Clear;
+  fdqTurmaAluno.SQL.Add(rs_SQLTurmaAluno);
   fdqTurmaAluno.SQL.Add(GetSQLEscolaId());
-  fdqTurmaAluno.Open;
+  fdqTurmaAluno.Open;
 end;
 
 procedure TDm.OpenTurmaAluno(TurmaId: Integer);
@@ -479,10 +463,10 @@ procedure TDm.OpenTurmas;
 begin
   fdqTurma.Close;
   fdqTurma.SQL.Clear;
-  fdqTurma.SQL.Add(' SELECT * FROM turma t');
-  fdqTurma.SQL.Add(' where 1=1');
+  fdqTurma.SQL.Clear;
+  fdqTurma.SQL.Add(rs_SQLTurma);
   fdqTurma.SQL.Add(GetSQLEscolaId);
-  fdqTurma.SQL.Add('order by nome');
+  fdqTurma.SQL.Add('order by nome');
   fdqTurma.Open;
 
   OpenTurmaAluno;
@@ -691,7 +675,6 @@ end;
 
 procedure TDm.SetSQLAlunos;
 begin
-
   fdqAluno.SQL.Clear;
 
   if Usuario.Tipo = Funcionario then

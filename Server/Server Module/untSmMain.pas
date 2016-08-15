@@ -139,6 +139,7 @@ var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Alunos
+  //Migracao Resp OK Server x Mobile
   try
     try
       SetParamsServer(pEscolaId,pUsuario);
@@ -151,16 +152,11 @@ begin
 
       Result := TFDJSONDataSets.Create;
 
-      fdqAluno.Active := False;
       fdqAluno.SQL.Clear;
-      fdqAluno.SQL.Add('SELECT a.*, concat(coalesce(a.nome,''),' + ' ' + ', coalesce(a.sobrenome,'')) as nome_completo');
-      fdqAluno.SQL.Add('FROM aluno a');
-      fdqAluno.SQL.Add('where 1=1');
+      fdqAluno.SQL.Add(rs_SQLAluno);
       fdqAluno.SQL.Add(GetSQLEscolaId);
-      fdqAluno.SQL.Add('and ativo = '+ QuoTedStr('S'));
-      fdqAluno.SQL.Add('order by nome_completo');
 
-      TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqAluno);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       begin
@@ -327,6 +323,7 @@ var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Responsaveis
+  //Migracao Resp OK Server x Mobile
   try
     try
       SetParamsServer(pEscolaId,pUsuario);
@@ -401,20 +398,15 @@ begin
 
       fdqTurma.Active := False;
       fdqTurma.SQL.Clear;
-      fdqTurma.SQL.Add(' SELECT * FROM turma t');
-      fdqTurma.SQL.Add(' where 1=1');
+      fdqTurma.SQL.Add(rs_SQLTurma);
       fdqTurma.SQL.Add(GetSQLEscolaId);
-      fdqTurma.SQL.Add('order by nome');
       TFDJSONDataSetsWriter.ListAdd(Result,'turma',fdqTurma);
 
       fdqTurmaAluno.Active := False;
       fdqTurmaAluno.SQL.Clear;
-      fdqTurmaAluno.SQL.Add('select');
-      fdqTurmaAluno.SQL.Add('ta.*');
-      fdqTurmaAluno.SQL.Add('from turma_aluno ta');
-      fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
-      fdqTurmaAluno.SQL.Add(' where 1=1');
+      fdqTurmaAluno.SQL.Add(rs_SQLTurmaAluno);
       fdqTurmaAluno.SQL.Add(GetSQLEscolaId());
+
       TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
 
       SmMain.SaveLogServerRequest(LogServerRequest);
