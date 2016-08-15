@@ -185,7 +185,7 @@ object Dm: TDm
         'inner join responsavel r on (r.responsavel_id = ra.responsavel_i' +
         'd)'
       'where r.ativo = '#39'S'#39)
-    Left = 131
+    Left = 211
     Top = 111
   end
   object fdqRespTelefone: TFDQuery
@@ -197,14 +197,14 @@ object Dm: TDm
         'inner join responsavel r on (r.responsavel_id = rt.responsavel_i' +
         'd)'
       'where r.ativo = '#39'S'#39)
-    Left = 211
+    Left = 291
     Top = 111
   end
   object fdqRespTipo: TFDQuery
     Connection = FDConnectionDB
     SQL.Strings = (
       'select rt.*'#10'from responsavel_tipo rt'#10)
-    Left = 299
+    Left = 379
     Top = 111
   end
   object fdqFunc: TFDQuery
@@ -294,5 +294,14 @@ object Dm: TDm
       'select * from parametro')
     Left = 40
     Top = 328
+  end
+  object fdqRespEscola: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select re.*'
+      'from responsavel_escola re'
+      'where re.ativo = '#39'S'#39)
+    Left = 128
+    Top = 120
   end
 end

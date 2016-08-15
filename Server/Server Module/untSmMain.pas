@@ -386,7 +386,7 @@ var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar as Turmas
-  //analisar rotina acho q esta com erro
+  //Migracao Resp OK Server x Mobile
   try
     try
       SetParamsServer(pEscolaId,pUsuario);
@@ -413,9 +413,10 @@ begin
       fdqTurmaAluno.SQL.Add('ta.*');
       fdqTurmaAluno.SQL.Add('from turma_aluno ta');
       fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+      fdqTurmaAluno.SQL.Add(' where 1=1');
       fdqTurmaAluno.SQL.Add(GetSQLEscolaId());
-
-      TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
+      TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
+
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       begin

@@ -30,10 +30,13 @@ type
     fdqProcessoAtualizacaodata_local: TDateTimeField;
     fdqProcessoAtualizacaoescola_id: TIntegerField;
     fdqRespEscola: TFDQuery;
+    fdqRespTipo: TFDQuery;
   private
   public
     procedure OpenProcessoAtualizacao;
     procedure OpenTurmas;
+    procedure OpenResponsaveis;
+
 
     procedure GetProcessoAtualizacao;
 
@@ -85,7 +88,7 @@ implementation
 
 uses untDM, untRestClient, smDBFireDac,
   FMX.Dialogs, System.SysUtils, smGeralFMX, untLibDevicePortable, FMX.Forms,smMensagensFMX,smNetworkState,
-  untLibGeral, Data.DBXJSONReflect, System.JSON, System.ZLib, untTypes;
+  untLibGeral, Data.DBXJSONReflect, System.JSON, System.ZLib, untTypes, untSQLs;
 
 {$R *.dfm}
 
@@ -583,15 +586,69 @@ begin
   fdqProcessoAtualizacao.Open;
 end;
 
+procedure TDmGetServer.OpenResponsaveis;
+begin
+  //Tabela responsavel
+  fdqResp.Active := False;
+  fdqResp.SQL.Clear;
+ { fdqResp.SQL.Add('select * from responsavel r');
+  fdqResp.SQL.Add('inner join responsavel_escola re on (r.responsavel_id = re.responsavel_id)');
+  fdqResp.SQL.Add('where re.ativo = ' + QuoTedStr('S')); }
+
+  fdqResp.SQL.Add(rs_rs_SQLResposavel);
+  fdqResp.SQL.Add(GetSQLEscolaId('re.escola_id'));
+
+  //Tabela de responsavel_escola
+  fdqRespEscola.Active := False;
+  fdqRespEscola.SQL.Clear;
+  fdqRespEscola.SQL.Add('select re.*');
+  fdqRespEscola.SQL.Add('from responsavel_escola re');
+  fdqRespEscola.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespEscola.SQL.Add(GetSQLEscolaId('re.escola_id'));
+
+  //Tabela de responsavel_aluno
+  fdqRespAluno.Active := False;
+  fdqRespAluno.SQL.Clear;
+  fdqRespAluno.SQL.Add('select ra.*');
+  fdqRespAluno.SQL.Add('from responsavel_aluno ra');
+  fdqRespAluno.SQL.Add('inner join responsavel_escola re on (ra.responsavel_id = re.responsavel_id)');
+  fdqRespAluno.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespAluno.SQL.Add(GetSQLEscolaId('re.escola_id'));
+
+  //Tabela de responsavel_telefone
+  fdqRespTelefone.Active := False;
+  fdqRespTelefone.SQL.Clear;
+  fdqRespTelefone.SQl.Add('select rt.*');
+  fdqRespTelefone.SQl.Add('from responsavel_telefone rt');
+  fdqRespTelefone.SQl.Add('inner join responsavel_escola re on (rt.responsavel_id = re.responsavel_id)');
+  fdqRespTelefone.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespTelefone.SQL.Add(GetSQLEscolaId('re.escola_id'));
+
+
+  fdqRespTipo.Close;
+  fdqRespTipo.Open;
+
+end;
+
 procedure TDmGetServer.OpenTurmas;
 begin
   fdqTurma.Close;
-  fdqTurma.ParamByName('escola_id').AsInteger:= GetEscolaId;
+  fdqTurma.SQL.Clear;
+  fdqTurma.SQL.Add(' SELECT * FROM turma t');
+  fdqTurma.SQL.Add(' where 1=1');
+  fdqTurma.SQL.Add(GetSQLEscolaId);
+  fdqTurma.SQL.Add('order by nome');
   fdqTurma.Open;
 
   fdqTurmaAluno.Close;
-  fdqTurmaAluno.ParamByName('escola_id').AsInteger:= GetEscolaId;
-  fdqTurmaAluno.Open;
+  fdqTurmaAluno.SQL.Clear;
+  fdqTurmaAluno.SQL.Add('select');
+  fdqTurmaAluno.SQL.Add('ta.*');
+  fdqTurmaAluno.SQL.Add('from turma_aluno ta');
+  fdqTurmaAluno.SQL.Add('inner join turma t on (t.turma_id = ta.turma_id )');
+  fdqTurmaAluno.SQL.Add(' where 1=1');
+  fdqTurmaAluno.SQL.Add(GetSQLEscolaId());
+  fdqTurmaAluno.Open;
 end;
 
 procedure TDmGetServer.SetSQLAgendaAluno(KeyValues: String);
@@ -646,7 +703,7 @@ begin
       if not Dm.ProcessHasUpdate('responsavel') and not (PrimeiroAcessoInExecute) then
        Exit;
 
-      //OpenResponsaveis;
+      OpenResponsaveis;
       if not ValidacoesRestClientBeforeExecute then
         Exit;
 

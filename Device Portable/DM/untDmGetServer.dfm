@@ -156,8 +156,8 @@ object DmGetServer: TDmGetServer
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
       'where f.escola_id = :escola_id')
-    Left = 402
-    Top = 73
+    Left = 42
+    Top = 233
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -270,5 +270,12 @@ object DmGetServer: TDmGetServer
       'where re.ativo = '#39'S'#39)
     Left = 120
     Top = 72
+  end
+  object fdqRespTipo: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select rt.*'#10'from responsavel_tipo rt'#10)
+    Left = 379
+    Top = 71
   end
 end
