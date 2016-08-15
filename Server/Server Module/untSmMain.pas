@@ -91,7 +91,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses smGeral, Vcl.Forms, smDBFireDac, Data.DBXJSONReflect,
-  System.Rtti;
+  System.Rtti, untSQLs;
 
 {$R *.dfm}
 
@@ -693,35 +693,25 @@ begin
   //Tabela responsavel
   fdqResp.Active := False;
   fdqResp.SQL.Clear;
-  fdqResp.SQL.Add('select * from responsavel r');
-  fdqResp.SQL.Add('inner join responsavel_escola re on (r.responsavel_id = re.responsavel_id)');
-  fdqResp.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqResp.SQL.Add(rs_SQLResposavel);
   fdqResp.SQL.Add(GetSQLEscolaId('re.escola_id'));
 
   //Tabela de responsavel_escola
   fdqRespEscola.Active := False;
   fdqRespEscola.SQL.Clear;
-  fdqRespEscola.SQL.Add('select re.*');
-  fdqRespEscola.SQL.Add('from responsavel_escola re');
-  fdqRespEscola.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespEscola.SQL.Add(rs_SQLResposavelEscola);
   fdqRespEscola.SQL.Add(GetSQLEscolaId('re.escola_id'));
 
   //Tabela de responsavel_aluno
   fdqRespAluno.Active := False;
   fdqRespAluno.SQL.Clear;
-  fdqRespAluno.SQL.Add('select ra.*');
-  fdqRespAluno.SQL.Add('from responsavel_aluno ra');
-  fdqRespAluno.SQL.Add('inner join responsavel_escola re on (ra.responsavel_id = re.responsavel_id)');
-  fdqRespAluno.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespAluno.SQL.Add(rs_SQLResposavelAluno);
   fdqRespAluno.SQL.Add(GetSQLEscolaId('re.escola_id'));
 
   //Tabela de responsavel_telefone
   fdqRespTelefone.Active := False;
   fdqRespTelefone.SQL.Clear;
-  fdqRespTelefone.SQl.Add('select rt.*');
-  fdqRespTelefone.SQl.Add('from responsavel_telefone rt');
-  fdqRespTelefone.SQl.Add('inner join responsavel_escola re on (rt.responsavel_id = re.responsavel_id)');
-  fdqRespTelefone.SQL.Add('where re.ativo = ' + QuoTedStr('S'));
+  fdqRespTelefone.SQL.Add(rs_SQLResposavelTelefone);
   fdqRespTelefone.SQL.Add(GetSQLEscolaId('re.escola_id'));
 end;
 

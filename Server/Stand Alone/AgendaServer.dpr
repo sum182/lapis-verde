@@ -20,7 +20,8 @@ uses
   untSmEscola in '..\Server Module\untSmEscola.pas' {SmEscola: TDataModule},
   untSmMain in '..\Server Module\untSmMain.pas' {SmMain: TDataModule},
   untSmResponsavel in '..\Server Module\untSmResponsavel.pas' {SmResponsavel: TDataModule},
-  untSmTeste in '..\Server Module\untSmTeste.pas' {SmTeste: TDataModule};
+  untSmTeste in '..\Server Module\untSmTeste.pas' {SmTeste: TDataModule},
+  untSQLs in '..\..\Lib\untSQLs.pas';
 
 {$R *.res}
 

@@ -485,6 +485,7 @@
             <Form>frmConfiguracoes</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="..\Lib\untSQLs.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

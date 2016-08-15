@@ -49,7 +49,8 @@ uses
   untSplashScreen in 'untSplashScreen.pas' {frmSplashScreen},
   untPerfil in 'Perfil\untPerfil.pas' {frmPerfil},
   untSobre in 'untSobre.pas' {frmSobre},
-  untConfiguracoes in 'untConfiguracoes.pas' {frmConfiguracoes};
+  untConfiguracoes in 'untConfiguracoes.pas' {frmConfiguracoes},
+  untSQLs in '..\Lib\untSQLs.pas';
 
 {$R *.res}
 
