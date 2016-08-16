@@ -53,18 +53,6 @@ end;
 
 function GetEscolaId(AlunoId:Integer=0):Integer;
 begin
-  if Usuario.Tipo = Funcionario then
-  begin
-    Result:= DM.fEscolaId;
-    Exit;
-  end;
-
-  if Usuario.Tipo = Responsavel then
-  begin
-    Result:= 0;
-    Exit;
-  end;
-
   if AlunoId > 0 then
   begin
     if DM.fdqAluno.State in [dsInactive] then
@@ -75,6 +63,19 @@ begin
       Exit;
 
     Result:= DM.fdqAluno.FieldByName('escola_id').AsInteger;
+    Exit;
+  end;
+
+  if (Usuario.Tipo = Funcionario) and ( AlunoId <= 0) then
+  begin
+    Result:= DM.fEscolaId;
+    Exit;
+  end;
+
+  if (Usuario.Tipo = Responsavel) and ( AlunoId <= 0)then
+  begin
+    Result:= 0;
+    Exit;
   end;
 
 end;

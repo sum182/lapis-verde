@@ -95,7 +95,8 @@ end;
 procedure TfrmSplashScreen.StartupTimerTimer(Sender: TObject);
 begin
   StartupTimer.Enabled := false;
-  if not FInitialized then begin
+  if not FInitialized then
+  begin
     FInitialized := true;
     LoadMainForm;
   end;
