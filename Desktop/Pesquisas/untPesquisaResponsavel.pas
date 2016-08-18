@@ -18,6 +18,9 @@ uses
   Vcl.Buttons, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
+Type
+    TTipoPesquisa = (Escola,Geral);
+
 type
   TfrmPesquisaResponsavel = class(TForm)
     grbxDados: TcxGroupBox;
@@ -38,7 +41,7 @@ type
     cxGrid1DBTableView1sobrenome: TcxGridDBColumn;
     cxStyleRepository1: TcxStyleRepository;
     cxStyle1: TcxStyle;
-    procedure fdqPesquisaBeforeOpen(DataSet: TDataSet);
+    cxGrid1DBTableView1CPF: TcxGridDBColumn;
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
@@ -48,9 +51,12 @@ type
     procedure FormShow(Sender: TObject);
   private
     fId:Integer;
+    fTipoPesquisa: TTipoPesquisa;
+    procedure SetSQL;
+    procedure SetParams;
     procedure OpenQuerys;
   public
-    function Open:Integer;
+    function Open(pTipoPesquisa: TTipoPesquisa = Escola):Integer;
   end;
 
 var
@@ -79,6 +85,7 @@ begin
   case cmbCampo.ItemIndex of
     0: fdqPesquisa.IndexFieldNames := 'nome';
     1: fdqPesquisa.IndexFieldNames:= 'sobrenome';
+    2: fdqPesquisa.IndexFieldNames:= 'cpf';
   end;
 end;
 
@@ -93,22 +100,21 @@ begin
   fdqPesquisa.FindNearest([edtConteudo.Text]);
 end;
 
-procedure TfrmPesquisaResponsavel.fdqPesquisaBeforeOpen(DataSet: TDataSet);
-begin
-  SetIdEscolaParamBusca(fdqPesquisa);
-end;
-
 procedure TfrmPesquisaResponsavel.FormShow(Sender: TObject);
 begin
   edtConteudo.SetFocus;
 end;
 
-function TfrmPesquisaResponsavel.Open: Integer;
+function TfrmPesquisaResponsavel.Open(pTipoPesquisa: TTipoPesquisa = Escola): Integer;
 begin
   with TfrmPesquisaResponsavel.Create(Application)do
   try
-    OpenQuerys;
     fId:=0;
+    fTipoPesquisa:=pTipoPesquisa;
+
+    SetSQL;
+    SetParams;
+    OpenQuerys;
     ShowModal;
     Result:=fId;
   finally
@@ -120,7 +126,32 @@ procedure TfrmPesquisaResponsavel.OpenQuerys;
 begin
   fdqPesquisa.Close;
   fdqPesquisa.Open;
+end;
 
+procedure TfrmPesquisaResponsavel.SetParams;
+begin
+  if fTipoPesquisa = Escola then
+    fdqPesquisa.ParamByName('escola_id').AsInteger:=GetEscolaId;
+end;
+
+procedure TfrmPesquisaResponsavel.SetSQL;
+begin
+  if fTipoPesquisa = Escola then
+  begin
+    fdqPesquisa.SQL.Clear;
+    fdqPesquisa.SQL.Add('SELECT * FROM responsavel r');
+    fdqPesquisa.SQL.Add('inner join responsavel_escola re on (r.responsavel_id = re.responsavel_id)');
+    fdqPesquisa.SQL.Add('where 1=1');
+    fdqPesquisa.SQL.Add('and re.escola_id = :escola_id');
+
+
+  end;
+
+  if fTipoPesquisa = Geral then
+  begin
+    fdqPesquisa.SQL.Clear;
+    fdqPesquisa.SQL.Add('SELECT * FROM  responsavel');
+  end;
 end;
 
 end.

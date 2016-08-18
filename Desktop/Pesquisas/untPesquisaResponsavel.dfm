@@ -4,7 +4,7 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
   BorderIcons = [biMinimize, biMaximize]
   Caption = 'Pesquisa de Respons'#225'veis'
   ClientHeight = 457
-  ClientWidth = 587
+  ClientWidth = 788
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,15 +22,17 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     Align = alClient
     Caption = 'Dados'
     TabOrder = 1
+    ExplicitWidth = 587
     Height = 336
-    Width = 587
+    Width = 788
     object cxGrid1: TcxGrid
       Left = 2
       Top = 18
-      Width = 583
+      Width = 784
       Height = 316
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 583
       object cxGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         OnCellDblClick = cxGrid1DBTableView1CellDblClick
@@ -53,7 +55,12 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
         object cxGrid1DBTableView1sobrenome: TcxGridDBColumn
           Caption = 'Sobrenome'
           DataBinding.FieldName = 'sobrenome'
-          Width = 298
+          Width = 352
+        end
+        object cxGrid1DBTableView1CPF: TcxGridDBColumn
+          Caption = 'CPF'
+          DataBinding.FieldName = 'cpf'
+          Width = 90
         end
       end
       object cxGrid1Level1: TcxGridLevel
@@ -67,8 +74,9 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     Align = alTop
     Caption = 'Filtros'
     TabOrder = 0
+    ExplicitWidth = 587
     Height = 70
-    Width = 587
+    Width = 788
     object edtConteudo: TcxTextEdit
       Left = 169
       Top = 38
@@ -92,7 +100,8 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
       Properties.DropDownListStyle = lsFixedList
       Properties.Items.Strings = (
         'Nome'
-        'Sobrenome')
+        'Sobrenome'
+        'CPF')
       Properties.OnChange = cmbCampoPropertiesChange
       TabOrder = 0
       Text = 'Nome'
@@ -104,8 +113,9 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     Top = 406
     Align = alBottom
     TabOrder = 2
+    ExplicitWidth = 587
     Height = 51
-    Width = 587
+    Width = 788
     object btnOK: TcxButton
       Left = 418
       Top = 16
@@ -128,30 +138,29 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     end
   end
   object fdqPesquisa: TFDQuery
-    BeforeOpen = fdqPesquisaBeforeOpen
     IndexFieldNames = 'nome'
     Connection = DM.FDConnection
     SQL.Strings = (
       'SELECT * FROM  responsavel'
       'where escola_id = :escola_id ')
-    Left = 508
-    Top = 168
+    Left = 692
+    Top = 240
     ParamData = <
       item
         Name = 'ESCOLA_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 1
       end>
   end
   object dsPesquisa: TDataSource
     DataSet = fdqPesquisa
-    Left = 508
-    Top = 216
+    Left = 692
+    Top = 288
   end
   object cxStyleRepository1: TcxStyleRepository
-    Left = 504
-    Top = 264
+    Left = 688
+    Top = 336
     PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svTextColor]

@@ -89,6 +89,7 @@ type
     fdqAlunosaluno_id: TIntegerField;
     fdqCadsenha: TStringField;
     fdqCaddata_atualizacao: TDateTimeField;
+    btnPesquisarResponsavel: TcxButton;
     procedure AcNovoExecute(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -111,6 +112,8 @@ type
     procedure fdqAlunosBeforeDelete(DataSet: TDataSet);
     procedure BuProcessarClick(Sender: TObject);
     procedure AcApplyUpdateExecute(Sender: TObject);
+    procedure btnPesquisarResponsavelClick(Sender: TObject);
+    procedure fdqCadBeforeOpen(DataSet: TDataSet);
   private
     procedure OpenQuerys;
     procedure SetPgtCtrlDefaut;
@@ -126,7 +129,7 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno, smGeral;
+uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno, smGeral, untPesquisaResponsavel;
 
 procedure TfrmCadastroResponsavel.AcApplyUpdateExecute(Sender: TObject);
 begin
@@ -175,6 +178,24 @@ begin
     Exit;
 
   fdqAlunos.Delete;
+end;
+
+procedure TfrmCadastroResponsavel.btnPesquisarResponsavelClick(Sender: TObject);
+var
+  ResponsavelId:integer;
+begin
+  ResponsavelId:=frmPesquisaResponsavel.Open(Geral);
+
+  if ResponsavelId <= 0 then
+    Exit;
+
+  {if fdqResponsaveis.Locate('responsavel_id',ResponsavelId,[]) then
+    Exit;
+
+  fdqResponsaveis.Append;
+  fdqResponsaveis.FieldByName('responsavel_id').AsInteger:= ResponsavelId;
+  fdqResponsaveis.Post;}
+
 end;
 
 procedure TfrmCadastroResponsavel.BuProcessarClick(Sender: TObject);
@@ -239,6 +260,12 @@ procedure TfrmCadastroResponsavel.fdqCadAfterOpen(DataSet: TDataSet);
 begin
   inherited;
   OpenQuerys;
+end;
+
+procedure TfrmCadastroResponsavel.fdqCadBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetIdEscolaParamBusca(fdqCad);
 end;
 
 procedure TfrmCadastroResponsavel.fdqCadNewRecord(DataSet: TDataSet);

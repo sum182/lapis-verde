@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2016/02/09 17:56:33.000.035,C:\Projetos\Agenda\AgendaProjectGroupRX10.groupproj=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj</Transaction>
-    <Transaction>2016/06/21 23:07:32.000.449,C:\Projetos\Agenda\AgendaProjectGroupRX10.groupproj=C:\Projetos\Agenda\LapisVerdeProjectGroupRX10.groupproj</Transaction>
+    <Transaction>2016/02/09 17:56:33.000.035,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj=C:\Projetos\Agenda\AgendaProjectGroupRX10.groupproj</Transaction>
+    <Transaction>2016/06/21 23:07:32.000.449,C:\Projetos\Agenda\LapisVerdeProjectGroupRX10.groupproj=C:\Projetos\Agenda\AgendaProjectGroupRX10.groupproj</Transaction>
   </Transactions>
 	<Default.Personality>
-		<Projects ActiveProject="C:\Projetos\Agenda\Server\Apache\mod_lapis_verde.dproj"/>
+		<Projects ActiveProject="C:\Projetos\Agenda\Device Portable\LapisVerde.dproj"/>
 	</Default.Personality>
 </BorlandProject>
