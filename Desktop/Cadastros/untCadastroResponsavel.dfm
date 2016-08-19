@@ -1,18 +1,19 @@
 inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   Caption = 'Cadastro de Respons'#225'veis'
   ClientHeight = 715
-  ClientWidth = 1363
+  ClientWidth = 1362
   OnClose = FormClose
-  ExplicitWidth = 1379
+  ExplicitLeft = -312
+  ExplicitWidth = 1378
   ExplicitHeight = 753
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
-    Width = 1363
-    ExplicitWidth = 1230
+    Width = 1362
+    ExplicitWidth = 1363
   end
   inherited PaCoPadrao: TPageControl
-    Width = 1363
+    Width = 1362
     Height = 674
     ActivePage = TaShCadastro
     ExplicitWidth = 1230
@@ -21,15 +22,15 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       ExplicitWidth = 1222
       ExplicitHeight = 455
       inherited grbxPesquisa: TGroupBox
-        Width = 1355
+        Width = 1354
         ExplicitWidth = 1222
         inherited ToolBar1: TToolBar
-          Width = 1345
-          ExplicitWidth = 1345
+          Width = 1344
+          ExplicitWidth = 1344
         end
       end
       inherited grPesquisa: TsmDBGrid
-        Width = 1355
+        Width = 1354
         Height = 531
         DataSource = dsBusca
         Columns = <
@@ -96,9 +97,9 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       end
       inherited stbrConsulta: TStatusBar
         Top = 628
-        Width = 1355
-        ExplicitTop = 437
-        ExplicitWidth = 1222
+        Width = 1354
+        ExplicitTop = 628
+        ExplicitWidth = 1354
       end
     end
     inherited TaShCadastro: TTabSheet
@@ -107,7 +108,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
-        Width = 1355
+        Width = 1354
         Height = 646
         Align = alClient
         TabOrder = 0
@@ -117,305 +118,313 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
         ExplicitHeight = 455
         ClientRectBottom = 642
         ClientRectLeft = 4
-        ClientRectRight = 1351
+        ClientRectRight = 1350
         ClientRectTop = 24
         object cxTabSheet1: TcxTabSheet
           Caption = 'Dados Principais'
           ImageIndex = 0
           ExplicitWidth = 1214
           ExplicitHeight = 427
-          object cxGroupBox1: TcxGroupBox
-            Left = 590
-            Top = 335
-            Caption = 'Telefones'
-            TabOrder = 1
-            Height = 226
-            Width = 363
-            object Bevel1: TBevel
-              Left = 208
-              Top = 96
-              Width = 50
-              Height = 50
-            end
-            object Bevel2: TBevel
-              Left = 2
-              Top = 18
-              Width = 359
-              Height = 44
-              Align = alTop
-              ExplicitLeft = 18
-              ExplicitTop = 26
-              ExplicitWidth = 535
-            end
-            object DBNavigator1: TDBNavigator
-              Left = 16
-              Top = 28
-              Width = 105
-              Height = 25
-              DataSource = dsTelefone
-              VisibleButtons = [nbInsert, nbDelete, nbPost]
-              Align = alCustom
-              ConfirmDelete = False
-              TabOrder = 0
-            end
-            object cxGrid1: TcxGrid
-              Left = 2
-              Top = 62
-              Width = 359
-              Height = 162
-              Align = alClient
-              TabOrder = 1
-              ExplicitWidth = 452
-              ExplicitHeight = 244
-              object cxGrid1DBTableView1: TcxGridDBTableView
-                Navigator.Buttons.CustomButtons = <>
-                DataController.DataSource = dsTelefone
-                DataController.Summary.DefaultGroupSummaryItems = <>
-                DataController.Summary.FooterSummaryItems = <>
-                DataController.Summary.SummaryGroups = <>
-                OptionsView.GroupByBox = False
-                object cxGrid1DBTableView1escola_telefone_id: TcxGridDBColumn
-                  DataBinding.FieldName = 'escola_telefone_id'
-                  Visible = False
-                  Width = 108
-                end
-                object cxGrid1DBTableView1escola_id: TcxGridDBColumn
-                  DataBinding.FieldName = 'escola_id'
-                  Visible = False
-                  Width = 74
-                end
-                object cxGrid1DBTableView1telefone_tipo_id: TcxGridDBColumn
-                  DataBinding.FieldName = 'telefone_tipo_id'
-                  Visible = False
-                  Width = 107
-                end
-                object cxGrid1DBTableView1numero: TcxGridDBColumn
-                  Caption = 'N'#250'mero'
-                  DataBinding.FieldName = 'numero'
-                  Width = 179
-                end
-                object cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn
-                  Caption = 'Tipo'
-                  DataBinding.FieldName = 'telefone_tipo_id'
-                  PropertiesClassName = 'TcxLookupComboBoxProperties'
-                  Properties.KeyFieldNames = 'telefone_tipo_id'
-                  Properties.ListColumns = <
-                    item
-                      FieldName = 'descricao'
-                    end>
-                  Properties.ListOptions.ShowHeader = False
-                  Properties.ListSource = dsTelefoneTipo
-                  Width = 152
-                end
-              end
-              object cxGrid1Level1: TcxGridLevel
-                GridView = cxGrid1DBTableView1
-              end
-            end
-          end
-          object cxGroupBox3: TcxGroupBox
-            Left = 24
-            Top = 335
-            Caption = 'Informa'#231#245'es Gerais'
+          object ScrollBox1: TScrollBox
+            Left = 0
+            Top = 0
+            Width = 1346
+            Height = 618
+            Align = alClient
             TabOrder = 0
-            Height = 226
-            Width = 545
-            object Label9: TLabel
-              Left = 20
-              Top = 71
-              Width = 93
-              Height = 13
-              Caption = 'Informa'#231#245'es Gerais'
-            end
-            object Label5: TLabel
-              Left = 158
-              Top = 32
-              Width = 99
-              Height = 13
-              Caption = 'Tipo de Respons'#225'vel'
-            end
-            object cxDBMemo1: TcxDBMemo
-              Left = 20
-              Top = 90
-              DataBinding.DataField = 'informacoes_gerais'
-              DataBinding.DataSource = dsCad
-              TabOrder = 2
-              Height = 103
-              Width = 496
-            end
-            object cxDBLookupComboBox1: TcxDBLookupComboBox
-              Left = 158
-              Top = 51
-              DataBinding.DataField = 'responsavel_tipo_id'
-              DataBinding.DataSource = dsCad
-              Properties.DropDownListStyle = lsFixedList
-              Properties.KeyFieldNames = 'responsavel_tipo_id'
-              Properties.ListColumns = <
-                item
-                  FieldName = 'descricao'
-                end>
-              Properties.ListOptions.ShowHeader = False
-              Properties.ListSource = dsResponsavelTipo
-              TabOrder = 1
-              Width = 185
-            end
-            object cxDBCheckBox1: TcxDBCheckBox
-              Left = 20
-              Top = 29
-              Caption = 'Respons'#225'vel Ativo'
-              DataBinding.DataField = 'ativo'
-              DataBinding.DataSource = dsCad
-              Properties.NullStyle = nssUnchecked
-              Properties.ValueChecked = 'S'
-              Properties.ValueUnchecked = 'N'
+            ExplicitTop = -6
+            object cxGroupBox2: TcxGroupBox
+              Left = 24
+              Top = 10
+              Caption = 'Dados do Respons'#225'vel'
               TabOrder = 0
-              Width = 113
+              Height = 311
+              Width = 545
+              object Label3: TLabel
+                Left = 20
+                Top = 59
+                Width = 27
+                Height = 13
+                Caption = 'Nome'
+                FocusControl = cxDBTextEdit1
+              end
+              object Label4: TLabel
+                Left = 20
+                Top = 112
+                Width = 54
+                Height = 13
+                Caption = 'Sobrenome'
+                FocusControl = cxDBTextEdit2
+              end
+              object Label7: TLabel
+                Left = 20
+                Top = 218
+                Width = 14
+                Height = 13
+                Caption = 'RG'
+              end
+              object Label8: TLabel
+                Left = 204
+                Top = 218
+                Width = 19
+                Height = 13
+                Caption = 'CPF'
+              end
+              object Label6: TLabel
+                Left = 395
+                Top = 218
+                Width = 24
+                Height = 13
+                Caption = 'Sexo'
+              end
+              object Label2: TLabel
+                Left = 20
+                Top = 165
+                Width = 24
+                Height = 13
+                Caption = 'Email'
+                FocusControl = cxDBTextEdit1
+              end
+              object cxDBTextEdit1: TcxDBTextEdit
+                Left = 20
+                Top = 76
+                DataBinding.DataField = 'nome'
+                DataBinding.DataSource = dsResp
+                Enabled = False
+                TabOrder = 0
+                Width = 496
+              end
+              object cxDBTextEdit2: TcxDBTextEdit
+                Left = 20
+                Top = 129
+                DataBinding.DataField = 'sobrenome'
+                DataBinding.DataSource = dsResp
+                Enabled = False
+                TabOrder = 1
+                Width = 496
+              end
+              object cxDBMaskEdit1: TcxDBMaskEdit
+                Left = 20
+                Top = 235
+                DataBinding.DataField = 'rg'
+                DataBinding.DataSource = dsResp
+                Enabled = False
+                Properties.EditMask = '00.000.000-a;0'
+                TabOrder = 3
+                Width = 162
+              end
+              object cxDBMaskEdit2: TcxDBMaskEdit
+                Left = 204
+                Top = 235
+                DataBinding.DataField = 'cpf'
+                DataBinding.DataSource = dsResp
+                Enabled = False
+                Properties.EditMask = '999.999.999-99;0;_'
+                TabOrder = 4
+                Width = 167
+              end
+              object cxDBImageComboBox1: TcxDBImageComboBox
+                Left = 395
+                Top = 235
+                DataBinding.DataField = 'sexo'
+                DataBinding.DataSource = dsResp
+                Enabled = False
+                Properties.Items = <
+                  item
+                    Description = 'Masculino'
+                    ImageIndex = 0
+                    Value = 'M'
+                  end
+                  item
+                    Description = 'Feminino'
+                    Value = 'F'
+                  end>
+                Style.Shadow = False
+                Style.ButtonStyle = btsDefault
+                Style.ButtonTransparency = ebtNone
+                TabOrder = 5
+                Width = 121
+              end
+              object cxDBTextEdit3: TcxDBTextEdit
+                Left = 20
+                Top = 184
+                DataBinding.DataField = 'email'
+                DataBinding.DataSource = dsResp
+                Enabled = False
+                TabOrder = 2
+                Width = 496
+              end
+              object cxLabel2: TcxLabel
+                Left = 20
+                Top = 274
+                Caption = 'Estas informa'#231#245'es s'#243' podem ser alteradas pelo Respons'#225'vel.'
+                ParentFont = False
+                Style.Font.Charset = DEFAULT_CHARSET
+                Style.Font.Color = clRed
+                Style.Font.Height = -11
+                Style.Font.Name = 'Tahoma'
+                Style.Font.Style = [fsBold]
+                Style.IsFontAssigned = True
+                Transparent = True
+              end
+              object btnPesquisarResponsavel: TcxButton
+                Left = 20
+                Top = 28
+                Width = 179
+                Height = 25
+                Caption = 'Pesquisar Respons'#225'vel'
+                OptionsImage.ImageIndex = 30
+                OptionsImage.Images = DM.ImageList1
+                TabOrder = 7
+                OnClick = btnPesquisarResponsavelClick
+              end
             end
-          end
-          object cxGroupBox2: TcxGroupBox
-            Left = 24
-            Top = 10
-            Caption = 'Dados do Respons'#225'vel'
-            TabOrder = 2
-            Height = 311
-            Width = 545
-            object Label3: TLabel
-              Left = 20
-              Top = 59
-              Width = 27
-              Height = 13
-              Caption = 'Nome'
-              FocusControl = cxDBTextEdit1
-            end
-            object Label4: TLabel
-              Left = 20
-              Top = 112
-              Width = 54
-              Height = 13
-              Caption = 'Sobrenome'
-              FocusControl = cxDBTextEdit2
-            end
-            object Label7: TLabel
-              Left = 20
-              Top = 218
-              Width = 14
-              Height = 13
-              Caption = 'RG'
-            end
-            object Label8: TLabel
-              Left = 204
-              Top = 218
-              Width = 19
-              Height = 13
-              Caption = 'CPF'
-            end
-            object Label6: TLabel
-              Left = 395
-              Top = 218
-              Width = 24
-              Height = 13
-              Caption = 'Sexo'
-            end
-            object Label2: TLabel
-              Left = 20
-              Top = 165
-              Width = 24
-              Height = 13
-              Caption = 'Email'
-              FocusControl = cxDBTextEdit1
-            end
-            object cxDBTextEdit1: TcxDBTextEdit
-              Left = 20
-              Top = 76
-              DataBinding.DataField = 'nome'
-              DataBinding.DataSource = dsCad
-              Enabled = False
-              TabOrder = 0
-              Width = 496
-            end
-            object cxDBTextEdit2: TcxDBTextEdit
-              Left = 20
-              Top = 129
-              DataBinding.DataField = 'sobrenome'
-              DataBinding.DataSource = dsCad
-              Enabled = False
+            object cxGroupBox1: TcxGroupBox
+              Left = 24
+              Top = 327
+              Caption = 'Telefones'
               TabOrder = 1
-              Width = 496
-            end
-            object cxDBMaskEdit1: TcxDBMaskEdit
-              Left = 20
-              Top = 235
-              DataBinding.DataField = 'rg'
-              DataBinding.DataSource = dsCad
-              Enabled = False
-              Properties.EditMask = '00.000.000-a;0'
-              TabOrder = 3
-              Width = 162
-            end
-            object cxDBMaskEdit2: TcxDBMaskEdit
-              Left = 204
-              Top = 235
-              DataBinding.DataField = 'cpf'
-              DataBinding.DataSource = dsCad
-              Enabled = False
-              Properties.EditMask = '999.999.999-99;0;_'
-              TabOrder = 4
-              Width = 167
-            end
-            object cxDBImageComboBox1: TcxDBImageComboBox
-              Left = 395
-              Top = 235
-              DataBinding.DataField = 'sexo'
-              DataBinding.DataSource = dsCad
-              Enabled = False
-              Properties.Items = <
-                item
-                  Description = 'Masculino'
-                  ImageIndex = 0
-                  Value = 'M'
+              Height = 226
+              Width = 363
+              object Bevel1: TBevel
+                Left = 208
+                Top = 96
+                Width = 50
+                Height = 50
+              end
+              object Bevel2: TBevel
+                Left = 2
+                Top = 18
+                Width = 359
+                Height = 44
+                Align = alTop
+                ExplicitLeft = 195
+                ExplicitTop = 46
+              end
+              object DBNavigator1: TDBNavigator
+                Left = 16
+                Top = 28
+                Width = 105
+                Height = 25
+                DataSource = dsTelefone
+                VisibleButtons = [nbInsert, nbDelete, nbPost]
+                Align = alCustom
+                ConfirmDelete = False
+                TabOrder = 0
+              end
+              object cxGrid1: TcxGrid
+                Left = 2
+                Top = 62
+                Width = 359
+                Height = 162
+                Align = alClient
+                TabOrder = 1
+                ExplicitTop = 49
+                ExplicitHeight = 175
+                object cxGrid1DBTableView1: TcxGridDBTableView
+                  Navigator.Buttons.CustomButtons = <>
+                  DataController.DataSource = dsTelefone
+                  DataController.Summary.DefaultGroupSummaryItems = <>
+                  DataController.Summary.FooterSummaryItems = <>
+                  DataController.Summary.SummaryGroups = <>
+                  OptionsView.GroupByBox = False
+                  object cxGrid1DBTableView1escola_telefone_id: TcxGridDBColumn
+                    DataBinding.FieldName = 'escola_telefone_id'
+                    Visible = False
+                    Width = 108
+                  end
+                  object cxGrid1DBTableView1escola_id: TcxGridDBColumn
+                    DataBinding.FieldName = 'escola_id'
+                    Visible = False
+                    Width = 74
+                  end
+                  object cxGrid1DBTableView1telefone_tipo_id: TcxGridDBColumn
+                    DataBinding.FieldName = 'telefone_tipo_id'
+                    Visible = False
+                    Width = 107
+                  end
+                  object cxGrid1DBTableView1numero: TcxGridDBColumn
+                    Caption = 'N'#250'mero'
+                    DataBinding.FieldName = 'numero'
+                    Width = 179
+                  end
+                  object cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn
+                    Caption = 'Tipo'
+                    DataBinding.FieldName = 'telefone_tipo_id'
+                    PropertiesClassName = 'TcxLookupComboBoxProperties'
+                    Properties.KeyFieldNames = 'telefone_tipo_id'
+                    Properties.ListColumns = <
+                      item
+                        FieldName = 'descricao'
+                      end>
+                    Properties.ListOptions.ShowHeader = False
+                    Properties.ListSource = dsTelefoneTipo
+                    Width = 152
+                  end
                 end
-                item
-                  Description = 'Feminino'
-                  Value = 'F'
-                end>
-              Style.Shadow = False
-              Style.ButtonStyle = btsDefault
-              Style.ButtonTransparency = ebtNone
-              TabOrder = 5
-              Width = 121
+                object cxGrid1Level1: TcxGridLevel
+                  GridView = cxGrid1DBTableView1
+                end
+              end
             end
-            object cxDBTextEdit3: TcxDBTextEdit
-              Left = 20
-              Top = 184
-              DataBinding.DataField = 'email'
-              DataBinding.DataSource = dsCad
-              Enabled = False
+            object cxGroupBox3: TcxGroupBox
+              Left = 590
+              Top = 10
+              Caption = 'Dados Gerais de Cadastro'
               TabOrder = 2
-              Width = 496
-            end
-            object cxLabel2: TcxLabel
-              Left = 20
-              Top = 274
-              Caption = 'Estas informa'#231#245'es s'#243' podem ser alteradas pelo Respons'#225'vel.'
-              ParentFont = False
-              Style.Font.Charset = DEFAULT_CHARSET
-              Style.Font.Color = clRed
-              Style.Font.Height = -11
-              Style.Font.Name = 'Tahoma'
-              Style.Font.Style = [fsBold]
-              Style.IsFontAssigned = True
-              Transparent = True
-            end
-            object btnPesquisarResponsavel: TcxButton
-              Left = 332
-              Top = 20
-              Width = 179
-              Height = 25
-              Caption = 'Pesquisar Respons'#225'vel'
-              OptionsImage.ImageIndex = 30
-              OptionsImage.Images = DM.ImageList1
-              TabOrder = 7
-              OnClick = btnPesquisarResponsavelClick
+              Height = 226
+              Width = 545
+              object Label9: TLabel
+                Left = 20
+                Top = 71
+                Width = 93
+                Height = 13
+                Caption = 'Informa'#231#245'es Gerais'
+              end
+              object Label5: TLabel
+                Left = 158
+                Top = 32
+                Width = 99
+                Height = 13
+                Caption = 'Tipo de Respons'#225'vel'
+              end
+              object cxDBMemo1: TcxDBMemo
+                Left = 20
+                Top = 90
+                DataBinding.DataField = 'informacoes_gerais'
+                DataBinding.DataSource = dsCad
+                TabOrder = 2
+                Height = 119
+                Width = 496
+              end
+              object cxDBLookupComboBox1: TcxDBLookupComboBox
+                Left = 158
+                Top = 51
+                DataBinding.DataField = 'responsavel_tipo_id'
+                DataBinding.DataSource = dsCad
+                Properties.DropDownListStyle = lsFixedList
+                Properties.KeyFieldNames = 'responsavel_tipo_id'
+                Properties.ListColumns = <
+                  item
+                    FieldName = 'descricao'
+                  end>
+                Properties.ListOptions.ShowHeader = False
+                Properties.ListSource = dsResponsavelTipo
+                TabOrder = 1
+                Width = 185
+              end
+              object cxDBCheckBox1: TcxDBCheckBox
+                Left = 20
+                Top = 29
+                Caption = 'Respons'#225'vel Ativo'
+                DataBinding.DataField = 'ativo'
+                DataBinding.DataSource = dsCad
+                Properties.NullStyle = nssUnchecked
+                Properties.ValueChecked = 'S'
+                Properties.ValueUnchecked = 'N'
+                TabOrder = 0
+                Width = 113
+              end
             end
           end
         end
@@ -1449,14 +1458,10 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     CachedUpdates = True
     Connection = DM.FDConnection
     SchemaAdapter = FDSchemaAdapter
-    UpdateOptions.AutoIncFields = 'responsavel_id'
     SQL.Strings = (
       'SELECT * FROM responsavel_escola re'#10#10
-      
-        'inner join  responsavel r on (r.responsavel_id = re.responsavel_' +
-        'id)'#10#10
       'where re.responsavel_id = :responsavel_id'#13#10#10
-      #10'and re.escola_id = :escola_id'#10)
+      #13'and re.escola_id = :escola_id'#10)
     Left = 1008
     Top = 280
     ParamData = <
@@ -1472,41 +1477,17 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
         ParamType = ptInput
         Value = Null
       end>
-    object fdqCadresponsavel_id: TFDAutoIncField
+    object fdqCadresponsavel_id: TIntegerField
       FieldName = 'responsavel_id'
       Origin = 'responsavel_id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
     end
-    object fdqCadnome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'nome'
-      Origin = 'nome'
-      Size = 150
-    end
-    object fdqCadsobrenome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'sobrenome'
-      Origin = 'sobrenome'
-      Size = 150
-    end
-    object fdqCadsexo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'sexo'
-      Origin = 'sexo'
-      FixedChar = True
-      Size = 1
-    end
-    object fdqCadrg: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'rg'
-      Origin = 'rg'
-      Size = 50
-    end
-    object fdqCadcpf: TLargeintField
-      AutoGenerateValue = arDefault
-      FieldName = 'cpf'
-      Origin = 'cpf'
+    object fdqCadescola_id: TIntegerField
+      FieldName = 'escola_id'
+      Origin = 'escola_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
     end
     object fdqCadativo: TStringField
       AutoGenerateValue = arDefault
@@ -1515,38 +1496,18 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       FixedChar = True
       Size = 1
     end
-    object fdqCademail: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'email'
-      Origin = 'email'
-      Size = 150
-    end
     object fdqCadinformacoes_gerais: TMemoField
       AutoGenerateValue = arDefault
       FieldName = 'informacoes_gerais'
       Origin = 'informacoes_gerais'
       BlobType = ftMemo
     end
-    object fdqCadescola_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'escola_id'
-      Origin = 'escola_id'
-    end
     object fdqCadresponsavel_tipo_id: TSmallintField
       AutoGenerateValue = arDefault
+      DisplayLabel = 'Tipo de Respons'#225'vel'
       FieldName = 'responsavel_tipo_id'
       Origin = 'responsavel_tipo_id'
-    end
-    object fdqCadsenha: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'senha'
-      Origin = 'senha'
-      Size = 150
-    end
-    object fdqCaddata_atualizacao: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'data_atualizacao'
-      Origin = 'data_atualizacao'
+      Required = True
     end
   end
   inherited dsCad: TDataSource
@@ -1709,5 +1670,26 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
     DataSet = fdqAlunosLookup
     Left = 688
     Top = 336
+  end
+  object dsResp: TDataSource
+    DataSet = fdqResp
+    Left = 624
+    Top = 464
+  end
+  object fdqResp: TFDQuery
+    Connection = DM.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM responsavel r'#13#10#10
+      ''
+      'where r.responsavel_id = :responsavel_id'#10)
+    Left = 624
+    Top = 416
+    ParamData = <
+      item
+        Name = 'RESPONSAVEL_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 75
+      end>
   end
 end

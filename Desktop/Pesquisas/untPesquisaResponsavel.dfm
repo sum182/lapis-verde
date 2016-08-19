@@ -22,7 +22,6 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     Align = alClient
     Caption = 'Dados'
     TabOrder = 1
-    ExplicitWidth = 587
     Height = 336
     Width = 788
     object cxGrid1: TcxGrid
@@ -32,7 +31,6 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
       Height = 316
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 583
       object cxGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         OnCellDblClick = cxGrid1DBTableView1CellDblClick
@@ -74,7 +72,6 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     Align = alTop
     Caption = 'Filtros'
     TabOrder = 0
-    ExplicitWidth = 587
     Height = 70
     Width = 788
     object edtConteudo: TcxTextEdit
@@ -113,12 +110,11 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
     Top = 406
     Align = alBottom
     TabOrder = 2
-    ExplicitWidth = 587
     Height = 51
     Width = 788
     object btnOK: TcxButton
-      Left = 418
-      Top = 16
+      Left = 622
+      Top = 17
       Width = 75
       Height = 25
       Caption = 'OK'
@@ -127,8 +123,8 @@ object frmPesquisaResponsavel: TfrmPesquisaResponsavel
       OnClick = btnOKClick
     end
     object btnCancelar: TcxButton
-      Left = 499
-      Top = 16
+      Left = 703
+      Top = 17
       Width = 75
       Height = 25
       Cancel = True

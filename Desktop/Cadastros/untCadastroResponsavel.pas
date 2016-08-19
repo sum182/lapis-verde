@@ -24,17 +24,6 @@ type
   TfrmCadastroResponsavel = class(TfrmCadFD)
     fdqResponsavelTipo: TFDQuery;
     dsResponsavelTipo: TDataSource;
-    fdqCadresponsavel_id: TFDAutoIncField;
-    fdqCadnome: TStringField;
-    fdqCadsobrenome: TStringField;
-    fdqCadsexo: TStringField;
-    fdqCadrg: TStringField;
-    fdqCadcpf: TLargeintField;
-    fdqCadativo: TStringField;
-    fdqCademail: TStringField;
-    fdqCadinformacoes_gerais: TMemoField;
-    fdqCadescola_id: TIntegerField;
-    fdqCadresponsavel_tipo_id: TSmallintField;
     fdqTelefoneTipo: TFDQuery;
     dsTelefoneTipo: TDataSource;
     dsTelefone: TDataSource;
@@ -43,18 +32,6 @@ type
     dsAlunos: TDataSource;
     cxPageControl1: TcxPageControl;
     cxTabSheet1: TcxTabSheet;
-    cxGroupBox1: TcxGroupBox;
-    Bevel1: TBevel;
-    Bevel2: TBevel;
-    DBNavigator1: TDBNavigator;
-    cxGrid1: TcxGrid;
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1DBTableView1escola_telefone_id: TcxGridDBColumn;
-    cxGrid1DBTableView1escola_id: TcxGridDBColumn;
-    cxGrid1DBTableView1telefone_tipo_id: TcxGridDBColumn;
-    cxGrid1DBTableView1numero: TcxGridDBColumn;
-    cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn;
-    cxGrid1Level1: TcxGridLevel;
     cxTabSheet2: TcxTabSheet;
     grbxAlunos: TcxGroupBox;
     cxGridAlunosDBTableView1: TcxGridDBTableView;
@@ -70,14 +47,7 @@ type
     btnAlunosExcluir: TcxButton;
     fdqAlunosresponsavel_id: TIntegerField;
     fdqAlunosaluno_id: TIntegerField;
-    fdqCadsenha: TStringField;
-    fdqCaddata_atualizacao: TDateTimeField;
-    cxGroupBox3: TcxGroupBox;
-    cxDBMemo1: TcxDBMemo;
-    Label9: TLabel;
-    cxDBLookupComboBox1: TcxDBLookupComboBox;
-    Label5: TLabel;
-    cxDBCheckBox1: TcxDBCheckBox;
+    ScrollBox1: TScrollBox;
     cxGroupBox2: TcxGroupBox;
     Label3: TLabel;
     Label4: TLabel;
@@ -93,7 +63,31 @@ type
     cxDBTextEdit3: TcxDBTextEdit;
     cxLabel2: TcxLabel;
     btnPesquisarResponsavel: TcxButton;
-    procedure AcNovoExecute(Sender: TObject);
+    cxGroupBox1: TcxGroupBox;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    DBNavigator1: TDBNavigator;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1DBTableView1escola_telefone_id: TcxGridDBColumn;
+    cxGrid1DBTableView1escola_id: TcxGridDBColumn;
+    cxGrid1DBTableView1telefone_tipo_id: TcxGridDBColumn;
+    cxGrid1DBTableView1numero: TcxGridDBColumn;
+    cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn;
+    cxGrid1Level1: TcxGridLevel;
+    cxGroupBox3: TcxGroupBox;
+    Label9: TLabel;
+    Label5: TLabel;
+    cxDBMemo1: TcxDBMemo;
+    cxDBLookupComboBox1: TcxDBLookupComboBox;
+    cxDBCheckBox1: TcxDBCheckBox;
+    dsResp: TDataSource;
+    fdqResp: TFDQuery;
+    fdqCadresponsavel_id: TIntegerField;
+    fdqCadescola_id: TIntegerField;
+    fdqCadativo: TStringField;
+    fdqCadinformacoes_gerais: TMemoField;
+    fdqCadresponsavel_tipo_id: TSmallintField;
     procedure fdqCadNewRecord(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -114,11 +108,11 @@ type
     procedure fdqAlunosAfterScroll(DataSet: TDataSet);
     procedure fdqAlunosBeforeDelete(DataSet: TDataSet);
     procedure BuProcessarClick(Sender: TObject);
-    procedure AcApplyUpdateExecute(Sender: TObject);
     procedure btnPesquisarResponsavelClick(Sender: TObject);
     procedure fdqCadBeforeOpen(DataSet: TDataSet);
   private
     procedure OpenQuerys;
+    procedure OpenResponsavel(ResponsavelId:Integer);
     procedure SetPgtCtrlDefaut;
     procedure SetStateButtonsAlunos;
   public
@@ -132,13 +126,7 @@ implementation
 
 {$R *.dfm}
 
-uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno, smGeral, untPesquisaResponsavel;
-
-procedure TfrmCadastroResponsavel.AcApplyUpdateExecute(Sender: TObject);
-begin
-  fdqCad.FieldByName('data_atualizacao').AsDateTime := Now;
-  inherited;
-end;
+uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno, smGeral, untPesquisaResponsavel, smMensagens;
 
 procedure TfrmCadastroResponsavel.AcCancelarExecute(Sender: TObject);
 begin
@@ -149,12 +137,6 @@ begin
   fdqAlunos.CancelUpdates;
   inherited;
 
-end;
-
-procedure TfrmCadastroResponsavel.AcNovoExecute(Sender: TObject);
-begin
-  inherited;
-  fdqCadnome.FocusControl;
 end;
 
 procedure TfrmCadastroResponsavel.btnAlunosAddClick(Sender: TObject);
@@ -192,8 +174,12 @@ begin
   if ResponsavelId <= 0 then
     Exit;
 
-  //fdqCad.FieldByName('responsavel_id').AsInteger:= ResponsavelId;
+  if (ResponsavelId <> fdqCadresponsavel_id.AsInteger) and (fdqCadresponsavel_id.AsInteger > 0)then
+    if not Msg('Deseja alterar o responsável deste cadastro?',mtConfirmacao,Sim_Nao_Cancelar) then
+      Exit;
 
+  OpenResponsavel(ResponsavelId);
+  fdqCadresponsavel_id.AsInteger := ResponsavelId;
 end;
 
 procedure TfrmCadastroResponsavel.BuProcessarClick(Sender: TObject);
@@ -270,6 +256,7 @@ end;
 procedure TfrmCadastroResponsavel.fdqCadNewRecord(DataSet: TDataSet);
 begin
   inherited;
+  fdqCadresponsavel_id.AsInteger:= 0;
   fdqCadativo.AsString:= 'S';
   SetIdEscolaCadastro(fdqCad);
 end;
@@ -339,6 +326,15 @@ begin
 
   fdqAlunosLookup.Close;
   fdqAlunosLookup.Open;
+
+  OpenResponsavel(fdqCadresponsavel_id.AsInteger);
+end;
+
+procedure TfrmCadastroResponsavel.OpenResponsavel(ResponsavelId: Integer);
+begin
+  fdqResp.Close;
+  fdqResp.ParamByName('responsavel_id').AsInteger := ResponsavelId;
+  fdqResp.Open;
 end;
 
 procedure TfrmCadastroResponsavel.SetPgtCtrlDefaut;
