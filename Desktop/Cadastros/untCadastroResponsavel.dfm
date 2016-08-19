@@ -276,7 +276,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
             Left = 24
             Top = 10
             Caption = 'Dados do Respons'#225'vel'
-            Enabled = False
             TabOrder = 2
             Height = 311
             Width = 545
