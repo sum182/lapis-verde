@@ -3,7 +3,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   ClientHeight = 715
   ClientWidth = 1362
   OnClose = FormClose
-  ExplicitLeft = -312
+  ExplicitTop = -239
   ExplicitWidth = 1378
   ExplicitHeight = 753
   PixelsPerInch = 96
@@ -1507,7 +1507,6 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
       DisplayLabel = 'Tipo de Respons'#225'vel'
       FieldName = 'responsavel_tipo_id'
       Origin = 'responsavel_tipo_id'
-      Required = True
     end
   end
   inherited dsCad: TDataSource

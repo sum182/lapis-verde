@@ -238,7 +238,6 @@ procedure TfrmCadastroResponsavel.fdqBuscaBeforeOpen(DataSet: TDataSet);
 begin
   inherited;
   SetIdEscolaParamBusca(fdqBusca);
-  //ShowMessage(fdqBusca.SQL.Text);
 end;
 
 procedure TfrmCadastroResponsavel.fdqCadAfterOpen(DataSet: TDataSet);
