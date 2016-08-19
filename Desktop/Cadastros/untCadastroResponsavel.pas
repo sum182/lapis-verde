@@ -43,22 +43,6 @@ type
     dsAlunos: TDataSource;
     cxPageControl1: TcxPageControl;
     cxTabSheet1: TcxTabSheet;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label2: TLabel;
-    Label9: TLabel;
-    cxDBTextEdit1: TcxDBTextEdit;
-    cxDBTextEdit2: TcxDBTextEdit;
-    cxDBMaskEdit1: TcxDBMaskEdit;
-    cxDBMaskEdit2: TcxDBMaskEdit;
-    cxDBLookupComboBox1: TcxDBLookupComboBox;
-    cxDBImageComboBox1: TcxDBImageComboBox;
-    cxDBTextEdit3: TcxDBTextEdit;
-    cxDBMemo1: TcxDBMemo;
     cxGroupBox1: TcxGroupBox;
     Bevel1: TBevel;
     Bevel2: TBevel;
@@ -71,7 +55,6 @@ type
     cxGrid1DBTableView1numero: TcxGridDBColumn;
     cxGrid1DBTableView1TelefoneTipo: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
-    cxDBCheckBox1: TcxDBCheckBox;
     cxTabSheet2: TcxTabSheet;
     grbxAlunos: TcxGroupBox;
     cxGridAlunosDBTableView1: TcxGridDBTableView;
@@ -89,6 +72,26 @@ type
     fdqAlunosaluno_id: TIntegerField;
     fdqCadsenha: TStringField;
     fdqCaddata_atualizacao: TDateTimeField;
+    cxGroupBox3: TcxGroupBox;
+    cxDBMemo1: TcxDBMemo;
+    Label9: TLabel;
+    cxDBLookupComboBox1: TcxDBLookupComboBox;
+    Label5: TLabel;
+    cxDBCheckBox1: TcxDBCheckBox;
+    cxGroupBox2: TcxGroupBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label6: TLabel;
+    Label2: TLabel;
+    cxDBTextEdit1: TcxDBTextEdit;
+    cxDBTextEdit2: TcxDBTextEdit;
+    cxDBMaskEdit1: TcxDBMaskEdit;
+    cxDBMaskEdit2: TcxDBMaskEdit;
+    cxDBImageComboBox1: TcxDBImageComboBox;
+    cxDBTextEdit3: TcxDBTextEdit;
+    cxLabel2: TcxLabel;
     btnPesquisarResponsavel: TcxButton;
     procedure AcNovoExecute(Sender: TObject);
     procedure fdqCadNewRecord(DataSet: TDataSet);
@@ -189,12 +192,7 @@ begin
   if ResponsavelId <= 0 then
     Exit;
 
-  {if fdqResponsaveis.Locate('responsavel_id',ResponsavelId,[]) then
-    Exit;
-
-  fdqResponsaveis.Append;
-  fdqResponsaveis.FieldByName('responsavel_id').AsInteger:= ResponsavelId;
-  fdqResponsaveis.Post;}
+  //fdqCad.FieldByName('responsavel_id').AsInteger:= ResponsavelId;
 
 end;
 
@@ -254,6 +252,7 @@ procedure TfrmCadastroResponsavel.fdqBuscaBeforeOpen(DataSet: TDataSet);
 begin
   inherited;
   SetIdEscolaParamBusca(fdqBusca);
+  //ShowMessage(fdqBusca.SQL.Text);
 end;
 
 procedure TfrmCadastroResponsavel.fdqCadAfterOpen(DataSet: TDataSet);
@@ -302,7 +301,7 @@ end;
 procedure TfrmCadastroResponsavel.FormCreate(Sender: TObject);
 begin
   inherited;
-  SetSQLEscolaIdBusca(smCadPadrao);
+  //SetSQLEscolaIdBusca(smCadPadrao);
 end;
 
 procedure TfrmCadastroResponsavel.FormShow(Sender: TObject);
