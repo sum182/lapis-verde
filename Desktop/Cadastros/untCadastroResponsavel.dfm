@@ -3,14 +3,13 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   ClientHeight = 715
   ClientWidth = 1362
   OnClose = FormClose
-  ExplicitTop = -239
   ExplicitWidth = 1378
   ExplicitHeight = 753
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToBaCadastro: TToolBar
     Width = 1362
-    ExplicitWidth = 1363
+    ExplicitWidth = 1362
   end
   inherited PaCoPadrao: TPageControl
     Width = 1362
@@ -397,7 +396,7 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
                 Height = 119
                 Width = 496
               end
-              object cxDBLookupComboBox1: TcxDBLookupComboBox
+              object cmbTipoResponsavel: TcxDBLookupComboBox
                 Left = 158
                 Top = 51
                 DataBinding.DataField = 'responsavel_tipo_id'
@@ -1581,14 +1580,12 @@ inherited frmCadastroResponsavel: TfrmCadastroResponsavel
   object fdqTelefone: TFDQuery
     BeforeInsert = fdqTelefoneBeforeInsert
     BeforeEdit = fdqTelefoneBeforeEdit
-    CachedUpdates = True
     IndexFieldNames = 'responsavel_id'
     ConstraintsEnabled = True
     MasterSource = dsCad
     MasterFields = 'responsavel_id'
     DetailFields = 'responsavel_id'
     Connection = DM.FDConnection
-    SchemaAdapter = FDSchemaAdapter
     FetchOptions.AssignedValues = [evDetailCascade]
     FetchOptions.DetailCascade = True
     UpdateOptions.AutoIncFields = 'responsavel_telefone_id'

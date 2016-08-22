@@ -79,7 +79,7 @@ type
     Label9: TLabel;
     Label5: TLabel;
     cxDBMemo1: TcxDBMemo;
-    cxDBLookupComboBox1: TcxDBLookupComboBox;
+    cmbTipoResponsavel: TcxDBLookupComboBox;
     cxDBCheckBox1: TcxDBCheckBox;
     dsResp: TDataSource;
     fdqResp: TFDQuery;
@@ -110,11 +110,13 @@ type
     procedure BuProcessarClick(Sender: TObject);
     procedure btnPesquisarResponsavelClick(Sender: TObject);
     procedure fdqCadBeforeOpen(DataSet: TDataSet);
+    procedure AcApplyUpdateExecute(Sender: TObject);
   private
     procedure OpenQuerys;
     procedure OpenResponsavel(ResponsavelId:Integer);
     procedure SetPgtCtrlDefaut;
     procedure SetStateButtonsAlunos;
+    function  ValidarCadastro:Boolean;
   public
     { Public declarations }
   end;
@@ -128,15 +130,21 @@ implementation
 
 uses untDM, smDBFireDac, untFuncoes, untPesquisaAluno, smGeral, untPesquisaResponsavel, smMensagens;
 
+procedure TfrmCadastroResponsavel.AcApplyUpdateExecute(Sender: TObject);
+begin
+  self.SetFocus;
+  ValidarCadastro;
+  inherited;
+end;
+
 procedure TfrmCadastroResponsavel.AcCancelarExecute(Sender: TObject);
 begin
-  fdqTelefone.Cancel;
-  fdqTelefone.CancelUpdates;
+//  fdqTelefone.Cancel;
+//  fdqTelefone.CancelUpdates;
 
   fdqAlunos.Cancel;
   fdqAlunos.CancelUpdates;
   inherited;
-
 end;
 
 procedure TfrmCadastroResponsavel.btnAlunosAddClick(Sender: TObject);
@@ -255,6 +263,7 @@ end;
 procedure TfrmCadastroResponsavel.fdqCadNewRecord(DataSet: TDataSet);
 begin
   inherited;
+  OpenQuerys;
   fdqCadresponsavel_id.AsInteger:= 0;
   fdqCadativo.AsString:= 'S';
   SetIdEscolaCadastro(fdqCad);
@@ -345,6 +354,22 @@ procedure TfrmCadastroResponsavel.SetStateButtonsAlunos;
 begin
   btnAlunosAdd.Enabled := fdqAlunos.State in [dsBrowse, dsInactive, dsEdit];
   btnAlunosExcluir.Enabled := (fdqAlunos.State in [dsEdit, dsBrowse, dsInactive]) and (fdqAlunos.RecordCount >= 1);
+end;
+
+function TfrmCadastroResponsavel.ValidarCadastro: Boolean;
+begin
+  Result:=False;
+
+ { if cmbTipoResponsavel.ItemIndex <=0 then
+  begin
+    Msg('obri');
+
+  end;
+  }
+
+  ValidarCampo(fdqCadresponsavel_tipo_id);
+
+  Result:=True;
 end;
 
 end.
