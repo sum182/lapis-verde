@@ -27,6 +27,7 @@ type
     bsTurmas: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
     LinkListControlToField1: TLinkListControlToField;
+    grbxAlunos: TGroupBox;
     procedure FormCreate(Sender: TObject);
     procedure lstAlunosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
@@ -112,6 +113,12 @@ begin
     tbCtrlPrincipal.ActiveTab:= tbitAlunos;
     tbCtrlPrincipal.TabPosition:= TTabPosition.None;
     lstAlunos.SearchVisible:=False;
+    grbxAlunos.Visible:=True;
+  end;
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    grbxAlunos.Visible:=False;
   end;
 end;
 

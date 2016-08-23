@@ -12,8 +12,8 @@ uses
 type
   TfrmSplashScreen = class(TForm)
     StartupTimer: TTimer;
-    Layout1: TLayout;
-    Label1: TLabel;
+    layLogotipo: TLayout;
+    lblTituloApp: TLabel;
     SplashImage: TImage;
     procedure FormCreate(Sender: TObject);
     procedure SplashImagePaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
@@ -30,7 +30,7 @@ var
 implementation
 
 uses
-  System.Devices, untLogin;
+  System.Devices, untLogin, smGeralFMX;
 
 {$R *.fmx}
 
@@ -39,8 +39,14 @@ resourcestring
 
 procedure TfrmSplashScreen.FormCreate(Sender: TObject);
 begin
+  if IsSysOSWindows then
+  begin
+    SplashImage.MultiResBitmap.Clear;
+    lblTituloApp.Text:= '';
+  end;
+
   StartupTimer.Enabled := false;
-  StartupTimer.Interval := 2000; // can be changed to improve startup speed in later releases
+  StartupTimer.Interval := 1500; // can be changed to improve startup speed in later releases
 end;
 
 procedure TfrmSplashScreen.LoadMainForm;

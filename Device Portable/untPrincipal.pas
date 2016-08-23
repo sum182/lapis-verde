@@ -181,6 +181,10 @@ begin
         TThread.Synchronize(nil, procedure
         begin
           GridPanelLayout1.Enabled:=False;
+          lstMnuMain.Enabled:=False;
+          ToolBarPincipal.Enabled:=False;
+
+          DM.fgActivityDialog.Cancellable:=False;
           DM.fgActivityDialog.Title:='Aguarde';
           DM.fgActivityDialog.Message := 'Atualizando informações para seu primeiro acesso.';
           DM.fgActivityDialog.Show;
@@ -192,6 +196,8 @@ begin
           TThread.Synchronize(nil, procedure
           begin
              GridPanelLayout1.Enabled:=True;
+             lstMnuMain.Enabled:=True;
+             ToolBarPincipal.Enabled:=True;
              Application.ProcessMessages;
              DM.fgActivityDialog.Title:='';
              Exit;
@@ -203,6 +209,8 @@ begin
           begin
              DM.fgActivityDialog.Hide;
              GridPanelLayout1.Enabled:=True;
+             lstMnuMain.Enabled:=True;
+             ToolBarPincipal.Enabled:=True;
              Application.ProcessMessages;
              DM.fgActivityDialog.Title:='';
           end);
