@@ -74,11 +74,11 @@ Coordinates=470,40,70,33
 Visible=False
 
 [bsAlunos]
-Coordinates=100,10,96,267
+Coordinates=100,10,116,87
 LayerNames=NewLayer0
 
 [bsTurmas]
-Coordinates=700,60,100,177
+Coordinates=700,60,69,87
 LayerNames=NewLayer0
 
 [DmEscola.fdqAluno]
@@ -141,10 +141,54 @@ EditingLayerName=NewLayer0
 
 [Dm.fdqAluno]
 Visible=False
+Coordinates=30,173,78,33
 
 [Dm.fdqTurma]
 Visible=False
+Coordinates=709,1,81,33
 
 [DmAgenda.fdqAgenda]
 Visible=False
+
+[Dm.fdqFunc]
+Coordinates=0,0,74,51
+
+[Dm.fdqUsuarioLogado]
+Coordinates=495,78,125,51
+
+[Dm.fdqTurmaAluno]
+Coordinates=366,356,110,51
+
+[Dm.fdqLoginRealizado]
+Coordinates=495,309,125,51
+
+[Dm.fdqResp]
+Coordinates=11,77,74,51
+
+[Dm.fdqLoginUltimo]
+Coordinates=0,298,109,51
+
+[Dm.fdqRespEscola]
+Coordinates=129,131,108,51
+
+[Dm.fdqRespTelefone]
+Coordinates=258,1,117,51
+
+[Dm.fdqParametro]
+Coordinates=258,78,100,51
+
+[Dm.fdqProcessoAtualizacao]
+Coordinates=495,232,153,51
+
+[Dm.fdqRespTipo]
+Coordinates=495,1,96,51
+
+[Dm.fdqRespAluno]
+Coordinates=247,356,104,51
+
+[Dm.fdqFuncTipo]
+Coordinates=495,155,96,51
+
+[grbxAlunos]
+Coordinates=239,227,71,51
 
