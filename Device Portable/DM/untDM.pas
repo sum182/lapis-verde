@@ -12,8 +12,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  Vcl.ExtCtrls
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -57,6 +56,7 @@ type
     fdqUsuarioLogado: TFDQuery;
     fdqParametro: TFDQuery;
     fdqRespEscola: TFDQuery;
+    fdqConfiguracoes: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -95,6 +95,7 @@ type
     procedure ResetRESTConnection;
     procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
     procedure OpenProcessoAtualizacao;
+    procedure OpenConfiguracoes;
     procedure OpenParametro;
     procedure OpenQuerys;
 
@@ -229,6 +230,7 @@ begin
 
   SetModoTeste;
   OpenParametro;
+  OpenConfiguracoes;
 end;
 
 procedure TDm.DeleteAllTabels;
@@ -334,6 +336,30 @@ begin
     fdqAluno.ParamByName('responsavel_id').AsInteger := Usuario.Id;
 
   fdqAluno.Open;
+end;
+
+procedure TDm.OpenConfiguracoes;
+begin
+  fdqConfiguracoes.Close;
+  fdqConfiguracoes.SQL.Clear;
+  fdqConfiguracoes.SQL.Add('select * from configuracoes');
+  fdqConfiguracoes.SQL.Add('where 1=1');
+  fdqConfiguracoes.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqConfiguracoes.SQL.Add(' or (funcionario_id = :funcionario_id)');
+    fdqConfiguracoes.ParamByName('funcionario_id').AsInteger:=Usuario.Id;
+  end;
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqConfiguracoes.SQL.Add(' or (responsavel_id = :responsavel_id)');
+    fdqConfiguracoes.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
+  end;
+
+  fdqConfiguracoes.SQL.Add(')');
+  fdqConfiguracoes.Open;
 end;
 
 procedure TDm.OpenFuncionarios;
@@ -505,7 +531,6 @@ end;
 procedure TDm.PrimeiroAcessoExecutar;
 var
   Chave:String;
-  FieldUsuario:String;
 begin
   try
     try
@@ -516,16 +541,10 @@ begin
       fdqParametro.IndexFieldNames := 'chave';
       if not fdqParametro.FindKey([Chave]) Then
       begin
-        if Usuario.Tipo = Funcionario then
-          FieldUsuario:='funcionario_id';
-
-        if Usuario.Tipo = Responsavel then
-          FieldUsuario:='responsavel_id';
-
         fdqParametro.Append;
         fdqParametro.FieldByName('parametro_id').AsString:=GetGUID;
         fdqParametro.FieldByName('Chave').AsString:=Chave;
-        fdqParametro.FieldByName(FieldUsuario).AsInteger:=Usuario.Id;
+        fdqParametro.FieldByName(Usuario.FieldName).AsInteger:=Usuario.Id;
         fdqParametro.Post;
       end
       else if fdqParametro.FieldByName('valor').AsString = 'OK' then

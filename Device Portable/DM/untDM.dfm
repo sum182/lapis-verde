@@ -304,4 +304,11 @@ object Dm: TDm
     Left = 128
     Top = 120
   end
+  object fdqConfiguracoes: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select * from configuracoes')
+    Left = 136
+    Top = 328
+  end
 end

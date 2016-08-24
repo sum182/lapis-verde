@@ -16,7 +16,6 @@ type
     lbiSeguranca: TListBoxItem;
     swDesconectar: TSwitch;
     procedure swDesconectarClick(Sender: TObject);
-    procedure imgVoltarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -33,7 +32,7 @@ implementation
 
 {$R *.fmx}
 
-uses {untFuncoes,} untDMStyles, untDM, smGeralFMX;
+uses {untFuncoes,} untDMStyles, untDM, smGeralFMX, Data.DB;
 
 
 { TfrmConfiguracoes }
@@ -42,20 +41,14 @@ procedure TfrmConfiguracoes.FormCreate(Sender: TObject);
 begin
   inherited;
 
+  Dm.OpenConfiguracoes;
   LerConfig;
-end;
 
-procedure TfrmConfiguracoes.imgVoltarClick(Sender: TObject);
-begin
-  inherited;
-
-  SalvarConfig;
 end;
 
 procedure TfrmConfiguracoes.swDesconectarClick(Sender: TObject);
 begin
   inherited;
-
   SalvarConfig;
 end;
 
@@ -64,7 +57,7 @@ var
   sValor: string;
   Diretorio: string;
 begin
-  exit;
+  {exit;
   try
     if not Assigned(Configuracoes.FIniFile) then
       Configuracoes.FIniFile := TIniFile.Create(Configuracoes.GetDiretorio + 'config.ini');
@@ -77,15 +70,26 @@ begin
     swDesconectar.IsChecked :=  (sValor = 'True');
   finally
     Configuracoes.FIniFile.DisposeOf;
-  end;
+  end; }
+
+  if (Dm.fdqConfiguracoes.State in [dsInactive])Then
+   Dm.OpenConfiguracoes;
+
+
+  swDesconectar.IsChecked:=False;
+  if dm.fdqConfiguracoes.IsEmpty then
+    Exit;
+
+  swDesconectar.IsChecked := (Dm.fdqConfiguracoes.FieldByName('seg_desc_sair').AsString = 'S');
 
 end;
 
 procedure TfrmConfiguracoes.SalvarConfig;
 var
   sValor: string;
+  FieldUsuario:String;
 begin
-  exit;
+  {exit;
   if (swDesconectar.IsChecked) then
     sValor := 'True'
   else
@@ -95,7 +99,31 @@ begin
     Configuracoes.FIniFile := TIniFile.Create(Configuracoes.GetDiretorio + 'config.ini');
 
   Configuracoes.FIniFile.WriteString(Configuracoes.SectionData, 'DesconectarAoSair', sValor);
-  FreeAndNil(Configuracoes.FIniFile);
+  FreeAndNil(Configuracoes.FIniFile);}
+
+  if (Dm.fdqConfiguracoes.State in [dsInactive])Then
+   Dm.OpenConfiguracoes;
+
+  if (swDesconectar.IsChecked) then
+    sValor := 'S'
+  else
+    sValor := 'N';
+
+  if Dm.fdqConfiguracoes.IsEmpty then
+  begin
+    Dm.fdqConfiguracoes.Append;
+    Dm.fdqConfiguracoes.FieldByName('configuracoes_id').AsString:=GetGUID;
+  end
+  else
+    Dm.fdqConfiguracoes.Edit;
+
+  Dm.fdqConfiguracoes.FieldByName(Usuario.FieldName).AsInteger:=Usuario.Id;
+  Dm.fdqConfiguracoes.FieldByName('seg_desc_sair').AsString:=sValor;
+  Dm.fdqConfiguracoes.FieldByName('data_insert_server').Clear;
+  Dm.fdqConfiguracoes.FieldByName('enviado_server').Clear;
+  Dm.fdqConfiguracoes.FieldByName('data_atualizacao').AsDateTime:=Now;
+
+  Dm.fdqConfiguracoes.Post;
 end;
 
 end.

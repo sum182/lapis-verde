@@ -16,9 +16,11 @@ Uses Data.DB,untTypes, System.JSON, Data.DBXJSONReflect;
         Sobrenome: String;
         FMarshalValue: TJSONValue;
 
+
         constructor Create;
         function Marshal:TJSONValue;
         function UnMarshal(oObjetoJSON:TJSONValue):TUsuario;
+        function FieldName:string;
 
         //Não utilizar esta propriedade esta dando acess violation
         property MarshalValue: TJSONValue read GetMarshalValue write FMarshalValue;
@@ -35,6 +37,15 @@ constructor TUsuario.Create;
 begin
   inherited Create;
   Tipo:= NaoDefinido;
+end;
+
+function TUsuario.FieldName: string;
+begin
+  if self.Tipo = Funcionario then
+    result:='funcionario_id';
+
+  if self.Tipo = Responsavel then
+    result:='responsavel_id';
 end;
 
 function TUsuario.GetMarshalValue: TJSONValue;
