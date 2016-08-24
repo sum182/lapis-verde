@@ -49,7 +49,7 @@ Visible=False
 Coordinates=419,111,95,33
 
 []
-Coordinates=701,520,73,51
+Coordinates=239,227,71,51
 
 [BindingsList1]
 Coordinates=136,1,82,33
@@ -188,7 +188,4 @@ Coordinates=247,356,104,51
 
 [Dm.fdqFuncTipo]
 Coordinates=495,155,96,51
-
-[grbxAlunos]
-Coordinates=239,227,71,51
 

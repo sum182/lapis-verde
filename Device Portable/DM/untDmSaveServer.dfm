@@ -71,4 +71,13 @@ object DmSaveServer: TDmSaveServer
       Required = True
     end
   end
+  object fdqConfiguracoes: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select * from configuracoes'
+      'where enviado_server is null'
+      'and data_insert_server is null')
+    Left = 48
+    Top = 141
+  end
 end

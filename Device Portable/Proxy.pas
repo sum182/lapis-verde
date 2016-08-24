@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 11/08/2016 15:46:14
+// 24/08/2016 17:08:12
 //
 
 unit Proxy;
@@ -124,6 +124,7 @@ type
     FGetFuncionariosCommand_Cache: TDSRestCommand;
     FSalvarFuncionarioCommand: TDSRestCommand;
     FSalvarLogErrorCommand: TDSRestCommand;
+    FSalvarConfiguracoesCommand: TDSRestCommand;
     FGetProcessoAtualizacaoCommand: TDSRestCommand;
     FGetProcessoAtualizacaoCommand_Cache: TDSRestCommand;
     FGetDataSetCommand: TDSRestCommand;
@@ -151,6 +152,7 @@ type
     function GetFuncionarios_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     function SalvarLogError(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
+    function SalvarConfiguracoes(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     function GetProcessoAtualizacao(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetProcessoAtualizacao_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetDataSet(pEscolaId: Integer; Nome: string; pUsuario: TJSONValue; UtilizaParamEscolaId: Boolean; Condicoes: string; const ARequestFilter: string = ''): TFDJSONDataSets;
@@ -498,6 +500,14 @@ const
   );
 
   TSmMain_SalvarLogError: array [0..3] of TDSRestParameterMetaData =
+  (
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: 'LDataSetList'; Direction: 1; DBXType: 37; TypeName: 'TFDJSONDataSets'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSmMain_SalvarConfiguracoes: array [0..3] of TDSRestParameterMetaData =
   (
     (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
@@ -1669,6 +1679,34 @@ begin
   Result := FSalvarLogErrorCommand.Parameters[3].Value.GetWideString;
 end;
 
+function TSmMainClient.SalvarConfiguracoes(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
+begin
+  if FSalvarConfiguracoesCommand = nil then
+  begin
+    FSalvarConfiguracoesCommand := FConnection.CreateCommand;
+    FSalvarConfiguracoesCommand.RequestType := 'POST';
+    FSalvarConfiguracoesCommand.Text := 'TSmMain."SalvarConfiguracoes"';
+    FSalvarConfiguracoesCommand.Prepare(TSmMain_SalvarConfiguracoes);
+  end;
+  FSalvarConfiguracoesCommand.Parameters[0].Value.SetInt32(pEscolaId);
+  FSalvarConfiguracoesCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  if not Assigned(LDataSetList) then
+    FSalvarConfiguracoesCommand.Parameters[2].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FSalvarConfiguracoesCommand.Parameters[2].ConnectionHandler).GetJSONMarshaler;
+    try
+      FSalvarConfiguracoesCommand.Parameters[2].Value.SetJSONValue(FMarshal.Marshal(LDataSetList), True);
+      if FInstanceOwner then
+        LDataSetList.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FSalvarConfiguracoesCommand.Execute(ARequestFilter);
+  Result := FSalvarConfiguracoesCommand.Parameters[3].Value.GetWideString;
+end;
+
 function TSmMainClient.GetProcessoAtualizacao(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
 begin
   if FGetProcessoAtualizacaoCommand = nil then
@@ -1790,6 +1828,7 @@ begin
   FGetFuncionariosCommand_Cache.DisposeOf;
   FSalvarFuncionarioCommand.DisposeOf;
   FSalvarLogErrorCommand.DisposeOf;
+  FSalvarConfiguracoesCommand.DisposeOf;
   FGetProcessoAtualizacaoCommand.DisposeOf;
   FGetProcessoAtualizacaoCommand_Cache.DisposeOf;
   FGetDataSetCommand.DisposeOf;

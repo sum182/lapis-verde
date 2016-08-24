@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.FireDACJSONReflect;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FMX.Dialogs, Data.FireDACJSONReflect;
 
 type
   TDmSaveServer = class(TDataModule)
@@ -18,10 +18,12 @@ type
     fdqAgendaTurma: TFDQuery;
     fdqAgendaTurmaagenda_id: TStringField;
     fdqAgendaTurmaturma_id: TIntegerField;
+    fdqConfiguracoes: TFDQuery;
   private
     SalvarAgendaInExecute:Boolean;
   public
     procedure SaveLogError;
+    procedure SaveConfiguracoes;
     procedure SaveAgenda;
     procedure SaveFuncionario(DataSet:TFDAdaptedDataSet);
     procedure SaveResponsavel(DataSet:TFDAdaptedDataSet);
@@ -83,7 +85,10 @@ begin
 
       //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then
-        SetFlagEnviado(fdqAgenda);
+        SetFlagEnviado(fdqAgenda)
+      else
+        ShowMessage('Erro ao Salvar Agenda' + #13 + MsgRetornoServer);
+
 
       MsgPoupUpTeste('DmSaveServer.SalvarAgenda Executado');
     except on E:Exception do
@@ -134,6 +139,10 @@ begin
         Exit;
 
       MsgRetornoServer:= RestClient.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
+
+      if (MsgRetornoServer <> '') and (IsTesteApp or IsModoTeste) then
+        ShowMessage( 'Erro ao Salvar LogError' + #13 + MsgRetornoServer);
+
       MsgPoupUpTeste('DmSaveServer.SalvarLogError Executado');
     except on E:Exception do
     begin
@@ -212,6 +221,14 @@ begin
     MsgPoupUp('DmSaveServer.SalvarLogError Erro:' + e.Message);
   end;
 
+
+  try
+    SaveConfiguracoes;
+  except on E:Exception do
+    MsgPoupUp('DmSaveServer.SaveConfiguracoes Erro:' + e.Message);
+  end;
+
+
 end;
 
 procedure TDmSaveServer.SaveFuncionario(DataSet:TFDAdaptedDataSet);
@@ -250,6 +267,59 @@ begin
   end;
 end;
 
+
+procedure TDmSaveServer.SaveConfiguracoes;
+var
+  LDataSetList  : TFDJSONDataSets;
+  MsgRetornoServer:string;
+begin
+  //Método para Salvar os Logs de Erro no Server
+  try
+    try
+      MsgRetornoServer := EmptyStr;
+      fdqConfiguracoes.Active := False;
+      fdqConfiguracoes.Active := True;
+
+      if fdqConfiguracoes.IsEmpty then
+        Exit;
+
+      LDataSetList := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,fdqConfiguracoes);
+
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
+      MsgRetornoServer:= RestClient.SmMainClient.SalvarConfiguracoes(GetEscolaId,Usuario.Marshal,LDataSetList);
+
+     //Flagando registros como enviado
+      if MsgRetornoServer = EmptyStr then
+        SetFlagEnviado(fdqConfiguracoes)
+      else
+        ShowMessage('Erro ao Salvar Configuracoes' + #13 + MsgRetornoServer);
+
+      MsgPoupUpTeste('DmSaveServer.SaveConfiguracoes Executado');
+    except on E:Exception do
+    begin
+      MsgRetornoServer := MsgRetornoServer + E.Message;
+
+      if (IsTesteApp or IsModoTeste) then
+        Raise;
+    end;
+    end;
+  finally
+    if MsgRetornoServer <> EmptyStr then
+       DM.SetLogError( MsgRetornoServer,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'SaveConfiguracoes',
+                      Now,
+                      'Erro ao Salvar Configuracoes' + #13 + MsgRetornoServer
+                    );
+    fdqConfiguracoes.Active := False;
+  end;
+
+end;
 
 procedure TDmSaveServer.SaveDadosServerBasico;
 begin

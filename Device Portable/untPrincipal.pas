@@ -36,10 +36,10 @@ type
     imgConfiguracoes: TImage;
     Label1: TLabel;
     imgLogoff: TImage;
-    Label2: TLabel;
     imgEnviar: TImage;
     Label3: TLabel;
     lstItemUsuario: TListBoxItem;
+    Label2: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);

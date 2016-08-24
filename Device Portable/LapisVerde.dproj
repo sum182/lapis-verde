@@ -328,7 +328,6 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
-        <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
         <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
         <Android_SplashTileMode>disabled</Android_SplashTileMode>
         <VerInfo_Build>1</VerInfo_Build>

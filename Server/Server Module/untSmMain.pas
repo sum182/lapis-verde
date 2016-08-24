@@ -32,16 +32,21 @@ type
     fdqFuncionarios: TFDQuery;
     fdqFuncionario: TFDQuery;
     fdqRespEscola: TFDQuery;
+    fdqConfiguracoes: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure FDConnectionAfterConnect(Sender: TObject);
+    procedure fdqConfiguracoesBeforePost(DataSet: TDataSet);
   private
     procedure SetSQLLogError;overload;
     procedure SetSQLLogError(KeyValues:String);overload;
+    procedure SetSQLConfiguracoes(KeyValues:String);
     procedure SetSQLResponsaveis;overload;
     procedure OpenLogError;overload;
     procedure OpenLogError(KeyValues:String);overload;
+
+    procedure OpenConfiguracoes(KeyValues:String);
     procedure CloseLogError;
     procedure SetTimeZone;
 
@@ -67,6 +72,11 @@ type
     function SalvarLogError(pEscolaId:Integer;
                             pUsuario:TJSONValue;
                             LDataSetList: TFDJSONDataSets = nil ):String;
+
+    function SalvarConfiguracoes(pEscolaId:Integer;
+                                 pUsuario:TJSONValue;
+                                 LDataSetList: TFDJSONDataSets = nil ):String;
+
 
     function GetProcessoAtualizacao(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
 
@@ -126,12 +136,15 @@ begin
   SetTimeZone;
 end;
 
+procedure TSmMain.fdqConfiguracoesBeforePost(DataSet: TDataSet);
+begin
+  Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
+end;
+
 procedure TSmMain.fdqLogErrorBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
-
-  Dataset.FieldByName('enviado_server').AsString:= 'S';
 end;
 
 function TSmMain.GetAlunos(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
@@ -428,6 +441,15 @@ begin
   fdqLogError.Active := True;
 end;
 
+procedure TSmMain.OpenConfiguracoes(KeyValues: String);
+begin
+  fdqConfiguracoes.Active := False;
+
+  SetSQLConfiguracoes(KeyValues);
+
+  fdqConfiguracoes.Active := True;
+end;
+
 procedure TSmMain.OpenLogError(KeyValues: String);
 begin
   CloseLogError;
@@ -435,6 +457,55 @@ begin
   SetSQLLogError(KeyValues);
 
   fdqLogError.Active := True;
+end;
+
+function TSmMain.SalvarConfiguracoes(pEscolaId: Integer; pUsuario: TJSONValue;
+  LDataSetList: TFDJSONDataSets): String;
+var
+  LDataSet: TFDDataSet;
+  Exceptions:string;
+  KeyValues: string;
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para Salvar Logs de Erros
+  try
+    try
+      SetParamsServer(pEscolaId,pUsuario);
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'SalvarConfiguracoes',
+                                            EscolaId,
+                                            Usuario);
+
+      Result:=EmptyStr;
+
+      Exceptions:=EmptyStr;
+
+      LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+
+      if LDataSet.IsEmpty then
+        Exit;
+
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'configuracoes_id');
+      OpenConfiguracoes(KeyValues);
+      CopyDataSet(LDataSet,fdqConfiguracoes,False,[coEdit,coAppend]);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      Exceptions:=  Exceptions + E.Message;
+    end;
+
+    if (Exceptions <> EmptyStr) then
+    begin
+      Result:= 'Erro ao Salvar Configurações' + #13 + Exceptions;
+      LogServerRequest.SetError(Exceptions);
+      SmMain.SaveLogError(LogServerRequest);
+    end;
+  finally
+    fdqConfiguracoes.Close;
+    LogServerRequest.Free;
+  end;
+
 end;
 
 function TSmMain.SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue;
@@ -666,6 +737,16 @@ begin
     fdqLogError.Active:=False;
   end;
 
+end;
+
+procedure TSmMain.SetSQLConfiguracoes(KeyValues: String);
+begin
+  if KeyValues = EmptyStr then
+    KeyValues:= QuoTedStr('0');
+
+  fdqConfiguracoes.SQL.Clear;
+  fdqConfiguracoes.SQL.Add('select * from configuracoes ');
+  fdqConfiguracoes.SQL.Add('where configuracoes_id in (' + KeyValues + ')');
 end;
 
 procedure TSmMain.SetSQLLogError(KeyValues: String);

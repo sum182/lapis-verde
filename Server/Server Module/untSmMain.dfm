@@ -236,4 +236,20 @@ object SmMain: TSmMain
     Left = 144
     Top = 176
   end
+  object fdqConfiguracoes: TFDQuery
+    BeforePost = fdqConfiguracoesBeforePost
+    Connection = FDConnection
+    SQL.Strings = (
+      'select * from configuracoes'
+      'where :configuracoes_id = :configuracoes_id')
+    Left = 56
+    Top = 349
+    ParamData = <
+      item
+        Name = 'CONFIGURACOES_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
 end

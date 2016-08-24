@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,DateUtils,
-  FMX.Types, Data.FireDACJSONReflect;
+  FMX.Types, FMX.Dialogs,Data.FireDACJSONReflect;
 
 type
   TDmGetServer = class(TDataModule)
@@ -88,8 +88,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses untDM, untRestClient, smDBFireDac,
-  FMX.Dialogs, System.SysUtils, smGeralFMX, untLibDevicePortable, FMX.Forms,smMensagensFMX,smNetworkState,
+uses untDM, untRestClient, smDBFireDac,System.SysUtils, smGeralFMX, untLibDevicePortable, FMX.Forms,smMensagensFMX,smNetworkState,
   untLibGeral, Data.DBXJSONReflect, System.JSON, System.ZLib, untTypes, untSQLs;
 
 {$R *.dfm}
