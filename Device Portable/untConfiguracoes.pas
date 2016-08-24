@@ -57,31 +57,14 @@ var
   sValor: string;
   Diretorio: string;
 begin
-  {exit;
-  try
-    if not Assigned(Configuracoes.FIniFile) then
-      Configuracoes.FIniFile := TIniFile.Create(Configuracoes.GetDiretorio + 'config.ini');
-
-    //ShowMessage(Configuracoes.GetDiretorio + 'config.ini');
-
-    sValor := Configuracoes.FIniFile.ReadString(Configuracoes.SectionData, 'DesconectarAoSair', 'False');
-    //ShowMessage( Configuracoes.FIniFile.ReadString(Configuracoes.SectionData, 'DesconectarAoSair', 'False'));
-
-    swDesconectar.IsChecked :=  (sValor = 'True');
-  finally
-    Configuracoes.FIniFile.DisposeOf;
-  end; }
-
   if (Dm.fdqConfiguracoes.State in [dsInactive])Then
    Dm.OpenConfiguracoes;
-
 
   swDesconectar.IsChecked:=False;
   if dm.fdqConfiguracoes.IsEmpty then
     Exit;
 
   swDesconectar.IsChecked := (Dm.fdqConfiguracoes.FieldByName('seg_desc_sair').AsString = 'S');
-
 end;
 
 procedure TfrmConfiguracoes.SalvarConfig;
@@ -89,20 +72,8 @@ var
   sValor: string;
   FieldUsuario:String;
 begin
-  {exit;
-  if (swDesconectar.IsChecked) then
-    sValor := 'True'
-  else
-    sValor := 'False';
-
-  if not Assigned(Configuracoes.FIniFile) then
-    Configuracoes.FIniFile := TIniFile.Create(Configuracoes.GetDiretorio + 'config.ini');
-
-  Configuracoes.FIniFile.WriteString(Configuracoes.SectionData, 'DesconectarAoSair', sValor);
-  FreeAndNil(Configuracoes.FIniFile);}
-
-  if (Dm.fdqConfiguracoes.State in [dsInactive])Then
-   Dm.OpenConfiguracoes;
+  if (Dm.fdqConfiguracoes.State in [dsInactive])Then
+   Dm.OpenConfiguracoes;
 
   if (swDesconectar.IsChecked) then
     sValor := 'S'

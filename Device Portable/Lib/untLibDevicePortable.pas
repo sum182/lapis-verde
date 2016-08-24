@@ -8,14 +8,8 @@ Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString,
   Type
     TConfiguracoes = class
       public
-        FIniFile: TIniFile;
         DesconectarAoSair:Boolean;
         procedure GetConfiguracoes;
-        function GetDiretorio:String;
-
-        const
-          SectionData = 'CONFIGURACOES';
-
   end;
 
   procedure SetStyle(Formulario:TForm);
@@ -166,29 +160,13 @@ var
   sValor: string;
   Diretorio: string;
 begin
-  DesconectarAoSair:=True;
-  exit;
+  if Usuario.Id <= 0 then
+    Dm.OpenConfiguracoesLoginUltimo
+  else
+    Dm.OpenConfiguracoes;
 
-  try
-    if not Assigned(FIniFile) then
-      FIniFile := TIniFile.Create(GetDiretorio + 'config.ini');
-
-    sValor := FIniFile.ReadString(SectionData, 'DesconectarAoSair', 'False');
-    DesconectarAoSair:= (sValor = 'True');
-  finally
-    FIniFile.DisposeOf;
-  end;
-
+  DesconectarAoSair:=(Dm.fdqConfiguracoes.FieldByName('seg_desc_sair').AsString = 'S');
 end;
 
-
-function TConfiguracoes.GetDiretorio: String;
-begin
-  if smGeralFMX.IsSysOSAndroid or (smGeralFMX.IsSysOSiOS) then
-    Result := TPath.GetDocumentsPath + PathDelim;
-
-  if smGeralFMX.IsSysOSWindows then
-    Result := Dm.AppPath + 'Arquivos\';
-end;
 
 end.

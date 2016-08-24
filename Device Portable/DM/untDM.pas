@@ -12,7 +12,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
+  Vcl.ExtCtrls
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -96,6 +97,8 @@ type
     procedure SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
     procedure OpenProcessoAtualizacao;
     procedure OpenConfiguracoes;
+    procedure OpenConfiguracoesLoginUltimo;
+    procedure OpenLoginUltimo;
     procedure OpenParametro;
     procedure OpenQuerys;
 
@@ -217,20 +220,24 @@ end;
 
 procedure TDm.DataModuleCreate(Sender: TObject);
 begin
+  //Não mudar esta ordem
+  Usuario := TUsuario.Create;
   GetInfoFileApp;
-  GetConfiguracoes;
   FDConnectionDB.Close;
   FDCreateDB.Close;
   ConectarBases;
 
-  Usuario := TUsuario.Create;
+  //Pega as configurações do ultimo usuario logado
+  GetConfiguracoes;
 
   PrimeiroAcessoInExecute:=False;
   PrimeiroAcessoOK:=False;
 
   SetModoTeste;
   OpenParametro;
-  OpenConfiguracoes;
+
+  //Pega as configurações do novo acesso
+  GetConfiguracoes;
 end;
 
 procedure TDm.DeleteAllTabels;
@@ -313,8 +320,7 @@ end;
 
 procedure TDm.LoginAuto;
 begin
-  fdqLoginUltimo.Close;
-  fdqLoginUltimo.Open;
+  OpenLoginUltimo;
 
   if fdqLoginUltimo.IsEmpty then
     Exit;
@@ -362,6 +368,32 @@ begin
   fdqConfiguracoes.Open;
 end;
 
+procedure TDm.OpenConfiguracoesLoginUltimo;
+begin
+  OpenLoginUltimo;
+
+  fdqConfiguracoes.Close;
+  fdqConfiguracoes.SQL.Clear;
+  fdqConfiguracoes.SQL.Add('select * from configuracoes');
+  fdqConfiguracoes.SQL.Add('where 1=1');
+  fdqConfiguracoes.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
+
+  if TUsuarioTipo(fdqLoginUltimo.FieldByName('usuario_tipo').AsInteger) = Funcionario then
+  begin
+    fdqConfiguracoes.SQL.Add(' or (funcionario_id = :funcionario_id)');
+    fdqConfiguracoes.ParamByName('funcionario_id').AsInteger:=fdqLoginUltimo.FieldByName('usuario_id').AsInteger;
+  end;
+
+  if TUsuarioTipo(fdqLoginUltimo.FieldByName('usuario_tipo').AsInteger) = Responsavel then
+  begin
+    fdqConfiguracoes.SQL.Add(' or (responsavel_id = :responsavel_id)');
+    fdqConfiguracoes.ParamByName('responsavel_id').AsInteger:=fdqLoginUltimo.FieldByName('usuario_id').AsInteger;
+  end;
+
+  fdqConfiguracoes.SQL.Add(')');
+  fdqConfiguracoes.Open;
+end;
+
 procedure TDm.OpenFuncionarios;
 begin
   fdqFunc.Close;
@@ -372,6 +404,12 @@ begin
 
   fdqFuncTipo.Close;
   fdqFuncTipo.Open;
+end;
+
+procedure TDm.OpenLoginUltimo;
+begin
+  fdqLoginUltimo.Close;
+  fdqLoginUltimo.Open;
 end;
 
 procedure TDm.OpenParametro;

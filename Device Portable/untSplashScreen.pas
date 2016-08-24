@@ -74,13 +74,19 @@ begin
   Dm.fdqLoginUltimo.Close;
   Dm.fdqLoginUltimo.Open;
 
-  if not (Configuracoes.DesconectarAoSair) and not(Dm.fdqLoginUltimo.IsEmpty) then
-  begin
-    formClass:=TfrmPrincipal;
-    DM.LoginAuto;
-  end
-  else
-    formClass := TfrmLogin;
+  formClass := TfrmLogin;
+
+  if not(Dm.fdqLoginUltimo.IsEmpty) then
+    if (Dm.fdqLoginUltimo.FieldByName('realizou_logoff').AsString <> 'S') then
+    begin
+      Dm.OpenConfiguracoesLoginUltimo;
+
+      if not Configuracoes.DesconectarAoSair then
+      begin
+        formClass:=TfrmPrincipal;
+        DM.LoginAuto;
+      end
+    end;
 
   if formClass <> nil then begin
     form := formClass.Create(Application);

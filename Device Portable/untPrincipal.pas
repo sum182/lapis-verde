@@ -35,7 +35,7 @@ type
     lblMensagens: TLabel;
     imgConfiguracoes: TImage;
     Label1: TLabel;
-    imgSair: TImage;
+    imgLogoff: TImage;
     Label2: TLabel;
     imgEnviar: TImage;
     Label3: TLabel;
@@ -54,7 +54,7 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
-    procedure imgSairClick(Sender: TObject);
+    procedure imgLogoffClick(Sender: TObject);
     procedure imgMeuPerfilClick(Sender: TObject);
     procedure imgConfiguracoesClick(Sender: TObject);
   private
@@ -71,6 +71,8 @@ type
     procedure AbrirAgenda;
     procedure AbrirMensagens;
     procedure Sair;
+    procedure Logoff;
+
     procedure SetModoTeste;
     procedure SetUsuario;
     procedure PrimeiroAcesso;
@@ -230,7 +232,7 @@ begin
         case BotaoPressionado of
           mrYes:
             begin
-             Application.Terminate;
+              Application.Terminate;
             end;
           mrNo:
             begin
@@ -355,10 +357,10 @@ begin
   MultiView1.HideMaster;
 end;
 
-procedure TfrmPrincipal.imgSairClick(Sender: TObject);
+procedure TfrmPrincipal.imgLogoffClick(Sender: TObject);
 begin
   inherited;
-  Sair;
+  Logoff;
 end;
 
 procedure TfrmPrincipal.imgMensagensClick(Sender: TObject);
@@ -402,6 +404,34 @@ begin
   inherited;
   AbrirMensagens;
 end;
+
+procedure TfrmPrincipal.Logoff;
+begin
+  MessageDlg('Deseja realmente desconectar este usuário?',
+    System.UITypes.TMsgDlgType.mtInformation,
+    [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+    procedure(const BotaoPressionado: TModalResult)
+      begin
+        case BotaoPressionado of
+          mrYes:
+            begin
+              Dm.OpenLoginUltimo;
+
+              dm.fdqLoginUltimo.Edit;
+              dm.fdqLoginUltimo.FieldByName('realizou_logoff').AsString := 'S';
+              dm.fdqLoginUltimo.Post;
+              Application.Terminate;
+            end;
+          mrNo:
+            begin
+              Abort;
+            end;
+        end;
+      end
+    );
+
+end;
+
 
 procedure TfrmPrincipal.lstItemSobreClick(Sender: TObject);
 begin
