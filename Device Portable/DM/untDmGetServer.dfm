@@ -9,17 +9,9 @@ object DmGetServer: TDmGetServer
   object fdqProcessoAtualizacao: TFDQuery
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
-      'SELECT * FROM processo_atualizacao'
-      'where ((escola_id = :escola_id) or (escola_id = 0))')
+      'SELECT * FROM processo_atualizacao')
     Left = 48
     Top = 183
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 1
-      end>
     object fdqProcessoAtualizacaoprocesso_atualizacao_id: TIntegerField
       FieldName = 'processo_atualizacao_id'
       Origin = 'processo_atualizacao_id'

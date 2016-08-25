@@ -12,6 +12,7 @@ object Dm: TDm
       'DriverID=SQLite')
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
+    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -89,18 +90,9 @@ object Dm: TDm
       end>
     Connection = FDConnectionDB
     SQL.Strings = (
-      'SELECT * FROM processo_atualizacao'
-      'where ((escola_id = :escola_id) or (escola_id = 0))'
-      '')
+      'SELECT * FROM processo_atualizacao')
     Left = 131
     Top = 216
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 1
-      end>
   end
   object TimerSyncBasico: TTimer
     Interval = 60000

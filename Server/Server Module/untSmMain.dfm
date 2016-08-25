@@ -24,6 +24,7 @@ object SmMain: TSmMain
       'Password=senhabdagenda'
       'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
+    Connected = True
     LoginPrompt = False
     AfterConnect = FDConnectionAfterConnect
     Left = 26
@@ -64,17 +65,9 @@ object SmMain: TSmMain
     Connection = FDConnection
     SQL.Strings = (
       'SELECT * FROM processo_atualizacao'
-      'where ((escola_id = :escola_id) or (escola_id = 0))'
       '')
     Left = 264
     Top = 288
-    ParamData = <
-      item
-        Name = 'ESCOLA_ID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 1
-      end>
   end
   object fdqLogServerRequest: TFDQuery
     Connection = FDConnection

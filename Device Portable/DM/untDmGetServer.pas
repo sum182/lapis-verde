@@ -661,15 +661,18 @@ begin
   if Usuario.Tipo = Funcionario then
   begin
     fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
-    fdqProcessoAtualizacao.SQL.Add('where ((escola_id = :escola_id) or (escola_id = 0))');
+    fdqProcessoAtualizacao.SQL.Add('where ((escola_id = :escola_id) or (escola_id = 0) or (funcionario_id = :funcionario_id) )');
     fdqProcessoAtualizacao.ParamByName('escola_id').AsInteger := GetEscolaId;
+    fdqProcessoAtualizacao.ParamByName('funcionario_id').AsInteger := Usuario.Id;
   end;
 
 
   if Usuario.Tipo = Responsavel then
   begin
     fdqProcessoAtualizacao.SQL.Add('SELECT * FROM processo_atualizacao');
-    fdqProcessoAtualizacao.SQL.Add('where (escola_id = 0) ' + GetSQLEscolaId('escola_id','or'));
+    fdqProcessoAtualizacao.SQL.Add('where ((escola_id = 0) ' + GetSQLEscolaId('escola_id','or'));
+    fdqProcessoAtualizacao.SQL.Add('or (responsavel_id = :responsavel_id))');
+    fdqProcessoAtualizacao.ParamByName('responsavel_id').AsInteger := Usuario.Id;
   end;
 
   fdqProcessoAtualizacao.Open;
