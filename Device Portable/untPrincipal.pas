@@ -35,10 +35,10 @@ type
     lblMensagens: TLabel;
     imgConfiguracoes: TImage;
     Label1: TLabel;
-    imgLogoff: TImage;
     imgEnviar: TImage;
     Label3: TLabel;
     lstItemUsuario: TListBoxItem;
+    imgLogoff: TImage;
     Label2: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);

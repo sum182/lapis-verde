@@ -278,4 +278,11 @@ object DmGetServer: TDmGetServer
     Left = 379
     Top = 71
   end
+  object fdqConfiguracoes: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select * from configuracoes')
+    Left = 48
+    Top = 296
+  end
 end

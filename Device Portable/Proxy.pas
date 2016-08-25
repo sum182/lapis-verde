@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 24/08/2016 17:08:12
+// 25/08/2016 12:44:27
 //
 
 unit Proxy;
@@ -109,6 +109,7 @@ type
     FfdqLogErrorBeforePostCommand: TDSRestCommand;
     FApplicationEventsExceptionCommand: TDSRestCommand;
     FFDConnectionAfterConnectCommand: TDSRestCommand;
+    FfdqConfiguracoesBeforePostCommand: TDSRestCommand;
     FSetLogErrorOldCommand: TDSRestCommand;
     FSaveLogErrorCommand: TDSRestCommand;
     FSaveLogServerRequestCommand: TDSRestCommand;
@@ -122,6 +123,8 @@ type
     FGetResponsaveisCommand_Cache: TDSRestCommand;
     FGetFuncionariosCommand: TDSRestCommand;
     FGetFuncionariosCommand_Cache: TDSRestCommand;
+    FGetConfiguracoesCommand: TDSRestCommand;
+    FGetConfiguracoesCommand_Cache: TDSRestCommand;
     FSalvarFuncionarioCommand: TDSRestCommand;
     FSalvarLogErrorCommand: TDSRestCommand;
     FSalvarConfiguracoesCommand: TDSRestCommand;
@@ -137,6 +140,7 @@ type
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure FDConnectionAfterConnect(Sender: TObject);
+    procedure fdqConfiguracoesBeforePost(DataSet: TDataSet);
     procedure SetLogErrorOld(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; pEscolaId: Integer);
     procedure SaveLogError(LogServerRequest: TLogServerRequest);
     procedure SaveLogServerRequest(LogServerRequest: TLogServerRequest);
@@ -150,6 +154,8 @@ type
     function GetResponsaveis_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function GetFuncionarios(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
     function GetFuncionarios_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
+    function GetConfiguracoes(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): TFDJSONDataSets;
+    function GetConfiguracoes_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string = ''): IDSRestCachedTFDJSONDataSets;
     function SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     function SalvarLogError(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
     function SalvarConfiguracoes(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string = ''): string;
@@ -401,6 +407,11 @@ const
     (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
   );
 
+  TSmMain_fdqConfiguracoesBeforePost: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'DataSet'; Direction: 1; DBXType: 23; TypeName: 'TDataSet')
+  );
+
   TSmMain_SetLogErrorOld: array [0..6] of TDSRestParameterMetaData =
   (
     (Name: 'MsgError'; Direction: 1; DBXType: 26; TypeName: 'string'),
@@ -485,6 +496,20 @@ const
   );
 
   TSmMain_GetFuncionarios_Cache: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSmMain_GetConfiguracoes: array [0..2] of TDSRestParameterMetaData =
+  (
+    (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TFDJSONDataSets')
+  );
+
+  TSmMain_GetConfiguracoes_Cache: array [0..2] of TDSRestParameterMetaData =
   (
     (Name: 'pEscolaId'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
     (Name: 'pUsuario'; Direction: 1; DBXType: 37; TypeName: 'TJSONValue'),
@@ -1357,6 +1382,19 @@ begin
   FFDConnectionAfterConnectCommand.Execute;
 end;
 
+procedure TSmMainClient.fdqConfiguracoesBeforePost(DataSet: TDataSet);
+begin
+  if FfdqConfiguracoesBeforePostCommand = nil then
+  begin
+    FfdqConfiguracoesBeforePostCommand := FConnection.CreateCommand;
+    FfdqConfiguracoesBeforePostCommand.RequestType := 'POST';
+    FfdqConfiguracoesBeforePostCommand.Text := 'TSmMain."fdqConfiguracoesBeforePost"';
+    FfdqConfiguracoesBeforePostCommand.Prepare(TSmMain_fdqConfiguracoesBeforePost);
+  end;
+  FfdqConfiguracoesBeforePostCommand.Parameters[0].Value.SetDBXReader(TDBXDataSetReader.Create(DataSet, FInstanceOwner), True);
+  FfdqConfiguracoesBeforePostCommand.Execute;
+end;
+
 procedure TSmMainClient.SetLogErrorOld(MsgError: string; Aplicacao: string; UnitNome: string; Classe: string; Metodo: string; Data: TDateTime; pEscolaId: Integer);
 begin
   if FSetLogErrorOldCommand = nil then
@@ -1623,6 +1661,48 @@ begin
   Result := TDSRestCachedTFDJSONDataSets.Create(FGetFuncionariosCommand_Cache.Parameters[2].Value.GetString);
 end;
 
+function TSmMainClient.GetConfiguracoes(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): TFDJSONDataSets;
+begin
+  if FGetConfiguracoesCommand = nil then
+  begin
+    FGetConfiguracoesCommand := FConnection.CreateCommand;
+    FGetConfiguracoesCommand.RequestType := 'POST';
+    FGetConfiguracoesCommand.Text := 'TSmMain."GetConfiguracoes"';
+    FGetConfiguracoesCommand.Prepare(TSmMain_GetConfiguracoes);
+  end;
+  FGetConfiguracoesCommand.Parameters[0].Value.SetInt32(pEscolaId);
+  FGetConfiguracoesCommand.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FGetConfiguracoesCommand.Execute(ARequestFilter);
+  if not FGetConfiguracoesCommand.Parameters[2].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetConfiguracoesCommand.Parameters[2].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TFDJSONDataSets(FUnMarshal.UnMarshal(FGetConfiguracoesCommand.Parameters[2].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetConfiguracoesCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSmMainClient.GetConfiguracoes_Cache(pEscolaId: Integer; pUsuario: TJSONValue; const ARequestFilter: string): IDSRestCachedTFDJSONDataSets;
+begin
+  if FGetConfiguracoesCommand_Cache = nil then
+  begin
+    FGetConfiguracoesCommand_Cache := FConnection.CreateCommand;
+    FGetConfiguracoesCommand_Cache.RequestType := 'POST';
+    FGetConfiguracoesCommand_Cache.Text := 'TSmMain."GetConfiguracoes"';
+    FGetConfiguracoesCommand_Cache.Prepare(TSmMain_GetConfiguracoes_Cache);
+  end;
+  FGetConfiguracoesCommand_Cache.Parameters[0].Value.SetInt32(pEscolaId);
+  FGetConfiguracoesCommand_Cache.Parameters[1].Value.SetJSONValue(pUsuario, FInstanceOwner);
+  FGetConfiguracoesCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTFDJSONDataSets.Create(FGetConfiguracoesCommand_Cache.Parameters[2].Value.GetString);
+end;
+
 function TSmMainClient.SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue; LDataSetList: TFDJSONDataSets; const ARequestFilter: string): string;
 begin
   if FSalvarFuncionarioCommand = nil then
@@ -1813,6 +1893,7 @@ begin
   FfdqLogErrorBeforePostCommand.DisposeOf;
   FApplicationEventsExceptionCommand.DisposeOf;
   FFDConnectionAfterConnectCommand.DisposeOf;
+  FfdqConfiguracoesBeforePostCommand.DisposeOf;
   FSetLogErrorOldCommand.DisposeOf;
   FSaveLogErrorCommand.DisposeOf;
   FSaveLogServerRequestCommand.DisposeOf;
@@ -1826,6 +1907,8 @@ begin
   FGetResponsaveisCommand_Cache.DisposeOf;
   FGetFuncionariosCommand.DisposeOf;
   FGetFuncionariosCommand_Cache.DisposeOf;
+  FGetConfiguracoesCommand.DisposeOf;
+  FGetConfiguracoesCommand_Cache.DisposeOf;
   FSalvarFuncionarioCommand.DisposeOf;
   FSalvarLogErrorCommand.DisposeOf;
   FSalvarConfiguracoesCommand.DisposeOf;

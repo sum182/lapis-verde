@@ -67,6 +67,7 @@ type
     function GetTurmas(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetResponsaveis(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetFuncionarios(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetConfiguracoes(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function SalvarFuncionario(pEscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
 
     function SalvarLogError(pEscolaId:Integer;
@@ -152,7 +153,6 @@ var
   LogServerRequest:TLogServerRequest;
 begin
   //Método para retornar os Alunos
-  //Migracao Resp OK Server x Mobile
   try
     try
       SetParamsServer(pEscolaId,pUsuario);
@@ -180,6 +180,46 @@ begin
   finally
     LogServerRequest.Free;
   end;
+end;
+
+function TSmMain.GetConfiguracoes(pEscolaId: Integer;
+  pUsuario: TJSONValue): TFDJSONDataSets;
+var
+  fdqDataSet: TFDQuery;
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para retornar as Configurações do usuário
+  try
+    try
+      SetParamsServer(pEscolaId,pUsuario);
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest(UnitName,
+                                           ClassName,
+                                           'GetConfiguracoes',
+                                           EscolaId,
+                                           Usuario);
+
+      Result := TFDJSONDataSets.Create;
+
+      fdqDataSet := TFDQuery.Create(self);
+      fdqDataSet.Connection:=SmMain.FDConnection;
+      fdqDataSet.Active := False;
+
+      fdqDataSet.SQL.Clear;
+      fdqDataSet.SQL.Add('select * from configuracoes');
+      fdqDataSet.SQL.Add('where ' + Usuario.FieldName + ' = ' + IntToStr(Usuario.Id));
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqDataSet);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
+    LogServerRequest.Free;
+  end;
+
 end;
 
 function TSmMain.GetDataSet(pEscolaId: Integer; Nome: String;

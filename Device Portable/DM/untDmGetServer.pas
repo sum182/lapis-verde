@@ -31,6 +31,7 @@ type
     fdqProcessoAtualizacaoescola_id: TIntegerField;
     fdqRespEscola: TFDQuery;
     fdqRespTipo: TFDQuery;
+    fdqConfiguracoes: TFDQuery;
   private
   public
     procedure OpenProcessoAtualizacao;
@@ -38,6 +39,7 @@ type
     procedure OpenTurmas;
     procedure OpenFuncionarios;
     procedure OpenResponsaveis;
+    procedure OpenConfiguracoes;
 
 
     procedure GetProcessoAtualizacao;
@@ -60,6 +62,7 @@ type
     procedure GetFuncionarios;
     function GetFuncionario(FuncionarioId:Integer):TFDDataSet;
     function GetResponsavel(ResponsavelId:Integer):TFDDataSet;
+    procedure GetConfiguracoes;
 
     procedure GetAgenda(DtIni,DtFim:TDateTime);
     procedure GetAgendaTeste(DtIni,DtFim:TDateTime);
@@ -340,6 +343,41 @@ begin
 
 end;
 
+procedure TDmGetServer.GetConfiguracoes;
+var
+  LDataSetList  : TFDJSONDataSets;
+  LDataSet: TFDDataSet;
+begin
+  try
+   { if not Dm.ProcessHasUpdate('configuracoes') then
+      Exit;}
+
+    OpenConfiguracoes;
+    if not ValidacoesRestClientBeforeExecute then
+      Exit;
+
+    LDataSetList := RestClient.SmMainClient.GetConfiguracoes(GetEscolaId,Usuario.Marshal);
+    LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+    CopyDataSet(LDataSet,fdqConfiguracoes);
+
+    //DM.ProcessSaveUpdate('configuracoes');
+    MsgPoupUpTeste('DmGetServer.GetConfiguracoes Executado');
+  except on E:Exception do
+  begin
+    DM.SetLogError( E.Message,
+                    GetApplicationName,
+                    UnitName,
+                    ClassName,
+                    'GetConfiguracoes',
+                    Now,
+                    'Erro na busca de configuracoes' + #13 + E.Message
+                    );
+     Raise;
+  end;
+  end;
+
+end;
+
 procedure TDmGetServer.GetDadosServerGeral;
 begin
   try
@@ -418,6 +456,14 @@ begin
   except on E:Exception do
     MsgPoupUp('DmGetServer.AgendaTipo Erro:' + e.Message);
   end;
+
+  try
+    GetConfiguracoes;
+    //MsgPoupUpTeste('DmGetServer.GetConfiguracoes OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetConfiguracoes Erro:' + e.Message);
+  end;
+
 
   try
     GetAgenda(Now - 30, Now + 1);
@@ -571,6 +617,30 @@ begin
   fdqAluno.SQL.Clear;
   fdqAluno.SQL.Add(rs_SQLAluno);
   fdqAluno.SQL.Add(GetSQLEscolaId);
+end;
+
+procedure TDmGetServer.OpenConfiguracoes;
+begin
+  fdqConfiguracoes.Close;
+  fdqConfiguracoes.SQL.Clear;
+  fdqConfiguracoes.SQL.Add('select * from configuracoes');
+  fdqConfiguracoes.SQL.Add('where 1=1');
+  fdqConfiguracoes.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqConfiguracoes.SQL.Add(' or (funcionario_id = :funcionario_id)');
+    fdqConfiguracoes.ParamByName('funcionario_id').AsInteger:=Usuario.Id;
+  end;
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqConfiguracoes.SQL.Add(' or (responsavel_id = :responsavel_id)');
+    fdqConfiguracoes.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
+  end;
+
+  fdqConfiguracoes.SQL.Add(')');
+  fdqConfiguracoes.Open;
 end;
 
 procedure TDmGetServer.OpenFuncionarios;
