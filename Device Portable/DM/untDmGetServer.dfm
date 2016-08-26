@@ -6,36 +6,6 @@ object DmGetServer: TDmGetServer
     Left = 533
     Top = 24
   end
-  object fdqProcessoAtualizacao: TFDQuery
-    Connection = Dm.FDConnectionDB
-    SQL.Strings = (
-      'SELECT * FROM processo_atualizacao')
-    Left = 48
-    Top = 183
-    object fdqProcessoAtualizacaoprocesso_atualizacao_id: TIntegerField
-      FieldName = 'processo_atualizacao_id'
-      Origin = 'processo_atualizacao_id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object fdqProcessoAtualizacaoprocesso: TStringField
-      FieldName = 'processo'
-      Origin = 'processo'
-      Size = 200
-    end
-    object fdqProcessoAtualizacaodata: TDateTimeField
-      FieldName = 'data'
-      Origin = 'data'
-    end
-    object fdqProcessoAtualizacaodata_local: TDateTimeField
-      FieldName = 'data_local'
-      Origin = 'data_local'
-    end
-    object fdqProcessoAtualizacaoescola_id: TIntegerField
-      FieldName = 'escola_id'
-      Origin = 'escola_id'
-    end
-  end
   object fdqAluno: TFDQuery
     Connection = Dm.FDConnectionDB
     SQL.Strings = (
@@ -276,5 +246,12 @@ object DmGetServer: TDmGetServer
       'select * from configuracoes')
     Left = 48
     Top = 296
+  end
+  object fdqProcessoAtualizacao: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'SELECT * FROM processo_atualizacao')
+    Left = 48
+    Top = 184
   end
 end

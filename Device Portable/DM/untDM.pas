@@ -774,19 +774,19 @@ begin
     SyncServer := True;
 
     try
-      DmGetServer.GetDadosServerGeral;
-      MsgPoupUpTeste('DmGetServer.GetDadosServerGeral OK');
-    except
-      on E: Exception do
-        MsgPoupUp('DmGetServer.GetDadosServerGeral Erro:' + E.Message);
-    end;
-
-    try
       DmSaveServer.SaveDadosServerGeral;
       MsgPoupUpTeste('DM.SalvarDadosServer OK');
     except
       on E: Exception do
         MsgPoupUp('DM.SalvarDadosServer Erro:' + E.Message);
+    end;
+
+    try
+      DmGetServer.GetDadosServerGeral;
+      MsgPoupUpTeste('DmGetServer.GetDadosServerGeral OK');
+    except
+      on E: Exception do
+        MsgPoupUp('DmGetServer.GetDadosServerGeral Erro:' + E.Message);
     end;
 
   finally
@@ -805,13 +805,6 @@ begin
 
     SyncServer := True;
 
-    try
-      DmGetServer.GetDadosServerBasico;
-      MsgPoupUpTeste('DmGetServer.GetDadosServerBasico OK');
-    except
-      on E: Exception do
-        MsgPoupUp('DmGetServer.GetDadosServerBasico' + E.Message);
-    end;
 
     try
       DmSaveServer.SaveDadosServerBasico;
@@ -819,6 +812,14 @@ begin
     except
       on E: Exception do
         MsgPoupUp('DmSaveServer.SaveDadosServerBasico Erro:' + E.Message);
+    end;
+
+    try
+      DmGetServer.GetDadosServerBasico;
+      MsgPoupUpTeste('DmGetServer.GetDadosServerBasico OK');
+    except
+      on E: Exception do
+        MsgPoupUp('DmGetServer.GetDadosServerBasico' + E.Message);
     end;
 
   finally

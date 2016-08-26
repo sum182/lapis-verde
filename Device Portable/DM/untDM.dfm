@@ -12,7 +12,6 @@ object Dm: TDm
       'DriverID=SQLite')
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
-    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8

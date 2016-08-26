@@ -12,7 +12,6 @@ uses
 type
   TDmGetServer = class(TDataModule)
     fdStanStorageBinLink: TFDStanStorageBinLink;
-    fdqProcessoAtualizacao: TFDQuery;
     fdqAluno: TFDQuery;
     fdqTurma: TFDQuery;
     fdqTurmaAluno: TFDQuery;
@@ -24,14 +23,10 @@ type
     fdqAgendaAluno: TFDQuery;
     fdqAgendaTurma: TFDQuery;
     fdqAgendaKeysInsert: TFDQuery;
-    fdqProcessoAtualizacaoprocesso_atualizacao_id: TIntegerField;
-    fdqProcessoAtualizacaoprocesso: TStringField;
-    fdqProcessoAtualizacaodata: TDateTimeField;
-    fdqProcessoAtualizacaodata_local: TDateTimeField;
-    fdqProcessoAtualizacaoescola_id: TIntegerField;
     fdqRespEscola: TFDQuery;
     fdqRespTipo: TFDQuery;
     fdqConfiguracoes: TFDQuery;
+    fdqProcessoAtualizacao: TFDQuery;
   private
   public
     procedure OpenProcessoAtualizacao;
@@ -349,8 +344,8 @@ var
   LDataSet: TFDDataSet;
 begin
   try
-   { if not Dm.ProcessHasUpdate('configuracoes') then
-      Exit;}
+    if not Dm.ProcessHasUpdate('configuracoes') then
+      Exit;
 
     OpenConfiguracoes;
     if not ValidacoesRestClientBeforeExecute then
@@ -360,7 +355,7 @@ begin
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqConfiguracoes);
 
-    //DM.ProcessSaveUpdate('configuracoes');
+    DM.ProcessSaveUpdate('configuracoes');
     MsgPoupUpTeste('DmGetServer.GetConfiguracoes Executado');
   except on E:Exception do
   begin

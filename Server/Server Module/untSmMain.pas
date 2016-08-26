@@ -356,7 +356,6 @@ begin
 
       fdqProcessoAtualizacao.Open;
 
-
       TFDJSONDataSetsWriter.ListAdd(Result,fdqProcessoAtualizacao);
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
