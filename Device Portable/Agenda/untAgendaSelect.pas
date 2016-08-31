@@ -89,6 +89,14 @@ begin
   frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
   frmAgendaView.TurmaId:= 0;
   frmAgendaView.Show;
+
+ { TODO -cErro :
+  Erro - Ao acessar com login de responsavel com mais de um filho a lista se perde e duplica o nome do filho.
+  Coloquei o metodo OpenAlunos e resolveu o problema mas ainda não está legal.
+  Obs.: Logo qdo abre a tela não ordena corretamente.
+  No windows a fonte muda de tamanho, no mobile não
+  Este erro aparece apenas na primeira abertura da tela}
+  Dm.OpenAlunos;
 end;
 
 procedure TfrmAgendaSelect.OpenAgendaTurma;
