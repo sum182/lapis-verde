@@ -81,6 +81,7 @@ begin
   finally
     //fdqLoginFuncionario.Active := False;
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 
 end;

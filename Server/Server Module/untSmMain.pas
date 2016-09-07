@@ -61,6 +61,9 @@ type
     procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
     function GetSQLEscolaId(FieldNameEscolaId:String = 'escola_id';Condicao:String = 'and'):String;
+    procedure StartRequest(pEscolaId:Integer;pUsuario:TJSONValue);
+    procedure EndRequest;
+
     procedure SetParamsServer(pEscolaId:Integer;pUsuario:TJSONValue);
    {$METHODINFO ON}
     function GetAlunos(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
@@ -132,6 +135,11 @@ begin
     Usuario:=TUsuario.Create;
 end;
 
+procedure TSmMain.EndRequest;
+begin
+  //FDConnection.Connected:=False;
+end;
+
 procedure TSmMain.FDConnectionAfterConnect(Sender: TObject);
 begin
   SetTimeZone;
@@ -155,7 +163,7 @@ begin
   //Método para retornar os Alunos
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest(UnitName,
                                            ClassName,
@@ -179,6 +187,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 end;
 
@@ -191,7 +200,7 @@ begin
   //Método para retornar as Configurações do usuário
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest(UnitName,
                                            ClassName,
@@ -218,6 +227,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 
 end;
@@ -236,7 +246,7 @@ begin
       if Nome = '' then
        raise Exception.Create('GetDataSet: Nome não definido');
 
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -271,6 +281,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 
 end;
@@ -284,7 +295,7 @@ begin
 
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -307,6 +318,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 end;
 
@@ -319,7 +331,7 @@ begin
   try
     try
       Result := TFDJSONDataSets.Create;
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -366,6 +378,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 
 end;
@@ -378,7 +391,7 @@ begin
   //Migracao Resp OK Server x Mobile
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest(UnitName,
                                            ClassName,
@@ -411,6 +424,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 
 end;
@@ -438,7 +452,7 @@ begin
   //Migracao Resp OK Server x Mobile
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -470,6 +484,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 end;
 
@@ -511,7 +526,7 @@ begin
   //Método para Salvar Logs de Erros
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -545,6 +560,7 @@ begin
   finally
     fdqConfiguracoes.Close;
     LogServerRequest.Free;
+    EndRequest;
   end;
 
 end;
@@ -558,7 +574,7 @@ begin
   //Método para salvar o Funcionario
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
 
       if Usuario.Tipo <>  Funcionario then
         Exit;
@@ -601,6 +617,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    EndRequest;
   end;
 
 end;
@@ -617,7 +634,7 @@ begin
   //Método para Salvar Logs de Erros
   try
     try
-      SetParamsServer(pEscolaId,pUsuario);
+      StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -652,6 +669,7 @@ begin
   finally
     fdqLogError.Close;
     LogServerRequest.Free;
+    EndRequest;
   end;
 
 end;
@@ -699,6 +717,14 @@ begin
     pEscolaId:= 0;
 
   EscolaId:= pEscolaId;
+end;
+
+procedure TSmMain.StartRequest(pEscolaId: Integer; pUsuario: TJSONValue);
+begin
+  if FDConnection.Connected = False then
+    FDConnection.Connected := True;
+
+  SetParamsServer(pEscolaId,pUsuario);
 end;
 
 procedure TSmMain.SaveLogServerRequest(LogServerRequest: TLogServerRequest);

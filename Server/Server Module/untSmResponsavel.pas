@@ -106,6 +106,7 @@ begin
   finally
     fdqLoginResponsavel.Active := False;
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 end;
 
@@ -147,6 +148,7 @@ begin
   finally
     //fdqLoginResponsavel.Active := False;
     LogServerRequest.Free;
+    //SmMain.EndRequest;
   end;
 end;
 
@@ -159,7 +161,7 @@ begin
   //Método para salvar o Responsável
   try
     try
-      SmMain.SetParamsServer(pEscolaId,pUsuario);
+      SmMain.StartRequest(pEscolaId,pUsuario);
 
       if Usuario.Tipo <>  Responsavel then
         Exit;
@@ -218,6 +220,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 end;
 
@@ -250,6 +253,7 @@ begin
   finally
     fdqLoginResponsavel.Active := False;
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 end;
 
@@ -283,6 +287,7 @@ begin
   finally
     fdqLoginResponsavel.Active := False;
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 end;
 

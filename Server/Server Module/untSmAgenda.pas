@@ -96,7 +96,7 @@ begin
   //Método para retornar as Agendas
   try
     try
-      SmMain.SetParamsServer(pEscolaId,pUsuario);
+      SmMain.StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -118,6 +118,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 end;
 
@@ -131,7 +132,7 @@ begin
   //Método para retornar as Agendas
   try
     try
-      SmMain.SetParamsServer(pEscolaId,pUsuario);
+      SmMain.StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -154,6 +155,7 @@ begin
     end;
   finally
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 end;
 
@@ -216,7 +218,7 @@ begin
     KeyValues:= EmptyStr;
 
     try
-      SmMain.SetParamsServer(pEscolaId,pUsuario);
+      SmMain.StartRequest(pEscolaId,pUsuario);
       LogServerRequest:=TLogServerRequest.Create;
       LogServerRequest.SetLogServerRequest( UnitName,
                                             ClassName,
@@ -256,6 +258,7 @@ begin
   finally
     CloseAgenda;
     LogServerRequest.Free;
+    SmMain.EndRequest;
   end;
 end;
 

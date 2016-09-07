@@ -24,6 +24,8 @@ object SmMain: TSmMain
       'Password=senhabdagenda'
       'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
+    ResourceOptions.AssignedValues = [rvAutoReconnect]
+    ResourceOptions.AutoReconnect = True
     LoginPrompt = False
     AfterConnect = FDConnectionAfterConnect
     Left = 26
