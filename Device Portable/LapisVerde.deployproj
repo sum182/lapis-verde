@@ -7,15 +7,6 @@
     <ItemGroup Condition="'$(Platform)'=='Win64'"/>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice32'"/>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
-        <DeployFile Include="Arquivos\config.ini" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\Arquivos\</RemoteDir>
-            <RemoteName>config.ini</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="Win32\Release\LapisVerde.exe" Condition="'$(Config)'=='Release'">
             <RemoteDir>LapisVerde\</RemoteDir>
             <RemoteName>LapisVerde.exe</RemoteName>
@@ -25,6 +16,25 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
             <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="Win32\Debug\LapisVerde.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\</RemoteDir>
+            <RemoteName>LapisVerde.exe</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="Arquivos\config.ini" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\Arquivos\</RemoteDir>
+            <RemoteName>config.ini</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Arquivos\config.ini" Condition="'$(Config)'=='Release'">
             <RemoteDir>LapisVerde\Arquivos\</RemoteDir>
@@ -43,16 +53,6 @@
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Win32\Debug\LapisVerde.exe" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\</RemoteDir>
-            <RemoteName>LapisVerde.exe</RemoteName>
-            <DeployClass>ProjectOutput</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Debug'">
             <RemoteDir>LapisVerde\BD\</RemoteDir>
@@ -113,24 +113,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_640x480.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\res\drawable-large\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <DeployClass>Android_SplashImage640</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-ldpi\ic_launcher.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\res\drawable-ldpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon36</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-mdpi\ic_launcher.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>LapisVerde\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -140,56 +122,10 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\library\lib\armeabi\</RemoteDir>
-            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
-            <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Release\libLapisVerde.so" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="$(BDS)\lib\android\debug\libProxyAndroidService.so" Condition="'$(Config)'=='Release'">
             <RemoteDir>LapisVerde\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libLapisVerde.so</RemoteName>
-            <DeployClass>ProjectOutput</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-ldpi\ic_launcher.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\res\drawable-ldpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon36</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_640x480.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\res\drawable-large\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <DeployClass>Android_SplashImage640</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-xhdpi\ic_launcher.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\res\drawable-xhdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon96</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\release\mips\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\library\lib\mips\</RemoteDir>
-            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
-            <DeployClass>AndroidLibnativeMipsFile</DeployClass>
+            <RemoteName>libProxyAndroidService.so</RemoteName>
+            <DeployClass>AndroidServiceOutput</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -213,33 +149,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-hdpi\ic_launcher.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\res\drawable-hdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon72</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <DeployClass>AndroidClassesDexFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>gdbserver</RemoteName>
-            <DeployClass>AndroidGDBServer</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_426x320.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>LapisVerde\res\drawable-small\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
@@ -249,19 +158,10 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\release\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\library\lib\armeabi\</RemoteDir>
-            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
-            <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-xhdpi\ic_launcher.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\res\drawable-xhdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon96</DeployClass>
+        <DeployFile Include="Services\Android\Android\Release\libLapisVerdeService.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libLapisVerdeService.so</RemoteName>
+            <DeployClass>AndroidServiceOutput</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -330,24 +230,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\release\x86\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\library\lib\x86\</RemoteDir>
-            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
-            <DeployClass>AndroidLibnativeX86File</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_960x720.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>LapisVerde\res\drawable-xlarge\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <DeployClass>Android_SplashImage960</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_470x320.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>LapisVerde\res\drawable-normal\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
@@ -361,15 +243,6 @@
             <RemoteDir>LapisVerde\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon72</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_426x320.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\res\drawable-small\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <DeployClass>Android_SplashImage426</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -393,7 +266,134 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="Android\Release\classes.dex" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_640x480.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\res\drawable-large\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage640</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-ldpi\ic_launcher.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\res\drawable-ldpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon36</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-ldpi\ic_launcher.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\res\drawable-ldpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon36</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\library\lib\armeabi\</RemoteDir>
+            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
+            <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\libLapisVerde.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libLapisVerde.so</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-xhdpi\ic_launcher.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\res\drawable-xhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon96</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_640x480.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\res\drawable-large\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage640</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\release\mips\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\library\lib\mips\</RemoteDir>
+            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
+            <DeployClass>AndroidLibnativeMipsFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-hdpi\ic_launcher.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\res\drawable-hdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon72</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>gdbserver</RemoteName>
+            <DeployClass>AndroidGDBServer</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\release\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\library\lib\armeabi\</RemoteDir>
+            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
+            <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\ico\Aplicação\1\drawable-xhdpi\ic_launcher.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\res\drawable-xhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon96</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\release\x86\libnative-activity.so" Condition="'$(Config)'=='Release'">
             <RemoteDir>LapisVerde\library\lib\x86\</RemoteDir>
             <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
             <DeployClass>AndroidLibnativeX86File</DeployClass>
@@ -402,10 +402,37 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Release\classes.dex" Condition="'$(Config)'=='Release'">
-            <RemoteDir>LapisVerde\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <DeployClass>AndroidClassesDexFile</DeployClass>
+        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_426x320.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\res\drawable-small\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage426</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\Imagens\Splash Screen\FundoBranco_960x720.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\res\drawable-xlarge\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage960</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Services\Android\Android\Debug\libLapisVerdeService.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>LapisVerde\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libLapisVerdeService.so</RemoteName>
+            <DeployClass>AndroidServiceOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\library\lib\x86\</RemoteDir>
+            <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
+            <DeployClass>AndroidLibnativeX86File</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -431,18 +458,18 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSSimulator'">
-        <DeployFile Include="$(BDS)\Redist\iossimulator\libPCRE.dylib">
+        <DeployFile Include="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib">
             <RemoteDir>LapisVerde.app\</RemoteDir>
-            <RemoteName>libPCRE.dylib</RemoteName>
+            <RemoteName>libcgunwind.1.0.dylib</RemoteName>
             <DeployClass>DependencyModule</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib">
+        <DeployFile Include="$(BDS)\Redist\iossimulator\libPCRE.dylib">
             <RemoteDir>LapisVerde.app\</RemoteDir>
-            <RemoteName>libcgunwind.1.0.dylib</RemoteName>
+            <RemoteName>libPCRE.dylib</RemoteName>
             <DeployClass>DependencyModule</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>

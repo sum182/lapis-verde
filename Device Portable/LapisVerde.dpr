@@ -50,7 +50,8 @@ uses
   untPerfil in 'Perfil\untPerfil.pas' {frmPerfil},
   untSobre in 'untSobre.pas' {frmSobre},
   untConfiguracoes in 'untConfiguracoes.pas' {frmConfiguracoes},
-  untSQLs in '..\Lib\untSQLs.pas';
+  untSQLs in '..\Lib\untSQLs.pas',
+  AndroidServiceDMUnt in 'Services\Android\AndroidServiceDMUnt.pas' {AndroidServiceDM: TAndroidService};
 
 {$R *.res}
 

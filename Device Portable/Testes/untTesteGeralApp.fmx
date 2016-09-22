@@ -1,12 +1,15 @@
 inherited frmTesteGeralApp: TfrmTesteGeralApp
   Caption = 'frmBaseToolBar1'
   ClientHeight = 527
+  ClientWidth = 354
   StyleBook = DMStyles.styleAndroid
   OnShow = FormShow
   DesignerMasterStyle = 3
   inherited layBase: TLayout
+    Size.Width = 354.000000000000000000
     Size.Height = 527.000000000000000000
     inherited ToolBar1: TToolBar
+      Size.Width = 354.000000000000000000
       inherited lblTitulo: TLabel
         Size.Width = 188.000000000000000000
         Text = 'Teste Aplica'#231#227'o'
@@ -23,10 +26,10 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E1DB65368EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB55B68EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A8470005B3CFA52081F188600000000
+                  721FB1E71A117315233D622E8C445C9B2A847000B64BFA2E33397ABA00000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -126,11 +129,11 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
     end
     object TabControl1: TTabControl
       Align = Client
-      Size.Width = 320.000000000000000000
+      Size.Width = 354.000000000000000000
       Size.Height = 479.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 4
       TabOrder = 6
       TabPosition = PlatformDefault
       object TabItem1: TTabItem
@@ -138,7 +141,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           item
           end>
         IsSelected = False
-        Size.Width = 80.000000000000000000
+        Size.Width = 70.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -148,7 +151,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         ExplicitSize.cy = 49.000000000000000000
         object layMetodosOK: TLayout
           Align = Top
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 37.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -176,7 +179,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout1: TLayout
           Align = Top
           Position.Y = 37.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 37.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
@@ -204,7 +207,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object LayTestar: TLayout
           Align = Top
           Position.Y = 74.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
@@ -227,8 +230,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           ItemSpaces.Left = 8.000000000000000000
           ItemSpaces.Right = 2.000000000000000000
           Align = Client
-          Size.Width = 320.000000000000000000
-          Size.Height = 249.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
           ItemAppearance.ItemHeight = 70
@@ -241,8 +243,8 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         CustomIcon = <
           item
           end>
-        IsSelected = True
-        Size.Width = 80.000000000000000000
+        IsSelected = False
+        Size.Width = 70.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -381,7 +383,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           item
           end>
         IsSelected = False
-        Size.Width = 80.000000000000000000
+        Size.Width = 70.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -391,7 +393,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         ExplicitSize.cy = 49.000000000000000000
         object Layout6: TLayout
           Align = Top
-          Size.Width = 50.000000000000000000
+          Size.Width = 354.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 7
@@ -409,7 +411,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout7: TLayout
           Align = Top
           Position.Y = 60.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 354.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 6
@@ -427,13 +429,13 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout8: TLayout
           Align = Top
           Position.Y = 120.000000000000000000
-          Size.Width = 50.000000000000000000
+          Size.Width = 354.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 5
           object lblPropriedades: TLabel
             Align = Client
-            Size.Width = 50.000000000000000000
+            Size.Width = 354.000000000000000000
             Size.Height = 60.000000000000000000
             Size.PlatformDefault = False
             Text = 'lblPropriedades'
@@ -445,7 +447,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           item
           end>
         IsSelected = False
-        Size.Width = 80.000000000000000000
+        Size.Width = 70.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -476,6 +478,35 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
           TabOrder = 1
           Viewport.Width = 233.000000000000000000
           Viewport.Height = 154.000000000000000000
+        end
+      end
+      object TabItem5: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 74.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Service'
+        object Layout12: TLayout
+          Align = Top
+          Size.Width = 354.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 7
+          object btnIniciarService: TSpeedButton
+            Align = Center
+            Size.Width = 191.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Iniciar Service'
+            TextSettings.FontColor = claBlue
+            OnClick = btnIniciarServiceClick
+          end
         end
       end
     end

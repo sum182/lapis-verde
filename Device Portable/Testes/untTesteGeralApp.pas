@@ -15,7 +15,7 @@ uses
   smDBFireDac, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, untDmSaveServer, System.Classes, untDM,smNetworkState,
-  FMX.TabControl, FMX.ScrollBox, FMX.Memo, FMX.Edit;
+  FMX.TabControl, FMX.ScrollBox, FMX.Memo, FMX.Edit, System.Android.Service;
 
 type
   TfrmTesteGeralApp = class(TfrmBaseToolBar)
@@ -60,6 +60,9 @@ type
     btnGetResponsaveis: TSpeedButton;
     Layout11: TLayout;
     SpeedButton4: TSpeedButton;
+    TabItem5: TTabItem;
+    Layout12: TLayout;
+    btnIniciarService: TSpeedButton;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
@@ -72,16 +75,19 @@ type
     procedure SpeedButton3Click(Sender: TObject);
     procedure btnGetResponsaveisClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
+    procedure btnIniciarServiceClick(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
     MetodosErro: Integer;
+    ConexaoServico : TLocalServiceConnection;
     procedure SetLogTeste(Descricao: String);
     procedure SetLogTesteOk(Metodo: String);
     procedure SetLogTesteErro(Metodo: String; Erro: String);
     procedure SetLabelsTotais;
     procedure TesteMetodosDmGetServer;
     procedure TesteMetodosDmSaveServer;
+
 
   public
     { Public declarations }
@@ -430,6 +436,13 @@ begin
     MsgPoupUp('DmGetServer.GetResponsaveis Erro:' + e.Message);
   end;
 
+end;
+
+procedure TfrmTesteGeralApp.btnIniciarServiceClick(Sender: TObject);
+begin
+  inherited;
+  ConexaoServico := TLocalServiceConnection.Create;
+  ConexaoServico.StartService('LapisVerdeService');
 end;
 
 procedure TfrmTesteGeralApp.btnMetodosGetAgendaClick(Sender: TObject);
