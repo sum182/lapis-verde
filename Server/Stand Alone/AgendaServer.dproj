@@ -176,6 +176,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Lib\untSQLs.pas"/>
+        <DCCReference Include="..\Server Container\untServerContainer.pas">
+            <Form>ServerContainer</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <None Include="js\base64.js"/>
         <None Include="js\ServerFunctionExecutor.js"/>
         <None Include="js\json2.js"/>

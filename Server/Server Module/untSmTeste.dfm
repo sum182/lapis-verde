@@ -4,7 +4,7 @@ object SmTeste: TSmTeste
   Height = 271
   Width = 448
   object fdqAlunos: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'SELECT * FROM aluno ')
     Left = 48

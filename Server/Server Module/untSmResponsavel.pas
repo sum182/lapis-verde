@@ -8,7 +8,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, untLibGeral, untLibServer,
   FireDAC.Phys.MySQLDef, FireDAC.Phys, FireDAC.Phys.MySQL,
-  FireDAC.Stan.StorageBin,System.JSON, untTypes,Data.FireDACJSONReflect;
+  FireDAC.Stan.StorageBin,System.JSON, untTypes,Data.FireDACJSONReflect,
+  FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.VCLUI.Wait;
 
 type
 {$METHODINFO ON}
@@ -47,7 +48,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses untSmMain, Vcl.Forms;
+uses untSmMain, Vcl.Forms, untServerContainer, smDBFireDac;
 
 {$R *.dfm}
 
@@ -114,6 +115,8 @@ procedure TSmResponsavel.DataModuleCreate(Sender: TObject);
 begin
   if not Assigned(SmMain) then
     Application.CreateForm(TSmMain, SmMain);
+
+  SetFDConnection(self,ServerContainer.GetConnection);
 end;
 
 function TSmResponsavel.LoginResponsavel(Login, Senha: string): TFDJSONDataSets;

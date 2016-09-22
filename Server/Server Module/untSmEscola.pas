@@ -8,7 +8,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,Data.FireDACJSONReflect,
   Vcl.AppEvnts, untLibGeral, System.JSON, FireDAC.Phys.MySQLDef, FireDAC.Phys,
-  FireDAC.Phys.MySQL, FireDAC.Stan.StorageBin;
+  FireDAC.Phys.MySQL, FireDAC.Stan.StorageBin, FireDAC.UI.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.VCLUI.Wait;
 
 type
 
@@ -37,7 +38,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral, FMX.Dialogs,
-  System.SysUtils, untLibServer, untTypes;
+  System.SysUtils, untLibServer, untTypes, untServerContainer;
 
 {$R *.dfm}
 
@@ -48,6 +49,8 @@ procedure TSmEscola.DataModuleCreate(Sender: TObject);
 begin
   if not Assigned(SmMain) then
     Application.CreateForm(TSmMain, SmMain);
+
+  SetFDConnection(self,ServerContainer.GetConnection);
 end;
 
 function TSmEscola.LoginFuncionario(Login, Senha: string): TFDJSONDataSets;

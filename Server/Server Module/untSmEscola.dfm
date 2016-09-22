@@ -4,7 +4,7 @@ object SmEscola: TSmEscola
   Height = 373
   Width = 460
   object fdqLoginFuncionario: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       
         'SELECT f.*, concat(coalesce(f.nome,'#39#39'),'#39' '#39', coalesce(f.sobrenome' +
@@ -22,8 +22,8 @@ object SmEscola: TSmEscola
       ''
       ''
       '')
-    Left = 63
-    Top = 40
+    Left = 55
+    Top = 104
     ParamData = <
       item
         Name = 'LOGIN'

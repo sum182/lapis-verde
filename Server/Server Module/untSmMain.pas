@@ -3,13 +3,14 @@
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  System.SysUtils, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Phys.MySQLDef,
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,untLibServer,
-  Data.FireDACJSONReflect, untLibGeral, System.JSON, untTypes;
+  Data.FireDACJSONReflect, untLibGeral, System.JSON, untTypes, System.Classes,
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script;
 
 type
 {$METHODINFO ON}
@@ -17,8 +18,6 @@ type
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     FDWaitCursor: TFDGUIxWaitCursor;
     FDStanStorageBinLink1: TFDStanStorageBinLink;
-    FDConnection: TFDConnection;
-    FDConnectionLocal: TFDConnection;
     fdqLogError: TFDQuery;
     ApplicationEvents: TApplicationEvents;
     fdqProcessoAtualizacao: TFDQuery;
@@ -60,6 +59,7 @@ type
 
     procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
+
     function GetSQLEscolaId(FieldNameEscolaId:String = 'escola_id';Condicao:String = 'and'):String;
     procedure StartRequest(pEscolaId:Integer;pUsuario:TJSONValue);
     procedure EndRequest;
@@ -105,7 +105,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses smGeral, Vcl.Forms, smDBFireDac, Data.DBXJSONReflect,
-  System.Rtti, untSQLs;
+  System.Rtti, untSQLs,untServerContainer;
 
 {$R *.dfm}
 
@@ -126,18 +126,14 @@ end;
 
 procedure TSmMain.DataModuleCreate(Sender: TObject);
 begin
-  FDConnection.Close;
-  FDConnection.Open;
-
-  FDConnectionLocal.Close;
-
   if not Assigned(Usuario) then
     Usuario:=TUsuario.Create;
+
+  SetFDConnection(self,ServerContainer.GetConnection);
 end;
 
 procedure TSmMain.EndRequest;
 begin
-  //FDConnection.Connected:=False;
 end;
 
 procedure TSmMain.FDConnectionAfterConnect(Sender: TObject);
@@ -211,7 +207,7 @@ begin
       Result := TFDJSONDataSets.Create;
 
       fdqDataSet := TFDQuery.Create(self);
-      fdqDataSet.Connection:=SmMain.FDConnection;
+      fdqDataSet.Connection:=ServerContainer.GetConnection;
       fdqDataSet.Active := False;
 
       fdqDataSet.SQL.Clear;
@@ -257,7 +253,7 @@ begin
 
       Result := TFDJSONDataSets.Create;
       fdqDataSet := TFDQuery.Create(self);
-      fdqDataSet.Connection:=SmMain.FDConnection;
+      fdqDataSet.Connection:=ServerContainer.GetConnection;
 
       fdqDataSet.Active := False;
 
@@ -721,50 +717,61 @@ end;
 
 procedure TSmMain.StartRequest(pEscolaId: Integer; pUsuario: TJSONValue);
 begin
-  if FDConnection.Connected = False then
-    FDConnection.Connected := True;
-
   SetParamsServer(pEscolaId,pUsuario);
 end;
 
 procedure TSmMain.SaveLogServerRequest(LogServerRequest: TLogServerRequest);
+var
+  fdqDataSet: TFDQuery;
 begin
   try
-    LogServerRequest.SetDataFim;
+    try
+      LogServerRequest.SetDataFim;
+      fdqDataSet := TFDQuery.Create(self);
+      fdqDataSet.Connection:=ServerContainer.GetConnection;
 
-    fdqLogServerRequest.Active:=False;
-    fdqLogServerRequest.Active:=True;
+      fdqDataSet.SQL.Clear;
+      fdqDataSet.SQL:= fdqLogServerRequest.SQL;
+      fdqDataSet.Params:= fdqLogServerRequest.Params;
+      fdqDataSet.Prepare;
+      fdqDataSet.Active := True;
+      fdqDataSet.Insert;
+      fdqDataSet.FieldByName('log_server_request_id').AsString:= smGeral.GetGUID;
+      fdqDataSet.FieldByName('aplicacao').AsString:= LogServerRequest.Aplicacao;
+      fdqDataSet.FieldByName('unit').AsString:= LogServerRequest.UnitNome;
+      fdqDataSet.FieldByName('class').AsString:= LogServerRequest.Classe;
+      fdqDataSet.FieldByName('metodo').AsString:= LogServerRequest.Metodo;
 
-    fdqLogServerRequest.Append;
-    fdqLogServerRequest.FieldByName('log_server_request_id').AsString:= smGeral.GetGUID;
-    fdqLogServerRequest.FieldByName('aplicacao').AsString:= LogServerRequest.Aplicacao;
-    fdqLogServerRequest.FieldByName('unit').AsString:= LogServerRequest.UnitNome;
-    fdqLogServerRequest.FieldByName('class').AsString:= LogServerRequest.Classe;
-    fdqLogServerRequest.FieldByName('metodo').AsString:= LogServerRequest.Metodo;
+      if LogServerRequest.EscolaId > 0 then
+        fdqDataSet.FieldByName('escola_id').AsInteger:=LogServerRequest.EscolaId;
 
-    if LogServerRequest.EscolaId > 0 then
-      fdqLogServerRequest.FieldByName('escola_id').AsInteger:=LogServerRequest.EscolaId;
+      if LogServerRequest.Usuario.Tipo = Responsavel then
+        fdqDataSet.FieldByName('responsavel_id').AsInteger:=LogServerRequest.Usuario.Id;
 
-    if LogServerRequest.Usuario.Tipo = Responsavel then
-      fdqLogServerRequest.FieldByName('responsavel_id').AsInteger:=LogServerRequest.Usuario.Id;
+      if LogServerRequest.Usuario.Tipo = Funcionario then
+        fdqDataSet.FieldByName('funcionario_id').AsInteger:= LogServerRequest.Usuario.Id;
 
-    if LogServerRequest.Usuario.Tipo = Funcionario then
-      fdqLogServerRequest.FieldByName('funcionario_id').AsInteger:= LogServerRequest.Usuario.Id;
+      fdqDataSet.FieldByName('data_ini').AsDateTime:= LogServerRequest.DataIni;
+      fdqDataSet.FieldByName('data_fim').AsDateTime:= LogServerRequest.DataFim;
 
-    fdqLogServerRequest.FieldByName('data_ini').AsDateTime:= LogServerRequest.DataIni;
-    fdqLogServerRequest.FieldByName('data_fim').AsDateTime:= LogServerRequest.DataFim;
+      fdqDataSet.FieldByName('msg_error').AsString:= LogServerRequest.MsgError;
 
-    fdqLogServerRequest.FieldByName('msg_error').AsString:= LogServerRequest.MsgError;
+      if LogServerRequest.DataError > 0 then
+        fdqDataSet.FieldByName('data_error').AsDateTime:= LogServerRequest.DataError;
 
-    if LogServerRequest.DataError > 0 then
-      fdqLogServerRequest.FieldByName('data_error').AsDateTime:= LogServerRequest.DataError;
-
-    fdqLogServerRequest.FieldByName('data_insert_server').AsDateTime:= Now;
-    fdqLogServerRequest.Post;
+      fdqDataSet.FieldByName('data_insert_server').AsDateTime:= Now;
+      fdqDataSet.Post;
+    except on E:Exception do
+    begin
+      LogServerRequest.SetError(E.Message);
+      SaveLogError(LogServerRequest);
+    end;
+    end;
   finally
-    fdqLogServerRequest.Active:=False;
+    fdqDataSet.Free;
   end;
 end;
+
 
 procedure TSmMain.SetSQLLogError;
 begin
@@ -855,7 +862,7 @@ end;
 
 procedure TSmMain.SetTimeZone;
 begin
-  FDConnection.ExecSQL('call sp_set_time_zone;');
+  ServerContainer.GetConnection.ExecSQL('call sp_set_time_zone;');
 end;
 
 end.

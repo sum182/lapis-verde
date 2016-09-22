@@ -5,7 +5,7 @@ object SmAgenda: TSmAgenda
   Width = 615
   object fdqAgenda: TFDQuery
     BeforePost = fdqAgendaBeforePost
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select '
       '  ag.*'
@@ -22,7 +22,7 @@ object SmAgenda: TSmAgenda
       'and ag.data between :dt_ini and :dt_fim'
       'group by agenda_id')
     Left = 66
-    Top = 61
+    Top = 93
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -44,7 +44,7 @@ object SmAgenda: TSmAgenda
       end>
   end
   object fdqAgendaAluno: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -62,7 +62,7 @@ object SmAgenda: TSmAgenda
       'and ag.data_insert_server between :dt_ini and :dt_fim'
       'group by agenda_id')
     Left = 146
-    Top = 61
+    Top = 93
     ParamData = <
       item
         Name = 'FUNCIONARIO_ID'
@@ -103,7 +103,7 @@ object SmAgenda: TSmAgenda
     end
   end
   object fdqAgendaTurma: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select '
       '  at.*'
@@ -119,7 +119,7 @@ object SmAgenda: TSmAgenda
       'group by agenda_id'
       '')
     Left = 250
-    Top = 61
+    Top = 93
     ParamData = <
       item
         Name = 'FUNCIONARIO_ID'
@@ -160,12 +160,12 @@ object SmAgenda: TSmAgenda
     end
   end
   object FDStanStorageBinLink1: TFDStanStorageBinLink
-    Left = 480
-    Top = 65
+    Left = 264
+    Top = 33
   end
   object FDMySQLDriverLink: TFDPhysMySQLDriverLink
     VendorLib = 'C:\Program Files\MySQL\MySQL Server 5.6\lib\libmysql.dll'
-    Left = 368
-    Top = 64
+    Left = 152
+    Top = 32
   end
 end

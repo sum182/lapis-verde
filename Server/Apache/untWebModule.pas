@@ -10,13 +10,6 @@ uses
 type
   TWebModule1 = class(TWebModule)
     DSHTTPWebDispatcher1: TDSHTTPWebDispatcher;
-    DSServer1: TDSServer;
-    DSServerClass1: TDSServerClass;
-    DSServerClassTeste: TDSServerClass;
-    DSServerClassEscola: TDSServerClass;
-    DSServerClassResponsavel: TDSServerClass;
-    DSServerClassMain: TDSServerClass;
-    DSServerClassAgenda: TDSServerClass;
     DSAuthenticationManager1: TDSAuthenticationManager;
     procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
@@ -52,7 +45,7 @@ implementation
 {$R *.dfm}
 
 uses untServerMetodos, Web.WebReq, untSmTeste, untSmMain, untSmEscola,
-  untSmResponsavel, untSmAgenda;
+  untSmResponsavel, untSmAgenda, untServerContainer;
 
 procedure TWebModule1.DSServerClassAgendaGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
@@ -117,6 +110,7 @@ begin
 end;
 
 initialization
+  ServerContainer := TServerContainer.Create(nil);
 finalization
   Web.WebReq.FreeWebModules;
 

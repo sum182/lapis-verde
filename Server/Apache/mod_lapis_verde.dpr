@@ -18,8 +18,9 @@ uses
   untLibServer in '..\..\Lib\untLibServer.pas',
   untResourceString in '..\..\Lib\untResourceString.pas',
   untTypes in '..\..\Lib\untTypes.pas',
-  untWebModule in 'untWebModule.pas' {WebModule1: TWebModule},
-  untSQLs in '..\..\Lib\untSQLs.pas';
+  untSQLs in '..\..\Lib\untSQLs.pas',
+  untServerContainer in '..\Server Container\untServerContainer.pas' {ServerContainer: TDataModule},
+  untWebModule in 'untWebModule.pas' {WebModule1: TWebModule};
 
 {$R *.res}
 
@@ -61,3 +62,4 @@ begin
   TApacheApplication(Application).OnTerminate := TerminateThreads;
   Application.Run;
 end.
+

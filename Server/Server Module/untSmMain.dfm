@@ -17,33 +17,9 @@ object SmMain: TSmMain
     Left = 336
     Top = 25
   end
-  object FDConnection: TFDConnection
-    Params.Strings = (
-      'Database=agendadb'
-      'User_Name=admin'
-      'Password=senhabdagenda'
-      'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
-      'DriverID=MySQL')
-    ResourceOptions.AssignedValues = [rvAutoReconnect]
-    ResourceOptions.AutoReconnect = True
-    LoginPrompt = False
-    AfterConnect = FDConnectionAfterConnect
-    Left = 26
-    Top = 16
-  end
-  object FDConnectionLocal: TFDConnection
-    Params.Strings = (
-      'Database=agenda'
-      'User_Name=root'
-      'Password=admin'
-      'DriverID=MySQL')
-    LoginPrompt = False
-    Left = 114
-    Top = 24
-  end
   object fdqLogError: TFDQuery
     BeforePost = fdqLogErrorBeforePost
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select * from log_error l'
       'where l.log_error_id = :log_error_id')
@@ -63,7 +39,7 @@ object SmMain: TSmMain
     Top = 24
   end
   object fdqProcessoAtualizacao: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'SELECT * FROM processo_atualizacao'
       '')
@@ -71,7 +47,7 @@ object SmMain: TSmMain
     Top = 288
   end
   object fdqLogServerRequest: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select * from log_server_request l'
       'where l.log_server_request_id = :log_server_request_id')
@@ -80,13 +56,13 @@ object SmMain: TSmMain
     ParamData = <
       item
         Name = 'LOG_SERVER_REQUEST_ID'
-        DataType = ftInteger
+        DataType = ftString
         ParamType = ptInput
-        Value = Null
+        Value = '3'
       end>
   end
   object fdqTurmaAluno: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select '#10'ta.*'#10'from turma_aluno ta'#10
       'inner join turma t on (t.turma_id = ta.turma_id )'#13#10#10
@@ -102,7 +78,7 @@ object SmMain: TSmMain
       end>
   end
   object fdqTurma: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'SELECT * FROM turma t'#13#10#10
       'where escola_id = :escola_id'
@@ -118,7 +94,7 @@ object SmMain: TSmMain
       end>
   end
   object fdqAluno: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       
         'SELECT a.*, concat(coalesce(a.nome,'#39#39'),'#39' '#39', coalesce(a.sobrenome' +
@@ -139,7 +115,7 @@ object SmMain: TSmMain
       end>
   end
   object fdqResp: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select * from responsavel r'
       
@@ -150,7 +126,7 @@ object SmMain: TSmMain
     Top = 176
   end
   object fdqRespAluno: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select ra.*'
       'from responsavel_aluno ra'
@@ -164,7 +140,7 @@ object SmMain: TSmMain
     Top = 176
   end
   object fdqRespTelefone: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select rt.*'
       'from responsavel_telefone rt'
@@ -178,7 +154,7 @@ object SmMain: TSmMain
     Top = 176
   end
   object fdqFuncionarios: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
       ''
@@ -196,7 +172,7 @@ object SmMain: TSmMain
       end>
   end
   object fdqFuncionario: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select * from funcionario f'#13#10#10
       ''
@@ -222,7 +198,7 @@ object SmMain: TSmMain
       end>
   end
   object fdqRespEscola: TFDQuery
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select re.*'
       'from responsavel_escola re'
@@ -232,7 +208,7 @@ object SmMain: TSmMain
   end
   object fdqConfiguracoes: TFDQuery
     BeforePost = fdqConfiguracoesBeforePost
-    Connection = FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select * from configuracoes'
       'where :configuracoes_id = :configuracoes_id')

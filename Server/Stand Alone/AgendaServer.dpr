@@ -21,7 +21,8 @@ uses
   untSmMain in '..\Server Module\untSmMain.pas' {SmMain: TDataModule},
   untSmResponsavel in '..\Server Module\untSmResponsavel.pas' {SmResponsavel: TDataModule},
   untSmTeste in '..\Server Module\untSmTeste.pas' {SmTeste: TDataModule},
-  untSQLs in '..\..\Lib\untSQLs.pas';
+  untSQLs in '..\..\Lib\untSQLs.pas',
+  untServerContainer in '..\Server Container\untServerContainer.pas' {ServerContainer: TDataModule};
 
 {$R *.res}
 
@@ -29,6 +30,7 @@ begin
   if WebRequestHandler <> nil then
     WebRequestHandler.WebModuleClass := WebModuleClass;
   Application.Initialize;
+  Application.CreateForm(TServerContainer, ServerContainer);
   Application.CreateForm(TfrmMainServer, frmMainServer);
   Application.CreateForm(TSmAgenda, SmAgenda);
   Application.CreateForm(TSmEscola, SmEscola);

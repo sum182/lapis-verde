@@ -34,7 +34,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses  untSmMain,System.StrUtils,Vcl.Forms;
+uses  untSmMain,System.StrUtils,Vcl.Forms, untServerContainer, smDBFireDac;
 
 {$R *.dfm}
 
@@ -44,6 +44,8 @@ procedure TSmTeste.DataModuleCreate(Sender: TObject);
 begin
   if not Assigned(SmMain) then
     Application.CreateForm(TSmMain, SmMain);
+
+  SetFDConnection(self,ServerContainer.GetConnection);
 end;
 
 function TSmTeste.EchoString(Value: string): string;

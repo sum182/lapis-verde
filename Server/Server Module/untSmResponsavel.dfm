@@ -4,13 +4,13 @@ object SmResponsavel: TSmResponsavel
   Height = 446
   Width = 707
   object fdqValidarEmailResponsavel: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'SELECT r.* '#10'FROM responsavel r'#13#10#10
       'where 1=1'#10#10#10
       'and Upper(r.email) = Upper(:email)'#10)
-    Left = 66
-    Top = 144
+    Left = 74
+    Top = 184
     ParamData = <
       item
         Name = 'EMAIL'
@@ -20,7 +20,7 @@ object SmResponsavel: TSmResponsavel
       end>
   end
   object fdqValidarCPFResponsavel: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'SELECT r.* '
       'FROM responsavel r'
@@ -31,8 +31,8 @@ object SmResponsavel: TSmResponsavel
       ''
       ''
       '')
-    Left = 66
-    Top = 200
+    Left = 74
+    Top = 240
     ParamData = <
       item
         Name = 'CPF'
@@ -42,7 +42,7 @@ object SmResponsavel: TSmResponsavel
       end>
   end
   object fdqResponsavel: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'SELECT r.* '
       'FROM responsavel r'
@@ -53,8 +53,8 @@ object SmResponsavel: TSmResponsavel
       ''
       ''
       '')
-    Left = 66
-    Top = 96
+    Left = 74
+    Top = 136
     ParamData = <
       item
         Name = 'RESPONSAVEL_ID'
@@ -64,14 +64,14 @@ object SmResponsavel: TSmResponsavel
       end>
   end
   object fdqResponsavelTelefone: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'SELECT rt.* '
       'FROM responsavel_telefone rt'
       'where 1=1'#10#10
       'and rt.responsavel_id = :responsavel_id')
-    Left = 66
-    Top = 40
+    Left = 74
+    Top = 80
     ParamData = <
       item
         Name = 'RESPONSAVEL_ID'
@@ -81,7 +81,7 @@ object SmResponsavel: TSmResponsavel
       end>
   end
   object fdqLoginResponsavel: TFDQuery
-    Connection = SmMain.FDConnection
+    Connection = ServerContainer.FDConnection
     SQL.Strings = (
       
         'SELECT r.*, concat(coalesce(r.nome,'#39#39'),'#39' '#39', coalesce(r.sobrenome' +
@@ -98,8 +98,8 @@ object SmResponsavel: TSmResponsavel
       ''
       ''
       '')
-    Left = 66
-    Top = 256
+    Left = 74
+    Top = 296
     ParamData = <
       item
         Name = 'LOGIN'

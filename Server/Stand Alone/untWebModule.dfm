@@ -21,23 +21,13 @@ object webModulo: TwebModulo
   BeforeDispatch = WebModuleBeforeDispatch
   Height = 467
   Width = 650
-  object DSServer1: TDSServer
-    Left = 96
-    Top = 11
-  end
   object DSHTTPWebDispatcher1: TDSHTTPWebDispatcher
-    Server = DSServer1
+    Server = ServerContainer.DSServer1
     Filters = <>
     AuthenticationManager = DSAuthenticationManager1
     WebDispatch.PathInfo = 'datasnap*'
     Left = 104
     Top = 75
-  end
-  object DSServerClass1: TDSServerClass
-    OnGetClass = DSServerClass1GetClass
-    Server = DSServer1
-    Left = 432
-    Top = 19
   end
   object ServerFunctionInvoker: TPageProducer
     HTMLFile = 'Templates\ServerFunctionInvoker.html'
@@ -99,44 +89,14 @@ object webModulo: TwebModulo
     Top = 248
   end
   object DSServerMetaDataProvider1: TDSServerMetaDataProvider
-    Server = DSServer1
+    Server = ServerContainer.DSServer1
     Left = 208
     Top = 248
-  end
-  object DSServerClassTeste: TDSServerClass
-    OnGetClass = DSServerClassTesteGetClass
-    Server = DSServer1
-    Left = 432
-    Top = 88
-  end
-  object DSServerClassEscola: TDSServerClass
-    OnGetClass = DSServerClassEscolaGetClass
-    Server = DSServer1
-    Left = 432
-    Top = 256
-  end
-  object DSServerClassResponsavel: TDSServerClass
-    OnGetClass = DSServerClassResponsavelGetClass
-    Server = DSServer1
-    Left = 432
-    Top = 312
   end
   object DSAuthenticationManager1: TDSAuthenticationManager
     OnUserAuthenticate = DSAuthenticationManager1UserAuthenticate
     Roles = <>
     Left = 236
     Top = 75
-  end
-  object DSServerClassMain: TDSServerClass
-    OnGetClass = DSServerClassMainGetClass
-    Server = DSServer1
-    Left = 432
-    Top = 144
-  end
-  object DSServerClassAgenda: TDSServerClass
-    OnGetClass = DSServerClassAgendaGetClass
-    Server = DSServer1
-    Left = 432
-    Top = 200
   end
 end

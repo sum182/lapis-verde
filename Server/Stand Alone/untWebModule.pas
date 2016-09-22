@@ -8,26 +8,22 @@ uses
   Web.WebFileDispatcher, Web.HTTPProd,
   DataSnap.DSAuth,
   Datasnap.DSProxyJavaScript, IPPeerServer, Datasnap.DSMetadata, Datasnap.DSServerMetadata, Datasnap.DSClientMetadata,
-  Datasnap.DSCommonServer, Datasnap.DSHTTP, untSmAgenda;
+  Datasnap.DSCommonServer, Datasnap.DSHTTP, untSmAgenda, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
+  FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB,
+  FireDAC.Comp.Client,
+  Generics.Collections,Datasnap.DSSession;
 
 type
   TwebModulo = class(TWebModule)
     DSHTTPWebDispatcher1: TDSHTTPWebDispatcher;
-    DSServer1: TDSServer;
-    DSServerClass1: TDSServerClass;
     ServerFunctionInvoker: TPageProducer;
     ReverseString: TPageProducer;
     WebFileDispatcher1: TWebFileDispatcher;
     DSProxyGenerator1: TDSProxyGenerator;
     DSServerMetaDataProvider1: TDSServerMetaDataProvider;
-    DSServerClassTeste: TDSServerClass;
-    DSServerClassEscola: TDSServerClass;
-    DSServerClassResponsavel: TDSServerClass;
     DSAuthenticationManager1: TDSAuthenticationManager;
-    DSServerClassMain: TDSServerClass;
-    DSServerClassAgenda: TDSServerClass;
-    procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
     procedure ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
       const TagString: string; TagParams: TStrings; var ReplaceText: string);
     procedure WebModuleDefaultAction(Sender: TObject;
@@ -38,25 +34,14 @@ type
       const AFileName: string; Request: TWebRequest; Response: TWebResponse;
       var Handled: Boolean);
     procedure WebModuleCreate(Sender: TObject);
-    procedure DSServerClassTesteGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure DSServerClassEscolaGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure DSServerClassResponsavelGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
     procedure DSAuthenticationManager1UserAuthenticate(Sender: TObject;
       const Protocol, Context, User, Password: string; var valid: Boolean;
       UserRoles: TStrings);
-    procedure DSServerClassMainGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure DSServerClassAgendaGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
     function AllowServerFunctionInvoker: Boolean;
   public
-    { Public declarations }
   end;
 
 var
@@ -67,7 +52,7 @@ implementation
 
 {$R *.dfm}
 
-uses untServerMetodos, Web.WebReq, untSmTeste, untSmMain, untSmEscola,
+uses untServerContainer, untServerMetodos, Web.WebReq, untSmTeste, untSmMain, untSmEscola,
   untSmResponsavel;
 
 procedure TwebModulo.DSAuthenticationManager1UserAuthenticate(Sender: TObject;
@@ -80,41 +65,7 @@ begin
    valid := False;
 end;
 
-procedure TwebModulo.DSServerClass1GetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
-begin
-  PersistentClass := untServerMetodos.TSrvServerMetodos;
-end;
 
-procedure TwebModulo.DSServerClassAgendaGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
-begin
-  PersistentClass := untSmAgenda.TSmAgenda;
-end;
-
-procedure TwebModulo.DSServerClassEscolaGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
-begin
-  PersistentClass := untSmEscola.TSmEscola;
-end;
-
-procedure TwebModulo.DSServerClassMainGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
-begin
-  PersistentClass := untSmMain.TSmMain;
-end;
-
-procedure TwebModulo.DSServerClassResponsavelGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
-begin
-  PersistentClass := untSmResponsavel.TSmResponsavel;
-end;
-
-procedure TwebModulo.DSServerClassTesteGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
-begin
-  PersistentClass := untSmTeste.TSmTeste;
-end;
 
 procedure TwebModulo.ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
   const TagString: string; TagParams: TStrings; var ReplaceText: string);
@@ -186,6 +137,13 @@ end;
 procedure TwebModulo.WebModuleCreate(Sender: TObject);
 begin
   FServerFunctionInvokerAction := ActionByName('ServerFunctionInvokerAction');
+  DSHTTPWebDispatcher1.Server := DSServer;
+  if DSServer.Started then
+  begin
+    DSHTTPWebDispatcher1.DbxContext := DSServer.DbxContext;
+    DSHTTPWebDispatcher1.Start;
+  end;
+
 end;
 
 initialization
