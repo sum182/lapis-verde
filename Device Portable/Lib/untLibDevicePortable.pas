@@ -3,7 +3,7 @@ unit untLibDevicePortable;
 interface
 
 Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString,
-  untTypes, System.IOUtils,FMX.Overbyte.IniFiles;
+  untTypes, System.IOUtils;
 
   Type
     TConfiguracoes = class
