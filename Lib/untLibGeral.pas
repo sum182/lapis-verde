@@ -29,7 +29,7 @@ Uses Data.DB,untTypes, System.JSON, Data.DBXJSONReflect;
 
 implementation
 
-uses System.SysUtils, smGeralFMX, System.Variants, System.Rtti;
+uses System.Variants, System.Rtti;
 
 { TUsuario }
 
