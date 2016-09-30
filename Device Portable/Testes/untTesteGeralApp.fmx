@@ -26,10 +26,10 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
                 PNG = {
                   89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                   F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  007249444154484BEDD0DD0980301003E0E23882DBF8B34EDDB55B68EF3C218A
+                  007249444154484BEDD0DD0980301003E0E23882DBF8B34E9DB56368EF3C218A
                   149F241E14FA8194E6219186A62EAA1A73CE2BAE5C67B97D9A52DA456440CC51
                   942F88395AF92B97F2AF5073EB70FAB21FF9EF892EC5C88C98EB31B2D93121E6
-                  721FB1E71A117315233D622E8C445C9B2A847000B64BFA2E33397ABA00000000
+                  721FB1E71A117315233D622E8C445C9B2A8470001169FA0AAEA2060E00000000
                   49454E44AE426082}
                 FileName = 
                   'C:\Projetos\Agenda\Imagens\ic_arrow_back\ic_arrow_back_white_24d' +
@@ -254,7 +254,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         ExplicitSize.cy = 49.000000000000000000
         object Layout2: TLayout
           Align = Top
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 7
@@ -272,7 +272,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout3: TLayout
           Align = Top
           Position.Y = 60.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 6
@@ -290,7 +290,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout4: TLayout
           Align = Top
           Position.Y = 180.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 5
@@ -308,7 +308,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout5: TLayout
           Align = Top
           Position.Y = 300.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
@@ -326,7 +326,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout9: TLayout
           Align = Top
           Position.Y = 360.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
@@ -344,7 +344,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout10: TLayout
           Align = Top
           Position.Y = 240.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 4
@@ -362,7 +362,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout11: TLayout
           Align = Top
           Position.Y = 120.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 8
@@ -393,7 +393,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         ExplicitSize.cy = 49.000000000000000000
         object Layout6: TLayout
           Align = Top
-          Size.Width = 354.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 7
@@ -411,7 +411,7 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout7: TLayout
           Align = Top
           Position.Y = 60.000000000000000000
-          Size.Width = 354.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 6
@@ -429,13 +429,13 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         object Layout8: TLayout
           Align = Top
           Position.Y = 120.000000000000000000
-          Size.Width = 354.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 5
           object lblPropriedades: TLabel
             Align = Client
-            Size.Width = 354.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 60.000000000000000000
             Size.PlatformDefault = False
             Text = 'lblPropriedades'
@@ -491,12 +491,14 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
         StyleLookup = ''
         TabOrder = 0
         Text = 'Service'
+        ExplicitSize.cx = 74.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
         object Layout12: TLayout
           Align = Top
           Size.Width = 354.000000000000000000
           Size.Height = 60.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 7
+          TabOrder = 9
           object btnIniciarService: TSpeedButton
             Align = Center
             Size.Width = 191.000000000000000000
@@ -506,6 +508,42 @@ inherited frmTesteGeralApp: TfrmTesteGeralApp
             Text = 'Iniciar Service'
             TextSettings.FontColor = claBlue
             OnClick = btnIniciarServiceClick
+          end
+        end
+        object Layout13: TLayout
+          Align = Top
+          Position.Y = 60.000000000000000000
+          Size.Width = 354.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 8
+          object btnServiceHttpApp: TSpeedButton
+            Align = Center
+            Size.Width = 256.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'Teste Requisi'#231#227'o Http App'
+            TextSettings.FontColor = claBlue
+            OnClick = btnServiceHttpAppClick
+          end
+        end
+        object Layout14: TLayout
+          Align = Top
+          Position.Y = 120.000000000000000000
+          Size.Width = 354.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 7
+          object SpeedButton5: TSpeedButton
+            Align = Center
+            Size.Width = 256.000000000000000000
+            Size.Height = 38.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'buttonstyle'
+            Text = 'GetAlunos Http App'
+            TextSettings.FontColor = claBlue
+            OnClick = SpeedButton5Click
           end
         end
       end

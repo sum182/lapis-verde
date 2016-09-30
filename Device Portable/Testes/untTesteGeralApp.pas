@@ -15,11 +15,13 @@ uses
   smDBFireDac, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, untDmSaveServer, System.Classes, untDM,smNetworkState,
-  FMX.TabControl, FMX.ScrollBox, FMX.Memo, FMX.Edit
+  FMX.TabControl, FMX.ScrollBox, FMX.Memo, FMX.Edit ,System.Net.URLClient,
+  System.Net.HttpClient, Data.FireDACJSONReflect
 
   {$IF DEFINED(ANDROID)}
   ,System.Android.Service
   {$ENDIF}
+
 
 
   ;
@@ -70,6 +72,10 @@ type
     TabItem5: TTabItem;
     Layout12: TLayout;
     btnIniciarService: TSpeedButton;
+    Layout13: TLayout;
+    btnServiceHttpApp: TSpeedButton;
+    Layout14: TLayout;
+    SpeedButton5: TSpeedButton;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
@@ -83,6 +89,8 @@ type
     procedure btnGetResponsaveisClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure btnIniciarServiceClick(Sender: TObject);
+    procedure btnServiceHttpAppClick(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -121,6 +129,24 @@ begin
   Dm.IsTesteApp:= True;
   Dm.SyncronizarDadosServerGeral;
   Dm.IsTesteApp:= False;
+end;
+
+procedure TfrmTesteGeralApp.btnServiceHttpAppClick(Sender: TObject);
+var
+  LValue: Integer;
+   LDataSetList  : TFDJSONDataSets;
+  LHttpCliente: THTTPClient;
+  LResponse: IHTTPResponse;
+  Retorno: string;
+begin
+  LHttpCliente:= THTTPClient.Create;
+
+  try
+    LResponse:= LHttpCliente.Get('http://54.200.116.223:8080/lapis_verde/datasnap/rest/TSrvServerMetodos/ReverseString/ab');
+    ShowMessage(LResponse.ContentAsString);
+  finally
+    LHttpCliente.Free;
+  end;
 end;
 
 procedure TfrmTesteGeralApp.btnTesteGeralClick(Sender: TObject);
@@ -429,6 +455,26 @@ begin
   Dm.IsTesteApp:= True;
   Dm.DeleteAllTabels;
   Dm.IsTesteApp:= False;
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton5Click(Sender: TObject);
+var
+  LValue: Integer;
+   LDataSetList  : TFDJSONDataSets;
+  LHttpCliente: THTTPClient;
+  LResponse: IHTTPResponse;
+  Retorno: string;
+begin
+  LHttpCliente:= THTTPClient.Create;
+
+  try
+    ShowMessage(Usuario.Marshal.ToString);
+    LResponse:= LHttpCliente.Get('http://54.200.116.223:8080/lapis_verde/datasnap/rest/TSmMain/GetAlunos/' +IntToStr(GetEscolaId()) + '/' + Usuario.Marshal.ToString);
+    ShowMessage(LResponse.ContentAsString);
+  finally
+    LHttpCliente.Free;
+  end;
+
 end;
 
 procedure TfrmTesteGeralApp.btnGetResponsaveisClick(Sender: TObject);
