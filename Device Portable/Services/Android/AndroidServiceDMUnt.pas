@@ -7,7 +7,9 @@ uses
   System.Classes,
   System.Android.Service,
   AndroidApi.JNI.GraphicsContentViewText,
-  Androidapi.JNI.Os;
+  Androidapi.JNI.Os,
+  untTypes,
+  untLibGeral;
 
 type
   TAndroidServiceDM = class(TAndroidService)
@@ -21,6 +23,7 @@ type
 
 var
   AndroidServiceDM: TAndroidServiceDM;
+  Usuario: TUsuario;
 
 implementation
 
@@ -35,5 +38,10 @@ function TAndroidServiceDM.AndroidServiceStartCommand(const Sender: TObject;
 begin
   Result := TJService.JavaClass.START_STICKY; // Manterá o serviço executando
 end;
+
+initialization
+  Usuario:= TUsuario.Create;
+  Usuario.Tipo := Responsavel;
+  Usuario.Id := 75;
 
 end.
