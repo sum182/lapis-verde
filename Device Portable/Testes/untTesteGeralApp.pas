@@ -15,7 +15,14 @@ uses
   smDBFireDac, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, untDmSaveServer, System.Classes, untDM,smNetworkState,
-  FMX.TabControl, FMX.ScrollBox, FMX.Memo, FMX.Edit, System.Android.Service;
+  FMX.TabControl, FMX.ScrollBox, FMX.Memo, FMX.Edit
+
+  {$IF DEFINED(ANDROID)}
+  ,System.Android.Service
+  {$ENDIF}
+
+
+  ;
 
 type
   TfrmTesteGeralApp = class(TfrmBaseToolBar)
@@ -80,7 +87,11 @@ type
     Metodo: String;
     MetodosOK: Integer;
     MetodosErro: Integer;
+
+    {$IF DEFINED(ANDROID)}
     ConexaoServico : TLocalServiceConnection;
+    {$ENDIF}
+
     procedure SetLogTeste(Descricao: String);
     procedure SetLogTesteOk(Metodo: String);
     procedure SetLogTesteErro(Metodo: String; Erro: String);
@@ -441,8 +452,10 @@ end;
 procedure TfrmTesteGeralApp.btnIniciarServiceClick(Sender: TObject);
 begin
   inherited;
+  {$IF DEFINED(ANDROID)}
   ConexaoServico := TLocalServiceConnection.Create;
   ConexaoServico.StartService('LapisVerdeService');
+  {$ENDIF}
 end;
 
 procedure TfrmTesteGeralApp.btnMetodosGetAgendaClick(Sender: TObject);
