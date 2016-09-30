@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   smFrmBaseToolBar, FMX.Objects, FMX.Controls.Presentation, FMX.Layouts,
   FMX.ListBox, FMX.Edit, FMX.EditBox, FMX.SpinBox, System.IOUtils,
-  firedac.comp.client, FMX.Overbyte.IniFiles;
+  firedac.comp.client;
 
 type
   TfrmConfiguracoes = class(TfrmBaseToolBar)
