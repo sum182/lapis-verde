@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{85B1131D-9F54-46DC-B789-D950E71C668C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="CodeRage\CodeRage.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Componentes\TGCMReceiver\testgcm.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="CodeRage">
+        <MSBuild Projects="CodeRage\CodeRage.dproj"/>
+    </Target>
+    <Target Name="CodeRage:Clean">
+        <MSBuild Projects="CodeRage\CodeRage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CodeRage:Make">
+        <MSBuild Projects="CodeRage\CodeRage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="testgcm">
+        <MSBuild Projects="C:\Componentes\TGCMReceiver\testgcm.dproj"/>
+    </Target>
+    <Target Name="testgcm:Clean">
+        <MSBuild Projects="C:\Componentes\TGCMReceiver\testgcm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="testgcm:Make">
+        <MSBuild Projects="C:\Componentes\TGCMReceiver\testgcm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="CodeRage;testgcm"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="CodeRage:Clean;testgcm:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="CodeRage:Make;testgcm:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
