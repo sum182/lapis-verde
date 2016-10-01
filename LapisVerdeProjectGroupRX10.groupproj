@@ -12,12 +12,6 @@
         <Projects Include="Server\Stand Alone\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\AplicaçãoPost\AplicacaoPost.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\ServicoPost\ServicoPost.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Device Portable\Services\Android\LapisVerdeService.dproj">
             <Dependencies/>
         </Projects>
@@ -56,24 +50,6 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj" Targets="Make"/>
     </Target>
-    <Target Name="AplicacaoPost">
-        <MSBuild Projects="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\AplicaçãoPost\AplicacaoPost.dproj"/>
-    </Target>
-    <Target Name="AplicacaoPost:Clean">
-        <MSBuild Projects="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\AplicaçãoPost\AplicacaoPost.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="AplicacaoPost:Make">
-        <MSBuild Projects="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\AplicaçãoPost\AplicacaoPost.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ServicoPost">
-        <MSBuild Projects="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\ServicoPost\ServicoPost.dproj"/>
-    </Target>
-    <Target Name="ServicoPost:Clean">
-        <MSBuild Projects="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\ServicoPost\ServicoPost.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ServicoPost:Make">
-        <MSBuild Projects="..\Estudo\ArtigoServicoAndroid\ArtigoServicoAndroid\ServicoPost\ServicoPost.dproj" Targets="Make"/>
-    </Target>
     <Target Name="LapisVerdeService">
         <MSBuild Projects="Device Portable\Services\Android\LapisVerdeService.dproj"/>
     </Target>
@@ -84,13 +60,13 @@
         <MSBuild Projects="Device Portable\Services\Android\LapisVerdeService.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;AplicacaoPost;ServicoPost;LapisVerdeService"/>
+        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;LapisVerdeService"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;AplicacaoPost:Clean;ServicoPost:Clean;LapisVerdeService:Clean"/>
+        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;LapisVerdeService:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;AplicacaoPost:Make;ServicoPost:Make;LapisVerdeService:Make"/>
+        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;LapisVerdeService:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

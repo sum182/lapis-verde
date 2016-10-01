@@ -1,3 +1,16 @@
+{$IF DEFINED(MSWINDOWS)}
+unit AndroidServiceDMUnt;
+
+interface
+
+implementation
+
+end.
+{$ENDIF}
+
+
+
+{$IFDEF ANDROID}
 unit AndroidServiceDMUnt;
 
 interface
@@ -45,3 +58,6 @@ initialization
   Usuario.Id := 75;
 
 end.
+
+{$ENDIF}
+
