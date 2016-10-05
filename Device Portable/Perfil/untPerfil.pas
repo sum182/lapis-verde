@@ -43,7 +43,6 @@ type
     fdmPerfilemail: TStringField;
     fdmPerfilsenha: TStringField;
     fdmPerfilinformacoes_gerais: TBlobField;
-    fdmPerfilescola_id: TIntegerField;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     edtNome: TEdit;

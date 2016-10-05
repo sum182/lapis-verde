@@ -22,9 +22,6 @@ Visible=False
 Coordinates=749,432,69,36
 Visible=False
 
-[fdmPerfilescola_id]
-Coordinates=990,155,120,36
-
 [DmGetServer.fdqAgendaAluno]
 Coordinates=496,500,165,33
 Visible=False
@@ -208,7 +205,7 @@ Coordinates=213,863,93,36
 Coordinates=114,863,96,36
 
 []
-Coordinates=599,320,112,36
+Coordinates=990,155,120,36
 LayerNames=NewLayer1
 Visible=False
 
