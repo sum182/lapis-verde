@@ -9,6 +9,9 @@
         <Projects Include="C:\Componentes\TGCMReceiver\testgcm.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="CodeRageRX10\CodeRageRX10.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="testgcm:Make">
         <MSBuild Projects="C:\Componentes\TGCMReceiver\testgcm.dproj" Targets="Make"/>
     </Target>
+    <Target Name="CodeRageRX10">
+        <MSBuild Projects="CodeRageRX10\CodeRageRX10.dproj"/>
+    </Target>
+    <Target Name="CodeRageRX10:Clean">
+        <MSBuild Projects="CodeRageRX10\CodeRageRX10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CodeRageRX10:Make">
+        <MSBuild Projects="CodeRageRX10\CodeRageRX10.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="CodeRage;testgcm"/>
+        <CallTarget Targets="CodeRage;testgcm;CodeRageRX10"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="CodeRage:Clean;testgcm:Clean"/>
+        <CallTarget Targets="CodeRage:Clean;testgcm:Clean;CodeRageRX10:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="CodeRage:Make;testgcm:Make"/>
+        <CallTarget Targets="CodeRage:Make;testgcm:Make;CodeRageRX10:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

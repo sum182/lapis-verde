@@ -1,4 +1,4 @@
-program CodeRage;
+program CodeRageRX10;
 
 uses
   System.StartUpCopy,
