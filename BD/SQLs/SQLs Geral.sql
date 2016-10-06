@@ -18,5 +18,8 @@ FROM agendadb.log_error
 order by data desc;
 
 
+-- Funcionario
+select * from funcionario
+where funcionario.email = 'f'
 
 
