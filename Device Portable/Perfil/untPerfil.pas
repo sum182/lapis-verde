@@ -122,6 +122,10 @@ end;
 
 procedure TfrmPerfil.FormCreate(Sender: TObject);
 begin
+  { TODO :Telefone - Responsavel}
+  //lstItemTelefone.Visible := (Usuario.Tipo = Responsavel);
+  lstItemTelefone.Visible := False;
+
   inherited;
   if not DM.fgActivityDialog.IsShown then
   begin
@@ -192,10 +196,6 @@ begin
     cmbSexo.ItemIndex := 1
   else
     cmbSexo.ItemIndex := -1;
-
-  { TODO : Consertar no futuro }
-  //lstItemTelefone.Visible := (Usuario.Tipo = Responsavel);
-  lstItemTelefone.Visible := False;
 
   fdmPerfil.Post;
 end;
