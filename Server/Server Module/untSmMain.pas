@@ -865,4 +865,14 @@ begin
   ServerContainer.GetConnection.ExecSQL('call sp_set_time_zone;');
 end;
 
+
+initialization
+  //Este código parece estranho mas...
+  { ao chamar algum metodo do smMain ex GetAlunos logo apos subir o server dava erro
+    devido o objeto nao estar criado
+    Com o codigo abaixo o erro foi resolvdio
+  }
+  if not Assigned(SmMain) then
+    Application.CreateForm(TSmMain, SmMain);
+
 end.
