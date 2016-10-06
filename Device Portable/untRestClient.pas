@@ -69,30 +69,28 @@ begin
    //Windows
    if IsSysOSWindows then
    begin
+    //Apache Local
+    DSRestConnection1.Host := DSRestConnectionApacheLocal.Host;
+    DSRestConnection1.UrlPath := DSRestConnectionApacheLocal.UrlPath;
+    exit;
+
+
+    //Stand Alone - Server local
+    DSRestConnection1.Host := DSRestConnectionLocal.Host;
+    DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
+    exit;
+
+    //Stand Alone - Local
+    DSRestConnection1.Host := DSRestConnectionLocal.Host;
+    DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
+    Exit;
+
     //Apache Amazon
     DSRestConnection1.Host := DSRestConnectionApacheAWS.Host;
     DSRestConnection1.UrlPath := DSRestConnectionApacheAWS.UrlPath;
     Exit;
 
 
-    //Local
-    DSRestConnection1.Host := DSRestConnectionLocal.Host;
-    DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
-    Exit;
-
-    //Modo de Teste - Apache Local
-    DSRestConnection1.Host := DSRestConnectionApacheLocal.Host;
-    DSRestConnection1.UrlPath := DSRestConnectionApacheLocal.UrlPath;
-    exit;
-
-
-    //Modo de Teste - Server local stand alone
-    {DSRestConnection1.Host := DSRestConnectionLocal.Host;
-    DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
-    exit;}
-
-    DSRestConnection1.Host := DSRestConnectionApacheAWS.Host;
-    DSRestConnection1.UrlPath := DSRestConnectionApacheAWS.UrlPath;
   end;
 
 
