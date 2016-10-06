@@ -197,8 +197,9 @@ begin
       fdqResponsavel.FieldByName('senha').AsString := LDataSet.FieldByName('senha').AsString;
       fdqResponsavel.Post;
 
+     { TODO :Telefone - Responsavel}
       //Atualizando o Telefone
-      if LDataSet.FieldByName('telefone').AsString <> '' then
+      {if LDataSet.FieldByName('telefone').AsString <> '' then
       begin
         fdqResponsavelTelefone.Close;
         fdqResponsavelTelefone.ParamByName('responsavel_id').AsInteger:= Usuario.Id;
@@ -211,7 +212,7 @@ begin
         fdqResponsavelTelefone.FieldByName('telefone_tipo_id').AsInteger := 2;
         fdqResponsavelTelefone.FieldByName('numero').AsString := LDataSet.FieldByName('telefone').AsString;
         fdqResponsavelTelefone.Post;
-      end;
+      end;}
 
 
       SmMain.SaveLogServerRequest(LogServerRequest);
