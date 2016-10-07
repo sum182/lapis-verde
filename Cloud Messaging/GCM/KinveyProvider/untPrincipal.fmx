@@ -1,0 +1,63 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 522
+  ClientWidth = 381
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object CheckBox1: TCheckBox
+    Align = Top
+    Size.Width = 381.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'Active'
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Align = Client
+    Size.Width = 381.000000000000000000
+    Size.Height = 489.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 377.000000000000000000
+    Viewport.Height = 485.000000000000000000
+  end
+  object PushEvents1: TPushEvents
+    Provider = KinveyProvider1
+    OnDeviceTokenReceived = PushEvents1DeviceTokenReceived
+    OnDeviceTokenRequestFailed = PushEvents1DeviceTokenRequestFailed
+    OnPushReceived = PushEvents1PushReceived
+    OnDeviceRegistered = PushEvents1DeviceRegistered
+    Left = 144
+    Top = 384
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 228
+    Top = 461
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = PushEvents1
+      FieldName = 'Active'
+      Control = CheckBox1
+      Track = True
+    end
+  end
+  object KinveyProvider1: TKinveyProvider
+    ApiVersion = '3'
+    AppKey = 'kid_SJi09wSR'
+    AppSecret = 'a125926f5648469b890d00d93a10d466'
+    MasterSecret = '3e6e4e94a8314dcaa5d908c280bf9d90'
+    UserName = 'user-kinvei'
+    Password = 'passkvlpvr'
+    AndroidPush.GCMAppID = '279079000294'
+    Left = 40
+    Top = 384
+  end
+end
