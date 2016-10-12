@@ -3,29 +3,45 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 522
-  ClientWidth = 381
+  ClientWidth = 402
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   DesignerMasterStyle = 0
-  object CheckBox1: TCheckBox
-    Align = Top
-    Size.Width = 381.000000000000000000
-    Size.Height = 33.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 0
-    Text = 'Active'
-  end
   object Memo1: TMemo
     Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
     DataDetectorTypes = []
     Align = Client
-    Size.Width = 381.000000000000000000
-    Size.Height = 489.000000000000000000
+    Size.Width = 402.000000000000000000
+    Size.Height = 449.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 1
-    Viewport.Width = 377.000000000000000000
-    Viewport.Height = 485.000000000000000000
+    TabOrder = 0
+    Viewport.Width = 398.000000000000000000
+    Viewport.Height = 445.000000000000000000
+  end
+  object ToolBar1: TToolBar
+    Size.Width = 402.000000000000000000
+    Size.Height = 73.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    object CheckBox1: TCheckBox
+      Align = Top
+      Size.Width = 402.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Active'
+    end
+    object btnGetDeviceInfo: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 129.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'GetDeviceInfo'
+      OnClick = btnGetDeviceInfoClick
+    end
   end
   object PushEvents1: TPushEvents
     Provider = KinveyProvider1

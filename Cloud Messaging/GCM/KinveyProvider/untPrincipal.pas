@@ -10,7 +10,7 @@ uses
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt,
   Fmx.Bind.DBEngExt, REST.Backend.KinveyProvider, Data.Bind.Components,
   Data.Bind.ObjectScope, REST.Backend.BindSource, REST.Backend.PushDevice,
-  REST.Backend.KinveyPushDevice;
+  REST.Backend.KinveyPushDevice, FMX.Edit;
 
 type
   TForm1 = class(TForm)
@@ -20,13 +20,16 @@ type
     BindingsList1: TBindingsList;
     LinkControlToField1: TLinkControlToField;
     KinveyProvider1: TKinveyProvider;
+    ToolBar1: TToolBar;
+    btnGetDeviceInfo: TButton;
     procedure PushEvents1PushReceived(Sender: TObject; const AData: TPushData);
     procedure PushEvents1DeviceTokenRequestFailed(Sender: TObject;
       const AErrorMessage: string);
     procedure PushEvents1DeviceTokenReceived(Sender: TObject);
     procedure PushEvents1DeviceRegistered(Sender: TObject);
+    procedure btnGetDeviceInfoClick(Sender: TObject);
   private
-    { Private declarations }
+    procedure GetDeviceInfo;
   public
     { Public declarations }
   end;
@@ -36,7 +39,52 @@ var
 
 implementation
 
+uses
+{$IFDEF IOS}
+  FMX.PushNotification.IOS; // inject IOS push provider
+{$ENDIF}
+
+{$IFDEF ANDROID}
+  FMX.PushNotification.Android; // inject GCM push provider
+{$ENDIF}
+
 {$R *.fmx}
+
+var
+  APushService: TPushService;
+  AServiceConnection: TPushServiceConnection;
+
+procedure TForm1.btnGetDeviceInfoClick(Sender: TObject);
+begin
+  GetDeviceInfo;
+end;
+
+procedure TForm1.GetDeviceInfo;
+var
+  DeviceId:String;
+  DeviceToken:String;
+begin
+
+  APushService:=TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
+
+{$IFDEF ANDROID}
+  APushService.AppProps[TPushService.TAppPropNames.GCMAppID]:='279079000294';
+{$ENDIF}
+
+  AServiceConnection:=TPushServiceConnection.Create(APushService);
+  AServiceConnection.Active:=True;
+  DeviceId:=APushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID];
+  DeviceToken:=APushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
+
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('DeviceId: ' + DeviceId);
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('DeviceToken: ' + DeviceToken);
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('--');
+
+
+end;
 
 procedure TForm1.PushEvents1DeviceRegistered(Sender: TObject);
 begin

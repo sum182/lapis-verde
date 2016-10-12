@@ -15,6 +15,9 @@
         <Projects Include="KinveyProvider\KinveyProvider.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="SendPush\SendPush.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="KinveyProvider:Make">
         <MSBuild Projects="KinveyProvider\KinveyProvider.dproj" Targets="Make"/>
     </Target>
+    <Target Name="SendPush">
+        <MSBuild Projects="SendPush\SendPush.dproj"/>
+    </Target>
+    <Target Name="SendPush:Clean">
+        <MSBuild Projects="SendPush\SendPush.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SendPush:Make">
+        <MSBuild Projects="SendPush\SendPush.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="CodeRage;testgcm;CodeRageRX10;KinveyProvider"/>
+        <CallTarget Targets="CodeRage;testgcm;CodeRageRX10;KinveyProvider;SendPush"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="CodeRage:Clean;testgcm:Clean;CodeRageRX10:Clean;KinveyProvider:Clean"/>
+        <CallTarget Targets="CodeRage:Clean;testgcm:Clean;CodeRageRX10:Clean;KinveyProvider:Clean;SendPush:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="CodeRage:Make;testgcm:Make;CodeRageRX10:Make;KinveyProvider:Make"/>
+        <CallTarget Targets="CodeRage:Make;testgcm:Make;CodeRageRX10:Make;KinveyProvider:Make;SendPush:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
