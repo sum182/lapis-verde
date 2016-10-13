@@ -1,8 +1,8 @@
-program SendPush;
+program CloudMessagingSend;
 
 uses
   Vcl.Forms,
-  untSendPush in 'untSendPush.pas' {Form2};
+  untSend in 'untSend.pas' {Form2};
 
 {$R *.res}
 

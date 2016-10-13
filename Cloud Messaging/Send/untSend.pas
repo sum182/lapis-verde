@@ -1,4 +1,4 @@
-unit untSendPush;
+unit untSend;
 
 interface
 
@@ -54,14 +54,14 @@ begin
 
     //Celular Alvaro
     // Set Device token
-    DeviceToken:='APA91bFIdMvO6U-gM2KodISW3jkNaaivjP3Geul1DqonW6Xf3gRdt3f2OXBr8MosZiURR4tvkectEoMAVeOvbu_nfYjCp6pR1wj39c6RdXN0RAREXcfPeQ0cEVRqaCr9m_okI1DTeVJ5';
+    DeviceToken:='APA91bELfESn8tXzdborRV-a7nSicGHiKznqZhvbS63QlIMvqNn3BZBvYlskCpPJ8O8VWJ0aySxA7K0HAGyBOMME36iUTxaJ5iv9x2wYdelhyZ9u8DGwzt6cfHXaL9tq4bcHxu0ZuBAhvfkhHeINwezVR0DC9oZFMw';
     // Set the device token..
     ARegisterIds.Add(DeviceToken);
 
     //Celular Vanessa
-    DeviceToken:='APA91bGHZGTmGe5z8cn4beE6QrIskXJX-HlCsYnOcz2Px2c5Oh8EF5QATLcez06sQ_BXoGlmdLFUMaHKrDyP09TTuk1fnbWwjDtN-5zX3-Qq0BjZtrnoWVqTATIJExWg04sli7LFSDyq';
+    {DeviceToken:='APA91bGHZGTmGe5z8cn4beE6QrIskXJX-HlCsYnOcz2Px2c5Oh8EF5QATLcez06sQ_BXoGlmdLFUMaHKrDyP09TTuk1fnbWwjDtN-5zX3-Qq0BjZtrnoWVqTATIJExWg04sli7LFSDyq';
     // Set the device token..
-    ARegisterIds.Add(DeviceToken);
+    ARegisterIds.Add(DeviceToken);}
 
     //Tablet
     DeviceToken:='APA91bEc7yib72snGDn02TYsuud87gv6K1CTyH1-AdEfY-lja0KyA64dQf4Gb45ZF5_goEmxzHcMM3aOei9gXkiylbY-EFoZSGzOLWIsExemUQdyHOAtCTbz-iTdF2HsVaIpQg-hnPjm';

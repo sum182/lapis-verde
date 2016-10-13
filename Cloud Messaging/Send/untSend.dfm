@@ -1,7 +1,7 @@
 object Form2: TForm2
   Left = 0
   Top = 0
-  Caption = 'Form2'
+  Caption = 'Cloud Messaging - Send'
   ClientHeight = 313
   ClientWidth = 527
   Color = clBtnFace
@@ -11,45 +11,44 @@ object Form2: TForm2
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 32
-    Top = 29
-    Width = 42
+    Left = 24
+    Top = 21
+    Width = 51
     Height = 13
-    Caption = 'Message'
+    Caption = 'Mensagem'
   end
   object Label2: TLabel
-    Left = 32
-    Top = 104
+    Left = 24
+    Top = 72
     Width = 89
     Height = 13
     Caption = 'Response Content'
   end
   object edtMessage: TEdit
-    Left = 32
-    Top = 48
+    Left = 24
+    Top = 40
     Width = 329
     Height = 21
     TabOrder = 0
-    Text = 'edtMessage'
   end
   object memResponse: TMemo
-    Left = 32
-    Top = 123
+    Left = 24
+    Top = 91
     Width = 329
-    Height = 153
-    Lines.Strings = (
-      'memResponse')
+    Height = 182
     TabOrder = 1
   end
   object btnSendMessage: TButton
-    Left = 392
-    Top = 46
+    Left = 376
+    Top = 38
     Width = 105
     Height = 25
     Caption = 'Send Message'
+    Default = True
     TabOrder = 2
     OnClick = btnSendMessageClick
   end

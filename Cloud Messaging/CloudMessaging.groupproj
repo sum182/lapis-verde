@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0B51EBB7-89CB-4DD7-834C-1C8D34E82B29}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Send\CloudMessagingSend.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Client\CloudMessagingClient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="CloudMessagingSend">
+        <MSBuild Projects="Send\CloudMessagingSend.dproj"/>
+    </Target>
+    <Target Name="CloudMessagingSend:Clean">
+        <MSBuild Projects="Send\CloudMessagingSend.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CloudMessagingSend:Make">
+        <MSBuild Projects="Send\CloudMessagingSend.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CloudMessagingClient">
+        <MSBuild Projects="Client\CloudMessagingClient.dproj"/>
+    </Target>
+    <Target Name="CloudMessagingClient:Clean">
+        <MSBuild Projects="Client\CloudMessagingClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CloudMessagingClient:Make">
+        <MSBuild Projects="Client\CloudMessagingClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="CloudMessagingSend;CloudMessagingClient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="CloudMessagingSend:Clean;CloudMessagingClient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="CloudMessagingSend:Make;CloudMessagingClient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
