@@ -51,21 +51,8 @@ begin
   ARegisterIds := TJSONArray.Create();
   AJson := TJSONObject.Create();
   try
-
-    //Celular Alvaro
-    // Set Device token
-    DeviceToken:='APA91bELfESn8tXzdborRV-a7nSicGHiKznqZhvbS63QlIMvqNn3BZBvYlskCpPJ8O8VWJ0aySxA7K0HAGyBOMME36iUTxaJ5iv9x2wYdelhyZ9u8DGwzt6cfHXaL9tq4bcHxu0ZuBAhvfkhHeINwezVR0DC9oZFMw';
-    // Set the device token..
-    ARegisterIds.Add(DeviceToken);
-
-    //Celular Vanessa
-    {DeviceToken:='APA91bGHZGTmGe5z8cn4beE6QrIskXJX-HlCsYnOcz2Px2c5Oh8EF5QATLcez06sQ_BXoGlmdLFUMaHKrDyP09TTuk1fnbWwjDtN-5zX3-Qq0BjZtrnoWVqTATIJExWg04sli7LFSDyq';
-    // Set the device token..
-    ARegisterIds.Add(DeviceToken);}
-
-    //Tablet
-    DeviceToken:='APA91bEc7yib72snGDn02TYsuud87gv6K1CTyH1-AdEfY-lja0KyA64dQf4Gb45ZF5_goEmxzHcMM3aOei9gXkiylbY-EFoZSGzOLWIsExemUQdyHOAtCTbz-iTdF2HsVaIpQg-hnPjm';
-    // Set the device token..
+    // Celular Alvaro
+    DeviceToken:='APA91bENEwdZ28PMYXisPk3eHx6W0UMkgemRajTXZ7TKJhxJDX4lEx6dOZbh2phYi10NklVmFSs6gmN5zisXZ9wNFXdgLvfWhvcMMz6t40R_zixkNdtN30Fc-FHK_iKI53uUk4W1C93_';
     ARegisterIds.Add(DeviceToken);
 
     // Create Json to Send!

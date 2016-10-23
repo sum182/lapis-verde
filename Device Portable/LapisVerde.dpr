@@ -52,7 +52,8 @@ uses
   untConfiguracoes in 'untConfiguracoes.pas' {frmConfiguracoes},
   untSQLs in '..\Lib\untSQLs.pas',
   AndroidServiceDMUnt in 'Services\Android\AndroidServiceDMUnt.pas' {AndroidServiceDM: TAndroidService},
-  untCloudMessagingTeste in 'Cloud Messaging\untCloudMessagingTeste.pas' {frmCloudMessagingTeste};
+  untCloudMessagingTeste in 'Cloud Messaging\untCloudMessagingTeste.pas' {frmCloudMessagingTeste},
+  untDMCloudMessaging in 'Cloud Messaging\untDMCloudMessaging.pas' {DMCloudMessaging: TDataModule};
 
 {$R *.res}
 

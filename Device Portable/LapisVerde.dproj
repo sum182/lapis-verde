@@ -497,6 +497,11 @@
             <Form>frmCloudMessagingTeste</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="Cloud Messaging\untDMCloudMessaging.pas">
+            <Form>DMCloudMessaging</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <None Include="AndroidManifest.template.xml"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -803,6 +808,12 @@
                     <Platform Name="Win32">
                         <RemoteDir>.\BD\</RemoteDir>
                         <RemoteName>db.s3db</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="AndroidManifest.template.xml" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

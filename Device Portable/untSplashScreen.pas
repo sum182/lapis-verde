@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Controls.Presentation, FMX.StdCtrls, untPrincipal, untDM, untDmAgenda,
   untDmGetServer, untDmResponsavel, untDmSaveServer, untDMStyles, untRestClient,
-  FMX.Layouts;
+  untDMCloudMessaging, FMX.Layouts;
 
 type
   TfrmSplashScreen = class(TForm)
@@ -64,6 +64,7 @@ begin
   end; }
 
   Application.CreateForm(TDm, Dm);
+  Application.CreateForm(TDMCloudMessaging, DMCloudMessaging);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmAgenda, DmAgenda);
   Application.CreateForm(TDMStyles, DMStyles);
