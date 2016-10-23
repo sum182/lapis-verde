@@ -6,17 +6,20 @@ uses
   System.SysUtils, System.Classes, IPPeerClient, REST.Backend.PushTypes,
   System.JSON, REST.Backend.KinveyPushDevice, System.PushNotification,
   Data.Bind.Components, Data.Bind.ObjectScope, REST.Backend.BindSource,
-  REST.Backend.PushDevice, REST.Backend.KinveyProvider;
+  REST.Backend.PushDevice, REST.Backend.KinveyProvider, System.Notification;
 
 type
   TDMCloudMessaging = class(TDataModule)
     KinveyProvider: TKinveyProvider;
     PushEvents: TPushEvents;
+    NotificationCenter: TNotificationCenter;
     procedure DataModuleCreate(Sender: TObject);
+    procedure PushEventsPushReceived(Sender: TObject; const AData: TPushData);
   private
     { Private declarations }
   public
     procedure GetDeviceInfo;
+    procedure CreateNotification(AlertBody:string);
   end;
 
 var
@@ -48,6 +51,24 @@ uses
 
 { TDMCloudMessaging }
 
+procedure TDMCloudMessaging.CreateNotification(AlertBody: string);
+var
+  MyNotification: TNotification;
+begin
+  MyNotification := NotificationCenter.CreateNotification;
+  try
+    MyNotification.Name := 'MyNotification';
+    MyNotification.AlertBody := AlertBody;
+    // Set Icon Badge Number (for iOS) or message number (for Android) as well
+    //MyNotification.Number := 18;
+    MyNotification.EnableSound := True;
+    // Send message to the notification center
+    NotificationCenter.PresentNotification(MyNotification);
+  finally
+    MyNotification.DisposeOf;
+  end;
+end;
+
 procedure TDMCloudMessaging.DataModuleCreate(Sender: TObject);
 begin
   GetDeviceInfo;
@@ -68,7 +89,12 @@ begin
   AServiceConnection.Active:=True;
   DeviceId:=APushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID];
   DeviceToken:=APushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
-  ShowMessage('GetDeviceInfo');
+end;
+
+procedure TDMCloudMessaging.PushEventsPushReceived(Sender: TObject;
+  const AData: TPushData);
+begin
+  CreateNotification('Você tem novos recados');
 end;
 
 end.

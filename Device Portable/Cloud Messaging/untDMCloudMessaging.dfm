@@ -16,7 +16,12 @@ object DMCloudMessaging: TDMCloudMessaging
   end
   object PushEvents: TPushEvents
     Provider = KinveyProvider
+    OnPushReceived = PushEventsPushReceived
     Left = 142
     Top = 37
+  end
+  object NotificationCenter: TNotificationCenter
+    Left = 232
+    Top = 35
   end
 end
