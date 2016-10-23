@@ -76,6 +76,9 @@ type
     btnServiceHttpApp: TSpeedButton;
     Layout14: TLayout;
     SpeedButton5: TSpeedButton;
+    TabItem6: TTabItem;
+    Layout15: TLayout;
+    SpeedButton6: TSpeedButton;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
@@ -91,6 +94,7 @@ type
     procedure btnIniciarServiceClick(Sender: TObject);
     procedure btnServiceHttpAppClick(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -119,7 +123,7 @@ implementation
 
 {$R *.fmx}
 
-uses untRestClient;
+uses untRestClient, untCloudMessagingTeste;
 
 procedure TfrmTesteGeralApp.btnMetodosSyncGeralClick(Sender: TObject);
 begin
@@ -475,6 +479,15 @@ begin
     LHttpCliente.Free;
   end;
 
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton6Click(Sender: TObject);
+begin
+  inherited;
+ if not Assigned(frmCloudMessagingTeste) then
+    Application.CreateForm(TfrmCloudMessagingTeste, frmCloudMessagingTeste);
+
+  frmCloudMessagingTeste.Show;
 end;
 
 procedure TfrmTesteGeralApp.btnGetResponsaveisClick(Sender: TObject);
