@@ -50,37 +50,4 @@ object frmCloudMessagingTeste: TfrmCloudMessagingTeste
       end
     end
   end
-  object PushEvents1: TPushEvents
-    Provider = KinveyProvider1
-    OnDeviceTokenReceived = PushEvents1DeviceTokenReceived
-    OnDeviceTokenRequestFailed = PushEvents1DeviceTokenRequestFailed
-    OnPushReceived = PushEvents1PushReceived
-    OnDeviceRegistered = PushEvents1DeviceRegistered
-    Left = 144
-    Top = 301
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 228
-    Top = 301
-    object LinkControlToField1: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = PushEvents1
-      FieldName = 'Active'
-      Control = CheckBox1
-      Track = True
-    end
-  end
-  object KinveyProvider1: TKinveyProvider
-    ApiVersion = '3'
-    AppKey = 'kid_SJi09wSR'
-    AppSecret = 'a125926f5648469b890d00d93a10d466'
-    MasterSecret = '3e6e4e94a8314dcaa5d908c280bf9d90'
-    UserName = 'user-kinvei'
-    Password = 'passkvlpvr'
-    AndroidPush.GCMAppID = '279079000294'
-    Left = 48
-    Top = 301
-  end
 end
