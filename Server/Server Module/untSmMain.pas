@@ -10,7 +10,9 @@ uses
   FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.StorageBin, FireDAC.Comp.UI, FireDAC.Comp.DataSet, Vcl.AppEvnts,untLibServer,
   Data.FireDACJSONReflect, untLibGeral, System.JSON, untTypes, System.Classes,
-  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script;
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script,
+  IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP;
 
 type
 {$METHODINFO ON}
@@ -32,6 +34,8 @@ type
     fdqFuncionario: TFDQuery;
     fdqRespEscola: TFDQuery;
     fdqConfiguracoes: TFDQuery;
+    IdHTTP1: TIdHTTP;
+    IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
@@ -65,6 +69,7 @@ type
     procedure EndRequest;
 
     procedure SetParamsServer(pEscolaId:Integer;pUsuario:TJSONValue);
+    procedure SendCloudMessaging(Mensagem:string);
    {$METHODINFO ON}
     function GetAlunos(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetTurmas(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
@@ -668,6 +673,89 @@ begin
     EndRequest;
   end;
 
+end;
+
+procedure TSmMain.SendCloudMessaging(Mensagem: string);
+var
+  AJson: TJSONObject;
+  AJsonData: TJSONObject;
+  ARegisterIds: TJSONArray;
+  AData, AResponseContent: TStringStream;
+  DeviceToken: string;
+  FThread: TThread;
+begin
+  ARegisterIds := TJSONArray.Create();
+  AJson := TJSONObject.Create();
+  ARegisterIds := TJSONArray.Create();
+  AJson := TJSONObject.Create();
+  try
+    // Celular Alvaro
+    DeviceToken:='APA91bENEwdZ28PMYXisPk3eHx6W0UMkgemRajTXZ7TKJhxJDX4lEx6dOZbh2phYi10NklVmFSs6gmN5zisXZ9wNFXdgLvfWhvcMMz6t40R_zixkNdtN30Fc-FHK_iKI53uUk4W1C93_';
+    ARegisterIds.Add(DeviceToken);
+
+    // Create Json to Send!
+    AJsonData := TJSONObject.Create();
+    AJsonData.AddPair('id','');
+    AJsonData.AddPair('message',Mensagem);
+    // Add the information to send GCM server;
+    AJson.AddPair('registration_ids',ARegisterIds);
+    AJson.AddPair('data',AJsonData);
+    // Set the Header.
+    IdHTTP1.Request.ContentType := 'application/json';
+    // Set the Key for Server Apllication
+    IdHTTP1.Request.CustomHeaders.AddValue('Authorization','key=AIzaSyCU7YtJK0A4LDfFrvicS58RdHoTi814uR4');
+    AData := TStringStream.Create(AJson.ToString);
+    AData.Position := 0;
+    AResponseContent := TStringStream.Create();
+    // Send the notification
+    IdHTTP1.Post('https://android.googleapis.com/gcm/send',AData,AResponseContent);
+    AResponseContent.Position := 0;
+    //resposta
+    //memResponse.Lines.Add(AResponseContent.DataString);
+  finally
+  end;
+
+  exit;
+  //teste com Threads
+  FThread := TThread.CreateAnonymousThread(procedure
+  begin
+    try
+      TThread.Synchronize(nil, procedure
+      begin
+      end);
+
+        ARegisterIds := TJSONArray.Create();
+        AJson := TJSONObject.Create();
+        try
+          // Celular Alvaro
+          DeviceToken:='APA91bENEwdZ28PMYXisPk3eHx6W0UMkgemRajTXZ7TKJhxJDX4lEx6dOZbh2phYi10NklVmFSs6gmN5zisXZ9wNFXdgLvfWhvcMMz6t40R_zixkNdtN30Fc-FHK_iKI53uUk4W1C93_';
+          ARegisterIds.Add(DeviceToken);
+
+          // Create Json to Send!
+          AJsonData := TJSONObject.Create();
+          AJsonData.AddPair('id','');
+          AJsonData.AddPair('message',Mensagem);
+          // Add the information to send GCM server;
+          AJson.AddPair('registration_ids',ARegisterIds);
+          AJson.AddPair('data',AJsonData);
+          // Set the Header.
+          IdHTTP1.Request.ContentType := 'application/json';
+          // Set the Key for Server Apllication
+          IdHTTP1.Request.CustomHeaders.AddValue('Authorization','key=AIzaSyCU7YtJK0A4LDfFrvicS58RdHoTi814uR4');
+          AData := TStringStream.Create(AJson.ToString);
+          AData.Position := 1;
+          AResponseContent := TStringStream.Create();
+          // Send the notification
+          IdHTTP1.Post('https://android.googleapis.com/gcm/send',AData,AResponseContent);
+          AResponseContent.Position := 0;
+          //resposta
+          //memResponse.Lines.Add(AResponseContent.DataString);
+        finally
+        end;
+    finally
+    end;
+  end);
+    FThread.Start;
 end;
 
 procedure TSmMain.SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;

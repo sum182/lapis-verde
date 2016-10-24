@@ -88,6 +88,10 @@ procedure TSmAgenda.fdqAgendaBeforePost(DataSet: TDataSet);
 begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
+
+  SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                            fdqAgenda.FieldByName('descricao').AsString
+                            );
 end;
 
 
@@ -248,7 +252,7 @@ begin
       LDataSet := TFDJSONDataSetsReader.GetListValueByName(LDataSetList,'agenda_turma');
       CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
 
-       SmMain.SaveLogServerRequest(LogServerRequest);
+      SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
       Exceptions:=  Exceptions + E.Message;
     end;

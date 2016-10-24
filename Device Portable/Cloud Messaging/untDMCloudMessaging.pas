@@ -94,7 +94,7 @@ end;
 procedure TDMCloudMessaging.PushEventsPushReceived(Sender: TObject;
   const AData: TPushData);
 begin
-  CreateNotification('Você tem novos recados');
+  CreateNotification(AData.Message);
 end;
 
 end.
