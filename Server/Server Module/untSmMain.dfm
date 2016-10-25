@@ -249,4 +249,19 @@ object SmMain: TSmMain
     Left = 528
     Top = 96
   end
+  object fdqLogCloudMessaging: TFDQuery
+    Connection = ServerContainer.FDConnection
+    SQL.Strings = (
+      'select * from log_cloud_messaging l'
+      'where log_cloud_messaging_id= :log_cloud_messaging_id')
+    Left = 528
+    Top = 208
+    ParamData = <
+      item
+        Name = 'LOG_CLOUD_MESSAGING_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
 end

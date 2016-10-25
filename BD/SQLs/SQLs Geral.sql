@@ -20,6 +20,14 @@ order by data desc;
 
 -- Funcionario
 select * from funcionario
-where funcionario.email = 'f'
+where funcionario.email = 'f';
 
 
+-- agenda
+select * from agenda ag
+order by agenda.agenda_id desc;
+
+
+-- cloud log
+select * from log_cloud_messaging
+order by data_insert_server desc;

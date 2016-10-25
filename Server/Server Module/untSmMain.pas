@@ -36,6 +36,7 @@ type
     fdqConfiguracoes: TFDQuery;
     IdHTTP1: TIdHTTP;
     IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
+    fdqLogCloudMessaging: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
@@ -63,6 +64,10 @@ type
 
     procedure SaveLogError(LogServerRequest:TLogServerRequest);overload;
     procedure SaveLogServerRequest(LogServerRequest:TLogServerRequest);overload;
+    procedure SaveLogCloudMessaging(AData,Response:string;
+                                    MsgError:String;
+                                    LogServerRequest:TLogServerRequest = nil);
+
 
     function GetSQLEscolaId(FieldNameEscolaId:String = 'escola_id';Condicao:String = 'and'):String;
     procedure StartRequest(pEscolaId:Integer;pUsuario:TJSONValue);
@@ -683,40 +688,48 @@ var
   AData, AResponseContent: TStringStream;
   DeviceToken: string;
   FThread: TThread;
+  MsgError: string;
 begin
-  ARegisterIds := TJSONArray.Create();
-  AJson := TJSONObject.Create();
-  ARegisterIds := TJSONArray.Create();
-  AJson := TJSONObject.Create();
   try
-    // Celular Alvaro
-    DeviceToken:='APA91bENEwdZ28PMYXisPk3eHx6W0UMkgemRajTXZ7TKJhxJDX4lEx6dOZbh2phYi10NklVmFSs6gmN5zisXZ9wNFXdgLvfWhvcMMz6t40R_zixkNdtN30Fc-FHK_iKI53uUk4W1C93_';
-    ARegisterIds.Add(DeviceToken);
+    try
+      ARegisterIds := TJSONArray.Create();
+      AJson := TJSONObject.Create();
+      // Celular Alvaro
+      DeviceToken:='APA91bENEwdZ28PMYXisPk3eHx6W0UMkgemRajTXZ7TKJhxJDX4lEx6dOZbh2phYi10NklVmFSs6gmN5zisXZ9wNFXdgLvfWhvcMMz6t40R_zixkNdtN30Fc-FHK_iKI53uUk4W1C93_';
+      ARegisterIds.Add(DeviceToken);
 
-    // Create Json to Send!
-    AJsonData := TJSONObject.Create();
-    AJsonData.AddPair('id','');
-    AJsonData.AddPair('message',Mensagem);
-    // Add the information to send GCM server;
-    AJson.AddPair('registration_ids',ARegisterIds);
-    AJson.AddPair('data',AJsonData);
-    // Set the Header.
-    IdHTTP1.Request.ContentType := 'application/json';
-    // Set the Key for Server Apllication
-    IdHTTP1.Request.CustomHeaders.AddValue('Authorization','key=AIzaSyCU7YtJK0A4LDfFrvicS58RdHoTi814uR4');
-    AData := TStringStream.Create(AJson.ToString);
-    AData.Position := 0;
-    AResponseContent := TStringStream.Create();
-    // Send the notification
-    IdHTTP1.Post('https://android.googleapis.com/gcm/send',AData,AResponseContent);
-    AResponseContent.Position := 0;
-    //resposta
-    //memResponse.Lines.Add(AResponseContent.DataString);
-  finally
+      // Create Json to Send!
+      AJsonData := TJSONObject.Create();
+      AJsonData.AddPair('id','');
+      AJsonData.AddPair('message',Mensagem);
+      // Add the information to send GCM server;
+      AJson.AddPair('registration_ids',ARegisterIds);
+      AJson.AddPair('data',AJsonData);
+      // Set the Header.
+      IdHTTP1.Request.ContentType := 'application/json';
+      // Set the Key for Server Apllication
+      IdHTTP1.Request.CustomHeaders.AddValue('Authorization','key=AIzaSyCU7YtJK0A4LDfFrvicS58RdHoTi814uR4');
+      AData := TStringStream.Create(AJson.ToString);
+      AData.Position := 0;
+      AResponseContent := TStringStream.Create();
+      // Send the notification
+      IdHTTP1.Post('https://android.googleapis.com/gcm/send',AData,AResponseContent);
+      AResponseContent.Position := 0;
+    finally
+      //ARegisterIds.DisposeOf;
+      //AJson.DisposeOf;
+    end;
+   except on E:Exception do
+   begin
+      MsgError:= E.Message;
+   end;
   end;
 
+
+  SaveLogCloudMessaging(AData.DataString,AResponseContent.DataString,MsgError);
+
   exit;
-  //teste com Threads
+  {//teste com Threads
   FThread := TThread.CreateAnonymousThread(procedure
   begin
     try
@@ -755,7 +768,7 @@ begin
     finally
     end;
   end);
-    FThread.Start;
+    FThread.Start;}
 end;
 
 procedure TSmMain.SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
@@ -867,6 +880,51 @@ begin
   fdqLogError.SQL.Add('select * from log_error ');
   fdqLogError.SQL.Add('where l.log_error_id = :log_error_id');
   fdqLogError.ParamByName('log_error_id').AsInteger := 0;
+end;
+
+procedure TSmMain.SaveLogCloudMessaging(AData,Response:string;
+                                        MsgError:String;
+                                        LogServerRequest:TLogServerRequest = nil);
+var
+  fdqDataSet: TFDQuery;
+begin
+  try
+    try
+      fdqDataSet := TFDQuery.Create(self);
+      fdqDataSet.Connection:=ServerContainer.GetConnection;
+
+      fdqDataSet.SQL.Clear;
+      fdqDataSet.SQL:= fdqLogCloudMessaging.SQL;
+      fdqDataSet.Params:= fdqLogCloudMessaging.Params;
+      fdqDataSet.Prepare;
+      fdqDataSet.Active := True;
+      fdqDataSet.Insert;
+      fdqDataSet.FieldByName('log_cloud_messaging_id').AsString:= smGeral.GetGUID;
+      fdqDataSet.FieldByName('AData').AsString:= AData;
+      fdqDataSet.FieldByName('Response').AsString:= Response;
+
+     { if LogServerRequest.EscolaId > 0 then
+        fdqDataSet.FieldByName('escola_id').AsInteger:=LogServerRequest.EscolaId;
+
+      if LogServerRequest.Usuario.Tipo = Responsavel then
+        fdqDataSet.FieldByName('responsavel_id').AsInteger:=LogServerRequest.Usuario.Id;
+
+      if LogServerRequest.Usuario.Tipo = Funcionario then
+        fdqDataSet.FieldByName('funcionario_id').AsInteger:= LogServerRequest.Usuario.Id;
+     }
+      fdqDataSet.FieldByName('msg_error').AsString:= MsgError;
+
+      fdqDataSet.FieldByName('data_insert_server').AsDateTime:= Now;
+      fdqDataSet.Post;
+    except on E:Exception do
+    begin
+      LogServerRequest.SetError(E.Message);
+      SaveLogError(LogServerRequest);
+    end;
+    end;
+  finally
+    fdqDataSet.Free;
+  end;
 end;
 
 procedure TSmMain.SaveLogError(LogServerRequest: TLogServerRequest);
