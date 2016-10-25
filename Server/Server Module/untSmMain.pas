@@ -716,8 +716,6 @@ begin
       IdHTTP1.Post('https://android.googleapis.com/gcm/send',AData,AResponseContent);
       AResponseContent.Position := 0;
     finally
-      //ARegisterIds.DisposeOf;
-      //AJson.DisposeOf;
     end;
    except on E:Exception do
    begin

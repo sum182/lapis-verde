@@ -62,7 +62,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral,untLibServer,
-  untServerContainer;
+  untServerContainer, Vcl.Dialogs;
 
 {$R *.dfm}
 
@@ -85,13 +85,38 @@ begin
 end;
 
 procedure TSmAgenda.fdqAgendaBeforePost(DataSet: TDataSet);
+var
+  FThread: TThread;
 begin
-  if Dataset.State in [dsInsert]  then
+   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 
-  SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+  {SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
                             fdqAgenda.FieldByName('descricao').AsString
-                            );
+                            );}
+
+
+  //teste com Threads
+  //clocar no after post
+  try
+    FThread := TThread.CreateAnonymousThread(procedure
+    begin
+      try
+        TThread.Synchronize(nil, procedure
+        begin
+        end);
+          SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                                    fdqAgenda.FieldByName('descricao').AsString
+                                    );
+      finally
+      end;
+    end);
+      FThread.Start;
+  except on E:Exception do
+  begin
+    ShowMessage(E.Message);
+  end;
+  end;
 end;
 
 
