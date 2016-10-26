@@ -5,6 +5,7 @@ object SmAgenda: TSmAgenda
   Width = 615
   object fdqAgenda: TFDQuery
     BeforePost = fdqAgendaBeforePost
+    AfterPost = fdqAgendaAfterPost
     Connection = ServerContainer.FDConnection
     SQL.Strings = (
       'select '

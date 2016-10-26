@@ -29,6 +29,7 @@ type
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
+    procedure fdqAgendaAfterPost(DataSet: TDataSet);
   private
     procedure SetSQLAgenda(KeysInserts: String = '');overload;
     procedure SetSQLAgendaByKey(KeyValues:String);overload;
@@ -84,39 +85,39 @@ begin
   SetFDConnection(self,ServerContainer.GetConnection);
 end;
 
-procedure TSmAgenda.fdqAgendaBeforePost(DataSet: TDataSet);
+procedure TSmAgenda.fdqAgendaAfterPost(DataSet: TDataSet);
 var
   FThread: TThread;
+  msgError: string;
 begin
-   if Dataset.State in [dsInsert]  then
+ {SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                                 fdqAgenda.FieldByName('descricao').AsString
+                                  );
+  }
+  // As Threas nao estao rodando no Apache
+  {FThread := TThread.CreateAnonymousThread(procedure
+  begin
+    try
+      TThread.Synchronize(nil, procedure
+      begin
+      end);
+        SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                                  fdqAgenda.FieldByName('descricao').AsString
+                                  );
+    finally
+    end;
+  end);
+    FThread.Start;}
+end;
+
+procedure TSmAgenda.fdqAgendaBeforePost(DataSet: TDataSet);
+begin
+  if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 
-  {SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
-                            fdqAgenda.FieldByName('descricao').AsString
-                            );}
-
-
-  //teste com Threads
-  //clocar no after post
-  try
-    FThread := TThread.CreateAnonymousThread(procedure
-    begin
-      try
-        TThread.Synchronize(nil, procedure
-        begin
-        end);
-          SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
-                                    fdqAgenda.FieldByName('descricao').AsString
-                                    );
-      finally
-      end;
-    end);
-      FThread.Start;
-  except on E:Exception do
-  begin
-    ShowMessage(E.Message);
-  end;
-  end;
+  SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                             fdqAgenda.FieldByName('descricao').AsString
+                             );
 end;
 
 
@@ -288,6 +289,7 @@ begin
       LogServerRequest.SetError(Exceptions);
       SmMain.SaveLogError(LogServerRequest);
     end;
+
   finally
     CloseAgenda;
     LogServerRequest.Free;
