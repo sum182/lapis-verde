@@ -302,4 +302,11 @@ object Dm: TDm
     Left = 136
     Top = 328
   end
+  object fdqDeviceUsuario: TFDQuery
+    Connection = FDConnectionDB
+    SQL.Strings = (
+      'select * from device_usuario')
+    Left = 264
+    Top = 328
+  end
 end

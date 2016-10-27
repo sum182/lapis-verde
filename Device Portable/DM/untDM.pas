@@ -12,7 +12,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
+  Vcl.ExtCtrls
 
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
@@ -58,6 +59,7 @@ type
     fdqParametro: TFDQuery;
     fdqRespEscola: TFDQuery;
     fdqConfiguracoes: TFDQuery;
+    fdqDeviceUsuario: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -79,6 +81,7 @@ type
     IsTesteApp: Boolean;
 
     fEscolaId: Integer;
+    fSistemaOperacionalTipo:TSistemaOperacional;
 
     procedure DeleteTabel(Tabela:String);
     procedure DeleteAllTabels;
@@ -98,6 +101,7 @@ type
     procedure OpenProcessoAtualizacao;
     procedure OpenConfiguracoes;
     procedure OpenConfiguracoesLoginUltimo;
+    procedure OpenDeviceUsuario;
     procedure OpenLoginUltimo;
     procedure OpenParametro;
     procedure OpenQuerys;
@@ -111,6 +115,9 @@ type
     procedure ProcessSaveUpdate(Process: string);
 
     procedure SetLogin(IdUsuario:Integer; TipoUsuario: TUsuarioTipo;EscolaId:Integer);
+    procedure SetDeviceUsuario;
+    procedure SetSistemaOperacionalTipo;
+
 
     procedure OpenUsuarioLogado;
 
@@ -139,7 +146,7 @@ implementation
 { %CLASSGROUP 'FMX.Controls.TControl' }
 
 uses smGeralFMX, FMX.Dialogs, Data.FireDACJSONReflect, untRestClient, smDBFireDac, smMensagensFMX, smNetworkState, untDmGetServer,
-  untDmSaveServer, untSQLs;
+  untDmSaveServer, untSQLs, untDMCloudMessaging;
 
 {$R *.dfm}
 
@@ -227,6 +234,8 @@ begin
   FDCreateDB.Close;
   ConectarBases;
 
+  SetSistemaOperacionalTipo;
+
   //Pega as configurações do ultimo usuario logado
   GetConfiguracoes;
 
@@ -238,6 +247,9 @@ begin
 
   //Pega as configurações do novo acesso
   GetConfiguracoes;
+
+  //Seta as informações de device do usuario
+  //SetDeviceUsuario;
 end;
 
 procedure TDm.DeleteAllTabels;
@@ -364,6 +376,9 @@ begin
     fdqConfiguracoes.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
   end;
 
+   fdqConfiguracoes.SQL.Add('and sistema_operacional_tipo_id)');
+
+
   fdqConfiguracoes.SQL.Add(')');
   fdqConfiguracoes.Open;
 end;
@@ -392,6 +407,35 @@ begin
 
   fdqConfiguracoes.SQL.Add(')');
   fdqConfiguracoes.Open;
+end;
+
+procedure TDm.OpenDeviceUsuario;
+begin
+  fdqDeviceUsuario.Close;
+  fdqDeviceUsuario.SQL.Clear;
+  fdqDeviceUsuario.SQL.Add('select * from device_usuario');
+  fdqDeviceUsuario.SQL.Add('where 1=1');
+  fdqDeviceUsuario.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqDeviceUsuario.SQL.Add(' or (funcionario_id = :funcionario_id)');
+    fdqDeviceUsuario.ParamByName('funcionario_id').AsInteger:=Usuario.Id;
+  end;
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqDeviceUsuario.SQL.Add(' or (responsavel_id = :responsavel_id)');
+    fdqDeviceUsuario.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
+  end;
+
+  fdqDeviceUsuario.SQL.Add(')');
+
+  fdqDeviceUsuario.SQL.Add('and sistema_operacional_tipo_id = ' + IntToStr(Integer(fSistemaOperacionalTipo)));
+  fdqDeviceUsuario.SQL.Add('and device_id = ' + QuoTedStr(DeviceId) );
+  fdqDeviceUsuario.SQL.Add('and device_token = ' + QuoTedStr(DeviceToken));
+
+  fdqDeviceUsuario.Open;
 end;
 
 procedure TDm.OpenFuncionarios;
@@ -671,6 +715,28 @@ begin
   RESTClient1.BaseURL := BASE_URL;
 end;
 
+procedure TDm.SetDeviceUsuario;
+begin
+  OpenDeviceUsuario;
+
+  if not fdqDeviceUsuario.IsEmpty then
+    Exit;
+
+  fdqDeviceUsuario.Append;
+  fdqDeviceUsuario.FieldByName('device_usuario_id').AsString:=GetGUID;
+  fdqDeviceUsuario.FieldByName(Usuario.FieldName).AsInteger:=Usuario.Id;
+  fdqDeviceUsuario.FieldByName('device_id').AsString:=DeviceId;
+  fdqDeviceUsuario.FieldByName('device_token').AsString:=DeviceToken;
+  fdqDeviceUsuario.FieldByName('sistema_operacional_tipo_id').AsInteger := Integer(fSistemaOperacionalTipo);
+
+  fdqDeviceUsuario.FieldByName('data_insert_server').Clear;
+  fdqDeviceUsuario.FieldByName('enviado_server').Clear;
+  fdqDeviceUsuario.FieldByName('data_atualizacao').AsDateTime:=Now;
+
+  fdqDeviceUsuario.Post;
+
+end;
+
 procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
 begin
   try
@@ -734,6 +800,16 @@ begin
 
   //Usuario.Tipo := Funcionario;
   //Usuario.Id := 16;
+end;
+
+procedure TDm.SetSistemaOperacionalTipo;
+begin
+  if smGeralFMX.IsSysOSAndroid then
+    fSistemaOperacionalTipo := Android
+  else if smGeralFMX.IsSysOSWindows then
+    fSistemaOperacionalTipo := Windows
+  else if smGeralFMX.IsSysOSiOS then
+    fSistemaOperacionalTipo := Ios;
 end;
 
 procedure TDm.SetSQLAlunos;

@@ -63,8 +63,8 @@ begin
     TDeviceInfo.TDeviceClass.Tablet: formClass := TMainFormTablet;
   end; }
 
-  Application.CreateForm(TDMCloudMessaging, DMCloudMessaging);
   Application.CreateForm(TDm, Dm);
+  Application.CreateForm(TDMCloudMessaging, DMCloudMessaging);
   Application.CreateForm(TDmResponsavel, DmResponsavel);
   Application.CreateForm(TDmAgenda, DmAgenda);
   Application.CreateForm(TDMStyles, DMStyles);
