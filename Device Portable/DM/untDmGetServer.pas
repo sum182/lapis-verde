@@ -468,6 +468,12 @@ begin
     MsgPoupUp('DmGetServer.GetConfiguracoes Erro:' + e.Message);
   end;
 
+  try
+    GetDeviceUsuario;
+    //MsgPoupUpTeste('DmGetServer.GetConfiguracoes OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetDeviceUsuario Erro:' + e.Message);
+  end;
 
   try
     GetAgenda(Now - 30, Now + 1);
@@ -566,7 +572,7 @@ begin
     if not ValidacoesRestClientBeforeExecute then
       Exit;
 
-    LDataSetList := RestClient.SmMainClient.GetConfiguracoes(GetEscolaId,Usuario.Marshal);
+    LDataSetList := RestClient.SmMainClient.GetDeviceUsuario(GetEscolaId,Usuario.Marshal);
     LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
     CopyDataSet(LDataSet,fdqDeviceUsuario);
 

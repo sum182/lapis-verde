@@ -230,6 +230,13 @@ begin
     MsgPoupUp('DmSaveServer.SaveConfiguracoes Erro:' + e.Message);
   end;
 
+  try
+    SaveDeviceUsuario;
+  except on E:Exception do
+    MsgPoupUp('DmSaveServer.SaveDeviceUsuario Erro:' + e.Message);
+  end;
+
+
 
 end;
 
@@ -254,7 +261,7 @@ begin
       if not ValidacoesRestClientBeforeExecute then
         Exit;
 
-      MsgRetornoServer:= RestClient.SmMainClient.SalvarConfiguracoes(GetEscolaId,Usuario.Marshal,LDataSetList);
+      MsgRetornoServer:= RestClient.SmMainClient.SalvarDeviceUsuario(GetEscolaId,Usuario.Marshal,LDataSetList);
 
      //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then

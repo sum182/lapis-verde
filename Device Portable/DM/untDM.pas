@@ -671,11 +671,11 @@ end;
 function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
 
-  if IsTesteApp then
+  {if IsTesteApp then
   begin
     Result:=True;
     Exit;
-  end;
+  end;}
 
   if PrimeiroAcessoInExecute then
   begin
