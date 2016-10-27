@@ -27,6 +27,7 @@ type
     fdqRespTipo: TFDQuery;
     fdqConfiguracoes: TFDQuery;
     fdqProcessoAtualizacao: TFDQuery;
+    fdqDeviceUsuario: TFDQuery;
   private
   public
     procedure OpenProcessoAtualizacao;
@@ -35,7 +36,7 @@ type
     procedure OpenFuncionarios;
     procedure OpenResponsaveis;
     procedure OpenConfiguracoes;
-
+    procedure OpenDeviceUsuario;
 
     procedure GetProcessoAtualizacao;
 
@@ -59,6 +60,7 @@ type
     function GetFuncionario(FuncionarioId:Integer):TFDDataSet;
     function GetResponsavel(ResponsavelId:Integer):TFDDataSet;
     procedure GetConfiguracoes;
+    procedure GetDeviceUsuario;
 
     procedure GetAgenda(DtIni,DtFim:TDateTime);
     procedure GetAgendaTeste(DtIni,DtFim:TDateTime);
@@ -371,7 +373,6 @@ begin
      Raise;
   end;
   end;
-
 end;
 
 procedure TDmGetServer.GetDadosServerGeral;
@@ -552,6 +553,40 @@ begin
 
 end;
 
+procedure TDmGetServer.GetDeviceUsuario;
+var
+  LDataSetList  : TFDJSONDataSets;
+  LDataSet: TFDDataSet;
+begin
+  try
+    if not Dm.ProcessHasUpdate('device_usuario') then
+      Exit;
+
+    OpenDeviceUsuario;
+    if not ValidacoesRestClientBeforeExecute then
+      Exit;
+
+    LDataSetList := RestClient.SmMainClient.GetConfiguracoes(GetEscolaId,Usuario.Marshal);
+    LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+    CopyDataSet(LDataSet,fdqDeviceUsuario);
+
+    DM.ProcessSaveUpdate('device_usuario');
+    MsgPoupUpTeste('DmGetServer.GetDeviceUsuario Executado');
+  except on E:Exception do
+  begin
+    DM.SetLogError( E.Message,
+                    GetApplicationName,
+                    UnitName,
+                    ClassName,
+                    'GetDeviceUsuario',
+                    Now,
+                    'Erro na busca de device_usuario' + #13 + E.Message
+                    );
+     Raise;
+  end;
+  end;
+end;
+
 procedure TDmGetServer.GetEscola;
 begin
   GetDataSet('escola');
@@ -644,6 +679,30 @@ begin
 
   fdqConfiguracoes.SQL.Add(')');
   fdqConfiguracoes.Open;
+end;
+
+procedure TDmGetServer.OpenDeviceUsuario;
+begin
+  fdqDeviceUsuario.Close;
+  fdqDeviceUsuario.SQL.Clear;
+  fdqDeviceUsuario.SQL.Add('select * from device_usuario');
+  fdqDeviceUsuario.SQL.Add('where 1=1');
+  fdqDeviceUsuario.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
+
+  if Usuario.Tipo = Funcionario then
+  begin
+    fdqDeviceUsuario.SQL.Add(' or (funcionario_id = :funcionario_id)');
+    fdqDeviceUsuario.ParamByName('funcionario_id').AsInteger:=Usuario.Id;
+  end;
+
+  if Usuario.Tipo = Responsavel then
+  begin
+    fdqDeviceUsuario.SQL.Add(' or (responsavel_id = :responsavel_id)');
+    fdqDeviceUsuario.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
+  end;
+
+  fdqDeviceUsuario.SQL.Add(')');
+  fdqDeviceUsuario.Open;
 end;
 
 procedure TDmGetServer.OpenFuncionarios;

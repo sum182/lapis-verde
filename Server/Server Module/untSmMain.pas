@@ -37,6 +37,7 @@ type
     IdHTTP1: TIdHTTP;
     IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
     fdqLogCloudMessaging: TFDQuery;
+    fdqDeviceUsuario: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
@@ -46,11 +47,14 @@ type
     procedure SetSQLLogError;overload;
     procedure SetSQLLogError(KeyValues:String);overload;
     procedure SetSQLConfiguracoes(KeyValues:String);
+    procedure SetSQLDeviceUsuario(KeyValues:String);
     procedure SetSQLResponsaveis;overload;
     procedure OpenLogError;overload;
     procedure OpenLogError(KeyValues:String);overload;
 
     procedure OpenConfiguracoes(KeyValues:String);
+    procedure OpenDeviceUsuario(KeyValues:String);
+
     procedure CloseLogError;
     procedure SetTimeZone;
 
@@ -81,6 +85,7 @@ type
     function GetResponsaveis(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetFuncionarios(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetConfiguracoes(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
+    function GetDeviceUsuario(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function SalvarFuncionario(pEscolaId:Integer;pUsuario:TJSONValue;LDataSetList: TFDJSONDataSets):String;
 
     function SalvarLogError(pEscolaId:Integer;
@@ -88,6 +93,11 @@ type
                             LDataSetList: TFDJSONDataSets = nil ):String;
 
     function SalvarConfiguracoes(pEscolaId:Integer;
+                                 pUsuario:TJSONValue;
+                                 LDataSetList: TFDJSONDataSets = nil ):String;
+
+
+    function SalvarDeviceUsuario(pEscolaId:Integer;
                                  pUsuario:TJSONValue;
                                  LDataSetList: TFDJSONDataSets = nil ):String;
 
@@ -235,7 +245,6 @@ begin
     LogServerRequest.Free;
     EndRequest;
   end;
-
 end;
 
 function TSmMain.GetDataSet(pEscolaId: Integer; Nome: String;
@@ -290,6 +299,46 @@ begin
     EndRequest;
   end;
 
+end;
+
+function TSmMain.GetDeviceUsuario(pEscolaId: Integer;
+  pUsuario: TJSONValue): TFDJSONDataSets;
+var
+  fdqDataSet: TFDQuery;
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para retornar os devices do usuário
+  try
+    try
+      StartRequest(pEscolaId,pUsuario);
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest(UnitName,
+                                           ClassName,
+                                           'GetDeviceUsuario',
+                                           EscolaId,
+                                           Usuario);
+
+      Result := TFDJSONDataSets.Create;
+
+      fdqDataSet := TFDQuery.Create(self);
+      fdqDataSet.Connection:=ServerContainer.GetConnection;
+      fdqDataSet.Active := False;
+
+      fdqDataSet.SQL.Clear;
+      fdqDataSet.SQL.Add('select * from device_usuario');
+      fdqDataSet.SQL.Add('where ' + Usuario.FieldName + ' = ' + IntToStr(Usuario.Id));
+      TFDJSONDataSetsWriter.ListAdd(Result, fdqDataSet);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      begin
+        LogServerRequest.SetError(E.Message);
+        SmMain.SaveLogError(LogServerRequest);
+      end;
+    end;
+  finally
+    LogServerRequest.Free;
+    EndRequest;
+  end;
 end;
 
 function TSmMain.GetFuncionarios(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
@@ -512,6 +561,15 @@ begin
   fdqConfiguracoes.Active := True;
 end;
 
+procedure TSmMain.OpenDeviceUsuario(KeyValues: String);
+begin
+  fdqDeviceUsuario.Active := False;
+
+  SetSQLDeviceUsuario(KeyValues);
+
+  fdqDeviceUsuario.Active := True;
+end;
+
 procedure TSmMain.OpenLogError(KeyValues: String);
 begin
   CloseLogError;
@@ -529,7 +587,7 @@ var
   KeyValues: string;
   LogServerRequest:TLogServerRequest;
 begin
-  //Método para Salvar Logs de Erros
+  //Método para Salvar Configuracoes
   try
     try
       StartRequest(pEscolaId,pUsuario);
@@ -569,6 +627,55 @@ begin
     EndRequest;
   end;
 
+end;
+
+function TSmMain.SalvarDeviceUsuario(pEscolaId: Integer; pUsuario: TJSONValue;
+  LDataSetList: TFDJSONDataSets): String;
+var
+  LDataSet: TFDDataSet;
+  Exceptions:string;
+  KeyValues: string;
+  LogServerRequest:TLogServerRequest;
+begin
+  //Método para Salvar Device do Usuario
+  try
+    try
+      StartRequest(pEscolaId,pUsuario);
+      LogServerRequest:=TLogServerRequest.Create;
+      LogServerRequest.SetLogServerRequest( UnitName,
+                                            ClassName,
+                                            'SalvarDeviceUsuario',
+                                            EscolaId,
+                                            Usuario);
+
+      Result:=EmptyStr;
+
+      Exceptions:=EmptyStr;
+
+      LDataSet := TFDJSONDataSetsReader.GetListValue(LDataSetList,0);
+
+      if LDataSet.IsEmpty then
+        Exit;
+
+      KeyValues:= GetKeyValuesDataSet(LDataSet,'device_usuario_id');
+      OpenDeviceUsuario(KeyValues);
+      CopyDataSet(LDataSet,fdqDeviceUsuario,False,[coEdit,coAppend]);
+      SmMain.SaveLogServerRequest(LogServerRequest);
+    except on E:Exception do
+      Exceptions:=  Exceptions + E.Message;
+    end;
+
+    if (Exceptions <> EmptyStr) then
+    begin
+      Result:= 'Erro ao Salvar Device Usuário' + #13 + Exceptions;
+      LogServerRequest.SetError(Exceptions);
+      SmMain.SaveLogError(LogServerRequest);
+    end;
+  finally
+    fdqDeviceUsuario.Close;
+    LogServerRequest.Free;
+    EndRequest;
+  end;
 end;
 
 function TSmMain.SalvarFuncionario(pEscolaId: Integer; pUsuario: TJSONValue;
@@ -921,6 +1028,16 @@ begin
   fdqConfiguracoes.SQL.Clear;
   fdqConfiguracoes.SQL.Add('select * from configuracoes ');
   fdqConfiguracoes.SQL.Add('where configuracoes_id in (' + KeyValues + ')');
+end;
+
+procedure TSmMain.SetSQLDeviceUsuario(KeyValues: String);
+begin
+  if KeyValues = EmptyStr then
+    KeyValues:= QuoTedStr('0');
+
+  fdqDeviceUsuario.SQL.Clear;
+  fdqDeviceUsuario.SQL.Add('select * from device_usuario ');
+  fdqDeviceUsuario.SQL.Add('where device_usuario_id in (' + KeyValues + ')');
 end;
 
 procedure TSmMain.SetSQLLogError(KeyValues: String);

@@ -264,4 +264,20 @@ object SmMain: TSmMain
         Value = Null
       end>
   end
+  object fdqDeviceUsuario: TFDQuery
+    BeforePost = fdqConfiguracoesBeforePost
+    Connection = ServerContainer.FDConnection
+    SQL.Strings = (
+      'select * from device_usuario'
+      'where device_usuario_id = :device_usuario_id')
+    Left = 146
+    Top = 348
+    ParamData = <
+      item
+        Name = 'DEVICE_USUARIO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
 end

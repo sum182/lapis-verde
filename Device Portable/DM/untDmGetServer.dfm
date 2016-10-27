@@ -254,4 +254,11 @@ object DmGetServer: TDmGetServer
     Left = 48
     Top = 184
   end
+  object fdqDeviceUsuario: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select * from device_usuario')
+    Left = 48
+    Top = 357
+  end
 end

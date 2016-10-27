@@ -19,11 +19,13 @@ type
     fdqAgendaTurmaagenda_id: TStringField;
     fdqAgendaTurmaturma_id: TIntegerField;
     fdqConfiguracoes: TFDQuery;
+    fdqDeviceUsuario: TFDQuery;
   private
     SalvarAgendaInExecute:Boolean;
   public
     procedure SaveLogError;
     procedure SaveConfiguracoes;
+    procedure SaveDeviceUsuario;
     procedure SaveAgenda;
     procedure SaveFuncionario(DataSet:TFDAdaptedDataSet);
     procedure SaveResponsavel(DataSet:TFDAdaptedDataSet);
@@ -229,6 +231,58 @@ begin
   end;
 
 
+end;
+
+procedure TDmSaveServer.SaveDeviceUsuario;
+var
+  LDataSetList  : TFDJSONDataSets;
+  MsgRetornoServer:string;
+begin
+  //Método para Salvar os Logs de Erro no Server
+  try
+    try
+      MsgRetornoServer := EmptyStr;
+      fdqDeviceUsuario.Active := False;
+      fdqDeviceUsuario.Active := True;
+
+      if fdqDeviceUsuario.IsEmpty then
+        Exit;
+
+      LDataSetList := TFDJSONDataSets.Create;
+      TFDJSONDataSetsWriter.ListAdd(LDataSetList,fdqDeviceUsuario);
+
+      if not ValidacoesRestClientBeforeExecute then
+        Exit;
+
+      MsgRetornoServer:= RestClient.SmMainClient.SalvarConfiguracoes(GetEscolaId,Usuario.Marshal,LDataSetList);
+
+     //Flagando registros como enviado
+      if MsgRetornoServer = EmptyStr then
+        SetFlagEnviado(fdqDeviceUsuario)
+      else
+        ShowMessage('Erro ao Salvar Device Usuário ' + #13 + MsgRetornoServer);
+
+      MsgPoupUpTeste('DmSaveServer.SaveDeviceUsuario Executado');
+    except on E:Exception do
+    begin
+      MsgRetornoServer := MsgRetornoServer + E.Message;
+
+      if (IsTesteApp or IsModoTeste) then
+        Raise;
+    end;
+    end;
+  finally
+    if MsgRetornoServer <> EmptyStr then
+       DM.SetLogError( MsgRetornoServer,
+                      GetApplicationName,
+                      UnitName,
+                      ClassName,
+                      'SaveDeviceUsuario',
+                      Now,
+                      'Erro ao Salvar Device Usuário' + #13 + MsgRetornoServer
+                    );
+    fdqDeviceUsuario.Active := False;
+  end;
 end;
 
 procedure TDmSaveServer.SaveFuncionario(DataSet:TFDAdaptedDataSet);
