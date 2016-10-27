@@ -306,6 +306,7 @@ begin
 
   { TODO : Implentar uma saudação para usuário }
   SetUsuario;
+  Dm.SetDeviceUsuario;
 end;
 
 

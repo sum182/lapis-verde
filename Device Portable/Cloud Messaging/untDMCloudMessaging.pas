@@ -80,7 +80,11 @@ begin
   AServiceConnection:=TPushServiceConnection.Create(APushService);
 
   if smGeralFMX.IsSysOSWindows then
+  begin
+    DeviceId:='DeviceId-Teste-Windows';
+    DeviceToken:='DeviceToken-Teste-Windows';
     Exit;
+  end;
 
   {$IFDEF ANDROID}
   APushService.AppProps[TPushService.TAppPropNames.GCMAppID]:='279079000294';

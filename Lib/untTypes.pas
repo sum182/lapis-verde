@@ -8,6 +8,9 @@ Uses Data.DB;
     //Tipos de Usuário
     TUsuarioTipo = (NaoDefinido,Funcionario,Responsavel);
 
+    //Tipos de Sistema Operacional
+    TSistemaOperacional = (SistemaOperacionalNaoDefinido,Windows,Android,Ios);
+
 
 implementation
 

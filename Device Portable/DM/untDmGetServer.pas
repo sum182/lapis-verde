@@ -51,6 +51,7 @@ type
     procedure GetFuncionarioTipo;
     procedure GetTelefoneTipo;
     procedure GetAgendaTipo;
+    procedure GetSistemaOperacionalTipo;
     procedure GetAlunos;
     procedure GetTurmas;
     procedure GetResponsaveis;
@@ -429,6 +430,13 @@ begin
     //MsgPoupUpTeste('DmGetServer.ResponsavelTipo OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.ResponsavelTipo Erro:' + e.Message);
+  end;
+
+  try
+    GetSistemaOperacionalTipo;
+    //MsgPoupUpTeste('DmGetServer.GetSistemaOperacionalTipo OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetSistemaOperacionalTipo Erro:' + e.Message);
   end;
 
   try
@@ -821,6 +829,11 @@ end;
 procedure TDmGetServer.GetResponsavelTipo;
 begin
   GetDataSet('responsavel_tipo',False);
+end;
+
+procedure TDmGetServer.GetSistemaOperacionalTipo;
+begin
+  GetDataSet('sistema_operacional_tipo',False);
 end;
 
 procedure TDmGetServer.GetDadosServerBasico;
