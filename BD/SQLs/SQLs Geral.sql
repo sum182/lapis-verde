@@ -31,3 +31,10 @@ order by agenda.agenda_id desc;
 -- cloud log
 select * from log_cloud_messaging
 order by data_insert_server desc;
+
+-- Devices
+select * from device_usuario
+
+-- Processo Atualizacao
+select * from processo_atualizacao
+where processo = 'device_usuario'
