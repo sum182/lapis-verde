@@ -45,6 +45,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="AndroidManifest.template.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>LapisVerde\</RemoteDir>
+            <RemoteName>AndroidManifest.template.xml</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="..\BD\SQLite\db.s3db" Condition="'$(Config)'=='Release'">
             <RemoteDir>LapisVerde\BD\</RemoteDir>
             <RemoteName>db.s3db</RemoteName>

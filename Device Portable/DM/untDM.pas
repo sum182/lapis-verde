@@ -670,12 +670,11 @@ end;
 
 function TDm.ProcessHasUpdate(Process: string): Boolean;
 begin
-
-  {if IsTesteApp then
+  if IsTesteApp then
   begin
     Result:=True;
     Exit;
-  end;}
+  end;
 
   if PrimeiroAcessoInExecute then
   begin
@@ -722,6 +721,7 @@ begin
   if not fdqDeviceUsuario.IsEmpty then
     Exit;
 
+  DMCloudMessaging.GetDeviceInfo;
   fdqDeviceUsuario.Append;
   fdqDeviceUsuario.FieldByName('device_usuario_id').AsString:=GetGUID;
   fdqDeviceUsuario.FieldByName(Usuario.FieldName).AsInteger:=Usuario.Id;

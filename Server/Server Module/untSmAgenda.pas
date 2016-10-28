@@ -52,6 +52,7 @@ type
     function GetAgenda(pEscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
     function GetAgendaTeste(pEscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
     function SalvarAgenda(pEscolaId:Integer; pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
+    procedure SendCloudMessagingAgenda();
   end;
 
 var
@@ -115,9 +116,9 @@ begin
   if Dataset.State in [dsInsert]  then
     Dataset.FieldByName('data_insert_server').AsDateTime:=Now;
 
-  SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+  {SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
                              fdqAgenda.FieldByName('descricao').AsString
-                             );
+                             );}
 end;
 
 
@@ -279,6 +280,7 @@ begin
       CopyDataSet(LDataSet,fdqAgendaTurma,False,[coAppend,coEdit]);
 
       SmMain.SaveLogServerRequest(LogServerRequest);
+      SendCloudMessagingAgenda;
     except on E:Exception do
       Exceptions:=  Exceptions + E.Message;
     end;
@@ -295,6 +297,24 @@ begin
     LogServerRequest.Free;
     SmMain.EndRequest;
   end;
+end;
+
+procedure TSmAgenda.SendCloudMessagingAgenda;
+begin
+  CloseAgenda;
+  fdqAgenda.Active := True;
+  fdqAgendaAluno.Active := True;
+  fdqAgendaTurma.Active := True;
+
+  fdqAgenda.First;
+  while not fdqAgenda.Eof do
+  begin
+    SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                               fdqAgenda.FieldByName('descricao').AsString
+                             );
+    fdqAgenda.Next;
+  end;
+
 end;
 
 procedure TSmAgenda.SetParamsAgenda(DtIni,DtFim: TDateTime);

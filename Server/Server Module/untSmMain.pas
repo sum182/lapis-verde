@@ -38,6 +38,7 @@ type
     IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
     fdqLogCloudMessaging: TFDQuery;
     fdqDeviceUsuario: TFDQuery;
+    fdqDevicesResp: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
@@ -54,6 +55,7 @@ type
 
     procedure OpenConfiguracoes(KeyValues:String);
     procedure OpenDeviceUsuario(KeyValues:String);
+    procedure OpenDevicesResponsavel(AlunoId:integer;ResponsavelId:integer);
 
     procedure CloseLogError;
     procedure SetTimeZone;
@@ -559,6 +561,18 @@ begin
   SetSQLConfiguracoes(KeyValues);
 
   fdqConfiguracoes.Active := True;
+end;
+
+procedure TSmMain.OpenDevicesResponsavel(AlunoId, ResponsavelId: integer);
+begin
+  fdqDevicesResp.Close;
+  fdqDevicesResp.ParamByName('aluno_id').AsInteger := AlunoId;
+  fdqDevicesResp.ParamByName('responsavel_id').AsInteger := ResponsavelId;
+
+  //teste
+  fdqDevicesResp.ParamByName('responsavel_id').AsInteger := 0;
+
+  fdqDevicesResp.Open;
 end;
 
 procedure TSmMain.OpenDeviceUsuario(KeyValues: String);

@@ -270,11 +270,41 @@ object SmMain: TSmMain
     SQL.Strings = (
       'select * from device_usuario'
       'where device_usuario_id = :device_usuario_id')
-    Left = 146
-    Top = 348
+    Left = 530
+    Top = 260
     ParamData = <
       item
         Name = 'DEVICE_USUARIO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object fdqDevicesResp: TFDQuery
+    Connection = ServerContainer.FDConnection
+    SQL.Strings = (
+      'select du.device_token '#13#10#10
+      'from responsavel_aluno ra'#13#10#10
+      
+        'inner join device_usuario du on (du.responsavel_id = ra.responsa' +
+        'vel_id)'#13#10#10
+      
+        'inner join responsavel r on (r.responsavel_id = ra.responsavel_i' +
+        'd)'#13#10#10
+      'where ra.aluno_id = :aluno_id'#13#10#10
+      'and r.ativo = '#39'S'#39#13#10#10
+      'and ra.responsavel_id <> :responsavel_id')
+    Left = 530
+    Top = 309
+    ParamData = <
+      item
+        Name = 'ALUNO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'RESPONSAVEL_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = Null
