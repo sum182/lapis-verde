@@ -315,7 +315,11 @@ begin
   while not fdqAgenda.Eof do
   begin
     //implementar filtro por agenda_id
-    //fdqAgendaAluno.Filter:='a'
+
+    fdqAgendaAluno.Filtered:=False;
+    fdqAgendaAluno.Filter:='agenda_id = ' + QuotedStr(fdqAgenda.FieldByName('agenda_id').AsString);
+    fdqAgendaAluno.Filtered:=True;
+
 
     fdqAgendaAluno.First;
     while not fdqAgendaAluno.Eof do
