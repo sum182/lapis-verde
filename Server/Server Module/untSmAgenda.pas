@@ -300,18 +300,51 @@ begin
 end;
 
 procedure TSmAgenda.SendCloudMessagingAgenda;
+var
+  DestinatariosResp: TJSONArray;
 begin
   CloseAgenda;
   fdqAgenda.Active := True;
   fdqAgendaAluno.Active := True;
   fdqAgendaTurma.Active := True;
 
+  DestinatariosResp := TJSONArray.Create();
+
+
   fdqAgenda.First;
   while not fdqAgenda.Eof do
   begin
+    //implementar filtro por agenda_id
+    //fdqAgendaAluno.Filter:='a'
+
+    fdqAgendaAluno.First;
+    while not fdqAgendaAluno.Eof do
+    begin
+
+      SmMain.OpenDevicesResponsavel(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
+                                    fdqAgenda.FieldByName('responsavel_id').AsInteger
+                                   );
+
+      SmMain.fdqDevicesResp.First;
+      while not SmMain.fdqDevicesResp.eof do
+      begin
+        DestinatariosResp.Add(SmMain.fdqDevicesResp.FieldByName('device_token').AsString);
+        SmMain.fdqDevicesResp.Next;
+      end;
+
+
+
+      fdqAgendaAluno.Next;
+    end;
+
+
+
+    //SendCloudMessaging - Responsaveis
     SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
-                               fdqAgenda.FieldByName('descricao').AsString
+                               fdqAgenda.FieldByName('descricao').AsString,DestinatariosResp
                              );
+
+
     fdqAgenda.Next;
   end;
 

@@ -55,7 +55,6 @@ type
 
     procedure OpenConfiguracoes(KeyValues:String);
     procedure OpenDeviceUsuario(KeyValues:String);
-    procedure OpenDevicesResponsavel(AlunoId:integer;ResponsavelId:integer);
 
     procedure CloseLogError;
     procedure SetTimeZone;
@@ -79,8 +78,12 @@ type
     procedure StartRequest(pEscolaId:Integer;pUsuario:TJSONValue);
     procedure EndRequest;
 
+    procedure OpenDevicesResponsavel(AlunoId:integer;ResponsavelId:integer);
+
     procedure SetParamsServer(pEscolaId:Integer;pUsuario:TJSONValue);
-    procedure SendCloudMessaging(Mensagem:string);
+    procedure SendCloudMessagingOld(Mensagem:string);
+    procedure SendCloudMessaging(Mensagem:string;Destinatarios:TJSONArray);overload;
+
    {$METHODINFO ON}
     function GetAlunos(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
     function GetTurmas(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
@@ -801,7 +804,7 @@ begin
 
 end;
 
-procedure TSmMain.SendCloudMessaging(Mensagem: string);
+procedure TSmMain.SendCloudMessagingOld(Mensagem: string);
 var
   AJson: TJSONObject;
   AJsonData: TJSONObject;
@@ -845,6 +848,48 @@ begin
 
   SaveLogCloudMessaging(AData.DataString,AResponseContent.DataString,MsgError);
 end;
+
+procedure TSmMain.SendCloudMessaging(Mensagem: string;
+  Destinatarios: TJSONArray);
+var
+  AJson: TJSONObject;
+  AJsonData: TJSONObject;
+  AData, AResponseContent: TStringStream;
+  DeviceToken: string;
+  MsgError: string;
+  i:integer;
+begin
+  try
+    try
+      AJson := TJSONObject.Create();
+      AJsonData := TJSONObject.Create();
+
+      AJsonData.AddPair('id','');
+      AJsonData.AddPair('message',Mensagem);
+      // Add the information to send GCM server;
+      AJson.AddPair('registration_ids',Destinatarios);
+      AJson.AddPair('data',AJsonData);
+      // Set the Header.
+      IdHTTP1.Request.ContentType := 'application/json';
+      // Set the Key for Server Apllication
+      IdHTTP1.Request.CustomHeaders.AddValue('Authorization','key=AIzaSyCU7YtJK0A4LDfFrvicS58RdHoTi814uR4');
+      AData := TStringStream.Create(AJson.ToString);
+      AData.Position := 0;
+      AResponseContent := TStringStream.Create();
+      // Send the notification
+      IdHTTP1.Post('https://android.googleapis.com/gcm/send',AData,AResponseContent);
+      AResponseContent.Position := 0;
+    finally
+    end;
+   except on E:Exception do
+   begin
+      MsgError:= E.Message;
+   end;
+  end;
+
+  SaveLogCloudMessaging(AData.DataString,AResponseContent.DataString,MsgError);
+end;
+
 
 procedure TSmMain.SetLogErrorOld( MsgError,Aplicacao,UnitNome,Classe,Metodo:String;
                                Data:TDateTime;
