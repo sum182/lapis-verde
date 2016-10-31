@@ -12,8 +12,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  Vcl.ExtCtrls
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
 
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
@@ -260,6 +259,8 @@ begin
   DeleteTabel('agenda_turma');
   DeleteTabel('aluno');
   DeleteTabel('aluno_foto');
+  DeleteTabel('configuracoes');
+  DeleteTabel('device_usuario');
   DeleteTabel('escola');
   DeleteTabel('escola_endereco');
   DeleteTabel('escola_telefone');
@@ -279,6 +280,7 @@ begin
   DeleteTabel('responsavel_foto');
   DeleteTabel('responsavel_telefone');
   DeleteTabel('responsavel_tipo');
+  DeleteTabel('sistema_operacional_tipo');
   DeleteTabel('telefone_tipo');
   DeleteTabel('turma');
   DeleteTabel('turma_aluno');

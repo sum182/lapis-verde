@@ -79,6 +79,16 @@ type
     TabItem6: TTabItem;
     Layout15: TLayout;
     SpeedButton6: TSpeedButton;
+    Layout16: TLayout;
+    SpeedButton7: TSpeedButton;
+    Layout17: TLayout;
+    SpeedButton8: TSpeedButton;
+    Layout18: TLayout;
+    SpeedButton9: TSpeedButton;
+    Layout19: TLayout;
+    SpeedButton10: TSpeedButton;
+    Layout20: TLayout;
+    SpeedButton11: TSpeedButton;
     procedure btnTesteGeralClick(Sender: TObject);
     procedure btnMetodosSyncGeralClick(Sender: TObject);
     procedure btnMetodosSyncBasicoClick(Sender: TObject);
@@ -95,6 +105,11 @@ type
     procedure btnServiceHttpAppClick(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
+    procedure SpeedButton10Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure SpeedButton9Click(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton11Click(Sender: TObject);
   private
     Metodo: String;
     MetodosOK: Integer;
@@ -123,7 +138,7 @@ implementation
 
 {$R *.fmx}
 
-uses untRestClient, untCloudMessagingTeste;
+uses untRestClient, untCloudMessagingTeste, untDMCloudMessaging;
 
 procedure TfrmTesteGeralApp.btnMetodosSyncGeralClick(Sender: TObject);
 begin
@@ -428,6 +443,28 @@ begin
   Inc(MetodosOK);
 end;
 
+procedure TfrmTesteGeralApp.SpeedButton10Click(Sender: TObject);
+begin
+  inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
+  try
+    Dm.IsTesteApp:= True;
+    Dm.SetDeviceUsuario;
+    Dm.IsTesteApp:= False;
+    MsgPoupUpTeste('Dm.SetDeviceUsuario OK');
+  except on E:Exception do
+    MsgPoupUp('Dm.SetDeviceUsuario Erro:' + e.Message);
+  end;
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton11Click(Sender: TObject);
+begin
+  inherited;
+  Dm.DeleteTabel('device_usuario');
+end;
+
 procedure TfrmTesteGeralApp.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
@@ -488,6 +525,45 @@ begin
     Application.CreateForm(TfrmCloudMessagingTeste, frmCloudMessagingTeste);
 
   frmCloudMessagingTeste.Show;
+end;
+
+
+procedure TfrmTesteGeralApp.SpeedButton7Click(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('DeviceToken: ' + DeviceToken);
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton8Click(Sender: TObject);
+begin
+  inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
+  try
+    Dm.IsTesteApp:= True;
+    DmGetServer.GetDeviceUsuario;
+    Dm.IsTesteApp:= False;
+    MsgPoupUpTeste('DmGetServer.GetDeviceUsuario OK');
+  except on E:Exception do
+    MsgPoupUp('DmGetServer.GetDeviceUsuario Erro:' + e.Message);
+  end;
+end;
+
+procedure TfrmTesteGeralApp.SpeedButton9Click(Sender: TObject);
+begin
+  inherited;
+  if not smNetworkState.ValidarConexao then
+    Exit;
+
+  try
+    Dm.IsTesteApp:= True;
+    DmSaveServer.SaveDeviceUsuario;
+    Dm.IsTesteApp:= False;
+    MsgPoupUpTeste('DmSaveServer.SaveDeviceUsuario OK');
+  except on E:Exception do
+    MsgPoupUp('DmSaveServer.SaveDeviceUsuario Erro:' + e.Message);
+  end;
 end;
 
 procedure TfrmTesteGeralApp.btnGetResponsaveisClick(Sender: TObject);
