@@ -13,7 +13,6 @@ uses
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
-
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -724,6 +723,10 @@ begin
     Exit;
 
   DMCloudMessaging.GetDeviceInfo;
+
+  if DeviceToken = '' then
+    Exit;
+
   fdqDeviceUsuario.Append;
   fdqDeviceUsuario.FieldByName('device_usuario_id').AsString:=GetGUID;
   fdqDeviceUsuario.FieldByName(Usuario.FieldName).AsInteger:=Usuario.Id;
@@ -736,7 +739,6 @@ begin
   fdqDeviceUsuario.FieldByName('data_atualizacao').AsDateTime:=Now;
 
   fdqDeviceUsuario.Post;
-
 end;
 
 procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');

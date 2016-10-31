@@ -91,10 +91,6 @@ begin
   {$ENDIF}
 
   AServiceConnection.Active:=True;
-  AServiceConnection.OnChange := OnServiceConnectionChange;
-  AServiceConnection.OnReceiveNotification := OnReceiveNotificationEvent;
-
-
   DeviceId:=APushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID];
   DeviceToken:=APushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
 end;

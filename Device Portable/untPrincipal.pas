@@ -96,7 +96,8 @@ uses untLogin,
   untDmResponsavel, smMensagensFMX,smNetworkState
   //, untConfiguracoes
 
-  , untPerfil, untTypes, untSobre, untConfiguracoes, untAgendaView;
+  , untPerfil, untTypes, untSobre, untConfiguracoes, untAgendaView,
+  untResourceString;
 
 { TfrmPrincipal }
 
@@ -267,8 +268,11 @@ end;
 
 procedure TfrmPrincipal.AbrirAgenda;
 begin
+  Dm.SyncronizarDadosServerBasico;
+
   if not OpenAgendaAlunoAutomatico then
     OpenForm(TfrmAgendaSelect);
+
 end;
 
 procedure TfrmPrincipal.AbrirMensagens;
@@ -373,7 +377,55 @@ end;
 procedure TfrmPrincipal.imgAgendaClick(Sender: TObject);
 begin
   inherited;
-  AbrirAgenda;
+  //AbrirAgenda;
+
+
+ if not DM.fgActivityDialog.IsShown then
+  begin
+    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+      begin
+        try
+          TThread.Synchronize(nil, procedure
+          begin
+            GridPanelLayout1.Enabled:=False;
+            lstMnuMain.Enabled:=False;
+            ToolBarPincipal.Enabled:=False;
+
+            DM.fgActivityDialog.Message := rs_carregando_informacoes;
+            DM.fgActivityDialog.Show;
+          end);
+
+          AbrirAgenda;
+
+          if TThread.CheckTerminated then
+          begin
+            TThread.Synchronize(nil, procedure
+            begin
+              GridPanelLayout1.Enabled:=True;
+              lstMnuMain.Enabled:=True;
+              ToolBarPincipal.Enabled:=True;
+              Application.ProcessMessages;
+              Exit;
+            end);
+          end;
+
+
+        finally
+          if not TThread.CheckTerminated then
+            TThread.Synchronize(nil, procedure
+            begin
+               DM.fgActivityDialog.Hide;
+               GridPanelLayout1.Enabled:=True;
+               lstMnuMain.Enabled:=True;
+               ToolBarPincipal.Enabled:=True;
+               Application.ProcessMessages;
+            end);
+        end;
+      end);
+    FActivityDialogThread.FreeOnTerminate := False;
+    FActivityDialogThread.Start;
+  end;
+
 end;
 
 procedure TfrmPrincipal.imgConfiguracoesClick(Sender: TObject);
