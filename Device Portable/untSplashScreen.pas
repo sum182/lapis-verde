@@ -30,7 +30,7 @@ var
 implementation
 
 uses
-  System.Devices, untLogin, smGeralFMX;
+  System.Devices, untLogin, smGeralFMX, smMensagensFMX, untLibDevicePortable;
 
 {$R *.fmx}
 
@@ -55,6 +55,7 @@ type
 var
   form: TForm;
   formClass: TFormClass;
+  Thread: TThread;
 begin
   formClass := nil;
   {case TDeviceInfo.ThisDevice.DeviceClass of
@@ -97,6 +98,26 @@ begin
   else begin
     ShowMessage(SNotSuitableForDevice);
   end;
+
+
+  //Sync Geral
+  MsgPoupUpTeste('TfrmSplashScreen Sync - Ini');
+  if Dm.IsTesteApp then
+    Exit;
+
+
+  Dm.PrimeiroAcessoVerificar;
+  if PrimeiroAcessoOK then
+  begin
+    Thread := TThread.CreateAnonymousThread(
+      procedure
+      begin
+        Dm.SyncronizarDadosServerGeral;
+        MsgPoupUpTeste('TfrmSplashScreen Sync - OK');
+      end);
+    Thread.Start;
+  end;
+
   Close;
 end;
 
