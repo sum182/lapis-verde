@@ -40,6 +40,9 @@ type
     lstItemUsuario: TListBoxItem;
     imgLogoff: TImage;
     Label2: TLabel;
+    Layout1: TLayout;
+    Rectangle1: TRectangle;
+    Label4: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);
