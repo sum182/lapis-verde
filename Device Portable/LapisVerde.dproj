@@ -336,6 +336,7 @@
         <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
         <VerInfo_Locale>1033</VerInfo_Locale>

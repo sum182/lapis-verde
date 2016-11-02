@@ -286,7 +286,6 @@ begin
 
   if not OpenAgendaAlunoAutomatico then
     OpenForm(TfrmAgendaSelect);
-
 end;
 
 procedure TfrmPrincipal.AbrirMensagens;
@@ -459,6 +458,9 @@ end;
 procedure TfrmPrincipal.imgMeuPerfilClick(Sender: TObject);
 begin
   inherited;
+  if not smNetworkState.ValidarConexao  then
+    Exit;
+
   OpenForm(TfrmPerfil);
 end;
 

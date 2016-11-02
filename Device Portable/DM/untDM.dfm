@@ -94,13 +94,14 @@ object Dm: TDm
     Top = 216
   end
   object TimerSyncBasico: TTimer
+    Enabled = False
     Interval = 60000
     OnTimer = TimerSyncBasicoTimer
     Left = 648
     Top = 216
   end
   object TimerSyncGeral: TTimer
-    Interval = 3600000
+    Interval = 900000
     OnTimer = TimerSyncGeralTimer
     Left = 648
     Top = 164
@@ -308,5 +309,11 @@ object Dm: TDm
       'select * from device_usuario')
     Left = 264
     Top = 328
+  end
+  object TimerSaveGeral: TTimer
+    Interval = 150000
+    OnTimer = TimerSaveGeralTimer
+    Left = 648
+    Top = 272
   end
 end

@@ -58,10 +58,12 @@ type
     fdqRespEscola: TFDQuery;
     fdqConfiguracoes: TFDQuery;
     fdqDeviceUsuario: TFDQuery;
+    TimerSaveGeral: TTimer;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
     procedure fgActivityDialogCancel(Sender: TObject);
+    procedure TimerSaveGeralTimer(Sender: TObject);
   private
     SyncServer: Boolean;
     procedure ConectarSQLite(FDConnection: TFDConnection; DataBaseName: String);
@@ -122,6 +124,9 @@ type
     procedure LoginAuto;
 
     function AllowSyncronizar:Boolean;
+    procedure SyncronizarSaveServerGeral;
+    procedure SyncronizarSaveServerBasico;
+
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
 
@@ -376,9 +381,6 @@ begin
     fdqConfiguracoes.SQL.Add(' or (responsavel_id = :responsavel_id)');
     fdqConfiguracoes.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
   end;
-
-   fdqConfiguracoes.SQL.Add('and sistema_operacional_tipo_id)');
-
 
   fdqConfiguracoes.SQL.Add(')');
   fdqConfiguracoes.Open;
@@ -874,6 +876,52 @@ begin
   end;
 end;
 
+procedure TDm.SyncronizarSaveServerBasico;
+begin
+  try
+    if not AllowSyncronizar then
+      Exit;
+
+    if PrimeiroAcessoInExecute then
+      Exit;
+
+    SyncServer := True;
+
+
+    try
+      DmSaveServer.SaveDadosServerBasico;
+      MsgPoupUpTeste('DmSaveServer.SaveDadosServerBasico OK');
+    except
+      on E: Exception do
+        MsgPoupUp('DmSaveServer.SaveDadosServerBasico Erro:' + E.Message);
+    end;
+
+  finally
+    SyncServer := False;
+  end;
+end;
+
+procedure TDm.SyncronizarSaveServerGeral;
+begin
+  try
+    if not AllowSyncronizar then
+      Exit;
+
+    SyncServer := True;
+
+    try
+      DmSaveServer.SaveDadosServerGeral;
+      MsgPoupUpTeste('DM.SalvarDadosServer OK');
+    except
+      on E: Exception do
+        MsgPoupUp('DM.SalvarDadosServer Erro:' + E.Message);
+    end;
+
+  finally
+    SyncServer := False;
+  end;
+end;
+
 procedure TDm.SyncronizarDadosServerBasico;
 begin
   try
@@ -905,6 +953,21 @@ begin
   finally
     SyncServer := False;
   end;
+end;
+
+procedure TDm.TimerSaveGeralTimer(Sender: TObject);
+var
+  Thread: TThread;
+begin
+  if IsTesteApp then
+    Exit;
+
+  Thread := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      SyncronizarSaveServerGeral;
+    end);
+  Thread.Start;
 end;
 
 procedure TDm.TimerSyncBasicoTimer(Sender: TObject);

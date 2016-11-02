@@ -172,12 +172,6 @@ procedure TfrmPerfil.GetPerfil;
 var
   DataSet:TFDDataSet;
 begin
-  if not smNetworkState.ValidarConexao  then
-  begin
-    imgVoltar.OnClick(self);
-    Exit;
-  end;
-
   if Usuario.Tipo = Funcionario then
     DataSet:= DmGetServer.GetFuncionario(Usuario.Id);
 

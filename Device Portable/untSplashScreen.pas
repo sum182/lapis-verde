@@ -90,21 +90,21 @@ begin
       end
     end;
 
-  if formClass <> nil then begin
+  if formClass <> nil then
+  begin
     form := formClass.Create(Application);
     form.Show;
     Application.MainForm := form;
   end
-  else begin
+  else
+  begin
     ShowMessage(SNotSuitableForDevice);
   end;
 
 
   //Sync Geral
-  MsgPoupUpTeste('TfrmSplashScreen Sync - Ini');
   if Dm.IsTesteApp then
     Exit;
-
 
   Dm.PrimeiroAcessoVerificar;
   if PrimeiroAcessoOK then
@@ -113,7 +113,7 @@ begin
       procedure
       begin
         Dm.SyncronizarDadosServerGeral;
-        MsgPoupUpTeste('TfrmSplashScreen Sync - OK');
+        MsgPoupUpTeste('TfrmSplashScreen SyncGeral - OK');
       end);
     Thread.Start;
   end;
