@@ -50,10 +50,10 @@ type
     btnCalendarLeft: TSpeedButton;
     btnCalendarRight: TSpeedButton;
     lblCalendar: TLabel;
+    tmInternet: TTimer;
     layInternet: TLayout;
     recInternet: TRectangle;
     lblInternet: TLabel;
-    tmInternet: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

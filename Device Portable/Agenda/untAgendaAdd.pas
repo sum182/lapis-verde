@@ -27,10 +27,10 @@ type
     imgAluno: TImage;
     imgTurma: TImage;
     lblNome: TLabel;
+    tmInternet: TTimer;
     layInternet: TLayout;
     recInternet: TRectangle;
     lblInternet: TLabel;
-    tmInternet: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure btnEnviarClick(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);

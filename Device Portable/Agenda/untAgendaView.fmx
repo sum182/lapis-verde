@@ -260,7 +260,7 @@ inherited frmAgendaView: TfrmAgendaView
           Margins.Left = 2.000000000000000000
           Margins.Right = 2.000000000000000000
           Size.Width = 382.000000000000000000
-          Size.Height = 136.000000000000000000
+          Size.Height = 153.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'listboxstyle'
           TabOrder = 0
@@ -286,7 +286,7 @@ inherited frmAgendaView: TfrmAgendaView
           DefaultItemStyles.GroupFooterStyle = ''
           GroupingKind = Grouped
           Viewport.Width = 377.000000000000000000
-          Viewport.Height = 136.000000000000000000
+          Viewport.Height = 153.000000000000000000
         end
         object layCalendar: TLayout
           Align = Top
@@ -879,37 +879,39 @@ inherited frmAgendaView: TfrmAgendaView
             end
           end
         end
-        object layInternet: TLayout
-          Align = Bottom
-          Position.Y = 412.000000000000000000
-          Size.Width = 386.000000000000000000
-          Size.Height = 50.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 4
-          object recInternet: TRectangle
-            Align = Client
-            Size.Width = 386.000000000000000000
-            Size.Height = 50.000000000000000000
-            Size.PlatformDefault = False
-            Stroke.Kind = None
-            object lblInternet: TLabel
-              Align = Client
-              StyledSettings = [Size, FontColor]
-              Margins.Left = 7.000000000000000000
-              Size.Width = 379.000000000000000000
-              Size.Height = 50.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Segoe UI Semibold'
-              TextSettings.Font.Style = [fsBold]
-              Text = 'Sem conex'#227'o de Internet.'
-            end
-          end
-        end
         object tmInternet: TTimer
           Interval = 3000
           OnTimer = tmInternetTimer
           Left = 326
           Top = 512
+        end
+        object layInternet: TLayout
+          Align = Bottom
+          Position.Y = 429.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object recInternet: TRectangle
+            Align = Client
+            Fill.Color = claDarkgray
+            Size.Width = 386.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object lblInternet: TLabel
+              Align = Client
+              StyledSettings = []
+              Margins.Left = 8.000000000000000000
+              Margins.Bottom = 3.000000000000000000
+              Size.Width = 378.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.WordWrap = False
+              Text = 'Sem conex'#227'o de Internet.'
+            end
+          end
         end
       end
       object tbItemListAgendaDev: TTabItem
