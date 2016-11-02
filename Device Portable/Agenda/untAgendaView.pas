@@ -50,6 +50,10 @@ type
     btnCalendarLeft: TSpeedButton;
     btnCalendarRight: TSpeedButton;
     lblCalendar: TLabel;
+    layInternet: TLayout;
+    recInternet: TRectangle;
+    lblInternet: TLabel;
+    tmInternet: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -68,6 +72,7 @@ type
     procedure imgCalendarRightClick(Sender: TObject);
     procedure imgCalendarDownClick(Sender: TObject);
     procedure imgCalendarUpClick(Sender: TObject);
+    procedure tmInternetTimer(Sender: TObject);
   private
     MarginTextLeft:Integer;
     MarginTextRigth:Integer;
@@ -106,7 +111,7 @@ implementation
 {$R *.fmx}
 
 uses untLibDevicePortable, untDmAgenda, untDM, untAgendaAdd, untPrincipal,
-  untDMStyles, smMensagensFMX;
+  untDMStyles, smMensagensFMX,smNetworkState;
 
 procedure TfrmAgendaView.btnVoltarClick(Sender: TObject);
 begin
@@ -255,6 +260,8 @@ procedure TfrmAgendaView.RefreshForm;
 begin
   lblCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
   btnAdd.Visible:= (Calendar.Date >= Date);
+
+  layInternet.Visible:= not (smNetworkState.IsConnected);
 
   //if UsuarioLogadoIsFuncionario then
     DmAgenda.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
@@ -600,6 +607,12 @@ begin
   MarginTextLeft:=8;
   MarginTextRigth:=8;
   MarginTextTop:=6;
+end;
+
+procedure TfrmAgendaView.tmInternetTimer(Sender: TObject);
+begin
+  inherited;
+  layInternet.Visible:= not (smNetworkState.IsConnected);
 end;
 
 procedure TfrmAgendaView.btnCalendarClick(Sender: TObject);

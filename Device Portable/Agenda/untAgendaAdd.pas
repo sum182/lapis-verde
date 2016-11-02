@@ -27,6 +27,10 @@ type
     imgAluno: TImage;
     imgTurma: TImage;
     lblNome: TLabel;
+    layInternet: TLayout;
+    recInternet: TRectangle;
+    lblInternet: TLabel;
+    tmInternet: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure btnEnviarClick(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
@@ -37,6 +41,7 @@ type
     procedure fgKeyboardHide(Sender: TObject; const Bounds: TRect);
     procedure fgKeyboardShow(Sender: TObject; const Bounds: TRect);
     procedure imgEnviarClick(Sender: TObject);
+    procedure tmInternetTimer(Sender: TObject);
   private
     procedure SetCabecalho;
     procedure SetEnabledFields;
@@ -57,7 +62,7 @@ implementation
 {$R *.fmx}
 
 uses smGeralFMX, untDM, untDmAgenda, untDMStyles, untLibDevicePortable, smMensagensFMX,
-  FMX.Forms, untAgendaView;
+  FMX.Forms, untAgendaView,smNetworkState;
 
 procedure TfrmAgendaAdd.btnVoltarClick(Sender: TObject);
 begin
@@ -135,6 +140,13 @@ begin
   imgAluno.Visible := (AlunoId >= 1);
   imgTurma.Visible := (TurmaId >= 1);
   lblNome.Visible:=True;
+  layInternet.Visible:= not (smNetworkState.IsConnected);
+end;
+
+procedure TfrmAgendaAdd.tmInternetTimer(Sender: TObject);
+begin
+  inherited;
+  layInternet.Visible:= not (smNetworkState.IsConnected);
 end;
 
 procedure TfrmAgendaAdd.SetCabecalho;

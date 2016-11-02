@@ -40,9 +40,10 @@ type
     lstItemUsuario: TListBoxItem;
     imgLogoff: TImage;
     Label2: TLabel;
-    Layout1: TLayout;
-    Rectangle1: TRectangle;
-    Label4: TLabel;
+    layInternet: TLayout;
+    recInternet: TRectangle;
+    lblInternet: TLabel;
+    tmInternet: TTimer;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure lstItemTesteGeralAppClick(Sender: TObject);
@@ -60,6 +61,7 @@ type
     procedure imgLogoffClick(Sender: TObject);
     procedure imgMeuPerfilClick(Sender: TObject);
     procedure imgConfiguracoesClick(Sender: TObject);
+    procedure tmInternetTimer(Sender: TObject);
   private
     { Private declarations }
     fShowForm:Boolean;
@@ -159,6 +161,7 @@ begin
     layPrincipal.AddObject(TLayout(LayoutBase));
     layMenu.Visible:=False;
     layPrincipal.Visible:=True;
+    layInternet.Parent:=layPrincipal;
   end;
 
   btnVoltarForms := fActiveForm.FindComponent('btnVoltar');
@@ -254,6 +257,7 @@ begin
   lstItemTesteLogin.Visible := IsModoTeste;
 end;
 
+
 procedure TfrmPrincipal.SetUsuario;
 begin
   lstItemUsuario.Text:=Usuario.Nome;
@@ -262,11 +266,18 @@ end;
 procedure TfrmPrincipal.ShowMenuPrincipal;
 begin
   layPrincipal.Visible:=False;
+  layInternet.Parent:=layMenu;
   layMenu.Visible:=True;
   ToolBarPincipal.Visible:=True;
   MultiView1.HideMaster;
   fShowMenuPrincipal:=True;
   fShowForm:=False;
+end;
+
+procedure TfrmPrincipal.tmInternetTimer(Sender: TObject);
+begin
+  inherited;
+  layInternet.Visible:= not (smNetworkState.IsConnected);
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;
@@ -355,6 +366,8 @@ begin
 
   PrimeiroAcesso;
   Dm.OpenQuerys;
+
+  layInternet.Visible:= not (smNetworkState.IsConnected);
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;
