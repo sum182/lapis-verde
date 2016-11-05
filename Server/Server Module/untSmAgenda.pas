@@ -27,6 +27,7 @@ type
     fdqAgendaTurmaturma_id: TIntegerField;
     FDStanStorageBinLink1: TFDStanStorageBinLink;
     FDMySQLDriverLink: TFDPhysMySQLDriverLink;
+    fdqAluno: TFDQuery;
     procedure fdqAgendaBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqAgendaAfterPost(DataSet: TDataSet);
@@ -44,15 +45,14 @@ type
 
      procedure OpenAgendaTeste(DtIni,DtFim:TDateTime);
      procedure SetSQLAgendaTeste;
-
-
+     procedure OpenAlunos;
+     procedure SendCloudMessagingAgenda();
 
  {$METHODINFO ON}
   public
     function GetAgenda(pEscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
     function GetAgendaTeste(pEscolaId:Integer;pUsuario:TJSONValue;DtIni,DtFim:TDateTime;KeysInserts: String = '' ):TFDJSONDataSets;
     function SalvarAgenda(pEscolaId:Integer; pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets):String;
-    procedure SendCloudMessagingAgenda();
   end;
 
 var
@@ -64,7 +64,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses untSmMain, smDBFireDac, Vcl.Forms, smGeralFMX, smGeral,untLibServer,
-  untServerContainer, Vcl.Dialogs;
+  untServerContainer, Vcl.Dialogs,smJson, untResourceString, untSQLs;
 
 {$R *.dfm}
 
@@ -239,6 +239,15 @@ begin
 end;
 
 
+procedure TSmAgenda.OpenAlunos;
+begin
+  fdqAluno.Close;
+  fdqAluno.SQL.Clear;
+  fdqAluno.SQL.Add(rs_SQLAluno);
+  fdqAluno.SQL.Add(smMain.GetSQLEscolaId);
+  fdqAluno.Open;
+end;
+
 function TSmAgenda.SalvarAgenda(pEscolaId:Integer;pUsuario:TJSONValue; DtIni, DtFim: TDateTime; LDataSetList: TFDJSONDataSets): String;
 var
   LDataSet: TFDDataSet;
@@ -302,14 +311,17 @@ end;
 procedure TSmAgenda.SendCloudMessagingAgenda;
 var
   DestinatariosResp: TJSONArray;
+  DestinatariosFunc: TJSONArray;
+  Aluno:string;
 begin
   CloseAgenda;
   fdqAgenda.Active := True;
   fdqAgendaAluno.Active := True;
   fdqAgendaTurma.Active := True;
+  OpenAlunos;
 
   DestinatariosResp := TJSONArray.Create();
-
+  DestinatariosFunc := TJSONArray.Create();
 
   fdqAgenda.First;
   while not fdqAgenda.Eof do
@@ -320,11 +332,11 @@ begin
     fdqAgendaAluno.Filter:='agenda_id = ' + QuotedStr(fdqAgenda.FieldByName('agenda_id').AsString);
     fdqAgendaAluno.Filtered:=True;
 
-
     fdqAgendaAluno.First;
     while not fdqAgendaAluno.Eof do
     begin
 
+      //Resp
       SmMain.OpenDevicesResponsavel(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
                                     fdqAgenda.FieldByName('responsavel_id').AsInteger
                                    );
@@ -332,12 +344,36 @@ begin
       SmMain.fdqDevicesResp.First;
       while not SmMain.fdqDevicesResp.eof do
       begin
-        DestinatariosResp.Add(SmMain.fdqDevicesResp.FieldByName('device_token').AsString);
+
+        if not smJson.CheckItemAdd(DestinatariosResp,SmMain.fdqDevicesResp.FieldByName('device_token').AsString) then
+          DestinatariosResp.Add(SmMain.fdqDevicesResp.FieldByName('device_token').AsString);
         SmMain.fdqDevicesResp.Next;
       end;
 
 
+      //Func
+      SmMain.OpenDevicesFuncionario(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
+                                    fdqAgenda.FieldByName('funcionario_id').AsInteger
+                                   );
 
+      SmMain.fdqDevicesFunc.First;
+      while not SmMain.fdqDevicesFunc.eof do
+      begin
+
+        if not smJson.CheckItemAdd(DestinatariosFunc,SmMain.fdqDevicesFunc.FieldByName('device_token').AsString) then
+          DestinatariosFunc.Add(SmMain.fdqDevicesFunc.FieldByName('device_token').AsString);
+        SmMain.fdqDevicesFunc.Next;
+      end;
+
+      fdqAluno.IndexFieldNames:='aluno_id';
+      if fdqAluno.FindKey([fdqAgendaAluno.FieldByName('aluno_id').AsInteger])Then
+        Aluno:= fdqAluno.FieldByName('nome').AsString;
+
+      //SendCloudMessaging - Funcionário
+      SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                                'Aluno: ' + Aluno + '-'+
+                                 fdqAgenda.FieldByName('descricao').AsString,DestinatariosFunc
+                               );
       fdqAgendaAluno.Next;
     end;
 
@@ -347,6 +383,9 @@ begin
     SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
                                fdqAgenda.FieldByName('descricao').AsString,DestinatariosResp
                              );
+
+
+
 
 
     fdqAgenda.Next;

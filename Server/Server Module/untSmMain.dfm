@@ -105,7 +105,7 @@ object SmMain: TSmMain
       'and ativo = '#39'S'#39
       'order by nome_completo'#10)
     Left = 50
-    Top = 96
+    Top = 98
     ParamData = <
       item
         Name = 'ESCOLA_ID'
@@ -295,7 +295,7 @@ object SmMain: TSmMain
       'and r.ativo = '#39'S'#39#13#10#10
       'and ra.responsavel_id <> :responsavel_id')
     Left = 530
-    Top = 309
+    Top = 325
     ParamData = <
       item
         Name = 'ALUNO_ID'
@@ -305,6 +305,40 @@ object SmMain: TSmMain
       end
       item
         Name = 'RESPONSAVEL_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object fdqDevicesFunc: TFDQuery
+    Connection = ServerContainer.FDConnection
+    SQL.Strings = (
+      ''
+      'select du.device_token'
+      'from funcionario f'
+      
+        'inner join device_usuario du on (du.funcionario_id = f.funcionar' +
+        'io_id)'
+      'inner join turma t on (t.funcionario_id = f.funcionario_id)'
+      'where f.ativo = '#39'S'#39
+      ''
+      'and t.turma_id in ( select ta.turma_id'
+      #9#9#9#9#9'from turma_aluno ta'
+      #9#9#9#9#9'where ta.aluno_id = :aluno_id'
+      '                  )'
+      '                  '
+      'and f.funcionario_id <> :funcionario_id  ')
+    Left = 530
+    Top = 381
+    ParamData = <
+      item
+        Name = 'ALUNO_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'FUNCIONARIO_ID'
         DataType = ftInteger
         ParamType = ptInput
         Value = Null

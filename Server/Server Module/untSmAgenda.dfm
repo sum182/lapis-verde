@@ -169,4 +169,25 @@ object SmAgenda: TSmAgenda
     Left = 152
     Top = 32
   end
+  object fdqAluno: TFDQuery
+    Connection = ServerContainer.FDConnection
+    SQL.Strings = (
+      
+        'SELECT a.*, concat(coalesce(a.nome,'#39#39'),'#39' '#39', coalesce(a.sobrenome' +
+        ','#39#39')) as nome_completo '
+      'FROM aluno a'
+      'where 1=1'#10' '#10
+      'and escola_id = :escola_id'#10
+      'and ativo = '#39'S'#39
+      'order by nome_completo'#10)
+    Left = 66
+    Top = 162
+    ParamData = <
+      item
+        Name = 'ESCOLA_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
 end

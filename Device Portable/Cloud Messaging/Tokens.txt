@@ -14,3 +14,12 @@
     DeviceToken:='APA91bEc7yib72snGDn02TYsuud87gv6K1CTyH1-AdEfY-lja0KyA64dQf4Gb45ZF5_goEmxzHcMM3aOei9gXkiylbY-EFoZSGzOLWIsExemUQdyHOAtCTbz-iTdF2HsVaIpQg-hnPjm';
     // Set the device token..
     ARegisterIds.Add(DeviceToken);
+	
+	
+	
+	Lapis Verde
+	Tablet
+	APA91bGRqK9ae1GWwFBAcNN0gUWAD42athiarRx4amYxls3X7C8W2YlZYf5ka6VQDz9lG5y2D7Pzjkv9XooKw8uGxMYxNJsBuXnNLcs3R8Iw_GEn_UZgrBSoiuVGXP85_j31t5wqktdX
+	
+	Alvaro
+	APA91bENEwdZ28PMYXisPk3eHx6W0UMkgemRajTXZ7TKJhxJDX4lEx6dOZbh2phYi10NklVmFSs6gmN5zisXZ9wNFXdgLvfWhvcMMz6t40R_zixkNdtN30Fc

@@ -39,6 +39,7 @@ type
     fdqLogCloudMessaging: TFDQuery;
     fdqDeviceUsuario: TFDQuery;
     fdqDevicesResp: TFDQuery;
+    fdqDevicesFunc: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fdqLogErrorBeforePost(DataSet: TDataSet);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
@@ -79,6 +80,7 @@ type
     procedure EndRequest;
 
     procedure OpenDevicesResponsavel(AlunoId:integer;ResponsavelId:integer);
+    procedure OpenDevicesFuncionario(AlunoId:integer;FuncionarioId:integer);
 
     procedure SetParamsServer(pEscolaId:Integer;pUsuario:TJSONValue);
     procedure SendCloudMessagingOld(Mensagem:string);
@@ -564,6 +566,18 @@ begin
   SetSQLConfiguracoes(KeyValues);
 
   fdqConfiguracoes.Active := True;
+end;
+
+procedure TSmMain.OpenDevicesFuncionario(AlunoId, FuncionarioId: integer);
+begin
+  fdqDevicesFunc.Close;
+  fdqDevicesFunc.ParamByName('aluno_id').AsInteger := AlunoId;
+  fdqDevicesFunc.ParamByName('funcionario_id').AsInteger := FuncionarioId;
+
+  //teste
+  fdqDevicesFunc.ParamByName('funcionario_id').AsInteger := 0;
+
+  fdqDevicesFunc.Open;
 end;
 
 procedure TSmMain.OpenDevicesResponsavel(AlunoId, ResponsavelId: integer);
