@@ -321,11 +321,17 @@ begin
   OpenAlunos;
 
   DestinatariosResp := TJSONArray.Create();
-  DestinatariosFunc := TJSONArray.Create();
 
   fdqAgenda.First;
   while not fdqAgenda.Eof do
   begin
+    //Caso a MSG ja tenha sido enviado - vai para proxima
+    if fdqAgenda.FieldByName('cloud_messaging_send').AsString = 'S' then
+    begin
+      fdqAgenda.Next;
+      Continue;
+    end;
+
     //implementar filtro por agenda_id
 
     fdqAgendaAluno.Filtered:=False;
@@ -335,6 +341,7 @@ begin
     fdqAgendaAluno.First;
     while not fdqAgendaAluno.Eof do
     begin
+      DestinatariosFunc := TJSONArray.Create();
 
       //Resp
       SmMain.OpenDevicesResponsavel(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
@@ -374,6 +381,7 @@ begin
                                 'Aluno: ' + Aluno + '-'+
                                  fdqAgenda.FieldByName('descricao').AsString,DestinatariosFunc
                                );
+      DestinatariosFunc.Free;
       fdqAgendaAluno.Next;
     end;
 
@@ -386,11 +394,14 @@ begin
 
 
 
-
+    //Flag de msg enviada
+    fdqAgenda.Edit;
+    fdqAgenda.FieldByName('cloud_messaging_send').AsString:= 'S';
+    fdqAgenda.Post;
 
     fdqAgenda.Next;
   end;
-
+  DestinatariosResp.Free;
 end;
 
 procedure TSmAgenda.SetParamsAgenda(DtIni,DtFim: TDateTime);

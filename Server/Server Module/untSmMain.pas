@@ -84,7 +84,7 @@ type
 
     procedure SetParamsServer(pEscolaId:Integer;pUsuario:TJSONValue);
     procedure SendCloudMessagingOld(Mensagem:string);
-    procedure SendCloudMessaging(Mensagem:string;Destinatarios:TJSONArray);overload;
+    procedure SendCloudMessaging(Mensagem:string;Destinatarios:TJSONArray);
 
    {$METHODINFO ON}
     function GetAlunos(pEscolaId:Integer;pUsuario:TJSONValue):TFDJSONDataSets;
