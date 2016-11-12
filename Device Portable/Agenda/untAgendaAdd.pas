@@ -46,6 +46,7 @@ type
     procedure SetCabecalho;
     procedure SetEnabledFields;
     procedure SetVisibleObjects;
+    procedure SetInternetDisconect;
   public
     AlunoId:Integer;
     TurmaId:Integer;
@@ -62,7 +63,7 @@ implementation
 {$R *.fmx}
 
 uses smGeralFMX, untDM, untDmAgenda, untDMStyles, untLibDevicePortable, smMensagensFMX,
-  FMX.Forms, untAgendaView,smNetworkState;
+  FMX.Forms, untAgendaView,smNetworkState, untResourceString;
 
 procedure TfrmAgendaAdd.btnVoltarClick(Sender: TObject);
 begin
@@ -134,19 +135,40 @@ begin
   btnEnviar.Enabled:= not (memAgenda.Text = '');
 end;
 
+procedure TfrmAgendaAdd.SetInternetDisconect;
+begin
+  layInternet.Visible:= not (smNetworkState.IsConnected);
+
+  if not(layInternet.Visible) then
+    Exit;
+
+  if lblInternet.Text = rs_sem_conexao_internet then
+  begin
+    lblInternet.Text:= rs_informacoes_desatualizadas;
+    Exit;
+  end;
+
+  if (lblInternet.Text = rs_informacoes_desatualizadas) or (lblInternet.Text = '') then
+  begin
+    lblInternet.Text:= rs_sem_conexao_internet;
+    Exit;
+  end;
+end;
+
 procedure TfrmAgendaAdd.SetVisibleObjects;
 begin
   lblNome.Visible:=False;
   imgAluno.Visible := (AlunoId >= 1);
   imgTurma.Visible := (TurmaId >= 1);
   lblNome.Visible:=True;
-  layInternet.Visible:= not (smNetworkState.IsConnected);
+  lblInternet.Text:= '';
+  SetInternetDisconect;
 end;
 
 procedure TfrmAgendaAdd.tmInternetTimer(Sender: TObject);
 begin
   inherited;
-  layInternet.Visible:= not (smNetworkState.IsConnected);
+  SetInternetDisconect;
 end;
 
 procedure TfrmAgendaAdd.SetCabecalho;

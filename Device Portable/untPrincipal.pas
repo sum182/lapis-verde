@@ -82,6 +82,7 @@ type
     procedure SetUsuario;
     procedure PrimeiroAcesso;
     function OpenAgendaAlunoAutomatico:Boolean;
+    procedure SetInternetDisconect;
   protected
 
   public
@@ -250,6 +251,27 @@ begin
     );
 end;
 
+procedure TfrmPrincipal.SetInternetDisconect;
+begin
+  layInternet.Visible:= not (smNetworkState.IsConnected);
+
+  if not(layInternet.Visible) then
+    Exit;
+
+  if lblInternet.Text = rs_sem_conexao_internet then
+  begin
+    lblInternet.Text:= rs_informacoes_desatualizadas;
+    Exit;
+  end;
+
+  if (lblInternet.Text = rs_informacoes_desatualizadas) or (lblInternet.Text = '') then
+  begin
+    lblInternet.Text:= rs_sem_conexao_internet;
+    Exit;
+  end;
+
+end;
+
 procedure TfrmPrincipal.SetModoTeste;
 begin
   lstGroupHeaderTestes.Visible := IsModoTeste;
@@ -277,24 +299,7 @@ end;
 procedure TfrmPrincipal.tmInternetTimer(Sender: TObject);
 begin
   inherited;
-  layInternet.Visible:= not (smNetworkState.IsConnected);
-
-  if not(layInternet.Visible) then
-    Exit;
-
-  if lblInternet.Text = 'Sem conexão de Internet' then
-  begin
-    lblInternet.Text:= 'As informações podem estar desatualizadas';
-    Exit;
-  end;
-
-  if lblInternet.Text = 'As informações podem estar desatualizadas' then
-  begin
-    lblInternet.Text:= 'Sem conexão de Internet';
-    Exit;
-  end;
-
-
+  SetInternetDisconect;
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;
@@ -383,7 +388,8 @@ begin
   PrimeiroAcesso;
   Dm.OpenQuerys;
 
-  layInternet.Visible:= not (smNetworkState.IsConnected);
+  lblInternet.Text:= '';
+  SetInternetDisconect;
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;

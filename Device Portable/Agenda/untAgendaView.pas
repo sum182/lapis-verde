@@ -92,6 +92,8 @@ type
     procedure SetStateObjects;
     procedure SetFiltroData;
     procedure AtualizarAgenda(DtIni, DtFim: TDateTime);
+    procedure SetInternetDisconect;
+
   public
     AlunoId: Integer;
     TurmaId: Integer;
@@ -202,10 +204,11 @@ end;
 procedure TfrmAgendaView.FormShow(Sender: TObject);
 begin
   inherited;
-
   layCalendar.Visible:=False;
   Calendar.Date := Now;
   RefreshForm;
+  lblInternet.Text:= '';
+  SetInternetDisconect;
 end;
 
 
@@ -264,8 +267,6 @@ begin
   lblCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
   btnAdd.Visible:= (Calendar.Date >= Date);
 
-  layInternet.Visible:= not (smNetworkState.IsConnected);
-
   //if UsuarioLogadoIsFuncionario then
     DmAgenda.OpenAgenda(AlunoId, TurmaId,Calendar.Date);
 
@@ -305,6 +306,26 @@ begin
       AtualizarAgenda(DtSyncBasicoExecFimOld,DtSyncBasicoExecFim);
     end;
   finally
+  end;
+end;
+
+procedure TfrmAgendaView.SetInternetDisconect;
+begin
+  layInternet.Visible:= not (smNetworkState.IsConnected);
+
+  if not(layInternet.Visible) then
+    Exit;
+
+  if lblInternet.Text = rs_sem_conexao_internet then
+  begin
+    lblInternet.Text:= rs_informacoes_desatualizadas;
+    Exit;
+  end;
+
+  if (lblInternet.Text = rs_informacoes_desatualizadas) or (lblInternet.Text = '') then
+  begin
+    lblInternet.Text:= rs_sem_conexao_internet;
+    Exit;
   end;
 end;
 
@@ -642,7 +663,7 @@ end;
 procedure TfrmAgendaView.tmInternetTimer(Sender: TObject);
 begin
   inherited;
-  layInternet.Visible:= not (smNetworkState.IsConnected);
+  SetInternetDisconect;
 end;
 
 procedure TfrmAgendaView.btnCalendarClick(Sender: TObject);

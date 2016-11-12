@@ -297,7 +297,7 @@ inherited frmAgendaView: TfrmAgendaView
           TabOrder = 1
           object Calendar: TCalendar
             Align = Client
-            Date = 42676.000000000000000000
+            Date = 42686.000000000000000000
             Size.Width = 386.000000000000000000
             Size.Height = 212.000000000000000000
             Size.PlatformDefault = False
@@ -894,7 +894,7 @@ inherited frmAgendaView: TfrmAgendaView
           TabOrder = 4
           object recInternet: TRectangle
             Align = Client
-            Fill.Color = claDarkgray
+            Fill.Color = claTomato
             Size.Width = 386.000000000000000000
             Size.Height = 33.000000000000000000
             Size.PlatformDefault = False
@@ -902,14 +902,15 @@ inherited frmAgendaView: TfrmAgendaView
             object lblInternet: TLabel
               Align = Client
               StyledSettings = []
-              Margins.Left = 8.000000000000000000
               Margins.Bottom = 3.000000000000000000
-              Size.Width = 378.000000000000000000
+              Size.Width = 386.000000000000000000
               Size.Height = 30.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.FontColor = claWhite
+              TextSettings.HorzAlign = Center
               TextSettings.WordWrap = False
-              Text = 'Sem conex'#227'o de Internet.'
+              Text = 'Sem conex'#227'o de Internet'
             end
           end
         end
