@@ -66,15 +66,15 @@ type
     procedure fgActivityDialogCancel(Sender: TObject);
     procedure TimerSaveGeralTimer(Sender: TObject);
   private
-    SyncServer: Boolean;
     procedure ConectarSQLite(FDConnection: TFDConnection; DataBaseName: String);
     procedure ConectarBases;
     procedure ConectarDB;
     procedure SetModoTeste;
     procedure GetInfoFileApp;
     procedure GetConfiguracoes;
+    procedure SetVariables;
   public
-
+    SyncServer: Boolean;
     AppName      : String;
     AppPath      : String;
 
@@ -140,6 +140,16 @@ var
   FActivityDialogThread: TThread;
   PrimeiroAcessoOK:Boolean;
   PrimeiroAcessoInExecute:Boolean;
+
+  DtSyncBasicoIni:TDateTime;
+  DtSyncBasicoFim:TDateTime;
+
+  DtSyncBasicoExecIni:TDateTime;
+  DtSyncBasicoExecFim:TDateTime;
+
+  DtSyncGeralIni:TDateTime;
+  DtSyncGeralFim:TDateTime;
+
 
 const
   BASE_URL: String =
@@ -233,6 +243,7 @@ procedure TDm.DataModuleCreate(Sender: TObject);
 begin
   //Não mudar esta ordem
   Usuario := TUsuario.Create;
+  SetVariables;
   GetInfoFileApp;
   FDConnectionDB.Close;
   FDCreateDB.Close;
@@ -846,6 +857,18 @@ begin
     fdqAluno.SQL.Add('where ra.responsavel_id = :responsavel_id');
     fdqAluno.SQL.Add('order by nome');
   end;
+end;
+
+procedure TDm.SetVariables;
+begin
+  DtSyncBasicoIni:= Now - 1;
+  DtSyncBasicoFim:= Now + 7;
+
+  DtSyncBasicoExecIni:=DtSyncBasicoIni;
+  DtSyncBasicoExecFim:=DtSyncBasicoFim;
+
+  DtSyncGeralIni:=Now - 30;
+  DtSyncGeralFim:=Now + 30;
 end;
 
 procedure TDm.SyncronizarDadosServerGeral;

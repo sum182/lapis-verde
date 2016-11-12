@@ -314,94 +314,98 @@ var
   DestinatariosFunc: TJSONArray;
   Aluno:string;
 begin
-  CloseAgenda;
-  fdqAgenda.Active := True;
-  fdqAgendaAluno.Active := True;
-  fdqAgendaTurma.Active := True;
-  OpenAlunos;
+  try
+    CloseAgenda;
+    fdqAgenda.Active := True;
+    fdqAgendaAluno.Active := True;
+    fdqAgendaTurma.Active := True;
+    OpenAlunos;
 
-  DestinatariosResp := TJSONArray.Create();
+    DestinatariosResp := TJSONArray.Create();
 
-  fdqAgenda.First;
-  while not fdqAgenda.Eof do
-  begin
-    //Caso a MSG ja tenha sido enviado - vai para proxima
-    if fdqAgenda.FieldByName('cloud_messaging_send').AsString = 'S' then
+    fdqAgenda.First;
+    while not fdqAgenda.Eof do
     begin
-      fdqAgenda.Next;
-      Continue;
-    end;
-
-    //implementar filtro por agenda_id
-
-    fdqAgendaAluno.Filtered:=False;
-    fdqAgendaAluno.Filter:='agenda_id = ' + QuotedStr(fdqAgenda.FieldByName('agenda_id').AsString);
-    fdqAgendaAluno.Filtered:=True;
-
-    fdqAgendaAluno.First;
-    while not fdqAgendaAluno.Eof do
-    begin
-      DestinatariosFunc := TJSONArray.Create();
-
-      //Resp
-      SmMain.OpenDevicesResponsavel(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
-                                    fdqAgenda.FieldByName('responsavel_id').AsInteger
-                                   );
-
-      SmMain.fdqDevicesResp.First;
-      while not SmMain.fdqDevicesResp.eof do
+      //Caso a MSG ja tenha sido enviado - vai para proxima
+      if fdqAgenda.FieldByName('cloud_messaging_send').AsString = 'S' then
       begin
+        fdqAgenda.Next;
+        Continue;
+      end;
 
-        if not smJson.CheckItemAdd(DestinatariosResp,SmMain.fdqDevicesResp.FieldByName('device_token').AsString) then
-          DestinatariosResp.Add(SmMain.fdqDevicesResp.FieldByName('device_token').AsString);
-        SmMain.fdqDevicesResp.Next;
+      //implementar filtro por agenda_id
+
+      fdqAgendaAluno.Filtered:=False;
+      fdqAgendaAluno.Filter:='agenda_id = ' + QuotedStr(fdqAgenda.FieldByName('agenda_id').AsString);
+      fdqAgendaAluno.Filtered:=True;
+
+      fdqAgendaAluno.First;
+      while not fdqAgendaAluno.Eof do
+      begin
+        DestinatariosFunc := TJSONArray.Create();
+
+        //Resp
+        SmMain.OpenDevicesResponsavel(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
+                                      fdqAgenda.FieldByName('responsavel_id').AsInteger
+                                     );
+
+        SmMain.fdqDevicesResp.First;
+        while not SmMain.fdqDevicesResp.eof do
+        begin
+
+          if not smJson.CheckItemAdd(DestinatariosResp,SmMain.fdqDevicesResp.FieldByName('device_token').AsString) then
+            DestinatariosResp.Add(SmMain.fdqDevicesResp.FieldByName('device_token').AsString);
+          SmMain.fdqDevicesResp.Next;
+        end;
+
+
+        //Func
+        SmMain.OpenDevicesFuncionario(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
+                                      fdqAgenda.FieldByName('funcionario_id').AsInteger
+                                     );
+
+        SmMain.fdqDevicesFunc.First;
+        while not SmMain.fdqDevicesFunc.eof do
+        begin
+
+          if not smJson.CheckItemAdd(DestinatariosFunc,SmMain.fdqDevicesFunc.FieldByName('device_token').AsString) then
+            DestinatariosFunc.Add(SmMain.fdqDevicesFunc.FieldByName('device_token').AsString);
+          SmMain.fdqDevicesFunc.Next;
+        end;
+
+        fdqAluno.IndexFieldNames:='aluno_id';
+        if fdqAluno.FindKey([fdqAgendaAluno.FieldByName('aluno_id').AsInteger])Then
+          Aluno:= fdqAluno.FieldByName('nome').AsString;
+
+        //SendCloudMessaging - Funcionário
+        SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
+                                  'Aluno: ' + Aluno + '-'+
+                                   fdqAgenda.FieldByName('descricao').AsString,DestinatariosFunc
+                                 );
+        DestinatariosFunc.Free;
+        fdqAgendaAluno.Next;
       end;
 
 
-      //Func
-      SmMain.OpenDevicesFuncionario(fdqAgendaAluno.FieldByName('aluno_id').AsInteger,
-                                    fdqAgenda.FieldByName('funcionario_id').AsInteger
-                                   );
 
-      SmMain.fdqDevicesFunc.First;
-      while not SmMain.fdqDevicesFunc.eof do
-      begin
-
-        if not smJson.CheckItemAdd(DestinatariosFunc,SmMain.fdqDevicesFunc.FieldByName('device_token').AsString) then
-          DestinatariosFunc.Add(SmMain.fdqDevicesFunc.FieldByName('device_token').AsString);
-        SmMain.fdqDevicesFunc.Next;
-      end;
-
-      fdqAluno.IndexFieldNames:='aluno_id';
-      if fdqAluno.FindKey([fdqAgendaAluno.FieldByName('aluno_id').AsInteger])Then
-        Aluno:= fdqAluno.FieldByName('nome').AsString;
-
-      //SendCloudMessaging - Funcionário
+      //SendCloudMessaging - Responsaveis
       SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
-                                'Aluno: ' + Aluno + '-'+
-                                 fdqAgenda.FieldByName('descricao').AsString,DestinatariosFunc
+                                 fdqAgenda.FieldByName('descricao').AsString,DestinatariosResp
                                );
-      DestinatariosFunc.Free;
-      fdqAgendaAluno.Next;
+
+
+
+      //Flag de msg enviada
+      fdqAgenda.Edit;
+      fdqAgenda.FieldByName('cloud_messaging_send').AsString:= 'S';
+      fdqAgenda.Post;
+
+      fdqAgenda.Next;
     end;
 
-
-
-    //SendCloudMessaging - Responsaveis
-    SmMain.SendCloudMessaging('Agenda: ' + fdqAgenda.FieldByName('data').AsString + ' ' +
-                               fdqAgenda.FieldByName('descricao').AsString,DestinatariosResp
-                             );
-
-
-
-    //Flag de msg enviada
-    fdqAgenda.Edit;
-    fdqAgenda.FieldByName('cloud_messaging_send').AsString:= 'S';
-    fdqAgenda.Post;
-
-    fdqAgenda.Next;
+  finally
+    DestinatariosResp.Free;
   end;
-  DestinatariosResp.Free;
 end;
 
 procedure TSmAgenda.SetParamsAgenda(DtIni,DtFim: TDateTime);

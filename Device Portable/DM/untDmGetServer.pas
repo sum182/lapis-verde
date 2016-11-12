@@ -476,7 +476,7 @@ begin
   end;
 
   try
-    GetAgenda(Now - 30, Now + 1);
+    GetAgenda(DtSyncGeralIni, DtSyncGeralFim);
     //MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);
@@ -904,7 +904,7 @@ end;
 procedure TDmGetServer.GetDadosServerBasico;
 begin
   try
-    GetAgenda(Now - 1, Now + 7);
+    GetAgenda(DtSyncBasicoIni, DtSyncBasicoFim);
     //MsgPoupUpTeste('DmGetServer.GetAgenda OK');
   except on E:Exception do
     MsgPoupUp('DmGetServer.GetAgenda Erro:' + e.Message);

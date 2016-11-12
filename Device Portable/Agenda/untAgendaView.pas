@@ -90,6 +90,8 @@ type
     procedure SetTextProperty(Text:TText;ListBoxItem:TListBoxItem);overload;
     procedure SetValuesObjects;
     procedure SetStateObjects;
+    procedure SetFiltroData;
+    procedure AtualizarAgenda(DtIni, DtFim: TDateTime);
   public
     AlunoId: Integer;
     TurmaId: Integer;
@@ -111,7 +113,7 @@ implementation
 {$R *.fmx}
 
 uses untLibDevicePortable, untDmAgenda, untDM, untAgendaAdd, untPrincipal,
-  untDMStyles, smMensagensFMX,smNetworkState;
+  untDMStyles, smMensagensFMX,smNetworkState, untDmGetServer, untResourceString;
 
 procedure TfrmAgendaView.btnVoltarClick(Sender: TObject);
 begin
@@ -124,6 +126,7 @@ end;
 procedure TfrmAgendaView.CalendarDateSelected(Sender: TObject);
 begin
   inherited;
+  SetFiltroData;
   RefreshForm;
   layCalendar.Visible := not layCalendar.Visible;
   SetStateObjects;
@@ -277,6 +280,33 @@ end;
 
 
 
+
+procedure TfrmAgendaView.SetFiltroData;
+var
+  DtSyncBasicoExecIniOld:TDate;
+  DtSyncBasicoExecFimOld:TDate;
+begin
+  try
+    if not Dm.AllowSyncronizar then
+      Exit;
+
+    if Calendar.Date < DtSyncBasicoExecIni then
+    begin
+      DtSyncBasicoExecIniOld:=DtSyncBasicoExecIni;
+      DtSyncBasicoExecIni:=Calendar.Date -30;
+
+      AtualizarAgenda(DtSyncBasicoExecIni,DtSyncBasicoExecIniOld);
+    end;
+
+    if Calendar.Date > DtSyncBasicoExecFim then
+    begin
+      DtSyncBasicoExecFimOld:= DtSyncBasicoExecFim;
+      DtSyncBasicoExecFim:=Calendar.Date + 30;
+      AtualizarAgenda(DtSyncBasicoExecFimOld,DtSyncBasicoExecFim);
+    end;
+  finally
+  end;
+end;
 
 procedure TfrmAgendaView.SetListBoxAgendaFooter;
 begin
@@ -626,6 +656,7 @@ procedure TfrmAgendaView.btnCalendarRightClick(Sender: TObject);
 begin
   inherited;
   Calendar.Date :=  IncDay(Calendar.date,1);
+  SetFiltroData;
   RefreshForm;
 end;
 
@@ -639,6 +670,7 @@ procedure TfrmAgendaView.btnCalendarLeftClick(Sender: TObject);
 begin
   inherited;
   Calendar.Date :=  IncDay(Calendar.date,-1);
+  SetFiltroData;
   RefreshForm;
 end;
 
@@ -646,6 +678,54 @@ procedure TfrmAgendaView.btnCalendarDownClick(Sender: TObject);
 begin
   inherited;
   btnCalendar.OnClick(self);
+end;
+
+procedure TfrmAgendaView.AtualizarAgenda(DtIni, DtFim: TDateTime);
+begin
+  if not DM.fgActivityDialog.IsShown then
+  begin
+      FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+      begin
+        try
+          TThread.Synchronize(nil, procedure
+          begin
+            layBase.Enabled:=False;
+            ToolBar1.Enabled:=False;
+
+            DM.fgActivityDialog.Message := rs_carregando_informacoes;
+            DM.fgActivityDialog.Show;
+          end);
+
+          Dm.SyncServer := True;
+          DmGetServer.GetAgenda(DtIni,DtFim);;
+
+          if TThread.CheckTerminated then
+          begin
+            TThread.Synchronize(nil, procedure
+            begin
+              layBase.Enabled:=True;
+              ToolBar1.Enabled:=True;
+              Application.ProcessMessages;
+              Exit;
+            end);
+          end;
+
+
+        finally
+          if not TThread.CheckTerminated then
+            TThread.Synchronize(nil, procedure
+            begin
+               DM.fgActivityDialog.Hide;
+               layBase.Enabled:=True;
+               ToolBar1.Enabled:=True;
+               Application.ProcessMessages;
+            end);
+          Dm.SyncServer := False;;
+        end;
+      end);
+    FActivityDialogThread.FreeOnTerminate := False;
+    FActivityDialogThread.Start;
+  end;
 end;
 
 procedure TfrmAgendaView.btnAddClick(Sender: TObject);
