@@ -278,6 +278,23 @@ procedure TfrmPrincipal.tmInternetTimer(Sender: TObject);
 begin
   inherited;
   layInternet.Visible:= not (smNetworkState.IsConnected);
+
+  if not(layInternet.Visible) then
+    Exit;
+
+  if lblInternet.Text = 'Sem conexão de Internet' then
+  begin
+    lblInternet.Text:= 'As informações podem estar desatualizadas';
+    Exit;
+  end;
+
+  if lblInternet.Text = 'As informações podem estar desatualizadas' then
+  begin
+    lblInternet.Text:= 'Sem conexão de Internet';
+    Exit;
+  end;
+
+
 end;
 
 procedure TfrmPrincipal.AbrirAgenda;

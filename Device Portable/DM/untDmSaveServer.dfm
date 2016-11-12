@@ -55,7 +55,7 @@ object DmSaveServer: TDmSaveServer
       'where a.enviado_server is null'
       'and a.data_insert_server is null'
       'order by a.data_insert_local')
-    Left = 224
+    Left = 235
     Top = 26
     object fdqAgendaTurmaagenda_id: TStringField
       FieldName = 'agenda_id'
@@ -88,5 +88,27 @@ object DmSaveServer: TDmSaveServer
       'and data_insert_server is null')
     Left = 48
     Top = 197
+  end
+  object fdqAgendaDtMax: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select strftime("%d/%m/%Y",max(data)) as data '
+      'from agenda a'
+      'where a.enviado_server is null'
+      'and a.data_insert_server is null'
+      'order by data_insert_local;')
+    Left = 144
+    Top = 86
+  end
+  object fdqAgendaDtMin: TFDQuery
+    Connection = Dm.FDConnectionDB
+    SQL.Strings = (
+      'select strftime("%d/%m/%Y",min(data)) as data '
+      'from agenda a'
+      'where a.enviado_server is null'
+      'and a.data_insert_server is null'
+      'order by data_insert_local;')
+    Left = 235
+    Top = 86
   end
 end

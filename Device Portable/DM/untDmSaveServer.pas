@@ -20,8 +20,12 @@ type
     fdqAgendaTurmaturma_id: TIntegerField;
     fdqConfiguracoes: TFDQuery;
     fdqDeviceUsuario: TFDQuery;
+    fdqAgendaDtMax: TFDQuery;
+    fdqAgendaDtMin: TFDQuery;
   private
     SalvarAgendaInExecute:Boolean;
+    function GetAgendaDtMax:TDateTime;
+    function GetAgendaDtMin:TDateTime;
   public
     procedure SaveLogError;
     procedure SaveConfiguracoes;
@@ -49,6 +53,22 @@ uses untDM, untLibDevicePortable, untRestClient, smDBFireDac,smNetworkState,
 {$R *.dfm}
 
 { TDmSaveServer }
+
+function TDmSaveServer.GetAgendaDtMax: TDateTime;
+begin
+  fdqAgendaDtMax.Active := False;
+  fdqAgendaDtMax.Active := True;
+
+  Result:= fdqAgendaDtMax.FieldByName('data').asDateTime;
+end;
+
+function TDmSaveServer.GetAgendaDtMin: TDateTime;
+begin
+  fdqAgendaDtMin.Active := False;
+  fdqAgendaDtMin.Active := True;
+
+  Result:= fdqAgendaDtMin.FieldByName('data').AsDateTime;
+end;
 
 procedure TDmSaveServer.SaveAgenda;
 var
@@ -83,7 +103,7 @@ begin
       if not ValidacoesRestClientBeforeExecute then
         Exit;
 
-      MsgRetornoServer:= RestClient.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
+      MsgRetornoServer:= RestClient.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,GetAgendaDtMin,GetAgendaDtMax,LDataSetList);
 
       //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then
