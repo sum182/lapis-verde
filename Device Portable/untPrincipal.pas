@@ -185,7 +185,7 @@ begin
   if DM.fgActivityDialog.IsShown Then
    DM.fgActivityDialog.Hide;
 
-  FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+   FActivityDialogThread := TThread.CreateAnonymousThread(procedure
     begin
       try
         TThread.Synchronize(nil, procedure
@@ -433,17 +433,22 @@ begin
             DM.fgActivityDialog.Show;
           end);
 
-          AbrirAgenda;
+          //AbrirAgenda;
+          Dm.SyncronizarDadosServerBasico;
 
           if TThread.CheckTerminated then
           begin
             TThread.Synchronize(nil, procedure
             begin
+              DM.fgActivityDialog.Hide;
               GridPanelLayout1.Enabled:=True;
               lstMnuMain.Enabled:=True;
               ToolBarPincipal.Enabled:=True;
+
+              if not OpenAgendaAlunoAutomatico then
+                OpenForm(TfrmAgendaSelect);
+
               Application.ProcessMessages;
-              Exit;
             end);
           end;
 
@@ -456,6 +461,10 @@ begin
                GridPanelLayout1.Enabled:=True;
                lstMnuMain.Enabled:=True;
                ToolBarPincipal.Enabled:=True;
+
+               if not OpenAgendaAlunoAutomatico then
+                 OpenForm(TfrmAgendaSelect);
+
                Application.ProcessMessages;
             end);
         end;

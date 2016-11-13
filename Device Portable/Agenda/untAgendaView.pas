@@ -90,9 +90,10 @@ type
     procedure SetTextProperty(Text:TText;ListBoxItem:TListBoxItem);overload;
     procedure SetValuesObjects;
     procedure SetStateObjects;
-    procedure SetFiltroData;
-    procedure AtualizarAgenda(DtIni, DtFim: TDateTime);
+    procedure PrepareAndExecuteRefreshAgenda;
+    procedure RefreshAgenda(DtIni, DtFim: TDateTime);
     procedure SetInternetDisconect;
+    function NeedRefreshAgenda:boolean;
 
   public
     AlunoId: Integer;
@@ -128,8 +129,11 @@ end;
 procedure TfrmAgendaView.CalendarDateSelected(Sender: TObject);
 begin
   inherited;
-  SetFiltroData;
-  RefreshForm;
+  if NeedRefreshAgenda then
+    PrepareAndExecuteRefreshAgenda
+  else
+   RefreshForm;
+
   layCalendar.Visible := not layCalendar.Visible;
   SetStateObjects;
 end;
@@ -209,6 +213,8 @@ begin
   RefreshForm;
   lblInternet.Text:= '';
   SetInternetDisconect;
+  DtSyncBasicoExecIni:=DtSyncBasicoIni;
+  DtSyncBasicoExecFim:=DtSyncBasicoFim;
 end;
 
 
@@ -262,6 +268,12 @@ begin
     end;
 end;
 
+function TfrmAgendaView.NeedRefreshAgenda: boolean;
+begin
+  Result:=(Calendar.Date < DtSyncBasicoExecIni) or
+          (Calendar.Date > DtSyncBasicoExecFim);
+end;
+
 procedure TfrmAgendaView.RefreshForm;
 begin
   lblCalendar.Text := Format('%s', [FormatDateTime('dddddd', Calendar.Date)]);
@@ -282,7 +294,7 @@ end;
 
 
 
-procedure TfrmAgendaView.SetFiltroData;
+procedure TfrmAgendaView.PrepareAndExecuteRefreshAgenda;
 var
   DtSyncBasicoExecIniOld:TDate;
   DtSyncBasicoExecFimOld:TDate;
@@ -295,15 +307,14 @@ begin
     begin
       DtSyncBasicoExecIniOld:=DtSyncBasicoExecIni;
       DtSyncBasicoExecIni:=Calendar.Date -30;
-
-      AtualizarAgenda(DtSyncBasicoExecIni,DtSyncBasicoExecIniOld);
+      RefreshAgenda(DtSyncBasicoExecIni,DtSyncBasicoExecIniOld);
     end;
 
     if Calendar.Date > DtSyncBasicoExecFim then
     begin
       DtSyncBasicoExecFimOld:= DtSyncBasicoExecFim;
       DtSyncBasicoExecFim:=Calendar.Date + 30;
-      AtualizarAgenda(DtSyncBasicoExecFimOld,DtSyncBasicoExecFim);
+      RefreshAgenda(DtSyncBasicoExecFimOld,DtSyncBasicoExecFim);
     end;
   finally
   end;
@@ -677,8 +688,10 @@ procedure TfrmAgendaView.btnCalendarRightClick(Sender: TObject);
 begin
   inherited;
   Calendar.Date :=  IncDay(Calendar.date,1);
-  SetFiltroData;
-  RefreshForm;
+  if NeedRefreshAgenda then
+    PrepareAndExecuteRefreshAgenda
+  else
+   RefreshForm;
 end;
 
 procedure TfrmAgendaView.btnCalendarTopClick(Sender: TObject);
@@ -691,8 +704,10 @@ procedure TfrmAgendaView.btnCalendarLeftClick(Sender: TObject);
 begin
   inherited;
   Calendar.Date :=  IncDay(Calendar.date,-1);
-  SetFiltroData;
-  RefreshForm;
+  if NeedRefreshAgenda then
+    PrepareAndExecuteRefreshAgenda
+  else
+   RefreshForm;
 end;
 
 procedure TfrmAgendaView.btnCalendarDownClick(Sender: TObject);
@@ -701,7 +716,7 @@ begin
   btnCalendar.OnClick(self);
 end;
 
-procedure TfrmAgendaView.AtualizarAgenda(DtIni, DtFim: TDateTime);
+procedure TfrmAgendaView.RefreshAgenda(DtIni, DtFim: TDateTime);
 begin
   if not DM.fgActivityDialog.IsShown then
   begin
@@ -718,16 +733,18 @@ begin
           end);
 
           Dm.SyncServer := True;
-          DmGetServer.GetAgenda(DtIni,DtFim);;
+          DmGetServer.GetAgenda(DtIni,DtFim);
+
 
           if TThread.CheckTerminated then
           begin
             TThread.Synchronize(nil, procedure
             begin
+              DM.fgActivityDialog.Hide;
               layBase.Enabled:=True;
               ToolBar1.Enabled:=True;
+              RefreshForm;
               Application.ProcessMessages;
-              Exit;
             end);
           end;
 
@@ -739,6 +756,7 @@ begin
                DM.fgActivityDialog.Hide;
                layBase.Enabled:=True;
                ToolBar1.Enabled:=True;
+               RefreshForm;
                Application.ProcessMessages;
             end);
           Dm.SyncServer := False;;
