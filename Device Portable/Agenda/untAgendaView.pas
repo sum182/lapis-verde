@@ -129,10 +129,10 @@ end;
 procedure TfrmAgendaView.CalendarDateSelected(Sender: TObject);
 begin
   inherited;
+  RefreshForm;
+
   if NeedRefreshAgenda then
-    PrepareAndExecuteRefreshAgenda
-  else
-   RefreshForm;
+    PrepareAndExecuteRefreshAgenda;
 
   layCalendar.Visible := not layCalendar.Visible;
   SetStateObjects;
@@ -688,10 +688,10 @@ procedure TfrmAgendaView.btnCalendarRightClick(Sender: TObject);
 begin
   inherited;
   Calendar.Date :=  IncDay(Calendar.date,1);
+  RefreshForm;
+
   if NeedRefreshAgenda then
-    PrepareAndExecuteRefreshAgenda
-  else
-   RefreshForm;
+    PrepareAndExecuteRefreshAgenda;
 end;
 
 procedure TfrmAgendaView.btnCalendarTopClick(Sender: TObject);
@@ -704,10 +704,10 @@ procedure TfrmAgendaView.btnCalendarLeftClick(Sender: TObject);
 begin
   inherited;
   Calendar.Date :=  IncDay(Calendar.date,-1);
+  RefreshForm;
+
   if NeedRefreshAgenda then
-    PrepareAndExecuteRefreshAgenda
-  else
-   RefreshForm;
+    PrepareAndExecuteRefreshAgenda;
 end;
 
 procedure TfrmAgendaView.btnCalendarDownClick(Sender: TObject);
@@ -740,10 +740,10 @@ begin
           begin
             TThread.Synchronize(nil, procedure
             begin
+              RefreshForm;
               DM.fgActivityDialog.Hide;
               layBase.Enabled:=True;
               ToolBar1.Enabled:=True;
-              RefreshForm;
               Application.ProcessMessages;
             end);
           end;
@@ -753,10 +753,10 @@ begin
           if not TThread.CheckTerminated then
             TThread.Synchronize(nil, procedure
             begin
+               RefreshForm;
                DM.fgActivityDialog.Hide;
                layBase.Enabled:=True;
                ToolBar1.Enabled:=True;
-               RefreshForm;
                Application.ProcessMessages;
             end);
           Dm.SyncServer := False;;
