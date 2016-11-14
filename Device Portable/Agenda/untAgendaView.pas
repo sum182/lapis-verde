@@ -90,10 +90,7 @@ type
     procedure SetTextProperty(Text:TText;ListBoxItem:TListBoxItem);overload;
     procedure SetValuesObjects;
     procedure SetStateObjects;
-    procedure PrepareAndExecuteRefreshAgenda;
-    procedure RefreshAgenda(DtIni, DtFim: TDateTime);
     procedure SetInternetDisconect;
-    function NeedRefreshAgenda:boolean;
 
   public
     AlunoId: Integer;
@@ -104,7 +101,10 @@ type
 
     procedure FillListBoxAgenda;
     procedure FillListBoxAgendaWait;
+    function  NeedRefreshAgenda:boolean;
     procedure RefreshForm;
+    procedure PrepareAndExecuteRefreshAgenda;
+    procedure RefreshAgenda(DtIni, DtFim: TDateTime);
     procedure SetSizeBtnCalendar;
   end;
 

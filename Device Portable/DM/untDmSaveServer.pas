@@ -103,7 +103,9 @@ begin
       if not ValidacoesRestClientBeforeExecute then
         Exit;
 
+      //MsgRetornoServer:= RestClient.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,Now-30,Now,LDataSetList);
       MsgRetornoServer:= RestClient.SmAgendaClient.SalvarAgenda(GetEscolaId,Usuario.Marshal,GetAgendaDtMin,GetAgendaDtMax,LDataSetList);
+
 
       //Flagando registros como enviado
       if MsgRetornoServer = EmptyStr then
