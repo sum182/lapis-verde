@@ -58,8 +58,6 @@ procedure TDMCloudMessaging.CreateNotification(AlertBody: string);
 var
   MyNotification: TNotification;
   Thread: TThread;
-  Data:TDate;
-  DataStr: string;
 begin
   MyNotification := NotificationCenter.CreateNotification;
   try
@@ -67,38 +65,13 @@ begin
     //MyNotification.Name := 'Notification';
     MyNotification.AlertBody := AlertBody;
     // Set Icon Badge Number (for iOS) or message number (for Android) as well
-    MyNotification.Number := NotificationNumber;
+    //MyNotification.Number := NotificationNumber;
     MyNotification.EnableSound := True;
     // Send message to the notification center
     NotificationCenter.PresentNotification(MyNotification);
     Inc(NotificationNumber);
 
     RefreshAgenda(AlertBody);
-    {Datastr:= AlertBody;
-    Datastr:= StringReplace(Datastr, 'Agenda: ', '', [rfReplaceAll, rfIgnoreCase]);
-    Datastr:= Copy(Datastr,1,10);
-    MsgPoupUpTeste('Data:' + DataStr );
-    Data:= StrToDate(DataStr);
-
-    Dm.SyncServer := True;
-    DmGetServer.GetAgenda(Data,Data);
-    Dm.SyncServer := False;
-
-    if Assigned(frmAgendaView) then
-    begin
-      frmAgendaView.RefreshForm;
-      MsgPoupUpTeste('TDMCloudMessaging frmAgendaView.RefreshForm - OK');
-    end ;
-    {else
-    begin
-      Thread := TThread.CreateAnonymousThread(
-        procedure
-        begin
-          Dm.SyncronizarDadosServerBasico;
-          MsgPoupUpTeste('TDMCloudMessaging SyncronizarDadosServerBasico - OK');
-        end);
-      Thread.Start;
-    end;}
   finally
     MyNotification.DisposeOf;
   end;
@@ -144,41 +117,8 @@ var
   DataStr: String;
   ThreadMsg: TThread;
 begin
-  {try
-    DataStr:= AlertBody;
-    DataStr:= StringReplace(DataStr, 'Agenda: ', '', [rfReplaceAll, rfIgnoreCase]);
-    DataStr:= Copy(DataStr,1,10);
-    MsgPoupUpTeste('Data:' + DataStr );
-    Data:= StrToDate(DataStr);
-
-    Dm.SyncServer := True;
-    DmGetServer.GetAgenda(Data,Data);
-    Dm.SyncServer := False;
-
-    if Assigned(frmAgendaView) then
-    begin
-      frmAgendaView.RefreshForm;
-      MsgPoupUpTeste('TDMCloudMessaging frmAgendaView.RefreshForm - OK');
-    end;
-
-  except on E:Exception do
-    begin
-      DM.SetLogError( E.Message,
-                      GetApplicationName,
-                      UnitName,
-                      ClassName,
-                      'DMCloudMessaging.RefreshAgenda',
-                      Now,
-                      'Erro na atualização da agenda' + #13 + E.Message
-                    );
-      Raise;
-    end;
-  end;
-
-  }
-
  try
-    ThreadMsg := TThread.CreateAnonymousThread(procedure
+   ThreadMsg := TThread.CreateAnonymousThread(procedure
     begin
       try
         DataStr:= AlertBody;
