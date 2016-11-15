@@ -5,6 +5,7 @@ order by data_insert_server desc;
 
 -- Devices
 select * from device_usuario
+where responsavel_id = 75
 where device_token = 'APA91bENEwdZ28PMYXisPk3eHx6W0UMkgemRajTXZ7TKJhxJDX4lEx6dOZbh2phYi10NklVmFSs6gmN5zisXZ9wNFXdgLvfWhvcMMz6t40R_zixkNdtN30Fc'
 
 
