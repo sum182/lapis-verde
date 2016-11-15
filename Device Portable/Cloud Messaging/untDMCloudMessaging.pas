@@ -125,7 +125,11 @@ begin
         DataStr:= StringReplace(DataStr, 'Agenda: ', '', [rfReplaceAll, rfIgnoreCase]);
         DataStr:= Copy(DataStr,1,10);
         MsgPoupUpTeste('Data:' + DataStr );
-        Data:= StrToDate(DataStr);
+
+        Data:= StrToDateDef (DataStr,0);
+
+        if Data <= 0 then
+          Exit;
 
         Dm.SyncServer := True;
         DmGetServer.GetAgenda(Data,Data);

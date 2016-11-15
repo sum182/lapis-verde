@@ -728,7 +728,7 @@ begin
             layBase.Enabled:=False;
             ToolBar1.Enabled:=False;
 
-            DM.fgActivityDialog.Message := rs_carregando_informacoes;
+            DM.fgActivityDialog.Message := rs_sync_informacoes;
             DM.fgActivityDialog.Show;
           end);
 
