@@ -107,7 +107,7 @@ begin
     Exit;
 
   Dm.PrimeiroAcessoVerificar;
-  if PrimeiroAcessoOK then
+  {if PrimeiroAcessoOK then
   begin
     Thread := TThread.CreateAnonymousThread(
       procedure
@@ -116,7 +116,7 @@ begin
         MsgPoupUpTeste('TfrmSplashScreen SyncGeral - OK');
       end);
     Thread.Start;
-  end;
+  end;}
 
   Close;
 end;

@@ -16,6 +16,7 @@ object DMCloudMessaging: TDMCloudMessaging
   end
   object PushEvents: TPushEvents
     Provider = KinveyProvider
+    AutoRegisterDevice = False
     OnPushReceived = PushEventsPushReceived
     Left = 142
     Top = 37

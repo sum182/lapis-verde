@@ -195,7 +195,6 @@ begin
           ToolBarPincipal.Enabled:=False;
 
           DM.fgActivityDialog.Cancellable:=False;
-          DM.fgActivityDialog.Title:='Aguarde';
           DM.fgActivityDialog.Message := 'Atualizando informações para seu primeiro acesso.';
           DM.fgActivityDialog.Show;
         end);
@@ -209,7 +208,6 @@ begin
              lstMnuMain.Enabled:=True;
              ToolBarPincipal.Enabled:=True;
              Application.ProcessMessages;
-             DM.fgActivityDialog.Title:='';
              Exit;
           end);
 
@@ -222,7 +220,6 @@ begin
              lstMnuMain.Enabled:=True;
              ToolBarPincipal.Enabled:=True;
              Application.ProcessMessages;
-             DM.fgActivityDialog.Title:='';
           end);
       end;
     end);
@@ -434,7 +431,10 @@ begin
           end);
 
           //AbrirAgenda;
-          Dm.SyncronizarDadosServerBasico;
+          if FirstSyncExecute then
+            Dm.SyncronizarDadosServerBasico
+          else
+            Dm.SyncronizarDadosServerGeral;
 
           if TThread.CheckTerminated then
           begin

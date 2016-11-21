@@ -13,7 +13,6 @@ uses
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
-  
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -149,6 +148,8 @@ var
 
   DtSyncGeralIni:TDateTime;
   DtSyncGeralFim:TDateTime;
+
+  FirstSyncExecute:Boolean;
 
 
 const
@@ -448,9 +449,12 @@ begin
 
   fdqDeviceUsuario.SQL.Add('and sistema_operacional_tipo_id = ' + IntToStr(Integer(fSistemaOperacionalTipo)));
   fdqDeviceUsuario.SQL.Add('and device_id = ' + QuoTedStr(DeviceId) );
-  fdqDeviceUsuario.SQL.Add('and device_token = ' + QuoTedStr(DeviceToken));
+  //fdqDeviceUsuario.SQL.Add('and device_token = ' + QuoTedStr(DeviceToken));
 
   fdqDeviceUsuario.Open;
+
+  DeviceId:= fdqDeviceUsuario.FieldByName('device_id').AsString;
+  DeviceToken:= fdqDeviceUsuario.FieldByName('device_token').AsString;
 end;
 
 procedure TDm.OpenFuncionarios;
@@ -736,6 +740,7 @@ begin
   if not fdqDeviceUsuario.IsEmpty then
     Exit;
 
+  DMCloudMessaging.PushEvents.AutoRegisterDevice:=True;
   DMCloudMessaging.GetDeviceInfo;
 
   if DeviceToken = '' then
@@ -753,6 +758,7 @@ begin
   fdqDeviceUsuario.FieldByName('data_atualizacao').AsDateTime:=Now;
 
   fdqDeviceUsuario.Post;
+  DMCloudMessaging.PushEvents.AutoRegisterDevice:=False;
 end;
 
 procedure TDm.SetLogError(MsgError, Aplicacao, UnitNome, Classe, Metodo: string; Data: TDateTime; MsgUsuario: string = '');
@@ -869,6 +875,8 @@ begin
 
   DtSyncGeralIni:=Now - 30;
   DtSyncGeralFim:=Now + 30;
+
+  FirstSyncExecute:=False;
 end;
 
 procedure TDm.SyncronizarDadosServerGeral;
@@ -895,6 +903,8 @@ begin
         MsgPoupUp('DmGetServer.GetDadosServerGeral Erro:' + E.Message);
     end;
 
+    if not FirstSyncExecute Then
+      FirstSyncExecute:= True;
   finally
     SyncServer := False;
   end;

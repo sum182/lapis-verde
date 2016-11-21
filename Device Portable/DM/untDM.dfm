@@ -27,6 +27,7 @@ object Dm: TDm
   end
   object fgActivityDialog: TfgActivityDialog
     Cancellable = True
+    Title = 'Aguarde'
     OnCancel = fgActivityDialogCancel
     Left = 648
     Top = 111
