@@ -103,7 +103,7 @@ uses untLogin,
   //, untConfiguracoes
 
   , untPerfil, untTypes, untSobre, untConfiguracoes, untAgendaView,
-  untResourceString;
+  untResourceString, untDMCloudMessaging;
 
 { TfrmPrincipal }
 
@@ -341,8 +341,6 @@ begin
   SetUsuario;
 
   { TODO : Implentar uma saudação para usuário }
-  SetUsuario;
-  Dm.SetDeviceUsuario;
 end;
 
 
@@ -383,6 +381,8 @@ begin
   end;
 
   PrimeiroAcesso;
+  DMCloudMessaging.GetDeviceInfo;
+
   Dm.OpenQuerys;
 
   lblInternet.Text:= '';

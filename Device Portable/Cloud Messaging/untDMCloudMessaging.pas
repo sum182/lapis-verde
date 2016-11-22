@@ -79,7 +79,7 @@ end;
 
 procedure TDMCloudMessaging.DataModuleCreate(Sender: TObject);
 begin
-  GetDeviceInfo;
+  //GetDeviceInfo;
   NotificationNumber:=1;
 end;
 
@@ -91,17 +91,23 @@ begin
   if smGeralFMX.IsSysOSWindows then
   begin
     DeviceId:='DeviceId-Teste-Windows';
-    DeviceToken:='DeviceToken-Teste-Windows';
-    Exit;
   end;
 
   {$IFDEF ANDROID}
   APushService.AppProps[TPushService.TAppPropNames.GCMAppID]:='279079000294';
-  {$ENDIF}
-
   AServiceConnection.Active:=True;
   DeviceId:=APushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID];
-  DeviceToken:=APushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
+  {$ENDIF}
+
+  Dm.OpenDeviceUsuario;
+
+  if (Dm.fdqDeviceUsuario.FieldByName('device_token').AsString <> '') then
+    DeviceToken:= Dm.fdqDeviceUsuario.FieldByName('device_token').AsString
+  else if IsSysOSAndroid then
+    DeviceToken:=APushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken]
+  else if IsSysOSWindows then
+    DeviceToken:='DeviceToken-Teste-Windows';
+
 end;
 
 procedure TDMCloudMessaging.PushEventsPushReceived(Sender: TObject;

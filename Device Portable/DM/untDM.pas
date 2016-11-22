@@ -127,6 +127,10 @@ type
     procedure SyncronizarSaveServerGeral;
     procedure SyncronizarSaveServerBasico;
 
+    procedure SyncronizarGetServerGeral;
+    procedure SyncronizarGetServerBasico;
+
+
     procedure SyncronizarDadosServerGeral;
     procedure SyncronizarDadosServerBasico;
 
@@ -430,31 +434,9 @@ begin
   fdqDeviceUsuario.Close;
   fdqDeviceUsuario.SQL.Clear;
   fdqDeviceUsuario.SQL.Add('select * from device_usuario');
-  fdqDeviceUsuario.SQL.Add('where 1=1');
-  fdqDeviceUsuario.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
-
-  if Usuario.Tipo = Funcionario then
-  begin
-    fdqDeviceUsuario.SQL.Add(' or (funcionario_id = :funcionario_id)');
-    fdqDeviceUsuario.ParamByName('funcionario_id').AsInteger:=Usuario.Id;
-  end;
-
-  if Usuario.Tipo = Responsavel then
-  begin
-    fdqDeviceUsuario.SQL.Add(' or (responsavel_id = :responsavel_id)');
-    fdqDeviceUsuario.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
-  end;
-
-  fdqDeviceUsuario.SQL.Add(')');
-
-  fdqDeviceUsuario.SQL.Add('and sistema_operacional_tipo_id = ' + IntToStr(Integer(fSistemaOperacionalTipo)));
+  fdqDeviceUsuario.SQL.Add('where ' + Usuario.FieldName + ' = ' + IntToStr(Usuario.Id));
   fdqDeviceUsuario.SQL.Add('and device_id = ' + QuoTedStr(DeviceId) );
-  //fdqDeviceUsuario.SQL.Add('and device_token = ' + QuoTedStr(DeviceToken));
-
   fdqDeviceUsuario.Open;
-
-  DeviceId:= fdqDeviceUsuario.FieldByName('device_id').AsString;
-  DeviceToken:= fdqDeviceUsuario.FieldByName('device_token').AsString;
 end;
 
 procedure TDm.OpenFuncionarios;
@@ -661,7 +643,12 @@ begin
       if not smNetworkState.ValidarConexao then
         Exit;
 
-      SyncronizarDadosServerGeral;
+      SyncronizarSaveServerGeral;
+      SyncronizarGetServerGeral;
+      //SyncronizarDadosServerGeral;
+      SetDeviceUsuario;
+      SyncronizarSaveServerGeral;
+
       fdqParametro.Edit;
       fdqParametro.FieldByName('valor').AsString:='OK';
       fdqParametro.Post;
@@ -735,16 +722,15 @@ end;
 
 procedure TDm.SetDeviceUsuario;
 begin
-  OpenDeviceUsuario;
+  DMCloudMessaging.GetDeviceInfo;
 
   if not fdqDeviceUsuario.IsEmpty then
     Exit;
 
-  DMCloudMessaging.PushEvents.AutoRegisterDevice:=True;
-  DMCloudMessaging.GetDeviceInfo;
-
   if DeviceToken = '' then
     Exit;
+
+  DMCloudMessaging.PushEvents.AutoRegisterDevice:=True;
 
   fdqDeviceUsuario.Append;
   fdqDeviceUsuario.FieldByName('device_usuario_id').AsString:=GetGUID;
@@ -908,6 +894,55 @@ begin
   finally
     SyncServer := False;
   end;
+end;
+
+procedure TDm.SyncronizarGetServerBasico;
+begin
+  try
+    if not AllowSyncronizar then
+      Exit;
+
+    if PrimeiroAcessoInExecute then
+      Exit;
+
+    SyncServer := True;
+
+    try
+      DmGetServer.GetDadosServerBasico;
+      MsgPoupUpTeste('DmGetServer.GetDadosServerBasico OK');
+    except
+      on E: Exception do
+        MsgPoupUp('DmGetServer.GetDadosServerBasico' + E.Message);
+    end;
+
+  finally
+    SyncServer := False;
+  end;
+
+end;
+
+procedure TDm.SyncronizarGetServerGeral;
+begin
+  try
+    if not AllowSyncronizar then
+      Exit;
+
+    SyncServer := True;
+
+    try
+      DmGetServer.GetDadosServerGeral;
+      MsgPoupUpTeste('DmGetServer.GetDadosServerGeral OK');
+    except
+      on E: Exception do
+        MsgPoupUp('DmGetServer.GetDadosServerGeral Erro:' + E.Message);
+    end;
+
+    if not FirstSyncExecute Then
+      FirstSyncExecute:= True;
+  finally
+    SyncServer := False;
+  end;
+
 end;
 
 procedure TDm.SyncronizarSaveServerBasico;

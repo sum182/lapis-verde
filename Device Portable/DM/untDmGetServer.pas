@@ -692,22 +692,7 @@ begin
   fdqDeviceUsuario.Close;
   fdqDeviceUsuario.SQL.Clear;
   fdqDeviceUsuario.SQL.Add('select * from device_usuario');
-  fdqDeviceUsuario.SQL.Add('where 1=1');
-  fdqDeviceUsuario.SQL.Add('and ((responsavel_id is null) and (funcionario_id is null)');
-
-  if Usuario.Tipo = Funcionario then
-  begin
-    fdqDeviceUsuario.SQL.Add(' or (funcionario_id = :funcionario_id)');
-    fdqDeviceUsuario.ParamByName('funcionario_id').AsInteger:=Usuario.Id;
-  end;
-
-  if Usuario.Tipo = Responsavel then
-  begin
-    fdqDeviceUsuario.SQL.Add(' or (responsavel_id = :responsavel_id)');
-    fdqDeviceUsuario.ParamByName('responsavel_id').AsInteger:=Usuario.Id;
-  end;
-
-  fdqDeviceUsuario.SQL.Add(')');
+  fdqDeviceUsuario.SQL.Add('where ' + Usuario.FieldName + ' = ' + IntToStr(Usuario.Id));
   fdqDeviceUsuario.Open;
 end;
 
