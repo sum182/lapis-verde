@@ -86,6 +86,7 @@ type
     lblErrorEmail: TLabel;
     Layout1: TLayout;
     lblErrorCriarConta: TLabel;
+    fgKeyboard: TfgVirtualKeyboard;
     procedure FormCreate(Sender: TObject);
     procedure btnProximaNomeClick(Sender: TObject);
     procedure btnVoltarNomeClick(Sender: TObject);
@@ -155,6 +156,8 @@ type
     procedure edtCPFClick(Sender: TObject);
     procedure edtRGClick(Sender: TObject);
     procedure cmbSexoClick(Sender: TObject);
+    procedure fgKeyboardHide(Sender: TObject; const Bounds: TRect);
+    procedure fgKeyboardShow(Sender: TObject; const Bounds: TRect);
   private
     fAllowCloseForm : Boolean;
     MsgCriarConta:String;
@@ -467,6 +470,22 @@ begin
   OnEnterFields(self,Key, KeyChar, Shift);
 end;
 
+procedure TfrmCriarConta.fgKeyboardHide(Sender: TObject; const Bounds: TRect);
+begin
+  inherited;
+  layBase.Align := TAlignLayout.Client;
+end;
+
+procedure TfrmCriarConta.fgKeyboardShow(Sender: TObject; const Bounds: TRect);
+begin
+  inherited;
+  layBase.Align := TAlignLayout.Top;
+  if BorderStyle <> TFmxFormBorderStyle.None then
+    layBase.Height := Screen.Size.Height - Bounds.Height
+  else
+    layBase.Height := Screen.Size.Height - Bounds.Height - 20;
+end;
+
 procedure TfrmCriarConta.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
@@ -487,7 +506,7 @@ procedure TfrmCriarConta.FormKeyUp(Sender: TObject; var Key: Word;
 begin
   inherited;
 
-  if (Key = vkHardwareBack) and not (KeyboradShowing) then
+  if (Key = vkHardwareBack) and not (KeyboardShowing) then
   begin
     Key := 0;
 
@@ -761,10 +780,15 @@ begin
                 layPrincipalDadosPrincipais.Enabled:=True;
                 Application.ProcessMessages;
                 MsgPoupUp('Conta criada com sucesso!');
+
+                fAllowCloseForm := True;
                 frmCriarConta.Close;
-                frmCriarConta.DisposeOf;
-                frmCriarConta:= nil;
+
+                //frmCriarConta.DisposeOf;
+                //frmCriarConta:= nil;
+
                 frmLogin.Show;
+
               end
               else
               begin
