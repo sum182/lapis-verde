@@ -23,6 +23,10 @@ select * from funcionario
 where funcionario.email = 'f';
 
 
+-- resposanvel
+select * from responsavel
+where funcionario.email = 'f';
+
 -- agenda
 select * from agenda ag
 order by agenda.agenda_id desc;

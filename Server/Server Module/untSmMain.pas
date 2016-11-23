@@ -573,10 +573,6 @@ begin
   fdqDevicesFunc.Close;
   fdqDevicesFunc.ParamByName('aluno_id').AsInteger := AlunoId;
   fdqDevicesFunc.ParamByName('funcionario_id').AsInteger := FuncionarioId;
-
-  //teste
-  fdqDevicesFunc.ParamByName('funcionario_id').AsInteger := 0;
-
   fdqDevicesFunc.Open;
 end;
 
@@ -585,10 +581,6 @@ begin
   fdqDevicesResp.Close;
   fdqDevicesResp.ParamByName('aluno_id').AsInteger := AlunoId;
   fdqDevicesResp.ParamByName('responsavel_id').AsInteger := ResponsavelId;
-
-  //teste
-  fdqDevicesResp.ParamByName('responsavel_id').AsInteger := 0;
-
   fdqDevicesResp.Open;
 end;
 

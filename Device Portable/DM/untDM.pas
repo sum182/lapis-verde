@@ -12,7 +12,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
+  Vcl.ExtCtrls
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -1029,6 +1030,9 @@ var
   Thread: TThread;
 begin
   if IsTesteApp then
+    Exit;
+
+  if not smNetworkState.IsConnected then
     Exit;
 
   Thread := TThread.CreateAnonymousThread(

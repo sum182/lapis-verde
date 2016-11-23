@@ -29,7 +29,7 @@ object Dm: TDm
     Cancellable = True
     Title = 'Aguarde'
     OnCancel = fgActivityDialogCancel
-    Left = 648
+    Left = 656
     Top = 111
   end
   object RESTClient1: TRESTClient
@@ -102,6 +102,7 @@ object Dm: TDm
     Top = 216
   end
   object TimerSyncGeral: TTimer
+    Enabled = False
     Interval = 900000
     OnTimer = TimerSyncGeralTimer
     Left = 648
@@ -312,7 +313,7 @@ object Dm: TDm
     Top = 328
   end
   object TimerSaveGeral: TTimer
-    Interval = 150000
+    Interval = 60000
     OnTimer = TimerSaveGeralTimer
     Left = 648
     Top = 272
