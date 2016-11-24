@@ -1,4 +1,0 @@
-CREATE DEFINER=`admin`@`%` TRIGGER `agendadb`.`agenda_BEFORE_INSERT` BEFORE INSERT ON `agenda` FOR EACH ROW
-BEGIN
-   --SET NEW.data_insert_server = SYSDATE();
-END
