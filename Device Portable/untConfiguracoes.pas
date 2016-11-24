@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   smFrmBaseToolBar, FMX.Objects, FMX.Controls.Presentation, FMX.Layouts,
   FMX.ListBox, FMX.Edit, FMX.EditBox, FMX.SpinBox, System.IOUtils,
-  firedac.comp.client;
+  firedac.comp.client,FMX.Consts;
 
 type
   TfrmConfiguracoes = class(TfrmBaseToolBar)
@@ -15,8 +15,15 @@ type
     lbghSeguranca: TListBoxGroupHeader;
     lbiSeguranca: TListBoxItem;
     swDesconectar: TSwitch;
+    lbRestaurarConfigs: TListBoxItem;
+    Layout1: TLayout;
+    btnConfigFabrica: TButton;
+    Line2: TLine;
+    Line1: TLine;
     procedure swDesconectarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnConfigFabricaClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   public
@@ -32,10 +39,56 @@ implementation
 
 {$R *.fmx}
 
-uses {untFuncoes,} untDMStyles, untDM, smGeralFMX, Data.DB;
+uses {untFuncoes,} untDMStyles, untDM, smGeralFMX, Data.DB, untLogin,
+  smMensagensFMX;
 
 
 { TfrmConfiguracoes }
+
+procedure TfrmConfiguracoes.btnConfigFabricaClick(Sender: TObject);
+begin
+  inherited;
+  MessageDlg('Deseja restaurar as configurações do aplicativo? ',
+    System.UITypes.TMsgDlgType.mtInformation,
+    [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+    procedure(const BotaoPressionado: TModalResult)
+      begin
+        case BotaoPressionado of
+          mrYes:
+            begin
+              Dm.DeleteAllTabels;
+              Sleep(500);
+
+              MessageDlg('Restauração realizada com sucesso! ' + #13+
+                          'A aplicação será fechada.',
+              System.UITypes.TMsgDlgType.mtInformation,
+              [System.UITypes.TMsgDlgBtn.mbOK], 0,
+                procedure(const BotaoPressionado: TModalResult)
+                  begin
+                    case BotaoPressionado of
+                      mrOk:
+                        begin
+                          Application.Terminate;
+                        end;
+                       end;
+                  end
+                );
+            end;
+          mrNo:
+            begin
+              Abort;
+            end;
+        end;
+      end
+    );
+end;
+
+procedure TfrmConfiguracoes.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  inherited;
+  CanClose := fAllowCloseForm;
+end;
 
 procedure TfrmConfiguracoes.FormCreate(Sender: TObject);
 begin

@@ -147,6 +147,5 @@ begin
   Result := FSmResponsavelClient;
 end;
 
-
 end.
 

@@ -53,7 +53,8 @@ uses
   untSQLs in '..\Lib\untSQLs.pas',
   AndroidServiceDMUnt in 'Services\Android\AndroidServiceDMUnt.pas' {AndroidServiceDM: TAndroidService},
   untCloudMessagingTeste in 'Cloud Messaging\untCloudMessagingTeste.pas' {frmCloudMessagingTeste},
-  untDMCloudMessaging in 'Cloud Messaging\untDMCloudMessaging.pas' {DMCloudMessaging: TDataModule};
+  untDMCloudMessaging in 'Cloud Messaging\untDMCloudMessaging.pas' {DMCloudMessaging: TDataModule},
+  FMX.Consts in 'Lib\Units Delphi Alteradas\FMX.Consts.pas';
 
 {$R *.res}
 
