@@ -12,15 +12,6 @@
         <Projects Include="Server\Stand Alone\AgendaServer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Device Portable\Services\Android\LapisVerdeService.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Cloud Messaging\Client\CloudMessagingClient.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Cloud Messaging\Send\CloudMessagingSend.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -56,41 +47,14 @@
     <Target Name="AgendaServer:Make">
         <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj" Targets="Make"/>
     </Target>
-    <Target Name="LapisVerdeService">
-        <MSBuild Projects="Device Portable\Services\Android\LapisVerdeService.dproj"/>
-    </Target>
-    <Target Name="LapisVerdeService:Clean">
-        <MSBuild Projects="Device Portable\Services\Android\LapisVerdeService.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="LapisVerdeService:Make">
-        <MSBuild Projects="Device Portable\Services\Android\LapisVerdeService.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="CloudMessagingClient">
-        <MSBuild Projects="Cloud Messaging\Client\CloudMessagingClient.dproj"/>
-    </Target>
-    <Target Name="CloudMessagingClient:Clean">
-        <MSBuild Projects="Cloud Messaging\Client\CloudMessagingClient.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="CloudMessagingClient:Make">
-        <MSBuild Projects="Cloud Messaging\Client\CloudMessagingClient.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="CloudMessagingSend">
-        <MSBuild Projects="Cloud Messaging\Send\CloudMessagingSend.dproj"/>
-    </Target>
-    <Target Name="CloudMessagingSend:Clean">
-        <MSBuild Projects="Cloud Messaging\Send\CloudMessagingSend.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="CloudMessagingSend:Make">
-        <MSBuild Projects="Cloud Messaging\Send\CloudMessagingSend.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer;LapisVerdeService;CloudMessagingClient;CloudMessagingSend"/>
+        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean;LapisVerdeService:Clean;CloudMessagingClient:Clean;CloudMessagingSend:Clean"/>
+        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make;LapisVerdeService:Make;CloudMessagingClient:Make;CloudMessagingSend:Make"/>
+        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

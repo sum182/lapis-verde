@@ -71,8 +71,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    F6EDDB3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C02028081010081A890A96D18D641000000
+                    E6CD9B3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C02028081010005F7908E758494E5000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -184,10 +184,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB8817CE0994C4144608
+                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB8807CE0D94C4144608
                     5D898C089207257416D376D192D237CC6CAB0B5B2E949B88ECAA3A20E668CA47
                     C41CB1DCC784982396FBCD67C41CA1FC7852DE63DED5617235AF581073FDF610
-                    EE47BBD443BC7CC536A55795720250E0908680AF8A8F0000000049454E44AE42
+                    EE47BBD443BC7CC536A557957202D5BC906B8EAAE64A0000000049454E44AE42
                     6082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -368,20 +368,19 @@ inherited frmCriarConta: TfrmCriarConta
         object layCabecalhoEmail: TLayout
           Align = Top
           Position.Y = 48.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
         end
         object layPrincipalEmail: TLayout
           Align = Client
-          Size.Width = 320.000000000000000000
-          Size.Height = 300.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object layEmail: TLayout
             Align = Top
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -393,8 +392,7 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
-              Size.Height = 32.000000000000000000
+              Size.Height = 33.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Email'
               OnChange = edtEmailChange
@@ -406,7 +404,7 @@ inherited frmCriarConta: TfrmCriarConta
           object layErrorEmail: TLayout
             Align = Top
             Position.Y = 73.000000000000000000
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 3
@@ -417,7 +415,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 15.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 13.000000000000000000
@@ -429,14 +426,13 @@ inherited frmCriarConta: TfrmCriarConta
         end
         object layRodapeEmail: TLayout
           Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object btnProximaEmail: TSpeedButton
             Align = Right
-            Position.X = 192.000000000000000000
+            Position.X = -78.000000000000000000
             Size.Width = 128.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
@@ -454,8 +450,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    E6CD9B3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C02028081010005F7908E758494E5000000
+                    FAF5EB3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C0202808101008A379073B5DDA63B000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -567,10 +563,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB8807CE0D94C4144608
+                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB88F7CD1194C4144608
                     5D898C089207257416D376D192D237CC6CAB0B5B2E949B88ECAA3A20E668CA47
                     C41CB1DCC784982396FBCD67C41CA1FC7852DE63DED5617235AF581073FDF610
-                    EE47BBD443BC7CC536A557957202D5BC906B8EAAE64A0000000049454E44AE42
+                    EE47BBD443BC7CC536A5579572025AA79050D11F489C0000000049454E44AE42
                     6082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -669,7 +665,7 @@ inherited frmCriarConta: TfrmCriarConta
           end
         end
         object ToolBarEmail: TToolBar
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -727,7 +723,7 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Height = 32.000000000000000000
+              Size.Height = 33.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Criar Senha'
               OnChange = edtCriarSenhaChange
@@ -752,7 +748,7 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Height = 32.000000000000000000
+              Size.Height = 33.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Confirmar Senha'
               OnChange = edtConfirmarSenhaChange
@@ -810,8 +806,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    E6CD9B3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C02028081010005F7908E758494E5000000
+                    FAF5EB3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C0202808101008A379073B5DDA63B000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -923,10 +919,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB8807CE0D94C4144608
+                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB88F7CD1194C4144608
                     5D898C089207257416D376D192D237CC6CAB0B5B2E949B88ECAA3A20E668CA47
                     C41CB1DCC784982396FBCD67C41CA1FC7852DE63DED5617235AF581073FDF610
-                    EE47BBD443BC7CC536A557957202D5BC906B8EAAE64A0000000049454E44AE42
+                    EE47BBD443BC7CC536A5579572025AA79050D11F489C0000000049454E44AE42
                     6082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -1082,7 +1078,7 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Height = 32.000000000000000000
+              Size.Height = 33.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Celular'
               OnChange = edtTelefoneChange
@@ -1118,8 +1114,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    E6CD9B3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C02028081010005F7908E758494E5000000
+                    FAF5EB3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C0202808101008A379073B5DDA63B000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -1231,10 +1227,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB8807CE0D94C4144608
+                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB88F7CD1194C4144608
                     5D898C089207257416D376D192D237CC6CAB0B5B2E949B88ECAA3A20E668CA47
                     C41CB1DCC784982396FBCD67C41CA1FC7852DE63DED5617235AF581073FDF610
-                    EE47BBD443BC7CC536A557957202D5BC906B8EAAE64A0000000049454E44AE42
+                    EE47BBD443BC7CC536A5579572025AA79050D11F489C0000000049454E44AE42
                     6082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -1365,20 +1361,19 @@ inherited frmCriarConta: TfrmCriarConta
         object layCabecalhoDadosPessoais: TLayout
           Align = Top
           Position.Y = 48.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
         end
         object layPrincipalDadosPrincipais: TLayout
           Align = Client
-          Size.Width = 320.000000000000000000
-          Size.Height = 300.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
           object layCPF: TLayout
             Align = Top
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -1391,8 +1386,7 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
-              Size.Height = 32.000000000000000000
+              Size.Height = 33.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'CPF'
               OnChange = edtCPFChange
@@ -1404,7 +1398,7 @@ inherited frmCriarConta: TfrmCriarConta
           object layRG: TLayout
             Align = Top
             Position.Y = 73.000000000000000000
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
@@ -1417,8 +1411,7 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
-              Size.Height = 32.000000000000000000
+              Size.Height = 33.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'RG'
               OnChange = edtRGChange
@@ -1430,7 +1423,7 @@ inherited frmCriarConta: TfrmCriarConta
           object laySexo: TLayout
             Align = Top
             Position.Y = 146.000000000000000000
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 73.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
@@ -1443,8 +1436,7 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
-              Size.Height = 32.000000000000000000
+              Size.Height = 33.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 0
               OnChange = cmbSexoChange
@@ -1455,7 +1447,7 @@ inherited frmCriarConta: TfrmCriarConta
                 Enabled = False
                 Margins.Left = 5.000000000000000000
                 Size.Width = 265.000000000000000000
-                Size.Height = 32.000000000000000000
+                Size.Height = 33.000000000000000000
                 Size.PlatformDefault = False
                 Text = 'Sexo'
               end
@@ -1464,7 +1456,7 @@ inherited frmCriarConta: TfrmCriarConta
           object Layout1: TLayout
             Align = Top
             Position.Y = 219.000000000000000000
-            Size.Width = 320.000000000000000000
+            Size.Width = 50.000000000000000000
             Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 3
@@ -1475,7 +1467,6 @@ inherited frmCriarConta: TfrmCriarConta
               Margins.Top = 20.000000000000000000
               Margins.Right = 30.000000000000000000
               Margins.Bottom = 20.000000000000000000
-              Size.Width = 270.000000000000000000
               Size.Height = 15.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 13.000000000000000000
@@ -1487,14 +1478,13 @@ inherited frmCriarConta: TfrmCriarConta
         end
         object layRodapeDadosPrincipais: TLayout
           Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object btnFinalizar: TSpeedButton
             Align = Right
-            Position.X = 192.000000000000000000
+            Position.X = -78.000000000000000000
             Size.Width = 128.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
@@ -1512,8 +1502,8 @@ inherited frmCriarConta: TfrmCriarConta
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
                     005349444154484B631805A3803EE0EFDFBF8DFFFFFF6F8072A90BFEFDFBA7FB
-                    EAD5AB3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
-                    490243DA70DA673490C134337C148C0202808101000E869058078B551E000000
+                    F2E5CB3F400B4080669644D0C392487A5812450F4BA249B184094A0F0E40AAEB
+                    490243DA70DA673490C134337C148C02028081010092C6903D593473AC000000
                     0049454E44AE426082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_next\ic_navigate_next_whi' +
@@ -1625,10 +1615,10 @@ inherited frmCriarConta: TfrmCriarConta
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
                     F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB88E7CD1594C4144608
+                    006C49444154484BEDD34B0A80300C04D0EA713C8F9FDB88D7CD1994C4144608
                     5D898C089207257416D376D192D237CC6CAB0B5B2E949B88ECAA3A20E668CA47
                     C41CB1DCC784982396FBCD67C41CA1FC7852DE63DED5617235AF581073FDF610
-                    EE47BBD443BC7CC536A557957202DF839035669B16A30000000049454E44AE42
+                    EE47BBD443BC7CC536A557957202646E901A16A205F50000000049454E44AE42
                     6082}
                   FileName = 
                     'C:\Projetos\Agenda\Imagens\ic_navigate_before\ic_navigate_before' +
@@ -1727,7 +1717,7 @@ inherited frmCriarConta: TfrmCriarConta
           end
         end
         object ToolBarDadosPessoais: TToolBar
-          Size.Width = 320.000000000000000000
+          Size.Width = 50.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
