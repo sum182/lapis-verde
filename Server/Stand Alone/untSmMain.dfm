@@ -19,10 +19,10 @@ object SmMain: TSmMain
   end
   object FDConnection: TFDConnection
     Params.Strings = (
-      'Database=agendadb'
+      'Database=dbdev'
       'User_Name=admin'
-      'Password=senhabdagenda'
-      'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
+      'Password=senhadbdevlapisverde'
+      'Server=dbdev.c8jh4twad1hp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
     LoginPrompt = False
     AfterConnect = FDConnectionAfterConnect
