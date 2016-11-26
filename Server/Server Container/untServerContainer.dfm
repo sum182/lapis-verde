@@ -51,6 +51,7 @@ object ServerContainer: TServerContainer
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
     LoginPrompt = False
+    AfterConnect = FDConnectionAfterConnect
     Left = 90
     Top = 104
   end

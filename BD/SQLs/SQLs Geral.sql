@@ -40,8 +40,8 @@ order by data_insert_server desc;
 select * from device_usuario
 
 -- Processo Atualizacao
-select * from processo_atualizacao
-where processo = 'device_usuario'
+SELECT * FROM dbdev.processo_atualizacao
+order by data desc
 
 
 

@@ -35,8 +35,8 @@ type
       var PersistentClass: TPersistentClass);
     procedure DSServer1Disconnect(DSConnectEventObject: TDSConnectEventObject);
     procedure DataModuleCreate(Sender: TObject);
+    procedure FDConnectionAfterConnect(Sender: TObject);
   private
-    { Private declarations }
 
   public
 
@@ -142,6 +142,11 @@ begin
   PersistentClass := untSmTeste.TSmTeste;
 end;
 
+procedure TServerContainer.FDConnectionAfterConnect(Sender: TObject);
+begin
+  FDConnection.ExecSQL('call sp_set_time_zone;');;
+end;
+
 function TServerContainer.GetConnection: TFDConnection;
 var
   dbconn : TFDConnection;
@@ -158,11 +163,11 @@ begin
     dbconn.ResourceOptions := FDConnection.ResourceOptions;
     dbconn.FormatOptions.DataSnapCompatibility:=True;
     dbconn.LoginPrompt := false;
+    dbconn.ExecSQL('call sp_set_time_zone;');
     ListofConnection.Add(ThreadSessionID, dbconn);
     Result := dbconn;
   end;
 end;
-
 
 initialization
   FModule := TServerContainer.Create(nil);
