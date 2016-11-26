@@ -10,11 +10,13 @@ object DM: TDM
   end
   object FDConnection: TFDConnection
     Params.Strings = (
-      'Database=agendadb'
+      'Database=dbdev'
       'User_Name=admin'
-      'Password=senhabdagenda'
-      'Server=agendadb.cfmlnopzuyrp.sa-east-1.rds.amazonaws.com'
+      'Password=senhadbdevlapisverde'
+      'Server=dbdev.c8jh4twad1hp.sa-east-1.rds.amazonaws.com'
       'DriverID=MySQL')
+    ResourceOptions.AssignedValues = [rvAutoReconnect]
+    ResourceOptions.AutoReconnect = True
     Connected = True
     LoginPrompt = False
     Transaction = FDTransaction
@@ -46,7 +48,7 @@ object DM: TDM
     Left = 168
     Top = 224
     Bitmap = {
-      494C01012600AC00300110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012600AC00340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0000000010020000000000000A0
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000495962FF495962FF495962FF495962FF495962FF495962FF4959

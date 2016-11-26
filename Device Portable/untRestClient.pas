@@ -69,15 +69,15 @@ begin
    //Windows
    if IsSysOSWindows then
    begin
-    //Stand Alone - Server local
-    DSRestConnection1.Host := DSRestConnectionLocal.Host;
-    DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
-    exit;
-
     //Apache Amazon
     DSRestConnection1.Host := DSRestConnectionApacheAWS.Host;
     DSRestConnection1.UrlPath := DSRestConnectionApacheAWS.UrlPath;
     Exit;
+
+    //Stand Alone - Server local
+    DSRestConnection1.Host := DSRestConnectionLocal.Host;
+    DSRestConnection1.UrlPath := DSRestConnectionLocal.UrlPath;
+    exit;
 
     //Apache Local
     DSRestConnection1.Host := DSRestConnectionApacheLocal.Host;

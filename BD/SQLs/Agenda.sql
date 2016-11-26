@@ -1,4 +1,4 @@
-SELECT * FROM agendadb.aluno;
+SELECT * FROM aluno;
 
 select * from agenda 
 

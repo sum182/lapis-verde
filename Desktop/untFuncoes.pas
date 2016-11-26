@@ -95,8 +95,8 @@ var
 begin
   try
     sSQL := 'select count(1) as Qtde ' +
-              'from agendadb.agenda_aluno aa ' +
-                   'inner join agendadb.agenda a on (a.agenda_id = aa.agenda_id) ' +
+              'from agenda_aluno aa ' +
+                   'inner join agenda a on (a.agenda_id = aa.agenda_id) ' +
              'where (aa.aluno_id = ' + IntToStr(idAluno) + ') ' +
                'and (a.escola_id = ' + IntToStr(GetEscolaId) + ')';
 
@@ -120,8 +120,8 @@ var
 begin
   try
     sSQL := 'select count(1) as Qtde ' +
-              'from agendadb.agenda_turma au ' +
-                   'inner join agendadb.agenda a on (a.agenda_id = au.agenda_id) ' +
+              'from agenda_turma au ' +
+                   'inner join agenda a on (a.agenda_id = au.agenda_id) ' +
              'where (au.turma_id = ' + IntToStr(idTurma) + ') ' +
                'and (a.escola_id = ' + IntToStr(GetEscolaId) + ')';
 
