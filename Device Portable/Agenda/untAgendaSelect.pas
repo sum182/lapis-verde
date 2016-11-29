@@ -56,6 +56,7 @@ begin
   tbctrlPrincipal.ActiveTab := tbitTurma;
   Dm.OpenAlunos;
   Dm.OpenTurmas;
+  Dm.RefreshFdmAlunos;
 
   //dm.fdqAluno.First;
   SetView;
@@ -83,20 +84,12 @@ begin
   if not Assigned(frmAgendaView) then
     Application.CreateForm(TfrmAgendaView, frmAgendaView);
 
-  frmAgendaView.AlunoId:= Dm.fdqAluno.FieldByName('aluno_id').AsInteger;
-  frmAgendaView.OwnerAgenda:= Dm.fdqAluno.FieldByName('nome').AsString;
-  frmAgendaView.NomeCompleto:= Dm.fdqAluno.FieldByName('nome_completo').AsString;
+  frmAgendaView.AlunoId:= Dm.fdmAlunos.FieldByName('aluno_id').AsInteger;
+  frmAgendaView.OwnerAgenda:= Dm.fdmAlunos.FieldByName('nome').AsString;
+  frmAgendaView.NomeCompleto:= Dm.fdmAlunos.FieldByName('nome_completo').AsString;
   frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
   frmAgendaView.TurmaId:= 0;
   frmAgendaView.Show;
-
- { TODO -cErro :
-  Erro - Ao acessar com login de responsavel com mais de um filho a lista se perde e duplica o nome do filho.
-  Coloquei o metodo OpenAlunos e resolveu o problema mas ainda não está legal.
-  Obs.: Logo qdo abre a tela não ordena corretamente.
-  No windows a fonte muda de tamanho, no mobile não
-  Este erro aparece apenas na primeira abertura da tela}
-  Dm.OpenAlunos;
 end;
 
 procedure TfrmAgendaSelect.OpenAgendaTurma;

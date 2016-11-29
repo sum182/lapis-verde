@@ -12,7 +12,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils,
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable
+  REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
+  FireDAC.Stan.StorageBin
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -59,6 +60,7 @@ type
     fdqConfiguracoes: TFDQuery;
     fdqDeviceUsuario: TFDQuery;
     TimerSaveGeral: TTimer;
+    fdmAlunos: TFDMemTable;
     procedure DataModuleCreate(Sender: TObject);
     procedure TimerSyncGeralTimer(Sender: TObject);
     procedure TimerSyncBasicoTimer(Sender: TObject);
@@ -89,6 +91,7 @@ type
     procedure SetSQLAlunos;
     procedure OpenAlunos;
     procedure OpenTurmas;
+    procedure RefreshFdmAlunos;
     procedure OpenTurmaAluno; overload;
     procedure OpenTurmaAluno(TurmaId: Integer); overload;
     procedure OpenResponsaveis;
@@ -710,6 +713,15 @@ begin
   fdqProcessoAtualizacao.Edit;
   fdqProcessoAtualizacao.FieldByName('data_local').AsDateTime := Now;
   fdqProcessoAtualizacao.Post;
+end;
+
+procedure TDm.RefreshFdmAlunos;
+begin
+  if fdqAluno.State in [dsInactive] then
+    OpenAlunos;
+
+  fdmAlunos.Close;
+  fdmAlunos.AppendData(fdqAluno);
 end;
 
 procedure TDm.ResetRESTConnection;
