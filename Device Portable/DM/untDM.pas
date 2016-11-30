@@ -817,7 +817,7 @@ end;
 
 procedure TDm.SetModoTeste;
 begin
-  IsModoTeste := True;
+  IsModoTeste := False;
   fEscolaId := 1;
 
   //Usuario.Tipo := Funcionario;

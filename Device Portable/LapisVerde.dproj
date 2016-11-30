@@ -119,12 +119,20 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
+        <AUP_CALL_PHONE>false</AUP_CALL_PHONE>
+        <PF_AliasKeyPass>852E47D95F9E0799CF67E530A4437BA7E44308407EFFECBE9F567733D854A8EDA5E15D1E7F62E26C8765C8FB0A1367CEBAB9360F047C22FC162345D6E5EA228CC94CF30FD516FA9FBFF0AF5D07021D5992583E1E1DD70917E3BE16E2447A78CC65DF9A9522C37D4E466CE8749257F3F938D067A757EA9CEE29D427E6</PF_AliasKeyPass>
+        <AUP_READ_EXTERNAL_STORAGE>false</AUP_READ_EXTERNAL_STORAGE>
+        <AUP_READ_PHONE_STATE>false</AUP_READ_PHONE_STATE>
+        <PF_KeyStore>C:\Projetos\Agenda\Device Portable\Publish Store\Android\PublishStoreLapisVerdeAndroid.keystore</PF_KeyStore>
+        <AUP_WRITE_EXTERNAL_STORAGE>false</AUP_WRITE_EXTERNAL_STORAGE>
+        <PF_AliasKey>lapis verde apk</PF_AliasKey>
+        <PF_KeyStorePass>852347C85F870783CF62E523A4547BB1E44208447EB4ECE29F127731D854A8EEA5B95D107F7EE2668762C8E00A0E67D914753652043A22CB16574584E5AE22C0C90AF31BD516FA9EBFABAF19074E1D5892003E1D1DA30917E3C216B1443878CC65DE9AC622E07D60466CE83F9200F3F9961C67AF57EA9CE629DF27EF3ABC</PF_KeyStorePass>
         <EL_ApsEnvironment>true</EL_ApsEnvironment>
         <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
         <Android_SplashGravity>fill</Android_SplashGravity>
         <AUP_ACCESS_WIFI_STATE>true</AUP_ACCESS_WIFI_STATE>
         <AUP_ACCESS_NETWORK_STATE>true</AUP_ACCESS_NETWORK_STATE>
-        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Build>4</VerInfo_Build>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <Android_SplashImage640>..\Imagens\Splash Screen\FundoBranco_640x480.png</Android_SplashImage640>
         <Android_LauncherIcon48>..\Imagens\ico\Aplicação\1\drawable-mdpi\ic_launcher.png</Android_LauncherIcon48>
@@ -135,7 +143,7 @@
         <BT_BuildType>Debug</BT_BuildType>
         <Android_LauncherIcon96>..\Imagens\ico\Aplicação\1\drawable-xhdpi\ic_launcher.png</Android_LauncherIcon96>
         <Android_SplashImage470>..\Imagens\Splash Screen\FundoBranco_470x320.png</Android_SplashImage470>
-        <VerInfo_Keys>package=com.lapisverde.app;label=Lápis Verde;versionCode=1;versionName=1.0.1;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
+        <VerInfo_Keys>package=com.lapisverde.app;label=Lápis Verde;versionCode=4;versionName=1.0.4;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;bindcompfmx;FmxTeeUI;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;IndySystem;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;FMXTee;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;FireDACDSDriver;DbxClientDriver;CustomIPTransport;bindcomp;IndyIPClient;dbxcds;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;$(DCC_UsePackage)</DCC_UsePackage>
         <Android_LauncherIcon72>..\Imagens\ico\Aplicação\1\drawable-hdpi\ic_launcher.png</Android_LauncherIcon72>
         <EnabledSysJars>android-support-v4.dex.jar;apk-expansion.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services.dex.jar</EnabledSysJars>
@@ -273,7 +281,6 @@
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true;LSApplicationCategoryType=public.app-category.utilities;NSLocationAlwaysUsageDescription=The reason for accessing the location information of the user;NSLocationWhenInUseUsageDescription=The reason for accessing the location information of the user</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <VerInfo_Build>1</VerInfo_Build>
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
         <Icon_MainIcon>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.ico</Icon_MainIcon>
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;svnui;tethering;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;svn;Intraweb;DBXOracleDriver;inetdb;FmxTeeUI;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;TeeDB;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;FireDACDSDriver;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;TeeUI;vclribbon;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -281,7 +288,7 @@
         <VerInfo_Locale>1046</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.1;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
@@ -308,7 +315,6 @@
         <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>1</VerInfo_Build>
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
         <Icon_MainIcon>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.ico</Icon_MainIcon>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -332,6 +338,9 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
+        <BT_BuildType>AppStore</BT_BuildType>
+        <PF_AliasKeyPass>852E47D95F9E5585A304712AD15DE33A81940557A005978797B40FAA8E6D3CD0DB48A3D6E3181C3AC1B85752FAB3C36BBABA361304262290166845ECE5BA2290C95DF35DD544A8D2D3C43B127232859FF7DE331FC3037246EB5C6E281253ECBA1B78644CBE8A835D00F777A462D9570E38D067A757EA9CEE29D427E6</PF_AliasKeyPass>
+        <PF_KeyStorePass>852347C85F870783CF62E523A4547BB1E44208447EB4ECE29F127731D854A8EEA5B95D107F7EE2668762C8E00A0E67D91475B84C8D827E798CF2A09AE5A422D3C913F373D51EFAC4BFB4AF1107441D0A92533E171DF10975E3EC16E2446078D565B39AAA22A37D534633E8609215F3E8962EE9AFDE11C01AB354C2AB3ABC</PF_KeyStorePass>
         <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
         <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
         <Android_SplashTileMode>disabled</Android_SplashTileMode>
@@ -588,11 +597,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Release" Class="AndroidGDBServer">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile">
                     <Platform Name="Android">
                         <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
@@ -791,11 +795,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\release\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
                     <Platform Name="Android">
                         <RemoteName>libAgendaDevicePortableRX10.so</RemoteName>
@@ -861,12 +860,27 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -1220,27 +1234,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
