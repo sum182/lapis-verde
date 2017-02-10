@@ -339,12 +339,13 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
         <BT_BuildType>AppStore</BT_BuildType>
-        <PF_AliasKeyPass>852E47D95F9E5585A304712AD15DE33A81940557A005978797B40FAA8E6D3CD0DB48A3D6E3181C3AC1B85752FAB3C36BBABA361304262290166845ECE5BA2290C95DF35DD544A8D2D3C43B127232859FF7DE331FC3037246EB5C6E281253ECBA1B78644CBE8A835D00F777A462D9570E38D067A757EA9CEE29D427E6</PF_AliasKeyPass>
-        <PF_KeyStorePass>852347C85F870783CF62E523A4547BB1E44208447EB4ECE29F127731D854A8EEA5B95D107F7EE2668762C8E00A0E67D91475B84C8D827E798CF2A09AE5A422D3C913F373D51EFAC4BFB4AF1107441D0A92533E171DF10975E3EC16E2446078D565B39AAA22A37D534633E8609215F3E8962EE9AFDE11C01AB354C2AB3ABC</PF_KeyStorePass>
+        <VerInfo_Keys>package=com.lapisverde.app;label=Lápis Verde;versionCode=5;versionName=1.0.5;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
+        <PF_AliasKeyPass>852E47D9645855D8A342711DD129E36881D0051BA043979397B40FAB8E363C94DB04A3D7E3401C39C1CC5752FACFC338BAF83613042722C3164B45C2E5BA22DBC90AF35DEE80A8D2D3C43B127232859FF7DE331FC3037246EB5C6E281253ECBA1B78644CBE8A835D00F777A462D9570E38D067A757EA9CEE29D427E6</PF_AliasKeyPass>
+        <PF_KeyStorePass>852347C85F870783CF62E523A4547BB1E4420844A007979E97FF0FD68E643CD0DB48A3D6E35F1C31C1B0572FFA95C375BABB3651043C2288165745F0E5F4228DC949F31ED506FADDBFCAAF0D071E1D0F92013E44C348721AEB186E2A1253ECB91B206442BE96835700F077BF62C4571938D267AF57EA9CE629DF27EF3ABC</PF_KeyStorePass>
         <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
         <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
         <Android_SplashTileMode>disabled</Android_SplashTileMode>
-        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Build>5</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
@@ -860,27 +861,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -1234,12 +1220,27 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
