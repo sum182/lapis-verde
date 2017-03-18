@@ -17,7 +17,6 @@ object DM: TDM
       'DriverID=MySQL')
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
-    Connected = True
     LoginPrompt = False
     Transaction = FDTransaction
     UpdateTransaction = FDTransaction
@@ -48,7 +47,7 @@ object DM: TDM
     Left = 168
     Top = 224
     Bitmap = {
-      494C01012600AC00340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012600AC00380110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0000000010020000000000000A0
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000495962FF495962FF495962FF495962FF495962FF495962FF4959
@@ -1504,7 +1503,6 @@ object DM: TDM
     end
   end
   object FDMySQLDriverLink: TFDPhysMySQLDriverLink
-    VendorLib = 'C:\Program Files\MySQL\MySQL Server 5.6\lib\libmysql.dll'
     Left = 136
     Top = 32
   end
@@ -1543,7 +1541,6 @@ object DM: TDM
       'User_Name=root'
       'Password=admin'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Left = 42
     Top = 160
