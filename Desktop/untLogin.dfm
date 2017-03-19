@@ -25,7 +25,6 @@ object frmLogin: TfrmLogin
     StyleFocused.LookAndFeel.SkinName = 'Black'
     StyleHot.LookAndFeel.SkinName = 'Black'
     TabOrder = 1
-    ExplicitTop = 192
     Height = 61
     Width = 313
     object btnLogin: TcxButton
@@ -64,7 +63,6 @@ object frmLogin: TfrmLogin
     StyleFocused.LookAndFeel.SkinName = 'Black'
     StyleHot.LookAndFeel.SkinName = 'Black'
     TabOrder = 0
-    ExplicitHeight = 178
     Height = 189
     Width = 313
     object edtSenha: TcxTextEdit
@@ -116,7 +114,7 @@ object frmLogin: TfrmLogin
       Left = 18
       Top = 49
       Properties.OnChange = edtLoginPropertiesChange
-      TabOrder = 1
+      TabOrder = 0
       Width = 279
     end
   end

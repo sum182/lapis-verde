@@ -138,6 +138,8 @@ begin
       dm.fdqFuncionario.Close;
       dm.fdqFuncionario.ParamByName('login').AsString := GetTextoLogin;
       dm.fdqFuncionario.ParamByName('senha').AsString := Encrypt(edtSenha.Text);
+      SetIdEscolaParamBusca(dm.fdqFuncionario);
+
       dm.fdqFuncionario.Open;
 
       //Login errado
