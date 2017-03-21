@@ -333,6 +333,12 @@ end;
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   inherited;
+  if IsSysOSWindows then
+  begin
+    self.Width:= 400;
+    self.Height:= 600;
+  end;
+
   fAllowCloseForm:= True;
   SetStyle(Self);
   fShowMenuPrincipal:=True;

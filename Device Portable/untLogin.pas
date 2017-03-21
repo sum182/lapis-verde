@@ -128,6 +128,13 @@ begin
                 OpenFrmPrincipal;
               FimLogin;
 
+              if (fLoginOK) then
+              begin
+                self.DisposeOf;
+                self := nil;
+              end;
+
+
             end);
         end;
       end);
@@ -420,12 +427,6 @@ begin
 
   frmPrincipal.Show;
   Application.MainForm := frmPrincipal;
-
-  if IsSysOSWindows then
-  begin
-    frmLogin.DisposeOf;
-    frmLogin := nil;
-  end;
 end;
 
 
