@@ -13,7 +13,7 @@ uses
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  FireDAC.Stan.StorageBin, Vcl.ExtCtrls
+  FireDAC.Stan.StorageBin
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //

@@ -130,8 +130,17 @@ begin
 
               if (fLoginOK) then
               begin
-                self.DisposeOf;
-                self := nil;
+                {$IF DEFINED(MSWINDOWS)}
+                  self.DisposeOf;
+                  self:= nil;
+                {$ENDIF}
+
+                if (IsSysOSAndroid) or (IsSysOSiOS) then
+                begin
+                  frmLogin.DisposeOf;
+                  frmLogin := nil;
+                end;
+
               end;
 
 
