@@ -39,11 +39,12 @@ resourcestring
 
 procedure TfrmSplashScreen.FormCreate(Sender: TObject);
 begin
-  if IsSysOSWindows then
+
+  {if IsSysOSWindows then
   begin
     SplashImage.MultiResBitmap.Clear;
     lblTituloApp.Text:= '';
-  end;
+  end;}
 
   StartupTimer.Enabled := false;
   StartupTimer.Interval := 1500; // can be changed to improve startup speed in later releases

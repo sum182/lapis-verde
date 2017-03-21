@@ -189,3 +189,6 @@ Coordinates=247,356,104,51
 [Dm.fdqFuncTipo]
 Coordinates=495,155,96,51
 
+[Dm.fdmAlunos]
+Visible=False
+

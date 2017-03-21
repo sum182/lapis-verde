@@ -48,7 +48,7 @@ implementation
 {$R *.fmx}
 
 uses untRestClient, Data.FireDACJSONReflect, untDM, untDmAgenda, untAgendaView,
-  untPrincipal, untDMStyles, untLibDevicePortable, untTypes;
+  untPrincipal, untDMStyles, untLibDevicePortable, untTypes, smGeralFMX;
 
 procedure TfrmAgendaSelect.FormCreate(Sender: TObject);
 begin
@@ -89,7 +89,11 @@ begin
   frmAgendaView.NomeCompleto:= Dm.fdmAlunos.FieldByName('nome_completo').AsString;
   frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
   frmAgendaView.TurmaId:= 0;
-  frmAgendaView.Show;
+
+  if IsSysOSWindows then
+    frmAgendaView.ShowModal
+  else
+    frmAgendaView.Show;
 end;
 
 procedure TfrmAgendaSelect.OpenAgendaTurma;
@@ -102,7 +106,11 @@ begin
   frmAgendaView.OwnerAgenda:= Dm.fdqTurma.FieldByName('nome').AsString;
   frmAgendaView.NomeCompleto:= Dm.fdqTurma.FieldByName('nome').AsString;
   frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
-  frmAgendaView.Show;
+
+  if IsSysOSWindows then
+    frmAgendaView.ShowModal
+  else
+    frmAgendaView.Show;
 end;
 
 procedure TfrmAgendaSelect.SetView;

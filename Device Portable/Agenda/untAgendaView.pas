@@ -116,7 +116,8 @@ implementation
 {$R *.fmx}
 
 uses untLibDevicePortable, untDmAgenda, untDM, untAgendaAdd, untPrincipal,
-  untDMStyles, smMensagensFMX,smNetworkState, untDmGetServer, untResourceString;
+  untDMStyles, smMensagensFMX,smNetworkState, untDmGetServer, untResourceString,
+  smGeralFMX;
 
 procedure TfrmAgendaView.btnVoltarClick(Sender: TObject);
 begin
@@ -778,7 +779,11 @@ begin
   frmAgendaAdd.OwnerAgenda := OwnerAgenda;
   frmAgendaAdd.NomeCompleto := NomeCompleto;
   frmAgendaAdd.Data := Calendar.Date;
-  frmAgendaAdd.Show;
+
+  if IsSysOSWindows then
+    frmAgendaAdd.ShowModal
+  else
+    frmAgendaAdd.Show;
 end;
 
 end.
