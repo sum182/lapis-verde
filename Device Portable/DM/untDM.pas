@@ -843,7 +843,8 @@ begin
     fdqAluno.SQL.Clear;
     fdqAluno.SQL.Add(' select a.*,');
     fdqAluno.SQL.Add('       coalesce(a.nome,'') || ' + ' ' + ' || coalesce(a.sobrenome,'') as nome_completo');
-    fdqAluno.SQL.Add('');
+
+    fdqAluno.SQL.Add('');
     fdqAluno.SQL.Add('from aluno a');
     fdqAluno.SQL.Add('where escola_id = :escola_id');
     fdqAluno.SQL.Add('order by nome');
@@ -855,7 +856,8 @@ begin
     fdqAluno.SQL.Clear;
     fdqAluno.SQL.Add(' select a.*,');
     fdqAluno.SQL.Add('       coalesce(a.nome,'') || ' + ' ' + ' || coalesce(a.sobrenome,'') as nome_completo');
-    fdqAluno.SQL.Add('');
+
+    fdqAluno.SQL.Add('');
     fdqAluno.SQL.Add('from aluno a');
     fdqAluno.SQL.Add('inner join responsavel_aluno ra on (ra.aluno_id = a.aluno_id)');
     fdqAluno.SQL.Add('where ra.responsavel_id = :responsavel_id');

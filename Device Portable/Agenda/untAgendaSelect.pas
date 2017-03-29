@@ -13,7 +13,7 @@ uses
   FireDAC.Stan.StorageBin, System.Rtti, System.Bindings.Outputs,
   Fmx.Bind.Editors, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FireDAC.Stan.Async, FireDAC.DApt;
+  FireDAC.Stan.Async, FireDAC.DApt, FMX.ScrollBox, FMX.Memo;
 
 type
   TfrmAgendaSelect = class(TfrmBaseToolBar)
@@ -27,6 +27,9 @@ type
     bsTurmas: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
     LinkListControlToField1: TLinkListControlToField;
+    layMsg: TLayout;
+    memMsg: TMemo;
+    lblMsg: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure lstAlunosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
@@ -36,6 +39,7 @@ type
   private
     procedure OpenAgendaAluno;
     procedure OpenAgendaTurma;
+    procedure SetMsg;
   public
     { Public declarations }
   end;
@@ -57,7 +61,7 @@ begin
   Dm.OpenAlunos;
   Dm.OpenTurmas;
   Dm.RefreshFdmAlunos;
-
+  SetMsg;
   //dm.fdqAluno.First;
   SetView;
 end;
@@ -111,6 +115,40 @@ begin
     frmAgendaView.ShowModal
   else
     frmAgendaView.Show;
+end;
+
+procedure TfrmAgendaSelect.SetMsg;
+begin
+  lblMsg.Text:='';
+  layMsg.Visible:=False;
+
+  if (not Dm.fdqAluno.IsEmpty) and ((not Dm.fdqTurma.IsEmpty))Then
+  begin
+    layMsg.Visible:=False;
+    Exit;
+  end;
+
+  if UsuarioLogadoIsResponsavel then
+  begin
+    if (Dm.fdqAluno.IsEmpty)  then
+    begin
+      lblMsg.Text:='Entre em contato com sua escola. Nenhum aluno foi vinculado' +
+      ' ao seu cadastro de responsável!';
+      layMsg.Visible:=True;
+    end;
+  end;
+
+  if UsuarioLogadoIsFuncionario then
+  begin
+    if (Dm.fdqAluno.IsEmpty) then
+    begin
+      lblMsg.Text:='Seu usuário não possui nenhum aluno vinculado. '+
+                    'Verifique o cadastro de funcionário e turmas.';
+      layMsg.Visible:=True;
+    end;
+  end;
+
+
 end;
 
 procedure TfrmAgendaSelect.SetView;

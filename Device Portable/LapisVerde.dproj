@@ -340,15 +340,17 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
         <BT_BuildType>AppStore</BT_BuildType>
-        <VerInfo_Keys>package=com.lapisverde.app;label=Lápis Verde;versionCode=5;versionName=1.0.5;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
-        <PF_AliasKeyPass>852E47D9645855D8A342711DD129E36881D0051BA043979397B40FAB8E363C94DB04A3D7E3401C39C1CC5752FACFC338BAF83613042722C3164B45C2E5BA22DBC90AF35DEE80A8D2D3C43B127232859FF7DE331FC3037246EB5C6E281253ECBA1B78644CBE8A835D00F777A462D9570E38D067A757EA9CEE29D427E6</PF_AliasKeyPass>
-        <PF_KeyStorePass>852347C85F870783CF62E523A4547BB1E4420844A007979E97FF0FD68E643CD0DB48A3D6E35F1C31C1B0572FFA95C375BABB3651043C2288165745F0E5F4228DC949F31ED506FADDBFCAAF0D071E1D0F92013E44C348721AEB186E2A1253ECB91B206442BE96835700F077BF62C4571938D267AF57EA9CE629DF27EF3ABC</PF_KeyStorePass>
+        <VerInfo_Keys>package=com.lapisverde.app;label=Lápis Verde;versionCode=6;versionName=1.0.6;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
+        <PF_AliasKeyPass>852E47D95F9E0799CF67E530A4437BA7E44308407EFFECBE9F567733D854A8EDA5E15D1E7F621C61C1BD5765FAB3C363BAB3361C04652294162B458CE5F52284C946F35DD545FA95BFA2AF3F072C1D0A92003E071DBA097BE3FD16D14425789365CA9A8422F1835D00F777A462D9570E38D067A757EA9CEE29D427E6</PF_AliasKeyPass>
+        <PF_KeyStorePass>852347C85F870783CF62E523A4547BB1E44208447EB497C397B90FE18E103C82DB0CA39AE3191C25C1B0572EFACEC331BAF736500464228B162345F0E58822DEC90BF31ED507FA8EBFE9AF23071E1D4492563E441DF9721AEB186E2A1253ECB91B206442BE96835700F077BF62C4571938D267AF57EA9CE629DF27EF3ABC</PF_KeyStorePass>
         <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
         <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
         <Android_SplashTileMode>disabled</Android_SplashTileMode>
-        <VerInfo_Build>5</VerInfo_Build>
+        <VerInfo_Build>6</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.6;Comments=</VerInfo_Keys>
+        <VerInfo_Build>6</VerInfo_Build>
         <Debugger_RunParams>-cleaninstall</Debugger_RunParams>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <Icns_MainIcns>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.icns</Icns_MainIcns>
@@ -358,6 +360,8 @@
         <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.6;Comments=</VerInfo_Keys>
+        <VerInfo_Build>6</VerInfo_Build>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <Icon_MainIcon>..\Imagens\ico\Aplicação\1\Flat-Icons.com-Flat-Pencil.ico</Icon_MainIcon>

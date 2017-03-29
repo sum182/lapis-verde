@@ -125,7 +125,7 @@ inherited frmAgendaSelect: TfrmAgendaSelect
     object tbctrlPrincipal: TTabControl
       Align = Client
       Size.Width = 320.000000000000000000
-      Size.Height = 432.000000000000000000
+      Size.Height = 327.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
       TabIndex = 1
@@ -189,7 +189,7 @@ inherited frmAgendaSelect: TfrmAgendaSelect
           ItemSpaces.Right = 2.000000000000000000
           Align = Client
           Size.Width = 320.000000000000000000
-          Size.Height = 383.000000000000000000
+          Size.Height = 278.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           ItemAppearance.ItemHeight = 70
@@ -204,18 +204,60 @@ inherited frmAgendaSelect: TfrmAgendaSelect
         end
       end
     end
+    object layMsg: TLayout
+      Align = Top
+      Position.Y = 48.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 105.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object memMsg: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        TextSettings.WordWrap = True
+        Align = Client
+        Enabled = False
+        Margins.Left = 6.000000000000000000
+        Margins.Top = 6.000000000000000000
+        Margins.Right = 6.000000000000000000
+        Margins.Bottom = 6.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 93.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'memostyle'
+        TabOrder = 0
+        Viewport.Width = 300.000000000000000000
+        Viewport.Height = 85.000000000000000000
+      end
+      object lblMsg: TLabel
+        Align = Client
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Size.Width = 304.000000000000000000
+        Size.Height = 89.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 13.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 
+          'Entre em contato com sua escola. Nenhum aluno foi vinculado ao s' +
+          'eu cadastro de respons'#225'vel!'
+      end
+    end
   end
   object bsAlunos: TBindSourceDB
     DataSet = Dm.fdmAlunos
     ScopeMappings = <>
-    Left = 48
-    Top = 200
+    Left = 40
+    Top = 360
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 52
-    Top = 261
+    Left = 44
+    Top = 413
     object LinkListControlToField2: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = bsTurmas
@@ -238,7 +280,7 @@ inherited frmAgendaSelect: TfrmAgendaSelect
   object bsTurmas: TBindSourceDB
     DataSet = Dm.fdqTurma
     ScopeMappings = <>
-    Left = 48
-    Top = 136
+    Left = 40
+    Top = 312
   end
 end
