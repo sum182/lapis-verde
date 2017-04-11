@@ -3,16 +3,17 @@ unit untPrincipal;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.MultiView, FMX.Layouts,smFrmBaseForAll,
+  FMX.Controls.Presentation, FMX.MultiView, FMX.Layouts, smFrmBaseForAll,
   FMX.ListBox, FMX.Objects, untDmGetServer, untTesteGeralApp
 
+{$IFDEF ANDROID}
+    , Androidapi.Helpers
+{$ENDIF}
+    ;
 
-  {$IFDEF ANDROID}
-   ,Androidapi.Helpers
-  {$ENDIF}
-  ;
 type
   TfrmPrincipal = class(TfrmBaseForAll)
     layPrincipal: TLayout;
@@ -64,12 +65,13 @@ type
     procedure tmInternetTimer(Sender: TObject);
   private
     { Private declarations }
-    fShowForm:Boolean;
-    fShowMenuPrincipal:Boolean;
+    fShowForm: Boolean;
+    fShowMenuPrincipal: Boolean;
     fActiveForm: TForm;
-    fAllowCloseForm : Boolean;
+    fAllowCloseForm: Boolean;
     LayoutBase, btnVoltarForms: TComponent;
 
+    iModoDesenvolvedor: Integer;
     procedure BotaoVoltarOnClick(Sender: TObject);
     procedure ShowMenuPrincipal;
     procedure HideMenuPrincipal;
@@ -78,15 +80,15 @@ type
     procedure Sair;
     procedure Logoff;
 
-    procedure SetModoTeste;
+    procedure SetModoDesenvolvedor;
     procedure SetUsuario;
     procedure PrimeiroAcesso;
-    function OpenAgendaAlunoAutomatico:Boolean;
+    function OpenAgendaAlunoAutomatico: Boolean;
     procedure SetInternetDisconect;
   protected
 
   public
-     procedure OpenForm(aFormClass: TComponentClass);
+    procedure OpenForm(aFormClass: TComponentClass);
   end;
 
 var
@@ -99,18 +101,17 @@ implementation
 uses untLogin,
   untLibDevicePortable, untDMStyles, untDM, untMensagens, smGeralFMX,
   untAgendaSelect, untAgendaAdd, untDmAgenda,
-  untDmResponsavel, smMensagensFMX,smNetworkState
-  //, untConfiguracoes
+  untDmResponsavel, smMensagensFMX, smNetworkState
+  // , untConfiguracoes
 
-  , untPerfil, untTypes, untSobre, untConfiguracoes, untAgendaView,
+    , untPerfil, untTypes, untSobre, untConfiguracoes, untAgendaView,
   untResourceString, untDMCloudMessaging;
 
 { TfrmPrincipal }
 
-
 function TfrmPrincipal.OpenAgendaAlunoAutomatico: Boolean;
 begin
-  Result:=False;
+  Result := False;
 
   if Usuario.Tipo = Funcionario then
     Exit;
@@ -119,25 +120,26 @@ begin
   if Dm.fdqAluno.RecordCount = 1 then
   begin
     if not Assigned(frmAgendaView) then
-        Application.CreateForm(TfrmAgendaView, frmAgendaView);
+      Application.CreateForm(TfrmAgendaView, frmAgendaView);
 
-    frmAgendaView.AlunoId:= Dm.fdqAluno.FieldByName('aluno_id').AsInteger;
-    frmAgendaView.OwnerAgenda:= Dm.fdqAluno.FieldByName('nome').AsString;
-    frmAgendaView.NomeCompleto:= Dm.fdqAluno.FieldByName('nome_completo').AsString;
-    frmAgendaView.DataSetAgenda:= DmAgenda.fdqAgenda;
-    frmAgendaView.TurmaId:= 0;
-    Result:=True;
+    frmAgendaView.AlunoId := Dm.fdqAluno.FieldByName('aluno_id').AsInteger;
+    frmAgendaView.OwnerAgenda := Dm.fdqAluno.FieldByName('nome').AsString;
+    frmAgendaView.NomeCompleto := Dm.fdqAluno.FieldByName
+      ('nome_completo').AsString;
+    frmAgendaView.DataSetAgenda := DmAgenda.fdqAgenda;
+    frmAgendaView.TurmaId := 0;
+    Result := True;
     frmAgendaView.Show;
   end;
 end;
 
-procedure TfrmPrincipal.OpenForm(AFormClass: TComponentClass);
+procedure TfrmPrincipal.OpenForm(aFormClass: TComponentClass);
 begin
-  if Assigned(fActiveForm)then
+  if Assigned(fActiveForm) then
   begin
-    if fActiveForm.ClassType = AFormClass then
+    if fActiveForm.ClassType = aFormClass then
     begin
-      //exit
+      // exit
       fActiveForm.DisposeOf;
       fActiveForm := nil;
     end
@@ -148,79 +150,80 @@ begin
     end;
   end;
 
+  Application.CreateForm(aFormClass, fActiveForm);
 
-  Application.CreateForm(AFormClass, fActiveForm);
+  fShowMenuPrincipal := False;
+  fShowForm := True;
 
-
-  fShowMenuPrincipal:=False;
-  fShowForm:=True;
-
-  //Encontra o Layout Base no form a ser exibido para adicionar ao frmPrincipal
+  // Encontra o Layout Base no form a ser exibido para adicionar ao frmPrincipal
   LayoutBase := fActiveForm.FindComponent('layBase');
   if Assigned(LayoutBase) then
   begin
     layPrincipal.AddObject(TLayout(LayoutBase));
-    layMenu.Visible:=False;
-    layPrincipal.Visible:=True;
-    layInternet.Parent:=layPrincipal;
+    layMenu.Visible := False;
+    layPrincipal.Visible := True;
+    layInternet.Parent := layPrincipal;
   end;
 
   btnVoltarForms := fActiveForm.FindComponent('btnVoltar');
   if Assigned(btnVoltarForms) then
     TControl(btnVoltarForms).OnClick := BotaoVoltarOnClick;
 
-   MultiView1.HideMaster;
-   ToolBarPincipal.Visible:=False;
+  MultiView1.HideMaster;
+  ToolBarPincipal.Visible := False;
 end;
-
 
 procedure TfrmPrincipal.PrimeiroAcesso;
 begin
 
   Dm.PrimeiroAcessoVerificar;
   if PrimeiroAcessoOK then
-   Exit;
+    Exit;
 
+  if Dm.fgActivityDialog.IsShown Then
+    Dm.fgActivityDialog.Hide;
 
-  if DM.fgActivityDialog.IsShown Then
-   DM.fgActivityDialog.Hide;
-
-   FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+  FActivityDialogThread := TThread.CreateAnonymousThread(
+    procedure
     begin
       try
-        TThread.Synchronize(nil, procedure
-        begin
-          GridPanelLayout1.Enabled:=False;
-          lstMnuMain.Enabled:=False;
-          ToolBarPincipal.Enabled:=False;
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            GridPanelLayout1.Enabled := False;
+            lstMnuMain.Enabled := False;
+            ToolBarPincipal.Enabled := False;
 
-          DM.fgActivityDialog.Cancellable:=False;
-          DM.fgActivityDialog.Message := 'Atualizando informações para seu primeiro acesso.';
-          DM.fgActivityDialog.Show;
-        end);
+            Dm.fgActivityDialog.Cancellable := False;
+            Dm.fgActivityDialog.Message :=
+              'Atualizando informações para seu primeiro acesso.';
+            Dm.fgActivityDialog.Show;
+          end);
 
         Dm.PrimeiroAcessoExecutar;
 
         if TThread.CheckTerminated then
-          TThread.Synchronize(nil, procedure
-          begin
-             GridPanelLayout1.Enabled:=True;
-             lstMnuMain.Enabled:=True;
-             ToolBarPincipal.Enabled:=True;
-             Application.ProcessMessages;
-             Exit;
-          end);
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              GridPanelLayout1.Enabled := True;
+              lstMnuMain.Enabled := True;
+              ToolBarPincipal.Enabled := True;
+              Application.ProcessMessages;
+              Exit;
+            end);
 
       finally
         if not TThread.CheckTerminated then
-          TThread.Synchronize(nil, procedure
-          begin
-             DM.fgActivityDialog.Hide;
-             GridPanelLayout1.Enabled:=True;
-             lstMnuMain.Enabled:=True;
-             ToolBarPincipal.Enabled:=True;
-             Application.ProcessMessages;
-          end);
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              Dm.fgActivityDialog.Hide;
+              GridPanelLayout1.Enabled := True;
+              lstMnuMain.Enabled := True;
+              ToolBarPincipal.Enabled := True;
+              Application.ProcessMessages;
+            end);
       end;
     end);
   FActivityDialogThread.FreeOnTerminate := False;
@@ -230,67 +233,66 @@ end;
 procedure TfrmPrincipal.Sair;
 begin
   MessageDlg('Deseja realmente fechar o Lápis Verde?',
-    System.UITypes.TMsgDlgType.mtInformation,
-    [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+    System.UITypes.TMsgDlgType.mtInformation, [System.UITypes.TMsgDlgBtn.mbYes,
+    System.UITypes.TMsgDlgBtn.mbNo], 0,
     procedure(const BotaoPressionado: TModalResult)
-      begin
-        case BotaoPressionado of
-          mrYes:
-            begin
-              Application.Terminate;
-            end;
-          mrNo:
-            begin
-              Abort;
-            end;
-        end;
-      end
-    );
+    begin
+      case BotaoPressionado of
+        mrYes:
+          begin
+            Application.Terminate;
+          end;
+        mrNo:
+          begin
+            Abort;
+          end;
+      end;
+    end);
 end;
 
 procedure TfrmPrincipal.SetInternetDisconect;
 begin
-  layInternet.Visible:= not (smNetworkState.IsConnected);
+  layInternet.Visible := not(smNetworkState.IsConnected);
 
   if not(layInternet.Visible) then
     Exit;
 
   if lblInternet.Text = rs_sem_conexao_internet then
   begin
-    lblInternet.Text:= rs_informacoes_desatualizadas;
+    lblInternet.Text := rs_informacoes_desatualizadas;
     Exit;
   end;
 
-  if (lblInternet.Text = rs_informacoes_desatualizadas) or (lblInternet.Text = '') then
+  if (lblInternet.Text = rs_informacoes_desatualizadas) or
+    (lblInternet.Text = '') then
   begin
-    lblInternet.Text:= rs_sem_conexao_internet;
+    lblInternet.Text := rs_sem_conexao_internet;
     Exit;
   end;
 
 end;
 
-procedure TfrmPrincipal.SetModoTeste;
+procedure TfrmPrincipal.SetModoDesenvolvedor;
 begin
-  lstGroupHeaderTestes.Visible := IsModoTeste;
-  lstItemTesteGeralApp.Visible := IsModoTeste;
-  lstItemTesteLogin.Visible := IsModoTeste;
+  lstGroupHeaderTestes.Visible := IsModoDesenvolvedor;
+  lstItemTesteGeralApp.Visible := IsModoDesenvolvedor;
+  lstItemTesteLogin.Visible := IsModoDesenvolvedor;
 end;
-
 
 procedure TfrmPrincipal.SetUsuario;
 begin
-  lstItemUsuario.Text:=Usuario.Nome;
+  lstItemUsuario.Text := Usuario.Nome;
 end;
 
 procedure TfrmPrincipal.ShowMenuPrincipal;
 begin
-  layPrincipal.Visible:=False;
-  layInternet.Parent:=layMenu;
-  layMenu.Visible:=True;
-  ToolBarPincipal.Visible:=True;
+  layPrincipal.Visible := False;
+  layInternet.Parent := layMenu;
+  layMenu.Visible := True;
+  ToolBarPincipal.Visible := True;
   MultiView1.HideMaster;
-  fShowMenuPrincipal:=True;
-  fShowForm:=False;
+  fShowMenuPrincipal := True;
+  fShowForm := False;
 end;
 
 procedure TfrmPrincipal.tmInternetTimer(Sender: TObject);
@@ -326,7 +328,7 @@ end;
 procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
-  //if (IsSysOSAndroid) or (IsSysOSiOS)then
+  // if (IsSysOSAndroid) or (IsSysOSiOS)then
   CanClose := fAllowCloseForm;
 end;
 
@@ -335,36 +337,37 @@ begin
   inherited;
   if IsSysOSWindows then
   begin
-    self.Width:= 400;
-    self.Height:= 600;
+    self.Width := 400;
+    self.Height := 600;
   end;
 
-  fAllowCloseForm:= True;
-  SetStyle(Self);
-  fShowMenuPrincipal:=True;
-  fShowForm:=False;
-  SetModoTeste;
+  fAllowCloseForm := True;
+  SetStyle(self);
+  fShowMenuPrincipal := True;
+  fShowForm := False;
+  iModoDesenvolvedor := 0;
+  SetModoDesenvolvedor;
   SetUsuario;
 
   { TODO : Implentar uma saudação para usuário }
 end;
 
-
 procedure TfrmPrincipal.FormKeyUp(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
+var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
 
   if Key = vkHardwareBack then
-    //Caso o menu estiver aberto
+    // Caso o menu estiver aberto
     if (MultiView1.IsShowed) then
     begin
       Key := 0;
       MultiView1.HideMaster;
       Exit;
     end
-    //Caso tenha algum form aberto
-    else if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm)) then
+    // Caso tenha algum form aberto
+    else if (Assigned(fActiveForm) and not(fShowMenuPrincipal) and (fShowForm))
+    then
     begin
       Key := 0;
       BotaoVoltarOnClick(self);
@@ -391,17 +394,18 @@ begin
 
   Dm.OpenQuerys;
 
-  lblInternet.Text:= '';
+  lblInternet.Text := '';
   SetInternetDisconect;
 end;
 
 procedure TfrmPrincipal.HideMenuPrincipal;
 begin
-  layPrincipal.Visible:=False;
-  layMenu.Visible:=True;
-  ToolBarPincipal.Visible:=True;
+  layPrincipal.Visible := False;
+  layMenu.Visible := True;
+  ToolBarPincipal.Visible := True;
   MultiView1.HideMaster;
-end;
+
+end;
 
 procedure TfrmPrincipal.imgLogoffClick(Sender: TObject);
 begin
@@ -418,25 +422,26 @@ end;
 procedure TfrmPrincipal.imgAgendaClick(Sender: TObject);
 begin
   inherited;
-  //AbrirAgenda;
+  // AbrirAgenda;
 
-
- if not DM.fgActivityDialog.IsShown then
+  if not Dm.fgActivityDialog.IsShown then
   begin
-    FActivityDialogThread := TThread.CreateAnonymousThread(procedure
+    FActivityDialogThread := TThread.CreateAnonymousThread(
+      procedure
       begin
         try
-          TThread.Synchronize(nil, procedure
-          begin
-            GridPanelLayout1.Enabled:=False;
-            lstMnuMain.Enabled:=False;
-            ToolBarPincipal.Enabled:=False;
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              GridPanelLayout1.Enabled := False;
+              lstMnuMain.Enabled := False;
+              ToolBarPincipal.Enabled := False;
 
-            DM.fgActivityDialog.Message := rs_sync_informacoes;
-            DM.fgActivityDialog.Show;
-          end);
+              Dm.fgActivityDialog.Message := rs_sync_informacoes;
+              Dm.fgActivityDialog.Show;
+            end);
 
-          //AbrirAgenda;
+          // AbrirAgenda;
           if FirstSyncExecute then
             Dm.SyncronizarDadosServerBasico
           else
@@ -444,35 +449,36 @@ begin
 
           if TThread.CheckTerminated then
           begin
-            TThread.Synchronize(nil, procedure
-            begin
-              DM.fgActivityDialog.Hide;
-              GridPanelLayout1.Enabled:=True;
-              lstMnuMain.Enabled:=True;
-              ToolBarPincipal.Enabled:=True;
+            TThread.Synchronize(nil,
+              procedure
+              begin
+                Dm.fgActivityDialog.Hide;
+                GridPanelLayout1.Enabled := True;
+                lstMnuMain.Enabled := True;
+                ToolBarPincipal.Enabled := True;
 
-              if not OpenAgendaAlunoAutomatico then
-                OpenForm(TfrmAgendaSelect);
+                if not OpenAgendaAlunoAutomatico then
+                  OpenForm(TfrmAgendaSelect);
 
-              Application.ProcessMessages;
-            end);
+                Application.ProcessMessages;
+              end);
           end;
-
 
         finally
           if not TThread.CheckTerminated then
-            TThread.Synchronize(nil, procedure
-            begin
-               DM.fgActivityDialog.Hide;
-               GridPanelLayout1.Enabled:=True;
-               lstMnuMain.Enabled:=True;
-               ToolBarPincipal.Enabled:=True;
+            TThread.Synchronize(nil,
+              procedure
+              begin
+                Dm.fgActivityDialog.Hide;
+                GridPanelLayout1.Enabled := True;
+                lstMnuMain.Enabled := True;
+                ToolBarPincipal.Enabled := True;
 
-               if not OpenAgendaAlunoAutomatico then
-                 OpenForm(TfrmAgendaSelect);
+                if not OpenAgendaAlunoAutomatico then
+                  OpenForm(TfrmAgendaSelect);
 
-               Application.ProcessMessages;
-            end);
+                Application.ProcessMessages;
+              end);
         end;
       end);
     FActivityDialogThread.FreeOnTerminate := False;
@@ -496,7 +502,7 @@ end;
 procedure TfrmPrincipal.imgMeuPerfilClick(Sender: TObject);
 begin
   inherited;
-  if not smNetworkState.ValidarConexao  then
+  if not smNetworkState.ValidarConexao then
     Exit;
 
   OpenForm(TfrmPerfil);
@@ -517,38 +523,62 @@ end;
 procedure TfrmPrincipal.Logoff;
 begin
   MessageDlg('Deseja realmente desconectar este usuário?',
-    System.UITypes.TMsgDlgType.mtInformation,
-    [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+    System.UITypes.TMsgDlgType.mtInformation, [System.UITypes.TMsgDlgBtn.mbYes,
+    System.UITypes.TMsgDlgBtn.mbNo], 0,
     procedure(const BotaoPressionado: TModalResult)
-      begin
-        case BotaoPressionado of
-          mrYes:
-            begin
-              Dm.OpenLoginUltimo;
+    begin
+      case BotaoPressionado of
+        mrYes:
+          begin
+            Dm.OpenLoginUltimo;
 
-              dm.fdqLoginUltimo.Edit;
-              dm.fdqLoginUltimo.FieldByName('realizou_logoff').AsString := 'S';
-              dm.fdqLoginUltimo.Post;
-              Application.Terminate;
-            end;
-          mrNo:
-            begin
-              Abort;
-            end;
-        end;
-      end
-    );
+            Dm.fdqLoginUltimo.Edit;
+            Dm.fdqLoginUltimo.FieldByName('realizou_logoff').AsString := 'S';
+            Dm.fdqLoginUltimo.Post;
+            Application.Terminate;
+          end;
+        mrNo:
+          begin
+            Abort;
+          end;
+      end;
+    end);
 
 end;
 
-
 procedure TfrmPrincipal.lstItemSobreClick(Sender: TObject);
+var
+  InputString: string;
 begin
   inherited;
   OpenForm(TfrmSobre);
+  Inc(iModoDesenvolvedor);
+
+  if iModoDesenvolvedor >= 6 then
+  begin
+
+    InputBox('Inserir senha para habilitar modo desenvolvedor!',
+             '', '',
+      procedure(const AResult: TModalResult; const AValue: string)
+      begin
+        case AResult of
+          mrOk:
+            begin
+              if AValue = 'zxc' then
+              begin
+                MsgPoupUp('Modo desenvolvedor habilitado!');
+                Dm.IsModoDesenvolvedor := True;
+                Dm.SetModoDesenvolvedor;
+                SetModoDesenvolvedor;
+              end;
+            end;
+          mrCancel:
+            begin
+            end;
+        end;
+      end);
+  end;
 end;
-
-
 
 procedure TfrmPrincipal.lstItemTesteGeralAppClick(Sender: TObject);
 begin
@@ -561,6 +591,5 @@ begin
   inherited;
   OpenForm(TfrmLogin);
 end;
-
 
 end.

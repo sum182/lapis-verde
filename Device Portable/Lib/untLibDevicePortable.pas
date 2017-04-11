@@ -15,7 +15,7 @@ Uses  FMX.Forms, Data.DB, untLibGeral,smNetworkState, untResourceString,
   procedure SetStyle(Formulario:TForm);
   function GetEscolaId(AlunoId:Integer=0):Integer;
   function GetSQLEscolaId(FieldNameEscolaId:String = 'escola_id';Condicao:String = 'and'):String;
-  function IsModoTeste:Boolean;
+  function IsModoDesenvolvedor:Boolean;
   function IsTesteApp:Boolean;
 
   function UsuarioLogadoIsResponsavel:boolean;
@@ -118,9 +118,9 @@ begin
   end;
 end;
 
-function IsModoTeste:Boolean;
+function IsModoDesenvolvedor:Boolean;
 begin
-  Result:=Dm.IsModoTeste;
+  Result:=Dm.IsModoDesenvolvedor;
 end;
 
 function IsTesteApp:Boolean;
@@ -131,7 +131,7 @@ end;
 
 procedure MsgPoupUpTeste(Mensagem:String);
 begin
-  if not IsModoTeste then
+  if not IsModoDesenvolvedor then
     Exit;
 
   if IsSysOSWindows then

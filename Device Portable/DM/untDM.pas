@@ -13,7 +13,7 @@ uses
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  FireDAC.Stan.StorageBin, Vcl.ExtCtrls
+  FireDAC.Stan.StorageBin
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -70,7 +70,6 @@ type
     procedure ConectarSQLite(FDConnection: TFDConnection; DataBaseName: String);
     procedure ConectarBases;
     procedure ConectarDB;
-    procedure SetModoTeste;
     procedure GetInfoFileApp;
     procedure GetConfiguracoes;
     procedure SetVariables;
@@ -79,12 +78,13 @@ type
     AppName      : String;
     AppPath      : String;
 
-    IsModoTeste: Boolean;
+    IsModoDesenvolvedor: Boolean;
     IsTesteApp: Boolean;
 
     fEscolaId: Integer;
     fSistemaOperacionalTipo:TSistemaOperacional;
 
+    procedure SetModoDesenvolvedor;
     procedure DeleteTabel(Tabela:String);
     procedure DeleteAllTabels;
 
@@ -265,7 +265,9 @@ begin
   PrimeiroAcessoInExecute:=False;
   PrimeiroAcessoOK:=False;
 
-  SetModoTeste;
+  //Desabilitar ao gerar versão
+  //SetModoDesenvolvedor;
+
   OpenParametro;
 
   //Pega as configurações do novo acesso
@@ -815,9 +817,9 @@ begin
   Dm.fdqLoginRealizado.Close;
 end;
 
-procedure TDm.SetModoTeste;
+procedure TDm.SetModoDesenvolvedor;
 begin
-  IsModoTeste := True;
+  IsModoDesenvolvedor := True;
   fEscolaId := 3;
 
   //Usuario.Tipo := Funcionario;

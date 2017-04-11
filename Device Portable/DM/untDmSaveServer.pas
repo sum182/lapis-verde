@@ -119,7 +119,7 @@ begin
     begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
 
-      if (IsTesteApp or IsModoTeste) then
+      if (IsTesteApp or IsModoDesenvolvedor) then
         Raise;
     end;
     end;
@@ -164,7 +164,7 @@ begin
 
       MsgRetornoServer:= RestClient.SmMainClient.SalvarLogError(GetEscolaId,Usuario.Marshal,LDataSetList);
 
-      if (MsgRetornoServer <> '') and (IsTesteApp or IsModoTeste) then
+      if (MsgRetornoServer <> '') and (IsTesteApp or IsModoDesenvolvedor) then
         ShowMessage( 'Erro ao Salvar LogError' + #13 + MsgRetornoServer);
 
       MsgPoupUpTeste('DmSaveServer.SalvarLogError Executado');
@@ -172,7 +172,7 @@ begin
     begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
 
-      if (IsTesteApp or IsModoTeste) then
+      if (IsTesteApp or IsModoDesenvolvedor) then
         Raise;
     end;
     end;
@@ -296,7 +296,7 @@ begin
     begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
 
-      if (IsTesteApp or IsModoTeste) then
+      if (IsTesteApp or IsModoDesenvolvedor) then
         Raise;
     end;
     end;
@@ -385,7 +385,7 @@ begin
     begin
       MsgRetornoServer := MsgRetornoServer + E.Message;
 
-      if (IsTesteApp or IsModoTeste) then
+      if (IsTesteApp or IsModoDesenvolvedor) then
         Raise;
     end;
     end;
