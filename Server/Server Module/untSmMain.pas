@@ -156,7 +156,8 @@ begin
   if not Assigned(Usuario) then
     Usuario:=TUsuario.Create;
 
-  SetFDConnection(self,ServerContainer.GetConnection);
+  if Assigned(ServerContainer) then
+    SetFDConnection(self,ServerContainer.GetConnection);
 end;
 
 procedure TSmMain.EndRequest;
@@ -535,7 +536,8 @@ begin
       fdqTurmaAluno.SQL.Add(rs_SQLTurmaAluno);
       fdqTurmaAluno.SQL.Add(GetSQLEscolaId());
 
-      TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
+
+      TFDJSONDataSetsWriter.ListAdd(Result,'turma_aluno',fdqTurmaAluno);
 
       SmMain.SaveLogServerRequest(LogServerRequest);
     except on E:Exception do
