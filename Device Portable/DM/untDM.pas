@@ -13,7 +13,7 @@ uses
   FMX.Types, FMX.Controls, System.ImageList, FMX.ImgList, FGX.ProgressDialog,
   IPPeerClient, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   REST.Types, untLibGeral, untTypes, untResourceString, untLibDevicePortable,
-  FireDAC.Stan.StorageBin
+  FireDAC.Stan.StorageBin, Vcl.ExtCtrls
   //Erro apagar o texto que esta no exemplo abaixo
   //,Vcl.ExtCtrls
   //
@@ -817,8 +817,8 @@ end;
 
 procedure TDm.SetModoTeste;
 begin
-  IsModoTeste := False;
-  fEscolaId := 1;
+  IsModoTeste := True;
+  fEscolaId := 3;
 
   //Usuario.Tipo := Funcionario;
   //Usuario.Id := 16;

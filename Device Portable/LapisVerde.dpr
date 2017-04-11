@@ -54,7 +54,7 @@ uses
   AndroidServiceDMUnt in 'Services\Android\AndroidServiceDMUnt.pas' {AndroidServiceDM: TAndroidService},
   untCloudMessagingTeste in 'Cloud Messaging\untCloudMessagingTeste.pas' {frmCloudMessagingTeste},
   untDMCloudMessaging in 'Cloud Messaging\untDMCloudMessaging.pas' {DMCloudMessaging: TDataModule},
-  FMX.Consts in 'Lib\Units Delphi Alteradas\FMX.Consts.pas';
+  FMX.Consts in 'Lib\Units Delphi Alteradas\RX 10\FMX.Consts.pas';
 
 {$R *.res}
 

@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D7F7BC09-D38A-4A17-A8B9-275F1926FE56}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Device Portable\LapisVerde.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Server\Apache\mod_lapis_verde.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Server\Stand Alone\AgendaServer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="LapisVerde">
+        <MSBuild Projects="Device Portable\LapisVerde.dproj"/>
+    </Target>
+    <Target Name="LapisVerde:Clean">
+        <MSBuild Projects="Device Portable\LapisVerde.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LapisVerde:Make">
+        <MSBuild Projects="Device Portable\LapisVerde.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="mod_lapis_verde">
+        <MSBuild Projects="Server\Apache\mod_lapis_verde.dproj"/>
+    </Target>
+    <Target Name="mod_lapis_verde:Clean">
+        <MSBuild Projects="Server\Apache\mod_lapis_verde.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mod_lapis_verde:Make">
+        <MSBuild Projects="Server\Apache\mod_lapis_verde.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AgendaServer">
+        <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj"/>
+    </Target>
+    <Target Name="AgendaServer:Clean">
+        <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AgendaServer:Make">
+        <MSBuild Projects="Server\Stand Alone\AgendaServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="LapisVerde;mod_lapis_verde;AgendaServer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="LapisVerde:Clean;mod_lapis_verde:Clean;AgendaServer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="LapisVerde:Make;mod_lapis_verde:Make;AgendaServer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
